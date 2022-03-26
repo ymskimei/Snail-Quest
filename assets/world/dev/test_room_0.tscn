@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/object/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://source/player.gd" type="Script" id=2]
-[ext_resource path="res://assets/object/test_block_two.tscn" type="PackedScene" id=3]
+[ext_resource path="res://source/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/object/test_block.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/texture/materials/test_block_4.tres" type="Material" id=4]
+[ext_resource path="res://assets/object/test_ramp.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/object/test_ramp_small.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/object/test_block_small.tscn" type="PackedScene" id=7]
 
 [sub_resource type="BoxShape" id=7]
 
@@ -68,3 +71,39 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -4 )
 
 [node name="TestBlockTwo5" parent="TestBlockGroup1" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -4 )
+
+[node name="TestBlockTwo6" parent="TestBlockGroup1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -3.72529e-07, -2 )
+
+[node name="TestBlockTwo7" parent="TestBlockGroup1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -7.45058e-07, -4 )
+
+[node name="TestBlockTwo8" parent="TestBlockGroup1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, -4 )
+
+[node name="TestBlockTwo9" parent="TestBlockGroup1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2.75671e-06, -4 )
+
+[node name="TestRamp" parent="TestBlockGroup1" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 9.31323e-09 )
+
+[node name="TestRamp2" parent="TestBlockGroup1" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, -2 )
+
+[node name="TestRamp3" parent="TestBlockGroup1" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, -4 )
+
+[node name="TestRampSmall" parent="TestBlockGroup1" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
+
+[node name="TestRampSmall2" parent="TestBlockGroup1" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -2 )
+
+[node name="TestRampSmall3" parent="TestBlockGroup1" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, -4 )
+
+[node name="TestBlockSmall" parent="TestBlockGroup1" instance=ExtResource( 7 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 0, -2.5 )
+
+[node name="TestBlockSmall2" parent="TestBlockGroup1" instance=ExtResource( 7 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.5, 0, -1.5 )

@@ -11,8 +11,8 @@
 [ext_resource path="res://assets/texture/gui_inventory_button_options_select/gui_inventory_button_options_select_2.png" type="Texture" id=9]
 [ext_resource path="res://assets/texture/gui_inventory_button_options_select/gui_inventory_button_options_select_3.png" type="Texture" id=10]
 [ext_resource path="res://assets/texture/gui_inventory_options.png" type="Texture" id=11]
-[ext_resource path="res://source/gui_inventory_button_return.gd" type="Script" id=12]
-[ext_resource path="res://source/gui_inventory.gd" type="Script" id=13]
+[ext_resource path="res://source/GuiInventoryReturn.gd" type="Script" id=12]
+[ext_resource path="res://source/GuiInventory.gd" type="Script" id=13]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
