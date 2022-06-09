@@ -1,83 +1,103 @@
-//By David Lipps aka DaveTheDev @ EXPWorlds
-//v2.0.0 for Godot 3.2
-
 shader_type spatial;
-render_mode ambient_light_disabled;
 
-uniform bool use_shade = true;
-uniform bool use_specular = false;
-uniform bool use_rim = false;
-uniform bool use_light = false;
-uniform bool use_shadow = false;
+//render_mode ambient_light_disabled;
 
-uniform vec4 base_color : hint_color = vec4(1.0);
-uniform vec4 shade_color : hint_color = vec4(1.0);
-uniform vec4 specular_tint : hint_color = vec4(0.75);
-uniform vec4 rim_tint : hint_color = vec4(0.75);
+const float PI = 3.1415926536f;
 
-uniform float shade_threshold : hint_range(-1.0, 1.0, 0.001) = 0.0;
-uniform float shade_softness : hint_range(0.0, 1.0, 0.001) = 0.01;
+uniform vec4 albedo : hint_color = vec4(1.0f);
+uniform sampler2D albedo_texture : hint_albedo;
+uniform bool clamp_diffuse_to_max = false;
 
-uniform float specular_glossiness : hint_range(1.0, 100.0, 0.1) = 15.0;
-uniform float specular_threshold : hint_range(0.01, 1.0, 0.001) = 0.5;
-uniform float specular_softness : hint_range(0.0, 1.0, 0.001) = 0.1;
+uniform int cuts : hint_range(1, 8) = 3;
+uniform float wrap : hint_range(-2.0f, 2.0f) = 0.0f;
+uniform float steepness : hint_range(1.0f, 8.0f) = 1.0f;
 
-uniform float rim_threshold : hint_range(0.00, 1.0, 0.001) = 0.25;
-uniform float rim_softness : hint_range(0.0, 1.0, 0.001) = 0.05;
-uniform float rim_spread : hint_range(0.0, 1.0, 0.001) = 0.5;
+uniform bool use_attenuation = true;
 
-uniform float shadow_threshold : hint_range(0.00, 1.0, 0.001) = 0.7;
-uniform float shadow_softness : hint_range(0.0, 1.0, 0.001) = 0.1;
+uniform bool use_specular = true;
+uniform float specular_strength : hint_range(0.0f, 1.0f) = 1.0f;
+uniform float specular_shininess : hint_range(0.0f, 32.0f) = 16.0f;
+uniform sampler2D specular_map : hint_albedo;
 
-uniform sampler2D base_texture: hint_albedo;
-uniform sampler2D shade_texture: hint_albedo;
+uniform bool use_rim = true;
+uniform float rim_width : hint_range(0.0f, 16.0f) = 8.0f;
+uniform vec4 rim_color : hint_color = vec4(1.0f);
 
-void light() {
-	float NdotL = dot(NORMAL, LIGHT);
-	float is_lit = step(shade_threshold, NdotL);
-	vec4 base = texture(base_texture, UV).rgba * base_color.rgba;
-	vec4 shade = texture(shade_texture, UV).rgba * shade_color.rgba;
-	vec4 diffuse = base;
+uniform bool use_ramp = false;
+uniform sampler2D ramp : hint_albedo;
 
-	if (use_shade) {
-		float shade_value = smoothstep(shade_threshold - shade_softness ,shade_threshold + shade_softness, NdotL);
-		diffuse = mix(shade, base, shade_value);
-		
-		if (use_shadow) {
-			float shadow_value = smoothstep(shadow_threshold - shadow_softness ,shadow_threshold + shadow_softness, ATTENUATION.r);
-			shade_value = min(shade_value, shadow_value);
-			diffuse = mix(shade, base, shade_value);
-			is_lit = step(shadow_threshold, shade_value);
-		}
-	}
+uniform bool use_borders = false;
+uniform float border_width = 0.01f;
 
-	if (use_specular) {
-		vec3 half = normalize(VIEW + LIGHT);
-		float NdotH = dot(NORMAL, half);
+varying vec3 vertex_pos;
+varying vec3 normal;
 
-		float specular_value = pow(NdotH * is_lit, specular_glossiness * specular_glossiness);
-		specular_value = smoothstep(specular_threshold - specular_softness, specular_threshold + specular_softness, specular_value);
-		diffuse += specular_tint.rgba * specular_value;
-	}
+float split_specular(float specular) {
+	return step(0.5f, specular);
+}
 
-	if (use_rim) {
-		float iVdotN = 1.0 - dot(VIEW, NORMAL);
-		float inverted_rim_threshold = 1.0 - rim_threshold;
-		float inverted_rim_spread = 1.0 - rim_spread;
-
-		float rim_value = iVdotN * pow(NdotL, inverted_rim_spread);
-		rim_value = smoothstep(inverted_rim_threshold - rim_softness, inverted_rim_threshold + rim_softness, rim_value);
-		diffuse += rim_tint.rgba * rim_value * is_lit;
-	}
-
-	if (use_light) {
-		diffuse *= vec4(LIGHT_COLOR, 1.0);
-	}
-
-	DIFFUSE_LIGHT = diffuse.rgb;
-	ALPHA = diffuse.a;
+void vertex() {
+	vertex_pos = VERTEX;
+	normal = NORMAL;
 }
 
 void fragment() {
-	ALPHA_SCISSOR = 1.0;
+	ALBEDO = albedo.rgb * texture(albedo_texture, UV).rgb;
+}
+
+void light() {
+	// Attenuation.
+	float attenuation = 1.0f;
+	if (use_attenuation) {
+		attenuation = ATTENUATION.x;
+	}
+	
+	// Diffuse lighting.
+	float NdotL = dot(NORMAL, LIGHT);
+	float diffuse_amount = NdotL + (attenuation - 1.0) + wrap;
+	//float diffuse_amount = NdotL * attenuation + wrap;
+	diffuse_amount *= steepness;
+	float cuts_inv = 1.0f / float(cuts);
+	float diffuse_stepped = clamp(diffuse_amount + mod(1.0f - diffuse_amount, cuts_inv), 0.0f, 1.0f);
+
+	// Calculate borders.
+	float border = 0.0f;
+	if (use_borders) {
+		float corr_border_width = length(cross(NORMAL, LIGHT)) * border_width * steepness;
+		border = step(diffuse_stepped - corr_border_width, diffuse_amount)
+				 - step(1.0 - corr_border_width, diffuse_amount);
+	}
+	
+	// Apply diffuse result to different styles.
+	vec3 diffuse = ALBEDO.rgb * LIGHT_COLOR / PI;
+	if (use_ramp) {
+		diffuse *= texture(ramp, vec2(diffuse_stepped * (1.0f - border), 0.0f)).rgb;
+	} else {
+		diffuse *= diffuse_stepped * (1.0f - border);
+	}
+	
+	if (clamp_diffuse_to_max) {
+		// Clamp diffuse to max for multiple light sources.
+		DIFFUSE_LIGHT = max(DIFFUSE_LIGHT, diffuse);
+	} else {
+		DIFFUSE_LIGHT += diffuse;
+	}
+	
+	// Specular lighting.
+	if (use_specular) {
+		vec3 H = normalize(LIGHT + VIEW);
+		float NdotH = dot(NORMAL, H);
+		float specular_amount = max(pow(NdotH, specular_shininess*specular_shininess), 0.0f)
+							    * texture(specular_map, UV).r
+								* attenuation;
+		specular_amount = split_specular(specular_amount);
+		SPECULAR_LIGHT += specular_strength * specular_amount * LIGHT_COLOR;
+	}
+	
+	// Simple rim lighting.
+	if (use_rim) {
+		float NdotV = dot(NORMAL, VIEW);
+		float rim_light = pow(1.0 - NdotV, rim_width);
+		DIFFUSE_LIGHT += rim_light * rim_color.rgb * rim_color.a * LIGHT_COLOR / PI;
+	}
 }

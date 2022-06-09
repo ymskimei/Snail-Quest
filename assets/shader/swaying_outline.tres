@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://shader-codes/wind-shader/swaying-outline.shader" type="Shader" id=1]
+
+[sub_resource type="Curve" id=1]
+resource_local_to_scene = true
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.200772, 0.763636 ), 0.0, 0.0, 0, 0, Vector2( 0.378378, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.683398, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.84556, 0.390909 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+resource_local_to_scene = true
+curve = SubResource( 1 )
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+shader_param/outline_width = 2.0
+shader_param/wind = Vector2( 1, 0 )
+shader_param/resistance = 0.5
+shader_param/interval = 3.5
+shader_param/height_offset = 0.0
+shader_param/quadratic_deformation = false
+shader_param/seed = Vector2( 0, 0 )
+shader_param/var_intensity = 1.0
+shader_param/var_frequency = 1.0
+shader_param/wind_var_curve = SubResource( 2 )
