@@ -143,4 +143,3 @@ transform = Transform( 2.1975, -0.637538, 0, 1.29909, 0.884652, -2.45869, 0.6080
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
-autoplay = true
