@@ -1,8 +1,0 @@
-extends Node
-
-enum StatusEffects {
-	STATUS_NONE,
-	STATUS_INVINCIBLE
-	STATUS_POISONED,
-	STATUS_STUNNED
-}

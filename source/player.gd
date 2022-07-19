@@ -3,24 +3,32 @@ extends KinematicBody
 #Main Variables
 export var player_name = "Sheldon"
 
+enum {
+	IDLE
+	MOVEMENT
+	COMBAT
+}
+
+var state: int = IDLE
+
 #Health Variables
-#signal health_increased
-#signal health_depleted
-#signal health_status
-#
-#export var _player_health = 0
-#export var player_maximum_health = 0
-#var player_health_status = null
-#
-#export var poison_cycles = 0
-#const POISON_DAMAGE = 1
-#
-#enum StatusEffects {
-#	STATUS_NONE,
-#	STATUS_INVINCIBLE
-#	STATUS_POISONED,
-#	STATUS_STUNNED
-#}
+signal health_increased
+signal health_depleted
+signal health_status
+
+export var _player_health = 0
+export var player_maximum_health = 0
+var player_health_status = null
+
+export var poison_cycles = 0
+const POISON_DAMAGE = 1
+
+enum StatusEffects {
+	STATUS_NONE,
+	STATUS_INVINCIBLE
+	STATUS_POISONED,
+	STATUS_STUNNED
+}
 
 #Movement Variables
 export var player_maximum_speed = 7
@@ -30,27 +38,23 @@ export var player_airborne_friction = 4
 export var player_jump_power = 10
 export var player_gravity = -30
 export var player_rotation_speed = 25
-export var mouse_sensitivity = 0.1
-export var controller_sensitivity = 2
 var velocity = Vector3.ZERO
 var snap_vector = Vector3.ZERO
 
 #Node Variables
-onready var player_camera_arm = $PlayerCameraArm
 onready var player_avatar = $PlayerAvatar
 onready var player_hitbox = $PlayerHitbox
+onready var camera_arm: SpringArm = $PlayerCameraArm
 
 #Setup
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	$PoisonTimer.connect('timeout', self, '_on_PoisonTimer_timeout')
+#	$PoisonTimer.connect('timeout', self, '_on_PoisonTimer_timeout')
+
+func _process(_delta: float) -> void:
+	camera_arm.translation = translation
 
 #Movement
-func _unhandled_input(event):
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
-		player_camera_arm.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
-
 func _physics_process(delta):
 	var input_vector = get_input_vector()
 	var direction = get_direction(input_vector)
@@ -59,8 +63,6 @@ func _physics_process(delta):
 	apply_gravity(delta)
 	update_snap_vector()
 	jump()
-	apply_controller_rotation()
-	player_camera_arm.rotation.x = clamp(player_camera_arm.rotation.x, deg2rad(-75), deg2rad(75))
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
 
 func get_input_vector():
@@ -102,50 +104,42 @@ func jump():
 	if Input.is_action_just_released("ui_select") and velocity.y > player_jump_power / 3:
 		velocity.y = player_jump_power / 3
 
-func apply_controller_rotation():
-	var axis_vector = Vector2.ZERO
-	axis_vector.x = Input.get_action_strength("cam_right") - Input.get_action_strength("cam_left")
-	axis_vector.y = Input.get_action_strength("cam_up") - Input.get_action_strength("cam_down")
-	if InputEventJoypadMotion:
-		rotate_y(deg2rad(-axis_vector.x) * controller_sensitivity)
-		player_camera_arm.rotate_x(deg2rad(-axis_vector.y) * controller_sensitivity / 1.3)
-
 #Health System
-#func _change_status(player_new_health_status):
-#	match player_health_status:
-#		StatusEffects.STATUS_POISONED:
-#			$PoisonTimer.stop()
+func _change_status(player_new_health_status):
+	match player_health_status:
+		StatusEffects.STATUS_POISONED:
+			$PoisonTimer.stop()
 
-#	match player_new_health_status:
-#		StatusEffects.STATUS_POISONED:
-#			poison_cycles = 0
-#			$PoisonTimer.start()
-#	player_health_status = player_new_health_status
-#	emit_signal('status_changed', player_new_health_status)
+	match player_new_health_status:
+		StatusEffects.STATUS_POISONED:
+			poison_cycles = 0
+			$PoisonTimer.start()
+	player_health_status = player_new_health_status
+	emit_signal('status_changed', player_new_health_status)
 
-#func take_damage(amount, effect = null):
-#	if player_health_status == StatusEffects.STATUS_INVINCIBLE:
-#		return
-#	_player_health -= amount
-#	_player_health = max(0, _player_health)
-#	emit_signal("health_changed", _player_health)
+func take_damage(amount, effect = null):
+	if player_health_status == StatusEffects.STATUS_INVINCIBLE:
+		return
+	_player_health -= amount
+	_player_health = max(0, _player_health)
+	emit_signal("health_changed", _player_health)
 
-#	if not effect:
-#		return
-#	match effect[0]:
-#		StatusEffects.STATUS_POISONED:
-#			_change_status(StatusEffects.STATUS_POISONED)
-#			poison_cycles = effect[1]
+	if not effect:
+		return
+	match effect[0]:
+		StatusEffects.STATUS_POISONED:
+			_change_status(StatusEffects.STATUS_POISONED)
+			poison_cycles = effect[1]
 
-#func heal(amount):
-#	_player_health += amount
-#	_player_health = min(_player_health, player_maximum_health)
-#	emit_signal("health_changed", _player_health)
+func heal(amount):
+	_player_health += amount
+	_player_health = min(_player_health, player_maximum_health)
+	emit_signal("health_changed", _player_health)
 
-#func _on_PoisonTimer_timeout():
-#	take_damage(POISON_DAMAGE)
-#	poison_cycles -= 1
-#	if poison_cycles == 0:
-#		_change_status(StatusEffects.STATUS_NONE)
-#		return
-#	$PoisonTimer.start()
+func _on_PoisonTimer_timeout():
+	take_damage(POISON_DAMAGE)
+	poison_cycles -= 1
+	if poison_cycles == 0:
+		_change_status(StatusEffects.STATUS_NONE)
+		return
+	$PoisonTimer.start()
