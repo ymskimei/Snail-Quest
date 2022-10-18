@@ -3,12 +3,12 @@ extends ColorRect
 var can_pause: bool = true
 onready var animator: AnimationPlayer = $AnimationPause
 
-func _ready():
-	set_as_toplevel(true)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+#func _ready():
+#	set_as_toplevel(true)
+#	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _input(_delta):
-	if can_pause and Input.is_action_just_pressed("ui_cancel"):
+func _gui_input(_delta):
+	if can_pause and Input.is_action_just_pressed("ui_pause"):
 		var tree_paused = get_tree().paused
 		if !tree_paused:
 			pause()

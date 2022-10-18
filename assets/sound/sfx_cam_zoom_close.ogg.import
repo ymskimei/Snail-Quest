@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sfx_cam_zoom_close.ogg-98ffe3c3c29a1b94e4f31b39528aa314.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/sfx_cam_zoom_close.ogg"
+dest_files=[ "res://.import/sfx_cam_zoom_close.ogg-98ffe3c3c29a1b94e4f31b39528aa314.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

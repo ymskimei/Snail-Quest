@@ -1,16 +1,10 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/gui/theme_options.tres" type="Theme" id=1]
-[ext_resource path="res://assets/texture/gui_inventory.png" type="Texture" id=2]
-[ext_resource path="res://assets/texture/gui_pause.png" type="Texture" id=3]
-[ext_resource path="res://assets/texture/gui_inventory_button_options.png" type="Texture" id=4]
-[ext_resource path="res://assets/texture/gui_inventory_button_options_focus.png" type="Texture" id=5]
-[ext_resource path="res://assets/texture/gui_inventory_button_options_highlight.png" type="Texture" id=6]
-[ext_resource path="res://assets/texture/gui_inventory_button_options_disabled.png" type="Texture" id=7]
-[ext_resource path="res://assets/texture/gui_inventory_button_options_select/gui_inventory_button_options_select_1.png" type="Texture" id=8]
-[ext_resource path="res://assets/texture/gui_inventory_button_options_select/gui_inventory_button_options_select_2.png" type="Texture" id=9]
-[ext_resource path="res://assets/texture/gui_inventory_button_options_select/gui_inventory_button_options_select_3.png" type="Texture" id=10]
-[ext_resource path="res://assets/texture/gui_inventory_options.png" type="Texture" id=11]
+[ext_resource path="res://assets/texture/gui/gui_inventory.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/gui/gui_pause.png" type="Texture" id=4]
+[ext_resource path="res://assets/texture/gui/gui_inventory_button_options_highlight.png" type="Texture" id=10]
+[ext_resource path="res://assets/texture/gui/gui_inventory_options.png" type="Texture" id=11]
 [ext_resource path="res://source/GuiInventoryReturn.gd" type="Script" id=12]
 [ext_resource path="res://source/GuiInventory.gd" type="Script" id=13]
 
@@ -172,16 +166,15 @@ Button/fonts/font = null
 Button/styles/normal = null
 
 [sub_resource type="StyleBoxTexture" id=9]
-texture = ExtResource( 3 )
-normal_map = ExtResource( 6 )
+texture = ExtResource( 4 )
 region_rect = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AnimatedTexture" id=12]
 flags = 4
 frames = 3
 fps = 30.0
-frame_0/texture = ExtResource( 8 )
-frame_1/texture = ExtResource( 9 )
+frame_0/texture = ExtResource( 10 )
+frame_1/texture = ExtResource( 10 )
 frame_1/delay_sec = 0.0
 frame_2/texture = ExtResource( 10 )
 frame_2/delay_sec = 0.0
@@ -191,11 +184,9 @@ texture = SubResource( 12 )
 region_rect = Rect2( 0, 0, 1, 1 )
 
 [sub_resource type="StyleBoxTexture" id=11]
-texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="StyleBoxTexture" id=8]
-texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="StyleBoxTexture" id=7]

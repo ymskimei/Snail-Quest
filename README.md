@@ -5,7 +5,8 @@ This is the repository for the video game **Snail Quest: A Snaily Adventure**, a
 
 ## Development Credits:
 ### Programming:
-Mei Yamasaki, James Reynolds
+Mei Yamasaki
+James Reynolds
 
 ### Art Design & 3D Modeling:
 Mei Yamasaki, Kai Futers

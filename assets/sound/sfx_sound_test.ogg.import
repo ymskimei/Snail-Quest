@@ -11,5 +11,5 @@ dest_files=[ "res://.import/sfx_sound_test.ogg-c0c15fe821e4255dd816684d72a232d0.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
