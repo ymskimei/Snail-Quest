@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/Camera.gd" type="Script" id=1]
+[ext_resource path="res://assets/object/world_audio_player.tscn" type="PackedScene" id=2]
+
+[node name="Camera" type="Camera"]
+transform = Transform( 1, 3.55271e-15, 0, -3.55271e-15, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0 )
+far = 250.0
+script = ExtResource( 1 )
+
+[node name="WorldAudioPlayer" parent="." instance=ExtResource( 2 )]
+
+[node name="Animation" type="Node" parent="."]
+
+[node name="AnimationCamZoom" type="Tween" parent="Animation"]

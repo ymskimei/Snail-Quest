@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/texture/materials/player_eyes.tres" type="Material" id=7]
 [ext_resource path="res://assets/texture/materials/player_shell.tres" type="Material" id=8]
 [ext_resource path="res://assets/texture/materials/player_body.tres" type="Material" id=9]
-[ext_resource path="res://assets/object/world_audio_player.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/object/camera.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ArrayMesh" id=10]
 resource_name = "shell_MeshShell001"
@@ -301,63 +301,60 @@ material/0 = ExtResource( 8 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.521372, 0 )
 shape = SubResource( 9 )
 
-[node name="Climbing" type="Spatial" parent="."]
+[node name="PlayerRays" type="Spatial" parent="."]
 
-[node name="RayCast" type="Spatial" parent="Climbing"]
+[node name="RayCast" type="Spatial" parent="PlayerRays"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
-[node name="RayForward" type="RayCast" parent="Climbing/RayCast"]
+[node name="RayForward" type="RayCast" parent="PlayerRays/RayCast"]
 enabled = true
 cast_to = Vector3( 0, 0, -1 )
 
-[node name="RayRight" type="RayCast" parent="Climbing/RayCast"]
+[node name="RayRight" type="RayCast" parent="PlayerRays/RayCast"]
 enabled = true
 cast_to = Vector3( 1, 0, 0 )
 
-[node name="RayBackward" type="RayCast" parent="Climbing/RayCast"]
+[node name="RayBackward" type="RayCast" parent="PlayerRays/RayCast"]
 enabled = true
 cast_to = Vector3( 0, 0, 1 )
 
-[node name="RayLeft" type="RayCast" parent="Climbing/RayCast"]
+[node name="RayLeft" type="RayCast" parent="PlayerRays/RayCast"]
 enabled = true
 cast_to = Vector3( -1, 0, 0 )
 
-[node name="RayUp" type="RayCast" parent="Climbing/RayCast"]
+[node name="RayUp" type="RayCast" parent="PlayerRays/RayCast"]
 enabled = true
 cast_to = Vector3( 0, 1, 0 )
 
-[node name="RayDown" type="RayCast" parent="Climbing/RayCast"]
+[node name="RayDown" type="RayCast" parent="PlayerRays/RayCast"]
 enabled = true
 
-[node name="ClimbingChecker" type="Area" parent="Climbing"]
+[node name="ClimbingChecker" type="Area" parent="PlayerRays"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
-[node name="ClimbingHitbox" type="CollisionShape" parent="Climbing/ClimbingChecker"]
+[node name="ClimbingHitbox" type="CollisionShape" parent="PlayerRays/ClimbingChecker"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.521372, 0 )
 shape = SubResource( 9 )
 
-[node name="DirectionChecker" type="Position3D" parent="Climbing"]
+[node name="DirectionChecker" type="Position3D" parent="PlayerRays"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.74228e-08, 1.5, 1 )
 
-[node name="PlayerCameraArm" type="SpringArm" parent="."]
+[node name="CameraArm" type="SpringArm" parent="."]
 transform = Transform( -1, 3.69465e-08, -7.9232e-08, 0, 0.906308, 0.422618, 8.74228e-08, 0.422618, -0.906308, 0, 0.5, -0.007 )
 collision_mask = 5
 spring_length = 5.0
 margin = 0.5
 
-[node name="PlayerCamera" type="Camera" parent="PlayerCameraArm"]
-transform = Transform( 1, 4.61853e-14, -1.42109e-14, -3.55271e-15, 1, -2.98023e-08, 0, 2.98023e-08, 1, 2.09277e-14, 0, 4 )
-far = 250.0
+[node name="Camera" parent="CameraArm" instance=ExtResource( 11 )]
+transform = Transform( 1, 3.55271e-15, 0, -3.55271e-15, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 4 )
 
-[node name="GuiInventory" parent="." instance=ExtResource( 3 )]
+[node name="Gui" type="Node" parent="."]
+
+[node name="GuiInventory" parent="Gui" instance=ExtResource( 3 )]
 visible = false
 
-[node name="GuiPlayer" parent="." instance=ExtResource( 6 )]
+[node name="GuiPlayer" parent="Gui" instance=ExtResource( 6 )]
 mouse_filter = 2
 
-[node name="PoisonTimer" type="Timer" parent="."]
+[node name="TimerPoison" type="Timer" parent="Gui"]
 wait_time = 0.5
-
-[node name="TweenCamZoom" type="Tween" parent="."]
-
-[node name="WorldAudioPlayer" parent="." instance=ExtResource( 10 )]
