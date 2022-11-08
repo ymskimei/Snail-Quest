@@ -74,12 +74,3 @@ func apply_friction(direction, delta):
 
 func can_jump():
 	return ground.size() or not ($AllowJump.is_stopped() or did_jump)
-
-func _on_checker_floor_body_entered(body):
-	if not body == self:
-		ground.append(body)
-		did_jump = false
-
-func _on_fhecker_floor_body_exited(body):
-	ground.remove(ground.find(body))
-	if not ground.size(): $AllowJump.start()
