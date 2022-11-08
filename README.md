@@ -8,10 +8,7 @@ This is the repository for the video game **Snail Quest: A Snaily Adventure**, a
 Mei Yamasaki, James Reynolds
 
 ### Art Design & 3D Modeling:
-Mei Yamasaki, Steven Martin, Kai Futers
+Mei Yamasaki, Kai Futers
 
 ### Sound Design & Composing:
 Mei Yamasaki
-
-### Retired Contributors:
-John Hutchinson, Brian Gatewood, Bradley Berridge, Jordan Rupp, Trey Johanson
