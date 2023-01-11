@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/gui/theme_options.tres" type="Theme" id=1]
+[ext_resource path="res://source/GuiTitle.gd" type="Script" id=2]
+[ext_resource path="res://assets/gui/gui_options.tscn" type="PackedScene" id=3]
+
+[node name="GuiTitle" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -310.0
+margin_top = -340.0
+margin_right = 310.0
+margin_bottom = -45.0
+
+[node name="StartButton" type="Button" parent="ButtonContainer"]
+margin_right = 620.0
+margin_bottom = 145.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+text = "Start Game"
+
+[node name="OptionsButton" type="Button" parent="ButtonContainer"]
+margin_top = 149.0
+margin_right = 620.0
+margin_bottom = 295.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+text = "Options"
+
+[node name="GuiOptions" parent="." instance=ExtResource( 3 )]
+
+[connection signal="pressed" from="ButtonContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="ButtonContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]

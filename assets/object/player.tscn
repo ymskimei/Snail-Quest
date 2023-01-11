@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/model/player_shell.material" type="Material" id=1]
 [ext_resource path="res://source/Player.gd" type="Script" id=2]
@@ -9,8 +9,6 @@
 [ext_resource path="res://assets/texture/materials/player_eyes.tres" type="Material" id=7]
 [ext_resource path="res://assets/texture/materials/player_shell.tres" type="Material" id=8]
 [ext_resource path="res://assets/texture/materials/player_body.tres" type="Material" id=9]
-[ext_resource path="res://source/CameraArm.gd" type="Script" id=10]
-[ext_resource path="res://assets/object/camera.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ArrayMesh" id=10]
 resource_name = "shell_MeshShell001"
@@ -170,7 +168,6 @@ transform = Transform( 0.000501888, 8.34832e-05, -0.391999, -0.0649539, 0.386581
 visible = false
 mesh = SubResource( 10 )
 skeleton = NodePath("")
-material/0 = null
 
 [node name="Skeleton" type="Skeleton" parent="PlayerAvatar"]
 transform = Transform( 0.539928, 0, 0, 0, 0.529388, 0, 0, 0, 0.529388, 0, 0, 0 )
@@ -324,16 +321,6 @@ shape = SubResource( 9 )
 
 [node name="DirectionChecker" type="Position3D" parent="PlayerRays"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.74228e-08, 1.5, 1 )
-
-[node name="CameraArm" type="SpringArm" parent="."]
-transform = Transform( -1, 3.69465e-08, -7.9232e-08, 0, 0.906308, 0.422618, 8.74228e-08, 0.422618, -0.906308, 0, 0.5, -0.007 )
-collision_mask = 5
-spring_length = 5.0
-margin = 0.5
-script = ExtResource( 10 )
-
-[node name="Camera" parent="CameraArm" instance=ExtResource( 11 )]
-transform = Transform( 1, 3.55271e-15, 0, -3.55271e-15, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 4 )
 
 [node name="Gui" type="Node" parent="."]
 

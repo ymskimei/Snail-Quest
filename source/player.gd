@@ -3,7 +3,7 @@ extends KinematicBody
 export var player_name = "Sheldon"
 
 export var player_gravity = -40
-export var player_jump_power = 12
+export var player_jump_power = 15
 export var player_maximum_speed = 9
 export var player_acceleration = 70
 export var player_friction = 60
@@ -18,10 +18,10 @@ var did_jump = false
 var world_variables = preload ("res://source/WorldVariables.gd")
 onready var player_avatar = $PlayerAvatar
 onready var player_hitbox = $PlayerHitbox
-onready var player_cam_arm = $CameraArm
+onready var player_cam = get_node("/root/Game/Camera")
 
 func _ready():
-	world_variables.register_player(self)
+	#world_variables.register_player(self)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
@@ -41,7 +41,7 @@ func get_input_vector():
 	return input_vector
 
 func get_direction(input_vector):
-	var direction = input_vector.rotated(Vector3.UP, player_cam_arm.rotation.y).normalized()
+	var direction = input_vector.rotated(Vector3.UP, player_cam.rotation.y).normalized()
 	return direction
 
 func apply_gravity(delta):
@@ -52,7 +52,7 @@ func update_snap_vector():
 	snap_vector = -get_floor_normal() if is_on_floor() else Vector3.DOWN
 
 func apply_jump(delta):
-	if Input.is_action_just_pressed("ui_select") and is_on_floor() || Input.is_action_just_pressed("ui_select") and $PlayerRays/RayFloor.is_colliding():
+	if Input.is_action_just_pressed("ui_select") and is_on_floor() || Input.is_action_just_pressed("ui_select"): #and $PlayerRays/RayFloor.is_colliding()
 		snap_vector = Vector3.ZERO
 		velocity.y = player_jump_power
 	if Input.is_action_just_released("ui_select") and velocity.y > player_jump_power / 2:
@@ -62,7 +62,7 @@ func apply_movement(input_vector, direction, delta):
 	if direction != Vector3.ZERO:
 		velocity.x = velocity.move_toward(direction * player_maximum_speed, player_acceleration * delta).x
 		velocity.z = velocity.move_toward(direction * player_maximum_speed, player_acceleration * delta).z
-		player_avatar.rotation.y = lerp_angle(player_avatar.rotation.y, atan2(+input_vector.x, +input_vector.z), player_rotation_speed * delta)
+		player_avatar.rotation.y = lerp_angle(player_avatar.rotation.y, atan2(-input_vector.x, -input_vector.z), player_rotation_speed * delta)
 
 func apply_friction(direction, delta):
 	if direction == Vector3.ZERO:
