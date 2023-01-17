@@ -21,8 +21,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-WorldOptions="*res://source/WorldOptions.gd"
 WorldVariables="*res://source/WorldVariables.gd"
+WorldOptions="*res://source/WorldOptions.gd"
 
 [display]
 
@@ -142,9 +142,10 @@ ui_pause={
 
 [layer_names]
 
-3d_physics/layer_1="World"
-3d_physics/layer_2="Player"
-3d_physics/layer_3="Camera"
+3d_physics/layer_1="Player"
+3d_physics/layer_2="Camera"
+3d_physics/layer_3="World"
+3d_physics/layer_4="Object"
 
 [physics]
 

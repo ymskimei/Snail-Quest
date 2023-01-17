@@ -12,8 +12,9 @@ export var sensitivity_stick = 2
 export var cam_lock_top = 90
 export var cam_lock_low = 5
 export var cam_smoothness = 15
-export var cam_speed = 3
-export var cam_height: Vector3
+export var cam_horizontal_speed = 3
+export var cam_vertical_speed = 1
+export var cam_offset = Vector3(0, 1, 0)
 
 export var cam_zoom_close = 3
 export var cam_zoom_normal = 5
@@ -64,7 +65,9 @@ func _physics_process(delta):
 	self.rotation.y += (deg2rad(cam_velocity.x))
 	self.rotation.x = clamp(rotation.x, deg2rad(-cam_lock_top), deg2rad(cam_lock_low))
 	if camera_target != null:
-		self.translation = lerp(self.translation, camera_target.translation + cam_height, cam_speed * delta)
+		self.translation.x = lerp(self.translation.x, camera_target.translation.x + cam_offset.x, cam_horizontal_speed * delta)
+		self.translation.y = lerp(self.translation.y, camera_target.translation.y + cam_offset.y, cam_vertical_speed * delta)
+		self.translation.z = lerp(self.translation.z, camera_target.translation.z + cam_offset.z, cam_horizontal_speed * delta)
 #		if camera_target.velocity == Vector3.ZERO:
 #			shake_count += delta * shake_freq
 #			shake_noise_rot.x = shake_x.get_noise_1d(shake_count) + shake_amp

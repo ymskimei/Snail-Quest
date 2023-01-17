@@ -158,6 +158,7 @@ extents = Vector3( 0.315713, 0.491977, 0.778575 )
 [sub_resource type="SphereShape" id=16]
 
 [node name="Player" type="KinematicBody"]
+collision_mask = 13
 script = ExtResource( 2 )
 
 [node name="PlayerAvatar" type="Position3D" parent="."]
