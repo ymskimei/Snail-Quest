@@ -22,7 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 WorldVariables="*res://source/WorldVariables.gd"
-WorldOptions="*res://source/WorldOptions.gd"
+GuiDebug="*res://assets/gui/gui_debug.tscn"
 
 [display]
 
@@ -133,10 +133,15 @@ cam_zoom={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-ui_pause={
+gui_pause={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777217,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+gui_debug={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":96,"unicode":0,"echo":false,"script":null)
  ]
 }
 
@@ -154,6 +159,7 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 quality/directional_shadow/size=5120
@@ -162,8 +168,8 @@ quality/shadow_atlas/quadrant_0_subdiv=2
 quality/shadow_atlas/quadrant_1_subdiv=3
 quality/shadow_atlas/quadrant_2_subdiv=4
 quality/shadow_atlas/quadrant_3_subdiv=5
-quality/shadows/filter_mode=2
+quality/shadows/filter_mode=0
 quality/shading/force_vertex_shading.mobile=false
-environment/default_clear_color=Color( 0.560784, 0.560784, 0.560784, 1 )
+environment/default_clear_color=Color( 1, 1, 1, 1 )
 quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"

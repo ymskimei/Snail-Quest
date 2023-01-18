@@ -4,8 +4,8 @@ export var player_name = "Sheldon"
 
 export var player_gravity = -40
 export var player_jump_power = 15
-export var player_maximum_speed = 9
-export var player_acceleration = 70
+export var player_maximum_speed = 7
+export var player_acceleration = 100
 export var player_friction = 60
 export var player_airborne_friction = 15
 export var player_rotation_speed = 30

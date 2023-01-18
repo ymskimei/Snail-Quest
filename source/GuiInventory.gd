@@ -8,7 +8,7 @@ onready var animator: AnimationPlayer = $AnimationPause
 #	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _gui_input(_delta):
-	if can_pause and Input.is_action_just_pressed("ui_pause"):
+	if can_pause and Input.is_action_just_pressed("gui_pause"):
 		var tree_paused = get_tree().paused
 		if !tree_paused:
 			pause()

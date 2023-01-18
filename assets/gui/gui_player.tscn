@@ -1,14 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/GuiPlayer.gd" type="Script" id=1]
 [ext_resource path="res://assets/gui/font_default.tres" type="DynamicFont" id=2]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends RichTextLabel
-
-"
-
-[node name="User Interace" type="Control"]
+[node name="UserInterace" type="Control"]
 anchor_left = 0.021
 anchor_top = 0.037
 anchor_right = 0.979
@@ -19,18 +14,15 @@ margin_right = 40.3199
 margin_bottom = 39.96
 script = ExtResource( 1 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-anchor_left = 0.021
-anchor_top = 0.037
-anchor_right = 0.279
-anchor_bottom = 0.2
-margin_left = -40.32
-margin_top = -39.96
-margin_right = 40.3199
-margin_bottom = 40.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 32.0
+
+[node name="DisplayFramerate" type="RichTextLabel" parent="MarginContainer"]
+margin_right = 1887.0
+margin_bottom = 1048.0
 custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
-bbcode_text = "testing version"
 tab_size = 5
-text = "testing version"
-script = SubResource( 1 )

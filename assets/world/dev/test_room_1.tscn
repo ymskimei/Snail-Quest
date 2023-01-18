@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/object/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/object/map/test_map_0.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/object/test_block.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/texture/materials/water_pond.material" type="Material" id=4]
 [ext_resource path="res://assets/object/test_ramp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/object/test_ramp_small.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/object/test_block_small.tscn" type="PackedScene" id=7]
@@ -143,14 +142,8 @@ transform = Transform( 2.1975, -0.637538, 0, 1.29909, 0.884652, -2.45869, 0.6080
 [node name="TestGrass" type="MeshInstance" parent="World"]
 transform = Transform( 0.658531, 0, 0, 0, 1.88686, 0, 0, 0, 0.7945, 3.1008, -5.63923, -13.6651 )
 mesh = SubResource( 1 )
-skeleton = NodePath("../TestWater")
+skeleton = NodePath("")
 material/0 = ExtResource( 9 )
-
-[node name="TestWater" type="MeshInstance" parent="World"]
-transform = Transform( 61.9031, 0, 0, 0, 5.07194, 0, 0, 0, 69.9512, -13.8206, -9.72569, -15.7918 )
-mesh = SubResource( 1 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
