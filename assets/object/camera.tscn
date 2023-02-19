@@ -6,9 +6,8 @@
 [node name="Camera" type="SpringArm"]
 collision_mask = 14
 spring_length = 5.0
-margin = 10.0
+margin = 0.1
 script = ExtResource( 1 )
-cam_height = Vector3( 0, 1, 0 )
 
 [node name="CameraLens" type="Camera" parent="."]
 transform = Transform( 1, 3.55271e-15, -1.05879e-22, -3.55271e-15, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0 )
@@ -18,6 +17,6 @@ far = 250.0
 
 [node name="Animation" type="Node" parent="CameraLens"]
 
-[node name="AnimationCamZoom" type="Tween" parent="CameraLens/Animation"]
+[node name="AnimationCam" type="Tween" parent="CameraLens/Animation"]
 
 [node name="WorldAudioPlayer" parent="." instance=ExtResource( 2 )]

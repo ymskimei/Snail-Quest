@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/test_ramp.gltf-57d07d9bc5b068ce66f090a45b0b0c7e.scn"
+path="res://import/test_ramp.gltf-57d07d9bc5b068ce66f090a45b0b0c7e.scn"
 
 [deps]
 
 source_file="res://assets/model/test_ramp.gltf"
-dest_files=[ "res://.import/test_ramp.gltf-57d07d9bc5b068ce66f090a45b0b0c7e.scn" ]
+dest_files=[ "res://import/test_ramp.gltf-57d07d9bc5b068ce66f090a45b0b0c7e.scn" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/shell.gltf-e4c13ed30c9720161db6216c89058f47.scn"
+path="res://import/shell.gltf-e4c13ed30c9720161db6216c89058f47.scn"
 
 [deps]
 
 source_file="res://assets/model/shell.gltf"
-dest_files=[ "res://.import/shell.gltf-e4c13ed30c9720161db6216c89058f47.scn" ]
+dest_files=[ "res://import/shell.gltf-e4c13ed30c9720161db6216c89058f47.scn" ]
 
 [params]
 

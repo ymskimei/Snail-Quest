@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/player.gltf-a40f975207b951a5a8bcb33e50e62135.scn"
+path="res://import/player.gltf-a40f975207b951a5a8bcb33e50e62135.scn"
 
 [deps]
 
 source_file="res://assets/model/player.gltf"
-dest_files=[ "res://.import/player.gltf-a40f975207b951a5a8bcb33e50e62135.scn" ]
+dest_files=[ "res://import/player.gltf-a40f975207b951a5a8bcb33e50e62135.scn" ]
 
 [params]
 

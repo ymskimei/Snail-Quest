@@ -20,7 +20,6 @@ func _ready():
 	add_display_resolution()
 
 ## Video Settings
-
 func _on_ButtonDisplayResolution_item_selected(index):
 	select_display_resolution(index)
 
@@ -31,7 +30,6 @@ func _on_CheckBoxVerticalSync_toggled(button_pressed):
 	pass
 
 ## Audio Settings
-
 func _on_BarMasterVolume_value_changed(value):
 	pass
 
@@ -54,7 +52,3 @@ func select_display_resolution(index):
 	var size = display_resolution_dict.get(display_resolution.get_item_text(index))
 	OS.set_window_size(size)
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT, SceneTree.STRETCH_ASPECT_KEEP, size)
-
-#func select_framerate(index):
-#	match
-#	Engine.set_target_fps(fps)

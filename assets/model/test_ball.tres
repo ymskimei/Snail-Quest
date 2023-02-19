@@ -2,6 +2,7 @@
 
 [ext_resource path="res://assets/texture/materials/test_ball.material" type="Material" id=1]
 
+
 [resource]
 resource_name = "test_ball_Sphere"
 surfaces/0 = {

@@ -1,14 +1,19 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/model/player_shell.material" type="Material" id=1]
 [ext_resource path="res://source/Player.gd" type="Script" id=2]
 [ext_resource path="res://assets/gui/gui_inventory.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/model/player_eyes_001.material" type="Material" id=4]
 [ext_resource path="res://assets/model/player_body.material" type="Material" id=5]
-[ext_resource path="res://assets/gui/gui_player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/gui/gui_debug.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/texture/materials/player_eyes.tres" type="Material" id=7]
 [ext_resource path="res://assets/texture/materials/player_shell.tres" type="Material" id=8]
 [ext_resource path="res://assets/texture/materials/player_body.tres" type="Material" id=9]
+[ext_resource path="res://source/PlayerStates.gd" type="Script" id=10]
+[ext_resource path="res://source/PlayerStateIdle.gd" type="Script" id=11]
+[ext_resource path="res://source/PlayerStateMove.gd" type="Script" id=12]
+[ext_resource path="res://source/PlayerStateJump.gd" type="Script" id=13]
+[ext_resource path="res://source/PlayerStateFall.gd" type="Script" id=14]
 
 [sub_resource type="ArrayMesh" id=10]
 resource_name = "shell_MeshShell001"
@@ -160,6 +165,21 @@ extents = Vector3( 0.315713, 0.491977, 0.778575 )
 [node name="Player" type="KinematicBody"]
 collision_mask = 13
 script = ExtResource( 2 )
+
+[node name="States" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 11 )
+
+[node name="Move" type="Node" parent="States"]
+script = ExtResource( 12 )
+
+[node name="Jump" type="Node" parent="States"]
+script = ExtResource( 13 )
+
+[node name="Fall" type="Node" parent="States"]
+script = ExtResource( 14 )
 
 [node name="PlayerAvatar" type="Position3D" parent="."]
 transform = Transform( 1, 0, 2.68221e-07, 0, 1, 0, -2.68221e-07, 0, 1, 0, 0, 0 )

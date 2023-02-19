@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/test_block.gltf-4b5cb4b853bffe9362ec304acda98515.scn"
+path="res://import/test_block.gltf-4b5cb4b853bffe9362ec304acda98515.scn"
 
 [deps]
 
 source_file="res://assets/model/test_block.gltf"
-dest_files=[ "res://.import/test_block.gltf-4b5cb4b853bffe9362ec304acda98515.scn" ]
+dest_files=[ "res://import/test_block.gltf-4b5cb4b853bffe9362ec304acda98515.scn" ]
 
 [params]
 

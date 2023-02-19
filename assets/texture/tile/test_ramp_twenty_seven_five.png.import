@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/test_ramp_twenty_seven_five.png-60346c958bc9064a1d6a80298001c7c0.s3tc.stex"
-path.etc="res://.import/test_ramp_twenty_seven_five.png-60346c958bc9064a1d6a80298001c7c0.etc.stex"
+path.s3tc="res://import/test_ramp_twenty_seven_five.png-60346c958bc9064a1d6a80298001c7c0.s3tc.stex"
+path.etc="res://import/test_ramp_twenty_seven_five.png-60346c958bc9064a1d6a80298001c7c0.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -12,7 +12,7 @@ metadata={
 [deps]
 
 source_file="res://assets/texture/tile/test_ramp_twenty_seven_five.png"
-dest_files=[ "res://.import/test_ramp_twenty_seven_five.png-60346c958bc9064a1d6a80298001c7c0.s3tc.stex", "res://.import/test_ramp_twenty_seven_five.png-60346c958bc9064a1d6a80298001c7c0.etc.stex" ]
+dest_files=[ "res://import/test_ramp_twenty_seven_five.png-60346c958bc9064a1d6a80298001c7c0.s3tc.stex", "res://import/test_ramp_twenty_seven_five.png-60346c958bc9064a1d6a80298001c7c0.etc.stex" ]
 
 [params]
 

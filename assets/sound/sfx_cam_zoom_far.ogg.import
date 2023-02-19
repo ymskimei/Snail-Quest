@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/sfx_cam_zoom_far.ogg-36785f7a22be614c345c0712b2b5289f.oggstr"
+path="res://import/sfx_cam_zoom_far.ogg-36785f7a22be614c345c0712b2b5289f.oggstr"
 
 [deps]
 
 source_file="res://assets/sound/sfx_cam_zoom_far.ogg"
-dest_files=[ "res://.import/sfx_cam_zoom_far.ogg-36785f7a22be614c345c0712b2b5289f.oggstr" ]
+dest_files=[ "res://import/sfx_cam_zoom_far.ogg-36785f7a22be614c345c0712b2b5289f.oggstr" ]
 
 [params]
 

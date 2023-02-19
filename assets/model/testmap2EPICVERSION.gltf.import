@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/testmap2EPICVERSION.gltf-e22adeacadfe4b0e5143c0cd011e153d.scn"
+path="res://import/testmap2EPICVERSION.gltf-e22adeacadfe4b0e5143c0cd011e153d.scn"
 
 [deps]
 
 source_file="res://assets/model/testmap2EPICVERSION.gltf"
-dest_files=[ "res://.import/testmap2EPICVERSION.gltf-e22adeacadfe4b0e5143c0cd011e153d.scn" ]
+dest_files=[ "res://import/testmap2EPICVERSION.gltf-e22adeacadfe4b0e5143c0cd011e153d.scn" ]
 
 [params]
 

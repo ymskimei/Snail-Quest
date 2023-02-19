@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gui_inventory_button_options_select_3.png-e499a64995254dd064691567b0121464.stex"
+path="res://import/gui_inventory_button_options_select_3.png-e499a64995254dd064691567b0121464.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://assets/texture/gui/gui_inventory_button_options_select/gui_inventory_button_options_select_3.png"
-dest_files=[ "res://.import/gui_inventory_button_options_select_3.png-e499a64995254dd064691567b0121464.stex" ]
+dest_files=[ "res://import/gui_inventory_button_options_select_3.png-e499a64995254dd064691567b0121464.stex" ]
 
 [params]
 

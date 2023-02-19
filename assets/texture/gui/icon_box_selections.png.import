@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_box_selections.png-8a15753870d3ac4c5227f320b7177034.stex"
+path="res://import/icon_box_selections.png-8a15753870d3ac4c5227f320b7177034.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://assets/texture/gui/icon_box_selections.png"
-dest_files=[ "res://.import/icon_box_selections.png-8a15753870d3ac4c5227f320b7177034.stex" ]
+dest_files=[ "res://import/icon_box_selections.png-8a15753870d3ac4c5227f320b7177034.stex" ]
 
 [params]
 

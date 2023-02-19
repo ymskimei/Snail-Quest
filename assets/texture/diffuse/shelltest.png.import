@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/shelltest.png-e3de66a080f371d2f31e2c61c8521cd5.s3tc.stex"
-path.etc="res://.import/shelltest.png-e3de66a080f371d2f31e2c61c8521cd5.etc.stex"
+path.s3tc="res://import/shelltest.png-e3de66a080f371d2f31e2c61c8521cd5.s3tc.stex"
+path.etc="res://import/shelltest.png-e3de66a080f371d2f31e2c61c8521cd5.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -12,7 +12,7 @@ metadata={
 [deps]
 
 source_file="res://assets/texture/diffuse/shelltest.png"
-dest_files=[ "res://.import/shelltest.png-e3de66a080f371d2f31e2c61c8521cd5.s3tc.stex", "res://.import/shelltest.png-e3de66a080f371d2f31e2c61c8521cd5.etc.stex" ]
+dest_files=[ "res://import/shelltest.png-e3de66a080f371d2f31e2c61c8521cd5.s3tc.stex", "res://import/shelltest.png-e3de66a080f371d2f31e2c61c8521cd5.etc.stex" ]
 
 [params]
 

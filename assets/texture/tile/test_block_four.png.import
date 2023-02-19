@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/test_block_four.png-ea10dc66d8cda0750931e3492206c23c.s3tc.stex"
-path.etc="res://.import/test_block_four.png-ea10dc66d8cda0750931e3492206c23c.etc.stex"
+path.s3tc="res://import/test_block_four.png-ea10dc66d8cda0750931e3492206c23c.s3tc.stex"
+path.etc="res://import/test_block_four.png-ea10dc66d8cda0750931e3492206c23c.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -12,7 +12,7 @@ metadata={
 [deps]
 
 source_file="res://assets/texture/tile/test_block_four.png"
-dest_files=[ "res://.import/test_block_four.png-ea10dc66d8cda0750931e3492206c23c.s3tc.stex", "res://.import/test_block_four.png-ea10dc66d8cda0750931e3492206c23c.etc.stex" ]
+dest_files=[ "res://import/test_block_four.png-ea10dc66d8cda0750931e3492206c23c.s3tc.stex", "res://import/test_block_four.png-ea10dc66d8cda0750931e3492206c23c.etc.stex" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/test_map_1.gltf-beefb70dc2c7578c40b27d1102dbaca8.scn"
+path="res://import/test_map_1.gltf-beefb70dc2c7578c40b27d1102dbaca8.scn"
 
 [deps]
 
 source_file="res://assets/model/test_map_1.gltf"
-dest_files=[ "res://.import/test_map_1.gltf-beefb70dc2c7578c40b27d1102dbaca8.scn" ]
+dest_files=[ "res://import/test_map_1.gltf-beefb70dc2c7578c40b27d1102dbaca8.scn" ]
 
 [params]
 

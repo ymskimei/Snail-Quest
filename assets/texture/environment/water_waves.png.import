@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/water_waves.png-2dad4d2869804bfa357917cff627ca5a.s3tc.stex"
-path.etc="res://.import/water_waves.png-2dad4d2869804bfa357917cff627ca5a.etc.stex"
+path.s3tc="res://import/water_waves.png-2dad4d2869804bfa357917cff627ca5a.s3tc.stex"
+path.etc="res://import/water_waves.png-2dad4d2869804bfa357917cff627ca5a.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -12,7 +12,7 @@ metadata={
 [deps]
 
 source_file="res://assets/texture/environment/water_waves.png"
-dest_files=[ "res://.import/water_waves.png-2dad4d2869804bfa357917cff627ca5a.s3tc.stex", "res://.import/water_waves.png-2dad4d2869804bfa357917cff627ca5a.etc.stex" ]
+dest_files=[ "res://import/water_waves.png-2dad4d2869804bfa357917cff627ca5a.s3tc.stex", "res://import/water_waves.png-2dad4d2869804bfa357917cff627ca5a.etc.stex" ]
 
 [params]
 

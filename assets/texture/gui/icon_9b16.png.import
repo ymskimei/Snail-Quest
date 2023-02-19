@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_9b16.png-565fd950cb3eb46f0b7ba1ada9b7a73b.stex"
+path="res://import/icon_9b16.png-565fd950cb3eb46f0b7ba1ada9b7a73b.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://assets/texture/gui/icon_9b16.png"
-dest_files=[ "res://.import/icon_9b16.png-565fd950cb3eb46f0b7ba1ada9b7a73b.stex" ]
+dest_files=[ "res://import/icon_9b16.png-565fd950cb3eb46f0b7ba1ada9b7a73b.stex" ]
 
 [params]
 

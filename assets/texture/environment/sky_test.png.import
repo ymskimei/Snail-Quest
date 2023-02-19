@@ -2,7 +2,7 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sky_test.png-c1b1956942ba263025bb5e3e475ea0b3.stex"
+path="res://import/sky_test.png-c1b1956942ba263025bb5e3e475ea0b3.stex"
 metadata={
 "vram_texture": false
 }
@@ -10,7 +10,7 @@ metadata={
 [deps]
 
 source_file="res://assets/texture/environment/sky_test.png"
-dest_files=[ "res://.import/sky_test.png-c1b1956942ba263025bb5e3e475ea0b3.stex" ]
+dest_files=[ "res://import/sky_test.png-c1b1956942ba263025bb5e3e475ea0b3.stex" ]
 
 [params]
 
