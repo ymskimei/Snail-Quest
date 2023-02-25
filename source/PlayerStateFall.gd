@@ -1,7 +1,7 @@
 extends PlayerStateMain
 
 func enter() -> void:
-	print("State: FALL")
+	print("Player State: FALL")
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)

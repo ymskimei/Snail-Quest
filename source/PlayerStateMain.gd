@@ -23,15 +23,16 @@ enum State {
 func enter() -> void:
 	pass
 
-func input(event: InputEvent) -> int:
+func input(_event: InputEvent) -> int:
 	return State.NULL
 
-func process(delta: float) -> int:
+func process(_delta: float) -> int:
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	input_vector = get_input_vector()
 	direction = get_direction(input_vector)
+	WorldMathHelper.safe_look_at(player.avatar, player.transform.origin + Vector3(velocity.x, 0, velocity.z))
 	velocity = player.move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
 	apply_gravity(delta)
 	update_snap_vector()
@@ -47,12 +48,12 @@ func apply_gravity(delta):
 	velocity.y = clamp(velocity.y, gravity, jump_power)
 
 func get_input_vector():
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input_vector.z = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input_vector.x = Input.get_action_raw_strength("ui_left") - Input.get_action_raw_strength("ui_right")
+	input_vector.z = Input.get_action_raw_strength("ui_up") - Input.get_action_raw_strength("ui_down")
 	return input_vector
 
 func get_direction(input_vector):
-	direction = input_vector.rotated(Vector3.UP, player.player_cam.rotation.y).normalized()
+	direction = -input_vector.rotated(Vector3.UP, player.player_cam.rotation.y).normalized()
 	return direction
 
 func update_snap_vector():

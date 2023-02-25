@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "CameraStateMain",
+"language": "GDScript",
+"path": "res://source/CameraStateMain.gd"
+}, {
 "base": "GraphNode",
 "class": "CommonNode",
 "language": "GDScript",
@@ -19,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogue_manager/dialogue_resource.gd"
 }, {
-"base": "KinematicBody",
+"base": "Reference",
 "class": "Player",
 "language": "GDScript",
 "path": "res://source/Player.gd"
@@ -29,17 +34,24 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/PlayerStateMain.gd"
 }, {
-"base": "Node",
-"class": "WorldInput",
+"base": "SpringArm",
+"class": "PrimaryCamera",
 "language": "GDScript",
-"path": "res://source/WorldInput.gd"
+"path": "res://source/Camera.gd"
+}, {
+"base": "Node",
+"class": "WorldMathHelper",
+"language": "GDScript",
+"path": "res://source/WorldMathHelper.gd"
 } ]
 _global_script_class_icons={
+"CameraStateMain": "",
 "CommonNode": "",
 "DialogueResource": "",
 "Player": "",
 "PlayerStateMain": "",
-"WorldInput": ""
+"PrimaryCamera": "",
+"WorldMathHelper": ""
 }
 
 [application]
@@ -59,7 +71,7 @@ config/icon="res://icon.png"
 
 GuiDebug="*res://assets/gui/gui_debug.tscn"
 WorldClock="*res://source/WorldClock.gd"
-DataSave="*res://source/DataSave.gd"
+DataSave="*res://source/WorldSaveData.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [display]
@@ -171,14 +183,14 @@ cam_down={
 }
 cam_zoom={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
- ]
-}
-cam_reset={
-"deadzone": 0.5,
 "events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":9,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+cam_lock={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 gui_pause={
@@ -216,7 +228,6 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
@@ -228,7 +239,10 @@ quality/shadow_atlas/quadrant_2_subdiv=4
 quality/shadow_atlas/quadrant_3_subdiv=5
 quality/shadows/filter_mode=0
 quality/shading/force_vertex_shading.mobile=false
+quality/shading/use_physical_light_attenuation=true
+quality/filters/anisotropic_filter_level=16
 environment/default_clear_color=Color( 1, 1, 1, 1 )
 quality/filters/msaa=2
 quality/filters/use_fxaa=true
+quality/filters/use_debanding=true
 environment/default_environment="res://default_env.tres"

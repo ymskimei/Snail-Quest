@@ -1,27 +1,26 @@
 extends Node
 
-var current_state: PlayerStateMain
+var current_state: CameraStateMain
 
 onready var states = {
-	PlayerStateMain.State.IDLE: $Idle,
-	PlayerStateMain.State.MOVE: $Move,
-	PlayerStateMain.State.FALL: $Fall,
-	PlayerStateMain.State.JUMP: $Jump
+	CameraStateMain.State.ORBIT: $Orbit,
+	CameraStateMain.State.LOOK: $Look,
+	CameraStateMain.State.LOCK: $Lock
 }
 
-func ready(player: Player) -> void:
+func ready(camera: PrimaryCamera) -> void:
 	for child in get_children():
-		child.player = player
-	change_state(PlayerStateMain.State.IDLE)
-	
+		child.camera = camera
+	change_state(CameraStateMain.State.ORBIT)
+
 func unhandled_input(event: InputEvent) -> void:
 	var new_state = current_state.input(event)
-	if new_state != PlayerStateMain.State.NULL:
+	if new_state != CameraStateMain.State.NULL:
 		change_state(new_state)
 
 func physics_process(delta: float) -> void:
 	var new_state = current_state.physics_process(delta)
-	if new_state != PlayerStateMain.State.NULL:
+	if new_state != CameraStateMain.State.NULL:
 		change_state(new_state)
 
 func change_state(new_state: int) -> void:

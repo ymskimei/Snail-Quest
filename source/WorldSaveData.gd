@@ -3,7 +3,7 @@ extends Node
 const SAVE_PATH = "user://save_data.json"
 var game_data = {}
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("debug_save"):
 		save_data()
 	if Input.is_action_just_pressed("debug_load"):
@@ -28,7 +28,7 @@ func load_data():
 		}
 		save_data()
 	file.open(SAVE_PATH, File.READ)
-	var game_data = parse_json(file.get_line())
-	WorldClock.game_time = game_data.game_time
-	WorldClock.play_time = game_data.play_time
+	var data = parse_json(file.get_line())
+	WorldClock.game_time = data.game_time
+	WorldClock.play_time = data.play_time
 	file.close()

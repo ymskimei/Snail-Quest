@@ -1,7 +1,7 @@
 extends PlayerStateMain
 
 func enter() -> void:
-	print("State: JUMP")
+	print("Player State: JUMP")
 	snap_vector = Vector3.ZERO
 	velocity.y = jump_power
 	print(velocity.y)
@@ -13,7 +13,7 @@ func physics_process(delta: float) -> int:
 #		if input_vector:
 #			return State.MOVE
 #		else:
-			return State.IDLE
+		return State.IDLE
 	if velocity.y > 0:
 		return State.FALL
 	return State.NULL

@@ -1,9 +1,9 @@
 extends PlayerStateMain
 
 func enter() -> void:
-	print("State: MOVE")
+	print("Player State: MOVE")
 
-func input(event: InputEvent) -> int:
+func input(_event: InputEvent) -> int:
 	if Input.is_action_just_pressed("ui_select"):
 		return State.JUMP
 	return State.NULL

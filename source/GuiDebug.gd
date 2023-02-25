@@ -1,17 +1,15 @@
-extends Control
+extends CanvasLayer
 
 onready var display_framerate = $MarginContainer/VBoxContainer/DisplayFramerate
 onready var display_world_clock = $MarginContainer/VBoxContainer/DisplayWorldClock
 onready var display_play_time = $MarginContainer/VBoxContainer/DisplayPlayTime
-onready var display_player_state = $MarginContainer/VBoxContainer/DisplayPlayerState
 export var framerate_normal = 60
 export var framerate_low = 30
 
-func _process(delta):
+func _process(_delta):
 	var framerate = Engine.get_frames_per_second()
 	var world_time = WorldClock.game_time
 	var play_time = WorldClock.play_time
-	#var player_state = .get_state
 	if framerate < framerate_low:
 		display_framerate.set_bbcode(" [color=#EA6A59]" + str(framerate))
 	elif framerate < framerate_normal:
@@ -20,4 +18,3 @@ func _process(delta):
 		display_framerate.set_bbcode(" [color=#C3EF5D]" + str(framerate))
 	display_world_clock.set_bbcode(" [color=#C3EF5D]" + str(world_time))
 	display_play_time.set_bbcode(" [color=#C3EF5D]" + str(play_time))
-	#display_player_state.set_bbcode(" [color=#EDDB65]" + str(player_state))

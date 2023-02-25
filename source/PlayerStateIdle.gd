@@ -1,9 +1,9 @@
 extends PlayerStateMain
 
 func enter() -> void:
-	print("State: IDLE")
+	print("Player State: IDLE")
 
-func input(event: InputEvent) -> int:
+func input(_event: InputEvent) -> int:
 	if Input.is_action_just_pressed("ui_select") and player.is_on_floor():
 		return State.JUMP
 	return State.NULL

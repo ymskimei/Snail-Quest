@@ -12,22 +12,22 @@ func _ready():
 	set_time_start()
 	second_timer()
 
-func _process(delta):
+func _process(_delta):
 	pass
 	
 func set_time_start():
 	time_start = OS.get_unix_time()
 
-func time_elapsed():
+func get_time_elapsed():
 	time_elapsed = OS.get_unix_time() - time_start
 
-func time_converted(time_elapsed):
-	var second = time_elapsed % 60
-	var minute = (time_elapsed / 60) % 60
-	var hour = (time_elapsed / 60) / 60
-	return [hour, minute, second]
+func time_converted():
+	var s = time_elapsed % 60
+	var m = (time_elapsed / 60) % 60
+	var h = (time_elapsed / 60) / 60
+	return [h, m, s]
 
-func clock_converted(time_elapsed):
+func clock_converted():
 	minute += 1
 	if minute > 60:
 		minute = 0
@@ -48,8 +48,8 @@ func second_timer():
 	second_timer.start()
 
 func on_second_timeout():
-	time_elapsed()
-	var time = time_converted(time_elapsed)
-	var clock = clock_converted(time_elapsed)
+	get_time_elapsed()
+	var time = time_converted()
+	var clock = clock_converted()
 	play_time = "%02dh, %02dm, %02ds" % [time[0], time[1], time[2]]
 	game_time = "%02d:%02d" % [clock[0], clock[1]] + clock[2] 
