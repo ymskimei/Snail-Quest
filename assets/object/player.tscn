@@ -1,18 +1,17 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/model/player_shell.material" type="Material" id=1]
-[ext_resource path="res://source/Player.gd" type="Script" id=2]
-[ext_resource path="res://assets/gui/gui_inventory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://source/player/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/gui/gui_popup_inventory.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/model/player_eyes_001.material" type="Material" id=4]
 [ext_resource path="res://assets/model/player_body.material" type="Material" id=5]
-[ext_resource path="res://assets/gui/gui_debug.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/texture/materials/player_shell.tres" type="Material" id=8]
 [ext_resource path="res://assets/texture/materials/player_body.tres" type="Material" id=9]
-[ext_resource path="res://source/PlayerStates.gd" type="Script" id=10]
-[ext_resource path="res://source/PlayerStateIdle.gd" type="Script" id=11]
-[ext_resource path="res://source/PlayerStateMove.gd" type="Script" id=12]
-[ext_resource path="res://source/PlayerStateJump.gd" type="Script" id=13]
-[ext_resource path="res://source/PlayerStateFall.gd" type="Script" id=14]
+[ext_resource path="res://source/player/PlayerStates.gd" type="Script" id=10]
+[ext_resource path="res://source/player/PlayerStateIdle.gd" type="Script" id=11]
+[ext_resource path="res://source/player/PlayerStateMove.gd" type="Script" id=12]
+[ext_resource path="res://source/player/PlayerStateJump.gd" type="Script" id=13]
+[ext_resource path="res://source/player/PlayerStateFall.gd" type="Script" id=14]
 [ext_resource path="res://assets/texture/materials/player_eyes.tres" type="Material" id=15]
 
 [sub_resource type="ArrayMesh" id=17]
@@ -348,9 +347,6 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.74228
 
 [node name="GuiInventory" parent="Gui" instance=ExtResource( 3 )]
 visible = false
-
-[node name="GuiPlayer" parent="Gui" instance=ExtResource( 6 )]
-mouse_filter = 2
 
 [node name="TimerPoison" type="Timer" parent="Gui"]
 wait_time = 0.5

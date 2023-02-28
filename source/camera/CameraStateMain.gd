@@ -1,0 +1,31 @@
+class_name CameraStateMain
+extends Node
+
+var camera: PrimaryCamera
+var rotation: Vector2
+var velocity: Vector2
+var controller_detected = false
+
+export var sensitivity = 10
+
+enum State {
+	NULL,
+	ORBIT,
+	TARGET,
+	LOOK
+}
+
+func enter() -> void:
+	pass
+
+func input(_event: InputEvent) -> int:
+	return State.NULL
+
+func process(_delta: float) -> int:
+	return State.NULL
+
+func physics_process(_delta: float) -> int:
+	return State.NULL
+
+func exit() -> void:
+	pass

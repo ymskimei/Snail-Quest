@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://source/WorldAudioPlayer.gd" type="Script" id=1]
+[ext_resource path="res://source/AudioPlayer.gd" type="Script" id=1]
 [ext_resource path="res://assets/sound/sfx_sound_test.ogg" type="AudioStream" id=2]
 [ext_resource path="res://assets/sound/sfx_cam_zoom_far.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/sound/sfx_cam_zoom_normal.ogg" type="AudioStream" id=4]
