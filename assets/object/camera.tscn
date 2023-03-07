@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://source/camera/Camera.gd" type="Script" id=1]
-[ext_resource path="res://assets/object/world_audio_player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/camera/CameraStates.gd" type="Script" id=3]
 [ext_resource path="res://source/camera/CameraStateLook.gd" type="Script" id=4]
 [ext_resource path="res://source/camera/CameraStateTarget.gd" type="Script" id=5]
@@ -104,5 +103,3 @@ grow_horizontal = 2
 rect_scale = Vector2( 1, 1e-05 )
 rect_pivot_offset = Vector2( 0, 96 )
 color = Color( 0, 0, 0, 1 )
-
-[node name="WorldAudioPlayer" parent="." instance=ExtResource( 2 )]

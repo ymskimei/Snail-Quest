@@ -1,4 +1,4 @@
-class_name GuiConsoleCommandCategory
+class_name GuiConsoleCategory
 extends Node
 
 export(NodePath) var command_handler_target = ".."
@@ -21,7 +21,7 @@ func command_entered(command, arguments):
 		command_console.send_message(command_node.get_usage())
 		return
 	if !command_handler.has_method(command_node.call_back):
-		command_console.send_message("[color=#EA6A59]Command call back not found: " + command_node.call_back + "[/color]")
+		command_console.send_message("[color=#EA6A59]Command call back not found: /n" + command_node.call_back + "[/color]")
 		return
 	command_handler.call(command_node.call_back, command_console, parse_result)
 

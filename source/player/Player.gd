@@ -3,24 +3,67 @@ extends KinematicBody
 
 export var player_name = "Sheldon"
 
-onready var player_cam = get_node("/root/Game/Camera")
+onready var player_cam = get_parent().get_node("Camera")
 onready var avatar = $PlayerAvatar
-onready var hitbox = $PlayerHitbox
 onready var states = $States
+
+onready var current_target = $"/root/Game/Objects/LilyPawn"
+
+export var health_maximum = 10 setget set_maximum_health
+export var health_current = 10 setget set_current_health
+
+signal health_changed
+signal player_killed
 
 var velocity = Vector3.ZERO
 var snap_vector = Vector3.ZERO
+var targeting : bool
+
+#signal play_battle_tracks
 
 func _ready():
 	states.ready(self)
 
 func _physics_process(delta: float) -> void:
-	WorldMathHelper.safe_look_at(avatar, transform.origin + Vector3(velocity.x, 0, velocity.z))
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
+	if Input.is_action_pressed("cam_lock") and current_target.get_global_translation().distance_to(get_global_translation()) < 15:
+		targeting = true
+	else:
+		targeting = false
 	states.physics_process(delta)
+#	var targ = get_parent().get_node("Objects/Target")
+#	if (targ.get_global_translation().distance_to(get_global_translation()) < 30):
+#		WorldAudioPlayer.play_battle_drums_far()
+#		if (targ.get_global_translation().distance_to(get_global_translation()) < 15):
+#			WorldAudioPlayer.play_battle_drums_near()
+#		else:
+#			WorldAudioPlayer.stop_battle_drums_near()
+#	else:
+#		WorldAudioPlayer.stop_battle_drums_far()
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
+
+func set_maximum_health(max_health):
+	pass
+
+func inflict_damage(damage_amount):
+	set_current_health(health_current - damage_amount)
+	print("Player Health: " + str(health_current))
+
+func set_current_health(new_amount):
+	health_current = new_amount
+	emit_signal("health_changed", new_amount)
+	if health_current <= 0:
+		kill_player()
+		print("Player Died")
+
+func kill_player():
+	emit_signal("player_killed")
+
+func _on_body_entered(body):
+	if body.is_in_group("enemy"):
+		inflict_damage(body.strength)
 
 #export var player_gravity = -110
 #export var player_jump_power = 30

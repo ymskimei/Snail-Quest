@@ -1,10 +1,10 @@
 class_name CameraStateMain
 extends Node
 
-var camera: PrimaryCamera
+var camera: MainCamera
 var rotation: Vector2
 var velocity: Vector2
-var controller_detected = false
+var controller : bool
 
 export var sensitivity = 10
 

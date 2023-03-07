@@ -16,7 +16,7 @@ func welcome_message():
 	command_display.bbcode_text += "   More information will be displayed here at a later date.\n"
 	command_display.bbcode_text += "   Use the command 'help' for more.\n\n"
 	
-func add_command_module(module : GuiConsoleCommandCategory):
+func add_command_module(module : GuiConsoleCategory):
 	module.command_console = self
 	command_modules.push_back(module)
 

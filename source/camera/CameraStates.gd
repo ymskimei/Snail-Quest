@@ -8,7 +8,7 @@ onready var states = {
 	CameraStateMain.State.TARGET: $Target
 }
 
-func ready(camera: PrimaryCamera) -> void:
+func ready(camera: MainCamera) -> void:
 	for child in get_children():
 		child.camera = camera
 	change_state(CameraStateMain.State.ORBIT)

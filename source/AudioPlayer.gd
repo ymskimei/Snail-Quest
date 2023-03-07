@@ -1,12 +1,34 @@
-extends Node2D
+class_name AudioStreamMusic
+extends AudioStreamPlayer
 
-onready var sfx_cam_zoom_far = $SoundEffects/CamZoomFar
-onready var sfx_cam_zoom_normal = $SoundEffects/CamZoomNormal
-onready var sfx_cam_zoom_close = $SoundEffects/CamZoomClose
+export(Resource) var resource
 
-onready var sfx_cam_target_lock = $SoundEffects/CamTargetLock
-onready var sfx_cam_target_unlock = $SoundEffects/CamTargetUnlock
+onready var bpm : int
+onready var measures : int
+onready var bars : int
+
+signal beat(position)
+signal measure(position)
 
 func _ready():
-	pass # Replace with function body.
+	bpm = resource.bpm
+	measures = resource.measures
+	bars = resource.bars
 
+#extends Node
+#
+#onready var music = $MixingDeskMusic
+#
+#func _ready():
+#	music.init_song("Demo")
+#	music.play("Demo")
+#
+#func play_battle_music():
+#		music.unmute("Demo", "Bass")
+#		music.unmute("Demo", "Percussion1")
+#		music.unmute("Demo", "Percussion2")
+#
+#func stop_battle_music():
+#		music.mute("Demo", "Bass")
+#		music.mute("Demo", "Percussion1")
+#		music.mute("Demo", "Percussion2")

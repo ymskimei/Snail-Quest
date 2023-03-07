@@ -318,11 +318,12 @@ mesh = SubResource( 23 )
 skin = SubResource( 19 )
 material/0 = ExtResource( 8 )
 
-[node name="PlayerHitbox" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.521372, 0 )
+[node name="PlayerCollision" type="CollisionShape" parent="."]
+transform = Transform( 0.7, 0, 0, 0, 0.9, 0, 0, 0, 1.4, 0, 0.45, 0 )
 shape = SubResource( 24 )
 
 [node name="PlayerRays" type="Spatial" parent="."]
+visible = false
 
 [node name="CheckerFloor" type="Area" parent="PlayerRays"]
 
@@ -355,5 +356,12 @@ wait_time = 0.5
 wait_time = 0.5
 one_shot = true
 
+[node name="PlayerArea" type="Area" parent="."]
+
+[node name="PlayerHitbox" type="CollisionShape" parent="PlayerArea"]
+transform = Transform( 0.7, 0, 0, 0, 0.9, 0, 0, 0, 1.4, 0, 0.45, 0 )
+shape = SubResource( 24 )
+
 [connection signal="body_entered" from="PlayerRays/CheckerFloor" to="." method="_on_CheckerFloor_body_entered"]
 [connection signal="body_exited" from="PlayerRays/CheckerFloor" to="." method="_on_CheckerFloor_body_exited"]
+[connection signal="body_entered" from="PlayerArea" to="." method="_on_body_entered"]

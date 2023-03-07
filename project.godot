@@ -9,61 +9,73 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
+"base": "AudioStreamPlayer",
+"class": "AudioStreamMusic",
+"language": "GDScript",
+"path": "res://source/AudioPlayer.gd"
+}, {
+"base": "Node",
 "class": "CameraStateMain",
 "language": "GDScript",
 "path": "res://source/camera/CameraStateMain.gd"
-}, {
-"base": "GraphNode",
-"class": "CommonNode",
-"language": "GDScript",
-"path": "res://addons/project_map/pm_common_node.gd"
 }, {
 "base": "Resource",
 "class": "DialogueResource",
 "language": "GDScript",
 "path": "res://addons/dialogue_manager/dialogue_resource.gd"
 }, {
-"base": "Reference",
+"base": "Node",
+"class": "GuiConsoleCategory",
+"language": "GDScript",
+"path": "res://source/gui/GuiPopupConsoleCategory.gd"
+}, {
+"base": "Node",
 "class": "GuiConsoleCommand",
 "language": "GDScript",
 "path": "res://source/gui/GuiPopupConsoleCommand.gd"
 }, {
-"base": "Reference",
-"class": "GuiConsoleCommandCategory",
-"language": "GDScript",
-"path": "res://source/gui/GuiPopupConsoleCategory.gd"
-}, {
-"base": "Reference",
-"class": "Player",
-"language": "GDScript",
-"path": "res://source/player/Player.gd"
-}, {
-"base": "Reference",
-"class": "PlayerStateMain",
-"language": "GDScript",
-"path": "res://source/player/PlayerStateMain.gd"
-}, {
-"base": "Reference",
-"class": "PrimaryCamera",
+"base": "SpringArm",
+"class": "MainCamera",
 "language": "GDScript",
 "path": "res://source/camera/Camera.gd"
 }, {
 "base": "Node",
-"class": "WorldMathHelper",
+"class": "MathHelper",
 "language": "GDScript",
 "path": "res://source/MathHelper.gd"
+}, {
+"base": "KinematicBody",
+"class": "Player",
+"language": "GDScript",
+"path": "res://source/player/Player.gd"
+}, {
+"base": "Node",
+"class": "PlayerStateMain",
+"language": "GDScript",
+"path": "res://source/player/PlayerStateMain.gd"
+}, {
+"base": "Resource",
+"class": "ResourceAudioPlayer",
+"language": "GDScript",
+"path": "res://source/resource/ResourceAudioPlayer.gd"
+}, {
+"base": "Resource",
+"class": "ResourceEnemy",
+"language": "GDScript",
+"path": "res://source/resource/ResourceEnemy.gd"
 } ]
 _global_script_class_icons={
+"AudioStreamMusic": "",
 "CameraStateMain": "",
-"CommonNode": "",
 "DialogueResource": "",
+"GuiConsoleCategory": "",
 "GuiConsoleCommand": "",
-"GuiConsoleCommandCategory": "",
+"MainCamera": "",
+"MathHelper": "",
 "Player": "",
 "PlayerStateMain": "",
-"PrimaryCamera": "",
-"WorldMathHelper": ""
+"ResourceAudioPlayer": "",
+"ResourceEnemy": ""
 }
 
 [application]
@@ -85,6 +97,8 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Clock="*res://source/Clock.gd"
 SaveData="*res://source/SaveData.gd"
 GuiDebug="*res://assets/gui/gui_popup_debug.tscn"
+AudioPlayer="res://assets/object/audio_player.tscn"
+WorldAudioPlayer="res://assets/object/world_audio_player.tscn"
 
 [display]
 
@@ -102,7 +116,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogue_manager/plugin.cfg", "res://addons/epic-anchors/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/project_map/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogue_manager/plugin.cfg", "res://addons/epic-anchors/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/mixing-desk/plugin.cfg" )
 
 [global]
 
@@ -246,6 +260,7 @@ debug_load={
 [physics]
 
 common/enable_pause_aware_picking=true
+3d/physics_engine="Bullet"
 
 [rendering]
 

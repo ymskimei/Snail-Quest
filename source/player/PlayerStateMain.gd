@@ -7,7 +7,7 @@ var player_direction = Vector3.ZERO
 
 export var max_speed = 7
 export var acceleration = 100
-export var gravity = -50
+export var gravity = 50
 export var jump_power = 15
 
 enum State {
@@ -30,19 +30,15 @@ func process(_delta: float) -> int:
 func physics_process(delta: float) -> int:
 	input_vector = get_input_vector()
 	player_direction = get_direction()
+	if player.targeting:
+		var target = player.current_target.transform.origin
+		MathHelper.safe_look_at(player, Vector3(target.x, 0, target.z))
+	else:
+		MathHelper.safe_look_at(player, player.transform.origin + Vector3(player.velocity.x, 0, player.velocity.z))
 	apply_movement(player_direction, delta)
 	apply_gravity(delta)
 	update_snap_vector()
 	return State.NULL
-
-func apply_movement(direction, delta):
-	if direction != Vector3.ZERO:
-		player.velocity.x = player.velocity.move_toward(direction * max_speed, acceleration * delta).x
-		player.velocity.z = player.velocity.move_toward(direction * max_speed, acceleration * delta).z
-
-func apply_gravity(delta):
-	player.velocity.y += gravity * delta
-	player.velocity.y = clamp(player.velocity.y, gravity, jump_power)
 
 func get_input_vector():
 	input_vector.x = Input.get_action_raw_strength("ui_left") - Input.get_action_raw_strength("ui_right")
@@ -52,6 +48,15 @@ func get_input_vector():
 func get_direction():
 	player_direction = -input_vector.rotated(Vector3.UP, player.player_cam.rotation.y).normalized()
 	return player_direction
+
+func apply_movement(direction, delta):
+	if direction != Vector3.ZERO:
+		player.velocity.x = player.velocity.move_toward(direction * max_speed, acceleration * delta).x
+		player.velocity.z = player.velocity.move_toward(direction * max_speed, acceleration * delta).z
+
+func apply_gravity(delta):
+	player.velocity.y += -gravity * delta
+	player.velocity.y = clamp(player.velocity.y, -gravity, jump_power)
 
 func update_snap_vector():
 	player.snap_vector = -player.get_floor_normal() if player.is_on_floor() else Vector3.DOWN

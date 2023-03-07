@@ -1,11 +1,10 @@
-class_name PrimaryCamera
+class_name MainCamera
 extends SpringArm
 
-onready var camera_target = $"/root/Game/Player"
+onready var player = get_parent().get_node("Player")
 onready var camera_lens = $CameraLens
 onready var anim_tween = $CameraLens/Animation/AnimationCam
 onready var anim_player = $CameraLens/Animation/AnimationPlayer
-onready var audio_player = $WorldAudioPlayer
 onready var states = $States
 
 func _ready():

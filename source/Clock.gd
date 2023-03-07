@@ -42,6 +42,7 @@ func clock_converted():
 
 func second_timer():
 	var second_timer = Timer.new()
+	second_timer.set_timer_process_mode(1)
 	second_timer.set_wait_time(1)
 	second_timer.connect("timeout", self, "on_second_timeout")
 	add_child(second_timer)

@@ -1,4 +1,4 @@
-class_name WorldMathHelper
+class_name MathHelper
 extends Node
 
 static func safe_look_at(spatial : Spatial, target : Vector3) -> void:

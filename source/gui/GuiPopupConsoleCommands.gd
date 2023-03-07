@@ -1,7 +1,6 @@
 extends Node
 
 onready var command_console = get_node("../../../")
-signal toggle_debug_info
 
 func _ready():
 	command_console.add_command_module($Information)
@@ -36,7 +35,7 @@ func on_command_quit(_console, _args):
 	get_tree().quit()
 
 func on_command_restart(_console, _args):
-	var restart = get_tree().change_scene("res://assets/gui/gui_title.tscn")
+	var restart = get_tree().change_scene("res://assets/gui/gui_screen_title.tscn")
 	if restart != 0:
 		command_console.send_message("[color=#EA6A59]Title screen is missing[/color]\n")
 
