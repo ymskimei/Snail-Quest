@@ -21,9 +21,6 @@ func enter() -> void:
 func input(_event: InputEvent) -> int:
 	return State.NULL
 
-func process(_delta: float) -> int:
-	return State.NULL
-
 func physics_process(_delta: float) -> int:
 	return State.NULL
 

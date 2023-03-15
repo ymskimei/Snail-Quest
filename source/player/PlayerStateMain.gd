@@ -24,20 +24,21 @@ func enter() -> void:
 func input(_event: InputEvent) -> int:
 	return State.NULL
 
-func process(_delta: float) -> int:
-	return State.NULL
-
 func physics_process(delta: float) -> int:
 	input_vector = get_input_vector()
 	player_direction = get_direction()
 	if player.targeting:
 		var target = player.current_target.transform.origin
 		MathHelper.safe_look_at(player, Vector3(target.x, 0, target.z))
-	else:
+	elif !player.is_on_wall():
+		#MathHelper.slerp_look_at(player, player, 3)
 		MathHelper.safe_look_at(player, player.transform.origin + Vector3(player.velocity.x, 0, player.velocity.z))
-	apply_movement(player_direction, delta)
+	apply_movement(delta)
 	apply_gravity(delta)
 	update_snap_vector()
+	return State.NULL
+
+func process(_delta: float) -> int:
 	return State.NULL
 
 func get_input_vector():
@@ -49,10 +50,10 @@ func get_direction():
 	player_direction = -input_vector.rotated(Vector3.UP, player.player_cam.rotation.y).normalized()
 	return player_direction
 
-func apply_movement(direction, delta):
-	if direction != Vector3.ZERO:
-		player.velocity.x = player.velocity.move_toward(direction * max_speed, acceleration * delta).x
-		player.velocity.z = player.velocity.move_toward(direction * max_speed, acceleration * delta).z
+func apply_movement(delta):
+	if player_direction != Vector3.ZERO:
+		player.velocity.x = player.velocity.move_toward(player_direction * max_speed, acceleration * delta).x
+		player.velocity.z = player.velocity.move_toward(player_direction * max_speed, acceleration * delta).z
 
 func apply_gravity(delta):
 	player.velocity.y += -gravity * delta

@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/model/player_shell.material" type="Material" id=1]
 [ext_resource path="res://source/player/Player.gd" type="Script" id=2]
 [ext_resource path="res://assets/gui/gui_popup_inventory.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/model/player_eyes_001.material" type="Material" id=4]
 [ext_resource path="res://assets/model/player_body.material" type="Material" id=5]
+[ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=6]
 [ext_resource path="res://assets/texture/materials/player_shell.tres" type="Material" id=8]
 [ext_resource path="res://assets/texture/materials/player_body.tres" type="Material" id=9]
 [ext_resource path="res://source/player/PlayerStates.gd" type="Script" id=10]
@@ -322,6 +323,13 @@ material/0 = ExtResource( 8 )
 transform = Transform( 0.7, 0, 0, 0, 0.9, 0, 0, 0, 1.4, 0, 0.45, 0 )
 shape = SubResource( 24 )
 
+[node name="InteractionRay" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.734 )
+enabled = true
+cast_to = Vector3( 0, 0, -2 )
+collision_mask = 8
+collide_with_areas = true
+
 [node name="PlayerRays" type="Spatial" parent="."]
 visible = false
 
@@ -345,6 +353,20 @@ shape = SubResource( 9 )
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.74228e-08, 1.5, 1 )
 
 [node name="Gui" type="Node" parent="."]
+
+[node name="InteractionLabel" type="RichTextLabel" parent="Gui"]
+anchor_left = 0.4
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -131.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 6 )
+bbcode_enabled = true
+bbcode_text = "Press A to Interact"
+text = "Press A to Interact"
+scroll_active = false
 
 [node name="GuiInventory" parent="Gui" instance=ExtResource( 3 )]
 visible = false

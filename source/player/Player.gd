@@ -6,8 +6,9 @@ export var player_name = "Sheldon"
 onready var player_cam = get_parent().get_node("Camera")
 onready var avatar = $PlayerAvatar
 onready var states = $States
-
-onready var current_target = $"/root/Game/Objects/LilyPawn"
+onready var interactor = $InteractionRay
+onready var interaction_label = $Gui/InteractionLabel
+onready var current_target = $"/root/Game/Objects/EnemyParent"
 
 export var health_maximum = 10 setget set_maximum_health
 export var health_current = 10 setget set_current_health
@@ -18,11 +19,14 @@ signal player_killed
 var velocity = Vector3.ZERO
 var snap_vector = Vector3.ZERO
 var targeting : bool
+var current_collider
+var collider
 
 #signal play_battle_tracks
 
 func _ready():
 	states.ready(self)
+	set_interaction_text("")
 
 func _physics_process(delta: float) -> void:
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
@@ -31,6 +35,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		targeting = false
 	states.physics_process(delta)
+	interaction_check()
 #	var targ = get_parent().get_node("Objects/Target")
 #	if (targ.get_global_translation().distance_to(get_global_translation()) < 30):
 #		WorldAudioPlayer.play_battle_drums_far()
@@ -40,6 +45,9 @@ func _physics_process(delta: float) -> void:
 #			WorldAudioPlayer.stop_battle_drums_near()
 #	else:
 #		WorldAudioPlayer.stop_battle_drums_far()
+
+func _process(delta: float) -> void:
+	states.process(delta)
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
@@ -64,6 +72,28 @@ func kill_player():
 func _on_body_entered(body):
 	if body.is_in_group("enemy"):
 		inflict_damage(body.strength)
+
+func interaction_check():
+	var collider = interactor.get_collider()
+	if interactor.is_colliding() and collider is Interactable:
+		if current_collider != collider:
+			set_interaction_text(collider.get_interaction_text())
+			current_collider = collider
+		if Input.is_action_just_pressed("action_main"):
+			collider.interact()
+			set_interaction_text("")
+	elif current_collider:
+		current_collider = null
+		set_interaction_text("")
+
+func set_interaction_text(text):
+	if !text:
+		interaction_label.set_text("")
+		interaction_label.set_visible(false)
+	else:
+		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
+		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
+		interaction_label.set_visible(true)
 
 #export var player_gravity = -110
 #export var player_jump_power = 30
