@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/model/LilyPawnLime.material" type="Material" id=1]
-[ext_resource path="res://source/enemy/EnemyParent.gd" type="Script" id=2]
-[ext_resource path="res://source/enemy/EnemyStates.gd" type="Script" id=3]
-[ext_resource path="res://resource/enemy_test.tres" type="Resource" id=4]
-[ext_resource path="res://source/enemy/EnemyStateMove.gd" type="Script" id=5]
-[ext_resource path="res://source/enemy/EnemyStateSeek.gd" type="Script" id=6]
-[ext_resource path="res://source/enemy/EnemyStateLook.gd" type="Script" id=7]
+[ext_resource path="res://source/entity/enemy/EnemyParent.gd" type="Script" id=2]
+[ext_resource path="res://source/entity/enemy/EnemyStates.gd" type="Script" id=3]
+[ext_resource path="res://resource/player.tres" type="Resource" id=4]
+[ext_resource path="res://source/entity/enemy/EnemyStateMove.gd" type="Script" id=5]
+[ext_resource path="res://source/entity/enemy/EnemyStateSeek.gd" type="Script" id=6]
+[ext_resource path="res://source/entity/enemy/EnemyStateLook.gd" type="Script" id=7]
 [ext_resource path="res://assets/texture/materials/lily_pawn_lime.tres" type="Material" id=8]
 
 [sub_resource type="ArrayMesh" id=5]

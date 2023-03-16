@@ -1,9 +1,14 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://source/resource/ResourceEnemy.gd" type="Script" id=1]
+[ext_resource path="res://source/resource/ResourceEntity.gd" type="Script" id=1]
 
 [resource]
 script = ExtResource( 1 )
+entity_name = "Lily Pawn"
 health = 20
-strength = 3
-speed = 2
+strength = 10
+gravity = 50
+speed = 15
+max_speed = 0
+acceleration = 0
+jump = 0

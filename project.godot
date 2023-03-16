@@ -14,10 +14,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/AudioPlayer.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "CameraStateMain",
 "language": "GDScript",
-"path": "res://source/camera/CameraStateMain.gd"
+"path": "res://source/entity/camera/CameraStateMain.gd"
 }, {
 "base": "Reference",
 "class": "CellEditor",
@@ -79,15 +79,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogic/Other/DialogicUtil.gd"
 }, {
-"base": "KinematicBody",
+"base": "EntityParent",
 "class": "EnemyParent",
 "language": "GDScript",
-"path": "res://source/enemy/EnemyParent.gd"
+"path": "res://source/entity/enemy/EnemyParent.gd"
 }, {
 "base": "Node",
 "class": "EnemyStateMain",
 "language": "GDScript",
-"path": "res://source/enemy/EnemyStateMain.gd"
+"path": "res://source/entity/enemy/EnemyStateMain.gd"
+}, {
+"base": "KinematicBody",
+"class": "EntityParent",
+"language": "GDScript",
+"path": "res://source/entity/EntityParent.gd"
 }, {
 "base": "Resource",
 "class": "EverythingLibraryImport",
@@ -109,30 +114,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogic/Example Assets/History/HistoryRow.gd"
 }, {
-"base": "Node",
-"class": "Interactable",
-"language": "GDScript",
-"path": "res://source/Interactable.gd"
-}, {
 "base": "SpringArm",
 "class": "MainCamera",
 "language": "GDScript",
-"path": "res://source/camera/Camera.gd"
+"path": "res://source/entity/camera/Camera.gd"
 }, {
 "base": "Node",
 "class": "MathHelper",
 "language": "GDScript",
 "path": "res://source/MathHelper.gd"
 }, {
-"base": "KinematicBody",
+"base": "Node",
+"class": "ObjectInteractable",
+"language": "GDScript",
+"path": "res://source/object/ObjectInteractable.gd"
+}, {
+"base": "EntityParent",
 "class": "Player",
 "language": "GDScript",
-"path": "res://source/player/Player.gd"
+"path": "res://source/entity/player/Player.gd"
 }, {
 "base": "Node",
 "class": "PlayerStateMain",
 "language": "GDScript",
-"path": "res://source/player/PlayerStateMain.gd"
+"path": "res://source/entity/player/PlayerStateMain.gd"
 }, {
 "base": "Resource",
 "class": "ResourceAudioPlayer",
@@ -140,9 +145,9 @@ _global_script_classes=[ {
 "path": "res://source/resource/ResourceAudioPlayer.gd"
 }, {
 "base": "Resource",
-"class": "ResourceEnemy",
+"class": "ResourceEntity",
 "language": "GDScript",
-"path": "res://source/resource/ResourceEnemy.gd"
+"path": "res://source/resource/ResourceEntity.gd"
 }, {
 "base": "Resource",
 "class": "ResourceSign",
@@ -221,17 +226,18 @@ _global_script_class_icons={
 "DialogicUtil": "",
 "EnemyParent": "",
 "EnemyStateMain": "",
+"EntityParent": "",
 "EverythingLibraryImport": "",
 "GuiConsoleCategory": "",
 "GuiConsoleCommand": "",
 "HistoryRow": "",
-"Interactable": "",
 "MainCamera": "",
 "MathHelper": "",
+"ObjectInteractable": "",
 "Player": "",
 "PlayerStateMain": "",
 "ResourceAudioPlayer": "",
-"ResourceEnemy": "",
+"ResourceEntity": "",
 "ResourceSign": "",
 "SettingsGrid": "",
 "SheetsDockEditor": "",
@@ -276,6 +282,7 @@ GuiDebug="*res://assets/gui/gui_popup_debug.tscn"
 AudioPlayer="res://assets/object/audio_player.tscn"
 WorldAudioPlayer="res://assets/object/world_audio_player.tscn"
 Library="*res://addons/everything_library/src/autoload.gd"
+ReflectMaterialManager="*res://addons/Silicon.vfx.planar_reflection/reflect_material_manager.gd"
 
 [display]
 
@@ -294,7 +301,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/epic-anchors/plugin.cfg", "res://addons/everything_library/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/resources_speadsheet_view/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/Silicon.vfx.planar_reflection/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/epic-anchors/plugin.cfg", "res://addons/everything_library/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/resources_speadsheet_view/plugin.cfg" )
 
 [global]
 
@@ -474,9 +481,9 @@ quality/shading/force_vertex_shading.mobile=false
 quality/shading/use_physical_light_attenuation=true
 quality/filters/anisotropic_filter_level=15
 quality/filters/use_nearest_mipmap_filter=true
-environment/default_clear_color=Color( 1, 1, 1, 1 )
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 quality/filters/msaa=4
 quality/filters/use_fxaa=true
 quality/filters/use_debanding=true
 quality/depth/hdr=false
-environment/default_environment="res://assets/default_env.tres"
+environment/default_environment="res://default_env.tres"
