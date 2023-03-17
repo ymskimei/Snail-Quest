@@ -11,8 +11,8 @@ export var sensitivity = 10
 enum State {
 	NULL,
 	ORBIT,
-	TARGET,
-	LOOK
+	LOOK,
+	TARGET
 }
 
 func enter() -> void:
