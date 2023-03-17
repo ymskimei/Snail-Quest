@@ -2,11 +2,11 @@ extends CanvasLayer
 
 var can_pause : bool = true
 
-onready var debug_information = $MarginContainer/HBoxContainer/DebugInformation
-onready var display_framerate = $MarginContainer/HBoxContainer/DebugInformation/DisplayFramerate
-onready var display_world_clock = $MarginContainer/HBoxContainer/DebugInformation/DisplayWorldClock
-onready var display_play_time = $MarginContainer/HBoxContainer/DebugInformation/DisplayPlayTime
-onready var command_console = $MarginContainer/HBoxContainer/ConsoleContainer/GuiConsole
+onready var debug_information = $"%DebugInformation"
+onready var display_framerate = $"%DisplayFramerate"
+onready var display_world_clock = $"%DisplayWorldClock"
+onready var display_play_time = $"%DisplayPlayTime"
+onready var command_console = $"%GuiConsole"
 export var version_number = "0.1.0-alpha"
 export var framerate_normal = 60
 export var framerate_low = 30

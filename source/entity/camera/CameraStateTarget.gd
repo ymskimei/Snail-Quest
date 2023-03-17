@@ -1,6 +1,5 @@
 extends CameraStateMain
 
-
 export var follow_speed = 5.5
 export var targeting_offset = Vector3(0, 1, 0)
 export var targeting_rotation = -0.5
@@ -15,7 +14,7 @@ func enter() -> void:
 	print("Camera State: LOCK")
 
 func physics_process(delta):
-	MathHelper.slerp_look_at(entity, entity.player.current_target, targeting_speed)
+	MathHelper.slerp_look_at(entity, entity.player.target, targeting_speed)
 	entity.rotation.x = lerp(entity.rotation.x, targeting_rotation, follow_speed * delta)
 	entity.translation = lerp(entity.translation, entity.player.translation + targeting_offset, 5 * delta)
 	if !entity.player.targeting:
@@ -32,4 +31,3 @@ func exit () -> void:
 	entity.anim_player.play("BarsDisappear")
 	tween_cam_zoom()
 	print("Camera State: TARGET")
-

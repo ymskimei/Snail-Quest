@@ -15,7 +15,6 @@ func change_state(new_state: int) -> void:
 	current_state.enter()
 
 # Passing methods
-
 func physics_process(delta: float) -> void:
 	if current_state.has_method("physics_process"):
 		var new_state = current_state.physics_process(delta)

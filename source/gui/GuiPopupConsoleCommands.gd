@@ -20,7 +20,7 @@ func on_command_clear(_console, _args):
 	command_console.clear_console()
 
 func on_command_debug(_console, _args):
-	GuiDebug.display_debug_information()
+	GuiMain.debug.display_debug_information()
 
 func on_command_help(_console, _args):
 	var message = "[color=#7F7F7F]————[/color] [color=#A8A8A8]?[/color] Help [color=#A8A8A8]?[/color] [color=#7F7F7F]————[/color]\n"
@@ -43,7 +43,7 @@ func on_command_say(_console, args):
 	command_console.send_message(args[0])
 
 func on_command_version(_console, _args):
-	command_console.send_message("Snail Quest is on version [color=#C3EF5D]%s[/color]\n" % GuiDebug.version_number)
+	command_console.send_message("Snail Quest is on version [color=#C3EF5D]%s[/color]\n" % GuiMain.debug.version_number)
 
 #immortal - enable/disable invincibility
 #sethealth - add or remove health to an entity

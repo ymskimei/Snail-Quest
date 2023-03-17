@@ -21,7 +21,7 @@ func physics_process(delta: float) -> int:
 	entity.input = get_input_vector()
 	entity.direction = get_direction()
 	if entity.targeting:
-		var target = entity.current_target.transform.origin
+		var target = entity.target.transform.origin
 		MathHelper.safe_look_at(entity, Vector3(target.x, 0, target.z))
 	elif !entity.is_on_wall():
 		#MathHelper.slerp_look_at(entity, entity, 3)

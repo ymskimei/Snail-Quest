@@ -6,7 +6,6 @@ onready var avatar = $PlayerAvatar
 onready var states = $StateController
 onready var interactor = $InteractionRay
 onready var interaction_label = $Gui/InteractionLabel
-onready var current_target = $"/root/Game/Objects/EnemyParent"
 
 signal health_changed
 signal player_killed
@@ -16,6 +15,7 @@ var targeting : bool
 var current_collider
 var collider
 var can_interact : bool
+var target = null
 #signal play_battle_tracks
 
 func _ready():
@@ -24,12 +24,14 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
-	if Input.is_action_pressed("cam_lock") and current_target.get_global_translation().distance_to(get_global_translation()) < 15:
-		targeting = true
-	else:
-		targeting = false
 	states.physics_process(delta)
 	interaction_check()
+	if Input.is_action_pressed("cam_lock") and target.get_global_translation().distance_to(get_global_translation()) < 15:
+		targeting = true
+	else:
+		target = MathHelper.find_target(self, "target")
+		targeting = false
+	
 #	var targ = get_parent().get_node("Objects/Target")
 #	if (targ.get_global_translation().distance_to(get_global_translation()) < 30):
 #		WorldAudioPlayer.play_battle_drums_far()

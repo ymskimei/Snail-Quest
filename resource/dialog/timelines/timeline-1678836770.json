@@ -21,6 +21,19 @@
 			"question": "[color=#C3EF5D]I need to be awesome!!![/color]"
 		},
 		{
+			"choice": "You're awesome!!!",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1678844174.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Thank you for believing in me! I will never forget your kindness.\nNo one ever will..."
+		},
+		{
 			"choice": "Just be normal, please...",
 			"condition": "",
 			"definition": "",
@@ -50,19 +63,6 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "I am a normal sign."
-		},
-		{
-			"choice": "You are awesome, Mr. Sign!!",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
-		},
-		{
-			"character": "character-1678844174.json",
-			"event_id": "dialogic_001",
-			"portrait": "",
-			"text": "Thank you for believing in me! I will never forget your kindness.\nNo one ever will..."
 		},
 		{
 			"event_id": "dialogic_013"
