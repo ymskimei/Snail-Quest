@@ -18,8 +18,11 @@ func physics_process(delta: float) -> void:
 	if new_state != EnemyStateMain.State.NULL:
 		change_state(new_state)
 
+
 func change_state(new_state: int) -> void:
 	if current_state:
 		current_state.exit()
 	current_state = states[new_state]
+	print('change')
+	print(current_state)
 	current_state.enter()

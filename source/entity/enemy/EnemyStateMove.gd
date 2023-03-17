@@ -9,7 +9,7 @@ func physics_process(delta: float) -> int:
 	var global_pos = enemy.global_transform.origin
 	var w_transform = enemy.global_transform.looking_at(Vector3(x_location, global_pos.y, z_location), Vector3.UP)
 	var w_rotation = Quat(enemy.global_transform.basis).slerp(Quat(w_transform.basis), rot_speed)
-	self.global_transform = Transform(Basis(w_rotation), global_pos)
+	enemy.global_transform = Transform(Basis(w_rotation), global_pos)
 	if enemy.start_move == true:
 		var velocity = enemy.global_transform.basis.z.normalized() * enemy.idle_speed * delta
 		enemy.move_and_collide(-velocity)

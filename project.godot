@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/AudioPlayer.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "CameraStateMain",
 "language": "GDScript",
 "path": "res://source/entity/camera/CameraStateMain.gd"
