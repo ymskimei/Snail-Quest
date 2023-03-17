@@ -12,7 +12,7 @@ onready var target_location : Node = $"../../Player"
 
 onready var looking_timer = $LookingTimer
 onready var follow_timer = $FollowTimer
-onready var states = $States
+onready var states = $StateController
 
 var target_near : bool
 var escaped_yet : bool

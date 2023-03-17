@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/model/LilyPawnLime.material" type="Material" id=1]
 [ext_resource path="res://source/entity/enemy/EnemyParent.gd" type="Script" id=2]
-[ext_resource path="res://source/entity/enemy/EnemyStates.gd" type="Script" id=3]
+[ext_resource path="res://assets/entity/StateController.tscn" type="PackedScene" id=3]
 [ext_resource path="res://resource/player.tres" type="Resource" id=4]
 [ext_resource path="res://source/entity/enemy/EnemyStateMove.gd" type="Script" id=5]
 [ext_resource path="res://source/entity/enemy/EnemyStateSeek.gd" type="Script" id=6]
@@ -37,16 +37,15 @@ collision_mask = 15
 script = ExtResource( 2 )
 resource = ExtResource( 4 )
 
-[node name="States" type="Node" parent="."]
-script = ExtResource( 3 )
+[node name="StateController" parent="." instance=ExtResource( 3 )]
 
-[node name="Move" type="Node" parent="States"]
+[node name="Move" type="Node" parent="StateController"]
 script = ExtResource( 5 )
 
-[node name="Seek" type="Node" parent="States"]
+[node name="Seek" type="Node" parent="StateController"]
 script = ExtResource( 6 )
 
-[node name="Look" type="Node" parent="States"]
+[node name="Look" type="Node" parent="StateController"]
 script = ExtResource( 7 )
 
 [node name="Model" type="MeshInstance" parent="."]

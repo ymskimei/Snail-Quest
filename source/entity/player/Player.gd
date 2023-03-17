@@ -3,7 +3,7 @@ extends EntityParent
 
 onready var player_cam = get_parent().get_node("Camera")
 onready var avatar = $PlayerAvatar
-onready var states = $States
+onready var states = $StateController
 onready var interactor = $InteractionRay
 onready var interaction_label = $Gui/InteractionLabel
 onready var current_target = $"/root/Game/Objects/EnemyParent"

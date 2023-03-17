@@ -6,9 +6,9 @@
 [ext_resource path="res://assets/model/player_eyes_001.material" type="Material" id=4]
 [ext_resource path="res://assets/model/player_body.material" type="Material" id=5]
 [ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=6]
+[ext_resource path="res://assets/entity/StateController.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/texture/materials/player_shell.tres" type="Material" id=8]
 [ext_resource path="res://assets/texture/materials/player_body.tres" type="Material" id=9]
-[ext_resource path="res://source/entity/player/PlayerStates.gd" type="Script" id=10]
 [ext_resource path="res://source/entity/player/PlayerStateIdle.gd" type="Script" id=11]
 [ext_resource path="res://source/entity/player/PlayerStateMove.gd" type="Script" id=12]
 [ext_resource path="res://source/entity/player/PlayerStateJump.gd" type="Script" id=13]
@@ -169,19 +169,18 @@ extents = Vector3( 0.315713, 0.491977, 0.778575 )
 collision_mask = 13
 script = ExtResource( 2 )
 
-[node name="States" type="Node" parent="."]
-script = ExtResource( 10 )
+[node name="StateController" parent="." instance=ExtResource( 7 )]
 
-[node name="Idle" type="Node" parent="States"]
+[node name="Idle" type="Node" parent="StateController"]
 script = ExtResource( 11 )
 
-[node name="Move" type="Node" parent="States"]
+[node name="Move" type="Node" parent="StateController"]
 script = ExtResource( 12 )
 
-[node name="Jump" type="Node" parent="States"]
+[node name="Jump" type="Node" parent="StateController"]
 script = ExtResource( 13 )
 
-[node name="Fall" type="Node" parent="States"]
+[node name="Fall" type="Node" parent="StateController"]
 script = ExtResource( 14 )
 
 [node name="PlayerAvatar" type="Position3D" parent="."]
