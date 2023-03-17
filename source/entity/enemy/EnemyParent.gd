@@ -21,7 +21,6 @@ func _ready():
 	states.ready(self)
 
 func _physics_process(delta):
-	print(states)
 	if states != null:
 		states.physics_process(delta)
 

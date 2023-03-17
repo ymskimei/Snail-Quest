@@ -1,7 +1,7 @@
 class_name EnemyStateMain
 extends Node
 
-var enemy: EnemyParent
+var entity: EnemyParent
 
 var x_location = rand_range(-360, 360)
 var z_location = rand_range(-360, 360)

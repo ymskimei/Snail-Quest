@@ -1,7 +1,7 @@
 class_name CameraStateMain
 extends Node
 
-var camera: MainCamera
+var entity: MainCamera
 var rotation: Vector2
 var velocity: Vector2
 var controller : bool

@@ -34,9 +34,9 @@ func physics_process(delta):
 	var rotation = Vector2.ZERO
 	rotation.x = Input.get_action_raw_strength("cam_right") - Input.get_action_raw_strength("ui_right") / 3 - Input.get_action_raw_strength("cam_left") + Input.get_action_raw_strength("ui_left") / 3
 	velocity = velocity.linear_interpolate(rotation * sensitivity / 3, delta * rotation_speed)
-	camera.rotation.y += (deg2rad(velocity.x))
-	camera.translation = lerp(camera.translation, camera.player.translation + offset, follow_speed * delta)
-	if camera.player.targeting:
+	entity.rotation.y += (deg2rad(velocity.x))
+	entity.translation = lerp(entity.translation, entity.player.translation + offset, follow_speed * delta)
+	if entity.player.targeting:
 		return State.TARGET
 	apply_cam_pan()
 	apply_cam_zoom()
@@ -67,22 +67,22 @@ func apply_cam_pan():
 		tween_cam_pan(lock_default_lens, lock_default)
 
 func tween_cam_pan(lens, arm):
-	camera.anim_tween.interpolate_property(camera, "rotation:x", camera.rotation.x, lens, 0.15, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	camera.anim_tween.interpolate_property(camera.camera_lens, "rotation:x", camera.camera_lens.rotation.x, arm, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	camera.anim_tween.start()
+	entity.anim_tween.interpolate_property(entity, "rotation:x", entity.rotation.x, lens, 0.15, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity.camera_lens, "rotation:x", entity.camera_lens.rotation.x, arm, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	entity.anim_tween.start()
 
 func apply_cam_zoom():
 	if Input.is_action_just_pressed("cam_zoom"):
-		if camera.camera_lens.fov == zoom_far:
+		if entity.camera_lens.fov == zoom_far:
 			tween_cam_zoom(zoom_normal, distance_normal)
-			#camera.audio_player.sfx_cam_zoom_normal.play()
+			#entity.audio_player.sfx_cam_zoom_normal.play()
 			print("Camera view altered: Normal")
 		else:
 			tween_cam_zoom(zoom_far, distance_far)
-			#camera.audio_player.sfx_cam_zoom_far.play()
+			#entity.audio_player.sfx_cam_zoom_far.play()
 			print("Camera view altered: Far")
 
 func tween_cam_zoom(zoom, distance):
-	camera.anim_tween.interpolate_property(camera.camera_lens, "fov", camera.camera_lens.fov, zoom, 0.3, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
-	camera.anim_tween.interpolate_property(camera, "spring_length", camera.spring_length, distance, 0.4, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
-	camera.anim_tween.start()
+	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom, 0.3, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance, 0.4, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
+	entity.anim_tween.start()

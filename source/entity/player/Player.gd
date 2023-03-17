@@ -40,9 +40,6 @@ func _physics_process(delta: float) -> void:
 #	else:
 #		WorldAudioPlayer.stop_battle_drums_far()
 
-func _process(delta: float) -> void:
-	states.process(delta)
-
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
 
