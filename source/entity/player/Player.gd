@@ -28,7 +28,10 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
 	states.physics_process(delta)
-	target_check()
+	if target == null:
+		target = MathHelper.find_target(self, "target")
+	else:
+		target_check()
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
@@ -57,7 +60,7 @@ func target_check():
 	var max_enemy_distance = 15
 	var max_interactable_distance = 2.5
 	if Input.is_action_pressed("cam_lock"):
-		if target is EnemyParent and target_distance < max_enemy_distance or ObjectInteractable and target_distance < max_interactable_distance and relative_facing >= 0:
+		if target is EnemyParent and target_distance < max_enemy_distance or ObjectInteractable and target_distance < max_interactable_distance:
 			targeting = true
 		else:
 			targeting = false
