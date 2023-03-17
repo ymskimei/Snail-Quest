@@ -16,6 +16,9 @@ export var distance_far = 6
 var input_up = 0
 var input_down = 0
 
+var sfx_cam_zoom_normal = preload("res://assets/sound/sfx_cam_zoom_normal.ogg")
+var sfx_cam_zoom_far = preload("res://assets/sound/sfx_cam_zoom_far.ogg")
+
 func enter() -> void:
 	print("Camera State: ORBIT")
 	tween_cam_pan(lock_default_lens, lock_default)
@@ -75,11 +78,11 @@ func apply_cam_zoom():
 	if Input.is_action_just_pressed("cam_zoom"):
 		if entity.camera_lens.fov == zoom_far:
 			tween_cam_zoom(zoom_normal, distance_normal)
-			#entity.audio_player.sfx_cam_zoom_normal.play()
+			AudioPlayer.play_sfx(sfx_cam_zoom_normal)
 			print("Camera view altered: Normal")
 		else:
 			tween_cam_zoom(zoom_far, distance_far)
-			#entity.audio_player.sfx_cam_zoom_far.play()
+			AudioPlayer.play_sfx(sfx_cam_zoom_far)
 			print("Camera view altered: Far")
 
 func tween_cam_zoom(zoom, distance):

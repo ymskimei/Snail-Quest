@@ -14,10 +14,7 @@ func get_interaction_text():
 
 func interact():
 	if !Dialogic.has_current_dialog_node():
-		var sfx = AudioStreamPlayer.new()
-		sfx.stream = sfx_sign_view
-		add_child(sfx)
-		sfx.play()
+		AudioPlayer.play_sfx(sfx_sign_view)
 		var text = resource.dialogue_file
 		print(text)
 		var dialogue = Dialogic.start(text)
@@ -28,9 +25,6 @@ func interact():
 func dialog_listener(string):
 	match string:
 		"dialogue_ended":
-			var sfx = AudioStreamPlayer.new()
-			sfx.stream = sfx_sign_exit
-			add_child(sfx)
-			sfx.play()
+			AudioPlayer.play_sfx(sfx_sign_exit)
 			get_tree().set_deferred("paused", false)
 

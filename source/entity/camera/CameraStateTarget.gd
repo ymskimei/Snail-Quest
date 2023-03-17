@@ -7,8 +7,11 @@ export var targeting_speed = 0.2
 export var distance_targeting = 5
 export var zoom_targeting = 50
 
+var sfx_cam_target_lock = preload("res://assets/sound/sfx_cam_target_lock.ogg")
+var sfx_cam_target_unlock = preload("res://assets/sound/sfx_cam_target_unlock.ogg")
+
 func enter() -> void:
-	#entity.audio_player.sfx_cam_target_lock.play()
+	AudioPlayer.play_sfx(sfx_cam_target_lock)
 	entity.anim_player.play("BarsAppear")
 	tween_cam_zoom()
 	print("Camera State: LOCK")
@@ -27,7 +30,7 @@ func tween_cam_zoom():
 	entity.anim_tween.start()
 
 func exit () -> void:
-	#entity.audio_player.sfx_cam_target_unlock.play()
+	AudioPlayer.play_sfx(sfx_cam_target_unlock)
 	entity.anim_player.play("BarsDisappear")
 	tween_cam_zoom()
 	print("Camera State: TARGET")

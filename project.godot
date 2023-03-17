@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "AudioStreamPlayer",
-"class": "AudioStreamMusic",
-"language": "GDScript",
-"path": "res://source/AudioPlayer.gd"
-}, {
 "base": "Node",
 "class": "CameraStateMain",
 "language": "GDScript",
@@ -215,7 +210,6 @@ _global_script_classes=[ {
 "path": "res://addons/resources_speadsheet_view/editor_stylebox_overrider.gd"
 } ]
 _global_script_class_icons={
-"AudioStreamMusic": "",
 "CameraStateMain": "",
 "CellEditor": "",
 "CellEditorArray": "",
@@ -284,8 +278,7 @@ config/icon="res://icon.png"
 
 Clock="*res://source/Clock.gd"
 SaveData="*res://source/SaveData.gd"
-AudioPlayer="res://assets/object/audio_player.tscn"
-WorldAudioPlayer="res://assets/object/world_audio_player.tscn"
+AudioPlayer="*res://assets/object/audio_player.tscn"
 Library="*res://addons/everything_library/src/autoload.gd"
 GuiMain="*res://assets/gui/gui_main.tscn"
 MathHelper="*res://source/MathHelper.gd"
