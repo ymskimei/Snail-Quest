@@ -14,7 +14,6 @@ func enter() -> void:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	print(entity.velocity.y)
 	if Input.is_action_pressed("action_main") and can_jump:
 		entity.snap_vector = Vector3.ZERO
 		entity.velocity.y += entity.jump

@@ -23,7 +23,7 @@ surfaces/0 = {
 
 [sub_resource type="BoxShape" id=3]
 
-[node name="SignpostModel" type="StaticBody" groups=["interactable", "target"]]
+[node name="SignpostModel" type="StaticBody" groups=["target"]]
 pause_mode = 2
 collision_layer = 8
 script = ExtResource( 3 )

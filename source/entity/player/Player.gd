@@ -28,7 +28,6 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
 	states.physics_process(delta)
-	interaction_check()
 	target_check()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -53,21 +52,23 @@ func kill_player():
 	emit_signal("player_killed")
 
 func target_check():
-	if Input.is_action_pressed("cam_lock") and target.get_global_translation().distance_to(get_global_translation()) < 15:
-		targeting = true
+	var target_distance = target.get_global_translation().distance_to(get_global_translation())
+	var relative_facing = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
+	var max_enemy_distance = 15
+	var max_interactable_distance = 2.5
+	if Input.is_action_pressed("cam_lock"):
+		if target is EnemyParent and target_distance < max_enemy_distance or ObjectInteractable and target_distance < max_interactable_distance and relative_facing >= 0:
+			targeting = true
+		else:
+			targeting = false
 	else:
 		target = MathHelper.find_target(self, "target")
 		targeting = false
-
-func interaction_check():
-	interactable = MathHelper.find_target(self, "interactable")
-	var relative_pos = get_global_transform().origin - interactable.get_global_transform().origin
-	var relative_facing = interactable.get_global_transform().basis.z.dot(relative_pos)
-	if interactable.get_global_translation().distance_to(get_global_translation()) < 2 and relative_facing >= 0:
+	if target is ObjectInteractable and target_distance < max_interactable_distance and relative_facing >= 0:
 		can_interact = true
-		set_interaction_text(interactable.get_interaction_text())
+		set_interaction_text(target.get_interaction_text())
 		if Input.is_action_just_pressed("action_main"):
-			interactable.interact()
+			target.interact()
 			set_interaction_text("")
 	else:
 		can_interact = false

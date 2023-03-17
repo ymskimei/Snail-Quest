@@ -20,9 +20,9 @@ var escaped_yet : bool
 func _ready():
 	states.ready(self)
 
-func _physics_process(delta):
-	if states != null:
-		states.physics_process(delta)
+#func _physics_process(delta):
+#	if states != null:
+#		states.physics_process(delta)
 
 func _on_Area_body_entered(body):
 	if body.name == ("Player"):
