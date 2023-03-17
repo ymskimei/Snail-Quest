@@ -9,6 +9,5 @@ health = 20
 strength = 10
 gravity = 50
 speed = 15
-max_speed = 0
 acceleration = 0
 jump = 0

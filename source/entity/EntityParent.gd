@@ -8,7 +8,6 @@ onready var health : int
 onready var strength : int
 onready var gravity : int
 onready var speed : int
-onready var max_speed : int
 onready var acceleration : int
 onready var jump : int
 
@@ -22,6 +21,5 @@ func _ready():
 	strength = resource.strength
 	gravity = resource.gravity
 	speed = resource.speed
-	max_speed = resource.max_speed
 	acceleration = resource.acceleration
 	jump = resource.jump

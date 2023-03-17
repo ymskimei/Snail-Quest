@@ -4,8 +4,10 @@ extends EntityParent
 onready var player_cam = get_parent().get_node("Camera")
 onready var avatar = $PlayerAvatar
 onready var states = $StateController
-onready var interactor = $InteractionRay
 onready var interaction_label = $Gui/InteractionLabel
+
+onready var interactor = $"%CheckerInteraction"
+onready var jump_check = $"%CheckerFloor"
 
 signal health_changed
 signal player_killed
@@ -16,6 +18,7 @@ var current_collider
 var collider
 var can_interact : bool
 var target = null
+var interactable = null
 #signal play_battle_tracks
 
 func _ready():
@@ -26,24 +29,14 @@ func _physics_process(delta: float) -> void:
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
 	states.physics_process(delta)
 	interaction_check()
-	if Input.is_action_pressed("cam_lock") and target.get_global_translation().distance_to(get_global_translation()) < 15:
-		targeting = true
-	else:
-		target = MathHelper.find_target(self, "target")
-		targeting = false
-	
-#	var targ = get_parent().get_node("Objects/Target")
-#	if (targ.get_global_translation().distance_to(get_global_translation()) < 30):
-#		WorldAudioPlayer.play_battle_drums_far()
-#		if (targ.get_global_translation().distance_to(get_global_translation()) < 15):
-#			WorldAudioPlayer.play_battle_drums_near()
-#		else:
-#			WorldAudioPlayer.stop_battle_drums_near()
-#	else:
-#		WorldAudioPlayer.stop_battle_drums_far()
+	target_check()
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
+
+func _on_body_entered(body):
+	if body.is_in_group("enemy"):
+		inflict_damage(body.strength)
 
 func inflict_damage(damage_amount):
 	set_current_health(health - damage_amount)
@@ -59,23 +52,25 @@ func set_current_health(new_amount):
 func kill_player():
 	emit_signal("player_killed")
 
-func _on_body_entered(body):
-	if body.is_in_group("enemy"):
-		inflict_damage(body.strength)
+func target_check():
+	if Input.is_action_pressed("cam_lock") and target.get_global_translation().distance_to(get_global_translation()) < 15:
+		targeting = true
+	else:
+		target = MathHelper.find_target(self, "target")
+		targeting = false
 
 func interaction_check():
-	var collider = interactor.get_collider()
-	if interactor.is_colliding() and collider is ObjectInteractable:
-		if current_collider != collider:
-			can_interact = true
-			set_interaction_text(collider.get_interaction_text())
-			current_collider = collider
+	interactable = MathHelper.find_target(self, "interactable")
+	var relative_pos = get_global_transform().origin - interactable.get_global_transform().origin
+	var relative_facing = interactable.get_global_transform().basis.z.dot(relative_pos)
+	if interactable.get_global_translation().distance_to(get_global_translation()) < 2 and relative_facing >= 0:
+		can_interact = true
+		set_interaction_text(interactable.get_interaction_text())
 		if Input.is_action_just_pressed("action_main"):
-			collider.interact()
+			interactable.interact()
 			set_interaction_text("")
-	elif current_collider:
+	else:
 		can_interact = false
-		current_collider = null
 		set_interaction_text("")
 
 func set_interaction_text(text):
@@ -158,3 +153,6 @@ func set_interaction_text(text):
 #
 #func can_jump():
 #	return ground.size() or not ($AllowJump.is_stopped() or did_jump)
+
+
+

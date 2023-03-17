@@ -159,10 +159,9 @@ surfaces/0 = {
 [sub_resource type="BoxShape" id=24]
 extents = Vector3( 0.5, 0.5, 0.5 )
 
-[sub_resource type="SphereShape" id=16]
+[sub_resource type="SphereShape" id=27]
 
-[sub_resource type="BoxShape" id=9]
-extents = Vector3( 0.315713, 0.491977, 0.778575 )
+[sub_resource type="BoxShape" id=26]
 
 [node name="Player" type="KinematicBody"]
 collision_mask = 13
@@ -321,34 +320,27 @@ material/0 = ExtResource( 8 )
 transform = Transform( 0.7, 0, 0, 0, 0.9, 0, 0, 0, 1.4, 0, 0.45, 0 )
 shape = SubResource( 24 )
 
-[node name="InteractionRay" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.734 )
-enabled = true
-cast_to = Vector3( 0, 0, -2 )
-collision_mask = 8
-collide_with_areas = true
+[node name="Checkers" type="Spatial" parent="."]
 
-[node name="PlayerRays" type="Spatial" parent="."]
-visible = false
+[node name="CheckerInteraction" type="Area" parent="Checkers"]
+unique_name_in_owner = true
+transform = Transform( 1.1, 0, 0, 0, 0.7, 0, 0, 0, 0.8, 0, 0.5, -1 )
 
-[node name="CheckerFloor" type="Area" parent="PlayerRays"]
+[node name="CheckerInteractionCollision" type="CollisionShape" parent="Checkers/CheckerInteraction"]
+shape = SubResource( 27 )
 
-[node name="CheckerFloorHitbox" type="CollisionShape" parent="PlayerRays/CheckerFloor"]
-transform = Transform( 0.3, 0, 0, 0, 0.1, 0, 0, 0, 0.8, 0, 0, 0 )
-shape = SubResource( 16 )
+[node name="CheckerFloor" type="Area" parent="Checkers"]
+unique_name_in_owner = true
+transform = Transform( -0.4, 0, 0, 0, 0.15, 0, 0, 0, -0.8, 0, 0, 0 )
 
-[node name="Climbing" type="Spatial" parent="PlayerRays"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+[node name="CheckerFloorCollision" type="CollisionShape" parent="Checkers/CheckerFloor"]
+shape = SubResource( 26 )
 
-[node name="ClimbingChecker" type="Area" parent="PlayerRays"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+[node name="PlayerArea" type="Area" parent="Checkers"]
 
-[node name="ClimbingHitbox" type="CollisionShape" parent="PlayerRays/ClimbingChecker"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.521372, 0 )
-shape = SubResource( 9 )
-
-[node name="DirectionChecker" type="Position3D" parent="PlayerRays"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.74228e-08, 1.5, 1 )
+[node name="PlayerHitbox" type="CollisionShape" parent="Checkers/PlayerArea"]
+transform = Transform( 0.7, 0, 0, 0, 0.9, 0, 0, 0, 1.4, 0, 0.45, 0 )
+shape = SubResource( 24 )
 
 [node name="Gui" type="Node" parent="."]
 
@@ -373,12 +365,5 @@ wait_time = 0.5
 wait_time = 0.5
 one_shot = true
 
-[node name="PlayerArea" type="Area" parent="."]
-
-[node name="PlayerHitbox" type="CollisionShape" parent="PlayerArea"]
-transform = Transform( 0.7, 0, 0, 0, 0.9, 0, 0, 0, 1.4, 0, 0.45, 0 )
-shape = SubResource( 24 )
-
-[connection signal="body_entered" from="PlayerRays/CheckerFloor" to="." method="_on_CheckerFloor_body_entered"]
-[connection signal="body_exited" from="PlayerRays/CheckerFloor" to="." method="_on_CheckerFloor_body_exited"]
-[connection signal="body_entered" from="PlayerArea" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Checkers/CheckerInteraction" to="." method="_on_CheckerInteraction_body_entered"]
+[connection signal="body_entered" from="Checkers/PlayerArea" to="." method="_on_body_entered"]

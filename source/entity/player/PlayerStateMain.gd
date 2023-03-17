@@ -35,8 +35,8 @@ func process(_delta: float) -> int:
 	return State.NULL
 
 func get_input_vector():
-	entity.input.x = Input.get_action_raw_strength("ui_left") - Input.get_action_raw_strength("ui_right")
-	entity.input.z = Input.get_action_raw_strength("ui_up") - Input.get_action_raw_strength("ui_down")
+	entity.input.x = Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
+	entity.input.z = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
 	return entity.input
 
 func get_direction():
@@ -45,8 +45,8 @@ func get_direction():
 
 func apply_movement(delta):
 	if entity.direction != Vector3.ZERO:
-		entity.velocity.x = entity.velocity.move_toward(entity.direction * entity.max_speed, entity.acceleration * delta).x
-		entity.velocity.z = entity.velocity.move_toward(entity.direction * entity.max_speed, entity.acceleration * delta).z
+		entity.velocity.x = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * delta).x
+		entity.velocity.z = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * delta).z
 
 func apply_gravity(delta):
 	entity.velocity.y += -entity.gravity * delta
