@@ -69,6 +69,8 @@ script = ExtResource( 5 )
 
 [node name="Isom" type="Node" parent="StateController"]
 script = ExtResource( 3 )
+zoom_iso = 10
+distance_iso = 60
 
 [node name="Look" type="Node" parent="StateController"]
 script = ExtResource( 4 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/entity/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/entity/camera.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://resource/sign_test_3.tres" type="Resource" id=14]
 [ext_resource path="res://resource/player.tres" type="Resource" id=15]
 [ext_resource path="res://resource/enemy_test.tres" type="Resource" id=16]
+[ext_resource path="res://assets/object/test_ruler.tscn" type="PackedScene" id=17]
 
 [sub_resource type="PanoramaSky" id=8]
 panorama = ExtResource( 8 )
@@ -33,7 +34,7 @@ fog_color = Color( 0.917647, 0.94902, 0.870588, 1 )
 fog_sun_color = Color( 1, 1, 1, 1 )
 fog_depth_begin = 0.0
 fog_depth_end = 150.0
-fog_depth_curve = 1.7411
+fog_depth_curve = 3.03143
 fog_height_enabled = true
 fog_height_min = 1.0
 fog_height_max = 500.0
@@ -92,6 +93,12 @@ resource = ExtResource( 14 )
 [node name="EnemyParent" parent="Objects" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
 resource = ExtResource( 16 )
+
+[node name="TestRuler" parent="Objects" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.5, -6 )
+
+[node name="TestRuler2" parent="Objects" instance=ExtResource( 17 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 13.5, 6, -6 )
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )

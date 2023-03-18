@@ -45,7 +45,7 @@ func physics_process(delta):
 		input_up += 1
 		double_click()
 		if input_up >= 2:
-			return State.NORM
+			return State.ORBI
 		else:
 			tween_cam_pan(lock_high_arm, lock_high_lens)
 	if Input.is_action_just_pressed("cam_down"):

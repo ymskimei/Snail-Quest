@@ -24,7 +24,6 @@ func physics_process(delta: float) -> int:
 		var target = entity.target.transform.origin
 		MathHelper.safe_look_at(entity, Vector3(target.x, 0, target.z))
 	elif !entity.is_on_wall():
-		#MathHelper.slerp_look_at(entity, entity, 3)
 		MathHelper.safe_look_at(entity, entity.transform.origin + Vector3(entity.velocity.x, 0, entity.velocity.z))
 	apply_movement(delta)
 	apply_gravity(delta)
@@ -40,13 +39,13 @@ func get_input_vector():
 	return entity.input
 
 func get_direction():
-	entity.direction = -entity.input.rotated(Vector3.UP, entity.player_cam.rotation.y).normalized()
+	entity.direction = -entity.input.rotated(Vector3.UP, entity.player_cam.rotation.y)
 	return entity.direction
 
 func apply_movement(delta):
 	if entity.direction != Vector3.ZERO:
-		entity.velocity.x = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * delta).x
-		entity.velocity.z = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * delta).z
+		entity.velocity.x = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 10 * delta).x
+		entity.velocity.z = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 10 * delta).z
 
 func apply_gravity(delta):
 	entity.velocity.y += -entity.gravity * delta
