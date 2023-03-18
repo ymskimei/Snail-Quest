@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://source/resource/ResourceEntity.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+entity_name = "Player"
+health = 100
+strength = 5
+gravity = 40
+speed = 7
+acceleration = 5
+jump = 6

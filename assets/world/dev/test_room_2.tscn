@@ -1,0 +1,149 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/texture/environment/sky_test.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/materials/test_block_blank.tres" type="Material" id=2]
+[ext_resource path="res://assets/texture/materials/test_block_gray.tres" type="Material" id=3]
+[ext_resource path="res://assets/texture/materials/test_block_4.tres" type="Material" id=4]
+[ext_resource path="res://resource/player.tres" type="Resource" id=5]
+[ext_resource path="res://assets/entity/player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/entity/camera.tscn" type="PackedScene" id=7]
+
+[sub_resource type="PanoramaSky" id=8]
+panorama = ExtResource( 1 )
+
+[sub_resource type="Environment" id=7]
+background_mode = 2
+background_sky = SubResource( 8 )
+background_sky_orientation = Basis( 1, 0, 0, 1, 1, 0, 0, 0, 1 )
+background_color = Color( 0.741176, 0.788235, 0.792157, 0.25098 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.4
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_color = Color( 0.917647, 0.94902, 0.870588, 1 )
+fog_sun_color = Color( 1, 1, 1, 1 )
+fog_depth_begin = 0.0
+fog_depth_end = 150.0
+fog_depth_curve = 0.68302
+fog_height_enabled = true
+fog_height_min = 1.0
+fog_height_max = 500.0
+fog_height_curve = 0.25
+tonemap_white = 0.0
+glow_intensity = 6.37
+glow_strength = 1.27
+glow_blend_mode = 0
+glow_hdr_threshold = 1.08
+glow_hdr_luminance_cap = 56.32
+glow_hdr_scale = 4.0
+glow_bicubic_upscale = true
+glow_high_quality = true
+
+[node name="Game" type="Spatial"]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.92566, 0.316245, 0.207709, -0.255926, 0.119009, 0.959343, 0.278668, -0.941183, 0.191097, 0, 17.4034, 4.22515 )
+light_energy = 0.2
+light_specular = 0.0
+light_bake_mode = 0
+shadow_color = Color( 0.321569, 0.345098, 0.501961, 1 )
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.015
+directional_shadow_normal_bias = 0.0
+directional_shadow_bias_split_scale = 0.0
+directional_shadow_max_distance = 8192.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 7 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+use_collision = true
+collision_layer = 4
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0 )
+width = 64.0
+height = 8.0
+depth = 64.0
+material = ExtResource( 3 )
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+width = 64.0
+height = 0.001
+depth = 64.0
+material = ExtResource( 2 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner/CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2, 16 )
+operation = 2
+width = 16.0
+height = 4.0
+depth = 16.0
+material = ExtResource( 3 )
+
+[node name="GrayBox4" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2, -26 )
+width = 4.0
+depth = 4.0
+material = ExtResource( 3 )
+
+[node name="GreenTop" type="CSGBox" parent="CSGCombiner/GrayBox4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+operation = 2
+width = 4.0
+height = 0.001
+depth = 4.0
+material = ExtResource( 4 )
+
+[node name="GrayBox3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -26 )
+width = 4.0
+height = 8.0
+depth = 4.0
+material = ExtResource( 3 )
+
+[node name="GreenTop" type="CSGBox" parent="CSGCombiner/GrayBox3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+operation = 2
+width = 4.0
+height = 0.001
+depth = 4.0
+material = ExtResource( 4 )
+
+[node name="GrayBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, -26 )
+width = 4.0
+height = 6.0
+depth = 4.0
+material = ExtResource( 3 )
+
+[node name="GreenTop" type="CSGBox" parent="CSGCombiner/GrayBox2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+operation = 2
+width = 4.0
+height = 0.001
+depth = 4.0
+material = ExtResource( 4 )
+
+[node name="GrayBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 3, -26 )
+width = 4.0
+height = 4.0
+depth = 4.0
+material = ExtResource( 3 )
+
+[node name="GreenTop" type="CSGBox" parent="CSGCombiner/GrayBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+operation = 2
+width = 4.0
+height = 0.001
+depth = 4.0
+material = ExtResource( 4 )
+
+[node name="Camera" parent="." instance=ExtResource( 7 )]
+
+[node name="Player" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2, 0 )
+resource = ExtResource( 5 )

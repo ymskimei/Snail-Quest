@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://assets/object/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/entity/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/object/map/test_map_0.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/object/test_block.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resource/player.tres" type="Resource" id=4]
 [ext_resource path="res://assets/object/test_ramp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/object/test_ramp_small.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/object/test_block_small.tscn" type="PackedScene" id=7]
@@ -61,6 +62,7 @@ environment = SubResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0456, 3.98398, -41.8841 )
+resource = ExtResource( 4 )
 
 [node name="Objects" type="Spatial" parent="."]
 

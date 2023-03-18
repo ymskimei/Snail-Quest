@@ -1,7 +1,7 @@
 extends Node
 
-onready var command_input = $MarginContainer/VBoxContainer/CommandInput
-onready var command_display = $MarginContainer/VBoxContainer/ScrollContainer/CommandDisplay
+onready var command_input = $"%CommandInput"
+onready var command_display = $"%CommandDisplay"
 
 export var message_buffer_limit = 100
 

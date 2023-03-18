@@ -1,34 +1,21 @@
-class_name AudioStreamMusic
-extends AudioStreamPlayer
+extends Node
 
-export(Resource) var resource
+var sfx_cam_zoom_normal = preload("res://assets/sound/sfx_cam_zoom_normal.ogg")
+var sfx_cam_zoom_far = preload("res://assets/sound/sfx_cam_zoom_far.ogg")
+var sfx_cam_perspective = preload("res://assets/sound/sfx_cam_perspective.ogg")
+var sfx_cam_iso_up = preload("res://assets/sound/sfx_cam_iso_up.ogg")
+var sfx_cam_iso_down = preload("res://assets/sound/sfx_cam_iso_down.ogg")
+var sfx_cam_iso_rotate_0 = preload("res://assets/sound/sfx_cam_iso_rotate_0.ogg")
+var sfx_cam_iso_rotate_1 = preload("res://assets/sound/sfx_cam_iso_rotate_1.ogg")
+var sfx_cam_target_lock = preload("res://assets/sound/sfx_cam_target_lock.ogg")
+var sfx_cam_target_unlock = preload("res://assets/sound/sfx_cam_target_unlock.ogg")
+var sfx_cam_first_person = preload("res://assets/sound/sfx_cam_first_person.ogg")
+var sfx_cam_third_person = preload("res://assets/sound/sfx_cam_third_person.ogg")
 
-onready var bpm : int
-onready var measures : int
-onready var bars : int
-
-signal beat(position)
-signal measure(position)
-
-func _ready():
-	bpm = resource.bpm
-	measures = resource.measures
-	bars = resource.bars
-
-#extends Node
-#
-#onready var music = $MixingDeskMusic
-#
-#func _ready():
-#	music.init_song("Demo")
-#	music.play("Demo")
-#
-#func play_battle_music():
-#		music.unmute("Demo", "Bass")
-#		music.unmute("Demo", "Percussion1")
-#		music.unmute("Demo", "Percussion2")
-#
-#func stop_battle_music():
-#		music.mute("Demo", "Bass")
-#		music.mute("Demo", "Percussion1")
-#		music.mute("Demo", "Percussion2")
+func play_sfx(sound):
+	var sfx = AudioStreamPlayer.new()
+	sfx.stream = sound
+	add_child(sfx)
+	sfx.play()
+	yield(sfx, "finished")
+	sfx.queue_free()

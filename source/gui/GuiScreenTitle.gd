@@ -1,6 +1,6 @@
 extends Control
 
-onready var default_selection = $ButtonContainer/StartButton
+onready var default_selection = $"%StartButton"
 onready var screen_data = "res://assets/world/dev/test_room_0.tscn"
 onready var screen_options = $GuiOptions
 

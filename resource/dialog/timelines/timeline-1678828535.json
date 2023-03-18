@@ -1,0 +1,57 @@
+{
+	"events": [
+		{
+			"character": "character-1678838024.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This is the second sign... It's not really that different, it's kind of just significantly longer because it's meant to help debug/test our the actual length of messages that can display. Hopefully, it's actually long enough to be able to do that because otherwise I'm out of a job.\n...\nIs it finished yet? What do you think? Are you bored from reading this? Because I'm sure bored from writing it, but that's just how it goes."
+		},
+		{
+			"character": "character-1678838024.json",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "Here, let's at least try out something more interesting! A question, this time. So, here's two options. [color=#C3EF5D]Choose correctly if you want to get a prize.[/color]"
+		},
+		{
+			"choice": "I hate reading signs.",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1678838024.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Oh, well I hate you too! [color=#EA6A59]Go away![/color]"
+		},
+		{
+			"choice": "I love signs, they're so cool.",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1678838024.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "[shake rate=15 level=10]Yeah!!! Now THAT is what I'm talking about![/shake] [shake rate=20 level=20]WOOOO!!! THAT'S WHAT I'VE BEEN WAITING FOR![/shake]"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"emit_signal": "dialogue_ended",
+			"event_id": "dialogic_040"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1678828535.json",
+		"name": "test_sign_1"
+	}
+}

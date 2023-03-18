@@ -1,54 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://addons/mixing-desk/music/mixing_desk_music.gd" type="Script" id=1]
-[ext_resource path="res://addons/mixing-desk/music/song.gd" type="Script" id=2]
-[ext_resource path="res://addons/mixing-desk/music/containers/rollover_cont.gd" type="Script" id=3]
-[ext_resource path="res://assets/sound/music/demo/lead_1.ogg" type="AudioStream" id=4]
-[ext_resource path="res://addons/mixing-desk/music/containers/core_cont.gd" type="Script" id=5]
-[ext_resource path="res://assets/sound/music/demo/pad.ogg" type="AudioStream" id=6]
-[ext_resource path="res://assets/sound/music/demo/bass.ogg" type="AudioStream" id=7]
-[ext_resource path="res://assets/sound/music/demo/lead_2.ogg" type="AudioStream" id=9]
-[ext_resource path="res://assets/sound/music/demo/crash.ogg" type="AudioStream" id=10]
-[ext_resource path="res://assets/sound/music/demo/percussion_2.ogg" type="AudioStream" id=11]
-[ext_resource path="res://assets/sound/music/demo/percussion_1.ogg" type="AudioStream" id=12]
+[ext_resource path="res://source/AudioPlayer.gd" type="Script" id=1]
 
-[node name="MixingDeskMusic" type="Node"]
-
-[node name="MixingDeskMusic" type="Node" parent="."]
+[node name="AudioPlayer" type="Node"]
+pause_mode = 2
 script = ExtResource( 1 )
-play_mode = 4
-
-[node name="Demo" type="Node" parent="MixingDeskMusic"]
-script = ExtResource( 2 )
-tempo = 120
-bars = 8
-beats_in_bar = 4
-transition_beats = 1.0
-transition_type = "Beat"
-
-[node name="CoreContainer" type="Node" parent="MixingDeskMusic/Demo"]
-script = ExtResource( 5 )
-
-[node name="Bass" type="AudioStreamPlayer" parent="MixingDeskMusic/Demo/CoreContainer"]
-stream = ExtResource( 7 )
-
-[node name="Percussion1" type="AudioStreamPlayer" parent="MixingDeskMusic/Demo/CoreContainer"]
-stream = ExtResource( 12 )
-
-[node name="Percussion2" type="AudioStreamPlayer" parent="MixingDeskMusic/Demo/CoreContainer"]
-stream = ExtResource( 11 )
-
-[node name="Pad" type="AudioStreamPlayer" parent="MixingDeskMusic/Demo/CoreContainer"]
-stream = ExtResource( 6 )
-
-[node name="Lead1" type="AudioStreamPlayer" parent="MixingDeskMusic/Demo/CoreContainer"]
-stream = ExtResource( 4 )
-
-[node name="Lead2" type="AudioStreamPlayer" parent="MixingDeskMusic/Demo/CoreContainer"]
-stream = ExtResource( 9 )
-
-[node name="RolloverContainer" type="Node" parent="MixingDeskMusic/Demo"]
-script = ExtResource( 3 )
-
-[node name="crash" type="AudioStreamPlayer" parent="MixingDeskMusic/Demo/RolloverContainer"]
-stream = ExtResource( 10 )
