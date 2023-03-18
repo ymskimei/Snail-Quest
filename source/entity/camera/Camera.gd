@@ -4,7 +4,8 @@ extends SpringArm
 onready var player = get_parent().get_node("Player")
 onready var camera_lens = $CameraLens
 onready var anim_tween = $Animation/AnimationCam
-onready var anim_player = $Animation/AnimationPlayer
+onready var anim_bars = $Animation/AnimationBars
+onready var anim_wobble = $Animation/AnimationWobble
 onready var states = $StateController
 
 func _ready():

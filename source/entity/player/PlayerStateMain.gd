@@ -44,9 +44,9 @@ func get_direction():
 
 func apply_movement(delta):
 	if entity.direction != Vector3.ZERO:
-		entity.velocity.x = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 10 * delta).x
-		entity.velocity.z = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 10 * delta).z
-
+		entity.velocity.x = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 8 * delta).x
+		entity.velocity.z = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 8 * delta).z
+	
 func apply_gravity(delta):
 	entity.velocity.y += -entity.gravity * delta
 	entity.velocity.y = clamp(entity.velocity.y, -entity.gravity, entity.jump)

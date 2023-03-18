@@ -7,13 +7,10 @@ export var targeting_speed = 0.2
 export var distance_targeting = 5
 export var zoom_targeting = 50
 
-var sfx_cam_target_lock = preload("res://assets/sound/sfx_cam_target_lock.ogg")
-var sfx_cam_target_unlock = preload("res://assets/sound/sfx_cam_target_unlock.ogg")
-
 func enter() -> void:
 	print("Camera State: TARGET")
-	AudioPlayer.play_sfx(sfx_cam_target_lock)
-	entity.anim_player.play("BarsAppear")
+	AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_lock)
+	entity.anim_bars.play("BarsAppear")
 	tween_cam_zoom()
 
 func physics_process(delta):
@@ -25,11 +22,11 @@ func physics_process(delta):
 	return State.NULL
 
 func tween_cam_zoom():
-	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom_targeting, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance_targeting, 0.3, Tween.TRANS_BACK, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom_targeting, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance_targeting, 0.3, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
 func exit () -> void:
-	AudioPlayer.play_sfx(sfx_cam_target_unlock)
-	entity.anim_player.play("BarsDisappear")
+	AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_unlock)
+	entity.anim_bars.play("BarsDisappear")
 	tween_cam_zoom()

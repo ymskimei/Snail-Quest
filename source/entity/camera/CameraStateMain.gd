@@ -5,6 +5,7 @@ var entity: MainCamera
 var rotation: Vector2
 var velocity: Vector2
 var controller : bool
+var zoomed_out : bool
 
 export var sensitivity = 10
 
