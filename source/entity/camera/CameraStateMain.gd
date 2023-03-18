@@ -10,9 +10,10 @@ export var sensitivity = 10
 
 enum State {
 	NULL,
-	ORBIT,
-	LOOK,
-	TARGET
+	ORBI,
+	TARG,
+	ISOM,
+	LOOK
 }
 
 func enter() -> void:
@@ -23,6 +24,11 @@ func input(_event: InputEvent) -> int:
 
 func physics_process(_delta: float) -> int:
 	return State.NULL
+
+func tween_cam_pan(arm, lens):
+	entity.anim_tween.interpolate_property(entity, "rotation:x", entity.rotation.x, arm, 0.15, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity.camera_lens, "rotation:x", entity.camera_lens.rotation.x, lens, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	entity.anim_tween.start()
 
 func exit() -> void:
 	pass

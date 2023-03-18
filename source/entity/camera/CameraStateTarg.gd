@@ -11,17 +11,17 @@ var sfx_cam_target_lock = preload("res://assets/sound/sfx_cam_target_lock.ogg")
 var sfx_cam_target_unlock = preload("res://assets/sound/sfx_cam_target_unlock.ogg")
 
 func enter() -> void:
+	print("Camera State: TARGET")
 	AudioPlayer.play_sfx(sfx_cam_target_lock)
 	entity.anim_player.play("BarsAppear")
 	tween_cam_zoom()
-	print("Camera State: LOCK")
 
 func physics_process(delta):
 	MathHelper.slerp_look_at(entity, entity.player.target, targeting_speed)
 	entity.rotation.x = lerp(entity.rotation.x, targeting_rotation, follow_speed * delta)
 	entity.translation = lerp(entity.translation, entity.player.translation + targeting_offset, 5 * delta)
 	if !entity.player.targeting:
-		return State.ORBIT
+		return State.ORBI
 	return State.NULL
 
 func tween_cam_zoom():
@@ -33,4 +33,3 @@ func exit () -> void:
 	AudioPlayer.play_sfx(sfx_cam_target_unlock)
 	entity.anim_player.play("BarsDisappear")
 	tween_cam_zoom()
-	print("Camera State: TARGET")

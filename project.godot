@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "CameraStateMain",
+"class": "CameraStateIsom",
+"language": "GDScript",
+"path": "res://source/entity/camera/CameraStateIsom.gd"
+}, {
 "base": "Node",
 "class": "CameraStateMain",
 "language": "GDScript",
@@ -210,6 +215,7 @@ _global_script_classes=[ {
 "path": "res://addons/resources_speadsheet_view/editor_stylebox_overrider.gd"
 } ]
 _global_script_class_icons={
+"CameraStateIsom": "",
 "CameraStateMain": "",
 "CellEditor": "",
 "CellEditorArray": "",

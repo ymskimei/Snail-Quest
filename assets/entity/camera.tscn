@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://source/entity/camera/Camera.gd" type="Script" id=1]
 [ext_resource path="res://assets/entity/state_controller.tscn" type="PackedScene" id=2]
+[ext_resource path="res://source/entity/camera/CameraStateIsom.gd" type="Script" id=3]
 [ext_resource path="res://source/entity/camera/CameraStateLook.gd" type="Script" id=4]
-[ext_resource path="res://source/entity/camera/CameraStateTarget.gd" type="Script" id=5]
-[ext_resource path="res://source/entity/camera/CameraStateOrbit.gd" type="Script" id=6]
+[ext_resource path="res://source/entity/camera/CameraStateTarg.gd" type="Script" id=5]
+[ext_resource path="res://source/entity/camera/CameraStateOrbi.gd" type="Script" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BarsAppear"
@@ -60,14 +61,17 @@ script = ExtResource( 1 )
 
 [node name="StateController" parent="." instance=ExtResource( 2 )]
 
-[node name="Orbit" type="Node" parent="StateController"]
+[node name="Orbi" type="Node" parent="StateController"]
 script = ExtResource( 6 )
+
+[node name="Targ" type="Node" parent="StateController"]
+script = ExtResource( 5 )
+
+[node name="Isom" type="Node" parent="StateController"]
+script = ExtResource( 3 )
 
 [node name="Look" type="Node" parent="StateController"]
 script = ExtResource( 4 )
-
-[node name="Target" type="Node" parent="StateController"]
-script = ExtResource( 5 )
 
 [node name="CameraLens" type="Camera" parent="."]
 transform = Transform( 1, 3.55271e-15, -1.05879e-22, -3.55271e-15, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0 )
@@ -75,24 +79,27 @@ fov = 60.0
 near = 0.01
 far = 250.0
 
-[node name="Animation" type="Node" parent="CameraLens"]
+[node name="Animation" type="Node" parent="."]
 
-[node name="AnimationCam" type="Tween" parent="CameraLens/Animation"]
+[node name="AnimationCam" type="Tween" parent="Animation"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraLens/Animation"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
 anims/BarsAppear = SubResource( 1 )
 anims/BarsDisappear = SubResource( 2 )
 
-[node name="CanvasCamera" type="CanvasLayer" parent="CameraLens/Animation"]
+[node name="CanvasCamera" type="CanvasLayer" parent="Animation"]
 
-[node name="BarTop" type="ColorRect" parent="CameraLens/Animation/CanvasCamera"]
+[node name="BarTop" type="ColorRect" parent="Animation/CanvasCamera"]
 anchor_right = 1.0
 margin_bottom = 96.0
 grow_horizontal = 2
 rect_scale = Vector2( 1, 1e-05 )
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
-[node name="BarBottom" type="ColorRect" parent="CameraLens/Animation/CanvasCamera"]
+[node name="BarBottom" type="ColorRect" parent="Animation/CanvasCamera"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -102,3 +109,6 @@ grow_horizontal = 2
 rect_scale = Vector2( 1, 1e-05 )
 rect_pivot_offset = Vector2( 0, 96 )
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}

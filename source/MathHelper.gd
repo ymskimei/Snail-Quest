@@ -34,3 +34,4 @@ func find_target(node : Object, group_name : String, get_closest := true) -> Obj
 			distance_away = distance
 			return_target = target_group[index]
 	return return_target
+
