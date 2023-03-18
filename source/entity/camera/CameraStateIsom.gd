@@ -59,6 +59,7 @@ func physics_process(delta):
 		else:
 			rotation_timer_right.stop()
 			rotation_timer_left.stop()
+			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_perspective)
 			return State.ORBI
 	if entity.player.targeting:
 		return State.TARG
@@ -108,5 +109,4 @@ func tween_cam_zoom(zoom, distance):
 	entity.anim_tween.start()
 
 func exit() -> void:
-	AudioPlayer.play_sfx(AudioPlayer.sfx_cam_perspective)
 	entity.anim_wobble.stop()
