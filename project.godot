@@ -282,7 +282,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Clock="*res://source/Clock.gd"
+GameTime="*res://source/GameTime.gd"
+PlayTime="*res://source/PlayTime.gd"
 SaveData="*res://source/SaveData.gd"
 AudioPlayer="*res://assets/object/audio_player.tscn"
 Library="*res://addons/everything_library/src/autoload.gd"
