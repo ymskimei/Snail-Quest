@@ -13,8 +13,8 @@ func save_data():
 	var file = File.new()
 	file.open(SAVE_PATH, File.WRITE)
 	game_data = {
-		game_time = str(Clock.game_time),
-		play_time = str(Clock.play_time)
+		game_time = GameTime.game_time,
+		play_time = PlayTime.played_time
 	}
 	file.store_line(to_json(game_data))
 	file.close()
@@ -29,6 +29,8 @@ func load_data():
 		save_data()
 	file.open(SAVE_PATH, File.READ)
 	var data = parse_json(file.get_line())
-	Clock.game_time = data.game_time
-	Clock.play_time = data.play_time
+	GameTime.game_time = data.game_time
+	PlayTime.previous_time = data.play_time
+	PlayTime.played_time = 0
+	PlayTime.reset_start()
 	file.close()

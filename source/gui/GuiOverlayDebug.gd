@@ -13,16 +13,16 @@ export var framerate_low = 30
 
 func _process(_delta):
 	var framerate = Engine.get_frames_per_second()
-	var world_time = Clock.game_time
-	var play_time = Clock.play_time
+	var world_time = GameTime
+	var play_time = PlayTime
 	if framerate < framerate_low:
 		display_framerate.set_bbcode("[color=#EA6A59]" + str(framerate))
 	elif framerate < framerate_normal:
 		display_framerate.set_bbcode("[color=#EDDB65]" + str(framerate))
 	else:
 		display_framerate.set_bbcode("[color=#C3EF5D]" + str(framerate))
-	display_world_clock.set_bbcode("[color=#C3EF5D]" + str(world_time))
-	display_play_time.set_bbcode("[color=#C3EF5D]" + str(play_time))
+	display_world_clock.set_bbcode("[color=#C3EF5D]" + str(world_time.get_time(false)))
+	display_play_time.set_bbcode("[color=#C3EF5D]" + str(play_time.get_time()))
 	toggle_command_console()
 
 func display_debug_information():
