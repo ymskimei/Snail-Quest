@@ -13,21 +13,25 @@ var player : Spatial
 
 export var collection_offset = Vector3(0, 1.5, 0)
 
+var timer = Timer.new()
+
 func _ready():
 	$"%MeshInstance".set_mesh(item.mesh)
+	$AnimationPlayer.play("Floating")
+	$AnimationPlayer.seek(rand_range(0, 1))
+	timer.set_wait_time(1)
+	timer.one_shot = true
+	timer.connect("timeout", self, "on_timeout")
+	add_child(timer)
 
 func _physics_process(delta):
 	if collecting:
+		$AnimationPlayer.play("Still")
 		translation = player.translation + collection_offset
 
 func _on_Area_body_entered(body):
 	if body is Player:
 		player = body
-		var timer = Timer.new()
-		timer.set_wait_time(1)
-		timer.one_shot = true
-		timer.connect("timeout", self, "on_timeout")
-		add_child(timer)
 		timer.start()
 		tools.add_item(item, 1)
 		AudioPlayer.play_sfx(AudioPlayer.sfx_item_pickup_test)

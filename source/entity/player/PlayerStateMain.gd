@@ -28,7 +28,6 @@ func physics_process(delta: float) -> int:
 	apply_movement(delta)
 	apply_gravity(delta)
 	update_snap_vector()
-	#entity.direction = entity.move_and_slide_with_snap(entity.velocity, entity.snap_vector, Vector3.UP, true)
 	return State.NULL
 
 func process(_delta: float) -> int:
