@@ -1,5 +1,7 @@
 extends RigidBody
 
+#Working on this soon
+
 #var item = preload("res://assets/object/item_parent.tscn")
 #var drop = preload("res://resource/item_test_1.tres")
 #

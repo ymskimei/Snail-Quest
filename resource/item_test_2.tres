@@ -14,6 +14,6 @@ mesh = SubResource( 1 )
 sprite = ExtResource( 2 )
 stackable = false
 deletable = true
-init_amount = 1
+amount = 1
 max_amount = 0
 is_for_tool = false
