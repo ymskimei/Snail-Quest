@@ -5,19 +5,16 @@ var game_time:int = 0
 
 func _ready():
 	var second_timer = Timer.new()
-
 	second_timer.set_timer_process_mode(1)
 	second_timer.set_wait_time(1)
 	second_timer.connect("timeout", self, "on_unpaused_second")
 	add_child(second_timer)
-	
 	second_timer.start()
 
 func time_converted(hour24):
 	var hour = game_time / 60 as int
 	var minute = game_time % 60
 	var period = "AM" 
-	
 	if hour24: 
 		return [hour, minute, ""]
 	#else

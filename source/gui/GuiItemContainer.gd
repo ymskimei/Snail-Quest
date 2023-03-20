@@ -1,10 +1,11 @@
 extends CenterContainer
 
-onready var sprite = $TextureRect
+var tools = preload("res://resource/tools.tres")
 onready var button = $Button
+onready var label = $Button/ItemLabel
 
 func item_display(item):
 	if item is ResourceItem:
-		sprite.texture = item.sprite
-#	else:
-#		self.hide()
+		button.texture_normal = item.sprite
+		if item.stackable:
+			label.text = str(item.amount)

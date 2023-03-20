@@ -5,7 +5,6 @@ const pause_screens = [
 ]
 
 var played_time = 0
-
 var time_start
 var previous_time:int = 0
 

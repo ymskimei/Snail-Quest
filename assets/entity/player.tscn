@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/model/player_shell.material" type="Material" id=1]
 [ext_resource path="res://source/entity/player/Player.gd" type="Script" id=2]
+[ext_resource path="res://resource/player.tres" type="Resource" id=3]
 [ext_resource path="res://assets/model/player_eyes_001.material" type="Material" id=4]
 [ext_resource path="res://assets/model/player_body.material" type="Material" id=5]
 [ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=6]
@@ -163,9 +164,10 @@ extents = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="BoxShape" id=26]
 
-[node name="Player" type="KinematicBody"]
+[node name="Player" type="KinematicBody" groups=["collector"]]
 collision_mask = 13
 script = ExtResource( 2 )
+resource = ExtResource( 3 )
 
 [node name="StateController" parent="." instance=ExtResource( 7 )]
 
