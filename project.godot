@@ -114,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogic/Example Assets/History/HistoryRow.gd"
 }, {
+"base": "Spatial",
+"class": "ItemParent",
+"language": "GDScript",
+"path": "res://source/object/ItemParent.gd"
+}, {
 "base": "SpringArm",
 "class": "MainCamera",
 "language": "GDScript",
@@ -236,6 +241,7 @@ _global_script_class_icons={
 "GuiConsoleCategory": "",
 "GuiConsoleCommand": "",
 "HistoryRow": "",
+"ItemParent": "",
 "MainCamera": "",
 "ObjectInteractable": "",
 "Player": "",

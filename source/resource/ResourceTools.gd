@@ -27,7 +27,7 @@ func add_item(item, added_amount):
 			if items[i].amount >= items[i].max_amount and !items[i].max_amount == 0:
 				items[i].amount = items[i].max_amount
 			elif items[i].amount <= 0:
-				if item.deletable:
+				if item.depletable:
 					remove_item(i)
 				else:
 					items[i].amount = 0

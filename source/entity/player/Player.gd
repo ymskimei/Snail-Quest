@@ -19,6 +19,7 @@ var collider
 var can_interact : bool
 var target = null
 var interactable = null
+
 #signal play_battle_tracks
 
 func _ready():
@@ -85,6 +86,12 @@ func set_interaction_text(text):
 		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
 		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
 		interaction_label.set_visible(true)
+
+
+
+
+
+
 
 #export var player_gravity = -110
 #export var player_jump_power = 30

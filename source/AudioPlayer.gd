@@ -12,6 +12,8 @@ var sfx_cam_target_unlock = preload("res://assets/sound/sfx_cam_target_unlock.og
 var sfx_cam_first_person = preload("res://assets/sound/sfx_cam_first_person.ogg")
 var sfx_cam_third_person = preload("res://assets/sound/sfx_cam_third_person.ogg")
 
+var sfx_item_pickup_test = preload("res://assets/sound/sfx_item_pickup_test.ogg")
+
 func play_sfx(sound):
 	var sfx = AudioStreamPlayer.new()
 	sfx.stream = sound

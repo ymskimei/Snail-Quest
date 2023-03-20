@@ -10,10 +10,10 @@ material = ExtResource( 3 )
 [resource]
 script = ExtResource( 1 )
 item_name = "Dummy Item 3"
+description = "This item is not stackable and can be depleted on use."
 mesh = SubResource( 1 )
 sprite = ExtResource( 2 )
-stackable = false
-deletable = true
 amount = 1
 max_amount = 0
-is_for_tool = false
+stackable = false
+depletable = true
