@@ -12,7 +12,7 @@ func _ready():
 	second_timer.start()
 
 func time_converted(hour24):
-	var hour = game_time / 60 as int
+	var hour = int(game_time / 60)
 	var minute = game_time % 60
 	var period = "AM" 
 	if hour24: 

@@ -1,11 +1,22 @@
 extends CenterContainer
 
-var tools = preload("res://resource/tools.tres")
+export(Resource) var items
+export(Resource) var destination
+
 onready var button = $Button
+onready var sprite = $Button/ItemSprite
 onready var label = $Button/ItemLabel
 
+var contained_item
+
 func item_display(item):
+	contained_item = item
 	if item is ResourceItem:
-		button.texture_normal = item.sprite
+		sprite.texture = item.sprite
 		if item.stackable:
-			label.text = str(item.amount)
+			label.set_bbcode("[right]" + str(item.amount) + "[/right]")
+		else:
+			label.set_bbcode("")
+	elif !item:
+		sprite.texture = null
+		label.set_bbcode("")

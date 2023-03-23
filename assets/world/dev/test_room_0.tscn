@@ -17,7 +17,7 @@
 [ext_resource path="res://resource/enemy_test.tres" type="Resource" id=16]
 [ext_resource path="res://assets/object/test_ruler.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/texture/materials/test_block_1.tres" type="Material" id=18]
-[ext_resource path="res://source/object/ObjectDrop.gd" type="Script" id=19]
+[ext_resource path="res://source/object/TestLootable.gd" type="Script" id=19]
 [ext_resource path="res://assets/object/item_parent.tscn" type="PackedScene" id=20]
 [ext_resource path="res://resource/item_test_1.tres" type="Resource" id=21]
 

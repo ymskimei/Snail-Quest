@@ -11,4 +11,3 @@ export var amount = 1 #amount on first acquirement
 export var max_amount = 0 #0 is for infinite stacks
 export var stackable : bool
 export var depletable : bool
-

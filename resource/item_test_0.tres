@@ -16,4 +16,4 @@ sprite = ExtResource( 2 )
 amount = 1
 max_amount = 0
 stackable = false
-depletable = false
+depletable = true
