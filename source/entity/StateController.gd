@@ -1,8 +1,11 @@
 extends Node
 
 var current_state
+var et
+
 
 func ready(entity) -> void:
+	et = entity
 	for child in get_children():
 		child.entity = entity
 	change_state(1) # default state

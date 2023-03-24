@@ -10,6 +10,7 @@ func physics_process(delta: float) -> int:
 	var wrotation = Quat(entity.global_transform.basis).slerp(Quat(wtransform.basis), rot_speed)
 	entity.global_transform = Transform(Basis(wrotation), global_pos)
 	if !entity.is_on_floor():
+		entity.rotate
 		entity.move_and_collide(-entity.global_transform.basis.y.normalized() * entity.gravity * delta)
 	if entity.escaped_yet:
 		return State.MOVE
