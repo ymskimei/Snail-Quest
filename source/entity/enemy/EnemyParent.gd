@@ -1,7 +1,7 @@
 class_name EnemyParent
 extends EntityParent
 
-var idle_speed = rand_range(speed / 2, speed * 3)
+var idle_speed = int(rand_range(speed / 2, speed * 3))
 var move_or_not = [true, false]
 var start_move = move_or_not[randi() % move_or_not.size()]
 
@@ -39,7 +39,7 @@ func _on_NavigationAgent_velocity_computed(safe_velocity):
 
 func _on_LookingTimer_timeout():
 	looking_timer.set_wait_time(rand_range(4, 8))
-	idle_speed = rand_range(speed / 2, speed * 3)
+	idle_speed = int(rand_range(speed / 2, speed * 3))
 	start_move = move_or_not[randi() % move_or_not.size()]
 	looking_timer.start()
 
