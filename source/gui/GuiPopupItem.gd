@@ -1,16 +1,16 @@
 extends InventoryParent
 
 func _process(delta):
-	if Input.is_action_just_pressed("gui_items") and !items_open and !get_tree().paused:
+	if Input.is_action_just_pressed("gui_items") and !items_open and !GuiMain.game_paused:
+		GuiMain.game_paused = true
 		items_open = true
 		update_inventory_display()
 		$Animation.play("Open")
-		get_tree().set_deferred("paused", true)
 		$"%Item1".button.grab_focus()
 	elif Input.is_action_just_pressed("gui_items") and items_open:
+		GuiMain.game_paused = false
 		items_open = false
 		$Animation.play("Exit")
-		get_tree().set_deferred("paused", false)
 	if items_open:
 		for child in container.get_children():
 			if child.is_in_group("item_button") and child.get_node("Button").has_focus():
