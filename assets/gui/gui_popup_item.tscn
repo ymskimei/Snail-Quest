@@ -43,7 +43,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1100.0
 margin_bottom = -1100.0
-color = Color( 0.415686, 0.639216, 0.290196, 0.305882 )
+color = Color( 0.415686, 0.639216, 0.290196, 0.392157 )
 
 [node name="CenterContainer" type="CenterContainer" parent="Background"]
 anchor_right = 1.0

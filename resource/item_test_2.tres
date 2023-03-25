@@ -15,5 +15,7 @@ mesh = SubResource( 1 )
 sprite = ExtResource( 2 )
 amount = 1
 max_amount = 0
+specific_slot = 0
 stackable = false
 depletable = true
+loot_chance = 5

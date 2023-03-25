@@ -3,7 +3,7 @@ extends Resource
 
 signal items_updated(index)
 
-export(Array, Resource) var items = [null, null, null]
+export(Array, Resource) var items: Array = [null, null]
 
 func set_item(item_index, item):
 	var previous_item = items[item_index]

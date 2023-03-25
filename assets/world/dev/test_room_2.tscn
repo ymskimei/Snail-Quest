@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/texture/environment/sky_test.png" type="Texture" id=1]
 [ext_resource path="res://assets/texture/materials/test_block_blank.tres" type="Material" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://resource/item_test_0.tres" type="Resource" id=11]
 [ext_resource path="res://resource/item_test_2.tres" type="Resource" id=12]
 [ext_resource path="res://resource/item_samara.tres" type="Resource" id=13]
+[ext_resource path="res://assets/object/test_breakable.tscn" type="PackedScene" id=14]
 
 [sub_resource type="PanoramaSky" id=8]
 panorama = ExtResource( 1 )
@@ -206,11 +207,23 @@ material = ExtResource( 4 )
 [node name="Camera" parent="." instance=ExtResource( 7 )]
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 16 )
 
 [node name="SignpostModel" parent="." instance=ExtResource( 5 )]
 
 [node name="Objects" type="Spatial" parent="."]
+
+[node name="TestBreakable" parent="Objects" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -3, 12 )
+collision_mask = 5
+
+[node name="TestBreakable2" parent="Objects" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -3, 12 )
+collision_mask = 5
+
+[node name="TestBreakable3" parent="Objects" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -3, 17 )
+collision_mask = 5
 
 [node name="Item" parent="Objects" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -14 )
