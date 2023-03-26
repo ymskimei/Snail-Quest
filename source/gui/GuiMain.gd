@@ -14,4 +14,3 @@ func _process(delta):
 		get_tree().set_deferred("paused", true)
 	else:
 		get_tree().set_deferred("paused", false)
-	print(player_exists)

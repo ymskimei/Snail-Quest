@@ -1,12 +1,12 @@
 extends Node
 
-# Game time in minutes
-var game_time:int = 0
+var game_time: int = 0
+export var second_speed = 1
 
 func _ready():
 	var second_timer = Timer.new()
 	second_timer.set_timer_process_mode(1)
-	second_timer.set_wait_time(1)
+	second_timer.set_wait_time(second_speed)
 	second_timer.connect("timeout", self, "on_unpaused_second")
 	add_child(second_timer)
 	second_timer.start()
@@ -29,6 +29,9 @@ func on_unpaused_second():
 	game_time += 1
 	if (game_time >= (60 * 24)):
 		game_time = 0
+
+func get_raw_time():
+	return game_time
 
 func get_time(hour24):
 	var time = time_converted(hour24)
