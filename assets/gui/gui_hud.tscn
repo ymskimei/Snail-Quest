@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/gui/gui_container_equipment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/gui/GuiHud.gd" type="Script" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://assets/texture/gui/gui_hud_button_item_0.png" type="Texture" id=5]
 [ext_resource path="res://assets/texture/gui/gui_hud_button_item_1.png" type="Texture" id=6]
 [ext_resource path="res://resource/gui_hud_equipped.tres" type="Resource" id=7]
+[ext_resource path="res://assets/texture/gui/clock_temp.png" type="Texture" id=8]
+[ext_resource path="res://assets/texture/gui/clock_hand_temp.png" type="Texture" id=9]
+[ext_resource path="res://source/gui/GuiHudClock.gd" type="Script" id=10]
+[ext_resource path="res://assets/texture/gui/clock_minute_hand_temp.png" type="Texture" id=11]
 
 [node name="GuiHud" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -133,3 +137,47 @@ margin_left = 0.0
 margin_top = 0.0
 margin_right = 128.0
 margin_bottom = 128.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -384.0
+margin_right = 384.0
+custom_constants/margin_right = 64
+custom_constants/margin_top = 64
+custom_constants/margin_left = 64
+custom_constants/margin_bottom = 64
+script = ExtResource( 10 )
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 320.0
+margin_bottom = 320.0
+rect_pivot_offset = Vector2( 128, 128 )
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="MinuteHand" type="TextureRect" parent="MarginContainer"]
+unique_name_in_owner = true
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 320.0
+margin_bottom = 320.0
+rect_pivot_offset = Vector2( 128, 128 )
+size_flags_vertical = 0
+texture = ExtResource( 11 )
+stretch_mode = 6
+
+[node name="HourHand" type="TextureRect" parent="MarginContainer"]
+unique_name_in_owner = true
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 320.0
+margin_bottom = 320.0
+rect_pivot_offset = Vector2( 128, 128 )
+size_flags_vertical = 0
+texture = ExtResource( 9 )
+stretch_mode = 6
+
+[node name="Tween" type="Tween" parent="MarginContainer"]

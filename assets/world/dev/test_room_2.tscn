@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://assets/texture/environment/sky_test.png" type="Texture" id=1]
+[ext_resource path="res://assets/EnvironmentDefault.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/texture/materials/test_block_blank.tres" type="Material" id=2]
 [ext_resource path="res://assets/texture/materials/test_block_gray.tres" type="Material" id=3]
 [ext_resource path="res://assets/texture/materials/test_block_4.tres" type="Material" id=4]
@@ -14,37 +14,6 @@
 [ext_resource path="res://resource/item_test_2.tres" type="Resource" id=12]
 [ext_resource path="res://resource/item_samara.tres" type="Resource" id=13]
 [ext_resource path="res://assets/object/test_breakable.tscn" type="PackedScene" id=14]
-
-[sub_resource type="PanoramaSky" id=8]
-panorama = ExtResource( 1 )
-
-[sub_resource type="Environment" id=7]
-background_mode = 2
-background_sky = SubResource( 8 )
-background_sky_orientation = Basis( 1, 0, 0, 1, 1, 0, 0, 0, 1 )
-background_color = Color( 0.741176, 0.788235, 0.792157, 0.25098 )
-ambient_light_color = Color( 1, 1, 1, 1 )
-ambient_light_energy = 0.4
-ambient_light_sky_contribution = 0.0
-fog_enabled = true
-fog_color = Color( 0.917647, 0.94902, 0.870588, 1 )
-fog_sun_color = Color( 1, 1, 1, 1 )
-fog_depth_begin = 0.0
-fog_depth_end = 150.0
-fog_depth_curve = 5.46416
-fog_height_enabled = true
-fog_height_min = 1.0
-fog_height_max = 500.0
-fog_height_curve = 0.25
-tonemap_white = 0.0
-glow_intensity = 6.37
-glow_strength = 1.27
-glow_blend_mode = 0
-glow_hdr_threshold = 1.08
-glow_hdr_luminance_cap = 56.32
-glow_hdr_scale = 4.0
-glow_bicubic_upscale = true
-glow_high_quality = true
 
 [sub_resource type="Curve3D" id=11]
 _data = {
@@ -72,21 +41,6 @@ tracks/0/keys = {
 }
 
 [node name="Game" type="Spatial"]
-
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.92566, 0.316245, 0.207709, -0.255926, 0.119009, 0.959343, 0.278668, -0.941183, 0.191097, 0, 17.4034, 4.22515 )
-light_energy = 0.2
-light_specular = 0.0
-light_bake_mode = 0
-shadow_color = Color( 0.321569, 0.345098, 0.501961, 1 )
-directional_shadow_mode = 1
-directional_shadow_split_1 = 0.015
-directional_shadow_normal_bias = 0.0
-directional_shadow_bias_split_scale = 0.0
-directional_shadow_max_distance = 8192.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 7 )
 
 [node name="CSGCombiner" type="CSGCombiner" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
@@ -340,3 +294,12 @@ shape = SubResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Path"]
 anims/Movement = SubResource( 12 )
+
+[node name="EnvironmentDefault" parent="." instance=ExtResource( 1 )]
+dawn_ambient_color = Color( 0.823529, 0.733333, 0.486275, 1 )
+dawn_light_color = Color( 0.635294, 0.611765, 0.576471, 1 )
+day_light_color = Color( 0.556863, 0.537255, 0.494118, 1 )
+dusk_ambient_color = Color( 0.576471, 0.372549, 0.372549, 1 )
+dusk_light_color = Color( 0.85098, 0.662745, 0.447059, 1 )
+night_ambient_color = Color( 0.403922, 0.356863, 0.478431, 1 )
+night_light_color = Color( 0.368627, 0.478431, 0.533333, 1 )
