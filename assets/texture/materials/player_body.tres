@@ -4,8 +4,8 @@
 [ext_resource path="res://assets/texture/player/player_body.png" type="Texture" id=2]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.147465, 0.16129 )
-colors = PoolColorArray( 0.142843, 0.125817, 0.34375, 1, 1, 1, 1, 1 )
+offsets = PoolRealArray( 0.127341, 0.134831 )
+colors = PoolColorArray( 0.351563, 0.351563, 0.351563, 1, 1, 1, 1, 1 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
@@ -13,16 +13,16 @@ gradient = SubResource( 1 )
 [resource]
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/specular = 0.2
-shader_param/specular_amount = 1.0
-shader_param/specular_smoothness = 0.02
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.0
-shader_param/rim_smoothness = 0.0
-shader_param/metallic = 0.2
+shader_param/specular = 0.0
+shader_param/specular_amount = 0.0
+shader_param/specular_smoothness = 0.0
+shader_param/rim = 1.0
+shader_param/rim_amount = 0.729
+shader_param/rim_smoothness = 0.02
+shader_param/metallic = 0.266
 shader_param/roughness = 1.0
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
+shader_param/emission = Color( 0.192157, 0.376471, 0.427451, 1 )
+shader_param/emission_energy = 0.5
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
 shader_param/texture_albedo = ExtResource( 2 )

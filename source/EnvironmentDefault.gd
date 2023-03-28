@@ -1,28 +1,28 @@
 extends Spatial
 
-export var dawn_sky_color = Color("D0ECE9")
-export var dawn_ambient_color = Color("FFFFFF")
+export var dawn_sky_color = Color("B8CFD9")
+export var dawn_ambient_color = Color("F0C874")
 export var dawn_light_color = Color("9E9E9E")
 
-export var day_sky_color = Color("8AD6FF")
+export var day_sky_color = Color("ADD9FF")
 export var day_ambient_color = Color("FFFFFF")
 export var day_light_color = Color("B2B2B2")
 
 export var dusk_sky_color = Color("FAACB8")
 export var dusk_ambient_color = Color("873232")
-export var dusk_light_color = Color("BB9950")
+export var dusk_light_color = Color("C79D43")
 
 export var night_sky_color = Color("45396C")
 export var night_ambient_color = Color("433A51")
-export var night_light_color = Color("759CAF")
+export var night_light_color = Color("5D677A")
 
 export var full_cycle = 1440
 export var half_cycle = 720
 export var dawn = 360
 export var day = 480
 export var dusk = 960
-export var night = 1140
-export var transition_speed = 60.0
+export var night = 1080
+export var transition_speed = 0.60
 
 func _ready():
 	GameTime.game_time = half_cycle #temporary to start the game in day mode
@@ -81,6 +81,8 @@ func start_orbit():
 func check_orbit():
 	var time = GameTime.get_raw_time()
 	var day_percentage = float(GameTime.get_raw_time()) / full_cycle
+	#$Tween.interpolate_property($"%Orbital", "rotation:x", $"%Orbital".rotation.x, (-180 * PI / 180) + (day_percentage * (2 * PI)), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	#$Tween.start()
 	$"%Orbital".rotation.x = (-180 * PI / 180) + (day_percentage * (2 * PI))
 	if time in range (360, 1080):
 		$Tween.interpolate_property($"%DirectionalLight", "rotation:x", $"%DirectionalLight".rotation.x, (-180 * PI / 180) + ((day_percentage / 2) * (2 * PI)), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

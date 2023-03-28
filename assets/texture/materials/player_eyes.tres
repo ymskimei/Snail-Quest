@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/texture/player/player_eyes.png" type="Texture" id=2]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.0643275, 0.0701754 )
+offsets = PoolRealArray( 0.317972, 0.322581 )
 colors = PoolColorArray( 0.405273, 0.405273, 0.405273, 1, 0.972864, 0.972864, 0.972864, 1 )
 
 [sub_resource type="GradientTexture" id=2]
@@ -13,16 +13,16 @@ gradient = SubResource( 1 )
 [resource]
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/specular = 0.5
+shader_param/specular = 1.0
 shader_param/specular_amount = 0.5
-shader_param/specular_smoothness = 0.05
+shader_param/specular_smoothness = 0.02
 shader_param/rim = 0.5
 shader_param/rim_amount = 0.2
 shader_param/rim_smoothness = 0.05
 shader_param/metallic = 0.0
 shader_param/roughness = 1.0
 shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 0.45
+shader_param/emission_energy = 0.5
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
 shader_param/texture_albedo = ExtResource( 2 )

@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=2]
+
+[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=1]
+[ext_resource path="res://assets/texture/environment/cloud_test.png" type="Texture" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.501587, 0.51746 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/specular_amount = 0.0
+shader_param/specular_smoothness = 0.0
+shader_param/rim = 0.307
+shader_param/rim_amount = 0.675
+shader_param/rim_smoothness = 0.006
+shader_param/metallic = 0.395
+shader_param/roughness = 1.0
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/texture_albedo = ExtResource( 2 )
+shader_param/diffuse_curve = SubResource( 2 )
