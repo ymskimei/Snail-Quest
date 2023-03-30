@@ -27,7 +27,6 @@ func _ready():
 	set_interaction_text("")
 
 func _physics_process(delta: float) -> void:
-	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
 	states.physics_process(delta)
 	if target == null:
 		target = MathHelper.find_target(self, "target")
@@ -86,12 +85,6 @@ func set_interaction_text(text):
 		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
 		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
 		interaction_label.set_visible(true)
-
-
-
-
-
-
 
 #export var player_gravity = -110
 #export var player_jump_power = 30

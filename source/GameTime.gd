@@ -1,7 +1,7 @@
 extends Node
 
 var game_time: int = 0
-export var second_speed = 1
+export var second_speed = 0.01
 
 func _ready():
 	var second_timer = Timer.new()

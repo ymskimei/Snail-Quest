@@ -27,7 +27,7 @@ func physics_process(delta: float) -> int:
 		MathHelper.safe_look_at(entity, entity.transform.origin + Vector3(entity.velocity.x, 0, entity.velocity.z))
 	apply_movement(delta)
 	apply_gravity(delta)
-	update_snap_vector()
+	entity.velocity = entity.move_and_slide_with_snap(entity.velocity, entity.snap_vector, Vector3.UP, true)
 	return State.NULL
 
 func process(_delta: float) -> int:
@@ -50,12 +50,6 @@ func apply_movement(delta):
 func apply_gravity(delta):
 	entity.velocity.y += -entity.gravity * delta
 	entity.velocity.y = clamp(entity.velocity.y, -entity.gravity, entity.jump)
-
-func update_snap_vector():
-	if !entity.is_on_floor():
-		entity.snap_vector = Vector3.DOWN
-	else:
-		entity.snap_vector = Vector3.ZERO
 
 func exit() -> void:
 	pass

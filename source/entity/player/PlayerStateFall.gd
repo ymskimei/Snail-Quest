@@ -7,6 +7,7 @@ func enter() -> void:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
+	entity.snap_vector = Vector3.DOWN
 	if entity.input == Vector3.ZERO:
 		entity.velocity.x += entity.velocity.x * air_friction * delta
 		entity.velocity.z += entity.velocity.z * air_friction * delta

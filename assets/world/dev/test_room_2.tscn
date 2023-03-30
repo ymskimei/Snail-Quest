@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/EnvironmentDefault.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/texture/materials/test_block_blank.tres" type="Material" id=2]
@@ -14,6 +14,9 @@
 [ext_resource path="res://resource/item_test_2.tres" type="Resource" id=12]
 [ext_resource path="res://resource/item_samara.tres" type="Resource" id=13]
 [ext_resource path="res://assets/object/test_breakable.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/texture/materials/seed_red.tres" type="Material" id=15]
+[ext_resource path="res://assets/texture/materials/seed_stem.tres" type="Material" id=16]
+[ext_resource path="res://assets/model/seed_red.tres" type="ArrayMesh" id=17]
 
 [sub_resource type="Curve3D" id=11]
 _data = {
@@ -99,7 +102,7 @@ depth = 4.0
 material = ExtResource( 4 )
 
 [node name="GrayBox5" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -16 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -18 )
 width = 4.0
 height = 8.0
 depth = 4.0
@@ -114,7 +117,7 @@ depth = 4.0
 material = ExtResource( 4 )
 
 [node name="GrayBox6" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -4 )
 width = 4.0
 height = 8.0
 depth = 4.0
@@ -275,15 +278,21 @@ item = ExtResource( 12 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -3 )
 item = ExtResource( 12 )
 
+[node name="Seed" type="MeshInstance" parent="Objects"]
+transform = Transform( -1, -4.37114e-08, -9.2484e-09, 4.37114e-08, -3.57628e-07, -0.211579, 4.37114e-08, -1, 7.56665e-08, -4, 0, 11 )
+mesh = ExtResource( 17 )
+material/0 = ExtResource( 15 )
+material/1 = ExtResource( 16 )
+
 [node name="Path" type="Path" parent="."]
-transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2, 26, 8, -12 )
+transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2, 26, 8, -14 )
 curve = SubResource( 11 )
 script = ExtResource( 8 )
 
 [node name="PathFollow" type="PathFollow" parent="Path"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
-[node name="StaticBody" type="StaticBody" parent="Path/PathFollow"]
+[node name="StaticBody" type="KinematicBody" parent="Path/PathFollow"]
 
 [node name="MeshInstance" type="MeshInstance" parent="Path/PathFollow/StaticBody"]
 mesh = SubResource( 9 )
