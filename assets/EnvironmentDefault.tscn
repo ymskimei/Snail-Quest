@@ -4,7 +4,7 @@
 [ext_resource path="res://source/EnvironmentDefault.gd" type="Script" id=2]
 [ext_resource path="res://assets/texture/environment/sun.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/environment/moon.png" type="Texture" id=4]
-[ext_resource path="res://assets/model/environment_ring.tres" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/model/environment_ring.mesh" type="ArrayMesh" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Dawn"

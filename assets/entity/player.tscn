@@ -1,19 +1,21 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://assets/model/player_eyeball_left.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/model/player.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://source/entity/player/Player.gd" type="Script" id=2]
 [ext_resource path="res://resource/player.tres" type="Resource" id=3]
-[ext_resource path="res://assets/model/player_eyeball_right.tres" type="ArrayMesh" id=4]
-[ext_resource path="res://assets/model/player_body.tres" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/texture/materials/player_eyes.tres" type="Material" id=4]
+[ext_resource path="res://assets/texture/materials/player_body.tres" type="Material" id=5]
 [ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=6]
 [ext_resource path="res://assets/entity/state_controller.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/model/player_shell.tres" type="ArrayMesh" id=8]
+[ext_resource path="res://assets/texture/materials/player_shell.tres" type="Material" id=8]
+[ext_resource path="res://source/entity/player/PlayerStateHide.gd" type="Script" id=9]
 [ext_resource path="res://source/entity/player/PlayerStateIdle.gd" type="Script" id=11]
 [ext_resource path="res://source/entity/player/PlayerStateMove.gd" type="Script" id=12]
 [ext_resource path="res://source/entity/player/PlayerStateJump.gd" type="Script" id=13]
 [ext_resource path="res://source/entity/player/PlayerStateFall.gd" type="Script" id=14]
+[ext_resource path="res://source/entity/player/PlayerStateRoll.gd" type="Script" id=16]
 
-[sub_resource type="Skin" id=28]
+[sub_resource type="Skin" id=3]
 resource_name = "Skin"
 bind_count = 21
 bind/0/name = "BoneRoot"
@@ -80,15 +82,14 @@ bind/20/name = "BoneEyestalkLeftController"
 bind/20/bone = -1
 bind/20/pose = Transform( 1.85192, 0, -0.0265158, 0, 1.88897, 0, 0.0259982, 0, 1.88879, 0.269013, -1.20253, 1.17217 )
 
-[sub_resource type="BoxShape" id=24]
-extents = Vector3( 0.5, 0.5, 0.5 )
+[sub_resource type="SphereShape" id=28]
 
 [sub_resource type="SphereShape" id=27]
 
 [sub_resource type="BoxShape" id=26]
 
-[sub_resource type="Animation" id=29]
-resource_name = "Jump"
+[sub_resource type="BoxShape" id=24]
+extents = Vector3( 0.5, 0.5, 0.5 )
 
 [node name="Player" type="KinematicBody"]
 collision_mask = 13
@@ -109,10 +110,17 @@ script = ExtResource( 13 )
 [node name="Fall" type="Node" parent="StateController"]
 script = ExtResource( 14 )
 
+[node name="Hide" type="Node" parent="StateController"]
+script = ExtResource( 9 )
+
+[node name="Roll" type="Node" parent="StateController"]
+script = ExtResource( 16 )
+
 [node name="PlayerAvatar" type="Position3D" parent="."]
-transform = Transform( 0.5, 0, 2.21533e-07, 0, 0.5, 0, -2.21533e-07, 0, 0.5, 0, 0, 0 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.4, 0.3 )
 
 [node name="Skeleton" type="Skeleton" parent="PlayerAvatar"]
+transform = Transform( 1.07986, 0, -4.69107e-07, 0, 1.05878, 0, 4.78448e-07, 0, 1.05878, 0, -0.7, -0.3 )
 bones/0/name = "BoneRoot"
 bones/0/parent = -1
 bones/0/rest = Transform( 1, -7.10543e-15, 2.38419e-07, -7.10543e-15, 1, 5.96046e-08, -2.38419e-07, -5.96046e-08, 1, 0.0564262, 5.96046e-08, -0.0220091 )
@@ -220,24 +228,15 @@ bones/20/enabled = true
 bones/20/bound_children = [  ]
 
 [node name="Body" type="MeshInstance" parent="PlayerAvatar/Skeleton"]
-mesh = ExtResource( 5 )
-skin = SubResource( 28 )
-
-[node name="EyeballLeft" type="MeshInstance" parent="PlayerAvatar/Skeleton"]
 mesh = ExtResource( 1 )
-skin = SubResource( 28 )
-
-[node name="EyeballRight" type="MeshInstance" parent="PlayerAvatar/Skeleton"]
-mesh = ExtResource( 4 )
-skin = SubResource( 28 )
-
-[node name="Shell" type="MeshInstance" parent="PlayerAvatar/Skeleton"]
-mesh = ExtResource( 8 )
-skin = SubResource( 28 )
+skin = SubResource( 3 )
+material/0 = ExtResource( 5 )
+material/1 = ExtResource( 8 )
+material/2 = ExtResource( 4 )
 
 [node name="PlayerCollision" type="CollisionShape" parent="."]
-transform = Transform( 0.7, 0, 0, 0, 0.9, 0, 0, 0, 1.4, 0, 0.45, 0 )
-shape = SubResource( 24 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.398179, 0.148804 )
+shape = SubResource( 28 )
 
 [node name="Checkers" type="Spatial" parent="."]
 
@@ -284,6 +283,7 @@ wait_time = 0.5
 wait_time = 0.5
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../PlayerAvatar")
-anims/Jump = SubResource( 29 )
+[node name="Animation" type="Node" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
+playback_default_blend_time = 0.1

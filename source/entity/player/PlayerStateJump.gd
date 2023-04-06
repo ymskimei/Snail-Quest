@@ -11,9 +11,17 @@ func enter() -> void:
 	jump_timer.connect("timeout", self, "on_timeout")
 	add_child(jump_timer)
 	jump_timer.start()
+	entity.animator.set_speed_scale(1)
+	entity.animator.play("Jump")
+
+func input(_event: InputEvent) -> int:
+	if Input.is_action_just_pressed("action_defense"):
+		return State.ROLL
+	return State.NULL
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
+	apply_facing(0.9)
 	if Input.is_action_pressed("action_main") and can_jump:
 		entity.snap_vector = Vector3.ZERO
 		entity.velocity.y += entity.jump

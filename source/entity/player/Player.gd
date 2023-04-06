@@ -5,6 +5,7 @@ onready var player_cam = get_parent().get_node("Camera")
 onready var avatar = $PlayerAvatar
 onready var states = $StateController
 onready var interaction_label = $Gui/InteractionLabel
+onready var animator = $Animation/AnimationPlayer
 
 onready var interactor = $"%CheckerInteraction"
 onready var jump_check = $"%CheckerFloor"
@@ -14,16 +15,23 @@ signal player_killed
 
 var snap_vector = Vector3.ZERO
 var targeting : bool
+var can_move : bool
 var current_collider
 var collider
 var can_interact : bool
 var target = null
 var interactable = null
 
-#signal play_battle_tracks
-
 func _ready():
+	animator.add_animation("Move", load("res://resource/animation/PlayerMoveDefault.tres"))
+	animator.add_animation("Idle", load("res://resource/animation/PlayerIdleDefault.tres"))
+	animator.add_animation("Jump", load("res://resource/animation/PlayerJumpDefault.tres"))
+	animator.add_animation("Fall", load("res://resource/animation/PlayerFallDefault.tres"))
+	animator.add_animation("Tuck", load("res://resource/animation/PlayerTuckDefault.tres"))
+	animator.add_animation("Hide", load("res://resource/animation/PlayerHideDefault.tres"))	
+	animator.add_animation("Roll", load("res://resource/animation/PlayerRollDefault.tres"))
 	states.ready(self)
+	can_move = true
 	set_interaction_text("")
 
 func _physics_process(delta: float) -> void:
