@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/model/player.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://source/entity/player/Player.gd" type="Script" id=2]
@@ -9,11 +9,22 @@
 [ext_resource path="res://assets/entity/state_controller.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/texture/materials/player_shell.tres" type="Material" id=8]
 [ext_resource path="res://source/entity/player/PlayerStateHide.gd" type="Script" id=9]
+[ext_resource path="res://resource/animation/PlayerMoveDefault.tres" type="Animation" id=10]
 [ext_resource path="res://source/entity/player/PlayerStateIdle.gd" type="Script" id=11]
 [ext_resource path="res://source/entity/player/PlayerStateMove.gd" type="Script" id=12]
 [ext_resource path="res://source/entity/player/PlayerStateJump.gd" type="Script" id=13]
 [ext_resource path="res://source/entity/player/PlayerStateFall.gd" type="Script" id=14]
-[ext_resource path="res://source/entity/player/PlayerStateRoll.gd" type="Script" id=16]
+[ext_resource path="res://source/entity/player/PlayerStateDodg.gd" type="Script" id=15]
+[ext_resource path="res://resource/animation/PlayerRollLeft.tres" type="Animation" id=16]
+[ext_resource path="res://resource/animation/PlayerRollRight.tres" type="Animation" id=17]
+[ext_resource path="res://resource/animation/PlayerIdleDefault.tres" type="Animation" id=18]
+[ext_resource path="res://resource/animation/PlayerTuckDefault.tres" type="Animation" id=19]
+[ext_resource path="res://resource/animation/PlayerRollFront.tres" type="Animation" id=20]
+[ext_resource path="res://resource/animation/PlayerJumpDefault.tres" type="Animation" id=21]
+[ext_resource path="res://resource/animation/PlayerHideDefault.tres" type="Animation" id=22]
+[ext_resource path="res://resource/animation/PlayerFallDefault.tres" type="Animation" id=23]
+[ext_resource path="res://source/entity/player/PlayerStateTarg.gd" type="Script" id=24]
+[ext_resource path="res://resource/animation/PlayerRollBack.tres" type="Animation" id=25]
 
 [sub_resource type="Skin" id=3]
 resource_name = "Skin"
@@ -110,14 +121,17 @@ script = ExtResource( 13 )
 [node name="Fall" type="Node" parent="StateController"]
 script = ExtResource( 14 )
 
+[node name="Targ" type="Node" parent="StateController"]
+script = ExtResource( 24 )
+
 [node name="Hide" type="Node" parent="StateController"]
 script = ExtResource( 9 )
 
-[node name="Roll" type="Node" parent="StateController"]
-script = ExtResource( 16 )
+[node name="Dodg" type="Node" parent="StateController"]
+script = ExtResource( 15 )
 
 [node name="PlayerAvatar" type="Position3D" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.4, 0.3 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 8.74228e-08, 0, -8.74228e-08, 0.5, 0, 0.35, 0.3 )
 
 [node name="Skeleton" type="Skeleton" parent="PlayerAvatar"]
 transform = Transform( 1.07986, 0, -4.69107e-07, 0, 1.05878, 0, 4.78448e-07, 0, 1.05878, 0, -0.7, -0.3 )
@@ -235,7 +249,7 @@ material/1 = ExtResource( 8 )
 material/2 = ExtResource( 4 )
 
 [node name="PlayerCollision" type="CollisionShape" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.398179, 0.148804 )
+transform = Transform( 0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0.44, 0.25 )
 shape = SubResource( 28 )
 
 [node name="Checkers" type="Spatial" parent="."]
@@ -287,3 +301,13 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
 playback_default_blend_time = 0.1
+anims/PlayerFallDefault = ExtResource( 23 )
+anims/PlayerHideDefault = ExtResource( 22 )
+anims/PlayerIdleDefault = ExtResource( 18 )
+anims/PlayerJumpDefault = ExtResource( 21 )
+anims/PlayerMoveDefault = ExtResource( 10 )
+anims/PlayerRollBack = ExtResource( 25 )
+anims/PlayerRollFront = ExtResource( 20 )
+anims/PlayerRollLeft = ExtResource( 16 )
+anims/PlayerRollRight = ExtResource( 17 )
+anims/PlayerTuckDefault = ExtResource( 19 )

@@ -3,14 +3,20 @@ extends Node
 
 var entity: Player
 
+var input_up = 0
+var input_down = 0
+var input_left = 0
+var input_right = 0
+
 enum State {
 	NULL,
 	IDLE,
 	MOVE,
 	JUMP,
 	FALL,
+	TARG,
 	HIDE,
-	ROLL
+	DODG
 }
 
 func enter() -> void:
@@ -57,6 +63,42 @@ func apply_movement(delta, no_sliding, angle):
 func apply_gravity(delta):
 	entity.velocity.y += -entity.gravity * delta
 	entity.velocity.y = clamp(entity.velocity.y, -entity.gravity, entity.jump)
+
+func dodge_roll():
+	if Input.is_action_just_pressed("ui_up"):
+		input_up += 1
+		double_click()
+		if input_up >= 2:
+			return true
+	if Input.is_action_just_pressed("ui_down"):
+		input_down += 1
+		double_click()
+		if input_down >= 2:
+			return true
+	if Input.is_action_just_pressed("ui_left"):
+		input_left += 1
+		double_click()
+		if input_left >= 2:
+			return true
+	if Input.is_action_just_pressed("ui_right"):
+		input_right += 1
+		double_click()
+		if input_right >= 2:
+			return true
+
+func double_click():
+	var timer = Timer.new()
+	timer.set_one_shot(true)
+	timer.set_wait_time(0.25)
+	timer.connect("timeout", self, "on_input_timer")
+	add_child(timer)
+	timer.start()
+
+func on_input_timer():
+	input_up = 0
+	input_down = 0
+	input_left = 0
+	input_right = 0
 
 func exit() -> void:
 	pass

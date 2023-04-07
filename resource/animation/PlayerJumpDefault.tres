@@ -151,3 +151,15 @@ tracks/20/loop_wrap = true
 tracks/20/imported = false
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, -4.65661e-10, 0, 1, 1, 1, 1, 0.06, 1, 0.00030306, 0.019859, -0.0215861, 0, -9.31322e-10, 0, 1, 1, 1, 1, 0.13, 1, 0.00183842, 0.256744, -0.130955, 0, -9.31322e-10, 0, 1, 1, 1, 1, 0.19, 1, 0.00313139, 0.649557, -0.223055, 0, -9.31322e-10, 0, 1, 1, 1, 1, 0.26, 1, 0.00243425, 0.45452, -0.177488, 0, -4.65661e-10, 0, 1, 1, 1, 1, 0.33, 1, 0.000593543, 0.360297, -0.155658, -0.0118539, -3.93384e-10, -0.000166411, 0.99993, 1, 1, 1, 0.45, 1, -0.00276956, 0.398564, -0.161772, -0.104484, -7.97445e-10, -0.0014668, 0.994526, 1, 1, 1 )
+tracks/21/type = "value"
+tracks/21/path = NodePath("../PlayerAvatar:rotation_degrees")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}

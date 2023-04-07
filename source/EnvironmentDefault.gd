@@ -22,7 +22,7 @@ export var dawn = 360
 export var day = 480
 export var dusk = 960
 export var night = 1080
-export var transition_speed = 0.60
+export var transition_speed = 60
 
 func _ready():
 	GameTime.game_time = half_cycle #temporary to start the game in day mode

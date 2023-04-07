@@ -6,17 +6,22 @@ func enter() -> void:
 	print("Player State: FALL")
 	yield(entity.animator, "animation_finished")
 	entity.animator.set_speed_scale(1)
-	entity.animator.play("Fall")
+	entity.animator.play("PlayerFallDefault")
 
 func input(_event: InputEvent) -> int:
 	if Input.is_action_just_pressed("action_defense"):
-		return State.HIDE
+		if entity.input == Vector3.ZERO:
+			return State.HIDE
+		else:
+			return State.DODG
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	apply_facing(0.9)
 	apply_movement(delta, true, deg2rad(45))
+	if dodge_roll():
+		return State.DODG
 	entity.snap_vector = Vector3.DOWN
 	if entity.input == Vector3.ZERO:
 		entity.velocity.x += entity.velocity.x * air_friction * delta

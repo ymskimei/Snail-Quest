@@ -3,10 +3,10 @@ extends PlayerStateMain
 func enter() -> void:
 	print("Player State: ROLL")
 	entity.animator.set_speed_scale(1)
-	entity.animator.play("Tuck")
+	entity.animator.play("PlayerTuckDefault")
 	yield(entity.animator, "animation_finished")
 	entity.speed *= 1.8
-	entity.animator.play("Roll")
+	entity.animator.play("PlayerRollFront")
 	AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 
 func input(_event: InputEvent) -> int:
@@ -29,5 +29,4 @@ func physics_process(delta: float) -> int:
 	return State.NULL
 
 func exit() -> void:
-	entity.speed = entity.resource.speed
 	AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)

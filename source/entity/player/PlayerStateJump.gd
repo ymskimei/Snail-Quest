@@ -12,17 +12,22 @@ func enter() -> void:
 	add_child(jump_timer)
 	jump_timer.start()
 	entity.animator.set_speed_scale(1)
-	entity.animator.play("Jump")
+	entity.animator.play("PlayerJumpDefault")
 
 func input(_event: InputEvent) -> int:
 	if Input.is_action_just_pressed("action_defense"):
-		return State.ROLL
+		if entity.input == Vector3.ZERO:
+			return State.HIDE
+		else:
+			return State.DODG
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	apply_facing(0.9)
 	apply_movement(delta, true, deg2rad(45))
+	if dodge_roll():
+		return State.DODG
 	if Input.is_action_pressed("action_main") and can_jump:
 		entity.snap_vector = Vector3.ZERO
 		entity.velocity.y += entity.jump

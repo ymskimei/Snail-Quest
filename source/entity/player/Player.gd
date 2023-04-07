@@ -23,13 +23,6 @@ var target = null
 var interactable = null
 
 func _ready():
-	animator.add_animation("Move", load("res://resource/animation/PlayerMoveDefault.tres"))
-	animator.add_animation("Idle", load("res://resource/animation/PlayerIdleDefault.tres"))
-	animator.add_animation("Jump", load("res://resource/animation/PlayerJumpDefault.tres"))
-	animator.add_animation("Fall", load("res://resource/animation/PlayerFallDefault.tres"))
-	animator.add_animation("Tuck", load("res://resource/animation/PlayerTuckDefault.tres"))
-	animator.add_animation("Hide", load("res://resource/animation/PlayerHideDefault.tres"))	
-	animator.add_animation("Roll", load("res://resource/animation/PlayerRollDefault.tres"))
 	states.ready(self)
 	can_move = true
 	set_interaction_text("")
