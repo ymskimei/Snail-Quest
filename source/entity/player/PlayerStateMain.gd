@@ -8,13 +8,14 @@ var input_down = 0
 var input_left = 0
 var input_right = 0
 
+var shell_jumped : bool
+
 enum State {
 	NULL,
 	IDLE,
 	MOVE,
 	JUMP,
 	FALL,
-	TARG,
 	HIDE,
 	DODG
 }
@@ -29,6 +30,8 @@ func physics_process(delta: float) -> int:
 	entity.input = get_input_vector()
 	entity.direction = get_direction()
 	apply_gravity(delta)
+	if entity.is_on_floor():
+		shell_jumped = false
 	return State.NULL
 
 func process(_delta: float) -> int:

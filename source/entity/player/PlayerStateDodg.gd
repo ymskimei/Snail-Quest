@@ -27,8 +27,9 @@ func physics_process(delta: float) -> int:
 	apply_facing(0.3)
 	apply_movement(delta, true, deg2rad(45))
 	entity.snap_vector = Vector3.DOWN
-	if Input.is_action_just_pressed("action_main"):
+	if Input.is_action_just_pressed("action_main") and !shell_jumped:
 		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)
+		shell_jumped = true
 		return State.JUMP
 	if dodge_complete:
 		if Input.is_action_pressed("action_defense"):

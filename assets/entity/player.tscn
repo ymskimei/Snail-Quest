@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://assets/model/player.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://source/entity/player/Player.gd" type="Script" id=2]
@@ -23,7 +23,6 @@
 [ext_resource path="res://resource/animation/PlayerJumpDefault.tres" type="Animation" id=21]
 [ext_resource path="res://resource/animation/PlayerHideDefault.tres" type="Animation" id=22]
 [ext_resource path="res://resource/animation/PlayerFallDefault.tres" type="Animation" id=23]
-[ext_resource path="res://source/entity/player/PlayerStateTarg.gd" type="Script" id=24]
 [ext_resource path="res://resource/animation/PlayerRollBack.tres" type="Animation" id=25]
 
 [sub_resource type="Skin" id=3]
@@ -120,9 +119,6 @@ script = ExtResource( 13 )
 
 [node name="Fall" type="Node" parent="StateController"]
 script = ExtResource( 14 )
-
-[node name="Targ" type="Node" parent="StateController"]
-script = ExtResource( 24 )
 
 [node name="Hide" type="Node" parent="StateController"]
 script = ExtResource( 9 )

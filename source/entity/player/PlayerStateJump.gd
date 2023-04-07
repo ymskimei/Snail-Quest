@@ -16,7 +16,6 @@ func enter() -> void:
 
 func input(_event: InputEvent) -> int:
 	if Input.is_action_just_pressed("action_defense"):
-		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 		if entity.input == Vector3.ZERO:
 			return State.HIDE
 		else:
