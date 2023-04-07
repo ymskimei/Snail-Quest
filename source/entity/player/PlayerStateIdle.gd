@@ -2,6 +2,7 @@ extends PlayerStateMain
 
 func enter() -> void:
 	print("Player State: IDLE")
+	entity.speed = entity.resource.speed
 	entity.velocity.x = 0
 	entity.velocity.z = 0
 	entity.animator.set_speed_scale(1)

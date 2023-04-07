@@ -22,6 +22,7 @@ func physics_process(delta: float) -> int:
 	apply_facing(0.9)
 	apply_movement(delta, true, deg2rad(45))
 	if dodge_roll():
+		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 		return State.DODG
 	entity.snap_vector = Vector3.DOWN
 	if entity.input == Vector3.ZERO:
@@ -36,3 +37,6 @@ func physics_process(delta: float) -> int:
 		else:
 			return State.IDLE
 	return State.NULL
+
+func exit() -> void:
+	entity.speed = entity.resource.speed

@@ -28,6 +28,7 @@ func physics_process(delta: float) -> int:
 	apply_facing(0.9)
 	apply_movement(delta, true, deg2rad(45))
 	if dodge_roll():
+		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 		return State.DODG
 	if Input.is_action_pressed("action_main") and can_jump:
 		entity.snap_vector = Vector3.ZERO

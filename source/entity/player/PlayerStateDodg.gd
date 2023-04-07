@@ -28,6 +28,7 @@ func physics_process(delta: float) -> int:
 	apply_movement(delta, true, deg2rad(45))
 	entity.snap_vector = Vector3.DOWN
 	if Input.is_action_just_pressed("action_main"):
+		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)
 		return State.JUMP
 	if dodge_complete:
 		if Input.is_action_pressed("action_defense"):
@@ -40,7 +41,7 @@ func physics_process(delta: float) -> int:
 func dodge_timer():
 	var timer = Timer.new()
 	timer.set_one_shot(true)
-	timer.set_wait_time(0.6)
+	timer.set_wait_time(0.65)
 	timer.connect("timeout", self, "on_dodge_timer")
 	add_child(timer)
 	timer.start()
