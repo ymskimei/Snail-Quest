@@ -22,9 +22,7 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	entity.input = get_input_vector()
 	entity.direction = get_direction()
-	apply_movement(delta)
 	apply_gravity(delta)
-	entity.velocity = entity.move_and_slide_with_snap(entity.velocity, entity.snap_vector, Vector3.UP, true)
 	return State.NULL
 
 func process(_delta: float) -> int:
@@ -46,14 +44,15 @@ func get_direction():
 func apply_facing(turn_speed):
 	if entity.targeting:
 		var target = entity.target.transform.origin
-		MathHelper.safe_look_at(entity, Vector3(target.x, 0, target.z))
+		MathHelper.slerp_look_at(entity, Vector3(target.x, entity.transform.origin.y, target.z), 1)
 	elif !entity.is_on_wall() and entity.can_move:
 		MathHelper.slerp_look_at(entity, entity.transform.origin + Vector3(entity.velocity.x, 0, entity.velocity.z), turn_speed)
 
-func apply_movement(delta):
+func apply_movement(delta, no_sliding, angle):
 	if entity.direction != Vector3.ZERO:
 		entity.velocity.x = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 8 * delta).x
 		entity.velocity.z = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 8 * delta).z
+	entity.velocity = entity.move_and_slide_with_snap(entity.velocity, entity.snap_vector, Vector3.UP, no_sliding, 4, angle)
 
 func apply_gravity(delta):
 	entity.velocity.y += -entity.gravity * delta

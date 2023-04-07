@@ -22,6 +22,7 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	apply_facing(0.9)
+	apply_movement(delta, true, deg2rad(45))
 	if Input.is_action_pressed("action_main") and can_jump:
 		entity.snap_vector = Vector3.ZERO
 		entity.velocity.y += entity.jump

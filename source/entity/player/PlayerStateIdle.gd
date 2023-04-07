@@ -16,6 +16,7 @@ func input(_event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
+	#apply_movement(delta, true)
 	entity.snap_vector = Vector3.DOWN
 	if entity.input != Vector3.ZERO and entity.is_on_floor():
 		return State.MOVE

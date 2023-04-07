@@ -10,12 +10,13 @@ func enter() -> void:
 
 func input(_event: InputEvent) -> int:
 	if Input.is_action_just_pressed("action_defense"):
-		return State.ROLL
+		return State.HIDE
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	apply_facing(0.9)
+	apply_movement(delta, true, deg2rad(45))
 	entity.snap_vector = Vector3.DOWN
 	if entity.input == Vector3.ZERO:
 		entity.velocity.x += entity.velocity.x * air_friction * delta

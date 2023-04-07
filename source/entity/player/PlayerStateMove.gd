@@ -15,6 +15,7 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	apply_facing(0.6)
+	apply_movement(delta, true, deg2rad(45))
 	entity.snap_vector = Vector3.DOWN
 	var anim_speed = clamp((abs(entity.velocity.x) + abs(entity.velocity.z)), 0, 2)
 	entity.animator.set_speed_scale(anim_speed)

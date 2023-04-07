@@ -5,7 +5,7 @@ func enter() -> void:
 	entity.animator.set_speed_scale(1)
 	entity.animator.play("Tuck")
 	yield(entity.animator, "animation_finished")
-	entity.speed *= 1.7
+	entity.speed *= 1.8
 	entity.animator.play("Roll")
 	AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 
@@ -17,6 +17,7 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	apply_facing(0.3)
+	apply_movement(delta, true, deg2rad(1))
 	entity.snap_vector = Vector3.DOWN
 	if entity.input == Vector3.ZERO:
 		entity.velocity.x = lerp(entity.velocity.x, 0, 0.03)
