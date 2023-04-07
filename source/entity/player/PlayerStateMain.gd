@@ -89,7 +89,7 @@ func dodge_roll():
 func double_click():
 	var timer = Timer.new()
 	timer.set_one_shot(true)
-	timer.set_wait_time(0.25)
+	timer.set_wait_time(0.35)
 	timer.connect("timeout", self, "on_input_timer")
 	add_child(timer)
 	timer.start()

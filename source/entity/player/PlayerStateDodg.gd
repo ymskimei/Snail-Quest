@@ -4,7 +4,6 @@ var dodge_complete : bool
 
 func enter() -> void:
 	print("Player State: DODG")
-	AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 	dodge_complete = false
 	dodge_timer()
 	entity.animator.set_speed_scale(1)
@@ -23,11 +22,6 @@ func enter() -> void:
 	else:
 		entity.animator.play("PlayerRollFront")
 
-func input(_event: InputEvent) -> int:
-	if Input.is_action_just_released("ui_left") or Input.is_action_just_released("ui_right") or Input.is_action_just_released("ui_up") or Input.is_action_just_released("ui_down	"):
-		return State.IDLE
-	return State.NULL
-
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	apply_facing(0.3)
@@ -36,7 +30,11 @@ func physics_process(delta: float) -> int:
 	if Input.is_action_just_pressed("action_main"):
 		return State.JUMP
 	if dodge_complete:
-		return State.IDLE
+		if Input.is_action_pressed("action_defense"):
+			return State.HIDE
+		else:
+			AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)
+			return State.IDLE
 	return State.NULL
 
 func dodge_timer():
@@ -50,6 +48,3 @@ func dodge_timer():
 func on_dodge_timer():
 	print("ding")
 	dodge_complete = true
-
-func exit() -> void:
-	AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)
