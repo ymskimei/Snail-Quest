@@ -7,7 +7,7 @@ onready var states = $StateController
 onready var interaction_label = $Gui/InteractionLabel
 onready var animator = $Animation/AnimationPlayer
 
-onready var interactor = $"%CheckerInteraction"
+onready var ray_down = $"%RayDown"
 onready var jump_check = $"%CheckerFloor"
 
 signal health_changed
