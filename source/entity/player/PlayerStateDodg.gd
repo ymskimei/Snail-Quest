@@ -26,6 +26,7 @@ func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	apply_facing(0.3)
 	apply_movement(delta, true, deg2rad(45))
+	apply_gravity(delta)
 	entity.snap_vector = Vector3.DOWN
 	if Input.is_action_just_pressed("action_main") and !shell_jumped:
 		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)

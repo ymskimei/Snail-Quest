@@ -10,6 +10,17 @@ onready var animator = $Animation/AnimationPlayer
 onready var ray_down = $"%RayDown"
 onready var jump_check = $"%CheckerFloor"
 
+onready var ray_front = $"%RayFront"
+onready var ray_back = $"%RayBack"
+
+onready var ik_front = $"%IkFront"
+onready var ik_back = $"%IkBack"
+
+onready var position_front = $"%PositionFront"
+onready var position_back = $"%PositionBack"
+onready var position_front_null = $"%PositionFrontNull"
+onready var position_back_null = $"%PositionBackNull"
+
 signal health_changed
 signal player_killed
 
@@ -29,6 +40,8 @@ func _ready():
 	states.ready(self)
 	can_move = true
 	set_interaction_text("")
+	ik_front.start()
+	ik_back.start()
 
 func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
