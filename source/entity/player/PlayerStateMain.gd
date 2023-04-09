@@ -10,9 +10,6 @@ var input_right = 0
 
 var shell_jumped : bool
 
-export var min_max_interpolation = Vector2(0, 0.9)
-export var ik_height_offset = 0.05
-
 enum State {
 	NULL,
 	IDLE,
@@ -25,28 +22,26 @@ enum State {
 
 func enter() -> void:
 	pass
-	
+
 func input(_event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	entity.input = get_input_vector()
 	entity.direction = get_direction()
-	update_ik_position(entity.position_front, entity.ray_front, entity.position_front_null, ik_height_offset)
-	update_ik_position(entity.position_back, entity.ray_back, entity.position_back_null, ik_height_offset)
+	apply_gravity(delta)
 	if entity.is_on_floor():
 		shell_jumped = false
 	return State.NULL
 
+func align_to_surface(tform, new_up):
+	tform.basis.y = new_up
+	tform.basis.x = -tform.basis.z.cross(new_up)
+	tform.basis = tform.basis.orthonormalized()
+	return tform
+
 func process(_delta: float) -> int:
 	return State.NULL
-
-func update_ik_position(target, ray, ray_null, height_offset):
-	if ray.is_colliding():
-		var rest_point = ray.get_collision_point().y + height_offset
-		target.global_transform.origin.y = rest_point
-	else:
-		target.global_transform.origin.y = ray_null.global_transform.origin.y
 
 func get_input_vector():
 	if entity.can_move:
@@ -60,12 +55,6 @@ func get_input_vector():
 func get_direction():
 	entity.direction = -entity.input.rotated(Vector3.UP, entity.player_cam.rotation.y)
 	return entity.direction
-
-func align_to_surface(tform, new_up):
-	tform.basis.y = new_up
-	tform.basis.x = -tform.basis.z.cross(new_up)
-	tform.basis = tform.basis.orthonormalized()
-	return tform
 
 func apply_facing(turn_speed):
 	if entity.targeting:

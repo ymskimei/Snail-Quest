@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/model/player.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://source/entity/player/Player.gd" type="Script" id=2]
@@ -92,8 +92,6 @@ bind/20/name = "BoneEyestalkLeftController"
 bind/20/bone = -1
 bind/20/pose = Transform( 1.85192, 0, -0.0265158, 0, 1.88897, 0, 0.0259982, 0, 1.88879, 0.269013, -1.20253, 1.17217 )
 
-[sub_resource type="SphereMesh" id=29]
-
 [sub_resource type="SphereShape" id=28]
 
 [sub_resource type="BoxShape" id=26]
@@ -127,7 +125,7 @@ script = ExtResource( 9 )
 script = ExtResource( 15 )
 
 [node name="PlayerAvatar" type="Position3D" parent="."]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.35, 0.3 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 8.74228e-08, 0, -8.74228e-08, 0.5, 0, 0.35, 0.3 )
 
 [node name="Skeleton" type="Skeleton" parent="PlayerAvatar"]
 transform = Transform( 1.07986, 0, -4.69107e-07, 0, 1.05878, 0, 4.78448e-07, 0, 1.05878, 0, -0.7, -0.3 )
@@ -243,70 +241,6 @@ skin = SubResource( 3 )
 material/0 = ExtResource( 5 )
 material/1 = ExtResource( 8 )
 material/2 = ExtResource( 4 )
-
-[node name="IkFront" type="SkeletonIK" parent="PlayerAvatar/Skeleton"]
-unique_name_in_owner = true
-process_priority = 1
-root_bone = "BoneFootTorso"
-tip_bone = "BoneFootHead"
-use_magnet = true
-magnet = Vector3( 0, 0, -100 )
-target_node = NodePath("../../../InverseKinematics/PositionFront")
-
-[node name="IkBack" type="SkeletonIK" parent="PlayerAvatar/Skeleton"]
-unique_name_in_owner = true
-process_priority = 1
-root_bone = "BoneFootWaist"
-tip_bone = "BoneFootTail"
-use_magnet = true
-magnet = Vector3( 0, 0, -100 )
-target_node = NodePath("../../../InverseKinematics/PositionBack")
-
-[node name="InverseKinematics" type="Spatial" parent="."]
-
-[node name="PositionFront" type="Position3D" parent="InverseKinematics"]
-unique_name_in_owner = true
-transform = Transform( -1, -1.52855e-14, -8.74228e-08, 8.74228e-08, -1.49012e-07, -1, 3.55271e-15, -1, 1.49012e-07, 0, 0, -0.5 )
-
-[node name="MeshInstance" type="MeshInstance" parent="InverseKinematics/PositionFront"]
-transform = Transform( -0.1, -1.68484e-15, -8.74228e-09, -1.65797e-15, -0.1, 3.67569e-08, -8.74228e-09, 3.67569e-08, 0.1, 0, 0, 0 )
-mesh = SubResource( 29 )
-skeleton = NodePath("../../PositionBack")
-
-[node name="PositionBack" type="Position3D" parent="InverseKinematics"]
-unique_name_in_owner = true
-transform = Transform( 1, 0, 0, 0, -2.18557e-07, -1, 0, 1, -2.18557e-07, 0, 0, 0.9 )
-
-[node name="MeshInstance" type="MeshInstance" parent="InverseKinematics/PositionBack"]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
-mesh = SubResource( 29 )
-
-[node name="RayFront" type="RayCast" parent="InverseKinematics"]
-unique_name_in_owner = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )
-enabled = true
-cast_to = Vector3( 0, -0.5, 0 )
-collision_mask = 12
-collide_with_areas = true
-
-[node name="RayBack" type="RayCast" parent="InverseKinematics"]
-unique_name_in_owner = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.9 )
-enabled = true
-cast_to = Vector3( 0, -0.5, 0 )
-collision_mask = 12
-collide_with_areas = true
-
-[node name="PositionFrontNull" type="Position3D" parent="InverseKinematics"]
-unique_name_in_owner = true
-transform = Transform( -1, -1.52855e-14, -8.74228e-08, 8.74228e-08, -1.49012e-07, -1, 3.55271e-15, -1, 1.49012e-07, 0, 0, -0.5 )
-
-[node name="PositionBackNull" type="Position3D" parent="InverseKinematics"]
-unique_name_in_owner = true
-transform = Transform( 1, 3.38813e-21, 0, 0, -2.18557e-07, -1, 0, 1, -2.18557e-07, 0, 0, 0.9 )
-
-[node name="IkInterpolation" type="Position3D" parent="InverseKinematics"]
-transform = Transform( 1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 5.96046e-08, -5.96046e-08 )
 
 [node name="PlayerCollision" type="CollisionShape" parent="."]
 transform = Transform( 0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0.44, 0.25 )

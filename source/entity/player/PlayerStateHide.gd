@@ -21,7 +21,6 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	apply_movement(delta, true, deg2rad(45))
-	apply_gravity(delta)
 	entity.snap_vector = Vector3.DOWN
 	entity.velocity.x = 0
 	entity.velocity.z = 0

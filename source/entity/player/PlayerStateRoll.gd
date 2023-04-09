@@ -18,7 +18,6 @@ func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	apply_facing(0.3)
 	apply_movement(delta, true, deg2rad(1))
-	apply_gravity(delta)
 	entity.snap_vector = Vector3.DOWN
 	if entity.input == Vector3.ZERO:
 		entity.velocity.x = lerp(entity.velocity.x, 0, 0.03)

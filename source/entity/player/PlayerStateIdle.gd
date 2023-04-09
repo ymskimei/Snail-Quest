@@ -19,8 +19,7 @@ func input(_event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	apply_movement(delta, true, deg2rad(180))
-	apply_gravity(delta)
+	apply_movement(delta, true, deg2rad(45))
 	if dodge_roll():
 		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 		return State.DODG
