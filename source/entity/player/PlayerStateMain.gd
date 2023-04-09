@@ -29,10 +29,11 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	entity.input = get_input_vector()
 	entity.direction = get_direction()
-	apply_gravity(delta)
 	if entity.is_on_floor():
 		shell_jumped = false
 	return State.NULL
+	
+	
 
 func align_to_surface(tform, new_up):
 	tform.basis.y = new_up
@@ -61,11 +62,9 @@ func apply_facing(turn_speed):
 		var target = entity.target.transform.origin
 		MathHelper.slerp_look_at(entity, Vector3(target.x, entity.transform.origin.y, target.z), 1)
 	elif !entity.is_on_wall() and entity.can_move:
-
 		if entity.velocity != Vector3.ZERO:
 			var look_direction = atan2(-entity.velocity.x, -entity.velocity.z)
 			entity.rotation.y = lerp_angle(entity.rotation.y, look_direction, 0.2)
-
 		if entity.ray_down.is_colliding() and entity.is_on_floor():
 			var normal = entity.ray_down.get_collision_normal()
 			var tform = align_to_surface(entity.global_transform, normal)

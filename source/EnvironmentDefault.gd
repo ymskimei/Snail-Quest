@@ -25,7 +25,7 @@ export var night = 1080
 export var transition_speed = 60
 
 func _ready():
-	GameTime.game_time = half_cycle #temporary to start the game in day mode
+	GameTime.game_time = 480 #temporary to start the game in day mode
 	start_environment()
 	start_orbit()
 	

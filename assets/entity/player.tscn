@@ -128,6 +128,7 @@ script = ExtResource( 15 )
 transform = Transform( 0.5, 0, 0, 0, 0.5, 8.74228e-08, 0, -8.74228e-08, 0.5, 0, 0.35, 0.3 )
 
 [node name="Skeleton" type="Skeleton" parent="PlayerAvatar"]
+unique_name_in_owner = true
 transform = Transform( 1.07986, 0, -4.69107e-07, 0, 1.05878, 0, 4.78448e-07, 0, 1.05878, 0, -0.7, -0.3 )
 bones/0/name = "BoneRoot"
 bones/0/parent = -1
@@ -242,6 +243,13 @@ material/0 = ExtResource( 5 )
 material/1 = ExtResource( 8 )
 material/2 = ExtResource( 4 )
 
+[node name="SkeletonIK" type="SkeletonIK" parent="PlayerAvatar/Skeleton"]
+unique_name_in_owner = true
+process_priority = 1
+root_bone = "BoneEyeballMainController"
+tip_bone = "BoneEyeballMainController"
+target_node = NodePath("../../../IK/EyeMainControl")
+
 [node name="PlayerCollision" type="CollisionShape" parent="."]
 transform = Transform( 0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0.44, 0.25 )
 shape = SubResource( 28 )
@@ -267,6 +275,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.1 )
 enabled = true
 collision_mask = 12
 collide_with_areas = true
+
+[node name="IK" type="Spatial" parent="."]
+
+[node name="EyeMainControl" type="Position3D" parent="IK"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.9 )
 
 [node name="Gui" type="Node" parent="."]
 
