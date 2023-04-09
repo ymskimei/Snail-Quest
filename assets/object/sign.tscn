@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/texture/materials/test_sign.tres" type="Material" id=1]
-[ext_resource path="res://assets/model/object_sign.tres" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/model/sign.mesh" type="ArrayMesh" id=2]
 [ext_resource path="res://source/object/ObjectSignpost.gd" type="Script" id=3]
 
 [sub_resource type="BoxShape" id=2]

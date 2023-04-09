@@ -9,6 +9,7 @@ func _process(delta):
 		$"%Item1".button.grab_focus()
 	elif Input.is_action_just_pressed("gui_items") and items_open:
 		GuiMain.game_paused = false
+		get_tree().set_deferred("paused", false)
 		items_open = false
 		$Animation.play("Exit")
 	if items_open:

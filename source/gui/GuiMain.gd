@@ -12,5 +12,3 @@ var player_exists : bool
 func _process(delta):
 	if game_paused:
 		get_tree().set_deferred("paused", true)
-	else:
-		get_tree().set_deferred("paused", false)

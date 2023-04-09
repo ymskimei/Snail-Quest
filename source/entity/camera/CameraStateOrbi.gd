@@ -36,7 +36,10 @@ func unhandled_input(event):
 		rotation = Vector2.ZERO
 
 func physics_process(delta):
-	rotation.x = Input.get_action_strength("cam_right") - Input.get_action_strength("ui_right") / 3 - Input.get_action_strength("cam_left") + Input.get_action_strength("ui_left") / 3
+	rotation.x = Input.get_action_strength("cam_right") - Input.get_action_strength("cam_left")
+	if entity.player.can_move:
+		rotation.x += -Input.get_action_strength("ui_right") / 3 + Input.get_action_strength("ui_left") / 3
+	#rotation.x = Input.get_action_strength("cam_right") - Input.get_action_strength("ui_right") / 3 - Input.get_action_strength("cam_left") + Input.get_action_strength("ui_left") / 3
 	velocity = velocity.linear_interpolate(rotation * sensitivity / 3, delta * rotation_speed)
 	entity.rotation.y += (deg2rad(velocity.x))
 	entity.translation = lerp(entity.translation, entity.player.translation + offset, follow_speed * delta)

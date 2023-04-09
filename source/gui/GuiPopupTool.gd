@@ -8,6 +8,7 @@ func _process(delta):
 		$"%Tool1".button.grab_focus()
 	elif Input.is_action_just_released("gui_tools") and GuiMain.game_paused:
 		GuiMain.game_paused = false
+		get_tree().set_deferred("paused", false)
 		for child in container.get_children():
 			if child.is_in_group("tool_button"):
 				if child.get_node("Button").has_focus():

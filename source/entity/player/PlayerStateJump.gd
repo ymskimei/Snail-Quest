@@ -11,12 +11,28 @@ func enter() -> void:
 	jump_timer.connect("timeout", self, "on_timeout")
 	add_child(jump_timer)
 	jump_timer.start()
+	entity.animator.set_speed_scale(1)
+	entity.animator.play("PlayerJumpDefault")
+
+func input(_event: InputEvent) -> int:
+	if Input.is_action_just_pressed("action_defense"):
+		if entity.input == Vector3.ZERO:
+			return State.HIDE
+		else:
+			return State.DODG
+	return State.NULL
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
+	MathHelper.slerp_look_at(entity, entity.transform.origin + Vector3(entity.velocity.x, 0, entity.velocity.z), 0.55)
+	apply_movement(delta, true, deg2rad(45))
+	apply_gravity(delta)
+	if dodge_roll():
+		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
+		return State.DODG
 	if Input.is_action_pressed("action_main") and can_jump:
 		entity.snap_vector = Vector3.ZERO
-		entity.velocity.y += entity.jump
+		entity.velocity.y += (entity.jump * 50) * delta / 2
 	else:
 		return State.FALL
 	if entity.velocity.y < 0:

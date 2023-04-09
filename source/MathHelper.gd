@@ -14,10 +14,9 @@ func safe_look_at(spatial : Spatial, target : Vector3) -> void:
 	if up != Vector3.ZERO:
 		spatial.look_at(target, up)
 
-func slerp_look_at(spatial : Spatial, target : Spatial, speed) -> void:
+func slerp_look_at(spatial : Spatial, target : Vector3, speed) -> void:
 		var global_pos = spatial.global_transform.origin
-		var target_pos = target.global_transform.origin
-		var dest_transform = spatial.global_transform.looking_at(Vector3(target_pos.x, target_pos.y, target_pos.z), Vector3.UP)
+		var dest_transform = spatial.global_transform.looking_at(Vector3(target.x, target.y, target.z), Vector3.UP)
 		var dest_rotation = Quat(spatial.global_transform.basis).slerp(Quat(dest_transform.basis), speed)
 		spatial.global_transform = Transform(Basis(dest_rotation), global_pos)
 
