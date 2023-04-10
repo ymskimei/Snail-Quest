@@ -289,7 +289,7 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 
 config/name="Snail Quest"
 config/description="A small snail on an adventure to save his homeland! "
-run/main_scene="res://assets/gui/gui_screen_title.tscn"
+run/main_scene="res://assets/Main.tscn"
 config/use_hidden_project_data_directory=false
 config/use_custom_user_dir=true
 boot_splash/image="res://assets/texture/gui/gui_splash.png"

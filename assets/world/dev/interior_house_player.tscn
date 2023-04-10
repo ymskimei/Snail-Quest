@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://source/RoomMaster.gd" type="Script" id=1]
+[ext_resource path="res://assets/model/interior_mushroom_stem.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/texture/materials/mushroom_floor.tres" type="Material" id=4]
+[ext_resource path="res://assets/texture/materials/mushroom_wall.tres" type="Material" id=5]
+[ext_resource path="res://assets/entity/enemy_parent.tscn" type="PackedScene" id=6]
+
+[sub_resource type="CylinderShape" id=9]
+
+[sub_resource type="PanoramaSky" id=8]
+
+[sub_resource type="Environment" id=10]
+background_mode = 1
+background_sky = SubResource( 8 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.05
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_color = Color( 0, 0, 0, 1 )
+fog_sun_color = Color( 1, 1, 1, 1 )
+fog_depth_begin = 0.0
+fog_depth_curve = 1.46409
+fog_height_enabled = true
+fog_height_min = 1.0
+fog_height_max = 500.0
+fog_height_curve = 0.25
+tonemap_white = 0.0
+ssao_radius = 0.1
+ssao_intensity = 0.0
+ssao_radius2 = 30.07
+glow_bicubic_upscale = true
+glow_high_quality = true
+
+[node name="Room" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="EnemyParent" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 4, 0, 9 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="Cylinder" type="MeshInstance" parent="StaticBody"]
+transform = Transform( 8, 0, 0, 0, 2, 0, 0, 0, 8, 0, 2.5, 0 )
+mesh = ExtResource( 3 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 5 )
+material/1 = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 8, 0, 0, 0, 0.5, 0, 0, 0, 8, 0, 0, 0 )
+shape = SubResource( 9 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 10 )
+
+[node name="OmniLight" type="OmniLight" parent="WorldEnvironment"]
+transform = Transform( 0.965926, 3.394e-08, 0.258819, -0.258819, 1.26666e-07, 0.965926, 0, -1, 1.31134e-07, 0, 5, 0 )
+light_specular = 16.0
+shadow_bias = 0.673
+omni_range = 15.0

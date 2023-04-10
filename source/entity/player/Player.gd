@@ -33,10 +33,10 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
-	if target == null:
-		target = MathHelper.find_target(self, "target")
-	else:
-		target_check()
+#	if target == null:
+#		target = MathHelper.find_target(self, "target")
+#	else:
+#		target_check()
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
