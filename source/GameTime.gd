@@ -10,6 +10,7 @@ func _ready():
 	second_timer.connect("timeout", self, "on_unpaused_second")
 	add_child(second_timer)
 	second_timer.start()
+	GlobalManager.register_game_time(self)
 
 func time_converted(hour24):
 	var hour = int(game_time / 60)
@@ -35,4 +36,7 @@ func get_raw_time():
 
 func get_time(hour24):
 	var time = time_converted(hour24)
-	return "%02d:%02d" % [time[0], time[1]] + time[2] 
+	return "%02d:%02d" % [time[0], time[1]] + time[2]
+
+func set_time(new_time):
+	game_time = new_time

@@ -1,26 +1,15 @@
 extends Node
 
-const pause_screens = [
-	"res://assets/gui/gui_screen_title.tscn"
-]
-
 var played_time = 0
 var time_start
-var previous_time:int = 0
+var previous_time : int = 0
 
 func _ready():
-	pause_mode = Node.PAUSE_MODE_PROCESS
 	reset_start()
+	GlobalManager.register_play_time(self)
 
 func _process(_delta):
-	if !is_current_screen_pausing():
-		calculate_play_time()
-	else:
-		previous_time = played_time
-		reset_start()
-
-func is_current_screen_pausing(): 
-	return pause_screens.has(get_tree().get_current_scene().filename);
+	calculate_play_time()
 
 func reset_start():
 	time_start = Time.get_ticks_msec()

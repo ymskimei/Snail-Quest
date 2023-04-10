@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/entity/camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/entity/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://source/GameMaster.gd" type="Script" id=3]
+[ext_resource path="res://source/World.gd" type="Script" id=3]
+[ext_resource path="res://source/GameTime.gd" type="Script" id=4]
+[ext_resource path="res://source/PlayTime.gd" type="Script" id=5]
 
 [node name="GameMaster" type="Node"]
 script = ExtResource( 3 )
@@ -13,3 +15,10 @@ script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.523556, 3 )
+
+[node name="GameTime" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="PlayTime" type="Node" parent="."]
+pause_mode = 2
+script = ExtResource( 5 )

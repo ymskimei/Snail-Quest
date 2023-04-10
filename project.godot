@@ -184,6 +184,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/resources_speadsheet_view/typed_editors/dock_base.gd"
 }, {
+"base": "Node",
+"class": "SnailQuest",
+"language": "GDScript",
+"path": "res://source/SnailQuest.gd"
+}, {
 "base": "Reference",
 "class": "SpreadsheetEditFormat",
 "language": "GDScript",
@@ -265,6 +270,7 @@ _global_script_class_icons={
 "ResourceSign": "",
 "SettingsGrid": "",
 "SheetsDockEditor": "",
+"SnailQuest": "",
 "SpreadsheetEditFormat": "",
 "SpreadsheetEditFormatCsv": "",
 "SpreadsheetEditFormatTres": "",
@@ -289,7 +295,7 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 
 config/name="Snail Quest"
 config/description="A small snail on an adventure to save his homeland! "
-run/main_scene="res://assets/Main.tscn"
+run/main_scene="res://assets/snail_quest.tscn"
 config/use_hidden_project_data_directory=false
 config/use_custom_user_dir=true
 boot_splash/image="res://assets/texture/gui/gui_splash.png"
@@ -300,8 +306,6 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameTime="*res://source/GameTime.gd"
-PlayTime="*res://source/PlayTime.gd"
 SaveData="*res://source/SaveData.gd"
 AudioPlayer="*res://assets/object/audio_player.tscn"
 Library="*res://addons/everything_library/src/autoload.gd"

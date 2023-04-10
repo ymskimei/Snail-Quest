@@ -11,6 +11,7 @@ func _ready():
 	print(room_current)
 	room_current.connect("goto_room", self, "_on_Goto_Room")
 	room_current.connect("goto_main", self, "_on_Goto_Main")
+	GlobalManager.game_time.set_time(480) #temporary time set
 
 func _on_Goto_Room(room : PackedScene):
 	get_tree().set_deferred("paused", true)

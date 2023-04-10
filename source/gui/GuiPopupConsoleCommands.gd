@@ -20,7 +20,7 @@ func on_command_clear(_console, _args):
 	command_console.clear_console()
 
 func on_command_debug(_console, _args):
-	GuiMain.debug.display_debug_information()
+	GuiMain.debug.show_debug_information()
 
 func on_command_help(_console, _args):
 	var message = "[color=#7F7F7F]————[/color] [color=#A8A8A8]?[/color] Help [color=#A8A8A8]?[/color] [color=#7F7F7F]————[/color]\n"
@@ -35,15 +35,20 @@ func on_command_quit(_console, _args):
 	get_tree().quit()
 
 func on_command_restart(_console, _args):
-	var restart = get_tree().change_scene("res://assets/gui/gui_screen_title.tscn")
-	if restart != 0:
-		command_console.send_message("[color=#EA6A59]Title screen is missing[/color]\n")
+#	var restart = get_tree().change_scene("res://assets/gui/gui_screen_title.tscn")
+#	if restart != 0:
+#		command_console.send_message("[color=#EA6A59]Title screen is missing[/color]\n")
+	get_tree().reload_current_scene()
+
+func on_command_time(_console, args):
+	GlobalManager.game_time.set_time(args[0])
+	command_console.send_message("The world's time has been set to [color=#C3EF5D]%s[/color]\n" % args[0])
 
 func on_command_say(_console, args):
 	command_console.send_message(args[0])
 
 func on_command_version(_console, _args):
-	command_console.send_message("Snail Quest is on version [color=#C3EF5D]%s[/color]\n" % GuiMain.debug.version_number)
+	command_console.send_message("Snail Quest is on version [color=#C3EF5D]%s[/color]\n" % GlobalManager.version_number)
 
 #immortal - enable/disable invincibility
 #sethealth - add or remove health to an entity

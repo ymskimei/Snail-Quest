@@ -62,7 +62,7 @@ bbcode_text = "00"
 tab_size = 5
 text = "00"
 
-[node name="DisplayWorldTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+[node name="DisplayGameTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
 unique_name_in_owner = true
 margin_top = 110.0
 margin_right = 626.0

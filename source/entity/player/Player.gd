@@ -31,8 +31,6 @@ func _ready():
 	states.ready(self)
 	can_move = true
 	set_interaction_text("")
-
-func _process(delta : float) -> void:
 	GlobalManager.register_player(self)
 
 func _physics_process(delta : float) -> void:
