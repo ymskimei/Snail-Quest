@@ -27,7 +27,7 @@ margin_bottom = 1040.0
 alignment = 1
 
 [node name="ConsoleContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-margin_right = 1880.0
+margin_right = 1250.0
 margin_bottom = 1040.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -36,12 +36,11 @@ size_flags_stretch_ratio = 2.0
 [node name="GuiConsole" parent="MarginContainer/HBoxContainer/ConsoleContainer" instance=ExtResource( 3 )]
 unique_name_in_owner = true
 visible = false
-margin_right = 1880.0
+margin_right = 1250.0
 margin_bottom = 1040.0
 
 [node name="DebugInformation" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-visible = false
 margin_left = 1254.0
 margin_right = 1880.0
 margin_bottom = 1040.0
@@ -52,7 +51,7 @@ alignment = 2
 [node name="DisplayFramerate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
 unique_name_in_owner = true
 margin_right = 626.0
-margin_bottom = 119.0
+margin_bottom = 106.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -63,11 +62,11 @@ bbcode_text = "00"
 tab_size = 5
 text = "00"
 
-[node name="DisplayWorldClock" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+[node name="DisplayWorldTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
 unique_name_in_owner = true
-margin_top = 123.0
+margin_top = 110.0
 margin_right = 626.0
-margin_bottom = 242.0
+margin_bottom = 216.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -79,7 +78,22 @@ text = "00:00:00"
 
 [node name="DisplayPlayTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
 unique_name_in_owner = true
-margin_top = 246.0
+margin_top = 220.0
+margin_right = 626.0
+margin_bottom = 327.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "00"
+tab_size = 5
+text = "00"
+
+[node name="DisplayCoordinate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+unique_name_in_owner = true
+margin_top = 331.0
 margin_right = 626.0
 margin_bottom = 1040.0
 rect_clip_content = false
@@ -87,6 +101,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
-bbcode_text = "00:00:00"
+bbcode_text = "0, 0, 0"
 tab_size = 5
-text = "00:00:00"
+text = "0, 0, 0"

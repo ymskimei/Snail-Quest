@@ -307,6 +307,7 @@ AudioPlayer="*res://assets/object/audio_player.tscn"
 Library="*res://addons/everything_library/src/autoload.gd"
 GuiMain="*res://assets/gui/gui_main.tscn"
 MathHelper="*res://source/MathHelper.gd"
+GlobalManager="*res://source/GlobalManager.gd"
 
 [display]
 

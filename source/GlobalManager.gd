@@ -1,6 +1,6 @@
 extends Node
 
+var player : Spatial
 
-
-func _ready():
-	pass
+func register_player(p):
+	player = p
