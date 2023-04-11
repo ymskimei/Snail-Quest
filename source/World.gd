@@ -13,6 +13,8 @@ func _ready():
 
 func _on_goto_room(room : PackedScene, coords : Vector3, dir : String):
 	get_tree().set_deferred("paused", true)
+	$GuiTransition/AnimationPlayer.play("GuiTransitionFade")
+	yield($GuiTransition/AnimationPlayer, "animation_finished")
 	var room_new = room.instance()
 	$Rooms.add_child(room_new)
 	room_current.queue_free()
@@ -20,6 +22,7 @@ func _on_goto_room(room : PackedScene, coords : Vector3, dir : String):
 	check_for_transitions(room_current)
 	GlobalManager.player.set_coords(coords, dir)
 	GlobalManager.camera.set_coords(coords, dir, true)
+	$GuiTransition/AnimationPlayer.play_backwards("GuiTransitionFade")
 	get_tree().set_deferred("paused", false)
 
 func _on_goto_main():
