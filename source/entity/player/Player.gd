@@ -13,6 +13,7 @@ onready var jump_check = $"%CheckerFloor"
 
 signal health_changed
 signal player_killed
+signal player_data(position)
 
 var snap_vector = Vector3.ZERO
 
@@ -30,13 +31,14 @@ func _ready():
 	states.ready(self)
 	can_move = true
 	set_interaction_text("")
+	GlobalManager.register_player(self)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta : float) -> void:
 	states.physics_process(delta)
-	if target == null:
-		target = MathHelper.find_target(self, "target")
-	else:
-		target_check()
+#	if target == null:
+#		target = MathHelper.find_target(self, "target")
+#	else:
+#		target_check()
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
@@ -90,3 +92,5 @@ func set_interaction_text(text):
 		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
 		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
 		interaction_label.set_visible(true)
+
+

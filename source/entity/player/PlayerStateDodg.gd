@@ -9,7 +9,7 @@ func enter() -> void:
 	entity.animator.set_speed_scale(1)
 	entity.animator.play("PlayerTuckDefault")
 	yield(entity.animator, "animation_finished")
-	entity.speed *= 1.8
+	entity.speed *= 2
 	if entity.targeting:
 		if entity.input.x > 0:
 			entity.animator.play("PlayerRollLeft")

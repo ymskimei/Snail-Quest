@@ -165,6 +165,11 @@ _global_script_classes=[ {
 "path": "res://source/resource/ResourceItem.gd"
 }, {
 "base": "Resource",
+"class": "ResourceLocation",
+"language": "GDScript",
+"path": "res://source/resource/ResourceLocation.gd"
+}, {
+"base": "Resource",
 "class": "ResourceLootTable",
 "language": "GDScript",
 "path": "res://source/resource/ResourceLootTable.gd"
@@ -173,6 +178,11 @@ _global_script_classes=[ {
 "class": "ResourceSign",
 "language": "GDScript",
 "path": "res://source/resource/ResourceSign.gd"
+}, {
+"base": "Spatial",
+"class": "RoomTransition",
+"language": "GDScript",
+"path": "res://source/object/RoomTransition.gd"
 }, {
 "base": "GridContainer",
 "class": "SettingsGrid",
@@ -183,6 +193,11 @@ _global_script_classes=[ {
 "class": "SheetsDockEditor",
 "language": "GDScript",
 "path": "res://addons/resources_speadsheet_view/typed_editors/dock_base.gd"
+}, {
+"base": "Node",
+"class": "SnailQuest",
+"language": "GDScript",
+"path": "res://source/SnailQuest.gd"
 }, {
 "base": "Reference",
 "class": "SpreadsheetEditFormat",
@@ -261,10 +276,13 @@ _global_script_class_icons={
 "ResourceEntity": "",
 "ResourceEquipped": "",
 "ResourceItem": "",
+"ResourceLocation": "",
 "ResourceLootTable": "",
 "ResourceSign": "",
+"RoomTransition": "",
 "SettingsGrid": "",
 "SheetsDockEditor": "",
+"SnailQuest": "",
 "SpreadsheetEditFormat": "",
 "SpreadsheetEditFormatCsv": "",
 "SpreadsheetEditFormatTres": "",
@@ -289,7 +307,7 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 
 config/name="Snail Quest"
 config/description="A small snail on an adventure to save his homeland! "
-run/main_scene="res://assets/gui/gui_screen_title.tscn"
+run/main_scene="res://assets/snail_quest.tscn"
 config/use_hidden_project_data_directory=false
 config/use_custom_user_dir=true
 boot_splash/image="res://assets/texture/gui/gui_splash.png"
@@ -300,13 +318,12 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameTime="*res://source/GameTime.gd"
-PlayTime="*res://source/PlayTime.gd"
 SaveData="*res://source/SaveData.gd"
 AudioPlayer="*res://assets/object/audio_player.tscn"
 Library="*res://addons/everything_library/src/autoload.gd"
 GuiMain="*res://assets/gui/gui_main.tscn"
 MathHelper="*res://source/MathHelper.gd"
+GlobalManager="*res://source/GlobalManager.gd"
 
 [display]
 
@@ -548,4 +565,4 @@ quality/filters/msaa=4
 quality/filters/use_fxaa=true
 quality/filters/use_debanding=true
 quality/depth/hdr=false
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://resource/environment/environment_interior.tres"

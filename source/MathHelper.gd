@@ -34,3 +34,28 @@ func find_target(node : Object, group_name : String, get_closest := true) -> Obj
 			return_target = target_group[index]
 	return return_target
 
+#func degrees_to_cardinal(angle):
+#	var directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+#	var i = int(round(angle / (360 / len(directions))))
+#	return directions[i % 8]
+
+func cardinal_to_degrees(direction):
+	var result
+	match direction:
+		"NORTH":
+			result = 0
+		"NORTHEAST":
+			result = 45
+		"EAST":
+			result = 90
+		"SOUTHEAST":
+			result = 135
+		"SOUTH":
+			result = 180
+		"SOUTHWEST":
+			result = 225
+		"WEST":
+			result = 270
+		"NORTHWEST":
+			result = 315
+	return result

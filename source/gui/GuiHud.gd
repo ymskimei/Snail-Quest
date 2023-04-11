@@ -9,7 +9,7 @@ onready var item_slot_2 = $"%ItemSlot2"
 func _ready():
 	equipment.connect("items_updated", self, "on_items_updated")
 
-func _process(delta):
+func _process(_delta):
 	update_inventory_display()
 
 func update_item_slot_display(item_index):

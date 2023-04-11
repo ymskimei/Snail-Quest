@@ -23,3 +23,14 @@ func _ready():
 	speed = resource.speed
 	acceleration = resource.acceleration
 	jump = resource.jump
+
+func get_coords():
+	var x = round(global_transform.origin.x)
+	var y = round(global_transform.origin.y)
+	var z = round(global_transform.origin.z)
+	var coords = [x, y, z]
+	return coords
+
+func set_coords(position : Vector3, angle : String):
+	set_global_translation(position)
+	set_global_rotation(Vector3(0, deg2rad(MathHelper.cardinal_to_degrees(angle)), 0))

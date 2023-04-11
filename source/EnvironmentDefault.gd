@@ -24,29 +24,23 @@ export var dusk = 960
 export var night = 1080
 export var transition_speed = 60
 
-func _ready():
-	GameTime.game_time = 480 #temporary to start the game in day mode
-	start_environment()
-	start_orbit()
-	
 func _physics_process(_delta):
-	check_environment()
-	check_orbit()
+	if GlobalManager.game_time != null:
+		var time = GlobalManager.game_time.get_raw_time()
+		check_orbit(time)
+		check_environment(time)
 
-func start_environment():
-	var time = GameTime.get_raw_time()
-	if time in range(dawn, day):
-		set_environment(dawn_ambient_color, dawn_light_color, dawn_sky_color)
-	elif time in range(day, dusk):
-		set_environment(day_ambient_color, day_light_color, day_sky_color)
-	elif time in range(dusk, night):
-		set_environment(dusk_ambient_color, dusk_light_color, dusk_sky_color)
-	else:
-		set_environment(night_ambient_color, night_light_color, night_sky_color)
+func check_orbit(time):
+	var day_percentage = float(time) / full_cycle
+	$"%Orbital".rotation.x = (-180 * PI / 180) + (day_percentage * (2 * PI))
+	if time in range (360, 1080):
+		$Tween.interpolate_property($"%DirectionalLight", "rotation:x", $"%DirectionalLight".rotation.x, (-180 * PI / 180) + ((day_percentage / 2) * (2 * PI)), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Tween.start()
+	elif time >= night:
+		$Tween.interpolate_property($"%DirectionalLight", "rotation:x", $"%DirectionalLight".rotation.x, (-90 * PI / 180) + ((day_percentage / 2) * (2 * PI)), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Tween.start()
 
-func check_environment():
-	var time = GameTime.get_raw_time()
-	var day_percentage = float(GameTime.get_raw_time()) / full_cycle
+func check_environment(time):
 	if time in range(dawn, day):
 		change_environment(dawn_ambient_color, dawn_light_color, dawn_sky_color)
 	elif time in range(day, dusk):
@@ -56,11 +50,6 @@ func check_environment():
 	else:
 		change_environment(night_ambient_color, night_light_color, night_sky_color)
 
-func set_environment(start_ambient_color, start_light_color, start_sky_color):
-	$WorldEnvironment.environment.ambient_light_color = start_ambient_color
-	$"%DirectionalLight".light_color = start_light_color
-	$WorldEnvironment.environment.background_color = start_sky_color
-
 func change_environment(new_ambient_color, new_light_color, new_sky_color):
 	var ambient_color = $WorldEnvironment.environment.ambient_light_color
 	var light_color = $"%DirectionalLight".light_color
@@ -69,24 +58,3 @@ func change_environment(new_ambient_color, new_light_color, new_sky_color):
 	$Tween.interpolate_property($"%DirectionalLight", "light_color", light_color, new_light_color, transition_speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.interpolate_property($WorldEnvironment.environment, "background_color", sky_color, new_sky_color, transition_speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
-
-func start_orbit():
-	var time = GameTime.get_raw_time()
-	var day_percentage = float(GameTime.get_raw_time()) / full_cycle
-	if time in range (360, 1080):
-		$"%DirectionalLight".rotation.x = (-180 * PI / 180) + ((day_percentage / 2) * (2 * PI))
-	elif time >= night:
-		$"%DirectionalLight".rotation.x = (-90 * PI / 180) + ((day_percentage / 2) * (2 * PI))
-
-func check_orbit():
-	var time = GameTime.get_raw_time()
-	var day_percentage = float(GameTime.get_raw_time()) / full_cycle
-	#$Tween.interpolate_property($"%Orbital", "rotation:x", $"%Orbital".rotation.x, (-180 * PI / 180) + (day_percentage * (2 * PI)), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	#$Tween.start()
-	$"%Orbital".rotation.x = (-180 * PI / 180) + (day_percentage * (2 * PI))
-	if time in range (360, 1080):
-		$Tween.interpolate_property($"%DirectionalLight", "rotation:x", $"%DirectionalLight".rotation.x, (-180 * PI / 180) + ((day_percentage / 2) * (2 * PI)), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.start()
-	elif time >= night:
-		$Tween.interpolate_property($"%DirectionalLight", "rotation:x", $"%DirectionalLight".rotation.x, (-90 * PI / 180) + ((day_percentage / 2) * (2 * PI)), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.start()

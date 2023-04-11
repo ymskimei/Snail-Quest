@@ -1,6 +1,6 @@
 extends InventoryParent
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("gui_tools") and !GuiMain.game_paused:
 		GuiMain.game_paused = true
 		update_inventory_display()

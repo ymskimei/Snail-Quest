@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://resource/environment_default.tres" type="Environment" id=1]
+[ext_resource path="res://source/EnvironmentDefault.gd" type="Script" id=2]
+[ext_resource path="res://assets/texture/environment/sun.png" type="Texture" id=3]
+[ext_resource path="res://assets/texture/environment/moon.png" type="Texture" id=4]
+[ext_resource path="res://assets/model/environment_ring.mesh" type="ArrayMesh" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Dawn"
+
+[node name="EnvironmentDefault" type="Spatial"]
+script = ExtResource( 2 )
+dawn_light_color = Color( 0.85098, 0.92549, 0.65098, 1 )
+day_light_color = Color( 0.658824, 0.658824, 0.658824, 1 )
+dusk_sky_color = Color( 0.980392, 0.72549, 0.67451, 1 )
+night_sky_color = Color( 0.109804, 0.0823529, 0.2, 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 1 )
+
+[node name="Orbital" type="Spatial" parent="WorldEnvironment"]
+unique_name_in_owner = true
+
+[node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment/Orbital"]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0 )
+light_color = Color( 0.690196, 0.690196, 0.690196, 1 )
+light_energy = 0.6
+light_specular = 0.0
+light_bake_mode = 0
+shadow_color = Color( 0.290196, 0.34902, 0.737255, 1 )
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.015
+directional_shadow_normal_bias = 0.0
+directional_shadow_bias_split_scale = 0.0
+directional_shadow_max_distance = 8192.0
+
+[node name="Sun" type="Sprite3D" parent="WorldEnvironment/Orbital"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 64, 0 )
+pixel_size = 0.1
+texture = ExtResource( 3 )
+
+[node name="Moon" type="Sprite3D" parent="WorldEnvironment/Orbital"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -64, 0 )
+pixel_size = 0.1
+texture = ExtResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="WorldEnvironment"]
+transform = Transform( 25, 0, 0, 0, 150, 0, 0, 0, 25, 0, 50, 0 )
+visible = false
+mesh = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Dawn = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
