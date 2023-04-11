@@ -12,6 +12,8 @@ func enter() -> void:
 	entity.anim_wobble.play("Wobble")
 
 func physics_process(delta: float) -> int:
+	if entity.lock_to_point == true:
+		return State.LOCK
 	rotation.x = -Input.get_action_strength("cam_right") / 1.5 - -Input.get_action_strength("cam_left") / 1.5
 	rotation.y = Input.get_action_strength("cam_up") / 1.3 - Input.get_action_strength("cam_down") / 1.3
 	velocity = velocity.linear_interpolate(rotation * sensitivity / 3, delta * rotation_speed)

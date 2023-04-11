@@ -27,7 +27,7 @@ margin_bottom = 1040.0
 alignment = 1
 
 [node name="ConsoleContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-margin_right = 1250.0
+margin_right = 1880.0
 margin_bottom = 1040.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -36,11 +36,12 @@ size_flags_stretch_ratio = 2.0
 [node name="GuiConsole" parent="MarginContainer/HBoxContainer/ConsoleContainer" instance=ExtResource( 3 )]
 unique_name_in_owner = true
 visible = false
-margin_right = 1250.0
+margin_right = 1880.0
 margin_bottom = 1040.0
 
 [node name="DebugInformation" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 margin_left = 1254.0
 margin_right = 1880.0
 margin_bottom = 1040.0

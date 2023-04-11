@@ -36,6 +36,8 @@ func unhandled_input(event):
 		rotation = Vector2.ZERO
 
 func physics_process(delta):
+	if entity.lock_to_point == true:
+		return State.LOCK
 	rotation.x = Input.get_action_strength("cam_right") - Input.get_action_strength("cam_left")
 	if entity.player.can_move:
 		rotation.x += -Input.get_action_strength("ui_right") / 3 + Input.get_action_strength("ui_left") / 3

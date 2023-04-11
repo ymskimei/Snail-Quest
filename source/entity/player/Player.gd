@@ -25,7 +25,7 @@ var can_move : bool
 var can_interact : bool
 
 var interactable = null
-var target = null
+var target
 
 func _ready():
 	states.ready(self)
@@ -35,10 +35,10 @@ func _ready():
 
 func _physics_process(delta : float) -> void:
 	states.physics_process(delta)
-#	if target == null:
-#		target = MathHelper.find_target(self, "target")
-#	else:
-#		target_check()
+	if is_instance_valid(target):
+		target_check()
+	else:
+		target = MathHelper.find_target(self, "target")
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)

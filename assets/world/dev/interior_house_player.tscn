@@ -1,14 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://resource/environment/environment_interior.tres" type="Environment" id=1]
 [ext_resource path="res://assets/object/room_transition.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/model/interior_mushroom_stem.mesh" type="ArrayMesh" id=3]
-[ext_resource path="res://assets/texture/materials/mushroom_floor.tres" type="Material" id=4]
-[ext_resource path="res://assets/texture/materials/mushroom_wall.tres" type="Material" id=5]
+[ext_resource path="res://assets/object/mushroom_window.tscn" type="PackedScene" id=6]
 [ext_resource path="res://resource/location/exterior_house_player.tres" type="Resource" id=7]
+[ext_resource path="res://assets/object/beam.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CylinderShape" id=9]
 
 [sub_resource type="BoxShape" id=10]
+
+[sub_resource type="SphereMesh" id=11]
 
 [node name="Room" type="Spatial"]
 
@@ -18,11 +21,9 @@ collision_layer = 0
 collision_mask = 9
 
 [node name="Cylinder" type="MeshInstance" parent="StaticBody"]
-transform = Transform( 8, 0, 0, 0, 2, 0, 0, 0, 8, 0, 2.5, 0 )
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 3.7, 0 )
 mesh = ExtResource( 3 )
 skeleton = NodePath("../..")
-material/0 = ExtResource( 5 )
-material/1 = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 8, 0, 0, 0, 0.5, 0, 0, 0, 8, 0, 0, 0 )
@@ -78,12 +79,36 @@ shape = SubResource( 10 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 0.965926, 3.394e-08, 0.258819, -0.258819, 1.26666e-07, 0.965926, 0, -1, 1.31134e-07, 0, 5, 0 )
+light_color = Color( 0.933333, 0.909804, 0.854902, 1 )
 light_specular = 16.0
 shadow_bias = 0.673
-omni_range = 15.0
+omni_range = 10.0
+omni_attenuation = 0.392292
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="OmniLight"]
+environment = ExtResource( 1 )
 
 [node name="Transitions" type="Spatial" parent="."]
 
 [node name="Area" parent="Transitions" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, -7 )
 resource = ExtResource( 7 )
+
+[node name="MushroomWindow" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -4.125, 2, -7.125 )
+
+[node name="MeshInstance2" parent="MushroomWindow" instance=ExtResource( 8 )]
+transform = Transform( 0.997269, 0.0508971, 0.0693294, -0.0610736, 1.624, 0.580452, -0.0415238, -1.1662, 0.811337, -0.07, -1.279, 0.836 )
+skeleton = NodePath("")
+
+[node name="MushroomWindow2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 4.125, 2, -7.125 )
+
+[node name="MeshInstance3" parent="MushroomWindow2" instance=ExtResource( 8 )]
+transform = Transform( 0.997269, 0.0508974, 0.0693291, -0.0610736, 1.624, 0.580452, -0.0415237, -1.1662, 0.811337, -0.0364661, -1.279, 0.897466 )
+skeleton = NodePath("")
+
+[node name="CameraLock" type="MeshInstance" parent="." groups=["camera"]]
+transform = Transform( 1, 0, 0, 0, 0.979049, 0.203625, 0, -0.203625, 0.979049, 0, 2.67748, 7 )
+visible = false
+mesh = SubResource( 11 )

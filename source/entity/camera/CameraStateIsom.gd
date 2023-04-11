@@ -33,7 +33,9 @@ func enter() -> void:
 	rotation_timer_left.connect("timeout", self, "on_timeout_left")
 	add_child(rotation_timer_left)
 
-func physics_process(delta):
+func physics_process(delta: float) -> int:
+	if entity.lock_to_point == true:
+		return State.LOCK
 	entity.translation = lerp(entity.translation, entity.player.translation + offset, follow_speed * delta)
 	if Input.is_action_just_pressed("cam_right"):
 		tween_isometric(45)

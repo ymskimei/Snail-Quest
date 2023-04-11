@@ -6,6 +6,7 @@ var rotation: Vector2
 var velocity: Vector2
 var controller : bool
 var zoomed_out : bool
+var lock_target
 
 export var sensitivity = 10
 
@@ -14,7 +15,8 @@ enum State {
 	ORBI,
 	TARG,
 	ISOM,
-	LOOK
+	LOOK,
+	LOCK
 }
 
 func enter() -> void:

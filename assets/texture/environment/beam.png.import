@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://import/wood_test.png-1345e195d7d6ee77f853c98a2b4474df.s3tc.stex"
-path.etc="res://import/wood_test.png-1345e195d7d6ee77f853c98a2b4474df.etc.stex"
+path.s3tc="res://import/beam.png-a3f7969c1b9fa9e2dee75287e06f457c.s3tc.stex"
+path.etc="res://import/beam.png-a3f7969c1b9fa9e2dee75287e06f457c.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/texture/tile/wood_test.png"
-dest_files=[ "res://import/wood_test.png-1345e195d7d6ee77f853c98a2b4474df.s3tc.stex", "res://import/wood_test.png-1345e195d7d6ee77f853c98a2b4474df.etc.stex" ]
+source_file="res://assets/texture/environment/beam.png"
+dest_files=[ "res://import/beam.png-a3f7969c1b9fa9e2dee75287e06f457c.s3tc.stex", "res://import/beam.png-a3f7969c1b9fa9e2dee75287e06f457c.etc.stex" ]
 
 [params]
 

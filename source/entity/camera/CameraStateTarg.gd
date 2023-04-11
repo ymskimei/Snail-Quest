@@ -14,6 +14,8 @@ func enter() -> void:
 	tween_cam_zoom()
 
 func physics_process(delta):
+	if entity.lock_to_point == true:
+		return State.LOCK
 	MathHelper.slerp_look_at(entity, entity.player.target.global_transform.origin, targeting_speed)
 	entity.rotation.x = lerp(entity.rotation.x, targeting_rotation, follow_speed * delta)
 	entity.translation = lerp(entity.translation, entity.player.translation + targeting_offset, 5 * delta)

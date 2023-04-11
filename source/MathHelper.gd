@@ -20,19 +20,20 @@ func slerp_look_at(spatial : Spatial, target : Vector3, speed) -> void:
 		var dest_rotation = Quat(spatial.global_transform.basis).slerp(Quat(dest_transform.basis), speed)
 		spatial.global_transform = Transform(Basis(dest_rotation), global_pos)
 
-func find_target(node : Object, group_name : String, get_closest := true) -> Object:
-	var target_group = get_tree().get_nodes_in_group("target")
-	var distance_away = node.global_transform.origin.distance_to(target_group[0].global_transform.origin)
-	var return_target = target_group[0]
-	for index in target_group.size():
-		var distance = node.global_transform.origin.distance_to(target_group[index].global_transform.origin)
-		if get_closest == true and distance < distance_away:
-			distance_away = distance
-			return_target = target_group[index]
-		elif get_closest == false and distance > distance_away:
-			distance_away = distance
-			return_target = target_group[index]
-	return return_target
+func find_target(node : Object, group_name : String, get_closest := true):
+	var target_group = get_tree().get_nodes_in_group(group_name)
+	if !target_group.empty():
+		var distance_away = node.global_transform.origin.distance_to(target_group[0].global_transform.origin)
+		var return_target = target_group[0]
+		for index in target_group.size():
+			var distance = node.global_transform.origin.distance_to(target_group[index].global_transform.origin)
+			if get_closest == true and distance < distance_away:
+				distance_away = distance
+				return_target = target_group[index]
+			elif get_closest == false and distance > distance_away:
+				distance_away = distance
+				return_target = target_group[index]
+		return return_target
 
 #func degrees_to_cardinal(angle):
 #	var directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
