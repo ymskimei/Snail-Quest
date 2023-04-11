@@ -41,7 +41,6 @@ func check_orbit(time):
 		$Tween.start()
 
 func check_environment(time):
-	var day_percentage = float(time) / full_cycle
 	if time in range(dawn, day):
 		change_environment(dawn_ambient_color, dawn_light_color, dawn_sky_color)
 	elif time in range(day, dusk):

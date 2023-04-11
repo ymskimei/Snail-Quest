@@ -165,6 +165,11 @@ _global_script_classes=[ {
 "path": "res://source/resource/ResourceItem.gd"
 }, {
 "base": "Resource",
+"class": "ResourceLocation",
+"language": "GDScript",
+"path": "res://source/resource/ResourceLocation.gd"
+}, {
+"base": "Resource",
 "class": "ResourceLootTable",
 "language": "GDScript",
 "path": "res://source/resource/ResourceLootTable.gd"
@@ -173,6 +178,11 @@ _global_script_classes=[ {
 "class": "ResourceSign",
 "language": "GDScript",
 "path": "res://source/resource/ResourceSign.gd"
+}, {
+"base": "Spatial",
+"class": "RoomTransition",
+"language": "GDScript",
+"path": "res://source/object/RoomTransition.gd"
 }, {
 "base": "GridContainer",
 "class": "SettingsGrid",
@@ -266,8 +276,10 @@ _global_script_class_icons={
 "ResourceEntity": "",
 "ResourceEquipped": "",
 "ResourceItem": "",
+"ResourceLocation": "",
 "ResourceLootTable": "",
 "ResourceSign": "",
+"RoomTransition": "",
 "SettingsGrid": "",
 "SheetsDockEditor": "",
 "SnailQuest": "",

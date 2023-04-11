@@ -93,9 +93,4 @@ func set_interaction_text(text):
 		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
 		interaction_label.set_visible(true)
 
-func get_rounded_coords():
-	var x = round(global_transform.origin.x)
-	var y = round(global_transform.origin.y)
-	var z = round(global_transform.origin.z)
-	var coords = [x, y, z]
-	return coords
+

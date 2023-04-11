@@ -15,7 +15,7 @@ func _on_Area_body_entered(body):
 		queue_free()
 
 func drop_item(amount):
-	for i in range(amount):
+	for _i in range(amount):
 		var drop = item.instance()
 		drop.item = loot_table.select_item()
 		drop.transform.origin = self.transform.origin

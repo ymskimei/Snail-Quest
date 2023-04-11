@@ -1,6 +1,6 @@
 extends MarginContainer
 
-func _process(delta):
+func _process(_delta):
 	rotate_hands()
 
 func rotate_hands():

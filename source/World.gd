@@ -8,21 +8,26 @@ var room_current : Spatial
 func _ready():
 	room_current = room_first
 	$Rooms.add_child(room_current)
-	print(room_current)
-	room_current.connect("goto_room", self, "_on_Goto_Room")
-	room_current.connect("goto_main", self, "_on_Goto_Main")
+	check_for_transitions(room_current)
 	GlobalManager.game_time.set_time(480) #temporary time set
 
-func _on_Goto_Room(room : PackedScene):
+func _on_goto_room(room : PackedScene, coords : Vector3, dir : String):
 	get_tree().set_deferred("paused", true)
 	var room_new = room.instance()
 	$Rooms.add_child(room_new)
 	room_current.queue_free()
 	room_current = room_new
-	room_new.connect("goto_room", self, "_on_goto_room")
-	room_new.connect("goto_main", self, "_on_goto_main")
+	check_for_transitions(room_current)
+	GlobalManager.player.set_coords(coords, dir)
+	GlobalManager.camera.set_coords(coords, dir, true)
 	get_tree().set_deferred("paused", false)
 
-func _on_Goto_Main():
+func _on_goto_main():
 	get_tree().set_deferred("paused", true)
 	emit_signal("game_end")
+
+func check_for_transitions(room):
+	for child in room.find_node("Transitions").get_children():
+		if child is RoomTransition:
+			child.connect("goto_room", self, "_on_goto_room")
+			child.connect("goto_main", self, "_on_goto_main")
