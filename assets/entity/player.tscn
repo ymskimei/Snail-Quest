@@ -318,3 +318,7 @@ anims/PlayerRollFront = ExtResource( 20 )
 anims/PlayerRollLeft = ExtResource( 16 )
 anims/PlayerRollRight = ExtResource( 17 )
 anims/PlayerTuckDefault = ExtResource( 19 )
+
+[node name="Spatial" type="Spatial" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Spatial"]

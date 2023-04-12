@@ -6,8 +6,8 @@ export var follow_speed = 4
 
 func enter() -> void:
 	print("Camera State: LOCKED")
-	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, 20, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, 17, 0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, 20, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, 17, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
 func physics_process(delta):

@@ -22,7 +22,7 @@ export var dawn = 360
 export var day = 480
 export var dusk = 960
 export var night = 1080
-export var transition_speed = 60
+export var transition_speed = 15
 
 func _physics_process(_delta):
 	if GlobalManager.game_time != null:

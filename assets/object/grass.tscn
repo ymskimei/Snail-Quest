@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/texture/environment/leaf.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/environment/stem.png" type="Texture" id=2]
+[ext_resource path="res://assets/model/grass.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/shader/swaying.shader" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.0
+shader_param/metallic = 0.0
+shader_param/roughness = 0.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/sway_speed = 1.0
+shader_param/sway_strength = 0.1
+shader_param/sway_phase_len = 8.0
+shader_param/texture_albedo = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 4 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = null
+shader_param/metallic = null
+shader_param/roughness = 0.0
+shader_param/point_size = null
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = null
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = null
+shader_param/sway_speed = 1.0
+shader_param/sway_strength = 0.1
+shader_param/sway_phase_len = 8.0
+shader_param/texture_albedo = ExtResource( 2 )
+
+[node name="Cylinder" type="MeshInstance"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+mesh = ExtResource( 3 )
+material/0 = SubResource( 2 )
+material/1 = SubResource( 4 )

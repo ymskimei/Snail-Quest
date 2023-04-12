@@ -24,16 +24,16 @@ unique_name_in_owner = true
 
 [node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment/Orbital"]
 unique_name_in_owner = true
-transform = Transform( 1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 66, 0 )
 light_color = Color( 0.690196, 0.690196, 0.690196, 1 )
 light_energy = 0.6
 light_specular = 0.0
 light_bake_mode = 0
 shadow_color = Color( 0.290196, 0.34902, 0.737255, 1 )
-directional_shadow_mode = 1
 directional_shadow_split_1 = 0.015
-directional_shadow_normal_bias = 0.0
+directional_shadow_normal_bias = 10.0
 directional_shadow_bias_split_scale = 0.0
+directional_shadow_depth_range = 1
 directional_shadow_max_distance = 8192.0
 
 [node name="Sun" type="Sprite3D" parent="WorldEnvironment/Orbital"]

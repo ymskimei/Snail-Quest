@@ -25,16 +25,6 @@ _global_script_classes=[ {
 "path": "res://source/entity/camera/CameraStateMain.gd"
 }, {
 "base": "Reference",
-"class": "CellEditor",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/typed_cells/cell_editor.gd"
-}, {
-"base": "CellEditor",
-"class": "CellEditorArray",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/typed_cells/cell_editor_array.gd"
-}, {
-"base": "Reference",
 "class": "DTS",
 "language": "GDScript",
 "path": "res://addons/dialogic/Localization/translation_service.gd"
@@ -98,11 +88,6 @@ _global_script_classes=[ {
 "class": "EntityParent",
 "language": "GDScript",
 "path": "res://source/entity/EntityParent.gd"
-}, {
-"base": "Resource",
-"class": "EverythingLibraryImport",
-"language": "GDScript",
-"path": "res://addons/everything_library/src/import_data.gd"
 }, {
 "base": "Node",
 "class": "GuiConsoleCategory",
@@ -189,72 +174,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/object/RoomTransition.gd"
 }, {
-"base": "GridContainer",
-"class": "SettingsGrid",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/settings_grid.gd"
-}, {
-"base": "Control",
-"class": "SheetsDockEditor",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/typed_editors/dock_base.gd"
-}, {
 "base": "Node",
 "class": "SnailQuest",
 "language": "GDScript",
 "path": "res://source/SnailQuest.gd"
-}, {
-"base": "Reference",
-"class": "SpreadsheetEditFormat",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/import_export/formats_edit/edit_base.gd"
-}, {
-"base": "SpreadsheetEditFormatTres",
-"class": "SpreadsheetEditFormatCsv",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/import_export/formats_edit/edit_csv.gd"
-}, {
-"base": "SpreadsheetEditFormat",
-"class": "SpreadsheetEditFormatTres",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/import_export/formats_edit/edit_tres.gd"
-}, {
-"base": "Reference",
-"class": "SpreadsheetExportFormatCsv",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/import_export/formats_export/export_csv.gd"
-}, {
-"base": "Resource",
-"class": "SpreadsheetImport",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/import_export/spreadsheet_import.gd"
-}, {
-"base": "Reference",
-"class": "SpreadsheetImportFormatCsv",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/import_export/formats_import/import_csv.gd"
-}, {
-"base": "Reference",
-"class": "TextEditingUtils",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/text_editing_utils.gd"
-}, {
-"base": "Button",
-"class": "ThemeIconButton",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/editor_icon_button.gd"
-}, {
-"base": "Control",
-"class": "ThemeStylebox",
-"language": "GDScript",
-"path": "res://addons/resources_speadsheet_view/editor_stylebox_overrider.gd"
 } ]
 _global_script_class_icons={
 "CameraStateIsom": "",
 "CameraStateLock": "",
 "CameraStateMain": "",
-"CellEditor": "",
-"CellEditorArray": "",
 "DTS": "",
 "Dialogic": "",
 "DialogicAnimaPropertiesHelper": "",
@@ -268,7 +196,6 @@ _global_script_class_icons={
 "EnemyParent": "",
 "EnemyStateMain": "",
 "EntityParent": "",
-"EverythingLibraryImport": "",
 "GuiConsoleCategory": "",
 "GuiConsoleCommand": "",
 "HistoryRow": "",
@@ -286,18 +213,7 @@ _global_script_class_icons={
 "ResourceLootTable": "",
 "ResourceSign": "",
 "RoomTransition": "",
-"SettingsGrid": "",
-"SheetsDockEditor": "",
-"SnailQuest": "",
-"SpreadsheetEditFormat": "",
-"SpreadsheetEditFormatCsv": "",
-"SpreadsheetEditFormatTres": "",
-"SpreadsheetExportFormatCsv": "",
-"SpreadsheetImport": "",
-"SpreadsheetImportFormatCsv": "",
-"TextEditingUtils": "",
-"ThemeIconButton": "",
-"ThemeStylebox": ""
+"SnailQuest": ""
 }
 
 [addons]
@@ -326,7 +242,6 @@ config/icon="res://icon.png"
 
 SaveData="*res://source/SaveData.gd"
 AudioPlayer="*res://assets/object/audio_player.tscn"
-Library="*res://addons/everything_library/src/autoload.gd"
 GuiMain="*res://assets/gui/gui_main.tscn"
 MathHelper="*res://source/MathHelper.gd"
 GlobalManager="*res://source/GlobalManager.gd"
@@ -349,7 +264,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/circular_container/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/everything_library/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/resources_speadsheet_view/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/circular_container/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/zylann.scatter/plugin.cfg" )
 
 [global]
 

@@ -3,6 +3,7 @@
 [ext_resource path="res://resource/environment/environment_interior.tres" type="Environment" id=1]
 [ext_resource path="res://assets/object/room_transition.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/model/interior_mushroom_stem.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/object/camera_lock_point.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/object/mushroom_window.tscn" type="PackedScene" id=6]
 [ext_resource path="res://resource/location/exterior_house_player.tres" type="Resource" id=7]
 [ext_resource path="res://assets/object/beam.tscn" type="PackedScene" id=8]
@@ -10,8 +11,6 @@
 [sub_resource type="CylinderShape" id=9]
 
 [sub_resource type="BoxShape" id=10]
-
-[sub_resource type="SphereMesh" id=11]
 
 [node name="Room" type="Spatial"]
 
@@ -108,7 +107,4 @@ transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 4.125, 2, -
 transform = Transform( 0.997269, 0.0508974, 0.0693291, -0.0610736, 1.624, 0.580452, -0.0415237, -1.1662, 0.811337, -0.0364661, -1.279, 0.897466 )
 skeleton = NodePath("")
 
-[node name="CameraLock" type="MeshInstance" parent="." groups=["camera"]]
-transform = Transform( 1, 0, 0, 0, 0.979049, 0.203625, 0, -0.203625, 0.979049, 0, 2.67748, 7 )
-visible = false
-mesh = SubResource( 11 )
+[node name="CameraLock" parent="." instance=ExtResource( 4 )]
