@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource( 1 )
 room_path = "res://assets/world/dev/snaily_town.tscn"
-coordinates = Vector3( -39, 1, 93 )
+coordinates = Vector3( 0, 1, 0 )
 direction = "SOUTHWEST"

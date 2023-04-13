@@ -32,8 +32,6 @@ func physics_process(delta: float) -> int:
 	if entity.is_on_floor():
 		shell_jumped = false
 	return State.NULL
-	
-	
 
 func align_to_surface(tform, new_up):
 	tform.basis.y = new_up

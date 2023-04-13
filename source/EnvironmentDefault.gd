@@ -32,7 +32,8 @@ func _physics_process(_delta):
 
 func check_orbit(time):
 	var day_percentage = float(time) / full_cycle
-	$"%Orbital".rotation.x = (-180 * PI / 180) + (day_percentage * (2 * PI))
+	$"%Orbital".global_translation = GlobalManager.camera.global_translation
+	$"%Orbital".rotation.x = lerp_angle($"%Orbital".rotation.x, (-180 * PI / 180) + (day_percentage * (2 * PI)), 0.01)
 	if time in range (360, 1080):
 		$Tween.interpolate_property($"%DirectionalLight", "rotation:x", $"%DirectionalLight".rotation.x, (-180 * PI / 180) + ((day_percentage / 2) * (2 * PI)), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()

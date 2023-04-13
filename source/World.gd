@@ -6,6 +6,7 @@ var room_first = preload("res://assets/world/dev/test_room_2.tscn").instance()
 var room_current : Spatial
 
 func _ready():
+	$GuiTransition/AnimationPlayer.play_backwards("GuiTransitionFade")
 	room_current = room_first
 	$Rooms.add_child(room_current)
 	check_for_transitions(room_current)
