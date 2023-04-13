@@ -5,10 +5,11 @@
 // code and added an adapted version of Roystan's methods for multiple light sources and more.
 shader_type spatial;
 
-
-
 uniform vec4 albedo : hint_color = vec4(1.0);
 uniform sampler2D texture_albedo : hint_albedo;
+
+uniform float normal_scale : hint_range(-16,16);
+uniform sampler2D texture_normal : hint_normal;
 
 // Diffuse curve. This is, in my opinion, what defines a toon shader. A
 // photo-realistic shader should have a linear curve starting at 0 and
@@ -52,25 +53,20 @@ uniform sampler2D texture_emission : hint_black_albedo;
 uniform vec2 uv_scale = vec2(1,1);
 uniform vec2 uv_offset = vec2(0,0);
 
-
-
 // Vertex function to deal with UV scale and offset, straight out of base code.
 void vertex() {
 	UV = UV * uv_scale.xy + uv_offset.xy;
 }
 
-
-
 void fragment() {
 	ALBEDO = albedo.rgb * texture(texture_albedo, UV).rgb;
+	NORMALMAP = texture(texture_normal, UV).rgb;
+	NORMALMAP_DEPTH = normal_scale;
 	ROUGHNESS = roughness * texture(texture_surface, UV).r;
 	METALLIC = metallic * texture(texture_surface, UV).g;
-	
 	// Emission, straight out of base code with additive mode.
 	EMISSION = (emission.rgb + texture(texture_emission, UV).rgb) * emission_energy;
 }
-
-
 
 const float PI = 3.14159265358979323846;
 
@@ -108,5 +104,3 @@ void light() {
 	float rim_intensity = smoothstep(rim_threshold - rim_smooth/2.0, rim_threshold + rim_smooth/2.0, rim_dot);
 	SPECULAR_LIGHT += LIGHT_COLOR * rim_value * rim_intensity * litness;
 }
-
-

@@ -245,6 +245,7 @@ AudioPlayer="*res://assets/object/audio_player.tscn"
 GuiMain="*res://assets/gui/gui_main.tscn"
 MathHelper="*res://source/MathHelper.gd"
 GlobalManager="*res://source/GlobalManager.gd"
+WorldSave="*res://source/WorldSave.gd"
 
 [display]
 

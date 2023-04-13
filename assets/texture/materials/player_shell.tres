@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/texture/player/player_shell.png" type="Texture" id=2]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.0645161, 0.0737327 )
+offsets = PoolRealArray( 0.052, 0.1 )
 colors = PoolColorArray( 0.208984, 0.208984, 0.208984, 1, 1, 1, 1, 1 )
 
 [sub_resource type="GradientTexture" id=2]
@@ -12,7 +12,8 @@ gradient = SubResource( 1 )
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/albedo = Color( 1, 0.94902, 0.85098, 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/normal_scale = -16.0
 shader_param/specular = 0.0
 shader_param/specular_amount = 0.0
 shader_param/specular_smoothness = 0.0
