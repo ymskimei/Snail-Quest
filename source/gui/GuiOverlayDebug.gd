@@ -6,6 +6,7 @@ onready var debug_information = $"%DebugInformation"
 onready var display_framerate = $"%DisplayFramerate"
 onready var display_game_time = $"%DisplayGameTime"
 onready var display_play_time = $"%DisplayPlayTime"
+onready var display_chunk_coords = $"%DisplayChunkCoords"
 onready var display_coordinate = $"%DisplayCoordinate"
 onready var command_console = $"%GuiConsole"
 
@@ -13,6 +14,7 @@ func _process(_delta):
 	set_display_framerate()
 	set_display_world_time()
 	set_display_play_time()
+	set_display_chunk_coords()
 	set_display_coordinates()
 	toggle_command_console()
 
@@ -38,6 +40,14 @@ func set_display_play_time():
 		display_play_time.set_bbcode("[color=#C3EF5D]%s" % play_time.get_time())
 	else:
 		display_play_time.set_bbcode("[color=#C3EF5D]??h, ??m, ??s")
+
+func set_display_chunk_coords():
+	if GlobalManager.chunk_coords != null:
+		var coords_x = GlobalManager.chunk_coords.x
+		var coords_z = GlobalManager.chunk_coords.z
+		display_chunk_coords.set_bbcode("[color=#C289FF]%s, [color=#62BC43]%s" % [coords_x, coords_z])
+	else:
+		display_chunk_coords.set_bbcode("?, ?")	
 
 func set_display_coordinates():
 	if is_instance_valid(GlobalManager.player):
