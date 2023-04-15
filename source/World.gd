@@ -46,24 +46,37 @@ func _process(_delta):
 func load_chunks():
 	var player_position = GlobalManager.player.global_translation
 	var current_chunk = _get_player_chunk(player_position)
-	
 	var render_bounds = (float(render_distance) * 2.0) + 1.0
-	var loaded_coord = []
+	var stored_chunks = []
+	
+	
 	for x in range(all_chunks.size()):
 		for z in range(all_chunks[x].size()):
 			var _x = (x + 1) - (round(render_bounds / 2.0)) + current_chunk.x
 			var _z = (z + 1) - (round(render_bounds / 2.0)) + current_chunk.z
 			var chunk_coords = Vector3(_x, 0, _z)
-			loaded_coord.append(chunk_coords)
 			var chunk = all_chunks[x][z]
 			if is_instance_valid(chunk):
 				var distance = player_position.distance_to(chunk.translation) / chunk_size
-				
-				#This works but since the chunks don't exist anymore, they can't return afterward \/
-#				if distance > render_distance and chunk.is_inside_tree():
-#					print(distance)
-#					chunk.queue_free()
-#					all_chunks[x][z] = null
+	
+				if distance > render_distance and chunk.is_inside_tree():
+					var ch_x = ceil(chunk.global_translation.x / 64) - GlobalManager.chunk_start.x;
+					var ch_z = ceil(chunk.global_translation.z / 64) - GlobalManager.chunk_start.z;
+					var chunk_position = Vector3(ch_x, 0, ch_z);
+					stored_chunks.append(chunk_position)
+					chunk.queue_free()
+					all_chunks[x][z] = null
+					print(stored_chunks)
+
+			#The bad didn't work lag
+#			for coord in stored_chunks:
+#				var pos_x = ceil(player_position.x / 64) - GlobalManager.chunk_start.x;
+#				var pos_z = ceil(player_position.z / 64) - GlobalManager.chunk_start.z;
+#				var player_pos = Vector3(pos_x, 0, pos_z)
+#				var dist = player_pos.distance_to(Vector3(coord[0], 0, coord[1]))
+#				if dist <= render_distance and !is_instance_valid(get_node(coord)):
+#					add_child(chunk)
+#					chunk.global_translation = Vector3(coord[0], 0, coord[1])
 
 				#This was a result of one of my tries to store the chunks to use for re-instancing \/
 #				if distance <= render_distance and !instance.is_inside_tree():
@@ -77,15 +90,11 @@ func load_chunks():
 #					all_chunks[x][z] = new_instance
 
 #I did this part last night and I think it probably works or something
-func _get_player_chunk(pos):
-	var chunk_pos = Vector3()
-	chunk_pos.x = int(pos.x / chunk_size)
-	chunk_pos.z = int(pos.z / chunk_size)
-	if pos.x < 0:
-		chunk_pos.x -= 1
-	if pos.z < 0:
-		chunk_pos.z -= 1
-	return chunk_pos
+func _get_player_chunk(player_pos):
+	var coords_x = ceil(player_pos.x / 64) - GlobalManager.chunk_start.x;
+	var coords_z = ceil(player_pos.z / 64) - GlobalManager.chunk_start.z;
+	var chunk_coords = Vector3(coords_x, 0, coords_z)
+	return chunk_coords
 
 #Self explanatory
 func get_chunk_rows(path : String) -> Array:
