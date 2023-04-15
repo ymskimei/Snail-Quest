@@ -6,7 +6,7 @@ var player : KinematicBody
 var camera : SpringArm
 var play_time : Node
 var game_time : Node
-var chunk_coords : Vector3
+var chunk_start : Vector3
 
 func register_camera(node):
 	camera = node
@@ -20,5 +20,5 @@ func register_play_time(node):
 func register_game_time(node):
 	game_time = node
 
-func register_chunk_coords(vec):
-	chunk_coords = vec
+func register_chunk_start(vec):
+	chunk_start = vec

@@ -31,6 +31,7 @@ func _ready():
 func register_chunks():
 	all_chunks = get_chunk_rows(world)
 	var grid_center = grid_size / 2
+	GlobalManager.register_chunk_start(Vector3(-grid_center.x, 0, -grid_center.y))
 	for x in range(-grid_center.x, grid_center.x):
 		for z in range(-grid_center.y, grid_center.y):
 			var scene_name = all_chunks[x + grid_size.x / 2][z + grid_size.y / 2]
@@ -59,10 +60,10 @@ func load_chunks():
 				var distance = player_position.distance_to(chunk.translation) / chunk_size
 				
 				#This works but since the chunks don't exist anymore, they can't return afterward \/
-				if distance > render_distance and chunk.is_inside_tree():
-					print(distance)
-					chunk.queue_free()
-					all_chunks[x][z] = null
+#				if distance > render_distance and chunk.is_inside_tree():
+#					print(distance)
+#					chunk.queue_free()
+#					all_chunks[x][z] = null
 
 				#This was a result of one of my tries to store the chunks to use for re-instancing \/
 #				if distance <= render_distance and !instance.is_inside_tree():
