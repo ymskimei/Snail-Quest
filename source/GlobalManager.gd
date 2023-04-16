@@ -7,6 +7,7 @@ var camera : SpringArm
 var play_time : Node
 var game_time : Node
 var chunk_start : Vector3
+var chunk_size = 64
 
 func register_camera(node):
 	camera = node

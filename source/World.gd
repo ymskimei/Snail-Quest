@@ -10,14 +10,13 @@ var room_current : Spatial
 var world = "res://assets/world/chunktest"
 
 #Temporary variables for testing
-export var grid_size = Vector2(4, 4)
-export var chunk_size = 64
-export var render_distance = 1
+export var render_radius = 1
 
 var player_pos : Vector3
 
-var all_chunks = [] #2D array of chunks for the grid
-var current_chunks = [] #All currently existing chunks
+var all_chunks: Dictionary = {} # Dictionary of all chunks { Vector2 : Chunk }
+var current_instances: Dictionary = {} # Dictionary of instances { Vector2 : Instance }
+var current_chunks = [] # All currently existing chunk  / Array[Vector3]
 
 func _ready():
 	$GuiTransition/AnimationPlayer.play_backwards("GuiTransitionFade")
@@ -29,71 +28,63 @@ func _ready():
 
 #The chunk stuff initiates here
 func register_chunks():
-	all_chunks = get_chunk_rows(world)
-	var grid_center = grid_size / 2
-	GlobalManager.register_chunk_start(Vector3(-grid_center.x, 0, -grid_center.y))
-	for x in range(-grid_center.x, grid_center.x):
-		for z in range(-grid_center.y, grid_center.y):
-			var scene_name = all_chunks[x + grid_size.x / 2][z + grid_size.y / 2]
-			var instance = scene_name
-			instance.translation = (Vector3(x, 0, z) * chunk_size) + Vector3(chunk_size, 0, chunk_size) / 2
-			add_child(instance)
-			current_chunks.append(instance)
+	# TODO: End up doing this in the get_chunks_row method
+	# wasn't sure if you wanted to continue the folder thing, so didn't refactor
+	var arr = get_chunk_rows(world)
+	for row in arr:
+		for chunk in row:
+			all_chunks[chunk.chunk_coord] = chunk
 
 func _process(_delta):
 	load_chunks()
+	pass
+
+# TODO: Eventually add in 2nd parameter to update data (like entities locations)
+func add_chunk(chunk: Chunk):
+	var instance = chunk.resource.instance()
+	instance.translation = chunk.real_pos()
+
+	current_instances[chunk.chunk_coord] = instance
+	add_child(instance)
+
+func difference(arr1, arr2):
+	var only_in_arr1 = []
+	for v in arr1:
+		if not (v in arr2):
+			only_in_arr1.append(v)
+	return only_in_arr1
 
 func load_chunks():
-	var player_position = GlobalManager.player.global_translation
-	var current_chunk = _get_player_chunk(player_position)
-	var render_bounds = (float(render_distance) * 2.0) + 1.0
-	var stored_chunks = []
-	
-	
-	for x in range(all_chunks.size()):
-		for z in range(all_chunks[x].size()):
-			var _x = (x + 1) - (round(render_bounds / 2.0)) + current_chunk.x
-			var _z = (z + 1) - (round(render_bounds / 2.0)) + current_chunk.z
-			var chunk_coords = Vector3(_x, 0, _z)
-			var chunk = all_chunks[x][z]
-			if is_instance_valid(chunk):
-				var distance = player_position.distance_to(chunk.translation) / chunk_size
-	
-				if distance > render_distance and chunk.is_inside_tree():
-					var ch_x = ceil(chunk.global_translation.x / 64) - GlobalManager.chunk_start.x;
-					var ch_z = ceil(chunk.global_translation.z / 64) - GlobalManager.chunk_start.z;
-					var chunk_position = Vector3(ch_x, 0, ch_z);
-					stored_chunks.append(chunk_position)
-					chunk.queue_free()
-					all_chunks[x][z] = null
-					print(stored_chunks)
+	var current_chunk = _get_player_chunk(GlobalManager.player.global_translation)
+	var new_current = []
 
-			#The bad didn't work lag
-#			for coord in stored_chunks:
-#				var pos_x = ceil(player_position.x / 64) - GlobalManager.chunk_start.x;
-#				var pos_z = ceil(player_position.z / 64) - GlobalManager.chunk_start.z;
-#				var player_pos = Vector3(pos_x, 0, pos_z)
-#				var dist = player_pos.distance_to(Vector3(coord[0], 0, coord[1]))
-#				if dist <= render_distance and !is_instance_valid(get_node(coord)):
-#					add_child(chunk)
-#					chunk.global_translation = Vector3(coord[0], 0, coord[1])
+	# This uses a square, which is bad for the future, it's also only 2D
+	for _x in range(render_radius*2+1):
+		for _z in range(render_radius*2+1):
+			var render_offset = render_radius + 1
+			var x = _x - render_offset + current_chunk.x
+			var z = _z - render_offset + current_chunk.y
+			new_current.append(Vector2(x,z))
+			
+	for pos in difference(current_chunks, new_current): # only in current / remove
+		if current_instances.has(pos):
+			var instance = current_instances[pos]
+			current_instances.erase(pos)
+			instance.queue_free()
 
-				#This was a result of one of my tries to store the chunks to use for re-instancing \/
-#				if distance <= render_distance and !instance.is_inside_tree():
-#					var new_instance = instance
-#					if new_instance == null:
-#						new_instance = instance
-#					new_instance.position = instance.position
-#					active_chunks.append(instance)
-#					active_coord.append(chunk_coords)
-#					add_child(new_instance)
-#					all_chunks[x][z] = new_instance
+	for pos in difference(new_current, current_chunks): # only in new / add
+		if all_chunks.has(pos):
+			var chunk = all_chunks[pos]
+			add_chunk(chunk)
+
+	current_chunks.clear()
+	current_chunks.append_array(new_current)
 
 #I did this part last night and I think it probably works or something
 func _get_player_chunk(player_pos):
-	var coords_x = ceil(player_pos.x / 64) - GlobalManager.chunk_start.x;
-	var coords_z = ceil(player_pos.z / 64) - GlobalManager.chunk_start.z;
-	var chunk_coords = Vector3(coords_x, 0, coords_z)
+	var coords_x = ceil(player_pos.x / GlobalManager.chunk_size)
+	var coords_z = ceil(player_pos.z / GlobalManager.chunk_size)
+	var chunk_coords = Vector2(coords_x, coords_z)
 	return chunk_coords
 
 #Self explanatory
@@ -114,7 +105,7 @@ func get_chunk_rows(path : String) -> Array:
 			while file_name != "":
 				var file_path = row_path + "/" + file_name
 				if !row.current_is_dir():
-					var segment = load(file_path).instance()
+					var segment = Chunk.new(Vector2(rows_array.size(), row_segments.size()), load(file_path))
 					row_segments.append(segment)
 				file_name = row.get_next()
 			rows_array.append(row_segments)
@@ -146,5 +137,4 @@ func check_for_transitions(room):
 			if child is RoomTransition:
 				child.connect("goto_room", self, "_on_goto_room")
 				child.connect("goto_main", self, "_on_goto_main")
-
 

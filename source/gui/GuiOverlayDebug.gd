@@ -43,11 +43,11 @@ func set_display_play_time():
 
 func set_display_chunk_coords():
 	if is_instance_valid(GlobalManager.player):
-		var coords_x = ceil(GlobalManager.player.global_translation.x / 64) - GlobalManager.chunk_start.x;
-		var coords_z = ceil(GlobalManager.player.global_translation.z / 64) - GlobalManager.chunk_start.z;
+		var coords_x = ceil(GlobalManager.player.global_translation.x / GlobalManager.chunk_size)
+		var coords_z = ceil(GlobalManager.player.global_translation.z / GlobalManager.chunk_size)
 		display_chunk_coords.set_bbcode("[color=#C289FF]%s, [color=#62BC43]%s" % [coords_x, coords_z])
 	else:
-		display_chunk_coords.set_bbcode("?, ?")	
+		display_chunk_coords.set_bbcode("?, ?")
 
 func set_display_coordinates():
 	if is_instance_valid(GlobalManager.player):
