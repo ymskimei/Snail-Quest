@@ -56,34 +56,34 @@ func difference(arr1, arr2):
 
 func load_chunks():
 	var current_chunk = _get_player_chunk(GlobalManager.player.global_translation)
-	var new_current = []
+	var new_current = {} # Being a dictionary means we don't have duplicates
 
-	# This uses a square, which is bad for the future, it's also only 2D
-	for _x in range(render_radius*2+1):
-		for _z in range(render_radius*2+1):
-			var render_offset = render_radius + 1
-			var x = _x - render_offset + current_chunk.x
-			var z = _z - render_offset + current_chunk.y
-			new_current.append(Vector2(x,z))
+	for x in range(render_radius):
+		for z in range(render_radius):
+			if pow(x,2) + pow(z,2) < pow(render_radius, 2):
+				new_current[Vector2(+x+current_chunk.x, +z+current_chunk.y)] = null
+				new_current[Vector2(+x+current_chunk.x, -z+current_chunk.y)] = null
+				new_current[Vector2(-x+current_chunk.x, +z+current_chunk.y)] = null
+				new_current[Vector2(-x+current_chunk.x, -z+current_chunk.y)] = null
 			
-	for pos in difference(current_chunks, new_current): # only in current / remove
+	for pos in difference(current_chunks, new_current.keys()): # only in current / remove
 		if current_instances.has(pos):
 			var instance = current_instances[pos]
 			current_instances.erase(pos)
 			instance.queue_free()
 
-	for pos in difference(new_current, current_chunks): # only in new / add
+	for pos in difference(new_current.keys(), current_chunks): # only in new / add
 		if all_chunks.has(pos):
 			var chunk = all_chunks[pos]
 			add_chunk(chunk)
 
 	current_chunks.clear()
-	current_chunks.append_array(new_current)
+	current_chunks.append_array(new_current.keys())
 
 #I did this part last night and I think it probably works or something
 func _get_player_chunk(player_pos):
-	var coords_x = ceil(player_pos.x / GlobalManager.chunk_size)
-	var coords_z = ceil(player_pos.z / GlobalManager.chunk_size)
+	var coords_x = floor(player_pos.x / GlobalManager.chunk_size)
+	var coords_z = floor(player_pos.z / GlobalManager.chunk_size)
 	var chunk_coords = Vector2(coords_x, coords_z)
 	return chunk_coords
 
@@ -105,7 +105,8 @@ func get_chunk_rows(path : String) -> Array:
 			while file_name != "":
 				var file_path = row_path + "/" + file_name
 				if !row.current_is_dir():
-					var segment = Chunk.new(Vector2(rows_array.size(), row_segments.size()), load(file_path))
+					# Must add 1 because folder structure starts with index 1 
+					var segment = Chunk.new(Vector2(rows_array.size()+1, row_segments.size()+1), load(file_path))
 					row_segments.append(segment)
 				file_name = row.get_next()
 			rows_array.append(row_segments)
