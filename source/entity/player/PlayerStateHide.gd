@@ -5,6 +5,7 @@ func enter() -> void:
 	entity.animator.set_speed_scale(1)
 	entity.animator.play("PlayerHideDefault")
 	entity.can_move = false
+	entity.in_shell = true
 
 func input(_event: InputEvent) -> int:
 	if Input.is_action_just_released("action_defense"):
@@ -29,3 +30,4 @@ func physics_process(delta: float) -> int:
 
 func exit() -> void:
 	entity.can_move = true
+	entity.in_shell = false

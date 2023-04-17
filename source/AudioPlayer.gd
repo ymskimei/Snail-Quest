@@ -17,6 +17,10 @@ var sfx_item_pickup_test = preload("res://assets/sound/sfx_item_pickup_test.ogg"
 var sfx_snail_shell_in = preload("res://assets/sound/sfx_snail_shell_in.ogg")
 var sfx_snail_shell_out = preload("res://assets/sound/sfx_snail_shell_out.ogg")
 
+var sfx_needle_swipe_0 = preload("res://assets/sound/sfx_needle_swipe_0.ogg")
+var sfx_needle_swipe_1 = preload("res://assets/sound/sfx_needle_swipe_1.ogg")
+var sfx_needle_swipe_2 = preload("res://assets/sound/sfx_needle_swipe_2.ogg")
+
 func play_sfx(sound):
 	var sfx = AudioStreamPlayer.new()
 	sfx.stream = sound

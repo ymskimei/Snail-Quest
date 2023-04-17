@@ -29,11 +29,13 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	entity.input = get_input_vector()
 	entity.direction = get_direction()
+	if Input.is_action_pressed("action_combat"):
+		entity.can_move = false
+	else:
+		entity.can_move = true
 	if entity.is_on_floor():
 		shell_jumped = false
 	return State.NULL
-	
-	
 
 func align_to_surface(tform, new_up):
 	tform.basis.y = new_up
@@ -46,8 +48,8 @@ func process(_delta: float) -> int:
 
 func get_input_vector():
 	if entity.can_move:
-		entity.input.x = Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
-		entity.input.z = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
+		entity.input.x = Input.get_action_strength("joy_left") - Input.get_action_strength("joy_right")
+		entity.input.z = Input.get_action_strength("joy_up") - Input.get_action_strength("joy_down")
 	else:
 		entity.input.x = 0
 		entity.input.z = 0
@@ -81,26 +83,27 @@ func apply_gravity(delta):
 	entity.velocity.y = clamp(entity.velocity.y, -entity.gravity, entity.jump)
 
 func dodge_roll():
-	if Input.is_action_just_pressed("ui_up"):
-		input_up += 1
-		double_click()
-		if input_up >= 2:
-			return true
-	if Input.is_action_just_pressed("ui_down"):
-		input_down += 1
-		double_click()
-		if input_down >= 2:
-			return true
-	if Input.is_action_just_pressed("ui_left"):
-		input_left += 1
-		double_click()
-		if input_left >= 2:
-			return true
-	if Input.is_action_just_pressed("ui_right"):
-		input_right += 1
-		double_click()
-		if input_right >= 2:
-			return true
+	if entity.can_move:
+		if Input.is_action_just_pressed("joy_up"):
+			input_up += 1
+			double_click()
+			if input_up >= 2:
+				return true
+		if Input.is_action_just_pressed("joy_down"):
+			input_down += 1
+			double_click()
+			if input_down >= 2:
+				return true
+		if Input.is_action_just_pressed("joy_left"):
+			input_left += 1
+			double_click()
+			if input_left >= 2:
+				return true
+		if Input.is_action_just_pressed("joy_right"):
+			input_right += 1
+			double_click()
+			if input_right >= 2:
+				return true
 
 func double_click():
 	var timer = Timer.new()

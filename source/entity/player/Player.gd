@@ -23,6 +23,7 @@ var collider
 var targeting : bool
 var can_move : bool
 var can_interact : bool
+var in_shell : bool
 
 var interactable = null
 var target = null
@@ -35,10 +36,14 @@ func _ready():
 
 func _physics_process(delta : float) -> void:
 	states.physics_process(delta)
-#	if target == null:
-#		target = MathHelper.find_target(self, "target")
-#	else:
-#		target_check()
+	if target == null:
+		target = MathHelper.find_target(self, "target")
+	else:
+		target_check()
+	if in_shell:
+		$"%ArmPoint".visible = false
+	else:
+		$"%ArmPoint".visible = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)

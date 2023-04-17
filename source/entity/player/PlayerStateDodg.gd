@@ -21,6 +21,7 @@ func enter() -> void:
 			entity.animator.play("PlayerRollBack")
 	else:
 		entity.animator.play("PlayerRollFront")
+	entity.in_shell = true
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
@@ -50,3 +51,4 @@ func dodge_timer():
 
 func on_dodge_timer():
 	dodge_complete = true
+	entity.in_shell = false
