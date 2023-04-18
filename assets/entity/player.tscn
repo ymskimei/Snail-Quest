@@ -23,9 +23,9 @@
 [ext_resource path="res://resource/animation/PlayerJumpDefault.tres" type="Animation" id=21]
 [ext_resource path="res://resource/animation/PlayerHideDefault.tres" type="Animation" id=22]
 [ext_resource path="res://resource/animation/PlayerFallDefault.tres" type="Animation" id=23]
-[ext_resource path="res://assets/item/Needle.tscn" type="PackedScene" id=24]
 [ext_resource path="res://resource/animation/PlayerRollBack.tres" type="Animation" id=25]
 [ext_resource path="res://assets/model/spool.mesh" type="ArrayMesh" id=26]
+[ext_resource path="res://resource/equipped_player.tres" type="Resource" id=27]
 
 [sub_resource type="Skin" id=3]
 resource_name = "Skin"
@@ -270,6 +270,7 @@ tracks/21/keys = {
 collision_mask = 13
 script = ExtResource( 2 )
 resource = ExtResource( 3 )
+equipped = ExtResource( 27 )
 
 [node name="StateController" parent="." instance=ExtResource( 7 )]
 
@@ -429,8 +430,6 @@ skeleton = NodePath("../../..")
 [node name="ArmPoint" type="Spatial" parent="PlayerAvatar/Skeleton"]
 unique_name_in_owner = true
 transform = Transform( 1, 0, -5.68434e-14, 0, 0.939694, -0.342021, 5.68434e-14, 0.342021, 0.939694, 0.55, 0.415, -1.26 )
-
-[node name="Needle" parent="PlayerAvatar/Skeleton/ArmPoint" instance=ExtResource( 24 )]
 
 [node name="PlayerCollision" type="CollisionShape" parent="."]
 transform = Transform( 0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0.44, 0.25 )

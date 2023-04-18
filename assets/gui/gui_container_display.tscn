@@ -4,7 +4,7 @@
 [ext_resource path="res://resource/animation/GuiItemStill.tres" type="Animation" id=2]
 [ext_resource path="res://resource/animation/GuiItemDisabled.tres" type="Animation" id=3]
 [ext_resource path="res://resource/animation/GuiItemBounce.tres" type="Animation" id=4]
-[ext_resource path="res://resource/gui_hud_equipped.tres" type="Resource" id=5]
+[ext_resource path="res://resource/equipped_player.tres" type="Resource" id=5]
 [ext_resource path="res://assets/gui/font/font_default.tres" type="DynamicFont" id=6]
 
 [sub_resource type="Animation" id=1]

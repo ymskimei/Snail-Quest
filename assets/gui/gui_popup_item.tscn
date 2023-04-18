@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/gui/gui_container_item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/gui/GuiPopupItem.gd" type="Script" id=2]
 [ext_resource path="res://resource/gui_item.tres" type="Resource" id=3]
-[ext_resource path="res://resource/gui_hud_equipped.tres" type="Resource" id=4]
+[ext_resource path="res://resource/equipped_player.tres" type="Resource" id=4]
 [ext_resource path="res://assets/texture/gui/gui_item_bag.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]

@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/texture/gui/gui_hud_equipment_background.png" type="Texture" id=4]
 [ext_resource path="res://assets/texture/gui/gui_hud_button_item_0.png" type="Texture" id=5]
 [ext_resource path="res://assets/texture/gui/gui_hud_button_item_1.png" type="Texture" id=6]
-[ext_resource path="res://resource/gui_hud_equipped.tres" type="Resource" id=7]
+[ext_resource path="res://resource/equipped_player.tres" type="Resource" id=7]
 [ext_resource path="res://assets/texture/gui/clock_temp.png" type="Texture" id=8]
 [ext_resource path="res://assets/texture/gui/clock_hand_temp.png" type="Texture" id=9]
 [ext_resource path="res://assets/texture/gui/clock_minute_hand_temp.png" type="Texture" id=11]
@@ -72,7 +72,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource( 6 )
 stretch_mode = 3
 
-[node name="ItemSlot1" parent="ContainerButtons/MarginButtons/MarginItem1/Button" instance=ExtResource( 1 )]
+[node name="ItemSlot1" parent="ContainerButtons/MarginButtons/MarginItem1/Button" groups=["hud_slot"] instance=ExtResource( 1 )]
 unique_name_in_owner = true
 margin_left = -64.0
 margin_top = -64.0
@@ -101,7 +101,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource( 5 )
 stretch_mode = 3
 
-[node name="ItemSlot2" parent="ContainerButtons/MarginButtons/MarginItem2/Button" instance=ExtResource( 1 )]
+[node name="ItemSlot2" parent="ContainerButtons/MarginButtons/MarginItem2/Button" groups=["hud_slot"] instance=ExtResource( 1 )]
 unique_name_in_owner = true
 margin_left = -64.0
 margin_top = -64.0
@@ -130,7 +130,7 @@ size_flags_vertical = 4
 texture_normal = ExtResource( 3 )
 stretch_mode = 3
 
-[node name="ToolSlot" parent="ContainerButtons/MarginButtons/MarginTool/Button" instance=ExtResource( 1 )]
+[node name="ToolSlot" parent="ContainerButtons/MarginButtons/MarginTool/Button" groups=["hud_slot"] instance=ExtResource( 1 )]
 unique_name_in_owner = true
 anchor_left = 0.0
 anchor_top = 0.0
@@ -174,7 +174,7 @@ margin_bottom = 384.0
 custom_constants/margin_top = 192
 custom_constants/margin_left = 256
 
-[node name="ToolDisplayRight" parent="MarginContainer/ToolRight" instance=ExtResource( 14 )]
+[node name="ToolDisplayRight" parent="MarginContainer/ToolRight" groups=["hud_slot"] instance=ExtResource( 14 )]
 unique_name_in_owner = true
 anchor_left = 0.0
 anchor_top = 0.0
@@ -189,7 +189,7 @@ margin_bottom = 192.0
 margin_right = 384.0
 margin_bottom = 384.0
 
-[node name="ToolDisplayBottom" parent="MarginContainer/ToolBottom" instance=ExtResource( 14 )]
+[node name="ToolDisplayBottom" parent="MarginContainer/ToolBottom" groups=["hud_slot"] instance=ExtResource( 14 )]
 unique_name_in_owner = true
 anchor_left = 0.0
 anchor_top = 0.0
@@ -206,7 +206,7 @@ margin_bottom = 384.0
 custom_constants/margin_top = 192
 custom_constants/margin_left = 128
 
-[node name="ToolDisplayLeft" parent="MarginContainer/ToolLeft" instance=ExtResource( 14 )]
+[node name="ToolDisplayLeft" parent="MarginContainer/ToolLeft" groups=["hud_slot"] instance=ExtResource( 14 )]
 unique_name_in_owner = true
 anchor_left = 0.0
 anchor_top = 0.0
@@ -223,7 +223,7 @@ margin_bottom = 384.0
 custom_constants/margin_top = 128
 custom_constants/margin_left = 192
 
-[node name="ToolDisplayTop" parent="MarginContainer/ToolTop" instance=ExtResource( 14 )]
+[node name="ToolDisplayTop" parent="MarginContainer/ToolTop" groups=["hud_slot"] instance=ExtResource( 14 )]
 unique_name_in_owner = true
 anchor_left = 0.0
 anchor_top = 0.0

@@ -8,6 +8,7 @@
 script = ExtResource( 3 )
 item_name = "Needle"
 description = "A sharp sewing needle."
+item_path = "res://assets/item/tool_needle.tscn"
 mesh = ExtResource( 1 )
 sprite = ExtResource( 2 )
 amount = 1

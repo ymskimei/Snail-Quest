@@ -1,12 +1,15 @@
 class_name Player
 extends EntityParent
 
+export(Resource) var equipped
+
 onready var player_cam = get_parent().get_node("Camera")
 onready var avatar = $PlayerAvatar
 onready var skeleton = $"%Skeleton"
 onready var states = $StateController
 onready var interaction_label = $Gui/InteractionLabel
 onready var animator = $Animation/AnimationPlayer
+onready var arm_point = $"%ArmPoint"
 
 onready var ray_down = $"%RayDown"
 onready var jump_check = $"%CheckerFloor"
@@ -24,6 +27,7 @@ var targeting : bool
 var can_move : bool
 var can_interact : bool
 var in_shell : bool
+var is_tool_equipped : bool
 
 var interactable = null
 var target = null
@@ -41,9 +45,9 @@ func _physics_process(delta : float) -> void:
 	else:
 		target_check()
 	if in_shell:
-		$"%ArmPoint".visible = false
+		arm_point.visible = false
 	else:
-		$"%ArmPoint".visible = true
+		arm_point.visible = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
@@ -62,6 +66,17 @@ func set_current_health(new_amount):
 	if health <= 0:
 		kill_player()
 		print("Player Died")
+
+func get_equipped_tool():
+	for child in arm_point.get_children():
+		arm_point.remove_child(child)
+		child.queue_free()
+	if equipped.items[0] != null:
+		var tool_item = equipped.items[0].item_path
+		if tool_item != "":
+			var equipped_tool = load(tool_item).instance()
+			equipped_tool.set_name("EquippedTool")
+			arm_point.add_child(equipped_tool)
 
 func kill_player():
 	emit_signal("player_killed")

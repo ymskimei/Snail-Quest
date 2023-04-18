@@ -3,13 +3,16 @@ extends RigidBody
 onready var anim = $AnimationPlayer
 var stored_attacks = 0
 
+func _ready():
+	anim.connect("animation_finished", self, "on_animation_finished")
+
 func _physics_process(delta):
 	directional_swing()
 	combo_swing()
 
 func combo_swing():
-	
 	if Input.is_action_just_released("action_combat"):
+		$"%Particles".emitting = true
 		if stored_attacks == 0:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_needle_swipe_0)
 			anim.play_backwards("NeedleSwingHorizontal")
@@ -44,3 +47,6 @@ func make_stationary():
 	$"%Particles".emitting = false
 	rotation.y = lerp(rotation.y, 0, 0.2)
 	rotation.x = lerp(rotation.x, 0, 0.2)
+
+func on_animation_finished():
+	make_stationary()

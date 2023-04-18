@@ -4,8 +4,9 @@
 [ext_resource path="res://source/gui/GuiPopupTool.gd" type="Script" id=2]
 [ext_resource path="res://addons/circular_container/CircularContainer.gd" type="Script" id=3]
 [ext_resource path="res://resource/gui_item.tres" type="Resource" id=4]
-[ext_resource path="res://resource/gui_hud_equipped.tres" type="Resource" id=5]
+[ext_resource path="res://resource/equipped_player.tres" type="Resource" id=5]
 [ext_resource path="res://resource/gui_tool.tres" type="Resource" id=6]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Exit"
