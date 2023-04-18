@@ -48,5 +48,5 @@ func make_stationary():
 	rotation.y = lerp(rotation.y, 0, 0.2)
 	rotation.x = lerp(rotation.x, 0, 0.2)
 
-func on_animation_finished():
+func _on_AnimationPlayer_animation_finished(anim_name):
 	make_stationary()

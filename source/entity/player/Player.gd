@@ -67,7 +67,7 @@ func set_current_health(new_amount):
 		kill_player()
 		print("Player Died")
 
-func get_equipped_tool():
+func update_equipped_tool():
 	for child in arm_point.get_children():
 		arm_point.remove_child(child)
 		child.queue_free()

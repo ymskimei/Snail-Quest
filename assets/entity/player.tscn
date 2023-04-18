@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/model/player.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://source/entity/player/Player.gd" type="Script" id=2]
@@ -24,7 +24,6 @@
 [ext_resource path="res://resource/animation/PlayerHideDefault.tres" type="Animation" id=22]
 [ext_resource path="res://resource/animation/PlayerFallDefault.tres" type="Animation" id=23]
 [ext_resource path="res://resource/animation/PlayerRollBack.tres" type="Animation" id=25]
-[ext_resource path="res://assets/model/spool.mesh" type="ArrayMesh" id=26]
 [ext_resource path="res://resource/equipped_player.tres" type="Resource" id=27]
 
 [sub_resource type="Skin" id=3]
@@ -418,18 +417,9 @@ root_bone = "BoneEyeballMainController"
 tip_bone = "BoneEyeballMainController"
 target_node = NodePath("../../../IK/EyeMainControl")
 
-[node name="BackPoint" type="BoneAttachment" parent="PlayerAvatar/Skeleton"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0564262, 0.342239, -0.0220091 )
-bone_name = "BoneShell"
-
-[node name="MeshInstance" type="MeshInstance" parent="PlayerAvatar/Skeleton/BackPoint"]
-transform = Transform( 0.676265, 0.733009, 0.0731845, -0.244578, 0.316438, -0.916547, -0.694995, 0.601929, 0.393274, -0.908133, 0.598105, 0.397685 )
-mesh = ExtResource( 26 )
-skeleton = NodePath("../../..")
-
 [node name="ArmPoint" type="Spatial" parent="PlayerAvatar/Skeleton"]
 unique_name_in_owner = true
-transform = Transform( 1, 0, -5.68434e-14, 0, 0.939694, -0.342021, 5.68434e-14, 0.342021, 0.939694, 0.55, 0.415, -1.26 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 5.68434e-14, 0, 1, 0.55, 0.6, -1.26 )
 
 [node name="PlayerCollision" type="CollisionShape" parent="."]
 transform = Transform( 0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0.44, 0.25 )

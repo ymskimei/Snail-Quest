@@ -21,6 +21,8 @@ var sfx_needle_swipe_0 = preload("res://assets/sound/sfx_needle_swipe_0.ogg")
 var sfx_needle_swipe_1 = preload("res://assets/sound/sfx_needle_swipe_1.ogg")
 var sfx_needle_swipe_2 = preload("res://assets/sound/sfx_needle_swipe_2.ogg")
 
+var sfx_mallet_slam = preload("res://assets/sound/sfx_mallet_slam.ogg")
+
 func play_sfx(sound):
 	var sfx = AudioStreamPlayer.new()
 	sfx.stream = sound

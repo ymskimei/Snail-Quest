@@ -8,7 +8,7 @@
 script = ExtResource( 3 )
 item_name = "Mallet"
 description = "A tough and powerful hammer!"
-item_path = ""
+item_path = "res://assets/item/tool_mallet.tscn"
 mesh = ExtResource( 1 )
 sprite = ExtResource( 2 )
 amount = 1
