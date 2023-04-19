@@ -27,26 +27,13 @@ func input(_event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(delta: float) -> int:
-	entity.input = get_input_vector()
+	entity.input = get_joy_input()
 	entity.direction = get_direction()
-	if Input.is_action_pressed("action_combat"):
-		entity.can_move = false
-	else:
-		entity.can_move = true
 	if entity.is_on_floor():
 		shell_jumped = false
 	return State.NULL
 
-func align_to_surface(tform, new_up):
-	tform.basis.y = new_up
-	tform.basis.x = -tform.basis.z.cross(new_up)
-	tform.basis = tform.basis.orthonormalized()
-	return tform
-
-func process(_delta: float) -> int:
-	return State.NULL
-
-func get_input_vector():
+func get_joy_input():
 	if entity.can_move:
 		entity.input.x = Input.get_action_strength("joy_left") - Input.get_action_strength("joy_right")
 		entity.input.z = Input.get_action_strength("joy_up") - Input.get_action_strength("joy_down")
@@ -69,8 +56,14 @@ func apply_facing(turn_speed):
 			entity.rotation.y = lerp_angle(entity.rotation.y, look_direction, 0.2)
 		if entity.ray_down.is_colliding() and entity.is_on_floor():
 			var normal = entity.ray_down.get_collision_normal()
-			var tform = align_to_surface(entity.global_transform, normal)
+			var tform = apply_surface_align(entity.global_transform, normal)
 			entity.global_transform = entity.global_transform.interpolate_with(tform, 0.3)
+
+func apply_surface_align(tform, new_up):
+	tform.basis.y = new_up
+	tform.basis.x = -tform.basis.z.cross(new_up)
+	tform.basis = tform.basis.orthonormalized()
+	return tform
 
 func apply_movement(delta, no_sliding, angle):
 	if entity.direction != Vector3.ZERO:
@@ -118,6 +111,29 @@ func on_input_timer():
 	input_down = 0
 	input_left = 0
 	input_right = 0
+
+func needle_swing():
+	var needle = entity.eye_point.get_node_or_null("Needle")
+	if is_instance_valid(needle):
+		if Input.is_action_just_released("action_combat"):
+			needle.combo_swing()
+
+func needle_aiming():
+	var needle = entity.eye_point.get_node_or_null("Needle")
+	if is_instance_valid(needle):
+		needle.directional_swing()
+
+func mallet_slam():
+	var mallet = entity.eye_point.get_node_or_null("Mallet")
+	if is_instance_valid(mallet):
+		if Input.is_action_pressed("action_combat"):
+			entity.can_move = false
+			entity.animator.play("PlayerSlamDefault")
+			mallet.slam()
+		else:
+			mallet.end_slam()
+			entity.can_move = true
+			entity.animator.play("PlayerIdleDefault")
 
 func exit() -> void:
 	pass

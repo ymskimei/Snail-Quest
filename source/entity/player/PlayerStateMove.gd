@@ -14,6 +14,8 @@ func input(_event: InputEvent) -> int:
 	if Input.is_action_just_pressed("action_defense"):
 		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 		return State.DODG
+	needle_swing()
+	mallet_slam()
 	return State.NULL
 
 func physics_process(delta: float) -> int:

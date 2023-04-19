@@ -15,6 +15,10 @@ func input(_event: InputEvent) -> int:
 		entity.animator.play("PlayerTuckDefault")
 		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 		return State.HIDE
+	needle_swing()
+	mallet_slam()
+	if entity.targeting:
+		needle_aiming()
 	return State.NULL
 
 func physics_process(delta: float) -> int:

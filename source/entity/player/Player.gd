@@ -9,7 +9,7 @@ onready var skeleton = $"%Skeleton"
 onready var states = $StateController
 onready var interaction_label = $Gui/InteractionLabel
 onready var animator = $Animation/AnimationPlayer
-onready var arm_point = $"%ArmPoint"
+onready var eye_point = $"%EyePoint"
 
 onready var ray_down = $"%RayDown"
 onready var jump_check = $"%CheckerFloor"
@@ -45,9 +45,9 @@ func _physics_process(delta : float) -> void:
 	else:
 		target_check()
 	if in_shell:
-		arm_point.visible = false
+		eye_point.visible = false
 	else:
-		arm_point.visible = true
+		eye_point.visible = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
@@ -68,15 +68,15 @@ func set_current_health(new_amount):
 		print("Player Died")
 
 func update_equipped_tool():
-	for child in arm_point.get_children():
-		arm_point.remove_child(child)
+	for child in eye_point.get_children():
+		eye_point.remove_child(child)
 		child.queue_free()
 	if equipped.items[0] != null:
-		var tool_item = equipped.items[0].item_path
-		if tool_item != "":
-			var equipped_tool = load(tool_item).instance()
-			equipped_tool.set_name("EquippedTool")
-			arm_point.add_child(equipped_tool)
+		var tool_item = equipped.items[0]
+		if tool_item.item_path != "":
+			var equipped_tool = load(tool_item.item_path).instance()
+			equipped_tool.set_name(tool_item.item_name)
+			eye_point.add_child(equipped_tool)
 
 func kill_player():
 	emit_signal("player_killed")

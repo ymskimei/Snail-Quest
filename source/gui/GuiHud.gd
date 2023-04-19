@@ -26,7 +26,7 @@ func _ready():
 	add_child(timer)
 	equipment.connect("items_updated", self, "on_items_updated")
 	tools.connect("items_updated", self, "on_items_updated")
-	
+
 func _process(_delta):
 	update_inventory_display()
 	if !equipment.items[0] == tools.items[0]:
