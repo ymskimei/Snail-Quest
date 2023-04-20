@@ -21,7 +21,6 @@ var escaped_yet : bool
 
 func _ready():
 	states.ready(self)
-	$DebugHealthBar.update_bar(health, max_health)
 
 func _physics_process(delta):
 	if states != null:
@@ -33,8 +32,10 @@ func _on_Area_body_entered(body):
 
 func _on_Area_area_entered(area):
 	if area.is_in_group("attack"):
-		inflict_damage(area.get_parent().get_parent().strength)
-		strike_flash(area)
+		var damage = area.get_parent().get_parent().strength
+		if damage >= 0.15 * max_health:
+			strike_flash(area)
+		inflict_damage(damage)
 
 func inflict_damage(damage_amount):
 	set_current_health(health - damage_amount)
@@ -43,7 +44,7 @@ func inflict_damage(damage_amount):
 func set_current_health(new_amount):
 	health = new_amount
 	emit_signal("health_changed", new_amount)
-	$DebugHealthBar.update_bar(health, max_health)
+	debug_healthbar()
 	if health <= 0:
 		print("Enemy Died")
 

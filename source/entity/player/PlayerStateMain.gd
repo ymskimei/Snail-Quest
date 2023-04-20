@@ -9,6 +9,7 @@ var input_left = 0
 var input_right = 0
 
 var shell_jumped : bool
+var previous_swing : bool
 
 enum State {
 	NULL,
@@ -116,7 +117,14 @@ func needle_swing():
 	var needle = entity.eye_point.get_node_or_null("Needle")
 	if is_instance_valid(needle):
 		if Input.is_action_just_released("action_combat"):
-			needle.combo_swing()
+			if previous_swing:
+				entity.animator.play("PlayerSwingDefault")
+				needle.swing_left()
+				previous_swing = false
+			else:
+				entity.animator.play_backwards("PlayerSwingDefault")
+				needle.swing_right()
+				previous_swing = true
 
 func needle_aiming():
 	var needle = entity.eye_point.get_node_or_null("Needle")

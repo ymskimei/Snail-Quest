@@ -4,6 +4,7 @@ func enter() -> void:
 	print("Enemy State: LOOK")
 
 func physics_process(delta: float) -> int:
+	.physics_process(delta)
 	var global_pos = entity.global_transform.origin
 	var target_pos = entity.target.global_transform.origin
 	var wtransform = entity.global_transform.looking_at(Vector3(target_pos.x, global_pos.y, target_pos.z), Vector3.UP)

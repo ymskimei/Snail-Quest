@@ -4,8 +4,8 @@ func enter() -> void:
 	print("Enemy State: MOVE")
 
 func physics_process(delta: float) -> int:
+	.physics_process(delta)
 	rot_speed = 0.02
-
 	var global_pos = entity.global_transform.origin
 	var w_transform = entity.global_transform.looking_at(Vector3(x_location, global_pos.y, z_location), Vector3.UP)
 	var w_rotation = Quat(entity.global_transform.basis).slerp(Quat(w_transform.basis), rot_speed)

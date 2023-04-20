@@ -2,25 +2,24 @@ extends RigidBody
 
 onready var anim = $AnimationPlayer
 var stored_attacks = 0
+var strength = 5
 
 func _ready():
 	anim.connect("animation_finished", self, "on_animation_finished")
 
-func combo_swing():
+func swing_left():
 	$"%Particles".emitting = true
-	if stored_attacks == 0:
-		AudioPlayer.play_sfx(AudioPlayer.sfx_needle_swipe_0)
-		anim.play_backwards("NeedleSwingHorizontal")
-		stored_attacks = 1
-	elif stored_attacks == 1:
-		AudioPlayer.play_sfx(AudioPlayer.sfx_needle_swipe_1)
-		anim.play("NeedleSwingVertical")
-		stored_attacks = 2
-	elif stored_attacks >= 2:
-		AudioPlayer.play_sfx(AudioPlayer.sfx_needle_swipe_2)
-		anim.play("NeedleSwingHorizontal")
-		stored_attacks = 0
-	print(stored_attacks)
+	AudioPlayer.play_sfx(AudioPlayer.sfx_needle_swipe_1)
+	anim.play("NeedleSwingHorizontal")
+	yield(anim, "animation_finished")
+	make_stationary()
+
+func swing_right():
+	$"%Particles".emitting = true
+	AudioPlayer.play_sfx(AudioPlayer.sfx_needle_swipe_0)
+	anim.play_backwards("NeedleSwingHorizontal")
+	yield(anim, "animation_finished")
+	make_stationary()
 
 func directional_swing():
 	if Input.is_action_pressed("cam_left") or Input.is_action_pressed("cam_right") or Input.is_action_pressed("cam_up") or Input.is_action_pressed("cam_down"):

@@ -4,6 +4,7 @@ func enter() -> void:
 	print("Enemy State: SEEK")
 
 func physics_process(delta: float) -> int:
+	.physics_process(delta)
 	rot_speed = 0.08
 	var global_pos = entity.global_transform.origin
 	var target_pos = entity.target.global_transform.origin

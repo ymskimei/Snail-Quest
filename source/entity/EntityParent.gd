@@ -25,6 +25,7 @@ func _ready():
 	speed = resource.speed
 	acceleration = resource.acceleration
 	jump = resource.jump
+	debug_healthbar()
 
 func get_coords():
 	var x = round(global_transform.origin.x)
@@ -55,3 +56,9 @@ func strike_flash(ar):
 	yield(tween, "tween_completed")
 	flash.queue_free()
 	tween.queue_free()
+
+func debug_healthbar():
+	if is_instance_valid($DebugHealthBar):
+		$DebugHealthBar.update_bar(health, max_health)
+		if is_instance_valid($"%MeshInstance"):
+			$DebugHealthBar.translation.y = $"%MeshInstance".get_aabb().size.y + 0.5
