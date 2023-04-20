@@ -420,7 +420,7 @@ tip_bone = "BoneEyeballMainController"
 target_node = NodePath("../../../IK/EyeMainControl")
 
 [node name="EyeAnchor" type="BoneAttachment" parent="PlayerAvatar/Skeleton"]
-transform = Transform( 0.991859, -0.066914, 0.111424, -0.0706909, 0.442112, 0.893929, -0.109153, -0.894367, 0.433559, 0.386063, 1.47208, -0.995752 )
+transform = Transform( 0.984814, -0.0782537, 0.158787, -0.0394169, 0.777749, 0.626921, -0.172769, -0.623502, 0.762085, 0.375628, 2.00167, -0.05642 )
 bone_name = "BoneEyeballRight"
 
 [node name="EyePoint" type="Spatial" parent="PlayerAvatar/Skeleton/EyeAnchor"]

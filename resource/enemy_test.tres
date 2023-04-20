@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource( 1 )
 entity_name = "LilyPawn"
-health = 20
+health = 100
+max_health = 100
 strength = 10
 gravity = 50
 speed = 15

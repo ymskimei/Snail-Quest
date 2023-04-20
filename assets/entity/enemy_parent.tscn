@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/model/enemy_parent.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://source/entity/enemy/EnemyParent.gd" type="Script" id=2]
@@ -8,8 +8,11 @@
 [ext_resource path="res://source/entity/enemy/EnemyStateSeek.gd" type="Script" id=6]
 [ext_resource path="res://source/entity/enemy/EnemyStateLook.gd" type="Script" id=7]
 [ext_resource path="res://assets/texture/materials/lily_pawn_lime.tres" type="Material" id=8]
+[ext_resource path="res://assets/gui/gui_debug_healthbar.tscn" type="PackedScene" id=9]
 
 [sub_resource type="BoxShape" id=2]
+
+[sub_resource type="BoxShape" id=8]
 
 [sub_resource type="BoxShape" id=6]
 
@@ -34,6 +37,7 @@ script = ExtResource( 6 )
 script = ExtResource( 7 )
 
 [node name="Model" type="MeshInstance" parent="."]
+layers = 4
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 8 )
 
@@ -44,10 +48,16 @@ shape = SubResource( 2 )
 [node name="Area" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 1, 0 )
+shape = SubResource( 8 )
+
+[node name="ViewArea" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="ViewArea"]
 transform = Transform( 3.53553, 0, 3.53553, 0, 1, 0, -2.75772, 0, 2.75772, 0, 1, -6 )
 shape = SubResource( 6 )
 
-[node name="CollisionShape2" type="CollisionShape" parent="Area"]
+[node name="CollisionShape2" type="CollisionShape" parent="ViewArea"]
 transform = Transform( 0, 0, 7, 0, 1, 0, -2.99376, 0, 0, 0, 1, -9 )
 shape = SubResource( 6 )
 
@@ -70,8 +80,16 @@ wait_time = 6.0
 one_shot = true
 autostart = true
 
-[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
-[connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]
+[node name="DebugHealthBar" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+layers = 0
+light_cull_mask = 4294967287
+
+[connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]
+[connection signal="body_entered" from="ViewArea" to="." method="_on_Area_body_entered"]
+[connection signal="body_exited" from="ViewArea" to="." method="_on_Area_body_exited"]
 [connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_NavigationAgent_velocity_computed"]
 [connection signal="timeout" from="LookingTimer" to="." method="_on_LookingTimer_timeout"]
 [connection signal="timeout" from="FollowTimer" to="." method="_on_FollowTimer_timeout"]

@@ -14,4 +14,3 @@ script = ExtResource( 3 )
 [node name="GuiHud" parent="." instance=ExtResource( 4 )]
 
 [node name="GuiDebug" parent="." instance=ExtResource( 1 )]
-visible = false

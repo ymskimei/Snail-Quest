@@ -133,7 +133,6 @@ func mallet_slam():
 		else:
 			mallet.end_slam()
 			entity.can_move = true
-			entity.animator.play("PlayerIdleDefault")
 
 func exit() -> void:
 	pass

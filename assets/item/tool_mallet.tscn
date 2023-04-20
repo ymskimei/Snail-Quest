@@ -188,7 +188,7 @@ mesh = ExtResource( 2 )
 skeleton = NodePath("../../..")
 
 [node name="MeshInstance2" type="MeshInstance" parent="Mallet"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.6, 0, 2.1, 0 )
 mesh = ExtResource( 5 )
 skeleton = NodePath("../../..")
 
@@ -223,4 +223,5 @@ anims/MalletStill = ExtResource( 4 )
 anims/MalletWeakSlam = SubResource( 12 )
 anims/RESET = SubResource( 10 )
 
+[connection signal="area_entered" from="Mallet/Area" to="." method="_on_Area_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

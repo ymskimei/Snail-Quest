@@ -14,11 +14,14 @@ onready var looking_timer = $LookingTimer
 onready var follow_timer = $FollowTimer
 onready var states = $StateController
 
+signal health_changed
+
 var target_near : bool
 var escaped_yet : bool
 
 func _ready():
 	states.ready(self)
+	$DebugHealthBar.update_bar(health, max_health)
 
 #func _physics_process(delta):
 #	if states != null:
@@ -27,6 +30,22 @@ func _ready():
 func _on_Area_body_entered(body):
 	if body.name == ("Player"):
 		target_near = true
+
+func _on_Area_area_entered(area):
+	if area.is_in_group("attack"):
+		inflict_damage(area.get_parent().get_parent().strength)
+		strike_flash(area)
+
+func inflict_damage(damage_amount):
+	set_current_health(health - damage_amount)
+	print("Enemy Health: " + str(health))
+
+func set_current_health(new_amount):
+	health = new_amount
+	emit_signal("health_changed", new_amount)
+	$DebugHealthBar.update_bar(health, max_health)
+	if health <= 0:
+		print("Enemy Died")
 
 func _on_Area_body_exited(body):
 	if body.name == ("Player"):

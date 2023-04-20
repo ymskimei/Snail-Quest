@@ -3,6 +3,7 @@ extends Resource
 
 export var entity_name : String = ""
 export var health : int
+export var max_health : int
 export var strength : int
 export var gravity : int
 export var speed : int
