@@ -17,26 +17,31 @@ func input(_event: InputEvent) -> int:
 			return State.DODG
 	return State.NULL
 
-func physics_process(delta: float) -> int:
+func physics_process(delta) -> int:
 	.physics_process(delta)
 	MathHelper.slerp_look_at(entity, entity.transform.origin + Vector3(entity.velocity.x, 0, entity.velocity.z), 0.4)
-	apply_movement(delta, true, deg2rad(45))
-	apply_gravity(delta)
+	#apply_movement(delta, true, deg2rad(45))
+	apply_movement()
+	#apply_gravity(delta)
 	if dodge_roll():
 		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 		return State.DODG
 	entity.snap_vector = Vector3.DOWN
 	if entity.input == Vector3.ZERO:
-		entity.velocity.x += entity.velocity.x * air_friction * delta
-		entity.velocity.z += entity.velocity.z * air_friction * delta
+		entity.velocity.x += entity.velocity.x * air_friction
+		entity.velocity.z += entity.velocity.z * air_friction
 	else:
-		entity.velocity.x += entity.velocity.x * delta
-		entity.velocity.z += entity.velocity.z * delta
-	if entity.is_on_floor():
+		entity.velocity.x += entity.velocity.x
+		entity.velocity.z += entity.velocity.z
+	if entity.ray_down.is_colliding():
 		if entity.input != Vector3.ZERO:
 			return State.MOVE
 		else:
 			return State.IDLE
+	return State.NULL
+
+func integrate_forces(state) -> int:
+	.integrate_forces(state)
 	return State.NULL
 
 func exit() -> void:

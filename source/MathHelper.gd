@@ -16,9 +16,10 @@ func safe_look_at(spatial : Spatial, target : Vector3) -> void:
 
 func slerp_look_at(spatial : Spatial, target : Vector3, speed) -> void:
 		var global_pos = spatial.global_transform.origin
-		var dest_transform = spatial.global_transform.looking_at(Vector3(target.x, target.y, target.z), Vector3.UP)
-		var dest_rotation = Quat(spatial.global_transform.basis).slerp(Quat(dest_transform.basis), speed)
-		spatial.global_transform = Transform(Basis(dest_rotation), global_pos)
+		if global_pos != target:
+			var dest_transform = spatial.global_transform.looking_at(Vector3(target.x, target.y, target.z), Vector3.UP)
+			var dest_rotation = Quat(spatial.global_transform.basis).slerp(Quat(dest_transform.basis), speed)
+			spatial.global_transform = Transform(Basis(dest_rotation), global_pos)
 
 func find_target(node : Object, group_name : String, get_closest := true) -> Object:
 	var target_group = get_tree().get_nodes_in_group("target")

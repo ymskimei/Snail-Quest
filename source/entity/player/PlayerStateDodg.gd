@@ -23,11 +23,12 @@ func enter() -> void:
 		entity.animator.play("PlayerRollFront")
 	entity.in_shell = true
 
-func physics_process(delta: float) -> int:
+func physics_process(delta) -> int:
 	.physics_process(delta)
-	apply_facing(0.3)
-	apply_movement(delta, true, deg2rad(45))
-	apply_gravity(delta)
+	#apply_facing(0.3)
+	apply_movement()
+	#apply_movement(delta, true, deg2rad(45))
+	#apply_gravity(delta)
 	entity.snap_vector = Vector3.DOWN
 	if Input.is_action_just_pressed("action_main") and !shell_jumped:
 		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)
@@ -39,6 +40,10 @@ func physics_process(delta: float) -> int:
 		else:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)
 			return State.IDLE
+	return State.NULL
+
+func integrate_forces(state) -> int:
+	.integrate_forces(state)
 	return State.NULL
 
 func dodge_timer():

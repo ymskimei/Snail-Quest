@@ -38,7 +38,7 @@ func _ready():
 	set_interaction_text("")
 	GlobalManager.register_player(self)
 
-func _physics_process(delta : float) -> void:
+func _physics_process(delta):
 	states.physics_process(delta)
 	if target == null:
 		target = MathHelper.find_target(self, "target")
@@ -48,6 +48,9 @@ func _physics_process(delta : float) -> void:
 		eye_point.visible = false
 	else:
 		eye_point.visible = true
+
+func _integrate_forces(state) -> void:
+	states.integrate_forces(state)
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
@@ -112,5 +115,3 @@ func set_interaction_text(text):
 		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
 		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
 		interaction_label.set_visible(true)
-
-

@@ -5,10 +5,10 @@ var idle_speed = int(rand_range(speed / 2, speed * 3))
 var move_or_not = [true, false]
 var start_move = move_or_not[randi() % move_or_not.size()]
 
-onready var target = $"../../Player"
+onready var target = GlobalManager.player
 
 onready var navi_agent : NavigationAgent = $NavigationAgent
-onready var target_location : Node = $"../../Player"
+onready var target_location : Node = GlobalManager.player
 
 onready var looking_timer = $LookingTimer
 onready var follow_timer = $FollowTimer
@@ -22,9 +22,9 @@ var escaped_yet : bool
 func _ready():
 	states.ready(self)
 
-func _physics_process(delta):
-	if states != null:
-		states.physics_process(delta)
+#func _physics_process(delta):
+#	if states != null:
+#		states.physics_process(delta)
 
 func _on_Area_body_entered(body):
 	if body.name == ("Player"):
@@ -55,7 +55,8 @@ func _on_Area_body_exited(body):
 		follow_timer.start()
 
 func _on_NavigationAgent_velocity_computed(safe_velocity):
-	move_and_collide(safe_velocity)
+	#move_and_collide(safe_velocity)
+	pass
 
 func _on_LookingTimer_timeout():
 	looking_timer.set_wait_time(rand_range(4, 8))

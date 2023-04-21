@@ -33,7 +33,7 @@ surfaces/0 = {
 [sub_resource type="Animation" id=7]
 resource_name = "Move"
 
-[node name="EnemyParent" type="KinematicBody" groups=["enemy", "target"]]
+[node name="EnemyParent" type="RigidBody" groups=["enemy", "target"]]
 collision_layer = 15
 collision_mask = 15
 script = ExtResource( 2 )

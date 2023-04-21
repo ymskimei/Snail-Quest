@@ -1,5 +1,5 @@
 class_name EntityParent
-extends KinematicBody
+extends RigidBody
 
 export(Resource) var resource
 
