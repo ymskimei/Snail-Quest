@@ -268,12 +268,8 @@ tracks/21/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 
-[node name="Player" type="RigidBody"]
+[node name="Player" type="KinematicBody"]
 collision_mask = 13
-mode = 2
-continuous_cd = true
-contacts_reported = 1
-contact_monitor = true
 script = ExtResource( 2 )
 resource = ExtResource( 3 )
 equipped = ExtResource( 27 )
@@ -398,7 +394,7 @@ bones/18/name = "BoneEyeballRight"
 bones/18/parent = -1
 bones/18/rest = Transform( 1, 0, 0, 0, 0, 1, 0, -1, 0, 0.397249, 1.44457, -1.20899 )
 bones/18/enabled = true
-bones/18/bound_children = [ NodePath("EyeAnchor") ]
+bones/18/bound_children = [  ]
 bones/19/name = "BoneEyestalkRightController"
 bones/19/parent = -1
 bones/19/rest = Transform( 0.999885, 0, -0.0151833, 0, 1, 0, 0.0151833, 0, 0.999885, 0.357374, 1.19536, -1.16828 )
@@ -422,9 +418,10 @@ unique_name_in_owner = true
 process_priority = 1
 root_bone = "BoneEyeballMainController"
 tip_bone = "BoneEyeballMainController"
+target_node = NodePath("../../../IK/EyeMainControl")
 
 [node name="EyeAnchor" type="BoneAttachment" parent="PlayerAvatar/Skeleton"]
-transform = Transform( 1, 0, 0, 0, 0, 1, 0, -1, 0, 0.397249, 1.44457, -1.20899 )
+transform = Transform( 1, 6.14222e-08, -5.84524e-08, 5.84524e-08, -6.35275e-22, 1, 6.14222e-08, -1, -3.59028e-15, 0.391507, 1.38435, -1.21405 )
 bone_name = "BoneEyeballRight"
 
 [node name="EyePoint" type="Spatial" parent="PlayerAvatar/Skeleton/EyeAnchor"]
@@ -454,9 +451,13 @@ shape = SubResource( 24 )
 unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.1 )
 enabled = true
-cast_to = Vector3( 0, -0.5, 0 )
 collision_mask = 12
 collide_with_areas = true
+
+[node name="IK" type="Spatial" parent="."]
+
+[node name="EyeMainControl" type="Position3D" parent="IK"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.9 )
 
 [node name="Gui" type="Node" parent="."]
 
@@ -499,5 +500,3 @@ anims/PlayerSlamDefault = ExtResource( 28 )
 anims/PlayerSwingDefault = ExtResource( 4 )
 anims/PlayerTuckDefault = ExtResource( 19 )
 anims/RESET = SubResource( 29 )
-
-[connection signal="area_entered" from="Checkers/CheckerFloor" to="StateController/Idle" method="_on_CheckerFloor_area_entered"]

@@ -1,6 +1,7 @@
 extends Sprite3D
 
 onready var bar = $Viewport/TextureProgress
+onready var text = $Viewport/RichTextLabel
 
 export var healthbar : Texture
 

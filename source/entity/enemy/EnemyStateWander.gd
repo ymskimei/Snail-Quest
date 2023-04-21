@@ -70,7 +70,7 @@ func move(delta):
 	var current = entity.transform.origin
 	var next = entity.navi_agent.get_next_location()
 	var velocity = (next - current).normalized() * delta * entity.speed
-	#entity.move_and_collide(velocity)
+	entity.move_and_collide(velocity)
 
 func rotate(delta):
 	if (entity.rotation.y == look_dir):

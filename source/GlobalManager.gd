@@ -2,7 +2,7 @@ extends Node
 
 var version_number = "0.3.0-pre-alpha"
 
-var player : RigidBody
+var player : KinematicBody
 var camera : SpringArm
 var play_time : Node
 var game_time : Node

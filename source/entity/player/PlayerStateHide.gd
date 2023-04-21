@@ -19,17 +19,13 @@ func input(_event: InputEvent) -> int:
 		return State.JUMP
 	return State.NULL
 
-func physics_process(delta) -> int:
+func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	#apply_movement(delta, true, deg2rad(45))
-	#apply_gravity(delta)
+	apply_movement(delta, true, deg2rad(45))
+	apply_gravity(delta)
 	entity.snap_vector = Vector3.DOWN
 	entity.velocity.x = 0
 	entity.velocity.z = 0
-	return State.NULL
-
-func integrate_forces(state) -> int:
-	.integrate_forces(state)
 	return State.NULL
 
 func exit() -> void:
