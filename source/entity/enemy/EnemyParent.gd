@@ -5,7 +5,7 @@ var idle_speed = int(rand_range(speed / 2, speed * 3))
 var move_or_not = [true, false]
 var start_move = move_or_not[randi() % move_or_not.size()]
 
-onready var target = $"../../Player"
+onready var target = GlobalManager.player
 
 onready var navi_agent : NavigationAgent = $NavigationAgent
 onready var target_location : Node = $"../../Player"
@@ -13,11 +13,12 @@ onready var target_location : Node = $"../../Player"
 onready var looking_timer = $LookingTimer
 onready var follow_timer = $FollowTimer
 onready var states = $StateController
+onready var anim = $AnimationPlayer
 
 signal health_changed
 
-var target_near : bool
-var escaped_yet : bool
+var target_seen : bool
+var is_pushed : bool
 
 func _ready():
 	states.ready(self)
@@ -28,7 +29,7 @@ func _physics_process(delta):
 
 func _on_Area_body_entered(body):
 	if body.name == ("Player"):
-		target_near = true
+		target_seen = true
 
 func _on_Area_area_entered(area):
 	if area.is_in_group("attack"):
@@ -36,6 +37,8 @@ func _on_Area_area_entered(area):
 		if damage >= 0.15 * max_health:
 			strike_flash(area)
 		inflict_damage(damage)
+		if !follow_timer.is_stopped():
+			follow_timer.start()
 
 func inflict_damage(damage_amount):
 	set_current_health(health - damage_amount)
@@ -50,19 +53,17 @@ func set_current_health(new_amount):
 
 func _on_Area_body_exited(body):
 	if body.name == ("Player"):
-		target_near = false
-		escaped_yet = false
 		follow_timer.start()
 
 func _on_NavigationAgent_velocity_computed(safe_velocity):
 	move_and_collide(safe_velocity)
 
 func _on_LookingTimer_timeout():
-	looking_timer.set_wait_time(rand_range(4, 8))
+	looking_timer.set_wait_time(rand_range(10, 12))
 	idle_speed = int(rand_range(speed / 2, speed * 3))
 	start_move = move_or_not[randi() % move_or_not.size()]
 	looking_timer.start()
 
 func _on_FollowTimer_timeout():
 	print("escaped")
-	escaped_yet = true
+	target_seen = false

@@ -17,13 +17,15 @@ func _ready():
 	add_child(timer)
 
 func enter():
-	print("setting thing")
+	print("Enemy State: WANDER")
 	mid_state = MidState.DECIDE
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
+	apply_gravity(delta)
 	match (mid_state):
 		MidState.DECIDE:
+			entity.anim.play("PawnIdle")
 			mid_state = randi() % 4
 		MidState.LOOK:
 			if look_dir == null:
@@ -32,6 +34,7 @@ func physics_process(delta: float) -> int:
 			else:
 				rotate(delta)
 		MidState.MOVE:
+			entity.anim.play("PawnMove")
 			if !move_set:
 				var current_loc = entity.transform.origin
 				var rot = entity.rotation.y + deg2rad((randi() % 80) - 40) + PI 
@@ -39,7 +42,7 @@ func physics_process(delta: float) -> int:
 				var new_loc_x = (dist * sin(rot))
 				var new_loc_z = (dist * cos(rot)) 
 				look_dir = rot + PI
-				entity.navi_agent.set_target_location(entity.transform.origin + Vector3(new_loc_x,0,new_loc_z))
+				entity.navi_agent.set_target_location(entity.transform.origin + Vector3(new_loc_x, 0, new_loc_z))
 				move_set = true
 				start_wait()
 				entity.navi_agent.connect("target_reached", self, "reset_move")
@@ -49,6 +52,8 @@ func physics_process(delta: float) -> int:
 		MidState.WAIT:
 			if !timer_set:
 				start_wait()
+	if entity.target_seen:
+		return State.BATT
 	return State.NULL
 
 func start_wait():
@@ -69,7 +74,7 @@ func reset_move():
 func move(delta):
 	var current = entity.transform.origin
 	var next = entity.navi_agent.get_next_location()
-	var velocity = (next - current).normalized() * delta * entity.speed
+	var velocity = (next - current).normalized() * delta * (entity.speed * 0.3)
 	entity.move_and_collide(velocity)
 
 func rotate(delta):

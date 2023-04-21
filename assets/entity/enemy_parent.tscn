@@ -1,14 +1,17 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/gui/gui_debug_healthbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/entity/enemy/EnemyParent.gd" type="Script" id=2]
 [ext_resource path="res://assets/entity/state_controller.tscn" type="PackedScene" id=3]
-[ext_resource path="res://resource/player.tres" type="Resource" id=4]
+[ext_resource path="res://resource/enemy_test.tres" type="Resource" id=4]
 [ext_resource path="res://source/entity/enemy/EnemyStateMove.gd" type="Script" id=5]
 [ext_resource path="res://source/entity/enemy/EnemyStateSeek.gd" type="Script" id=6]
 [ext_resource path="res://source/entity/enemy/EnemyStateLook.gd" type="Script" id=7]
 [ext_resource path="res://assets/texture/materials/lily_pawn_lime.tres" type="Material" id=8]
-[ext_resource path="res://source/entity/enemy/EnemyStateWander.gd" type="Script" id=9]
+[ext_resource path="res://source/entity/enemy/EnemyStateBatt.gd" type="Script" id=9]
+[ext_resource path="res://resource/animation/PawnJump.tres" type="Animation" id=10]
+[ext_resource path="res://resource/animation/PawnMove.tres" type="Animation" id=11]
+[ext_resource path="res://source/entity/enemy/EnemyStateWand.gd" type="Script" id=12]
 
 [sub_resource type="ArrayMesh" id=5]
 resource_name = "lily_pawn_Plane"
@@ -30,8 +33,63 @@ surfaces/0 = {
 
 [sub_resource type="BoxShape" id=6]
 
-[sub_resource type="Animation" id=7]
-resource_name = "Move"
+[sub_resource type="Animation" id=10]
+resource_name = "PawnIdle"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.5 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "RESET"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.5 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
 
 [node name="EnemyParent" type="KinematicBody" groups=["enemy", "target"]]
 collision_layer = 15
@@ -41,8 +99,8 @@ resource = ExtResource( 4 )
 
 [node name="StateController" parent="." instance=ExtResource( 3 )]
 
-[node name="Wander" type="Node" parent="StateController"]
-script = ExtResource( 9 )
+[node name="Wand" type="Node" parent="StateController"]
+script = ExtResource( 12 )
 
 [node name="Move" type="Node" parent="StateController"]
 script = ExtResource( 5 )
@@ -52,6 +110,9 @@ script = ExtResource( 6 )
 
 [node name="Look" type="Node" parent="StateController"]
 script = ExtResource( 7 )
+
+[node name="Batt" type="Node" parent="StateController"]
+script = ExtResource( 9 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 unique_name_in_owner = true
@@ -71,11 +132,11 @@ shape = SubResource( 8 )
 [node name="Vision" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="Vision"]
-transform = Transform( 3.53553, 0, 3.53553, 0, 1, 0, -2.75772, 0, 2.75772, 0, 1, -6 )
+transform = Transform( 3.53553, 0, 3.53553, 0, 1, 0, -2.75772, 0, 2.75772, 0, 1, -5 )
 shape = SubResource( 6 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Vision"]
-transform = Transform( 0, 0, 7, 0, 1, 0, -2.99376, 0, 0, 0, 1, -9 )
+transform = Transform( 0, 0, 7, 0, 1, 0, -2.99376, 0, 0, 0, 1, -8 )
 shape = SubResource( 6 )
 
 [node name="NavigationAgent" type="NavigationAgent" parent="."]
@@ -88,16 +149,19 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("")
-anims/Move = SubResource( 7 )
-
 [node name="FollowTimer" type="Timer" parent="."]
 wait_time = 6.0
 one_shot = true
 autostart = true
 
 [node name="DebugHealthBar" parent="." instance=ExtResource( 1 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_default_blend_time = 0.1
+anims/PawnIdle = SubResource( 10 )
+anims/PawnJump = ExtResource( 10 )
+anims/PawnMove = ExtResource( 11 )
+anims/RESET = SubResource( 9 )
 
 [connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]
 [connection signal="body_entered" from="Vision" to="." method="_on_Area_body_entered"]

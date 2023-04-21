@@ -125,7 +125,7 @@ sleeping = true
 script = ExtResource( 3 )
 
 [node name="Needle" type="Spatial" parent="."]
-transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -1.7 )
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -1.15 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Needle"]
 transform = Transform( -8.74228e-08, -8.74228e-08, 1, -1, 0, -8.74228e-08, 0, -1, -8.74228e-08, 0, 0, 0 )

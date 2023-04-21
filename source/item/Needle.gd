@@ -31,8 +31,8 @@ func directional_swing():
 
 func make_stationary():
 	$"%Particles".emitting = false
-	rotation.y = lerp(rotation.y, 0, 0.2)
-	rotation.x = lerp(rotation.x, 0, 0.2)
+	rotation.y = 0
+	rotation.x = 0
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	make_stationary()
