@@ -1,17 +1,19 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/gui/gui_debug_healthbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/entity/enemy/EnemyParent.gd" type="Script" id=2]
 [ext_resource path="res://assets/entity/state_controller.tscn" type="PackedScene" id=3]
 [ext_resource path="res://resource/enemy_test.tres" type="Resource" id=4]
 [ext_resource path="res://source/entity/enemy/EnemyStateMove.gd" type="Script" id=5]
-[ext_resource path="res://source/entity/enemy/EnemyStateSeek.gd" type="Script" id=6]
-[ext_resource path="res://source/entity/enemy/EnemyStateLook.gd" type="Script" id=7]
+[ext_resource path="res://source/entity/enemy/EnemyStateIdle.gd" type="Script" id=6]
+[ext_resource path="res://source/entity/enemy/EnemyStateJump.gd" type="Script" id=7]
 [ext_resource path="res://assets/texture/materials/lily_pawn_lime.tres" type="Material" id=8]
-[ext_resource path="res://source/entity/enemy/EnemyStateBatt.gd" type="Script" id=9]
+[ext_resource path="res://source/entity/enemy/EnemyStateFall.gd" type="Script" id=9]
 [ext_resource path="res://resource/animation/PawnJump.tres" type="Animation" id=10]
 [ext_resource path="res://resource/animation/PawnMove.tres" type="Animation" id=11]
-[ext_resource path="res://source/entity/enemy/EnemyStateWand.gd" type="Script" id=12]
+[ext_resource path="res://source/entity/enemy/EnemyStateTarg.gd" type="Script" id=12]
+[ext_resource path="res://source/entity/enemy/EnemyStateWait.gd" type="Script" id=13]
+[ext_resource path="res://source/entity/enemy/EnemyStateAgro.gd" type="Script" id=14]
 
 [sub_resource type="ArrayMesh" id=5]
 resource_name = "lily_pawn_Plane"
@@ -99,19 +101,25 @@ resource = ExtResource( 4 )
 
 [node name="StateController" parent="." instance=ExtResource( 3 )]
 
-[node name="Wand" type="Node" parent="StateController"]
-script = ExtResource( 12 )
+[node name="Wait" type="Node" parent="StateController"]
+script = ExtResource( 13 )
+
+[node name="Idle" type="Node" parent="StateController"]
+script = ExtResource( 6 )
 
 [node name="Move" type="Node" parent="StateController"]
 script = ExtResource( 5 )
 
-[node name="Seek" type="Node" parent="StateController"]
-script = ExtResource( 6 )
+[node name="Agro" type="Node" parent="StateController"]
+script = ExtResource( 14 )
 
-[node name="Look" type="Node" parent="StateController"]
+[node name="Targ" type="Node" parent="StateController"]
+script = ExtResource( 12 )
+
+[node name="Jump" type="Node" parent="StateController"]
 script = ExtResource( 7 )
 
-[node name="Batt" type="Node" parent="StateController"]
+[node name="Fall" type="Node" parent="StateController"]
 script = ExtResource( 9 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
