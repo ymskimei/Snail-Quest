@@ -13,7 +13,6 @@ var can_chase : bool
 
 enum State {
 	NULL,
-	WAIT,
 	IDLE,
 	MOVE,
 	AGRO,

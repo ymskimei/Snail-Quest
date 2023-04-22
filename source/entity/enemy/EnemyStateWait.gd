@@ -2,10 +2,6 @@ extends EnemyStateMain
 
 var mid_state = MidState.WAIT
 
-var timer = Timer.new()
-var timer_set = false
-var move_set = false
-
 enum MidState {
 	WAIT, IDLE, MOVE
 }

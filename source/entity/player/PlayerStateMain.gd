@@ -49,8 +49,9 @@ func get_direction():
 
 func apply_facing(turn_speed):
 	if entity.targeting:
-		var target = entity.target.transform.origin
-		MathHelper.slerp_look_at(entity, Vector3(target.x, entity.transform.origin.y, target.z), 1)
+		if is_instance_valid(entity.target):
+			var target = entity.target.transform.origin
+			MathHelper.slerp_look_at(entity, Vector3(target.x, entity.transform.origin.y, target.z), 1)
 	elif !entity.is_on_wall() and entity.can_move:
 		if entity.velocity != Vector3.ZERO:
 			var look_direction = atan2(-entity.velocity.x, -entity.velocity.z)
