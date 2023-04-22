@@ -24,7 +24,6 @@ enum State {
 
 func enter() -> void:
 	look_dir = entity.rotation.y
-	entity.attack_area.monitorable = false
 
 func physics_process(delta: float) -> int:
 	check_target_loc()

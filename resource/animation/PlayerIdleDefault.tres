@@ -168,7 +168,7 @@ tracks/21/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 tracks/22/type = "value"
-tracks/22/path = NodePath("../PlayerAvatar/Skeleton/Body:material/2")
+tracks/22/path = NodePath("../PlayerAvatar/Skeleton/MeshInstance:material/2")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/imported = false

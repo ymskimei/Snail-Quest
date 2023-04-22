@@ -1,5 +1,7 @@
 extends RigidBody
 
+onready var attack_area = $"%AttackArea"
+onready var particles = $"%Particles"
 onready var anim = $AnimationPlayer
 
 export var strength_charge_0 = 10
@@ -9,10 +11,11 @@ export var strength_full_charge = 40
 var strength = 0
 
 func _ready():
+	attack_area.monitorable = false
 	anim.play("MalletStill")
 
 func slam():
-	$"%Particles".emitting = true
+	particles.emitting = true
 	anim.play("MalletChargeSlam")
 
 func on_charge_0():
@@ -29,7 +32,7 @@ func on_full_charge():
 	end_slam()
 
 func on_slam():
-	$"%Area".monitorable = true
+	attack_area.monitorable = true
 	if strength == strength_full_charge:
 		AudioPlayer.play_sfx(AudioPlayer.sfx_mallet_full_slam)
 		Input.start_joy_vibration(0, 1, 1, 0.25)
@@ -46,8 +49,8 @@ func end_slam():
 		cancel_slam()
 
 func cancel_slam():
-	$"%Area".monitorable = false
-	$"%Particles".emitting = false
+	attack_area.monitorable = false
+	particles.emitting = false
 	strength = 0
 	anim.play("MalletStill")
 

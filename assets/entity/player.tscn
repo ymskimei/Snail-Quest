@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://assets/texture/materials/player_eyes_blink.tres" type="Material" id=1]
 [ext_resource path="res://source/entity/player/Player.gd" type="Script" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://resource/animation/PlayerJigDefault.tres" type="Animation" id=26]
 [ext_resource path="res://resource/equipped_player.tres" type="Resource" id=27]
 [ext_resource path="res://resource/animation/PlayerSlamDefault.tres" type="Animation" id=28]
+[ext_resource path="res://assets/gui/gui_debug_healthbar.tscn" type="PackedScene" id=29]
 
 [sub_resource type="Skin" id=3]
 resource_name = "Skin"
@@ -408,7 +409,8 @@ bones/20/rest = Transform( 0.999901, 0, 0.0140371, 0, 1, 0, -0.0140371, 0, 0.999
 bones/20/enabled = true
 bones/20/bound_children = [  ]
 
-[node name="Body" type="MeshInstance" parent="PlayerAvatar/Skeleton"]
+[node name="MeshInstance" type="MeshInstance" parent="PlayerAvatar/Skeleton"]
+unique_name_in_owner = true
 mesh = ExtResource( 24 )
 skin = SubResource( 3 )
 material/0 = ExtResource( 5 )
@@ -508,6 +510,8 @@ anims/PlayerSlamDefault = ExtResource( 28 )
 anims/PlayerSwingDefault = ExtResource( 4 )
 anims/PlayerTuckDefault = ExtResource( 19 )
 anims/RESET = SubResource( 29 )
+
+[node name="DebugHealthBar" parent="." instance=ExtResource( 29 )]
 
 [connection signal="area_entered" from="AffectArea" to="." method="_on_Area_area_entered"]
 [connection signal="body_entered" from="AffectArea" to="." method="_on_Area_body_entered"]

@@ -202,11 +202,11 @@ local_coords = false
 process_material = SubResource( 7 )
 draw_pass_1 = SubResource( 5 )
 
-[node name="Area" type="Area" parent="Mallet" groups=["attack"]]
+[node name="AttackArea" type="Area" parent="Mallet" groups=["attack"]]
 unique_name_in_owner = true
 monitorable = false
 
-[node name="CollisionShape" type="CollisionShape" parent="Mallet/Area"]
+[node name="CollisionShape" type="CollisionShape" parent="Mallet/AttackArea"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 2.10202, 0 )
 shape = SubResource( 1 )
 
@@ -223,5 +223,4 @@ anims/MalletStill = ExtResource( 4 )
 anims/MalletWeakSlam = SubResource( 12 )
 anims/RESET = SubResource( 10 )
 
-[connection signal="area_entered" from="Mallet/Area" to="." method="_on_Area_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

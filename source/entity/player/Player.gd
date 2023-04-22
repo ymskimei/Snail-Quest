@@ -40,7 +40,7 @@ func _ready():
 
 func _physics_process(delta : float) -> void:
 	states.physics_process(delta)
-	if target == null:
+	if !is_instance_valid(target):
 		target = MathHelper.find_target(self, "target")
 	else:
 		target_check()
@@ -63,6 +63,7 @@ func inflict_damage(damage_amount):
 func set_current_health(new_amount):
 	health = new_amount
 	emit_signal("health_changed", new_amount)
+	debug_healthbar()
 	if health <= 0:
 		kill_player()
 		print("Player Died")

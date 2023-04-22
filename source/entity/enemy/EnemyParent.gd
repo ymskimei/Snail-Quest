@@ -21,6 +21,7 @@ var target_seen : bool
 var is_pushed : bool
 
 func _ready():
+	attack_area.monitorable = false
 	states.ready(self)
 
 func _physics_process(delta):
@@ -36,7 +37,7 @@ func set_current_health(new_amount):
 	emit_signal("health_changed", new_amount)
 	debug_healthbar()
 	if health <= 0:
-		print("Enemy Died")
+		queue_free()
 
 func _on_Area_area_entered(area):
 	if area.is_in_group("attack"):
