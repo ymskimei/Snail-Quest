@@ -3,16 +3,13 @@ extends Node
 
 var entity : EnemyParent
 
-var x_location = rand_range(-360, 360)
-var z_location = rand_range(-360, 360)
-
-var rot_speed = 0.05
-var can_chase : bool
-
-
+var look_dir : float
 var target_distance : float
 var target_loc : Vector3
 var snap_vector = Vector3.ZERO
+
+var state_done : bool
+var can_chase : bool
 
 enum State {
 	NULL,
@@ -26,7 +23,8 @@ enum State {
 }
 
 func enter() -> void:
-	pass
+	look_dir = entity.rotation.y
+	entity.attack_area.monitorable = false
 
 func physics_process(delta: float) -> int:
 	check_target_loc()
@@ -35,17 +33,22 @@ func physics_process(delta: float) -> int:
 func apply_gravity(delta):
 	entity.velocity.y += -entity.gravity * delta
 	entity.velocity.y = clamp(entity.velocity.y, -entity.gravity, entity.jump)
-	entity.velocity = entity.move_and_slide_with_snap(entity.velocity, snap_vector, Vector3.UP)
+	entity.velocity = entity.move_and_slide_with_snap(entity.velocity, snap_vector, Vector3.UP, true)
 
-func move(delta, speed):
+func apply_movement(delta, speed):
 	var current = entity.transform.origin
 	var next = entity.navi_agent.get_next_location()
-	var velocity = (next - current).normalized() * delta * (entity.speed * speed)
+	var velocity = (Vector3(next.x, current.y, next.z) - current).normalized() * delta * (entity.speed * speed)
 	entity.move_and_collide(velocity)
+
+func rotate():
+	look_dir = entity.rotation.y + deg2rad((randi() % 270) - 135)
 
 func check_target_loc():
 	target_distance = entity.target.get_global_translation().distance_to(entity.get_global_translation())
 	target_loc = entity.target.transform.origin
+
+func chase_locked():
 	if target_distance >= 4:
 		can_chase = true
 	else:

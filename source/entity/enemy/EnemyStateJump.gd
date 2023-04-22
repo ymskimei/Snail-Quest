@@ -1,29 +1,27 @@
 extends EnemyStateMain
 
-var look_dir
 var timer = Timer.new()
 
 func enter():
 	print("Enemy State: JUMP")
-	entity.anim.play("PawnIdle")
+	entity.anim.play("PawnJump")
+	snap_vector = Vector3.ZERO
+	state_done = false
 	timer.one_shot = true
 	timer.connect("timeout", self, "end_wait")
 	add_child(timer)
-	timer.wait_time = randi() % 2 + 1
+	timer.set_wait_time(0.3)
 	timer.start()
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	apply_gravity(delta)
-	if entity.target_seen:
-		return State.BATT
+	apply_movement(delta, 5)
+	entity.velocity.y += (entity.jump * 50) * delta
+	entity.navi_agent.set_target_location(entity.target.transform.origin)
+	if state_done:
+		return State.FALL
 	return State.NULL
 
 func end_wait():
-	rotate()
-	timer.wait_time = randi() % 2 + 1
-	timer.start()
-
-func rotate():
-	look_dir = entity.rotation.y + deg2rad((randi() % 270) - 135)
-	entity.rotation.y == look_dir
+	state_done = true

@@ -5,14 +5,15 @@ var mid_state = MidState.WAIT
 var timer = Timer.new()
 var timer_set = false
 var move_set = false
-var look_dir
 
 enum MidState {
 	WAIT, IDLE, MOVE
 }
 
 func enter():
-	print("Enemy State: WANDER")
+	print("Enemy State: WAIT")
+	entity.anim.play("PawnIdle")
+	snap_vector = Vector3.DOWN
 	mid_state = MidState.WAIT
 
 func physics_process(delta: float) -> int:

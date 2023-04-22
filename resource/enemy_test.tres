@@ -11,4 +11,4 @@ strength = 10
 gravity = 50
 speed = 5
 acceleration = 0
-jump = 0
+jump = 10

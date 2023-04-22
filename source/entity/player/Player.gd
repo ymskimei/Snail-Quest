@@ -52,9 +52,9 @@ func _physics_process(delta : float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
 
-func _on_body_entered(body):
-	if body.is_in_group("enemy"):
-		inflict_damage(body.strength)
+func _on_Area_area_entered(area):
+	if area.is_in_group("danger"):
+		inflict_damage(area.get_parent().strength)
 
 func inflict_damage(damage_amount):
 	set_current_health(health - damage_amount)
@@ -112,5 +112,3 @@ func set_interaction_text(text):
 		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
 		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
 		interaction_label.set_visible(true)
-
-
