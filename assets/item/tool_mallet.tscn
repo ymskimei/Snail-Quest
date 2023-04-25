@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/texture/slash.png" type="Texture" id=1]
 [ext_resource path="res://assets/model/needle.mesh" type="ArrayMesh" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://assets/model/spool.mesh" type="ArrayMesh" id=5]
 [ext_resource path="res://resource/animation/MalletSlamDown.tres" type="Animation" id=6]
 [ext_resource path="res://resource/animation/MalletChargeSlam.tres" type="Animation" id=7]
+[ext_resource path="res://resource/animation/MalletSwingRight.tres" type="Animation" id=8]
+[ext_resource path="res://resource/animation/MalletSwingLeft.tres" type="Animation" id=9]
 
 [sub_resource type="Shader" id=6]
 code = "shader_type particles;
@@ -188,7 +190,7 @@ mesh = ExtResource( 2 )
 skeleton = NodePath("../../..")
 
 [node name="MeshInstance2" type="MeshInstance" parent="Mallet"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.6, 0, 2.1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0 )
 mesh = ExtResource( 5 )
 skeleton = NodePath("../../..")
 
@@ -220,6 +222,8 @@ anims/MalletChargeSlam = ExtResource( 7 )
 anims/MalletSlam = SubResource( 11 )
 anims/MalletSlamDown = ExtResource( 6 )
 anims/MalletStill = ExtResource( 4 )
+anims/MalletSwingLeft = ExtResource( 9 )
+anims/MalletSwingRight = ExtResource( 8 )
 anims/MalletWeakSlam = SubResource( 12 )
 anims/RESET = SubResource( 10 )
 

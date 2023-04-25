@@ -15,6 +15,8 @@ func input(_event: InputEvent) -> int:
 			return State.HIDE
 		else:
 			return State.DODG
+	needle()
+	mallet()
 	return State.NULL
 
 func physics_process(delta: float) -> int:

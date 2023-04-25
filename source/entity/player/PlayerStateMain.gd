@@ -10,6 +10,9 @@ var input_right = 0
 
 var shell_jumped : bool
 var previous_swing : bool
+var action_combat_held : bool
+
+var timer = Timer.new()
 
 enum State {
 	NULL,
@@ -81,27 +84,26 @@ func dodge_roll():
 	if entity.can_move:
 		if Input.is_action_just_pressed("joy_up"):
 			input_up += 1
-			double_click()
+			input_timer()
 			if input_up >= 2:
 				return true
 		if Input.is_action_just_pressed("joy_down"):
 			input_down += 1
-			double_click()
+			input_timer()
 			if input_down >= 2:
 				return true
 		if Input.is_action_just_pressed("joy_left"):
 			input_left += 1
-			double_click()
+			input_timer()
 			if input_left >= 2:
 				return true
 		if Input.is_action_just_pressed("joy_right"):
 			input_right += 1
-			double_click()
+			input_timer()
 			if input_right >= 2:
 				return true
 
-func double_click():
-	var timer = Timer.new()
+func input_timer():
 	timer.set_one_shot(true)
 	timer.set_wait_time(0.35)
 	timer.connect("timeout", self, "on_input_timer")
@@ -113,8 +115,12 @@ func on_input_timer():
 	input_down = 0
 	input_left = 0
 	input_right = 0
+	if Input.is_action_pressed("action_combat"):
+		action_combat_held = true
+	else:
+		action_combat_held = false
 
-func needle_swing():
+func needle():
 	var needle = entity.eye_point.get_node_or_null("Needle")
 	if is_instance_valid(needle):
 		if Input.is_action_just_released("action_combat"):
@@ -126,22 +132,35 @@ func needle_swing():
 				entity.animator.play_backwards("PlayerSwingDefault")
 				needle.swing_right()
 				previous_swing = true
+		if entity.targeting:
+			needle.directional_swing()
 
-func needle_aiming():
-	var needle = entity.eye_point.get_node_or_null("Needle")
-	if is_instance_valid(needle):
-		needle.directional_swing()
-
-func mallet_slam():
+func mallet():
 	var mallet = entity.eye_point.get_node_or_null("Mallet")
 	if is_instance_valid(mallet):
-		if Input.is_action_pressed("action_combat"):
-			entity.can_move = false
-			entity.animator.play("PlayerSlamDefault")
-			mallet.slam()
-		else:
-			mallet.end_slam()
+		if Input.is_action_just_pressed("action_combat"):
+			input_timer()
+			yield(timer, "timeout")
+			if action_combat_held == true:
+				entity.can_move = false
+				entity.animator.play("PlayerSlamDefault")
+				mallet.slam()
+		elif Input.is_action_just_released("action_combat"):
 			entity.can_move = true
+			entity.animator.play("PlayerIdleDefault")
+			mallet.end_slam()
+		if Input.is_action_just_released("action_combat") and action_combat_held == false:
+			if previous_swing:
+				entity.animator.play_backwards("PlayerSwingDefault")
+				mallet.swing_left()
+				previous_swing = false
+				yield(entity.animator, "animation_finished")
+			else:
+				entity.animator.play("PlayerSwingDefault")
+				mallet.swing_right()
+				previous_swing = true
+				yield(entity.animator, "animation_finished")
+	print(action_combat_held)
 
 func exit() -> void:
 	pass

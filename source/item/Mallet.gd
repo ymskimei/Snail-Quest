@@ -18,6 +18,24 @@ func slam():
 	particles.emitting = true
 	anim.play("MalletChargeSlam")
 
+func swing_left():
+	strength = strength_charge_0
+	attack_area.monitorable = true
+	particles.emitting = true
+	anim.play("MalletSwingLeft")
+	yield(anim, "animation_finished")
+	attack_area.monitorable = false
+	strength = 0
+
+func swing_right():
+	strength = strength_charge_0
+	attack_area.monitorable = true
+	particles.emitting = true
+	anim.play("MalletSwingRight")
+	yield(anim, "animation_finished")
+	attack_area.monitorable = false
+	strength = 0
+
 func on_charge_0():
 	AudioPlayer.play_sfx(AudioPlayer.sfx_mallet_charge_0)
 	strength = strength_charge_0
