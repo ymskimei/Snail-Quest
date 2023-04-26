@@ -3,7 +3,7 @@ extends Node
 signal game_end
 
 #Irrelevant for now, they relate to the previous scene transitioning
-var room_first = preload("res://assets/world/chunkworld.tscn")
+var room_first = preload("res://assets/world/dev/world_test.tscn")
 var room_current : Spatial
 
 #Scene for the chunk junk
