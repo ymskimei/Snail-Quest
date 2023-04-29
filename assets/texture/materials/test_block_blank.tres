@@ -6,7 +6,8 @@ load_path = "res://import/test_block_blank.png-f61f01e76ec6fe207b11df34e3982d08.
 
 [resource]
 params_diffuse_mode = 4
-params_specular_mode = 1
+params_specular_mode = 3
 albedo_texture = SubResource( 1 )
+metallic = 0.25
 uv1_scale = Vector3( 0.5, 0.5, 0.5 )
 uv1_triplanar = true

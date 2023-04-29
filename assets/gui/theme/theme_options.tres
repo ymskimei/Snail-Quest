@@ -1,12 +1,24 @@
-[gd_resource type="Theme" load_steps=5 format=2]
+[gd_resource type="Theme" load_steps=9 format=2]
 
 [ext_resource path="res://assets/texture/gui/icon_box_unchecked.png" type="Texture" id=1]
 [ext_resource path="res://assets/gui/font/font_default.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/texture/gui/icon_box_checked.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/gui/icon_box_selections.png" type="Texture" id=4]
 
+[sub_resource type="StyleBoxTexture" id=1]
+
+[sub_resource type="StyleBoxTexture" id=2]
+
+[sub_resource type="StyleBoxTexture" id=3]
+
+[sub_resource type="StyleBoxTexture" id=4]
+
 [resource]
 default_font = ExtResource( 2 )
+Button/styles/focus = SubResource( 1 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 3 )
+Button/styles/pressed = SubResource( 4 )
 CheckBox/icons/checked = ExtResource( 3 )
 CheckBox/icons/unchecked = ExtResource( 1 )
 HSlider/icons/grabber = null

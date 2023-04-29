@@ -60,7 +60,7 @@ func load_chunks():
 
 	for x in range(render_radius):
 		for z in range(render_radius):
-			if pow(x,2) + pow(z,2) < pow(render_radius, 2):
+			if pow(x, 2) + pow(z, 2) < pow(render_radius, 2):
 				new_current[Vector2(+x+current_chunk.x, +z+current_chunk.y)] = null
 				new_current[Vector2(+x+current_chunk.x, -z+current_chunk.y)] = null
 				new_current[Vector2(-x+current_chunk.x, +z+current_chunk.y)] = null
