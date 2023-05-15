@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "MeshInstance",
+"class": "AimCursor",
+"language": "GDScript",
+"path": "res://source/gui/GuiAimCursor.gd"
+}, {
 "base": "CameraStateMain",
 "class": "CameraStateIsom",
 "language": "GDScript",
@@ -98,11 +103,6 @@ _global_script_classes=[ {
 "class": "EntityStateParent",
 "language": "GDScript",
 "path": "res://source/entity/EntityStateParent.gd"
-}, {
-"base": "Resource",
-"class": "EverythingLibraryImport",
-"language": "GDScript",
-"path": "res://addons/everything_library/src/import_data.gd"
 }, {
 "base": "Node",
 "class": "GuiConsoleCategory",
@@ -250,6 +250,7 @@ _global_script_classes=[ {
 "path": "res://addons/resources_speadsheet_view/editor_stylebox_overrider.gd"
 } ]
 _global_script_class_icons={
+"AimCursor": "",
 "CameraStateIsom": "",
 "CameraStateMain": "",
 "CellEditor": "",
@@ -268,7 +269,6 @@ _global_script_class_icons={
 "EnemyStateMain": "",
 "EntityParent": "",
 "EntityStateParent": "",
-"EverythingLibraryImport": "",
 "GuiConsoleCategory": "",
 "GuiConsoleCommand": "",
 "HistoryRow": "",
@@ -604,12 +604,12 @@ quality/filters/sharpen_intensity=0.5
 quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-quality/directional_shadow/size=5120
+quality/directional_shadow/size=8192
 quality/shadow_atlas/size=5120
-quality/shadow_atlas/quadrant_0_subdiv=2
-quality/shadow_atlas/quadrant_1_subdiv=3
-quality/shadow_atlas/quadrant_2_subdiv=4
-quality/shadow_atlas/quadrant_3_subdiv=5
+quality/shadow_atlas/quadrant_0_subdiv=3
+quality/shadow_atlas/quadrant_1_subdiv=4
+quality/shadow_atlas/quadrant_2_subdiv=5
+quality/shadow_atlas/quadrant_3_subdiv=6
 quality/shadows/filter_mode=0
 quality/shading/force_vertex_shading.mobile=false
 quality/shading/use_physical_light_attenuation=true

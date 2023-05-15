@@ -1,6 +1,6 @@
 [gd_scene load_steps=36 format=2]
 
-[ext_resource path="res://assets/texture/materials/player_eyes_blink.tres" type="Material" id=1]
+[ext_resource path="res://assets/texture/materials/player_eyes.tres" type="Material" id=1]
 [ext_resource path="res://source/entity/player/Player.gd" type="Script" id=2]
 [ext_resource path="res://resource/player.tres" type="Resource" id=3]
 [ext_resource path="res://resource/animation/PlayerSwingDefault.tres" type="Animation" id=4]
@@ -425,7 +425,7 @@ tip_bone = "BoneEyeballMainController"
 target_node = NodePath("../../../IK/EyeMainControl")
 
 [node name="EyeAnchor" type="BoneAttachment" parent="PlayerAvatar/Skeleton"]
-transform = Transform( 1, 6.14222e-08, -5.84524e-08, 5.84524e-08, -6.35275e-22, 1, 6.14222e-08, -1, -3.59028e-15, 0.391507, 1.38435, -1.21405 )
+transform = Transform( 1, 0, 0, 0, 0, 1, 0, -1, 0, 0.397249, 1.44457, -1.20899 )
 bone_name = "BoneEyeballRight"
 
 [node name="EyePoint" type="Spatial" parent="PlayerAvatar/Skeleton/EyeAnchor"]
@@ -465,9 +465,11 @@ collision_mask = 12
 collide_with_areas = true
 
 [node name="IK" type="Spatial" parent="."]
+visible = false
 
 [node name="EyeMainControl" type="Position3D" parent="IK"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.9 )
+visible = false
 
 [node name="Gui" type="Node" parent="."]
 
@@ -514,4 +516,3 @@ anims/RESET = SubResource( 29 )
 [node name="DebugHealthBar" parent="." instance=ExtResource( 29 )]
 
 [connection signal="area_entered" from="AffectArea" to="." method="_on_Area_area_entered"]
-[connection signal="body_entered" from="AffectArea" to="." method="_on_Area_body_entered"]

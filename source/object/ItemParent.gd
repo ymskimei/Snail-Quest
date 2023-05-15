@@ -48,7 +48,7 @@ func _on_Area_body_entered(body):
 		else:
 			var slot = item.specific_slot
 			tools.set_item(slot, item)
-		AudioPlayer.play_sfx(AudioPlayer.sfx_item_pickup_test)
+		AudioPlayer.play_sfx(AudioPlayer.sfx_item_pickup)
 		collecting = true
 	pass
 

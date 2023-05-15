@@ -3,16 +3,17 @@ extends EntityParent
 
 export(Resource) var equipped
 
-onready var player_cam = get_parent().get_node("Camera")
+onready var player_cam = GlobalManager.camera
 onready var avatar = $PlayerAvatar
 onready var skeleton = $"%Skeleton"
 onready var states = $StateController
 onready var interaction_label = $Gui/InteractionLabel
 onready var animator = $Animation/AnimationPlayer
 onready var eye_point = $"%EyePoint"
-
 onready var ray_down = $"%RayDown"
 onready var jump_check = $"%CheckerFloor"
+
+var cursor = preload("res://assets/gui/gui_aim_cursor.tscn")
 
 signal health_changed
 signal player_killed
@@ -28,9 +29,12 @@ var can_move : bool
 var can_interact : bool
 var in_shell : bool
 var is_tool_equipped : bool
+var cursor_activated : bool
 
 var interactable = null
 var target = null
+
+var cursor_pos : Vector3
 
 func _ready():
 	states.ready(self)

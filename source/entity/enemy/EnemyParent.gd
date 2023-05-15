@@ -9,7 +9,6 @@ onready var target = GlobalManager.player
 onready var attack_area = $"%AttackArea"
 
 onready var navi_agent : NavigationAgent = $NavigationAgent
-onready var target_location : Node = $"../../Player"
 
 onready var follow_timer = $FollowTimer
 onready var states = $StateController

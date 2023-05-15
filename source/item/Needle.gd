@@ -3,12 +3,25 @@ extends RigidBody
 onready var attack_area = $"%AttackArea"
 onready var particles = $"%Particles"
 onready var anim = $AnimationPlayer
+
 var stored_attacks = 0
 var strength = 5
+
+var throwing_velocity : Vector3
+var throw_speed = 5
+var gravity = 5
+
+var is_throwing : bool
 
 func _ready():
 	attack_area.monitorable = false
 	anim.connect("animation_finished", self, "on_animation_finished")
+
+func _physics_process(delta):
+	if is_throwing:
+		var velocity = throwing_velocity + (Vector3(0, -gravity, 0) * delta)
+		translation += velocity
+		rotation = velocity.normalized().slerp(Vector3.FORWARD, velocity.length() / throw_speed)
 
 func swing_left():
 	attack_area.monitorable = true
@@ -33,6 +46,10 @@ func directional_swing():
 		rotation.x = clamp(lerp(rotation.x, (Input.get_action_raw_strength("cam_down") - Input.get_action_raw_strength("cam_up")) * 1.5, 0.2), deg2rad(-45), deg2rad(90))
 	else:
 		make_stationary()
+
+func throw(throw_direction : Vector3):
+	throwing_velocity = throw_direction.normalized() * throw_speed
+	is_throwing = true
 
 func make_stationary():
 	attack_area.monitorable = false

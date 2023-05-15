@@ -9,7 +9,6 @@ func enter():
 	state_done = false
 	timer.one_shot = true
 	timer.connect("timeout", self, "end_wait")
-	add_child(timer)
 	timer.set_wait_time(randi() % 5 + 1)
 	timer.start()
 

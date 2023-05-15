@@ -12,7 +12,7 @@ var sfx_cam_target_unlock = preload("res://assets/sound/sfx_cam_target_unlock.og
 var sfx_cam_first_person = preload("res://assets/sound/sfx_cam_first_person.ogg")
 var sfx_cam_third_person = preload("res://assets/sound/sfx_cam_third_person.ogg")
 
-var sfx_item_pickup_test = preload("res://assets/sound/sfx_item_pickup_test.ogg")
+var sfx_item_pickup = preload("res://assets/sound/sfx_item_pickup.ogg")
 
 var sfx_snail_shell_in = preload("res://assets/sound/sfx_snail_shell_in.ogg")
 var sfx_snail_shell_out = preload("res://assets/sound/sfx_snail_shell_out.ogg")

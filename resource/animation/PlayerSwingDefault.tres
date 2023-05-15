@@ -1,4 +1,7 @@
-[gd_resource type="Animation" format=2]
+[gd_resource type="Animation" load_steps=3 format=2]
+
+[ext_resource path="res://assets/texture/materials/player_eyes_squint.tres" type="Material" id=1]
+[ext_resource path="res://assets/texture/materials/player_eyes.tres" type="Material" id=2]
 
 [resource]
 resource_name = "Action001"
@@ -151,3 +154,15 @@ tracks/20/loop_wrap = true
 tracks/20/imported = false
 tracks/20/enabled = true
 tracks/20/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, -4.65661e-10, 0, 1, 1, 1, 1, 0.08, 1, -1.39727, -0.384169, -0.796993, 0, -9.31322e-10, 0, 1, 1, 1, 1, 0.26, 1, -1.27542, -0.480212, -1.18467, 0, -9.31322e-10, 0, 1, 1, 1, 1, 0.29, 1, -0.0370701, -0.480212, -1.23539, 0, -9.31322e-10, 0, 1, 1, 1, 1, 0.33, 1, 0.854044, -0.501914, -1.10697, 0, -4.65661e-10, 0, 1, 1, 1, 1, 0.41, 1, 1.1659, -0.528241, -0.7922, 0, -4.65661e-10, 0, 1, 1, 1, 1, 0.51, 1, 0.871158, -0.394702, -0.434989, 0, -4.65661e-10, 0, 1, 1, 1, 1, 0.54, 1, 0.352567, -0.15974, -0.144666, 0, -4.65661e-10, 0, 1, 1, 1, 1, 0.6, 1, 0, 0, 0, 0, -4.65661e-10, 0, 1, 1, 1, 1 )
+tracks/21/type = "value"
+tracks/21/path = NodePath("../PlayerAvatar/Skeleton/MeshInstance:material/2")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.08, 0.51, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 1 ), ExtResource( 2 ) ]
+}
