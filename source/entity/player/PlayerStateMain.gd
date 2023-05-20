@@ -55,26 +55,20 @@ func get_direction():
 
 func apply_facing(turn_speed):
 	if entity.targeting:
-		var target = entity.target.transform.origin
-		MathHelper.slerp_look_at(entity, Vector3(target.x, entity.transform.origin.y, target.z), 1)
+		if is_instance_valid(entity.target) and entity.target_found:
+			var target = entity.target.transform.origin
+			MathHelper.slerp_look_at(entity, Vector3(target.x, entity.transform.origin.y, target.z), 0.2)
 	elif !entity.is_on_wall() and entity.can_move:
 		if entity.velocity != Vector3.ZERO:
 			var look_direction = atan2(-entity.velocity.x, -entity.velocity.z)
 			entity.rotation.y = lerp_angle(entity.rotation.y, look_direction, 0.2)
 		if entity.ray_down.is_colliding() and entity.is_on_floor():
 			var normal = entity.ray_down.get_collision_normal()
-			var tform = apply_surface_align(entity.global_transform, normal)
+			var tform = MathHelper.apply_surface_align(entity.global_transform, normal)
 			entity.global_transform = entity.global_transform.interpolate_with(tform, 0.3)
-	
 	elif entity.cursor_activated:
-		#MathHelper.slerp_look_at(entity, Vector3(entity.aim_cursor.global_translation.x, entity.transform.origin.y, entity.aim_cursor.global_translation.z), 1)
+		MathHelper.slerp_look_at(entity, Vector3(GlobalManager.aim_cursor.global_translation.x, entity.transform.origin.y, GlobalManager.aim_cursor.global_translation.z), 0.3)
 		pass
-
-func apply_surface_align(tform, new_up):
-	tform.basis.y = new_up
-	tform.basis.x = -tform.basis.z.cross(new_up)
-	tform.basis = tform.basis.orthonormalized()
-	return tform
 
 func apply_movement(delta, no_sliding, angle):
 	if entity.can_move:
@@ -138,12 +132,14 @@ func needle():
 		if Input.is_action_just_pressed("action_combat"):
 			entity.can_move = false
 			entity.cursor_activated = true
-			entity.get_parent().add_child(cursor)
+			if !is_instance_valid(entity.get_parent().get_node("AimCursor")):
+				entity.get_parent().add_child(cursor)
 			#print(entity.aim_cursor)
 		if Input.is_action_just_released("action_combat"):
 			entity.can_move = true
 			entity.cursor_activated = false
-			entity.get_parent().remove_child(cursor)
+			if is_instance_valid(entity.get_parent().get_node("AimCursor")):
+				entity.get_parent().get_node("AimCursor").queue_free()
 #			var last_pos = needle.global_transform
 #			entity.eye_point.remove_child(needle)
 #			entity.get_parent().add_child(needle)

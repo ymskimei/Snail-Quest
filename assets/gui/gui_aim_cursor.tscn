@@ -1,31 +1,29 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/shader/temp_decal.tres" type="Shader" id=1]
 [ext_resource path="res://assets/texture/gui/aiming_target.png" type="Texture" id=2]
-[ext_resource path="res://assets/texture/gui/aiming_target_ocul.png" type="Texture" id=3]
 [ext_resource path="res://source/gui/GuiAimCursor.gd" type="Script" id=4]
 
-[sub_resource type="CubeMesh" id=31]
+[sub_resource type="CylinderMesh" id=33]
 
-[sub_resource type="ShaderMaterial" id=32]
-shader = ExtResource( 1 )
-shader_param/albedo_tint = Color( 1, 1, 1, 1 )
-shader_param/emission_tint = Color( 0.27451, 0.627451, 1, 1 )
-shader_param/emission_strength = 1.0
-shader_param/occlusion_strength = 1.5
-shader_param/specular_strength = 0.0
-shader_param/metallic_strength = 0.0
-shader_param/animation_speed = 10.0
-shader_param/flipbook_columns_count = 2
-shader_param/one_shot = false
-shader_param/start_time = null
-shader_param/current_frame_blend = 0.0
-shader_param/use_normal_map = true
-shader_param/albedo = ExtResource( 2 )
-shader_param/occlusion = ExtResource( 3 )
+[sub_resource type="SpatialMaterial" id=32]
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = ExtResource( 2 )
+uv1_scale = Vector3( 0.5, 0.5, 0.5 )
+uv1_offset = Vector3( 0.5, 0.5, 0.5 )
+uv1_triplanar = true
 
-[node name="AimCursor" type="MeshInstance"]
-transform = Transform( 0.7, 0, 0, 0, -3.0598e-08, -0.7, 0, 0.7, -3.0598e-08, 0, 0, 0 )
-mesh = SubResource( 31 )
-material/0 = SubResource( 32 )
+[node name="AimCursor" type="Spatial"]
 script = ExtResource( 4 )
+
+[node name="Mesh" type="MeshInstance" parent="."]
+transform = Transform( 0.7, 0, 0, 0, 0.001, 0, 0, 0, 0.7, 0, 0, 0 )
+mesh = SubResource( 33 )
+material/0 = SubResource( 32 )
+
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
+enabled = true
+cast_to = Vector3( 0, -20, 0 )
+collision_mask = 12
+collide_with_areas = true

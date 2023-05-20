@@ -37,6 +37,12 @@ func find_target(node : Object, group_name : String, get_closest := true):
 				return_target = target_group[index]
 		return return_target
 
+func apply_surface_align(tform, new_up):
+	tform.basis.y = new_up
+	tform.basis.x = -tform.basis.z.cross(new_up)
+	tform.basis = tform.basis.orthonormalized()
+	return tform
+
 #func degrees_to_cardinal(angle):
 #	var directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
 #	var i = int(round(angle / (360 / len(directions))))

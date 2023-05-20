@@ -52,3 +52,9 @@ func select_display_resolution(index):
 	var size = display_resolution_dict.get(display_resolution.get_item_text(index))
 	OS.set_window_size(size)
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT, SceneTree.STRETCH_ASPECT_KEEP, size)
+
+#CONTROLS TODO:
+#	Invert toggle
+#	Lefty toggle
+#	Camera target toggle/hold toggle
+#	Advanced (keybind setting) with reset

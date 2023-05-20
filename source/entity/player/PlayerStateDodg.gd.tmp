@@ -19,8 +19,6 @@ func enter() -> void:
 			entity.animator.play("PlayerRollFront")
 		elif entity.input.z < 0:
 			entity.animator.play("PlayerRollBack")
-		else:
-			dodge_complete
 	else:
 		entity.animator.play("PlayerRollFront")
 	entity.in_shell = true

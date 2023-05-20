@@ -25,6 +25,7 @@ var current_collider
 var collider
 
 var targeting : bool
+var target_found : bool
 var can_move : bool
 var can_interact : bool
 var in_shell : bool
@@ -92,13 +93,15 @@ func target_check():
 	var max_enemy_distance = 15
 	var max_interactable_distance = 2
 	if Input.is_action_pressed("cam_lock"):
+		targeting = true
 		if target is EnemyParent and target_distance < max_enemy_distance or ObjectInteractable and target_distance < max_interactable_distance:
-			targeting = true
+			target_found = true
 		else:
-			targeting = false
+			target_found = false
 	else:
 		target = MathHelper.find_target(self, "target")
 		targeting = false
+		
 	if target is ObjectInteractable and target_distance < max_interactable_distance and relative_facing >= 0:
 		can_interact = true
 		set_interaction_text(target.get_interaction_text())

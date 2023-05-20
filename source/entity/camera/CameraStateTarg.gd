@@ -6,18 +6,28 @@ export var targeting_rotation = -0.5
 export var targeting_speed = 0.2
 export var distance_targeting = 5
 export var zoom_targeting = 50
+var player_rot : Vector3
 
 func enter() -> void:
 	print("Camera State: TARGET")
-	AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_lock)
+	player_rot = entity.player.rotation
+	if entity.player.target_found:
+		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_lock)
+	else:
+		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_no_target_lock)
 	entity.anim_bars.play("BarsAppear")
 	tween_cam_zoom()
 
 func physics_process(delta):
 	if is_instance_valid(entity.player.target):
-		MathHelper.slerp_look_at(entity, entity.player.target.global_transform.origin, targeting_speed)
-	entity.rotation.x = lerp(entity.rotation.x, targeting_rotation, follow_speed * delta)
+		if entity.player.target_found:
+			MathHelper.slerp_look_at(entity, entity.player.target.global_transform.origin, targeting_speed)
+			entity.rotation.x = lerp(entity.rotation.x, targeting_rotation, follow_speed * delta)
+		else:
+			entity.rotation.y = lerp_angle(entity.rotation.y, player_rot.y, 7 * delta)
+			entity.rotation.x = lerp(entity.rotation.x, -0.15, follow_speed * delta)
 	entity.translation = lerp(entity.translation, entity.player.translation + targeting_offset, 5 * delta)
+	
 	if !entity.player.targeting:
 		return State.ORBI
 	return State.NULL
@@ -28,6 +38,9 @@ func tween_cam_zoom():
 	entity.anim_tween.start()
 
 func exit () -> void:
-	AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_unlock)
+	if entity.player.target_found:
+		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_unlock)
+	else:
+		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_no_target_unlock)
 	entity.anim_bars.play("BarsDisappear")
 	tween_cam_zoom()
