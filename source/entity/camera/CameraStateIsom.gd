@@ -34,6 +34,14 @@ func enter() -> void:
 	add_child(rotation_timer_left)
 
 func physics_process(delta):
+	cam_movement(delta)
+
+	if entity.player.targeting:
+		return State.TARG
+	apply_cam_zoom()
+	return State.NULL
+
+func cam_movement(delta):
 	entity.translation = lerp(entity.translation, entity.player.translation + offset, follow_speed * delta)
 	if Input.is_action_just_pressed("cam_right"):
 		tween_isometric(45)
@@ -48,23 +56,15 @@ func physics_process(delta):
 	if Input.is_action_just_pressed("cam_right") or Input.is_action_just_pressed("cam_left"):
 		rotation_sound()
 	if Input.is_action_just_pressed("cam_up"):
-		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_iso_up)
-		tween_overhead(-90)
-		cam_overhead = true
+		if !cam_overhead:
+			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_iso_up)
+			tween_overhead(-90)
+			cam_overhead = true
 	if Input.is_action_just_pressed("cam_down"):
 		if cam_overhead:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_iso_down)
 			tween_cam_pan(lock_iso_arm, entity.camera_lens.rotation.x)
 			cam_overhead = false
-		else:
-			rotation_timer_right.stop()
-			rotation_timer_left.stop()
-			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_perspective)
-			return State.ORBI
-	if entity.player.targeting:
-		return State.TARG
-	apply_cam_zoom()
-	return State.NULL
 
 func on_timeout_right():
 	tween_isometric(45)

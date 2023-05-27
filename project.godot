@@ -331,6 +331,17 @@ GuiMain="*res://assets/gui/gui_main.tscn"
 MathHelper="*res://source/MathHelper.gd"
 GlobalManager="*res://source/GlobalManager.gd"
 
+[debug]
+
+gdscript/warnings/unused_variable=false
+gdscript/warnings/shadowed_variable=false
+gdscript/warnings/unused_argument=false
+gdscript/warnings/unreachable_code=false
+gdscript/warnings/void_assignment=false
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
+gdscript/warnings/integer_division=false
+
 [display]
 
 window/size/width=1920

@@ -11,6 +11,7 @@ onready var interaction_label = $Gui/InteractionLabel
 onready var animator = $Animation/AnimationPlayer
 onready var eye_point = $"%EyePoint"
 onready var ray_down = $"%RayDown"
+onready var ray_forward = $"%RayForward"
 onready var jump_check = $"%CheckerFloor"
 
 var cursor = preload("res://assets/gui/gui_aim_cursor.tscn")

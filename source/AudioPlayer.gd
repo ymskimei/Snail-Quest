@@ -7,10 +7,13 @@ var sfx_cam_iso_up = preload("res://assets/sound/sfx_cam_iso_up.ogg")
 var sfx_cam_iso_down = preload("res://assets/sound/sfx_cam_iso_down.ogg")
 var sfx_cam_iso_rotate_0 = preload("res://assets/sound/sfx_cam_iso_rotate_0.ogg")
 var sfx_cam_iso_rotate_1 = preload("res://assets/sound/sfx_cam_iso_rotate_1.ogg")
+
+var sfx_cam_target_reset = preload("res://assets/sound/sfx_cam_target_reset.ogg")
 var sfx_cam_target_lock = preload("res://assets/sound/sfx_cam_target_lock.ogg")
 var sfx_cam_target_unlock = preload("res://assets/sound/sfx_cam_target_unlock.ogg")
 var sfx_cam_no_target_lock = preload("res://assets/sound/sfx_cam_no_target_lock.ogg")
 var sfx_cam_no_target_unlock = preload("res://assets/sound/sfx_cam_no_target_unlock.ogg")
+
 var sfx_cam_first_person = preload("res://assets/sound/sfx_cam_first_person.ogg")
 var sfx_cam_third_person = preload("res://assets/sound/sfx_cam_third_person.ogg")
 

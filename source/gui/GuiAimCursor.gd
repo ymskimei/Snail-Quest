@@ -6,10 +6,16 @@ func _ready():
 	GlobalManager.register_aim_cursor(self)
 
 func _physics_process(delta):
-	$Mesh.rotation.y += 5 * delta
-	global_translation = lerp(global_translation, GlobalManager.player.global_translation + cursor_movement().rotated(Vector3.UP, GlobalManager.camera.rotation.y) * 3, 0.3)
 	level_cursor()
-	pass
+	$Mesh.rotation.y += 5 * delta
+	var player = GlobalManager.player
+	var new_pos = Vector3.ZERO
+	if player.cursor_activated:
+		new_pos = player.global_translation + cursor_movement().rotated(Vector3.UP, GlobalManager.camera.rotation.y)
+	elif player.targeting:
+		if is_instance_valid(player.target):
+			new_pos = player.target.global_translation
+	global_translation = lerp(global_translation, new_pos * 3, 0.3)
 
 func cursor_movement():
 	var cursor_pos = Vector3.ZERO
@@ -22,7 +28,6 @@ func level_cursor():
 		var normal = $RayCast.get_collision_normal()
 		var tform = MathHelper.apply_surface_align(global_transform, normal)
 		global_transform = global_transform.interpolate_with(tform, 0.3)
-		
 		var floor_height = $RayCast.get_collider().translation.y
 		print(floor_height)
 		translation.y = floor_height + 1

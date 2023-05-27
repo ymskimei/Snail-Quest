@@ -205,7 +205,7 @@ material = ExtResource( 16 )
 transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 1, 48, 13, 4 )
 width = 4.0
 height = 4.0
-depth = 12.0
+depth = 20.0
 material = ExtResource( 18 )
 
 [node name="GreenTop" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner/GrayBox6"]
@@ -213,7 +213,39 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 operation = 2
 width = 4.0
 height = 0.001
-depth = 12.0
+depth = 20.0
+material = ExtResource( 16 )
+
+[node name="GrayBox7" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner"]
+transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 1, 40, 2, 17 )
+material = ExtResource( 18 )
+
+[node name="GreenTop" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner/GrayBox7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+operation = 2
+height = 0.001
+material = ExtResource( 16 )
+
+[node name="GrayBox8" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner"]
+transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 1, 40, 2, 21 )
+material = ExtResource( 18 )
+
+[node name="GreenTop" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner/GrayBox8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+operation = 2
+height = 0.001
+material = ExtResource( 16 )
+
+[node name="GrayBox9" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner"]
+transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 1, 40, 4, 19 )
+depth = 6.0
+material = ExtResource( 18 )
+
+[node name="GreenTop" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner/GrayBox9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+operation = 2
+height = 0.001
+depth = 6.0
 material = ExtResource( 16 )
 
 [node name="EnvironmentDefault" parent="." instance=ExtResource( 1 )]

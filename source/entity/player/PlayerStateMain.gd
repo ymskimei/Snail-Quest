@@ -40,6 +40,7 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	entity.input = get_joy_input()
 	entity.direction = get_direction()
+	apply_aim_cursor()
 	if entity.is_on_floor():
 		shell_jumped = false
 	return State.NULL
@@ -114,6 +115,16 @@ func on_input_timer():
 	else:
 		action_combat_held = false
 
+func apply_aim_cursor():
+	if entity.targeting and entity.target_found or entity.cursor_activated:
+		var cursor = entity.cursor.instance()
+		if is_instance_valid(entity.get_parent().get_node("AimCursor")):
+			entity.get_parent().get_node("AimCursor").queue_free()
+			entity.cursor_activated = false
+		else:
+			entity.get_parent().add_child(cursor)
+			entity.cursor_activated = true
+
 func needle():
 	var needle = entity.eye_point.get_node_or_null("Needle")
 	if is_instance_valid(needle):
@@ -128,18 +139,12 @@ func needle():
 #				previous_swing = true
 #		if entity.targeting:
 #			needle.directionaaal_swing()
-		var cursor = entity.cursor.instance()
 		if Input.is_action_just_pressed("action_combat"):
 			entity.can_move = false
 			entity.cursor_activated = true
-			if !is_instance_valid(entity.get_parent().get_node("AimCursor")):
-				entity.get_parent().add_child(cursor)
-			#print(entity.aim_cursor)
 		if Input.is_action_just_released("action_combat"):
 			entity.can_move = true
 			entity.cursor_activated = false
-			if is_instance_valid(entity.get_parent().get_node("AimCursor")):
-				entity.get_parent().get_node("AimCursor").queue_free()
 #			var last_pos = needle.global_transform
 #			entity.eye_point.remove_child(needle)
 #			entity.get_parent().add_child(needle)

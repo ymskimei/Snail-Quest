@@ -41,6 +41,9 @@ func physics_process(delta: float) -> int:
 		else:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)
 			return State.IDLE
+#	if entity.is_colliding():
+#		Input.start_joy_vibration(0, 1, 1, 0.5)
+#		on_dodge_timer()
 	return State.NULL
 
 func dodge_timer():
