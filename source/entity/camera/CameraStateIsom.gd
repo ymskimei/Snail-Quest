@@ -1,6 +1,9 @@
 class_name CameraStateIsom
 extends CameraStateMain
 
+#Entire mode to be used later in screenshotting,
+#not the game's camera movement
+
 export var rotation_speed = 10
 export var offset = Vector3(0, 1, 0)
 export var follow_speed = 3.5
@@ -19,21 +22,23 @@ var previous_sound : bool
 
 func enter() -> void:
 	print("Camera State: ISOMETRIC")
-	AudioPlayer.play_sfx(AudioPlayer.sfx_cam_perspective)
 	tween_cam_pan(lock_iso_arm, lock_iso_lens)
 	tween_cam_zoom(zoom_iso_normal, distance_iso_normal)
-	zoomed_out = false
+	add_rotation_timers()
+	AudioPlayer.play_sfx(AudioPlayer.sfx_cam_perspective)
 	entity.anim_tween.interpolate_property(entity, "rotation:y", entity.rotation.y, stepify(entity.rotation.y, deg2rad(45)), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 	entity.anim_wobble.play("Wobble")
-	rotation_timer_right.set_wait_time(0.5)
-	rotation_timer_right.connect("timeout", self, "on_timeout_right")
-	add_child(rotation_timer_right)
-	rotation_timer_left.set_wait_time(0.5)
-	rotation_timer_left.connect("timeout", self, "on_timeout_left")
-	add_child(rotation_timer_left)
+	zoomed_out = false
 
 func physics_process(delta):
+	cam_movement(delta)
+	if entity.player.targeting:
+		return State.TARG
+	apply_cam_zoom()
+	return State.NULL
+
+func cam_movement(delta):
 	entity.translation = lerp(entity.translation, entity.player.translation + offset, follow_speed * delta)
 	if Input.is_action_just_pressed("cam_right"):
 		tween_isometric(45)
@@ -48,23 +53,23 @@ func physics_process(delta):
 	if Input.is_action_just_pressed("cam_right") or Input.is_action_just_pressed("cam_left"):
 		rotation_sound()
 	if Input.is_action_just_pressed("cam_up"):
-		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_iso_up)
-		tween_overhead(-90)
-		cam_overhead = true
+		if !cam_overhead:
+			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_iso_up)
+			tween_overhead(-90)
+			cam_overhead = true
 	if Input.is_action_just_pressed("cam_down"):
 		if cam_overhead:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_iso_down)
 			tween_cam_pan(lock_iso_arm, entity.camera_lens.rotation.x)
 			cam_overhead = false
-		else:
-			rotation_timer_right.stop()
-			rotation_timer_left.stop()
-			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_perspective)
-			return State.ORBI
-	if entity.player.targeting:
-		return State.TARG
-	apply_cam_zoom()
-	return State.NULL
+
+func add_rotation_timers():
+	rotation_timer_right.set_wait_time(0.5)
+	rotation_timer_right.connect("timeout", self, "on_timeout_right")
+	add_child(rotation_timer_right)
+	rotation_timer_left.set_wait_time(0.5)
+	rotation_timer_left.connect("timeout", self, "on_timeout_left")
+	add_child(rotation_timer_left)
 
 func on_timeout_right():
 	tween_isometric(45)

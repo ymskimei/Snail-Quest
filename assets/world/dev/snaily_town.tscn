@@ -1,0 +1,3200 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/environment_default.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/model/town_snaily.shape" type="Shape" id=2]
+[ext_resource path="res://assets/model/town_snaily.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/object/grass.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/object/sign.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/object/room_transition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://resource/location/interior_house_player.tres" type="Resource" id=7]
+[ext_resource path="res://resource/snaily_town_entrance.tres" type="Resource" id=8]
+
+[node name="Room" type="Spatial"]
+
+[node name="SignpostModel" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.910173, 0.276208, 0.308697, -0.261573, 0.961098, -0.0887156, -0.321192, 0, 0.947014, -7.8082, 2.5172, 66.8984 )
+resource = ExtResource( 8 )
+
+[node name="EnvironmentDefault" parent="." instance=ExtResource( 1 )]
+dawn_ambient_color = Color( 0.823529, 0.733333, 0.486275, 1 )
+dawn_light_color = Color( 0.635294, 0.611765, 0.576471, 1 )
+day_light_color = Color( 0.556863, 0.537255, 0.494118, 1 )
+dusk_ambient_color = Color( 0.576471, 0.372549, 0.372549, 1 )
+dusk_light_color = Color( 0.85098, 0.662745, 0.447059, 1 )
+night_ambient_color = Color( 0.403922, 0.356863, 0.478431, 1 )
+night_light_color = Color( 0.368627, 0.478431, 0.533333, 1 )
+
+[node name="Transitions" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -72 )
+
+[node name="Area" parent="Transitions" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -41.2396, 1.16516, 92.1929 )
+resource = ExtResource( 7 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+collision_layer = 4
+
+[node name="Plane" type="MeshInstance" parent="StaticBody"]
+mesh = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = ExtResource( 2 )
+
+[node name="Objects" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -61.3665 )
+
+[node name="Cylinder" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.12714, 0, -0.483565, 0, 0.5, 0, 0.483565, 0, -0.12714, -36.7279, 11.8739, 149.927 )
+skeleton = NodePath("")
+
+[node name="Cylinder2" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.198436, 0, -0.458937, 0, 0.5, 0, 0.458937, 0, -0.198436, -32.6931, 11.877, 149.811 )
+skeleton = NodePath("")
+
+[node name="Cylinder3" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.458412, 0, -0.199646, 0, 0.5, 0, 0.199646, 0, 0.458412, -29.9358, 11.8893, 149.088 )
+skeleton = NodePath("")
+
+[node name="Cylinder4" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.187672, 0, -0.463443, 0, 0.5, 0, 0.463443, 0, -0.187672, -27.0874, 11.8515, 148.789 )
+skeleton = NodePath("")
+
+[node name="Cylinder5" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.290685, 0, 0.40682, 0, 0.5, 0, -0.40682, 0, -0.290685, -23.2036, 11.7786, 147.278 )
+skeleton = NodePath("")
+
+[node name="Cylinder6" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.374902, 0, -0.330829, 0, 0.5, 0, 0.330829, 0, -0.374902, -21.7176, 11.7771, 146.062 )
+skeleton = NodePath("")
+
+[node name="Cylinder7" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.135329, 0, -0.481338, 0, 0.5, 0, 0.481338, 0, -0.135329, -19.298, 11.7275, 143.125 )
+skeleton = NodePath("")
+
+[node name="Cylinder8" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.44752, 0, 0.222992, 0, 0.5, 0, -0.222992, 0, -0.44752, -17.1761, 11.7001, 139.527 )
+skeleton = NodePath("")
+
+[node name="Cylinder9" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0136184, 0, -0.499815, 0, 0.5, 0, 0.499815, 0, 0.0136184, -16.2739, 11.7135, 136.764 )
+skeleton = NodePath("")
+
+[node name="Cylinder10" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.00179777, 0, -0.499997, 0, 0.5, 0, 0.499997, 0, 0.00179777, -14.8586, 11.6187, 133.709 )
+skeleton = NodePath("")
+
+[node name="Cylinder11" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.478561, 0, 0.144842, 0, 0.5, 0, -0.144842, 0, -0.478561, -13.6579, 11.6015, 129.531 )
+skeleton = NodePath("")
+
+[node name="Cylinder12" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0190908, 0, -0.499635, 0, 0.5, 0, 0.499635, 0, 0.0190908, -13.2867, 11.5976, 128.519 )
+skeleton = NodePath("")
+
+[node name="Cylinder13" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0137188, 0, 0.499812, 0, 0.5, 0, -0.499812, 0, 0.0137188, -14.0781, 11.4797, 126.941 )
+skeleton = NodePath("")
+
+[node name="Cylinder14" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.347466, 0, -0.359537, 0, 0.5, 0, 0.359537, 0, -0.347466, -15.401, 11.3308, 125.941 )
+skeleton = NodePath("")
+
+[node name="Cylinder15" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.114642, 0, 0.48668, 0, 0.5, 0, -0.48668, 0, -0.114642, -17.4264, 11.5254, 125.681 )
+skeleton = NodePath("")
+
+[node name="Cylinder16" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.377988, 0, -0.3273, 0, 0.5, 0, 0.3273, 0, 0.377988, -19.3642, 11.6946, 125.311 )
+skeleton = NodePath("")
+
+[node name="Cylinder17" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.414991, 0, -0.278895, 0, 0.5, 0, 0.278895, 0, -0.414991, -21.3944, 11.6545, 124.956 )
+skeleton = NodePath("")
+
+[node name="Cylinder18" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.109008, 0, -0.487972, 0, 0.5, 0, 0.487972, 0, 0.109008, -23.0784, 11.6638, 124.902 )
+skeleton = NodePath("")
+
+[node name="Cylinder19" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.492067, 0, -0.0887113, 0, 0.5, 0, 0.0887113, 0, 0.492067, -24.7361, 11.6444, 124.63 )
+skeleton = NodePath("")
+
+[node name="Cylinder20" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.266965, 0, 0.422764, 0, 0.5, 0, -0.422764, 0, 0.266965, -26.3045, 11.6181, 124.313 )
+skeleton = NodePath("")
+
+[node name="Cylinder21" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.145099, 0, 0.478483, 0, 0.5, 0, -0.478483, 0, -0.145099, -28.4299, 11.5858, 123.908 )
+skeleton = NodePath("")
+
+[node name="Cylinder22" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.351958, 0, 0.355141, 0, 0.5, 0, -0.355141, 0, 0.351958, -29.6017, 11.5983, 123.768 )
+skeleton = NodePath("")
+
+[node name="Cylinder23" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.453875, 0, 0.209755, 0, 0.5, 0, -0.209755, 0, -0.453875, -32.1663, 11.4884, 122.602 )
+skeleton = NodePath("")
+
+[node name="Cylinder24" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.468904, 0, -0.173577, 0, 0.5, 0, 0.173577, 0, 0.468904, -32.841, 11.571, 122.627 )
+skeleton = NodePath("")
+
+[node name="Cylinder25" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.340625, 0, -0.366026, 0, 0.5, 0, 0.366026, 0, 0.340625, -36.5022, 11.1505, 120.931 )
+skeleton = NodePath("")
+
+[node name="Cylinder26" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.103293, 0, -0.489214, 0, 0.5, 0, 0.489214, 0, -0.103293, -37.9038, 11.3415, 120.088 )
+skeleton = NodePath("")
+
+[node name="Cylinder27" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.352443, 0, 0.354661, 0, 0.5, 0, -0.354661, 0, 0.352443, -39.5746, 11.2899, 118.859 )
+skeleton = NodePath("")
+
+[node name="Cylinder28" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.419711, 0, -0.27174, 0, 0.5, 0, 0.27174, 0, -0.419711, -41.5479, 11.2172, 117.394 )
+skeleton = NodePath("")
+
+[node name="Cylinder29" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.355731, 0, -0.351362, 0, 0.5, 0, 0.351362, 0, -0.355731, -43.2141, 11.4931, 115.914 )
+skeleton = NodePath("")
+
+[node name="Cylinder30" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.437888, 0, -0.241359, 0, 0.5, 0, 0.241359, 0, -0.437888, -44.4415, 11.6988, 113.667 )
+skeleton = NodePath("")
+
+[node name="Cylinder31" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.402642, 0, 0.296445, 0, 0.5, 0, -0.296445, 0, 0.402642, -45.3314, 11.5754, 111.179 )
+skeleton = NodePath("")
+
+[node name="Cylinder32" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.426512, 0, -0.260935, 0, 0.5, 0, 0.260935, 0, 0.426512, -46.189, 11.3863, 108.923 )
+skeleton = NodePath("")
+
+[node name="Cylinder33" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.257954, 0, 0.428322, 0, 0.5, 0, -0.428322, 0, -0.257954, -47.5156, 11.3658, 106.736 )
+skeleton = NodePath("")
+
+[node name="Cylinder34" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.417648, 0, -0.2749, 0, 0.5, 0, 0.2749, 0, -0.417648, -48.7051, 11.345, 105.084 )
+skeleton = NodePath("")
+
+[node name="Cylinder35" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0575805, 0, 0.496673, 0, 0.5, 0, -0.496673, 0, -0.0575805, -50.3522, 11.5647, 102.963 )
+skeleton = NodePath("")
+
+[node name="Cylinder36" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.427482, 0, -0.259343, 0, 0.5, 0, 0.259343, 0, 0.427482, -51.7691, 11.6033, 101.377 )
+skeleton = NodePath("")
+
+[node name="Cylinder37" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.470584, 0, -0.168971, 0, 0.5, 0, 0.168971, 0, -0.470584, -52.9415, 11.6036, 100.283 )
+skeleton = NodePath("")
+
+[node name="Cylinder38" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.492753, 0, 0.0848178, 0, 0.5, 0, -0.0848178, 0, -0.492753, -54.2483, 11.5858, 98.9092 )
+skeleton = NodePath("")
+
+[node name="Cylinder39" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.415884, 0, -0.277562, 0, 0.5, 0, 0.277562, 0, -0.415884, -54.9608, 11.5926, 96.5684 )
+skeleton = NodePath("")
+
+[node name="Cylinder40" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.254801, 0, -0.430205, 0, 0.5, 0, 0.430205, 0, 0.254801, -55.0994, 11.5637, 95.2471 )
+skeleton = NodePath("")
+
+[node name="Cylinder41" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.477406, 0, 0.148606, 0, 0.5, 0, -0.148606, 0, 0.477406, -54.7392, 11.3553, 93.0802 )
+skeleton = NodePath("")
+
+[node name="Cylinder42" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.335244, 0, -0.37096, 0, 0.5, 0, 0.37096, 0, 0.335244, -54.1123, 11.2278, 90.4544 )
+skeleton = NodePath("")
+
+[node name="Cylinder43" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.40086, 0, -0.298849, 0, 0.5, 0, 0.298849, 0, 0.40086, -54.1017, 11.5896, 89.0396 )
+skeleton = NodePath("")
+
+[node name="Cylinder44" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.274199, 0, 0.418109, 0, 0.5, 0, -0.418109, 0, 0.274199, -53.3551, 11.5892, 86.8144 )
+skeleton = NodePath("")
+
+[node name="Cylinder45" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.00454082, 0, -0.499979, 0, 0.5, 0, 0.499979, 0, -0.00454082, -52.6889, 11.6239, 84.42 )
+skeleton = NodePath("")
+
+[node name="Cylinder46" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.424853, 0, -0.263628, 0, 0.5, 0, 0.263628, 0, 0.424853, -52.0823, 11.6114, 83.0872 )
+skeleton = NodePath("")
+
+[node name="Cylinder47" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.494522, 0, -0.0738117, 0, 0.5, 0, 0.0738117, 0, 0.494522, -51.1198, 11.6697, 79.4482 )
+skeleton = NodePath("")
+
+[node name="Cylinder48" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.494652, 0, -0.0729353, 0, 0.5, 0, 0.0729353, 0, 0.494652, -50.4834, 11.7061, 76.8527 )
+skeleton = NodePath("")
+
+[node name="Cylinder49" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.187189, 0, -0.463638, 0, 0.5, 0, 0.463638, 0, 0.187189, -50.1178, 11.7284, 74.7722 )
+skeleton = NodePath("")
+
+[node name="Cylinder50" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0743473, 0, 0.494442, 0, 0.5, 0, -0.494442, 0, 0.0743473, -49.7775, 11.7448, 71.2786 )
+skeleton = NodePath("")
+
+[node name="Cylinder51" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.49566, 0, 0.0657331, 0, 0.5, 0, -0.0657331, 0, 0.49566, -49.2374, 11.6315, 68.0887 )
+skeleton = NodePath("")
+
+[node name="Cylinder52" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0714695, 0, -0.494866, 0, 0.5, 0, 0.494866, 0, 0.0714695, -49.1079, 11.5949, 67.7044 )
+skeleton = NodePath("")
+
+[node name="Cylinder53" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.10514, 0, -0.488821, 0, 0.5, 0, 0.488821, 0, -0.10514, -49.1395, 11.485, 66.4474 )
+skeleton = NodePath("")
+
+[node name="Cylinder54" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.181666, 0, -0.46583, 0, 0.5, 0, 0.46583, 0, -0.181666, -48.6652, 11.2306, 64.4233 )
+skeleton = NodePath("")
+
+[node name="Cylinder55" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.461186, 0, 0.193151, 0, 0.5, 0, -0.193151, 0, 0.461186, -47.5048, 10.9961, 61.7577 )
+skeleton = NodePath("")
+
+[node name="Cylinder56" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.357876, 0, -0.349178, 0, 0.5, 0, 0.349178, 0, 0.357876, -46.3884, 11.3909, 60.7767 )
+skeleton = NodePath("")
+
+[node name="Cylinder57" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.49886, 0, 0.0337433, 0, 0.5, 0, -0.0337433, 0, 0.49886, -42.2299, 11.157, 60.3694 )
+skeleton = NodePath("")
+
+[node name="Cylinder58" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0832179, 0, -0.493026, 0, 0.5, 0, 0.493026, 0, 0.0832179, -41.0763, 11.0088, 60.3016 )
+skeleton = NodePath("")
+
+[node name="Cylinder59" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.479909, 0, 0.140313, 0, 0.5, 0, -0.140313, 0, -0.479909, -38.7649, 11.1836, 60.5418 )
+skeleton = NodePath("")
+
+[node name="Cylinder60" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.420063, 0, 0.271195, 0, 0.5, 0, -0.271195, 0, 0.420063, -35.2538, 10.8969, 61.8461 )
+skeleton = NodePath("")
+
+[node name="Cylinder61" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.416767, 0, 0.276234, 0, 0.5, 0, -0.276234, 0, -0.416767, -33.0415, 11.3036, 63.6431 )
+skeleton = NodePath("")
+
+[node name="Cylinder62" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.290836, 0, 0.406712, 0, 0.5, 0, -0.406712, 0, -0.290836, -30.8257, 11.378, 65.8245 )
+skeleton = NodePath("")
+
+[node name="Cylinder63" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.197803, 0, 0.45921, 0, 0.5, 0, -0.45921, 0, 0.197803, -29.8136, 11.3836, 67.5176 )
+skeleton = NodePath("")
+
+[node name="Cylinder64" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499884, 0, -0.0107622, 0, 0.5, 0, 0.0107622, 0, 0.499884, -29.0391, 11.3882, 68.5798 )
+skeleton = NodePath("")
+
+[node name="Cylinder65" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.432229, 0, -0.251353, 0, 0.5, 0, 0.251353, 0, -0.432229, -27.9485, 11.3958, 70.0877 )
+skeleton = NodePath("")
+
+[node name="Cylinder66" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.487734, 0, -0.110071, 0, 0.5, 0, 0.110071, 0, -0.487734, -26.5585, 11.3825, 72.2636 )
+skeleton = NodePath("")
+
+[node name="Cylinder67" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.260041, 0, 0.427058, 0, 0.5, 0, -0.427058, 0, -0.260041, -25.4252, 11.386, 72.7903 )
+skeleton = NodePath("")
+
+[node name="Cylinder68" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.483581, 0, 0.127082, 0, 0.5, 0, -0.127082, 0, 0.483581, -23.2973, 11.3864, 73.8719 )
+skeleton = NodePath("")
+
+[node name="Cylinder69" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.459738, 0, 0.196574, 0, 0.5, 0, -0.196574, 0, 0.459738, -22.2739, 11.3802, 74.9304 )
+skeleton = NodePath("")
+
+[node name="Cylinder70" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.282315, 0, 0.412672, 0, 0.5, 0, -0.412672, 0, -0.282315, -20.8082, 11.3722, 76.4635 )
+skeleton = NodePath("")
+
+[node name="Cylinder71" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0796978, 0, -0.493607, 0, 0.5, 0, 0.493607, 0, 0.0796978, -19.3271, 11.3683, 77.7964 )
+skeleton = NodePath("")
+
+[node name="Cylinder72" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.439016, 0, 0.239301, 0, 0.5, 0, -0.239301, 0, -0.439016, -18.1652, 11.3672, 78.4229 )
+skeleton = NodePath("")
+
+[node name="Cylinder73" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.477953, 0, -0.146837, 0, 0.5, 0, 0.146837, 0, 0.477953, -16.4484, 11.4085, 79.2592 )
+skeleton = NodePath("")
+
+[node name="Cylinder74" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.445851, 0, 0.226311, 0, 0.5, 0, -0.226311, 0, 0.445851, -15.1563, 11.4131, 80.4943 )
+skeleton = NodePath("")
+
+[node name="Cylinder75" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.487546, 0, 0.110901, 0, 0.5, 0, -0.110901, 0, 0.487546, -13.7381, 11.4268, 81.4295 )
+skeleton = NodePath("")
+
+[node name="Cylinder76" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.103361, 0, -0.4892, 0, 0.5, 0, 0.4892, 0, -0.103361, -12.0653, 11.3445, 81.8467 )
+skeleton = NodePath("")
+
+[node name="Cylinder77" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.39302, 0, 0.309088, 0, 0.5, 0, -0.309088, 0, 0.39302, -10.0112, 11.2065, 82.1923 )
+skeleton = NodePath("")
+
+[node name="Cylinder78" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.13106, 0, 0.482518, 0, 0.5, 0, -0.482518, 0, 0.13106, -8.888, 11.2421, 81.5267 )
+skeleton = NodePath("")
+
+[node name="Cylinder79" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.498948, 0, -0.0324244, 0, 0.5, 0, 0.0324244, 0, 0.498948, -8.36491, 10.9831, 80.3732 )
+skeleton = NodePath("")
+
+[node name="Cylinder80" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.308998, 0, 0.393091, 0, 0.5, 0, -0.393091, 0, 0.308998, -7.63185, 10.7748, 79.558 )
+skeleton = NodePath("")
+
+[node name="Cylinder81" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499671, 0, -0.0181276, 0, 0.5, 0, 0.0181276, 0, -0.499671, -7.24448, 10.658, 77.8292 )
+skeleton = NodePath("")
+
+[node name="Cylinder82" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.410147, 0, 0.285971, 0, 0.5, 0, -0.285971, 0, 0.410147, -7.31871, 10.4926, 76.6629 )
+skeleton = NodePath("")
+
+[node name="Cylinder83" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.297766, 0, -0.401666, 0, 0.5, 0, 0.401666, 0, -0.297766, -8.45553, 10.4141, 74.702 )
+skeleton = NodePath("")
+
+[node name="Cylinder84" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.112341, 0, 0.487216, 0, 0.5, 0, -0.487216, 0, 0.112341, -8.9524, 10.2698, 73.1017 )
+skeleton = NodePath("")
+
+[node name="Cylinder85" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.157239, 0, -0.474632, 0, 0.5, 0, 0.474632, 0, -0.157239, -9.38684, 10.2718, 72.5901 )
+skeleton = NodePath("")
+
+[node name="Cylinder86" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.463527, 0, -0.187464, 0, 0.5, 0, 0.187464, 0, 0.463527, -10.9615, 10.2862, 70.7964 )
+skeleton = NodePath("")
+
+[node name="Cylinder87" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.44471, 0, -0.228545, 0, 0.5, 0, 0.228545, 0, 0.44471, -11.6746, 10.2751, 69.8353 )
+skeleton = NodePath("")
+
+[node name="Cylinder88" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.260013, 0, 0.427075, 0, 0.5, 0, -0.427075, 0, -0.260013, -12.7313, 10.2702, 68.4837 )
+skeleton = NodePath("")
+
+[node name="Cylinder89" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499982, 0, 0.00425108, 0, 0.5, 0, -0.00425108, 0, 0.499982, -13.8052, 10.3042, 67.4246 )
+skeleton = NodePath("")
+
+[node name="Cylinder90" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.135753, 0, 0.481218, 0, 0.5, 0, -0.481218, 0, 0.135753, -15.3496, 10.3515, 65.8871 )
+skeleton = NodePath("")
+
+[node name="Cylinder91" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.452355, 0, 0.213014, 0, 0.5, 0, -0.213014, 0, 0.452355, -16.0546, 10.0761, 64.2521 )
+skeleton = NodePath("")
+
+[node name="Cylinder92" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.468756, 0, -0.173976, 0, 0.5, 0, 0.173976, 0, -0.468756, -17.3946, 9.8795, 61.8954 )
+skeleton = NodePath("")
+
+[node name="Cylinder93" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.402049, 0, 0.297248, 0, 0.5, 0, -0.297248, 0, 0.402049, -18.1617, 10.0046, 61.0114 )
+skeleton = NodePath("")
+
+[node name="Cylinder94" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0870787, 0, 0.492359, 0, 0.5, 0, -0.492359, 0, 0.0870787, -19.6092, 9.79933, 58.4773 )
+skeleton = NodePath("")
+
+[node name="Cylinder95" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.266238, 0, -0.423223, 0, 0.5, 0, 0.423223, 0, -0.266238, -20.8021, 9.52413, 56.1077 )
+skeleton = NodePath("")
+
+[node name="Cylinder96" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.473406, 0, 0.160893, 0, 0.5, 0, -0.160893, 0, 0.473406, -22.1673, 9.47767, 53.9329 )
+skeleton = NodePath("")
+
+[node name="Cylinder97" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.270574, 0, 0.420464, 0, 0.5, 0, -0.420464, 0, -0.270574, -23.0133, 9.39657, 52.4061 )
+skeleton = NodePath("")
+
+[node name="Cylinder98" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.242139, 0, 0.437457, 0, 0.5, 0, -0.437457, 0, 0.242139, -24.9081, 9.47281, 49.9595 )
+skeleton = NodePath("")
+
+[node name="Cylinder99" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.284873, 0, 0.410911, 0, 0.5, 0, -0.410911, 0, -0.284873, -26.747, 9.4859, 47.6409 )
+skeleton = NodePath("")
+
+[node name="Cylinder100" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.360859, 0, -0.346093, 0, 0.5, 0, 0.346093, 0, -0.360859, -27.9601, 9.52406, 46.0665 )
+skeleton = NodePath("")
+
+[node name="Cylinder101" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.183429, 0, -0.465139, 0, 0.5, 0, 0.465139, 0, -0.183429, -29.9128, 9.59317, 43.7292 )
+skeleton = NodePath("")
+
+[node name="Cylinder102" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.310533, 0, 0.39188, 0, 0.5, 0, -0.39188, 0, -0.310533, -32.3081, 9.20379, 39.7614 )
+skeleton = NodePath("")
+
+[node name="Cylinder103" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.207826, 0, 0.454762, 0, 0.5, 0, -0.454762, 0, -0.207826, -33.7796, 9.31808, 38.1962 )
+skeleton = NodePath("")
+
+[node name="Cylinder104" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.444869, 0, -0.228237, 0, 0.5, 0, 0.228237, 0, -0.444869, -35.8586, 9.45061, 36.1665 )
+skeleton = NodePath("")
+
+[node name="Cylinder105" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.245121, 0, -0.435793, 0, 0.5, 0, 0.435793, 0, -0.245121, -38.7099, 9.52661, 32.5724 )
+skeleton = NodePath("")
+
+[node name="Cylinder106" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.257809, 0, -0.428409, 0, 0.5, 0, 0.428409, 0, 0.257809, -40.7225, 9.78661, 30.2981 )
+skeleton = NodePath("")
+
+[node name="Cylinder107" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.449397, 0, 0.219186, 0, 0.5, 0, -0.219186, 0, -0.449397, -41.8595, 9.8729, 27.905 )
+skeleton = NodePath("")
+
+[node name="Cylinder108" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.498641, 0, -0.0368404, 0, 0.5, 0, 0.0368404, 0, -0.498641, -42.2538, 9.71965, 26.2244 )
+skeleton = NodePath("")
+
+[node name="Cylinder109" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.476428, 0, -0.151712, 0, 0.5, 0, 0.151712, 0, 0.476428, -43.135, 9.67087, 22.8589 )
+skeleton = NodePath("")
+
+[node name="Cylinder110" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.396893, 0, 0.304098, 0, 0.5, 0, -0.304098, 0, -0.396893, -44.1875, 9.75659, 19.7945 )
+skeleton = NodePath("")
+
+[node name="Cylinder111" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.412461, 0, 0.282623, 0, 0.5, 0, -0.282623, 0, 0.412461, -44.4197, 9.61451, 18.3267 )
+skeleton = NodePath("")
+
+[node name="Cylinder112" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.27354, 0, 0.41854, 0, 0.5, 0, -0.41854, 0, 0.27354, -45.1322, 9.346, 13.9385 )
+skeleton = NodePath("")
+
+[node name="Cylinder113" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.42766, 0, -0.25905, 0, 0.5, 0, 0.25905, 0, -0.42766, -45.9882, 9.66855, 11.3764 )
+skeleton = NodePath("")
+
+[node name="Cylinder114" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.288773, 0, -0.408179, 0, 0.5, 0, 0.408179, 0, -0.288773, -46.08, 9.55611, 9.30603 )
+skeleton = NodePath("")
+
+[node name="Cylinder115" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0411684, 0, -0.498302, 0, 0.5, 0, 0.498302, 0, -0.0411684, -46.3148, 9.47762, 6.3279 )
+skeleton = NodePath("")
+
+[node name="Cylinder116" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.371853, 0, -0.334254, 0, 0.5, 0, 0.334254, 0, 0.371853, -46.2811, 9.43983, 3.15214 )
+skeleton = NodePath("")
+
+[node name="Cylinder117" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.489459, 0, 0.102127, 0, 0.5, 0, -0.102127, 0, -0.489459, -46.2433, 9.41835, 0.638653 )
+skeleton = NodePath("")
+
+[node name="Cylinder118" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.458305, 0, 0.199891, 0, 0.5, 0, -0.199891, 0, 0.458305, -45.8936, 9.29123, -2.40732 )
+skeleton = NodePath("")
+
+[node name="Cylinder119" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.493661, 0, 0.0793645, 0, 0.5, 0, -0.0793645, 0, -0.493661, -44.8887, 9.05136, -5.20254 )
+skeleton = NodePath("")
+
+[node name="Cylinder120" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0399106, 0, 0.498405, 0, 0.5, 0, -0.498405, 0, -0.0399106, -44.2094, 8.92443, -6.51455 )
+skeleton = NodePath("")
+
+[node name="Cylinder121" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.398491, 0, 0.302002, 0, 0.5, 0, -0.302002, 0, 0.398491, -43.1376, 8.71433, -8.70824 )
+skeleton = NodePath("")
+
+[node name="Cylinder122" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.472466, 0, -0.163633, 0, 0.5, 0, 0.163633, 0, 0.472466, -41.4128, 8.35818, -11.9281 )
+skeleton = NodePath("")
+
+[node name="Cylinder123" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.291462, 0, -0.406263, 0, 0.5, 0, 0.406263, 0, -0.291462, -42.4526, 8.52428, -10.6757 )
+skeleton = NodePath("")
+
+[node name="Cylinder124" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0355747, 0, 0.498733, 0, 0.5, 0, -0.498733, 0, 0.0355747, -40.5418, 8.11834, -14.186 )
+skeleton = NodePath("")
+
+[node name="Cylinder125" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.443956, 0, 0.230006, 0, 0.5, 0, -0.230006, 0, -0.443956, -39.1154, 7.74234, -14.6974 )
+skeleton = NodePath("")
+
+[node name="Cylinder126" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0887664, 0, 0.492057, 0, 0.5, 0, -0.492057, 0, 0.0887664, -36.7718, 10.5947, 172.236 )
+skeleton = NodePath("")
+
+[node name="Cylinder127" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.497736, 0, -0.0475307, 0, 0.5, 0, 0.0475307, 0, 0.497736, -34.7966, 10.6064, 171.914 )
+skeleton = NodePath("")
+
+[node name="Cylinder128" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.364397, 0, -0.342367, 0, 0.5, 0, 0.342367, 0, -0.364397, -31.2518, 10.6241, 171.277 )
+skeleton = NodePath("")
+
+[node name="Cylinder129" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.309718, 0, 0.392524, 0, 0.5, 0, -0.392524, 0, 0.309718, -28.7884, 10.6364, 170.825 )
+skeleton = NodePath("")
+
+[node name="Cylinder130" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0755771, 0, 0.494255, 0, 0.5, 0, -0.494255, 0, -0.0755771, -25.1171, 10.6256, 169.854 )
+skeleton = NodePath("")
+
+[node name="Cylinder131" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.299979, 0, -0.400016, 0, 0.5, 0, 0.400016, 0, -0.299979, -21.298, 10.6046, 168.744 )
+skeleton = NodePath("")
+
+[node name="Cylinder132" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.5, 0, -0.000390963, 0, 0.5, 0, 0.000390963, 0, -0.5, -17.5007, 10.5329, 167.039 )
+skeleton = NodePath("")
+
+[node name="Cylinder133" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.460392, 0, -0.195037, 0, 0.5, 0, 0.195037, 0, 0.460392, -15.5517, 10.4591, 165.807 )
+skeleton = NodePath("")
+
+[node name="Cylinder134" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.495607, 0, 0.0661355, 0, 0.5, 0, -0.0661355, 0, 0.495607, -11.5609, 10.3066, 163.177 )
+skeleton = NodePath("")
+
+[node name="Cylinder135" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.308649, 0, 0.393365, 0, 0.5, 0, -0.393365, 0, 0.308649, -7.9485, 10.2814, 160.012 )
+skeleton = NodePath("")
+
+[node name="Cylinder136" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.357961, 0, 0.34909, 0, 0.5, 0, -0.34909, 0, 0.357961, -5.4668, 10.339, 157.308 )
+skeleton = NodePath("")
+
+[node name="Cylinder137" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.377782, 0, -0.327537, 0, 0.5, 0, 0.327537, 0, -0.377782, -3.51124, 10.5928, 154.542 )
+skeleton = NodePath("")
+
+[node name="Cylinder138" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.497294, 0, -0.0519537, 0, 0.5, 0, 0.0519537, 0, 0.497294, -2.06639, 10.8217, 151.186 )
+skeleton = NodePath("")
+
+[node name="Cylinder139" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0177154, 0, 0.499686, 0, 0.5, 0, -0.499686, 0, -0.0177154, -0.387599, 11.2108, 148.107 )
+skeleton = NodePath("")
+
+[node name="Cylinder140" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0464845, 0, 0.497835, 0, 0.5, 0, -0.497835, 0, 0.0464845, 0.670639, 11.5609, 143.8 )
+skeleton = NodePath("")
+
+[node name="Cylinder141" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.044996, 0, 0.497971, 0, 0.5, 0, -0.497971, 0, -0.044996, 1.0762, 11.8975, 139.05 )
+skeleton = NodePath("")
+
+[node name="Cylinder142" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.158012, 0, -0.474376, 0, 0.5, 0, 0.474376, 0, -0.158012, 0.75561, 11.5961, 134.756 )
+skeleton = NodePath("")
+
+[node name="Cylinder143" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.322278, 0, -0.382278, 0, 0.5, 0, 0.382278, 0, -0.322278, 2.20545, 11.0237, 132.258 )
+skeleton = NodePath("")
+
+[node name="Cylinder144" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.254961, 0, 0.43011, 0, 0.5, 0, -0.43011, 0, 0.254961, 11.2147, 11.55, 127.769 )
+skeleton = NodePath("")
+
+[node name="Cylinder145" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.359251, 0, 0.347762, 0, 0.5, 0, -0.347762, 0, -0.359251, 5.56912, 11.2157, 130.474 )
+skeleton = NodePath("")
+
+[node name="Cylinder146" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.221668, 0, -0.448178, 0, 0.5, 0, 0.448178, 0, -0.221668, 7.39938, 11.5136, 129.932 )
+skeleton = NodePath("")
+
+[node name="Cylinder147" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.254206, 0, 0.430557, 0, 0.5, 0, -0.430557, 0, 0.254206, 13.7987, 11.5498, 125.924 )
+skeleton = NodePath("")
+
+[node name="Cylinder148" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.443132, 0, 0.23159, 0, 0.5, 0, -0.23159, 0, -0.443132, 15.0464, 11.5312, 124.811 )
+skeleton = NodePath("")
+
+[node name="Cylinder149" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.108168, 0, -0.488159, 0, 0.5, 0, 0.488159, 0, -0.108168, 18.7203, 11.4946, 121.541 )
+skeleton = NodePath("")
+
+[node name="Cylinder150" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.49976, 0, -0.0154765, 0, 0.5, 0, 0.0154765, 0, -0.49976, 21.1555, 11.5227, 119.401 )
+skeleton = NodePath("")
+
+[node name="Cylinder151" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.476043, 0, -0.152916, 0, 0.5, 0, 0.152916, 0, 0.476043, 22.6583, 11.6126, 118.119 )
+skeleton = NodePath("")
+
+[node name="Cylinder152" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.446828, 0, 0.224377, 0, 0.5, 0, -0.224377, 0, 0.446828, 24.1768, 11.6702, 111.96 )
+skeleton = NodePath("")
+
+[node name="Cylinder153" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.472026, 0, 0.164899, 0, 0.5, 0, -0.164899, 0, 0.472026, 23.8546, 11.6283, 109.186 )
+skeleton = NodePath("")
+
+[node name="Cylinder154" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0906074, 0, 0.491722, 0, 0.5, 0, -0.491722, 0, -0.0906074, 22.2599, 11.3866, 105.546 )
+skeleton = NodePath("")
+
+[node name="Cylinder155" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.00945051, 0, -0.499911, 0, 0.5, 0, 0.499911, 0, 0.00945051, 20.1442, 11.0789, 97.7472 )
+skeleton = NodePath("")
+
+[node name="Cylinder156" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.396611, 0, 0.304466, 0, 0.5, 0, -0.304466, 0, -0.396611, 18.7452, 11.3888, 93.4212 )
+skeleton = NodePath("")
+
+[node name="Cylinder157" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.179098, 0, -0.466823, 0, 0.5, 0, 0.466823, 0, 0.179098, 16.6794, 11.4282, 89.9202 )
+skeleton = NodePath("")
+
+[node name="Cylinder158" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0306968, 0, -0.499057, 0, 0.5, 0, 0.499057, 0, 0.0306968, 22.9498, 11.573, 100.838 )
+skeleton = NodePath("")
+
+[node name="Cylinder159" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.358711, 0, -0.348319, 0, 0.5, 0, 0.348319, 0, 0.358711, 17.0968, 11.4093, 85.9331 )
+skeleton = NodePath("")
+
+[node name="Cylinder160" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0192048, 0, -0.499631, 0, 0.5, 0, 0.499631, 0, -0.0192048, 18.3238, 11.3524, 83.8143 )
+skeleton = NodePath("")
+
+[node name="Cylinder161" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.5, 0, -0.000692205, 0, 0.5, 0, 0.000692205, 0, 0.5, 21.0304, 11.0891, 81.4314 )
+skeleton = NodePath("")
+
+[node name="Cylinder162" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.456933, 0, 0.203008, 0, 0.5, 0, -0.203008, 0, 0.456933, 26.1179, 10.7656, 78.9144 )
+skeleton = NodePath("")
+
+[node name="Cylinder163" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.182105, 0, 0.465658, 0, 0.5, 0, -0.465658, 0, -0.182105, 27.5034, 10.6319, 77.8363 )
+skeleton = NodePath("")
+
+[node name="Cylinder164" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0497154, 0, 0.497522, 0, 0.5, 0, -0.497522, 0, -0.0497154, 31.1577, 10.4759, 74.1622 )
+skeleton = NodePath("")
+
+[node name="Cylinder165" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0602457, 0, 0.496357, 0, 0.5, 0, -0.496357, 0, 0.0602457, 35.9716, 10.3934, 70.4408 )
+skeleton = NodePath("")
+
+[node name="Cylinder166" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.430895, 0, -0.253632, 0, 0.5, 0, 0.253632, 0, 0.430895, 38.6901, 10.4678, 69.3524 )
+skeleton = NodePath("")
+
+[node name="Cylinder167" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.441375, 0, 0.234922, 0, 0.5, 0, -0.234922, 0, 0.441375, 41.3803, 10.603, 68.0659 )
+skeleton = NodePath("")
+
+[node name="Cylinder168" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.202695, 0, -0.457072, 0, 0.5, 0, 0.457072, 0, 0.202695, 43.5597, 10.6642, 66.4067 )
+skeleton = NodePath("")
+
+[node name="Cylinder169" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.240312, 0, 0.438464, 0, 0.5, 0, -0.438464, 0, 0.240312, 47.3098, 10.793, 63.7689 )
+skeleton = NodePath("")
+
+[node name="Cylinder170" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.336014, 0, -0.370263, 0, 0.5, 0, 0.370263, 0, -0.336014, 49.2499, 10.8454, 61.9915 )
+skeleton = NodePath("")
+
+[node name="Cylinder171" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.144256, 0, -0.478738, 0, 0.5, 0, 0.478738, 0, 0.144256, 50.8783, 10.7883, 59.5767 )
+skeleton = NodePath("")
+
+[node name="Cylinder172" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.432843, 0, -0.250294, 0, 0.5, 0, 0.250294, 0, -0.432843, 51.9986, 10.5189, 56.0878 )
+skeleton = NodePath("")
+
+[node name="Cylinder173" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.47244, 0, 0.163709, 0, 0.5, 0, -0.163709, 0, 0.47244, 53.568, 10.4169, 53.2035 )
+skeleton = NodePath("")
+
+[node name="Cylinder174" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.48374, 0, -0.126473, 0, 0.5, 0, 0.126473, 0, 0.48374, 55.0113, 10.4572, 51.2816 )
+skeleton = NodePath("")
+
+[node name="Cylinder175" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.136886, 0, 0.480897, 0, 0.5, 0, -0.480897, 0, 0.136886, 56.6421, 10.4535, 48.6155 )
+skeleton = NodePath("")
+
+[node name="Cylinder176" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.477868, 0, 0.147111, 0, 0.5, 0, -0.147111, 0, -0.477868, 58.3604, 10.4416, 45.6058 )
+skeleton = NodePath("")
+
+[node name="Cylinder177" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.459098, 0, -0.198062, 0, 0.5, 0, 0.198062, 0, 0.459098, 58.3982, 10.2321, 41.7513 )
+skeleton = NodePath("")
+
+[node name="Cylinder178" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.119437, 0, 0.485525, 0, 0.5, 0, -0.485525, 0, 0.119437, 59.2869, 10.2383, 38.8996 )
+skeleton = NodePath("")
+
+[node name="Cylinder179" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.29015, 0, 0.407202, 0, 0.5, 0, -0.407202, 0, 0.29015, 59.8577, 10.1879, 36.2535 )
+skeleton = NodePath("")
+
+[node name="Cylinder180" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.392302, 0, -0.309999, 0, 0.5, 0, 0.309999, 0, 0.392302, 60.9989, 10.0958, 34.0483 )
+skeleton = NodePath("")
+
+[node name="Cylinder181" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.244031, 0, 0.436405, 0, 0.5, 0, -0.436405, 0, -0.244031, 63.8003, 10.1945, 32.4829 )
+skeleton = NodePath("")
+
+[node name="Cylinder182" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.00196788, 0, 0.499996, 0, 0.5, 0, -0.499996, 0, 0.00196788, 65.7948, 10.0328, 31.3892 )
+skeleton = NodePath("")
+
+[node name="Cylinder183" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.466336, 0, 0.180362, 0, 0.5, 0, -0.180362, 0, 0.466336, 68.6468, 10.2293, 32.652 )
+skeleton = NodePath("")
+
+[node name="Cylinder184" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.497607, 0, -0.0488612, 0, 0.5, 0, 0.0488612, 0, -0.497607, 71.9376, 10.1633, 32.8279 )
+skeleton = NodePath("")
+
+[node name="Cylinder185" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.36794, 0, 0.338556, 0, 0.5, 0, -0.338556, 0, 0.36794, 76.109, 9.95081, 32.2379 )
+skeleton = NodePath("")
+
+[node name="Cylinder186" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.42502, 0, 0.263359, 0, 0.5, 0, -0.263359, 0, 0.42502, 79.4003, 9.96346, 32.5817 )
+skeleton = NodePath("")
+
+[node name="Cylinder187" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.495121, 0, 0.0696814, 0, 0.5, 0, -0.0696814, 0, 0.495121, 81.9115, 9.91225, 32.301 )
+skeleton = NodePath("")
+
+[node name="Cylinder188" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.442343, 0, -0.233094, 0, 0.5, 0, 0.233094, 0, -0.442343, 84.7968, 9.86669, 31.3716 )
+skeleton = NodePath("")
+
+[node name="Cylinder189" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.467834, 0, -0.17644, 0, 0.5, 0, 0.17644, 0, -0.467834, 87.7482, 9.88609, 30.6229 )
+skeleton = NodePath("")
+
+[node name="Cylinder190" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499985, 0, -0.00381087, 0, 0.5, 0, 0.00381087, 0, 0.499985, 89.9024, 9.98809, 30.209 )
+skeleton = NodePath("")
+
+[node name="Cylinder191" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.41638, 0, -0.276817, 0, 0.5, 0, 0.276817, 0, 0.41638, 92.5427, 10.0074, 28.914 )
+skeleton = NodePath("")
+
+[node name="Cylinder192" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.327302, 0, 0.377986, 0, 0.5, 0, -0.377986, 0, -0.327302, 94.7035, 10.0909, 27.5737 )
+skeleton = NodePath("")
+
+[node name="Cylinder193" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.194676, 0, 0.460544, 0, 0.5, 0, -0.460544, 0, 0.194676, 96.5836, 10.1387, 26.1116 )
+skeleton = NodePath("")
+
+[node name="Cylinder194" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.216932, 0, -0.450489, 0, 0.5, 0, 0.450489, 0, 0.216932, 98.8249, 10.1632, 23.5349 )
+skeleton = NodePath("")
+
+[node name="Cylinder195" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.268454, 0, 0.42182, 0, 0.5, 0, -0.42182, 0, -0.268454, 100.481, 10.2516, 21.237 )
+skeleton = NodePath("")
+
+[node name="Cylinder196" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.317602, 0, 0.386172, 0, 0.5, 0, -0.386172, 0, 0.317602, 102.213, 10.3081, 18.4469 )
+skeleton = NodePath("")
+
+[node name="Cylinder197" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.429202, 0, 0.256488, 0, 0.5, 0, -0.256488, 0, 0.429202, 104.086, 10.44, 15.0071 )
+skeleton = NodePath("")
+
+[node name="Cylinder198" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.383058, 0, 0.321351, 0, 0.5, 0, -0.321351, 0, -0.383058, 104.822, 10.4087, 12.6084 )
+skeleton = NodePath("")
+
+[node name="Cylinder199" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.444725, 0, -0.228516, 0, 0.5, 0, 0.228516, 0, -0.444725, 93.1462, 10.314, 5.31027 )
+skeleton = NodePath("")
+
+[node name="Cylinder200" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.228786, 0, -0.444586, 0, 0.5, 0, 0.444586, 0, 0.228786, 92.5385, 10.2538, 8.31189 )
+skeleton = NodePath("")
+
+[node name="Cylinder201" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.478312, 0, -0.145664, 0, 0.5, 0, 0.145664, 0, -0.478312, 91.7063, 10.2426, 10.5106 )
+skeleton = NodePath("")
+
+[node name="Cylinder202" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499998, 0, -0.0013655, 0, 0.5, 0, 0.0013655, 0, -0.499998, 90.7787, 10.1777, 12.9533 )
+skeleton = NodePath("")
+
+[node name="Cylinder203" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.312689, 0, -0.390161, 0, 0.5, 0, 0.390161, 0, 0.312689, 89.6408, 10.1183, 14.395 )
+skeleton = NodePath("")
+
+[node name="Cylinder204" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.375742, 0, -0.329875, 0, 0.5, 0, 0.329875, 0, 0.375742, 87.0036, 10.1519, 15.6347 )
+skeleton = NodePath("")
+
+[node name="Cylinder205" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.418613, 0, 0.273428, 0, 0.5, 0, -0.273428, 0, -0.418613, 84.9668, 10.0188, 16.9791 )
+skeleton = NodePath("")
+
+[node name="Cylinder206" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.480557, 0, 0.138077, 0, 0.5, 0, -0.138077, 0, 0.480557, 83.5439, 10.0812, 16.8134 )
+skeleton = NodePath("")
+
+[node name="Cylinder207" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.153298, 0, -0.47592, 0, 0.5, 0, 0.47592, 0, -0.153298, 81.4757, 10.0912, 17.1463 )
+skeleton = NodePath("")
+
+[node name="Cylinder208" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0188491, 0, -0.499645, 0, 0.5, 0, 0.499645, 0, 0.0188491, 78.9847, 10.0418, 17.3315 )
+skeleton = NodePath("")
+
+[node name="Cylinder209" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.194187, 0, -0.460751, 0, 0.5, 0, 0.460751, 0, 0.194187, 76.5345, 10.0665, 16.9534 )
+skeleton = NodePath("")
+
+[node name="Cylinder210" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.321147, 0, 0.383229, 0, 0.5, 0, -0.383229, 0, 0.321147, 73.3331, 9.97469, 16.6317 )
+skeleton = NodePath("")
+
+[node name="Cylinder211" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.307511, 0, -0.394255, 0, 0.5, 0, 0.394255, 0, -0.307511, 70.8875, 9.89211, 16.4211 )
+skeleton = NodePath("")
+
+[node name="Cylinder212" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.410377, 0, -0.285641, 0, 0.5, 0, 0.285641, 0, -0.410377, 67.5786, 9.9254, 15.0772 )
+skeleton = NodePath("")
+
+[node name="Cylinder213" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.457081, 0, -0.202675, 0, 0.5, 0, 0.202675, 0, -0.457081, 64.9946, 9.96375, 13.5913 )
+skeleton = NodePath("")
+
+[node name="Cylinder214" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.376649, 0, 0.32884, 0, 0.5, 0, -0.32884, 0, -0.376649, 62.7249, 10.0348, 11.3656 )
+skeleton = NodePath("")
+
+[node name="Cylinder215" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.301895, 0, 0.398572, 0, 0.5, 0, -0.398572, 0, 0.301895, 61.2478, 10.0225, 10.4182 )
+skeleton = NodePath("")
+
+[node name="Cylinder216" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.395519, 0, -0.305883, 0, 0.5, 0, 0.305883, 0, 0.395519, 58.6861, 9.97449, 8.95079 )
+skeleton = NodePath("")
+
+[node name="Cylinder217" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.487695, 0, -0.110241, 0, 0.5, 0, 0.110241, 0, -0.487695, 56.7619, 9.92683, 7.98352 )
+skeleton = NodePath("")
+
+[node name="Cylinder218" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.162809, 0, 0.472751, 0, 0.5, 0, -0.472751, 0, -0.162809, 54.2338, 9.94379, 6.00137 )
+skeleton = NodePath("")
+
+[node name="Cylinder219" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.269127, 0, 0.421392, 0, 0.5, 0, -0.421392, 0, 0.269127, 51.6937, 10.0281, 3.75092 )
+skeleton = NodePath("")
+
+[node name="Cylinder220" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.321312, 0, -0.383091, 0, 0.5, 0, 0.383091, 0, -0.321312, 49.1775, 10.0961, 1.66984 )
+skeleton = NodePath("")
+
+[node name="Cylinder221" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.480365, 0, 0.138743, 0, 0.5, 0, -0.138743, 0, -0.480365, 45.955, 10.1536, -0.20723 )
+skeleton = NodePath("")
+
+[node name="Cylinder222" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.306737, 0, -0.394858, 0, 0.5, 0, 0.394858, 0, 0.306737, 43.4103, 10.2003, -1.57836 )
+skeleton = NodePath("")
+
+[node name="Cylinder223" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.364829, 0, 0.341906, 0, 0.5, 0, -0.341906, 0, 0.364829, 39.9781, 10.2272, -2.94866 )
+skeleton = NodePath("")
+
+[node name="Cylinder224" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0430486, 0, -0.498143, 0, 0.5, 0, 0.498143, 0, -0.0430486, 37.4607, 10.2684, -3.96844 )
+skeleton = NodePath("")
+
+[node name="Cylinder225" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.340882, 0, 0.365786, 0, 0.5, 0, -0.365786, 0, -0.340882, 34.1694, 10.2843, -4.93987 )
+skeleton = NodePath("")
+
+[node name="Cylinder226" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.171058, 0, 0.469829, 0, 0.5, 0, -0.469829, 0, -0.171058, 31.7566, 10.2913, -5.55675 )
+skeleton = NodePath("")
+
+[node name="Cylinder227" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.415973, 0, 0.277428, 0, 0.5, 0, -0.277428, 0, -0.415973, 28.4961, 10.3078, -5.8223 )
+skeleton = NodePath("")
+
+[node name="Cylinder228" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.462696, 0, 0.189506, 0, 0.5, 0, -0.189506, 0, 0.462696, 26.1789, 10.4246, -6.81936 )
+skeleton = NodePath("")
+
+[node name="Cylinder229" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.160112, 0, 0.473671, 0, 0.5, 0, -0.473671, 0, -0.160112, 22.9647, 10.3476, -6.35255 )
+skeleton = NodePath("")
+
+[node name="Cylinder230" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0239971, 0, -0.499424, 0, 0.5, 0, 0.499424, 0, -0.0239971, 19.8429, 10.3135, -6.20992 )
+skeleton = NodePath("")
+
+[node name="Cylinder231" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.382988, 0, -0.321435, 0, 0.5, 0, 0.321435, 0, -0.382988, 16.7985, 10.3145, -5.98093 )
+skeleton = NodePath("")
+
+[node name="Cylinder232" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.1437, 0, -0.478905, 0, 0.5, 0, 0.478905, 0, 0.1437, 14.219, 10.3583, -5.88883 )
+skeleton = NodePath("")
+
+[node name="Cylinder233" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.132264, 0, -0.482189, 0, 0.5, 0, 0.482189, 0, 0.132264, 10.393, 10.3823, -4.78852 )
+skeleton = NodePath("")
+
+[node name="Cylinder234" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.299031, 0, -0.400725, 0, 0.5, 0, 0.400725, 0, -0.299031, 8.63308, 10.4155, -4.80264 )
+skeleton = NodePath("")
+
+[node name="Cylinder235" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.266887, 0, 0.422814, 0, 0.5, 0, -0.422814, 0, 0.266887, 7.06989, 10.4254, -4.35555 )
+skeleton = NodePath("")
+
+[node name="Cylinder236" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.148437, 0, -0.477458, 0, 0.5, 0, 0.477458, 0, 0.148437, 2.58975, 10.3908, -2.71223 )
+skeleton = NodePath("")
+
+[node name="Cylinder237" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.472993, 0, 0.162104, 0, 0.5, 0, -0.162104, 0, -0.472993, 0.459415, 10.413, -2.13334 )
+skeleton = NodePath("")
+
+[node name="Cylinder238" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.465347, 0, 0.1829, 0, 0.5, 0, -0.1829, 0, -0.465347, -2.27618, 10.4879, -0.376514 )
+skeleton = NodePath("")
+
+[node name="Cylinder239" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.464128, 0, 0.185972, 0, 0.5, 0, -0.185972, 0, 0.464128, -5.31281, 10.5011, 1.36935 )
+skeleton = NodePath("")
+
+[node name="Cylinder240" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.205021, 0, 0.456033, 0, 0.5, 0, -0.456033, 0, -0.205021, -9.16297, 10.415, 4.60318 )
+skeleton = NodePath("")
+
+[node name="Cylinder241" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499879, 0, -0.0110125, 0, 0.5, 0, 0.0110125, 0, 0.499879, -11.4034, 10.3109, 7.49569 )
+skeleton = NodePath("")
+
+[node name="Cylinder242" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.210992, 0, -0.453302, 0, 0.5, 0, 0.453302, 0, 0.210992, -14.2822, 10.1792, 11.9833 )
+skeleton = NodePath("")
+
+[node name="Cylinder243" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.357647, 0, 0.349411, 0, 0.5, 0, -0.349411, 0, 0.357647, -16.2133, 10.0972, 15.8076 )
+skeleton = NodePath("")
+
+[node name="Cylinder244" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.099604, 0, 0.489979, 0, 0.5, 0, -0.489979, 0, 0.099604, -18.2861, 9.98419, 18.879 )
+skeleton = NodePath("")
+
+[node name="Cylinder245" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.1939, 0, 0.460872, 0, 0.5, 0, -0.460872, 0, 0.1939, -21.6924, 10.1875, 19.5325 )
+skeleton = NodePath("")
+
+[node name="Cylinder246" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.244851, 0, 0.435945, 0, 0.5, 0, -0.435945, 0, 0.244851, -24.7038, 10.3367, 17.1742 )
+skeleton = NodePath("")
+
+[node name="Cylinder247" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.403261, 0, -0.295602, 0, 0.5, 0, 0.295602, 0, 0.403261, -26.5166, 10.439, 15.5989 )
+skeleton = NodePath("")
+
+[node name="Cylinder248" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.299152, 0, -0.400634, 0, 0.5, 0, 0.400634, 0, -0.299152, -28.0812, 10.3938, 13.1218 )
+skeleton = NodePath("")
+
+[node name="Cylinder249" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.129475, 0, 0.482945, 0, 0.5, 0, -0.482945, 0, 0.129475, -30.3581, 10.0157, 9.59602 )
+skeleton = NodePath("")
+
+[node name="Cylinder250" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.192602, 0, 0.461416, 0, 0.5, 0, -0.461416, 0, 0.192602, -30.534, 9.99506, 8.46956 )
+skeleton = NodePath("")
+
+[node name="Cylinder251" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.255751, 0, 0.429641, 0, 0.5, 0, -0.429641, 0, -0.255751, -31.0634, 9.8482, 3.85447 )
+skeleton = NodePath("")
+
+[node name="Cylinder252" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.274515, 0, 0.417901, 0, 0.5, 0, -0.417901, 0, 0.274515, -31.8247, 9.63161, 1.24498 )
+skeleton = NodePath("")
+
+[node name="Cylinder253" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.470636, 0, -0.168826, 0, 0.5, 0, 0.168826, 0, -0.470636, -31.8272, 9.52337, -0.132809 )
+skeleton = NodePath("")
+
+[node name="Cylinder254" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.119841, 0, 0.485426, 0, 0.5, 0, -0.485426, 0, 0.119841, -31.4571, 9.08851, -2.41902 )
+skeleton = NodePath("")
+
+[node name="Cylinder255" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.142836, 0, 0.479164, 0, 0.5, 0, -0.479164, 0, 0.142836, -29.1113, 8.62768, -5.26029 )
+skeleton = NodePath("")
+
+[node name="Cylinder256" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.306194, 0, 0.395279, 0, 0.5, 0, -0.395279, 0, -0.306194, -27.7056, 8.56351, -5.97921 )
+skeleton = NodePath("")
+
+[node name="Cylinder257" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499999, 0, -0.000716523, 0, 0.5, 0, 0.000716523, 0, -0.499999, -26.8385, 7.76349, -7.24089 )
+skeleton = NodePath("")
+
+[node name="Cylinder258" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.143028, 0, 0.479106, 0, 0.5, 0, -0.479106, 0, 0.143028, -32.965, 10.8268, 175.297 )
+skeleton = NodePath("")
+
+[node name="Cylinder259" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0284775, 0, -0.499188, 0, 0.5, 0, 0.499188, 0, 0.0284775, -29.8046, 10.8966, 175.747 )
+skeleton = NodePath("")
+
+[node name="Cylinder260" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499734, 0, -0.0163088, 0, 0.5, 0, 0.0163088, 0, 0.499734, -26.4391, 10.9175, 174.949 )
+skeleton = NodePath("")
+
+[node name="Cylinder261" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.453773, 0, -0.209977, 0, 0.5, 0, 0.209977, 0, -0.453773, -20.6563, 10.8085, 171.912 )
+skeleton = NodePath("")
+
+[node name="Cylinder262" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.5, 0, 0.00020767, 0, 0.5, 0, -0.00020767, 0, 0.5, -16.489, 10.6695, 169.013 )
+skeleton = NodePath("")
+
+[node name="Cylinder263" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.488339, 0, 0.107356, 0, 0.5, 0, -0.107356, 0, -0.488339, -12.7766, 10.4635, 165.721 )
+skeleton = NodePath("")
+
+[node name="Cylinder264" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.486198, 0, 0.116669, 0, 0.5, 0, -0.116669, 0, 0.486198, -8.79845, 10.4588, 164.638 )
+skeleton = NodePath("")
+
+[node name="Cylinder265" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.331863, 0, -0.373988, 0, 0.5, 0, 0.373988, 0, 0.331863, -5.47214, 10.4005, 160.955 )
+skeleton = NodePath("")
+
+[node name="Cylinder266" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.464708, 0, 0.184516, 0, 0.5, 0, -0.184516, 0, -0.464708, -2.47275, 10.6725, 155.188 )
+skeleton = NodePath("")
+
+[node name="Cylinder267" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.181454, 0, 0.465913, 0, 0.5, 0, -0.465913, 0, 0.181454, 0.604368, 11.2541, 149.005 )
+skeleton = NodePath("")
+
+[node name="Cylinder268" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.489715, 0, 0.100893, 0, 0.5, 0, -0.100893, 0, -0.489715, 3.36134, 11.7782, 143.144 )
+skeleton = NodePath("")
+
+[node name="Cylinder269" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.103492, 0, -0.489172, 0, 0.5, 0, 0.489172, 0, 0.103492, 4.92517, 11.8959, 139.165 )
+skeleton = NodePath("")
+
+[node name="Cylinder270" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.286559, 0, 0.409737, 0, 0.5, 0, -0.409737, 0, -0.286559, 6.26229, 11.8363, 136.077 )
+skeleton = NodePath("")
+
+[node name="Cylinder271" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.157891, 0, 0.474416, 0, 0.5, 0, -0.474416, 0, -0.157891, 8.03966, 11.862, 137.637 )
+skeleton = NodePath("")
+
+[node name="Cylinder272" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.36146, 0, 0.345466, 0, 0.5, 0, -0.345466, 0, -0.36146, 4.09799, 10.9448, 153.386 )
+skeleton = NodePath("")
+
+[node name="Cylinder273" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.317124, 0, 0.386565, 0, 0.5, 0, -0.386565, 0, 0.317124, 2.91047, 10.8192, 155.082 )
+skeleton = NodePath("")
+
+[node name="Cylinder274" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0213217, 0, 0.499545, 0, 0.5, 0, -0.499545, 0, -0.0213217, 0.370102, 10.5482, 159.753 )
+skeleton = NodePath("")
+
+[node name="Cylinder275" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.399907, 0, -0.300123, 0, 0.5, 0, 0.300123, 0, 0.399907, -4.24004, 10.3416, 166.724 )
+skeleton = NodePath("")
+
+[node name="Cylinder276" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499195, 0, 0.028353, 0, 0.5, 0, -0.028353, 0, -0.499195, -9.64986, 10.4658, 172.349 )
+skeleton = NodePath("")
+
+[node name="Cylinder277" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.324354, 0, 0.380519, 0, 0.5, 0, -0.380519, 0, -0.324354, -13.9935, 10.6409, 175.116 )
+skeleton = NodePath("")
+
+[node name="Cylinder278" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0456734, 0, -0.49791, 0, 0.5, 0, 0.49791, 0, -0.0456734, -18.2041, 10.6448, 177.232 )
+skeleton = NodePath("")
+
+[node name="Cylinder279" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.433069, 0, -0.249902, 0, 0.5, 0, 0.249902, 0, 0.433069, -23.6032, 10.6629, 178.933 )
+skeleton = NodePath("")
+
+[node name="Cylinder280" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.179031, 0, 0.466849, 0, 0.5, 0, -0.466849, 0, -0.179031, -28.6861, 10.7467, 178.102 )
+skeleton = NodePath("")
+
+[node name="Cylinder281" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.471607, 0, 0.166094, 0, 0.5, 0, -0.166094, 0, -0.471607, -15.8418, 10.8492, 171.763 )
+skeleton = NodePath("")
+
+[node name="Cylinder282" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.19202, 0, 0.461658, 0, 0.5, 0, -0.461658, 0, 0.19202, -12.0946, 10.6961, 169.298 )
+skeleton = NodePath("")
+
+[node name="Cylinder283" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.308215, 0, 0.393705, 0, 0.5, 0, -0.393705, 0, 0.308215, -7.13343, 10.5032, 166.28 )
+skeleton = NodePath("")
+
+[node name="Cylinder284" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.162124, 0, 0.472986, 0, 0.5, 0, -0.472986, 0, 0.162124, -4.25038, 10.2503, 169.805 )
+skeleton = NodePath("")
+
+[node name="Cylinder285" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.187225, 0, -0.463624, 0, 0.5, 0, 0.463624, 0, -0.187225, 1.03895, 10.4245, 161.449 )
+skeleton = NodePath("")
+
+[node name="Cylinder286" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.343229, 0, -0.363585, 0, 0.5, 0, 0.363585, 0, 0.343229, 6.39905, 11.0238, 151.787 )
+skeleton = NodePath("")
+
+[node name="Cylinder287" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.010019, 0, 0.4999, 0, 0.5, 0, -0.4999, 0, -0.010019, 5.02571, 11.5272, 146.559 )
+skeleton = NodePath("")
+
+[node name="Cylinder288" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.495894, 0, -0.0639485, 0, 0.5, 0, 0.0639485, 0, -0.495894, 4.23759, 11.6229, 145.607 )
+skeleton = NodePath("")
+
+[node name="Cylinder289" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.255147, 0, -0.43, 0, 0.5, 0, 0.43, 0, -0.255147, 6.97091, 11.7891, 139.491 )
+skeleton = NodePath("")
+
+[node name="Cylinder290" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.313475, 0, 0.38953, 0, 0.5, 0, -0.38953, 0, 0.313475, 10.7167, 11.8828, 134.167 )
+skeleton = NodePath("")
+
+[node name="Cylinder291" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.430424, 0, -0.254431, 0, 0.5, 0, 0.254431, 0, 0.430424, 11.2496, 11.8334, 132.744 )
+skeleton = NodePath("")
+
+[node name="Cylinder292" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.20585, 0, -0.45566, 0, 0.5, 0, 0.45566, 0, 0.20585, 10.4813, 11.7425, 139.445 )
+skeleton = NodePath("")
+
+[node name="Cylinder293" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.323282, 0, 0.381429, 0, 0.5, 0, -0.381429, 0, 0.323282, 8.4305, 11.4811, 144.62 )
+skeleton = NodePath("")
+
+[node name="Cylinder294" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.423146, 0, -0.26636, 0, 0.5, 0, 0.26636, 0, -0.423146, 12.1056, 11.6078, 141.553 )
+skeleton = NodePath("")
+
+[node name="Cylinder295" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.273639, 0, 0.418475, 0, 0.5, 0, -0.418475, 0, 0.273639, 13.5014, 11.786, 136.316 )
+skeleton = NodePath("")
+
+[node name="Cylinder296" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.068183, 0, -0.495329, 0, 0.5, 0, 0.495329, 0, -0.068183, 17.2701, 11.7691, 132.418 )
+skeleton = NodePath("")
+
+[node name="Cylinder297" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.098844, 0, -0.490132, 0, 0.5, 0, 0.490132, 0, 0.098844, 15.7204, 11.8551, 129.297 )
+skeleton = NodePath("")
+
+[node name="Cylinder298" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.484451, 0, 0.123722, 0, 0.5, 0, -0.123722, 0, 0.484451, 18.0396, 11.8217, 127.063 )
+skeleton = NodePath("")
+
+[node name="Cylinder299" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.469564, 0, -0.171783, 0, 0.5, 0, 0.171783, 0, -0.469564, 20.822, 11.6557, 129.376 )
+skeleton = NodePath("")
+
+[node name="Cylinder300" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.433971, 0, 0.248332, 0, 0.5, 0, -0.248332, 0, 0.433971, 23.8039, 11.6515, 124.603 )
+skeleton = NodePath("")
+
+[node name="Cylinder301" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.323739, 0, -0.381042, 0, 0.5, 0, 0.381042, 0, 0.323739, 22.2218, 11.7949, 122.803 )
+skeleton = NodePath("")
+
+[node name="Cylinder302" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.167679, 0, 0.471046, 0, 0.5, 0, -0.471046, 0, -0.167679, 26.8429, 11.6872, 119.687 )
+skeleton = NodePath("")
+
+[node name="Cylinder303" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.25858, 0, 0.427944, 0, 0.5, 0, -0.427944, 0, 0.25858, 28.734, 11.7413, 114.791 )
+skeleton = NodePath("")
+
+[node name="Cylinder304" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.48232, 0, 0.131787, 0, 0.5, 0, -0.131787, 0, 0.48232, 27.5537, 11.8538, 113.457 )
+skeleton = NodePath("")
+
+[node name="Cylinder305" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.199024, 0, -0.458683, 0, 0.5, 0, 0.458683, 0, 0.199024, 30.0371, 11.8099, 108.954 )
+skeleton = NodePath("")
+
+[node name="Cylinder306" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.185748, 0, 0.464217, 0, 0.5, 0, -0.464217, 0, 0.185748, 27.5118, 11.9714, 107.122 )
+skeleton = NodePath("")
+
+[node name="Cylinder307" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.498558, 0, -0.0379521, 0, 0.5, 0, 0.0379521, 0, -0.498558, 25.9537, 11.842, 109.579 )
+skeleton = NodePath("")
+
+[node name="Cylinder308" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.360156, 0, 0.346825, 0, 0.5, 0, -0.346825, 0, -0.360156, 27.5657, 11.9688, 103.87 )
+skeleton = NodePath("")
+
+[node name="Cylinder309" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.446093, 0, -0.225834, 0, 0.5, 0, 0.225834, 0, -0.446093, 24.3543, 11.7022, 102.643 )
+skeleton = NodePath("")
+
+[node name="Cylinder310" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.412989, 0, -0.281851, 0, 0.5, 0, 0.281851, 0, 0.412989, 23.6058, 11.6036, 98.2073 )
+skeleton = NodePath("")
+
+[node name="Cylinder311" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.422912, 0, 0.266732, 0, 0.5, 0, -0.266732, 0, -0.422912, 22.2715, 11.5222, 95.69 )
+skeleton = NodePath("")
+
+[node name="Cylinder312" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.335269, 0, -0.370938, 0, 0.5, 0, 0.370938, 0, -0.335269, 20.4423, 11.4193, 92.3366 )
+skeleton = NodePath("")
+
+[node name="Cylinder313" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.458311, 0, -0.199879, 0, 0.5, 0, 0.199879, 0, 0.458311, 20.0438, 11.4272, 88.8679 )
+skeleton = NodePath("")
+
+[node name="Cylinder314" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.273021, 0, -0.418879, 0, 0.5, 0, 0.418879, 0, -0.273021, 22.2277, 11.4416, 86.0277 )
+skeleton = NodePath("")
+
+[node name="Cylinder315" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.373214, 0, -0.332733, 0, 0.5, 0, 0.332733, 0, 0.373214, 24.5896, 11.6387, 91.3961 )
+skeleton = NodePath("")
+
+[node name="Cylinder316" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.299958, 0, 0.400032, 0, 0.5, 0, -0.400032, 0, -0.299958, 27.2947, 11.9502, 98.0058 )
+skeleton = NodePath("")
+
+[node name="Cylinder317" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0272677, 0, -0.499256, 0, 0.5, 0, 0.499256, 0, -0.0272677, 28.9779, 11.9654, 102.422 )
+skeleton = NodePath("")
+
+[node name="Cylinder318" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.437274, 0, 0.242469, 0, 0.5, 0, -0.242469, 0, 0.437274, 30.7047, 11.9488, 103.298 )
+skeleton = NodePath("")
+
+[node name="Cylinder319" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.456346, 0, 0.204323, 0, 0.5, 0, -0.204323, 0, -0.456346, 31.8756, 11.9568, 97.5733 )
+skeleton = NodePath("")
+
+[node name="Cylinder320" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0943335, 0, -0.491021, 0, 0.5, 0, 0.491021, 0, 0.0943335, 30.881, 11.8622, 94.6677 )
+skeleton = NodePath("")
+
+[node name="Cylinder321" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.498509, 0, 0.0385815, 0, 0.5, 0, -0.0385815, 0, 0.498509, 27.3852, 11.6989, 91.3529 )
+skeleton = NodePath("")
+
+[node name="Cylinder322" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.393071, 0, 0.309023, 0, 0.5, 0, -0.309023, 0, 0.393071, 28.2394, 11.6004, 88.7782 )
+skeleton = NodePath("")
+
+[node name="Cylinder323" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0262309, 0, -0.499311, 0, 0.5, 0, 0.499311, 0, -0.0262309, 26.1663, 11.1666, 84.3474 )
+skeleton = NodePath("")
+
+[node name="Cylinder324" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.493338, 0, 0.0813478, 0, 0.5, 0, -0.0813478, 0, -0.493338, 29.7405, 11.1416, 82.3305 )
+skeleton = NodePath("")
+
+[node name="Cylinder325" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.332078, 0, 0.373797, 0, 0.5, 0, -0.373797, 0, -0.332078, 32.4846, 11.5501, 87.0021 )
+skeleton = NodePath("")
+
+[node name="Cylinder326" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0645571, 0, 0.495815, 0, 0.5, 0, -0.495815, 0, -0.0645571, 34.56, 11.8481, 92.9644 )
+skeleton = NodePath("")
+
+[node name="Cylinder327" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.405392, 0, -0.292673, 0, 0.5, 0, 0.292673, 0, -0.405392, 37.7055, 11.7091, 84.7047 )
+skeleton = NodePath("")
+
+[node name="Cylinder328" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0707144, 0, 0.494974, 0, 0.5, 0, -0.494974, 0, -0.0707144, 33.275, 11.1066, 79.1848 )
+skeleton = NodePath("")
+
+[node name="Cylinder329" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0214993, 0, 0.499538, 0, 0.5, 0, -0.499538, 0, -0.0214993, 30.6729, 10.7192, 77.0724 )
+skeleton = NodePath("")
+
+[node name="Cylinder330" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.454323, 0, 0.208783, 0, 0.5, 0, -0.208783, 0, -0.454323, 35.9822, 11.6277, 85.2225 )
+skeleton = NodePath("")
+
+[node name="Cylinder331" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.238612, 0, 0.439391, 0, 0.5, 0, -0.439391, 0, -0.238612, 34.4143, 11.6966, 89.592 )
+skeleton = NodePath("")
+
+[node name="Cylinder332" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.220535, 0, -0.448736, 0, 0.5, 0, 0.448736, 0, -0.220535, 41.0594, 11.9737, 87.3273 )
+skeleton = NodePath("")
+
+[node name="Cylinder333" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.179146, 0, 0.466805, 0, 0.5, 0, -0.466805, 0, 0.179146, 39.7915, 11.6753, 81.7156 )
+skeleton = NodePath("")
+
+[node name="Cylinder334" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.495707, 0, -0.0653817, 0, 0.5, 0, 0.0653817, 0, -0.495707, 36.4489, 11.3891, 79.5625 )
+skeleton = NodePath("")
+
+[node name="Cylinder335" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.325151, 0, 0.379838, 0, 0.5, 0, -0.379838, 0, 0.325151, 33.8568, 10.8252, 75.3983 )
+skeleton = NodePath("")
+
+[node name="Cylinder336" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.455702, 0, 0.205756, 0, 0.5, 0, -0.205756, 0, 0.455702, 37.4815, 11.0863, 75.2936 )
+skeleton = NodePath("")
+
+[node name="Cylinder337" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.495138, 0, -0.0695604, 0, 0.5, 0, 0.0695604, 0, 0.495138, 41.2977, 11.7053, 80.7642 )
+skeleton = NodePath("")
+
+[node name="Cylinder338" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.284413, 0, -0.411229, 0, 0.5, 0, 0.411229, 0, -0.284413, 44.211, 11.9775, 83.3674 )
+skeleton = NodePath("")
+
+[node name="Cylinder339" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.452998, 0, 0.211644, 0, 0.5, 0, -0.211644, 0, -0.452998, 46.1197, 11.9672, 80.9536 )
+skeleton = NodePath("")
+
+[node name="Cylinder340" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0543218, 0, -0.49704, 0, 0.5, 0, 0.49704, 0, 0.0543218, 41.5641, 11.5385, 77.0043 )
+skeleton = NodePath("")
+
+[node name="Cylinder341" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.442668, 0, 0.232477, 0, 0.5, 0, -0.232477, 0, -0.442668, 40.7958, 11.277, 74.8043 )
+skeleton = NodePath("")
+
+[node name="Cylinder342" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.308793, 0, 0.393252, 0, 0.5, 0, -0.393252, 0, -0.308793, 43.0699, 11.3152, 72.9288 )
+skeleton = NodePath("")
+
+[node name="Cylinder343" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.456304, 0, 0.204417, 0, 0.5, 0, -0.204417, 0, 0.456304, 46.8756, 11.8706, 78.0183 )
+skeleton = NodePath("")
+
+[node name="Cylinder344" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.167454, 0, 0.471125, 0, 0.5, 0, -0.471125, 0, 0.167454, 49.3794, 12.0353, 78.6619 )
+skeleton = NodePath("")
+
+[node name="Cylinder345" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.229526, 0, -0.444205, 0, 0.5, 0, 0.444205, 0, -0.229526, 49.6841, 11.7581, 71.5917 )
+skeleton = NodePath("")
+
+[node name="Cylinder346" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.114071, 0, 0.486814, 0, 0.5, 0, -0.486814, 0, 0.114071, 44.1242, 10.9142, 68.1425 )
+skeleton = NodePath("")
+
+[node name="Cylinder347" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.38661, 0, -0.317069, 0, 0.5, 0, 0.317069, 0, 0.38661, 48.4691, 11.1247, 65.6517 )
+skeleton = NodePath("")
+
+[node name="Cylinder348" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.390708, 0, 0.312006, 0, 0.5, 0, -0.312006, 0, -0.390708, 52.2573, 11.9445, 72.7228 )
+skeleton = NodePath("")
+
+[node name="Cylinder349" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.410286, 0, 0.285772, 0, 0.5, 0, -0.285772, 0, -0.410286, 53.7805, 12.0851, 74.1105 )
+skeleton = NodePath("")
+
+[node name="Cylinder350" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.386323, 0, -0.317418, 0, 0.5, 0, 0.317418, 0, 0.386323, 56.4057, 12.0046, 68.3616 )
+skeleton = NodePath("")
+
+[node name="Cylinder351" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.447973, 0, 0.222081, 0, 0.5, 0, -0.222081, 0, 0.447973, 56.1702, 11.8758, 65.8725 )
+skeleton = NodePath("")
+
+[node name="Cylinder352" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.223803, 0, 0.447115, 0, 0.5, 0, -0.447115, 0, -0.223803, 51.8216, 11.6928, 67.3946 )
+skeleton = NodePath("")
+
+[node name="Cylinder353" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.497649, 0, 0.0484288, 0, 0.5, 0, -0.0484288, 0, 0.497649, 52.3306, 11.2504, 62.1495 )
+skeleton = NodePath("")
+
+[node name="Cylinder354" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.460768, 0, 0.194147, 0, 0.5, 0, -0.194147, 0, -0.460768, 55.227, 11.3568, 59.5755 )
+skeleton = NodePath("")
+
+[node name="Cylinder355" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.413269, 0, 0.281441, 0, 0.5, 0, -0.281441, 0, 0.413269, 57.1842, 10.5022, 48.2313 )
+skeleton = NodePath("")
+
+[node name="Cylinder356" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.409736, 0, 0.286559, 0, 0.5, 0, -0.286559, 0, 0.409736, 56.5251, 11.0631, 55.1653 )
+skeleton = NodePath("")
+
+[node name="Cylinder357" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.366719, 0, -0.339878, 0, 0.5, 0, 0.339878, 0, 0.366719, 57.5945, 11.6162, 59.6563 )
+skeleton = NodePath("")
+
+[node name="Cylinder358" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0235814, 0, -0.499444, 0, 0.5, 0, 0.499444, 0, 0.0235814, 58.7216, 11.8589, 62.7571 )
+skeleton = NodePath("")
+
+[node name="Cylinder359" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.437685, 0, -0.241728, 0, 0.5, 0, 0.241728, 0, -0.437685, 61.7244, 12.1338, 64.3647 )
+skeleton = NodePath("")
+
+[node name="Cylinder360" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.379205, 0, -0.325889, 0, 0.5, 0, 0.325889, 0, -0.379205, 63.8357, 11.9559, 58.8882 )
+skeleton = NodePath("")
+
+[node name="Cylinder361" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.490302, 0, 0.0979981, 0, 0.5, 0, -0.0979981, 0, -0.490302, 65.8907, 11.864, 55.0198 )
+skeleton = NodePath("")
+
+[node name="Cylinder362" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0282019, 0, -0.499204, 0, 0.5, 0, 0.499204, 0, -0.0282019, 63.2279, 11.7448, 55.8003 )
+skeleton = NodePath("")
+
+[node name="Cylinder363" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.158135, 0, 0.474335, 0, 0.5, 0, -0.474335, 0, -0.158135, 60.3776, 11.2287, 50.5079 )
+skeleton = NodePath("")
+
+[node name="Cylinder364" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499995, 0, 0.00228856, 0, 0.5, 0, -0.00228856, 0, 0.499995, 61.7796, 11.1908, 47.7627 )
+skeleton = NodePath("")
+
+[node name="Cylinder365" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.232177, 0, 0.442825, 0, 0.5, 0, -0.442825, 0, 0.232177, 65.6968, 11.2308, 44.3248 )
+skeleton = NodePath("")
+
+[node name="Cylinder366" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.133377, 0, 0.481882, 0, 0.5, 0, -0.481882, 0, -0.133377, 64.9633, 10.8011, 36.8439 )
+skeleton = NodePath("")
+
+[node name="Cylinder367" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.473451, 0, 0.16076, 0, 0.5, 0, -0.16076, 0, -0.473451, 64.245, 10.7458, 36.5971 )
+skeleton = NodePath("")
+
+[node name="Cylinder368" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.344392, 0, 0.362484, 0, 0.5, 0, -0.362484, 0, -0.344392, 64.4656, 10.9026, 38.6299 )
+skeleton = NodePath("")
+
+[node name="Cylinder369" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0514015, 0, -0.497351, 0, 0.5, 0, 0.497351, 0, 0.0514015, 66.321, 11.6247, 50.1884 )
+skeleton = NodePath("")
+
+[node name="Cylinder370" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.419903, 0, 0.271444, 0, 0.5, 0, -0.271444, 0, 0.419903, 64.6883, 11.4307, 48.4504 )
+skeleton = NodePath("")
+
+[node name="Cylinder371" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.416407, 0, -0.276777, 0, 0.5, 0, 0.276777, 0, -0.416407, 61.8167, 10.9411, 44.0237 )
+skeleton = NodePath("")
+
+[node name="Cylinder372" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.48128, 0, -0.135536, 0, 0.5, 0, 0.135536, 0, -0.48128, 69.1999, 11.6667, 48.0723 )
+skeleton = NodePath("")
+
+[node name="Cylinder373" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.378989, 0, -0.326141, 0, 0.5, 0, 0.326141, 0, -0.378989, 71.4505, 11.7299, 47.0489 )
+skeleton = NodePath("")
+
+[node name="Cylinder374" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.372758, 0, 0.333243, 0, 0.5, 0, -0.333243, 0, -0.372758, 71.5462, 11.1792, 39.8115 )
+skeleton = NodePath("")
+
+[node name="Cylinder375" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.320154, 0, -0.384059, 0, 0.5, 0, 0.384059, 0, 0.320154, 68.4931, 11.0907, 39.5911 )
+skeleton = NodePath("")
+
+[node name="Cylinder376" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.301542, 0, -0.398839, 0, 0.5, 0, 0.398839, 0, -0.301542, 72.4521, 10.4864, 34.7824 )
+skeleton = NodePath("")
+
+[node name="Cylinder377" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.000507317, 0, 0.5, 0, 0.5, 0, -0.5, 0, -0.000507317, 77.2835, 10.8195, 37.6338 )
+skeleton = NodePath("")
+
+[node name="Cylinder378" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.495208, 0, -0.0690547, 0, 0.5, 0, 0.0690547, 0, -0.495208, 71.5489, 11.4263, 43.0258 )
+skeleton = NodePath("")
+
+[node name="Cylinder379" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.277103, 0, 0.41619, 0, 0.5, 0, -0.41619, 0, -0.277103, 76.8172, 11.2066, 41.7023 )
+skeleton = NodePath("")
+
+[node name="Cylinder380" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.475504, 0, -0.154585, 0, 0.5, 0, 0.154585, 0, -0.475504, 78.4014, 11.3315, 43.9585 )
+skeleton = NodePath("")
+
+[node name="Cylinder381" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.485449, 0, 0.119748, 0, 0.5, 0, -0.119748, 0, -0.485449, 80.797, 10.8615, 40.4787 )
+skeleton = NodePath("")
+
+[node name="Cylinder382" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.201093, 0, 0.457779, 0, 0.5, 0, -0.457779, 0, 0.201093, 79.8416, 10.7448, 38.1987 )
+skeleton = NodePath("")
+
+[node name="Cylinder383" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.421996, 0, -0.268177, 0, 0.5, 0, 0.268177, 0, 0.421996, 84.3994, 10.676, 37.9557 )
+skeleton = NodePath("")
+
+[node name="Cylinder384" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.190859, 0, -0.462139, 0, 0.5, 0, 0.462139, 0, -0.190859, 85.8751, 10.8412, 41.5781 )
+skeleton = NodePath("")
+
+[node name="Cylinder385" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.144934, 0, -0.478533, 0, 0.5, 0, 0.478533, 0, 0.144934, 87.9016, 10.6958, 37.0812 )
+skeleton = NodePath("")
+
+[node name="Cylinder386" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.23261, 0, -0.442598, 0, 0.5, 0, 0.442598, 0, -0.23261, 87.6816, 10.2892, 33.5093 )
+skeleton = NodePath("")
+
+[node name="Cylinder387" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.498574, 0, 0.0377395, 0, 0.5, 0, -0.0377395, 0, 0.498574, 90.7356, 10.7466, 36.6569 )
+skeleton = NodePath("")
+
+[node name="Cylinder388" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499802, 0, 0.0140569, 0, 0.5, 0, -0.0140569, 0, -0.499802, 93.1792, 10.7765, 35.2656 )
+skeleton = NodePath("")
+
+[node name="Cylinder389" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.189055, 0, -0.46288, 0, 0.5, 0, 0.46288, 0, -0.189055, 93.9535, 10.5536, 31.8501 )
+skeleton = NodePath("")
+
+[node name="Cylinder390" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.481256, 0, -0.13562, 0, 0.5, 0, 0.13562, 0, -0.481256, 96.6508, 10.8197, 32.4221 )
+skeleton = NodePath("")
+
+[node name="Cylinder391" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.355355, 0, 0.351742, 0, 0.5, 0, -0.351742, 0, 0.355355, 100.093, 10.9899, 32.5697 )
+skeleton = NodePath("")
+
+[node name="Cylinder392" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.480051, 0, -0.139823, 0, 0.5, 0, 0.139823, 0, 0.480051, 100.633, 10.8877, 28.2466 )
+skeleton = NodePath("")
+
+[node name="Cylinder393" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0256468, 0, 0.499342, 0, 0.5, 0, -0.499342, 0, -0.0256468, 101.702, 10.8829, 25.0923 )
+skeleton = NodePath("")
+
+[node name="Cylinder394" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.193587, 0, 0.461004, 0, 0.5, 0, -0.461004, 0, -0.193587, 105.322, 11.0985, 24.3083 )
+skeleton = NodePath("")
+
+[node name="Cylinder395" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.107404, 0, 0.488328, 0, 0.5, 0, -0.488328, 0, 0.107404, 106.624, 11.0722, 18.0652 )
+skeleton = NodePath("")
+
+[node name="Cylinder396" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0302169, 0, 0.499086, 0, 0.5, 0, -0.499086, 0, -0.0302169, 106.527, 11.0339, 16.1598 )
+skeleton = NodePath("")
+
+[node name="Cylinder397" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.468801, 0, 0.173854, 0, 0.5, 0, -0.173854, 0, -0.468801, 91.3791, 10.6554, 6.38993 )
+skeleton = NodePath("")
+
+[node name="Cylinder398" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.497326, 0, -0.0516456, 0, 0.5, 0, 0.0516456, 0, -0.497326, 87.8955, 10.7566, 6.81677 )
+skeleton = NodePath("")
+
+[node name="Cylinder399" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.480991, 0, -0.136556, 0, 0.5, 0, 0.136556, 0, 0.480991, 89.1598, 10.6667, 9.01871 )
+skeleton = NodePath("")
+
+[node name="Cylinder400" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.37978, 0, -0.325219, 0, 0.5, 0, 0.325219, 0, -0.37978, 87.727, 10.4832, 12.463 )
+skeleton = NodePath("")
+
+[node name="Cylinder401" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.209005, 0, 0.454221, 0, 0.5, 0, -0.454221, 0, 0.209005, 83.4956, 10.3909, 11.4068 )
+skeleton = NodePath("")
+
+[node name="Cylinder402" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.411316, 0, 0.284287, 0, 0.5, 0, -0.284287, 0, -0.411316, 81.963, 10.3996, 14.0264 )
+skeleton = NodePath("")
+
+[node name="Cylinder403" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.497583, 0, 0.0491065, 0, 0.5, 0, -0.0491065, 0, -0.497583, 86.0855, 10.4329, 11.7631 )
+skeleton = NodePath("")
+
+[node name="Cylinder404" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.400489, 0, -0.299347, 0, 0.5, 0, 0.299347, 0, 0.400489, 78.5834, 10.4546, 14.5466 )
+skeleton = NodePath("")
+
+[node name="Cylinder405" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.358926, 0, 0.348098, 0, 0.5, 0, -0.348098, 0, 0.358926, 78.6138, 10.5039, 12.8781 )
+skeleton = NodePath("")
+
+[node name="Cylinder406" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.488417, 0, -0.106998, 0, 0.5, 0, 0.106998, 0, -0.488417, 74.0869, 10.3757, 12.0708 )
+skeleton = NodePath("")
+
+[node name="Cylinder407" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.385407, 0, 0.318531, 0, 0.5, 0, -0.318531, 0, -0.385407, 72.2606, 10.3472, 13.1592 )
+skeleton = NodePath("")
+
+[node name="Cylinder408" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.479464, 0, -0.141826, 0, 0.5, 0, 0.141826, 0, -0.479464, 72.4839, 10.3519, 10.6142 )
+skeleton = NodePath("")
+
+[node name="Cylinder409" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.185315, 0, 0.46439, 0, 0.5, 0, -0.46439, 0, 0.185315, 68.3364, 10.3171, 10.0907 )
+skeleton = NodePath("")
+
+[node name="Cylinder410" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.461424, 0, -0.192581, 0, 0.5, 0, 0.192581, 0, -0.461424, 66.9484, 10.3136, 11.3962 )
+skeleton = NodePath("")
+
+[node name="Cylinder411" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.431895, 0, 0.251927, 0, 0.5, 0, -0.251927, 0, 0.431895, 67.841, 10.2994, 7.58728 )
+skeleton = NodePath("")
+
+[node name="Cylinder412" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499602, 0, -0.0199345, 0, 0.5, 0, 0.0199345, 0, -0.499602, 66.575, 10.2664, 7.17556 )
+skeleton = NodePath("")
+
+[node name="Cylinder413" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.379668, 0, -0.32535, 0, 0.5, 0, 0.32535, 0, -0.379668, 60.7155, 10.0598, 9.61763 )
+skeleton = NodePath("")
+
+[node name="Cylinder414" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.398182, 0, -0.302409, 0, 0.5, 0, 0.302409, 0, 0.398182, 63.9342, 10.2339, 10.3211 )
+skeleton = NodePath("")
+
+[node name="Cylinder415" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.117189, 0, -0.486073, 0, 0.5, 0, 0.486073, 0, 0.117189, 63.7736, 10.2431, 7.75304 )
+skeleton = NodePath("")
+
+[node name="Cylinder416" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.47571, 0, 0.153948, 0, 0.5, 0, -0.153948, 0, -0.47571, 60.002, 10.1311, 3.75474 )
+skeleton = NodePath("")
+
+[node name="Cylinder417" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.133375, 0, 0.481883, 0, 0.5, 0, -0.481883, 0, 0.133375, 61.9292, 10.1172, 3.17391 )
+skeleton = NodePath("")
+
+[node name="Cylinder418" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.29636, 0, -0.402704, 0, 0.5, 0, 0.402704, 0, 0.29636, 57.9024, 10.161, 4.68131 )
+skeleton = NodePath("")
+
+[node name="Cylinder419" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.356918, 0, -0.350156, 0, 0.5, 0, 0.350156, 0, 0.356918, 55.6862, 10.1773, 4.55536 )
+skeleton = NodePath("")
+
+[node name="Cylinder420" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.450236, 0, -0.217457, 0, 0.5, 0, 0.217457, 0, 0.450236, 55.106, 10.1216, 1.65504 )
+skeleton = NodePath("")
+
+[node name="Cylinder421" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.191326, 0, -0.461946, 0, 0.5, 0, 0.461946, 0, 0.191326, 57.4818, 10.08, 1.44236 )
+skeleton = NodePath("")
+
+[node name="Cylinder422" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.498523, 0, 0.0383977, 0, 0.5, 0, -0.0383977, 0, 0.498523, 56.216, 10.0546, -0.23622 )
+skeleton = NodePath("")
+
+[node name="Cylinder423" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.304059, 0, -0.396924, 0, 0.5, 0, 0.396924, 0, 0.304059, 64.4272, 10.2246, 6.30933 )
+skeleton = NodePath("")
+
+[node name="Cylinder424" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.182226, 0, 0.465611, 0, 0.5, 0, -0.465611, 0, -0.182226, 55.0863, 10.1459, 2.76715 )
+skeleton = NodePath("")
+
+[node name="Cylinder425" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.493023, 0, -0.0832394, 0, 0.5, 0, 0.0832394, 0, 0.493023, 52.5978, 10.1746, 1.19344 )
+skeleton = NodePath("")
+
+[node name="Cylinder426" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.417354, 0, -0.275346, 0, 0.5, 0, 0.275346, 0, 0.417354, 52.8667, 10.1092, -1.40658 )
+skeleton = NodePath("")
+
+[node name="Cylinder427" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.444198, 0, 0.229539, 0, 0.5, 0, -0.229539, 0, 0.444198, 52.1519, 10.1005, -2.6075 )
+skeleton = NodePath("")
+
+[node name="Cylinder428" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.491069, 0, -0.0940836, 0, 0.5, 0, 0.0940836, 0, -0.491069, 48.4567, 10.235, -2.11909 )
+skeleton = NodePath("")
+
+[node name="Cylinder429" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499983, 0, -0.00411339, 0, 0.5, 0, 0.00411339, 0, 0.499983, 49.5705, 10.1578, -3.52332 )
+skeleton = NodePath("")
+
+[node name="Cylinder430" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.376737, 0, 0.328739, 0, 0.5, 0, -0.328739, 0, 0.376737, 47.0607, 10.2549, -4.14409 )
+skeleton = NodePath("")
+
+[node name="Cylinder431" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.360929, 0, 0.34602, 0, 0.5, 0, -0.34602, 0, -0.360929, 45.386, 10.3454, -3.29217 )
+skeleton = NodePath("")
+
+[node name="Cylinder432" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.487553, 0, 0.110869, 0, 0.5, 0, -0.110869, 0, 0.487553, 43.4879, 10.4003, -4.67051 )
+skeleton = NodePath("")
+
+[node name="Cylinder433" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.49481, 0, -0.071852, 0, 0.5, 0, 0.071852, 0, -0.49481, 45.1802, 10.2958, -6.4925 )
+skeleton = NodePath("")
+
+[node name="Cylinder434" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.227808, 0, -0.445088, 0, 0.5, 0, 0.445088, 0, -0.227808, 43.1044, 10.3629, -7.95075 )
+skeleton = NodePath("")
+
+[node name="Cylinder435" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.49824, 0, 0.0419158, 0, 0.5, 0, -0.0419158, 0, 0.49824, 40.9319, 10.4998, -4.97091 )
+skeleton = NodePath("")
+
+[node name="Cylinder436" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.257197, 0, 0.428777, 0, 0.5, 0, -0.428777, 0, -0.257197, 39.8511, 10.5058, -6.72531 )
+skeleton = NodePath("")
+
+[node name="Cylinder437" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.490278, 0, 0.0981209, 0, 0.5, 0, -0.0981209, 0, 0.490278, 38.837, 10.5128, -8.2765 )
+skeleton = NodePath("")
+
+[node name="Cylinder438" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.408013, 0, -0.289008, 0, 0.5, 0, 0.289008, 0, -0.408013, 40.2508, 10.4424, -9.72006 )
+skeleton = NodePath("")
+
+[node name="Cylinder439" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.140385, 0, 0.479887, 0, 0.5, 0, -0.479887, 0, -0.140385, 39.2508, 10.4822, -9.28829 )
+skeleton = NodePath("")
+
+[node name="Cylinder440" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.326372, 0, 0.378789, 0, 0.5, 0, -0.378789, 0, -0.326372, 33.9821, 10.5987, -7.38427 )
+skeleton = NodePath("")
+
+[node name="Cylinder441" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.387164, 0, 0.316392, 0, 0.5, 0, -0.316392, 0, -0.387164, 34.4422, 10.6546, -8.36226 )
+skeleton = NodePath("")
+
+[node name="Cylinder442" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.45111, 0, -0.215638, 0, 0.5, 0, 0.215638, 0, -0.45111, 35.9323, 10.6032, -8.52727 )
+skeleton = NodePath("")
+
+[node name="Cylinder443" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.486094, 0, 0.117101, 0, 0.5, 0, -0.117101, 0, -0.486094, 36.8716, 10.5408, -10.8714 )
+skeleton = NodePath("")
+
+[node name="Cylinder444" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.45575, 0, 0.20565, 0, 0.5, 0, -0.20565, 0, 0.45575, 34.5867, 10.6034, -12.2821 )
+skeleton = NodePath("")
+
+[node name="Cylinder445" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.462469, 0, -0.190058, 0, 0.5, 0, 0.190058, 0, -0.462469, 31.5949, 10.7207, -10.5002 )
+skeleton = NodePath("")
+
+[node name="Cylinder446" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.133842, 0, 0.481753, 0, 0.5, 0, -0.481753, 0, -0.133842, 30.7355, 10.6187, -8.11738 )
+skeleton = NodePath("")
+
+[node name="Cylinder447" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.167219, 0, 0.471209, 0, 0.5, 0, -0.471209, 0, 0.167219, 30.6732, 10.7374, -9.58096 )
+skeleton = NodePath("")
+
+[node name="Cylinder448" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.362717, 0, -0.344146, 0, 0.5, 0, 0.344146, 0, 0.362717, 32.8637, 10.6705, -11.3792 )
+skeleton = NodePath("")
+
+[node name="Cylinder449" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.292062, 0, 0.405832, 0, 0.5, 0, -0.405832, 0, -0.292062, 31.2641, 10.6981, -13.2763 )
+skeleton = NodePath("")
+
+[node name="Cylinder450" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.308266, 0, 0.393665, 0, 0.5, 0, -0.393665, 0, -0.308266, 30.4498, 10.6979, -14.0919 )
+skeleton = NodePath("")
+
+[node name="Cylinder451" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.44009, 0, -0.237319, 0, 0.5, 0, 0.237319, 0, -0.44009, 30.4902, 10.7289, -10.6806 )
+skeleton = NodePath("")
+
+[node name="Cylinder452" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.469783, 0, -0.171183, 0, 0.5, 0, 0.171183, 0, 0.469783, 28, 10.759, -9.40492 )
+skeleton = NodePath("")
+
+[node name="Cylinder453" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.474843, 0, 0.156602, 0, 0.5, 0, -0.156602, 0, -0.474843, 29.4713, 10.729, -11.6712 )
+skeleton = NodePath("")
+
+[node name="Cylinder454" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.497126, 0, 0.0535351, 0, 0.5, 0, -0.0535351, 0, -0.497126, 29.4193, 10.7194, -12.7598 )
+skeleton = NodePath("")
+
+[node name="Cylinder455" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.495288, 0, -0.0684797, 0, 0.5, 0, 0.0684797, 0, -0.495288, 27.6786, 10.7242, -13.9425 )
+skeleton = NodePath("")
+
+[node name="Cylinder456" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.485093, 0, 0.121181, 0, 0.5, 0, -0.121181, 0, 0.485093, 27.0329, 10.7494, -11.8168 )
+skeleton = NodePath("")
+
+[node name="Cylinder457" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.265887, 0, 0.423443, 0, 0.5, 0, -0.423443, 0, 0.265887, 26.9133, 10.7584, -10.6746 )
+skeleton = NodePath("")
+
+[node name="Cylinder458" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.491075, 0, 0.0940505, 0, 0.5, 0, -0.0940505, 0, 0.491075, 25.5196, 10.6117, -8.28868 )
+skeleton = NodePath("")
+
+[node name="Cylinder459" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.145581, 0, -0.478337, 0, 0.5, 0, 0.478337, 0, -0.145581, 24.6463, 10.7797, -10.1048 )
+skeleton = NodePath("")
+
+[node name="Cylinder460" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.1104, 0, 0.48766, 0, 0.5, 0, -0.48766, 0, -0.1104, 25.4036, 10.7545, -12.8584 )
+skeleton = NodePath("")
+
+[node name="Cylinder461" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.495808, 0, -0.0646118, 0, 0.5, 0, 0.0646118, 0, -0.495808, 25.6075, 10.7415, -14.0839 )
+skeleton = NodePath("")
+
+[node name="Cylinder462" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.40914, 0, -0.28741, 0, 0.5, 0, 0.28741, 0, -0.40914, 24.2866, 10.7478, -14.686 )
+skeleton = NodePath("")
+
+[node name="Cylinder463" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.42914, 0, 0.256591, 0, 0.5, 0, -0.256591, 0, -0.42914, 22.8493, 10.7599, -14.7822 )
+skeleton = NodePath("")
+
+[node name="Cylinder464" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.401995, 0, -0.297321, 0, 0.5, 0, 0.297321, 0, 0.401995, 22.031, 10.7775, -13.2436 )
+skeleton = NodePath("")
+
+[node name="Cylinder465" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.226818, 0, 0.445594, 0, 0.5, 0, -0.445594, 0, 0.226818, 22.1058, 10.7852, -12.0704 )
+skeleton = NodePath("")
+
+[node name="Cylinder466" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.322874, 0, -0.381775, 0, 0.5, 0, 0.381775, 0, -0.322874, 21.8807, 10.7207, -9.28336 )
+skeleton = NodePath("")
+
+[node name="Cylinder467" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.182778, 0, 0.465395, 0, 0.5, 0, -0.465395, 0, 0.182778, 20.7308, 10.7081, -9.23255 )
+skeleton = NodePath("")
+
+[node name="Cylinder468" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.470794, 0, -0.168384, 0, 0.5, 0, 0.168384, 0, 0.470794, 18.8479, 10.7675, -10.7819 )
+skeleton = NodePath("")
+
+[node name="Cylinder469" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.240233, 0, 0.438507, 0, 0.5, 0, -0.438507, 0, 0.240233, 20.1829, 10.7812, -13.9831 )
+skeleton = NodePath("")
+
+[node name="Cylinder470" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.49625, 0, -0.0611189, 0, 0.5, 0, 0.0611189, 0, 0.49625, 19.5771, 10.7622, -14.8412 )
+skeleton = NodePath("")
+
+[node name="Cylinder471" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499995, 0, -0.00214091, 0, 0.5, 0, 0.00214091, 0, 0.499995, 16.5983, 10.6904, -15.1051 )
+skeleton = NodePath("")
+
+[node name="Cylinder472" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499704, 0, 0.0172138, 0, 0.5, 0, -0.0172138, 0, -0.499704, 19.4236, 10.7718, -12.4459 )
+skeleton = NodePath("")
+
+[node name="Cylinder473" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0507512, 0, -0.497418, 0, 0.5, 0, 0.497418, 0, -0.0507512, 19.3493, 10.7743, -11.6906 )
+skeleton = NodePath("")
+
+[node name="Cylinder474" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.477291, 0, -0.148974, 0, 0.5, 0, 0.148974, 0, -0.477291, 16.9811, 10.6956, -9.26651 )
+skeleton = NodePath("")
+
+[node name="Cylinder475" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.322755, 0, -0.381876, 0, 0.5, 0, 0.381876, 0, -0.322755, 16.473, 10.7028, -12.3436 )
+skeleton = NodePath("")
+
+[node name="Cylinder476" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.37516, 0, -0.330538, 0, 0.5, 0, 0.330538, 0, 0.37516, 15.9309, 10.6808, -13.9974 )
+skeleton = NodePath("")
+
+[node name="Cylinder477" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.212443, 0, 0.452624, 0, 0.5, 0, -0.452624, 0, 0.212443, 12.8945, 10.6067, -14.4353 )
+skeleton = NodePath("")
+
+[node name="Cylinder478" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.159737, 0, 0.473798, 0, 0.5, 0, -0.473798, 0, -0.159737, 14.6882, 10.6587, -12.708 )
+skeleton = NodePath("")
+
+[node name="Cylinder479" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.495293, 0, 0.0684433, 0, 0.5, 0, -0.0684433, 0, 0.495293, 14.8977, 10.697, -10.8073 )
+skeleton = NodePath("")
+
+[node name="Cylinder480" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.496645, 0, 0.0578244, 0, 0.5, 0, -0.0578244, 0, -0.496645, 14.3127, 10.4432, -7.40602 )
+skeleton = NodePath("")
+
+[node name="Cylinder481" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.481993, 0, -0.132976, 0, 0.5, 0, 0.132976, 0, 0.481993, 12.3323, 10.5159, -8.03773 )
+skeleton = NodePath("")
+
+[node name="Cylinder482" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.459278, 0, 0.197645, 0, 0.5, 0, -0.197645, 0, 0.459278, 13.3166, 10.6691, -10.8426 )
+skeleton = NodePath("")
+
+[node name="Cylinder483" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.226611, 0, -0.445699, 0, 0.5, 0, 0.445699, 0, -0.226611, 13.1749, 10.6249, -12.6155 )
+skeleton = NodePath("")
+
+[node name="Cylinder484" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.491436, 0, 0.0921468, 0, 0.5, 0, -0.0921468, 0, 0.491436, 10.4741, 10.6529, -9.46682 )
+skeleton = NodePath("")
+
+[node name="Cylinder485" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.447201, 0, -0.223633, 0, 0.5, 0, 0.223633, 0, -0.447201, 8.62634, 10.5293, -7.48039 )
+skeleton = NodePath("")
+
+[node name="Cylinder486" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0831409, 0, 0.493039, 0, 0.5, 0, -0.493039, 0, -0.0831409, 11.2424, 10.6121, -11.7557 )
+skeleton = NodePath("")
+
+[node name="Cylinder487" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.232131, 0, 0.442849, 0, 0.5, 0, -0.442849, 0, 0.232131, 11.0056, 10.5844, -12.7614 )
+skeleton = NodePath("")
+
+[node name="Cylinder488" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.239993, 0, 0.438638, 0, 0.5, 0, -0.438638, 0, -0.239993, 10.1389, 10.5435, -14.1229 )
+skeleton = NodePath("")
+
+[node name="Cylinder489" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0920244, 0, 0.491459, 0, 0.5, 0, -0.491459, 0, 0.0920244, 7.36163, 10.497, -13.8265 )
+skeleton = NodePath("")
+
+[node name="Cylinder490" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.158042, 0, -0.474366, 0, 0.5, 0, 0.474366, 0, -0.158042, 8.4009, 10.5693, -11.5091 )
+skeleton = NodePath("")
+
+[node name="Cylinder491" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0621053, 0, -0.496128, 0, 0.5, 0, 0.496128, 0, 0.0621053, 6.34495, 10.5514, -9.73976 )
+skeleton = NodePath("")
+
+[node name="Cylinder492" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.341727, 0, -0.364997, 0, 0.5, 0, 0.364997, 0, -0.341727, 6.0671, 10.5057, -6.09968 )
+skeleton = NodePath("")
+
+[node name="Cylinder493" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.480417, 0, 0.138562, 0, 0.5, 0, -0.138562, 0, 0.480417, 5.91938, 10.5009, -5.9573 )
+skeleton = NodePath("")
+
+[node name="Cylinder494" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.159647, 0, -0.473828, 0, 0.5, 0, 0.473828, 0, 0.159647, 4.5035, 10.5136, -8.39617 )
+skeleton = NodePath("")
+
+[node name="Cylinder495" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.35936, 0, -0.34765, 0, 0.5, 0, 0.34765, 0, -0.35936, 5.2442, 10.4963, -10.2541 )
+skeleton = NodePath("")
+
+[node name="Cylinder496" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.405591, 0, 0.292397, 0, 0.5, 0, -0.292397, 0, 0.405591, 5.58838, 10.473, -12.0046 )
+skeleton = NodePath("")
+
+[node name="Cylinder497" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.148897, 0, 0.477315, 0, 0.5, 0, -0.477315, 0, -0.148897, 2.89709, 10.3545, -12.4907 )
+skeleton = NodePath("")
+
+[node name="Cylinder498" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0857295, 0, 0.492596, 0, 0.5, 0, -0.492596, 0, -0.0857295, 1.35719, 10.3147, -11.4491 )
+skeleton = NodePath("")
+
+[node name="Cylinder499" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0636619, 0, 0.495931, 0, 0.5, 0, -0.495931, 0, 0.0636619, 1.38469, 10.3719, -8.8029 )
+skeleton = NodePath("")
+
+[node name="Cylinder500" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499993, 0, -0.0026092, 0, 0.5, 0, 0.0026092, 0, -0.499993, 0.856713, 10.526, -5.70649 )
+skeleton = NodePath("")
+
+[node name="Cylinder501" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.167207, 0, 0.471213, 0, 0.5, 0, -0.471213, 0, 0.167207, 1.51424, 10.4844, -4.80725 )
+skeleton = NodePath("")
+
+[node name="Cylinder502" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.149363, 0, -0.47717, 0, 0.5, 0, 0.47717, 0, 0.149363, 1.93099, 10.4485, -4.00493 )
+skeleton = NodePath("")
+
+[node name="Cylinder503" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.477469, 0, 0.148403, 0, 0.5, 0, -0.148403, 0, 0.477469, 2.51702, 10.4422, -8.07957 )
+skeleton = NodePath("")
+
+[node name="Cylinder504" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.267512, 0, -0.422419, 0, 0.5, 0, 0.422419, 0, -0.267512, 3.42846, 10.4499, -8.9988 )
+skeleton = NodePath("")
+
+[node name="Cylinder505" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.146248, 0, 0.478133, 0, 0.5, 0, -0.478133, 0, -0.146248, 4.93656, 10.4381, -12.4153 )
+skeleton = NodePath("")
+
+[node name="Cylinder506" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0602076, 0, 0.496362, 0, 0.5, 0, -0.496362, 0, 0.0602076, -1.28343, 10.2505, -9.46983 )
+skeleton = NodePath("")
+
+[node name="Cylinder507" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.384647, 0, -0.319448, 0, 0.5, 0, 0.319448, 0, -0.384647, -2.35151, 10.094, -11.4181 )
+skeleton = NodePath("")
+
+[node name="Cylinder508" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.473215, 0, 0.161454, 0, 0.5, 0, -0.161454, 0, -0.473215, -3.97253, 10.2737, -6.19246 )
+skeleton = NodePath("")
+
+[node name="Cylinder509" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.254529, 0, 0.430366, 0, 0.5, 0, -0.430366, 0, 0.254529, -3.32572, 10.4755, -3.94158 )
+skeleton = NodePath("")
+
+[node name="Cylinder510" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.468752, 0, 0.173987, 0, 0.5, 0, -0.173987, 0, 0.468752, -7.17182, 10.4474, -1.08549 )
+skeleton = NodePath("")
+
+[node name="Cylinder511" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.206692, 0, -0.455278, 0, 0.5, 0, 0.455278, 0, -0.206692, -7.60118, 10.4531, -0.943218 )
+skeleton = NodePath("")
+
+[node name="Cylinder512" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.301316, 0, -0.39901, 0, 0.5, 0, 0.39901, 0, -0.301316, -12.2646, 10.6038, 3.02433 )
+skeleton = NodePath("")
+
+[node name="Cylinder513" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.284457, 0, 0.411199, 0, 0.5, 0, -0.411199, 0, 0.284457, -15.1885, 10.6224, 8.69468 )
+skeleton = NodePath("")
+
+[node name="Cylinder514" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.495586, 0, -0.0662921, 0, 0.5, 0, 0.0662921, 0, -0.495586, -18.9997, 10.619, 11.0369 )
+skeleton = NodePath("")
+
+[node name="Cylinder515" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.324672, 0, 0.380248, 0, 0.5, 0, -0.380248, 0, 0.324672, -20.7444, 10.5408, 15.7419 )
+skeleton = NodePath("")
+
+[node name="Cylinder516" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.467055, 0, 0.178493, 0, 0.5, 0, -0.178493, 0, -0.467055, -22.7531, 10.555, 11.1005 )
+skeleton = NodePath("")
+
+[node name="Cylinder517" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.476207, 0, -0.152404, 0, 0.5, 0, 0.152404, 0, -0.476207, -18.6178, 10.594, 7.35577 )
+skeleton = NodePath("")
+
+[node name="Cylinder518" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.254601, 0, 0.430323, 0, 0.5, 0, -0.430323, 0, 0.254601, -15.0271, 10.4972, 2.58319 )
+skeleton = NodePath("")
+
+[node name="Cylinder519" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.407263, 0, -0.290063, 0, 0.5, 0, 0.290063, 0, -0.407263, -12.6463, 10.4013, 0.161646 )
+skeleton = NodePath("")
+
+[node name="Cylinder520" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.466987, 0, 0.17867, 0, 0.5, 0, -0.17867, 0, 0.466987, -10.8845, 10.391, -0.760771 )
+skeleton = NodePath("")
+
+[node name="Cylinder521" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.240427, 0, -0.4384, 0, 0.5, 0, 0.4384, 0, -0.240427, -7.52989, 10.1899, -5.04533 )
+skeleton = NodePath("")
+
+[node name="Cylinder522" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.172683, 0, 0.469234, 0, 0.5, 0, -0.469234, 0, -0.172683, -7.28335, 10.0236, -7.67159 )
+skeleton = NodePath("")
+
+[node name="Cylinder523" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.287529, 0, 0.409056, 0, 0.5, 0, -0.409056, 0, -0.287529, -7.49427, 9.85055, -9.99802 )
+skeleton = NodePath("")
+
+[node name="Cylinder524" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0143691, 0, 0.499793, 0, 0.5, 0, -0.499793, 0, 0.0143691, -9.50236, 9.69259, -10.4221 )
+skeleton = NodePath("")
+
+[node name="Cylinder525" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.353457, 0, 0.35365, 0, 0.5, 0, -0.35365, 0, 0.353457, -11.9259, 9.80433, -7.33737 )
+skeleton = NodePath("")
+
+[node name="Cylinder526" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.329479, 0, -0.37609, 0, 0.5, 0, 0.37609, 0, 0.329479, -12.3217, 10.0118, -4.8186 )
+skeleton = NodePath("")
+
+[node name="Cylinder527" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499813, 0, 0.0136555, 0, 0.5, 0, -0.0136555, 0, -0.499813, -3.99891, 10.0819, -9.99935 )
+skeleton = NodePath("")
+
+[node name="Cylinder528" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.26869, 0, -0.42167, 0, 0.5, 0, 0.42167, 0, 0.26869, -4.6688, 10.1535, -7.62313 )
+skeleton = NodePath("")
+
+[node name="Cylinder529" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.33659, 0, 0.36974, 0, 0.5, 0, -0.36974, 0, -0.33659, -17.199, 10.2964, 0.889917 )
+skeleton = NodePath("")
+
+[node name="Cylinder530" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.174598, 0, 0.468525, 0, 0.5, 0, -0.468525, 0, 0.174598, -20.0542, 10.5108, 5.5668 )
+skeleton = NodePath("")
+
+[node name="Cylinder531" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.310034, 0, -0.392274, 0, 0.5, 0, 0.392274, 0, -0.310034, -25.1266, 10.51, 10.6521 )
+skeleton = NodePath("")
+
+[node name="Cylinder532" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.431135, 0, 0.253225, 0, 0.5, 0, -0.253225, 0, 0.431135, -25.8213, 10.4226, 6.87848 )
+skeleton = NodePath("")
+
+[node name="Cylinder533" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.476499, 0, -0.15149, 0, 0.5, 0, 0.15149, 0, -0.476499, -27.2431, 10.1662, 2.8571 )
+skeleton = NodePath("")
+
+[node name="Cylinder534" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.312649, 0, -0.390193, 0, 0.5, 0, 0.390193, 0, -0.312649, -25.5552, 9.67146, -2.3071 )
+skeleton = NodePath("")
+
+[node name="Cylinder535" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.351767, 0, 0.35533, 0, 0.5, 0, -0.35533, 0, -0.351767, -23.4896, 9.22426, -4.78934 )
+skeleton = NodePath("")
+
+[node name="Cylinder536" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.48254, 0, 0.130979, 0, 0.5, 0, -0.130979, 0, -0.48254, -21.0371, 9.2599, -5.81864 )
+skeleton = NodePath("")
+
+[node name="Cylinder537" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.495368, 0, 0.0679003, 0, 0.5, 0, -0.0679003, 0, 0.495368, -16.2608, 9.5773, -7.56707 )
+skeleton = NodePath("")
+
+[node name="Cylinder538" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.33125, 0, -0.374531, 0, 0.5, 0, 0.374531, 0, 0.33125, -15.3784, 9.4366, -8.7896 )
+skeleton = NodePath("")
+
+[node name="Cylinder539" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0281142, 0, 0.499209, 0, 0.5, 0, -0.499209, 0, -0.0281142, -13.0519, 9.63415, -8.89423 )
+skeleton = NodePath("")
+
+[node name="Cylinder540" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.169836, 0, -0.470272, 0, 0.5, 0, 0.470272, 0, 0.169836, -21.7441, 8.57446, -8.28338 )
+skeleton = NodePath("")
+
+[node name="Cylinder541" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.133022, 0, -0.481981, 0, 0.5, 0, 0.481981, 0, 0.133022, -19.3422, 9.76824, -3.46997 )
+skeleton = NodePath("")
+
+[node name="Cylinder542" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.238465, 0, 0.439471, 0, 0.5, 0, -0.439471, 0, -0.238465, -19.6862, 10.0165, -1.08232 )
+skeleton = NodePath("")
+
+[node name="Cylinder543" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.375374, 0, 0.330294, 0, 0.5, 0, -0.330294, 0, 0.375374, -19.7132, 10.1404, 0.0485134 )
+skeleton = NodePath("")
+
+[node name="Cylinder544" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.298803, 0, -0.400895, 0, 0.5, 0, 0.400895, 0, -0.298803, -22.877, 10.318, 3.64339 )
+skeleton = NodePath("")
+
+[node name="Cylinder545" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.000922002, 0, -0.499999, 0, 0.5, 0, 0.499999, 0, 0.000922002, -22.8295, 10.1549, 1.32935 )
+skeleton = NodePath("")
+
+[node name="Cylinder546" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.443741, 0, -0.230422, 0, 0.5, 0, 0.230422, 0, -0.443741, -16.4972, 10.0483, -2.39843 )
+skeleton = NodePath("")
+
+[node name="Cylinder547" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.214469, 0, 0.451667, 0, 0.5, 0, -0.451667, 0, -0.214469, -44.7114, 8.4964, -12.6325 )
+skeleton = NodePath("")
+
+[node name="Cylinder548" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.135349, 0, -0.481332, 0, 0.5, 0, 0.481332, 0, -0.135349, -47.0914, 8.68702, -12.2177 )
+skeleton = NodePath("")
+
+[node name="Cylinder549" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.257246, 0, -0.428748, 0, 0.5, 0, 0.428748, 0, -0.257246, -50.6524, 8.76501, -11.2304 )
+skeleton = NodePath("")
+
+[node name="Cylinder550" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0317545, 0, 0.498991, 0, 0.5, 0, -0.498991, 0, 0.0317545, -53.589, 8.89523, -9.81094 )
+skeleton = NodePath("")
+
+[node name="Cylinder551" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.452073, 0, -0.213613, 0, 0.5, 0, 0.213613, 0, 0.452073, -56.5667, 9.11847, -7.73428 )
+skeleton = NodePath("")
+
+[node name="Cylinder552" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.433904, 0, 0.24845, 0, 0.5, 0, -0.24845, 0, -0.433904, -44.2612, 8.59502, -11.1495 )
+skeleton = NodePath("")
+
+[node name="Cylinder553" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.156317, 0, 0.474937, 0, 0.5, 0, -0.474937, 0, -0.156317, -52.3304, 9.20558, -7.85998 )
+skeleton = NodePath("")
+
+[node name="Cylinder554" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.196937, 0, 0.459582, 0, 0.5, 0, -0.459582, 0, 0.196937, -55.1278, 9.32458, -6.21881 )
+skeleton = NodePath("")
+
+[node name="Cylinder555" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.498899, 0, 0.0331636, 0, 0.5, 0, -0.0331636, 0, 0.498899, -58.3513, 9.48173, -4.1331 )
+skeleton = NodePath("")
+
+[node name="Cylinder556" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0394291, 0, 0.498443, 0, 0.5, 0, -0.498443, 0, -0.0394291, -57.6401, 9.69117, -2.23781 )
+skeleton = NodePath("")
+
+[node name="Cylinder557" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.404936, 0, -0.293303, 0, 0.5, 0, 0.293303, 0, 0.404936, -51.4089, 9.7116, -2.26293 )
+skeleton = NodePath("")
+
+[node name="Cylinder558" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.323676, 0, 0.381095, 0, 0.5, 0, -0.381095, 0, -0.323676, -47.2416, 9.26795, -4.32263 )
+skeleton = NodePath("")
+
+[node name="Cylinder559" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.49994, 0, 0.00777186, 0, 0.5, 0, -0.00777186, 0, 0.49994, -46.3794, 8.99647, -7.7956 )
+skeleton = NodePath("")
+
+[node name="Cylinder560" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.357275, 0, 0.349792, 0, 0.5, 0, -0.349792, 0, -0.357275, -47.6465, 9.50588, -0.11068 )
+skeleton = NodePath("")
+
+[node name="Cylinder561" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499802, 0, -0.0140673, 0, 0.5, 0, 0.0140673, 0, 0.499802, -54.5533, 9.90092, -0.346084 )
+skeleton = NodePath("")
+
+[node name="Cylinder562" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.33255, 0, -0.373377, 0, 0.5, 0, 0.373377, 0, -0.33255, -58.7203, 9.90647, 0.609844 )
+skeleton = NodePath("")
+
+[node name="Cylinder563" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.398746, 0, 0.301665, 0, 0.5, 0, -0.301665, 0, -0.398746, -61.0535, 9.98606, 2.99184 )
+skeleton = NodePath("")
+
+[node name="Cylinder564" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.49999, 0, 0.00312006, 0, 0.5, 0, -0.00312006, 0, 0.49999, -55.5262, 10.0732, 4.07989 )
+skeleton = NodePath("")
+
+[node name="Cylinder565" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.485984, 0, 0.117556, 0, 0.5, 0, -0.117556, 0, 0.485984, -52.088, 9.97526, 2.97064 )
+skeleton = NodePath("")
+
+[node name="Cylinder566" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.435701, 0, 0.245285, 0, 0.5, 0, -0.245285, 0, -0.435701, -49.4345, 9.83354, 5.20992 )
+skeleton = NodePath("")
+
+[node name="Cylinder567" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0875163, 0, -0.492281, 0, 0.5, 0, 0.492281, 0, -0.0875163, -52.7373, 10.1763, 7.26984 )
+skeleton = NodePath("")
+
+[node name="Cylinder568" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.498745, 0, 0.0354012, 0, 0.5, 0, -0.0354012, 0, 0.498745, -58.2739, 10.1751, 7.09358 )
+skeleton = NodePath("")
+
+[node name="Cylinder569" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.321923, 0, -0.382578, 0, 0.5, 0, 0.382578, 0, -0.321923, -59.7813, 10.1728, 7.32742 )
+skeleton = NodePath("")
+
+[node name="Cylinder570" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.190296, 0, 0.462371, 0, 0.5, 0, -0.462371, 0, 0.190296, -57.1816, 10.2532, 13.3016 )
+skeleton = NodePath("")
+
+[node name="Cylinder571" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0838692, 0, -0.492916, 0, 0.5, 0, 0.492916, 0, 0.0838692, -53.2219, 10.2643, 12.8571 )
+skeleton = NodePath("")
+
+[node name="Cylinder572" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.00415604, 0, 0.499983, 0, 0.5, 0, -0.499983, 0, 0.00415604, -49.4117, 10.0172, 12.5752 )
+skeleton = NodePath("")
+
+[node name="Cylinder573" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.361546, 0, -0.345376, 0, 0.5, 0, 0.345376, 0, -0.361546, -46.8001, 9.8245, 14.0037 )
+skeleton = NodePath("")
+
+[node name="Cylinder574" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.139756, 0, 0.480071, 0, 0.5, 0, -0.480071, 0, 0.139756, -48.0797, 10.0486, 18.8886 )
+skeleton = NodePath("")
+
+[node name="Cylinder575" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.479954, 0, -0.140159, 0, 0.5, 0, 0.140159, 0, 0.479954, -52.7375, 10.2995, 18.7085 )
+skeleton = NodePath("")
+
+[node name="Cylinder576" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.472984, 0, -0.16213, 0, 0.5, 0, 0.16213, 0, -0.472984, -55.6721, 10.2972, 20.7367 )
+skeleton = NodePath("")
+
+[node name="Cylinder577" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.282985, 0, 0.412213, 0, 0.5, 0, -0.412213, 0, 0.282985, -55.0216, 10.3112, 22.3481 )
+skeleton = NodePath("")
+
+[node name="Cylinder578" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.105329, 0, -0.48878, 0, 0.5, 0, 0.48878, 0, -0.105329, -45.2633, 10.0709, 25.3648 )
+skeleton = NodePath("")
+
+[node name="Cylinder579" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.447074, 0, 0.223886, 0, 0.5, 0, -0.223886, 0, 0.447074, -41.6659, 9.67783, 27.437 )
+skeleton = NodePath("")
+
+[node name="Cylinder580" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.478227, 0, 0.145941, 0, 0.5, 0, -0.145941, 0, 0.478227, -47.562, 10.4188, 29.0776 )
+skeleton = NodePath("")
+
+[node name="Cylinder581" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.491933, 0, -0.0894539, 0, 0.5, 0, 0.0894539, 0, 0.491933, -56.3606, 10.4524, 29.1283 )
+skeleton = NodePath("")
+
+[node name="Cylinder582" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.182139, 0, 0.465645, 0, 0.5, 0, -0.465645, 0, -0.182139, -51.7474, 10.4353, 27.2359 )
+skeleton = NodePath("")
+
+[node name="Cylinder583" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.426525, 0, -0.260915, 0, 0.5, 0, 0.260915, 0, 0.426525, -46.2151, 10.2501, 27.7401 )
+skeleton = NodePath("")
+
+[node name="Cylinder584" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499691, 0, -0.0175874, 0, 0.5, 0, 0.0175874, 0, -0.499691, -42.0779, 10.27, 34.2575 )
+skeleton = NodePath("")
+
+[node name="Cylinder585" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.114309, 0, -0.486758, 0, 0.5, 0, 0.486758, 0, -0.114309, -43.317, 10.3033, 33.255 )
+skeleton = NodePath("")
+
+[node name="Cylinder586" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.421315, 0, -0.269247, 0, 0.5, 0, 0.269247, 0, -0.421315, -48.894, 10.654, 31.9418 )
+skeleton = NodePath("")
+
+[node name="Cylinder587" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.301217, 0, 0.399084, 0, 0.5, 0, -0.399084, 0, 0.301217, -52.8563, 10.6988, 31.9362 )
+skeleton = NodePath("")
+
+[node name="Cylinder588" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.494654, 0, 0.0729187, 0, 0.5, 0, -0.0729187, 0, 0.494654, -57.2736, 10.7574, 35.0782 )
+skeleton = NodePath("")
+
+[node name="Cylinder589" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.07289, 0, -0.494659, 0, 0.5, 0, 0.494659, 0, 0.07289, -53.2745, 10.9681, 37.2284 )
+skeleton = NodePath("")
+
+[node name="Cylinder590" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0159406, 0, -0.499746, 0, 0.5, 0, 0.499746, 0, -0.0159406, -46.6859, 10.8443, 37.6907 )
+skeleton = NodePath("")
+
+[node name="Cylinder591" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.138229, 0, 0.480513, 0, 0.5, 0, -0.480513, 0, -0.138229, -41.1206, 10.554, 39.6738 )
+skeleton = NodePath("")
+
+[node name="Cylinder592" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.225023, 0, -0.446503, 0, 0.5, 0, 0.446503, 0, -0.225023, -36.2682, 10.4893, 43.6801 )
+skeleton = NodePath("")
+
+[node name="Cylinder593" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.429895, 0, 0.255324, 0, 0.5, 0, -0.255324, 0, 0.429895, -31.4158, 10.5649, 48.9933 )
+skeleton = NodePath("")
+
+[node name="Cylinder594" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.476259, 0, 0.152241, 0, 0.5, 0, -0.152241, 0, -0.476259, -25.1795, 10.7519, 56.8853 )
+skeleton = NodePath("")
+
+[node name="Cylinder595" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.321231, 0, 0.383159, 0, 0.5, 0, -0.383159, 0, -0.321231, -17.2878, 10.8874, 68.3054 )
+skeleton = NodePath("")
+
+[node name="Cylinder596" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.366839, 0, -0.339748, 0, 0.5, 0, 0.339748, 0, -0.366839, -10.283, 10.9381, 76.4463 )
+skeleton = NodePath("")
+
+[node name="Cylinder597" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.48151, 0, 0.134714, 0, 0.5, 0, -0.134714, 0, -0.48151, -15.6783, 11.2038, 72.7193 )
+skeleton = NodePath("")
+
+[node name="Cylinder598" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499218, 0, -0.0279446, 0, 0.5, 0, 0.0279446, 0, -0.499218, -17.9765, 11.1046, 69.2846 )
+skeleton = NodePath("")
+
+[node name="Cylinder599" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.437208, 0, -0.242588, 0, 0.5, 0, 0.242588, 0, 0.437208, -21.961, 10.9768, 63.0903 )
+skeleton = NodePath("")
+
+[node name="Cylinder600" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.178237, 0, 0.467153, 0, 0.5, 0, -0.467153, 0, 0.178237, -25.8802, 11.2076, 59.9959 )
+skeleton = NodePath("")
+
+[node name="Cylinder601" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.430735, 0, -0.253904, 0, 0.5, 0, 0.253904, 0, 0.430735, -29.8546, 11.1428, 55.285 )
+skeleton = NodePath("")
+
+[node name="Cylinder602" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.412258, 0, 0.282919, 0, 0.5, 0, -0.282919, 0, 0.412258, -33.4158, 11.1145, 52.5379 )
+skeleton = NodePath("")
+
+[node name="Cylinder603" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.124768, 0, 0.484183, 0, 0.5, 0, -0.484183, 0, -0.124768, -28.6417, 11.3985, 63.9145 )
+skeleton = NodePath("")
+
+[node name="Cylinder604" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.144386, 0, -0.478699, 0, 0.5, 0, 0.478699, 0, -0.144386, -23.7539, 11.4681, 68.4152 )
+skeleton = NodePath("")
+
+[node name="Cylinder605" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.12404, 0, 0.48437, 0, 0.5, 0, -0.48437, 0, 0.12404, -22.9829, 11.4538, 69.3217 )
+skeleton = NodePath("")
+
+[node name="Cylinder606" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.185397, 0, -0.464358, 0, 0.5, 0, 0.464358, 0, 0.185397, -29.4325, 11.3607, 61.0217 )
+skeleton = NodePath("")
+
+[node name="Cylinder607" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.182851, 0, 0.465366, 0, 0.5, 0, -0.465366, 0, -0.182851, -32.9285, 11.3234, 57.4389 )
+skeleton = NodePath("")
+
+[node name="Cylinder608" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.296322, 0, 0.402732, 0, 0.5, 0, -0.402732, 0, 0.296322, -36.6661, 11.2999, 52.3011 )
+skeleton = NodePath("")
+
+[node name="Cylinder609" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0781966, 0, 0.493847, 0, 0.5, 0, -0.493847, 0, -0.0781966, -38.449, 11.2052, 49.7659 )
+skeleton = NodePath("")
+
+[node name="Cylinder610" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.194532, 0, 0.460605, 0, 0.5, 0, -0.460605, 0, 0.194532, -39.4234, 10.9234, 45.6935 )
+skeleton = NodePath("")
+
+[node name="Cylinder611" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.153551, 0, 0.475838, 0, 0.5, 0, -0.475838, 0, 0.153551, -40.9633, 10.9586, 44.7749 )
+skeleton = NodePath("")
+
+[node name="Cylinder612" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.455147, 0, -0.206982, 0, 0.5, 0, 0.206982, 0, -0.455147, -44.4717, 11.0808, 43.2784 )
+skeleton = NodePath("")
+
+[node name="Cylinder613" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.45708, 0, 0.202677, 0, 0.5, 0, -0.202677, 0, 0.45708, -48.5854, 11.233, 42.4241 )
+skeleton = NodePath("")
+
+[node name="Cylinder614" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.122294, 0, -0.484814, 0, 0.5, 0, 0.484814, 0, 0.122294, -52.7784, 11.3066, 42.6598 )
+skeleton = NodePath("")
+
+[node name="Cylinder615" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499937, 0, 0.00792931, 0, 0.5, 0, -0.00792931, 0, -0.499937, -56.3566, 11.1822, 41.1619 )
+skeleton = NodePath("")
+
+[node name="Cylinder616" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.465008, 0, -0.183758, 0, 0.5, 0, 0.183758, 0, -0.465008, -57.7227, 11.3877, 44.4576 )
+skeleton = NodePath("")
+
+[node name="Cylinder617" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.253744, 0, 0.430829, 0, 0.5, 0, -0.430829, 0, 0.253744, -54.3189, 11.5747, 47.4884 )
+skeleton = NodePath("")
+
+[node name="Cylinder618" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0275379, 0, -0.499241, 0, 0.5, 0, 0.499241, 0, -0.0275379, -50.6043, 11.5022, 47.2591 )
+skeleton = NodePath("")
+
+[node name="Cylinder619" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.267159, 0, -0.422642, 0, 0.5, 0, 0.422642, 0, -0.267159, -43.987, 11.3542, 50.1924 )
+skeleton = NodePath("")
+
+[node name="Cylinder620" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.264834, 0, 0.424103, 0, 0.5, 0, -0.424103, 0, 0.264834, -39.3271, 11.3785, 54.0033 )
+skeleton = NodePath("")
+
+[node name="Cylinder621" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.498306, 0, 0.0411243, 0, 0.5, 0, -0.0411243, 0, 0.498306, -39.0184, 11.3925, 55.7515 )
+skeleton = NodePath("")
+
+[node name="Cylinder622" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.110424, 0, 0.487654, 0, 0.5, 0, -0.487654, 0, -0.110424, -46.3121, 11.5094, 55.2679 )
+skeleton = NodePath("")
+
+[node name="Cylinder623" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.334781, 0, -0.371378, 0, 0.5, 0, 0.371378, 0, -0.334781, -49.3413, 11.7346, 56.4185 )
+skeleton = NodePath("")
+
+[node name="Cylinder624" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.421779, 0, 0.268519, 0, 0.5, 0, -0.268519, 0, 0.421779, -51.564, 11.8942, 56.7978 )
+skeleton = NodePath("")
+
+[node name="Cylinder625" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.432544, 0, 0.25081, 0, 0.5, 0, -0.25081, 0, 0.432544, -53.755, 12.0261, 58.4622 )
+skeleton = NodePath("")
+
+[node name="Cylinder626" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.396935, 0, -0.304043, 0, 0.5, 0, 0.304043, 0, 0.396935, -56.262, 11.9561, 55.5139 )
+skeleton = NodePath("")
+
+[node name="Cylinder627" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.34781, 0, -0.359205, 0, 0.5, 0, 0.359205, 0, 0.34781, -56.5139, 11.7474, 50.3422 )
+skeleton = NodePath("")
+
+[node name="Cylinder628" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.453958, 0, 0.209575, 0, 0.5, 0, -0.209575, 0, 0.453958, -53.5818, 11.9139, 54.846 )
+skeleton = NodePath("")
+
+[node name="Cylinder629" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.42201, 0, -0.268155, 0, 0.5, 0, 0.268155, 0, -0.42201, -50.1641, 11.7531, 53.2455 )
+skeleton = NodePath("")
+
+[node name="Cylinder630" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.339927, 0, -0.366674, 0, 0.5, 0, 0.366674, 0, 0.339927, -46.8315, 11.4997, 53.5122 )
+skeleton = NodePath("")
+
+[node name="Cylinder631" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.326713, 0, 0.378495, 0, 0.5, 0, -0.378495, 0, -0.326713, -43.0209, 11.4498, 54.8055 )
+skeleton = NodePath("")
+
+[node name="Cylinder632" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.29155, 0, 0.4062, 0, 0.5, 0, -0.4062, 0, -0.29155, -13.7702, 11.4175, 77.81 )
+skeleton = NodePath("")
+
+[node name="Cylinder633" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.481552, 0, 0.134564, 0, 0.5, 0, -0.134564, 0, 0.481552, -51.1776, 11.8155, 60.9403 )
+skeleton = NodePath("")
+
+[node name="Cylinder634" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.490184, 0, 0.0985885, 0, 0.5, 0, -0.0985885, 0, 0.490184, -53.9154, 12.1424, 62.3553 )
+skeleton = NodePath("")
+
+[node name="Cylinder635" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.221637, 0, -0.448193, 0, 0.5, 0, 0.448193, 0, 0.221637, -56.0606, 12.0911, 60.314 )
+skeleton = NodePath("")
+
+[node name="Cylinder636" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.290908, 0, -0.40666, 0, 0.5, 0, 0.40666, 0, 0.290908, -57.492, 12.0543, 58.8715 )
+skeleton = NodePath("")
+
+[node name="Cylinder637" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.231098, 0, -0.443389, 0, 0.5, 0, 0.443389, 0, -0.231098, -55.478, 12.1333, 72.9016 )
+skeleton = NodePath("")
+
+[node name="Cylinder638" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.389163, 0, -0.31393, 0, 0.5, 0, 0.31393, 0, 0.389163, -53.9167, 12.1515, 69.9126 )
+skeleton = NodePath("")
+
+[node name="Cylinder639" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.479328, 0, -0.142282, 0, 0.5, 0, 0.142282, 0, -0.479328, -53.6223, 12.1556, 68.0644 )
+skeleton = NodePath("")
+
+[node name="Cylinder640" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.426454, 0, 0.261031, 0, 0.5, 0, -0.261031, 0, 0.426454, -52.3535, 12.0857, 66.9559 )
+skeleton = NodePath("")
+
+[node name="Cylinder641" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.358111, 0, 0.348936, 0, 0.5, 0, -0.348936, 0, -0.358111, -54.2352, 12.1513, 65.9398 )
+skeleton = NodePath("")
+
+[node name="Cylinder642" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.475262, 0, 0.155326, 0, 0.5, 0, -0.155326, 0, -0.475262, -55.3625, 12.133, 67.2582 )
+skeleton = NodePath("")
+
+[node name="Cylinder643" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.388085, 0, 0.315261, 0, 0.5, 0, -0.315261, 0, -0.388085, -56.8406, 12.1216, 62.4204 )
+skeleton = NodePath("")
+
+[node name="Cylinder644" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.412282, 0, 0.282884, 0, 0.5, 0, -0.282884, 0, 0.412282, -56.6251, 12.115, 67.9446 )
+skeleton = NodePath("")
+
+[node name="Cylinder645" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.271524, 0, 0.419851, 0, 0.5, 0, -0.419851, 0, -0.271524, -56.4497, 12.1175, 69.9994 )
+skeleton = NodePath("")
+
+[node name="Cylinder646" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.414806, 0, 0.27917, 0, 0.5, 0, -0.27917, 0, 0.414806, -57.8364, 11.9191, 53.898 )
+skeleton = NodePath("")
+
+[node name="Cylinder647" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499861, 0, -0.011794, 0, 0.5, 0, 0.011794, 0, -0.499861, -58.1702, 11.6719, 48.58 )
+skeleton = NodePath("")
+
+[node name="Cylinder648" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.33754, 0, 0.368873, 0, 0.5, 0, -0.368873, 0, 0.33754, -52.5102, 12.078, 74.5768 )
+skeleton = NodePath("")
+
+[node name="Cylinder649" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.495373, 0, 0.0678628, 0, 0.5, 0, -0.0678628, 0, 0.495373, -52.4253, 12.1349, 71.9699 )
+skeleton = NodePath("")
+
+[node name="Cylinder650" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.489466, 0, -0.102093, 0, 0.5, 0, 0.102093, 0, -0.489466, -55.0761, 12.1425, 74.2944 )
+skeleton = NodePath("")
+
+[node name="Cylinder651" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.431211, 0, -0.253096, 0, 0.5, 0, 0.253096, 0, -0.431211, -57.6882, 12.111, 75.2465 )
+skeleton = NodePath("")
+
+[node name="Cylinder652" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.420168, 0, -0.271034, 0, 0.5, 0, 0.271034, 0, -0.420168, -53.5135, 12.0778, 78.0173 )
+skeleton = NodePath("")
+
+[node name="Cylinder653" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.456785, 0, -0.203341, 0, 0.5, 0, 0.203341, 0, -0.456785, -53.2294, 12.0908, 76.925 )
+skeleton = NodePath("")
+
+[node name="Cylinder654" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.498467, 0, -0.0391197, 0, 0.5, 0, 0.0391197, 0, 0.498467, -57.4598, 12.1244, 77.6402 )
+skeleton = NodePath("")
+
+[node name="Cylinder655" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.482924, 0, -0.129556, 0, 0.5, 0, 0.129556, 0, 0.482924, -59.1381, 12.109, 79.0483 )
+skeleton = NodePath("")
+
+[node name="Cylinder656" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.483774, 0, 0.126344, 0, 0.5, 0, -0.126344, 0, 0.483774, -56.273, 12.1554, 81.0824 )
+skeleton = NodePath("")
+
+[node name="Cylinder657" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0454168, 0, -0.497933, 0, 0.5, 0, 0.497933, 0, -0.0454168, -55.1157, 12.1634, 79.6367 )
+skeleton = NodePath("")
+
+[node name="Cylinder658" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.256676, 0, 0.429089, 0, 0.5, 0, -0.429089, 0, -0.256676, -55.7578, 12.0439, 84.7592 )
+skeleton = NodePath("")
+
+[node name="Cylinder659" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.246988, 0, 0.434738, 0, 0.5, 0, -0.434738, 0, 0.246988, -56.142, 12.0243, 86.2806 )
+skeleton = NodePath("")
+
+[node name="Cylinder660" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.330066, 0, -0.375575, 0, 0.5, 0, 0.375575, 0, 0.330066, -56.906, 11.9651, 90.4996 )
+skeleton = NodePath("")
+
+[node name="Cylinder661" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.328899, 0, 0.376597, 0, 0.5, 0, -0.376597, 0, 0.328899, -56.1906, 11.7511, 94.8169 )
+skeleton = NodePath("")
+
+[node name="Cylinder662" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0202954, 0, -0.499588, 0, 0.5, 0, 0.499588, 0, 0.0202954, -55.4063, 11.7642, 98.7272 )
+skeleton = NodePath("")
+
+[node name="Cylinder663" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.476499, 0, 0.151488, 0, 0.5, 0, -0.151488, 0, -0.476499, -54.259, 12.005, 102.368 )
+skeleton = NodePath("")
+
+[node name="Cylinder664" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.258072, 0, -0.428251, 0, 0.5, 0, 0.428251, 0, -0.258072, -56.9088, 12.0415, 98.9448 )
+skeleton = NodePath("")
+
+[node name="Cylinder665" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.43935, 0, 0.238687, 0, 0.5, 0, -0.238687, 0, -0.43935, -56.7139, 11.8985, 91.6726 )
+skeleton = NodePath("")
+
+[node name="Cylinder666" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.206952, 0, -0.45516, 0, 0.5, 0, 0.45516, 0, -0.206952, -57.1863, 12.1657, 85.8375 )
+skeleton = NodePath("")
+
+[node name="Cylinder667" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.42049, 0, 0.270533, 0, 0.5, 0, -0.270533, 0, -0.42049, -57.1273, 12.1556, 83.3916 )
+skeleton = NodePath("")
+
+[node name="Cylinder668" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.486197, 0, -0.116672, 0, 0.5, 0, 0.116672, 0, 0.486197, -59.4969, 12.1334, 85.3519 )
+skeleton = NodePath("")
+
+[node name="Cylinder669" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.45951, 0, -0.197104, 0, 0.5, 0, 0.197104, 0, -0.45951, -59.7792, 12.1437, 89.31 )
+skeleton = NodePath("")
+
+[node name="Cylinder670" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.417937, 0, 0.274461, 0, 0.5, 0, -0.274461, 0, 0.417937, -59.5343, 12.1536, 93.6535 )
+skeleton = NodePath("")
+
+[node name="Cylinder671" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0526723, 0, 0.497218, 0, 0.5, 0, -0.497218, 0, -0.0526723, -58.3439, 12.1447, 96.4542 )
+skeleton = NodePath("")
+
+[node name="Cylinder672" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.457466, 0, -0.201805, 0, 0.5, 0, 0.201805, 0, 0.457466, -59.5711, 12.1192, 82.4266 )
+skeleton = NodePath("")
+
+[node name="Cylinder673" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.475181, 0, -0.155574, 0, 0.5, 0, 0.155574, 0, -0.475181, -61.1139, 12.1104, 84.9755 )
+skeleton = NodePath("")
+
+[node name="Cylinder674" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.188138, 0, 0.463254, 0, 0.5, 0, -0.463254, 0, 0.188138, -62.7692, 12.1021, 89.0136 )
+skeleton = NodePath("")
+
+[node name="Cylinder675" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.373547, 0, -0.33236, 0, 0.5, 0, 0.33236, 0, -0.373547, -62.8086, 12.1047, 91.3122 )
+skeleton = NodePath("")
+
+[node name="Cylinder676" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.365652, 0, -0.341026, 0, 0.5, 0, 0.341026, 0, -0.365652, -61.8837, 12.1195, 95.1142 )
+skeleton = NodePath("")
+
+[node name="Cylinder677" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.109376, 0, 0.48789, 0, 0.5, 0, -0.48789, 0, -0.109376, -60.731, 12.1318, 97.9188 )
+skeleton = NodePath("")
+
+[node name="Cylinder678" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.299794, 0, -0.400155, 0, 0.5, 0, 0.400155, 0, 0.299794, -60.7531, 12.1253, 99.6625 )
+skeleton = NodePath("")
+
+[node name="Cylinder679" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.480819, 0, -0.137161, 0, 0.5, 0, 0.137161, 0, -0.480819, -58.5531, 12.1239, 102.319 )
+skeleton = NodePath("")
+
+[node name="Cylinder680" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.231724, 0, 0.443062, 0, 0.5, 0, -0.443062, 0, -0.231724, -56.4523, 12.1448, 103.467 )
+skeleton = NodePath("")
+
+[node name="Cylinder681" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0146679, 0, 0.499785, 0, 0.5, 0, -0.499785, 0, 0.0146679, -53.8968, 12.155, 105.77 )
+skeleton = NodePath("")
+
+[node name="Cylinder682" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.00701323, 0, 0.499951, 0, 0.5, 0, -0.499951, 0, -0.00701323, -51.585, 12.1676, 108.037 )
+skeleton = NodePath("")
+
+[node name="Cylinder683" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.429679, 0, -0.255687, 0, 0.5, 0, 0.255687, 0, 0.429679, -49.545, 11.9223, 111.342 )
+skeleton = NodePath("")
+
+[node name="Cylinder684" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.316758, 0, -0.386865, 0, 0.5, 0, 0.386865, 0, 0.316758, -48.042, 11.9244, 113.228 )
+skeleton = NodePath("")
+
+[node name="Cylinder685" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.328228, 0, -0.377182, 0, 0.5, 0, 0.377182, 0, 0.328228, -45.4421, 11.9579, 117.399 )
+skeleton = NodePath("")
+
+[node name="Cylinder686" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.46976, 0, 0.171248, 0, 0.5, 0, -0.171248, 0, 0.46976, -42.9447, 11.9377, 120.441 )
+skeleton = NodePath("")
+
+[node name="Cylinder687" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.101391, 0, -0.489612, 0, 0.5, 0, 0.489612, 0, 0.101391, -40.7235, 11.8498, 121.652 )
+skeleton = NodePath("")
+
+[node name="Cylinder688" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.496655, 0, -0.0577422, 0, 0.5, 0, 0.0577422, 0, 0.496655, -36.4635, 11.7614, 123.129 )
+skeleton = NodePath("")
+
+[node name="Cylinder689" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.234285, 0, 0.441713, 0, 0.5, 0, -0.441713, 0, -0.234285, -33.391, 11.8706, 124.929 )
+skeleton = NodePath("")
+
+[node name="Cylinder690" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.230954, 0, 0.443464, 0, 0.5, 0, -0.443464, 0, -0.230954, -59.4522, 12.052, 104.687 )
+skeleton = NodePath("")
+
+[node name="Cylinder691" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0730551, 0, 0.494634, 0, 0.5, 0, -0.494634, 0, -0.0730551, -58.3852, 12.0226, 107.468 )
+skeleton = NodePath("")
+
+[node name="Cylinder692" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.145201, 0, -0.478452, 0, 0.5, 0, 0.478452, 0, 0.145201, -54.761, 12.0916, 108.268 )
+skeleton = NodePath("")
+
+[node name="Cylinder693" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.47592, 0, -0.153299, 0, 0.5, 0, 0.153299, 0, 0.47592, -52.6708, 12.0886, 111.296 )
+skeleton = NodePath("")
+
+[node name="Cylinder694" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.460521, 0, 0.194732, 0, 0.5, 0, -0.194732, 0, 0.460521, -49.6658, 11.9908, 116.947 )
+skeleton = NodePath("")
+
+[node name="Cylinder695" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.489623, 0, 0.101338, 0, 0.5, 0, -0.101338, 0, -0.489623, -48.9862, 11.974, 118.143 )
+skeleton = NodePath("")
+
+[node name="Cylinder696" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.233147, 0, 0.442315, 0, 0.5, 0, -0.442315, 0, -0.233147, -58.5989, 11.8981, 110.332 )
+skeleton = NodePath("")
+
+[node name="Cylinder697" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.234552, 0, -0.441571, 0, 0.5, 0, 0.441571, 0, 0.234552, -56.7798, 11.939, 111.447 )
+skeleton = NodePath("")
+
+[node name="Cylinder698" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.479299, 0, 0.142382, 0, 0.5, 0, -0.142382, 0, 0.479299, -54.4391, 11.959, 113.054 )
+skeleton = NodePath("")
+
+[node name="Cylinder699" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.336503, 0, 0.369819, 0, 0.5, 0, -0.369819, 0, -0.336503, -52.0207, 12.019, 113.721 )
+skeleton = NodePath("")
+
+[node name="Cylinder700" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.494277, 0, -0.0754335, 0, 0.5, 0, 0.0754335, 0, 0.494277, -52.3922, 11.8889, 116.677 )
+skeleton = NodePath("")
+
+[node name="Cylinder701" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.462489, 0, 0.190012, 0, 0.5, 0, -0.190012, 0, -0.462489, -55.6314, 11.7786, 115.072 )
+skeleton = NodePath("")
+
+[node name="Cylinder702" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.00840259, 0, -0.499929, 0, 0.5, 0, 0.499929, 0, 0.00840259, -58.0368, 11.7205, 113.465 )
+skeleton = NodePath("")
+
+[node name="Cylinder703" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.27853, 0, -0.415236, 0, 0.5, 0, 0.415236, 0, 0.27853, -54.9823, 11.6288, 118.351 )
+skeleton = NodePath("")
+
+[node name="Cylinder704" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.222958, 0, 0.447537, 0, 0.5, 0, -0.447537, 0, 0.222958, -53.035, 11.6524, 120.147 )
+skeleton = NodePath("")
+
+[node name="Cylinder705" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.472033, 0, 0.164879, 0, 0.5, 0, -0.164879, 0, -0.472033, -49.2923, 11.8977, 119.979 )
+skeleton = NodePath("")
+
+[node name="Cylinder706" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.454148, 0, -0.209164, 0, 0.5, 0, 0.209164, 0, 0.454148, -50.5661, 11.6775, 122.514 )
+skeleton = NodePath("")
+
+[node name="Cylinder707" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.488194, 0, 0.108013, 0, 0.5, 0, -0.108013, 0, 0.488194, -47.1333, 11.9343, 122.547 )
+skeleton = NodePath("")
+
+[node name="Cylinder708" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.221295, 0, 0.448362, 0, 0.5, 0, -0.448362, 0, -0.221295, -44.524, 12.0125, 122.845 )
+skeleton = NodePath("")
+
+[node name="Cylinder709" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.189365, 0, 0.462754, 0, 0.5, 0, -0.462754, 0, -0.189365, -41.9587, 12.0622, 123.854 )
+skeleton = NodePath("")
+
+[node name="Cylinder710" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.457174, 0, -0.202464, 0, 0.5, 0, 0.202464, 0, 0.457174, -36.7247, 12.1083, 126.702 )
+skeleton = NodePath("")
+
+[node name="Cylinder711" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499999, 0, -0.000784115, 0, 0.5, 0, 0.000784115, 0, 0.499999, -31.7377, 12.1214, 128.642 )
+skeleton = NodePath("")
+
+[node name="Cylinder712" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0748761, 0, -0.494362, 0, 0.5, 0, 0.494362, 0, 0.0748761, -29.5944, 12.128, 128.991 )
+skeleton = NodePath("")
+
+[node name="Cylinder713" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.466409, 0, 0.180174, 0, 0.5, 0, -0.180174, 0, 0.466409, -18.0012, 12.0012, 128.623 )
+skeleton = NodePath("")
+
+[node name="Cylinder714" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499173, 0, -0.0287462, 0, 0.5, 0, 0.0287462, 0, 0.499173, -20.5756, 12.1778, 128.484 )
+skeleton = NodePath("")
+
+[node name="Cylinder715" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.168021, 0, -0.470923, 0, 0.5, 0, 0.470923, 0, 0.168021, -25.2615, 11.9843, 127.09 )
+skeleton = NodePath("")
+
+[node name="Cylinder716" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.435686, 0, -0.245312, 0, 0.5, 0, 0.245312, 0, 0.435686, -27.046, 11.8699, 126.187 )
+skeleton = NodePath("")
+
+[node name="Cylinder717" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.263802, 0, -0.424745, 0, 0.5, 0, 0.424745, 0, -0.263802, -30.6612, 11.8629, 125.561 )
+skeleton = NodePath("")
+
+[node name="Cylinder718" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.187382, 0, -0.46356, 0, 0.5, 0, 0.46356, 0, -0.187382, -21.1069, 12.1608, 131.964 )
+skeleton = NodePath("")
+
+[node name="Cylinder719" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.416742, 0, 0.276271, 0, 0.5, 0, -0.276271, 0, -0.416742, -25.9072, 12.1297, 131.364 )
+skeleton = NodePath("")
+
+[node name="Cylinder720" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.403099, 0, 0.295823, 0, 0.5, 0, -0.295823, 0, -0.403099, -29.7192, 12.1154, 130.653 )
+skeleton = NodePath("")
+
+[node name="Cylinder721" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0261624, 0, -0.499315, 0, 0.5, 0, 0.499315, 0, 0.0261624, -34.0019, 12.1069, 129.272 )
+skeleton = NodePath("")
+
+[node name="Cylinder722" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.135811, 0, -0.481202, 0, 0.5, 0, 0.481202, 0, -0.135811, -36.0064, 12.1056, 128.382 )
+skeleton = NodePath("")
+
+[node name="Cylinder723" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499984, 0, -0.00397686, 0, 0.5, 0, 0.00397686, 0, -0.499984, -38.4624, 12.065, 127.818 )
+skeleton = NodePath("")
+
+[node name="Cylinder724" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.230831, 0, -0.443528, 0, 0.5, 0, 0.443528, 0, 0.230831, -41.3088, 12.0391, 126.226 )
+skeleton = NodePath("")
+
+[node name="Cylinder725" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.468537, 0, -0.174566, 0, 0.5, 0, 0.174566, 0, 0.468537, -44.366, 11.9858, 125.467 )
+skeleton = NodePath("")
+
+[node name="Cylinder726" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.326047, 0, 0.379069, 0, 0.5, 0, -0.379069, 0, 0.326047, -48.718, 11.7787, 124.211 )
+skeleton = NodePath("")
+
+[node name="Cylinder727" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.49993, 0, 0.00836179, 0, 0.5, 0, -0.00836179, 0, 0.49993, -44.6438, 11.9428, 128.305 )
+skeleton = NodePath("")
+
+[node name="Cylinder728" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.456133, 0, 0.204799, 0, 0.5, 0, -0.204799, 0, -0.456133, -41.7906, 11.9813, 130.044 )
+skeleton = NodePath("")
+
+[node name="Cylinder729" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.250617, 0, -0.432656, 0, 0.5, 0, 0.432656, 0, -0.250617, -36.0863, 12.0831, 131.177 )
+skeleton = NodePath("")
+
+[node name="Cylinder730" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.376458, 0, 0.329059, 0, 0.5, 0, -0.329059, 0, 0.376458, -33.3892, 12.0912, 131.651 )
+skeleton = NodePath("")
+
+[node name="Cylinder731" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.312892, 0, -0.389998, 0, 0.5, 0, 0.389998, 0, 0.312892, -27.6029, 12.1085, 133.286 )
+skeleton = NodePath("")
+
+[node name="Cylinder732" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.00923048, 0, -0.499915, 0, 0.5, 0, 0.499915, 0, 0.00923048, -21.5517, 12.1733, 135.137 )
+skeleton = NodePath("")
+
+[node name="Cylinder733" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.289519, 0, -0.40765, 0, 0.5, 0, 0.40765, 0, -0.289519, -20.8213, 12.1574, 135.251 )
+skeleton = NodePath("")
+
+[node name="Cylinder734" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.495236, 0, 0.0688584, 0, 0.5, 0, -0.0688584, 0, -0.495236, -19.6352, 12.0525, 136.908 )
+skeleton = NodePath("")
+
+[node name="Cylinder735" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.26211, 0, 0.425791, 0, 0.5, 0, -0.425791, 0, -0.26211, -22.1483, 12.1788, 139.807 )
+skeleton = NodePath("")
+
+[node name="Cylinder736" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.324708, 0, -0.380217, 0, 0.5, 0, 0.380217, 0, -0.324708, -23.0864, 12.1601, 141.194 )
+skeleton = NodePath("")
+
+[node name="Cylinder737" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.423736, 0, -0.26542, 0, 0.5, 0, 0.26542, 0, 0.423736, -23.8708, 12.1792, 136.973 )
+skeleton = NodePath("")
+
+[node name="Cylinder738" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.425535, 0, 0.262525, 0, 0.5, 0, -0.262525, 0, -0.425535, -25.7099, 12.1219, 133.4 )
+skeleton = NodePath("")
+
+[node name="Cylinder739" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.474457, 0, 0.157767, 0, 0.5, 0, -0.157767, 0, -0.474457, -23.6519, 12.1382, 133.579 )
+skeleton = NodePath("")
+
+[node name="Cylinder740" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.196729, 0, -0.459671, 0, 0.5, 0, 0.459671, 0, -0.196729, -25.074, 12.1736, 137.072 )
+skeleton = NodePath("")
+
+[node name="Cylinder741" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.37519, 0, -0.330503, 0, 0.5, 0, 0.330503, 0, 0.37519, -22.9715, 12.1174, 143.093 )
+skeleton = NodePath("")
+
+[node name="Cylinder742" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.35694, 0, 0.350134, 0, 0.5, 0, -0.350134, 0, -0.35694, -24.2856, 12.0776, 144.384 )
+skeleton = NodePath("")
+
+[node name="Cylinder743" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.302477, 0, 0.39813, 0, 0.5, 0, -0.39813, 0, -0.302477, -26.7099, 12.0206, 146.12 )
+skeleton = NodePath("")
+
+[node name="Cylinder744" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.450232, 0, 0.217466, 0, 0.5, 0, -0.217466, 0, 0.450232, -29.3399, 12.116, 145.554 )
+skeleton = NodePath("")
+
+[node name="Cylinder745" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.419209, 0, 0.272514, 0, 0.5, 0, -0.272514, 0, -0.419209, -32.994, 12.1562, 143.481 )
+skeleton = NodePath("")
+
+[node name="Cylinder746" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.396588, 0, -0.304496, 0, 0.5, 0, 0.304496, 0, -0.396588, -35.1528, 12.1593, 142.093 )
+skeleton = NodePath("")
+
+[node name="Cylinder747" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.336726, 0, -0.369616, 0, 0.5, 0, 0.369616, 0, -0.336726, -37.3738, 12.1589, 139.957 )
+skeleton = NodePath("")
+
+[node name="Cylinder748" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.437975, 0, -0.241202, 0, 0.5, 0, 0.241202, 0, 0.437975, -39.8363, 12.1377, 137.725 )
+skeleton = NodePath("")
+
+[node name="Cylinder749" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.280347, 0, -0.414012, 0, 0.5, 0, 0.414012, 0, 0.280347, -41.0181, 12.0174, 133.912 )
+skeleton = NodePath("")
+
+[node name="Cylinder750" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.396367, 0, 0.304783, 0, 0.5, 0, -0.304783, 0, -0.396367, -38.3998, 12.1475, 138.279 )
+skeleton = NodePath("")
+
+[node name="Cylinder751" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.175778, 0, -0.468083, 0, 0.5, 0, 0.468083, 0, 0.175778, -35.9819, 12.16, 140.763 )
+skeleton = NodePath("")
+
+[node name="Cylinder752" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.224037, 0, -0.446998, 0, 0.5, 0, 0.446998, 0, 0.224037, -38.2949, 12.0378, 131.577 )
+skeleton = NodePath("")
+
+[node name="Cylinder753" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499567, 0, 0.0208056, 0, 0.5, 0, -0.0208056, 0, -0.499567, -36.778, 12.067, 131.664 )
+skeleton = NodePath("")
+
+[node name="Cylinder754" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.365283, 0, 0.341421, 0, 0.5, 0, -0.341421, 0, 0.365283, -33.5649, 12.0861, 132.245 )
+skeleton = NodePath("")
+
+[node name="Cylinder755" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.474873, 0, 0.156511, 0, 0.5, 0, -0.156511, 0, -0.474873, -30.9174, 12.0944, 132.807 )
+skeleton = NodePath("")
+
+[node name="Cylinder756" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0776368, 0, 0.493936, 0, 0.5, 0, -0.493936, 0, 0.0776368, -28.7875, 12.0999, 134.034 )
+skeleton = NodePath("")
+
+[node name="Cylinder757" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0534712, 0, -0.497133, 0, 0.5, 0, 0.497133, 0, -0.0534712, -25.3111, 12.1901, 138.871 )
+skeleton = NodePath("")
+
+[node name="Cylinder758" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.105059, 0, -0.488838, 0, 0.5, 0, 0.488838, 0, -0.105059, -25.3858, 12.1776, 141.58 )
+skeleton = NodePath("")
+
+[node name="Cylinder759" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.499923, 0, 0.00880115, 0, 0.5, 0, -0.00880115, 0, 0.499923, -28.1913, 12.177, 139.894 )
+skeleton = NodePath("")
+
+[node name="Cylinder760" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.178243, 0, 0.46715, 0, 0.5, 0, -0.46715, 0, -0.178243, -31.3135, 12.1365, 136.892 )
+skeleton = NodePath("")
+
+[node name="Cylinder761" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.417903, 0, 0.274513, 0, 0.5, 0, -0.274513, 0, 0.417903, -32.8513, 12.1141, 135.388 )
+skeleton = NodePath("")
+
+[node name="Cylinder762" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.167287, 0, -0.471185, 0, 0.5, 0, 0.471185, 0, 0.167287, -34.4606, 12.123, 136.178 )
+skeleton = NodePath("")
+
+[node name="Cylinder763" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.163528, 0, -0.472502, 0, 0.5, 0, 0.472502, 0, 0.163528, -32.7833, 12.1644, 140.126 )
+skeleton = NodePath("")
+
+[node name="Cylinder764" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.371449, 0, -0.334702, 0, 0.5, 0, 0.334702, 0, -0.371449, -30.8817, 12.1625, 141.553 )
+skeleton = NodePath("")
+
+[node name="Cylinder765" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.499996, 0, 0.00194616, 0, 0.5, 0, -0.00194616, 0, -0.499996, -29.4392, 12.1618, 142.48 )
+skeleton = NodePath("")
+
+[node name="Cylinder766" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.405539, 0, -0.292469, 0, 0.5, 0, 0.292469, 0, -0.405539, -31.0886, 12.1536, 144.705 )
+skeleton = NodePath("")
+
+[node name="Cylinder767" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.481873, 0, 0.133412, 0, 0.5, 0, -0.133412, 0, -0.481873, -38.3063, 12.1543, 142.493 )
+skeleton = NodePath("")
+
+[node name="Cylinder768" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.465666, 0, -0.182086, 0, 0.5, 0, 0.182086, 0, 0.465666, -36.9412, 12.1556, 143.678 )
+skeleton = NodePath("")
+
+[node name="Cylinder769" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.297132, 0, -0.402135, 0, 0.5, 0, 0.402135, 0, -0.297132, -34.4188, 12.1566, 145.147 )
+skeleton = NodePath("")
+
+[node name="Cylinder770" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.315193, 0, 0.388141, 0, 0.5, 0, -0.388141, 0, 0.315193, -31.0044, 12.0605, 146.677 )
+skeleton = NodePath("")
+
+[node name="Cylinder771" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.4785, 0, 0.145045, 0, 0.5, 0, -0.145045, 0, -0.4785, -31.0675, 12.029, 147.202 )
+skeleton = NodePath("")
+
+[node name="Cylinder772" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0913487, 0, -0.491585, 0, 0.5, 0, 0.491585, 0, 0.0913487, -35.6807, 12.0369, 147.396 )
+skeleton = NodePath("")
+
+[node name="Cylinder773" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0107806, 0, -0.499884, 0, 0.5, 0, 0.499884, 0, 0.0107806, -38.4626, 12.096, 146.242 )
+skeleton = NodePath("")
+
+[node name="Cylinder774" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.437421, 0, 0.242204, 0, 0.5, 0, -0.242204, 0, -0.437421, -39.0086, 11.9191, 148.991 )
+skeleton = NodePath("")
+
+[node name="Cylinder775" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.371002, 0, 0.335198, 0, 0.5, 0, -0.335198, 0, 0.371002, -39.0526, 11.6, 151.643 )
+skeleton = NodePath("")
+
+[node name="Cylinder776" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.171667, 0, -0.469607, 0, 0.5, 0, 0.469607, 0, -0.171667, -35.6832, 11.2964, 152.858 )
+skeleton = NodePath("")
+
+[node name="Cylinder777" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.0951511, 0, -0.490863, 0, 0.5, 0, 0.490863, 0, -0.0951511, -37.101, 12.0071, 147.737 )
+skeleton = NodePath("")
+
+[node name="Cylinder778" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.362047, 0, -0.344851, 0, 0.5, 0, 0.344851, 0, 0.362047, 26.9501, 11.7857, 117.088 )
+skeleton = NodePath("")
+
+[node name="Cylinder779" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.289543, 0, -0.407633, 0, 0.5, 0, 0.407633, 0, -0.289543, 23.7097, 11.6293, 115.49 )
+skeleton = NodePath("")
+
+[node name="Cylinder780" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.43738, 0, 0.242278, 0, 0.5, 0, -0.242278, 0, -0.43738, 25.1559, 11.7681, 114.473 )
+skeleton = NodePath("")
+
+[node name="Cylinder781" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.481375, 0, 0.135198, 0, 0.5, 0, -0.135198, 0, -0.481375, 17.8883, 11.6085, 123.901 )
+skeleton = NodePath("")
+
+[node name="Cylinder782" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.3669, 0, -0.339682, 0, 0.5, 0, 0.339682, 0, 0.3669, 22.6334, 11.6085, 127.344 )
+skeleton = NodePath("")
+
+[node name="Cylinder783" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.0438721, 0, -0.498072, 0, 0.5, 0, 0.498072, 0, 0.0438721, 20.058, 11.5228, 120.768 )
+skeleton = NodePath("")
+
+[node name="Cylinder784" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.217395, 0, -0.450266, 0, 0.5, 0, 0.450266, 0, -0.217395, 24.897, 11.6766, 122.833 )
+skeleton = NodePath("")
+
+[node name="Cylinder785" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.432879, 0, -0.250231, 0, 0.5, 0, 0.250231, 0, -0.432879, 21.9814, 11.5036, 100.322 )
+skeleton = NodePath("")
+
+[node name="Cylinder786" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.463343, 0, 0.187919, 0, 0.5, 0, -0.187919, 0, 0.463343, 15.8494, 11.2211, 87.7101 )
+skeleton = NodePath("")
+
+[node name="Cylinder787" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.306805, 0, -0.394805, 0, 0.5, 0, 0.394805, 0, -0.306805, 11.1374, 11.6859, 130.015 )
+skeleton = NodePath("")
+
+[node name="Cylinder788" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( 0.467296, 0, 0.17786, 0, 0.5, 0, -0.17786, 0, 0.467296, 13.7962, 11.9192, 132.31 )
+skeleton = NodePath("")
+
+[node name="Cylinder789" parent="Objects" instance=ExtResource( 4 )]
+transform = Transform( -0.428146, 0, -0.258246, 0, 0.5, 0, 0.258246, 0, -0.428146, 16.1936, 11.7538, 135.518 )
+skeleton = NodePath("")

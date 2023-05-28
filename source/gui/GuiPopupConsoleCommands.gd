@@ -31,6 +31,27 @@ func on_command_help(_console, _args):
 		message += module.generate_command_list()
 	command_console.send_message(message)
 
+#Remove later
+func on_command_aspect(_console, _args):
+	var argument = _args[0].to_lower()
+	var standard = "Aspect ratio changed to 4:3"
+	var wide = "Aspect ratio changed to 16:9"
+	if argument == "standard":
+		ProjectSettings.set_setting("display/window/size/width", 1440)
+		print(standard)
+	elif argument == "4:3":
+		ProjectSettings.set_setting("display/window/size/width", 1440)
+		print(standard)
+	elif argument == "widescreen":
+		ProjectSettings.set_setting("display/window/size/width", 1920)
+		print(wide)
+	elif argument == "16:9":
+		ProjectSettings.set_setting("display/window/size/width", 1920)
+		print(wide)
+	elif argument == "wide":
+		ProjectSettings.set_setting("display/window/size/width", 1920)
+		print(wide)
+
 func on_command_quit(_console, _args):
 	get_tree().quit()
 

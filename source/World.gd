@@ -2,7 +2,7 @@ extends Node
 
 signal game_end
 
-var room_first = preload("res://assets/world/dev/test_room_2.tscn").instance() 
+var room_first = preload("res://assets/world/dev/test_room_0.tscn").instance() 
 var room_current : Spatial
 
 func _ready():
@@ -30,7 +30,8 @@ func _on_goto_main():
 	emit_signal("game_end")
 
 func check_for_transitions(room):
-	for child in room.find_node("Transitions").get_children():
-		if child is RoomTransition:
-			child.connect("goto_room", self, "_on_goto_room")
-			child.connect("goto_main", self, "_on_goto_main")
+	if is_instance_valid(room.find_node("Transitions")):
+		for child in room.find_node("Transitions").get_children():
+			if child is RoomTransition:
+				child.connect("goto_room", self, "_on_goto_room")
+				child.connect("goto_main", self, "_on_goto_main")

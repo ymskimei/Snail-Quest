@@ -3,13 +3,15 @@ extends PlayerStateMain
 func enter() -> void:
 	print("Player State: HIDE")
 	entity.animator.set_speed_scale(1)
+	entity.animator.play("PlayerTuckDefault")
+	yield(entity.animator, "animation_finished")
 	entity.animator.play("PlayerHideDefault")
 	entity.can_move = false
+	entity.in_shell = true
 
 func input(_event: InputEvent) -> int:
 	if Input.is_action_just_released("action_defense"):
-		entity.animator.set_speed_scale(-1)
-		entity.animator.play("PlayerTuckDefault")
+		entity.animator.play_backwards("PlayerTuckDefault")
 		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)
 		return State.IDLE
 	if Input.is_action_just_pressed("action_main") and !shell_jumped:
@@ -29,3 +31,4 @@ func physics_process(delta: float) -> int:
 
 func exit() -> void:
 	entity.can_move = true
+	entity.in_shell = false

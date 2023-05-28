@@ -12,6 +12,7 @@
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 collision_layer = 12
 mode = 1
+contact_monitor = true
 script = ExtResource( 2 )
 loot_table = ExtResource( 3 )
 
@@ -28,4 +29,4 @@ shape = SubResource( 10 )
 [node name="CollisionShape2" type="CollisionShape" parent="Area"]
 shape = SubResource( 10 )
 
-[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]

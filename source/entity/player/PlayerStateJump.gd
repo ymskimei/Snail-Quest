@@ -6,7 +6,7 @@ func enter() -> void:
 	print("Player State: JUMP")
 	can_jump = true
 	var jump_timer = Timer.new()
-	jump_timer.set_wait_time(0.17)
+	jump_timer.set_wait_time(0.2)
 	jump_timer.one_shot = true
 	jump_timer.connect("timeout", self, "on_timeout")
 	add_child(jump_timer)
@@ -24,7 +24,7 @@ func input(_event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	MathHelper.slerp_look_at(entity, entity.transform.origin + Vector3(entity.velocity.x, 0, entity.velocity.z), 0.55)
+	apply_facing(0.65)
 	apply_movement(delta, true, deg2rad(45))
 	apply_gravity(delta)
 	if dodge_roll():

@@ -46,8 +46,9 @@ func _on_Area_body_entered(body):
 		if item.depletable:
 			items.add_item(item, 1)
 		else:
-			tools.set_item(0, item)
-		AudioPlayer.play_sfx(AudioPlayer.sfx_item_pickup_test)
+			var slot = item.specific_slot
+			tools.set_item(slot, item)
+		AudioPlayer.play_sfx(AudioPlayer.sfx_item_pickup)
 		collecting = true
 	pass
 

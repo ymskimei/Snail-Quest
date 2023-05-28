@@ -1,23 +1,37 @@
 extends EnemyStateMain
 
-func enter() -> void:
+var timer = Timer.new()
+
+func enter():
 	print("Enemy State: MOVE")
+	entity.anim.play("PawnMove")
+	snap_vector = Vector3.DOWN
+	state_done = false
+	timer.one_shot = true
+	timer.connect("timeout", self, "end_wait")
+	timer.set_wait_time(randi() % 5 + 1)
+	timer.start()
 
 func physics_process(delta: float) -> int:
-	rot_speed = 0.02
-
-	var global_pos = entity.global_transform.origin
-	var w_transform = entity.global_transform.looking_at(Vector3(x_location, global_pos.y, z_location), Vector3.UP)
-	var w_rotation = Quat(entity.global_transform.basis).slerp(Quat(w_transform.basis), rot_speed)
-	entity.global_transform = Transform(Basis(w_rotation), global_pos)
-	if entity.start_move == true:
-		var velocity = entity.global_transform.basis.z.normalized() * entity.idle_speed * delta
-		entity.move_and_collide(-velocity)
-	if entity.target_near:
-		return State.SEEK
+	.physics_process(delta)
+	apply_gravity(delta)
+	entity.rotation.y = lerp(entity.rotation.y, look_dir, 0.05)
+	var current_loc = entity.transform.origin
+	var rot = entity.rotation.y + deg2rad((randi() % 80) - 40) + PI 
+	var dist = randi() % 7 + 1
+	var new_loc_x = (dist * sin(rot))
+	var new_loc_z = (dist * cos(rot)) 
+	entity.navi_agent.set_target_location(entity.transform.origin + Vector3(new_loc_x, 0, new_loc_z))
+	apply_movement(delta, 0.3)
+	if state_done:
+		return State.IDLE
+	if entity.target_seen:
+		return State.AGRO
 	return State.NULL
 
-#	if harass == true:
-#		if entity.target_location != null:
-#			return State.FOLLOW
-#	elif player_escape == false:
+func end_wait():
+	if randi() % 2:
+		state_done = true  
+	rotate()
+	timer.set_wait_time(randi() % 5 + 1)
+	timer.start()

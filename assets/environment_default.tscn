@@ -28,13 +28,14 @@ transform = Transform( 1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0 )
 light_color = Color( 0.690196, 0.690196, 0.690196, 1 )
 light_energy = 0.6
 light_specular = 0.0
-light_bake_mode = 0
-shadow_color = Color( 0.290196, 0.34902, 0.737255, 1 )
-directional_shadow_mode = 1
-directional_shadow_split_1 = 0.015
-directional_shadow_normal_bias = 0.0
-directional_shadow_bias_split_scale = 0.0
-directional_shadow_max_distance = 8192.0
+light_bake_mode = 2
+shadow_color = Color( 0.145098, 0.176471, 0.372549, 1 )
+shadow_bias = -0.002
+directional_shadow_split_1 = 0.05
+directional_shadow_split_2 = 0.1
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.5
+directional_shadow_max_distance = 256.0
 
 [node name="Sun" type="Sprite3D" parent="WorldEnvironment/Orbital"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 64, 0 )

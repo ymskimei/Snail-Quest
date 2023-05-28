@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/model/needle.mesh" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/texture/gui/gui_tool_needle.png" type="Texture" id=2]
+[ext_resource path="res://source/resource/ResourceItem.gd" type="Script" id=3]
+
+[resource]
+script = ExtResource( 3 )
+item_name = "Needle"
+description = "A sharp sewing needle."
+item_path = "res://assets/item/tool_needle.tscn"
+mesh = ExtResource( 1 )
+sprite = ExtResource( 2 )
+amount = 1
+max_amount = 1
+specific_slot = 0
+stackable = false
+depletable = false
+loot_chance = 0

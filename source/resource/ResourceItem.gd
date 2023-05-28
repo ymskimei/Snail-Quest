@@ -3,6 +3,7 @@ extends Resource
 
 export var item_name : String = ""
 export var description : String = ""
+export var item_path : String
 
 export var mesh : Mesh
 export var sprite : Texture #gui sprite only

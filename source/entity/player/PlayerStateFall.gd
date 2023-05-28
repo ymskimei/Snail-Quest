@@ -15,11 +15,13 @@ func input(_event: InputEvent) -> int:
 			return State.HIDE
 		else:
 			return State.DODG
+	needle()
+	mallet()
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	MathHelper.slerp_look_at(entity, entity.transform.origin + Vector3(entity.velocity.x, 0, entity.velocity.z), 0.4)
+	apply_facing(0.4)
 	apply_movement(delta, true, deg2rad(45))
 	apply_gravity(delta)
 	if dodge_roll():

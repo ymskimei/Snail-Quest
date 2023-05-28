@@ -11,6 +11,7 @@ material = ExtResource( 3 )
 script = ExtResource( 1 )
 item_name = "Dummy Item 3"
 description = "This item is not stackable and can be depleted on use."
+item_path = ""
 mesh = SubResource( 1 )
 sprite = ExtResource( 2 )
 amount = 1

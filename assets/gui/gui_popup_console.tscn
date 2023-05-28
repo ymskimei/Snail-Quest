@@ -83,6 +83,11 @@ help = "Give the version number of the project."
 
 [node name="Utility" parent="MarginContainer/VBoxContainer/ConsoleCommandList" instance=ExtResource( 4 )]
 
+[node name="aspect" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+argument_names = [ "string" ]
+argument_types = [ 3 ]
+help = "Set the aspect ratio of the window."
+
 [node name="quit" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
 help = "Shut down the game process."
 

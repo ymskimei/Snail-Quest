@@ -15,24 +15,33 @@ func safe_look_at(spatial : Spatial, target : Vector3) -> void:
 		spatial.look_at(target, up)
 
 func slerp_look_at(spatial : Spatial, target : Vector3, speed) -> void:
-		var global_pos = spatial.global_transform.origin
-		var dest_transform = spatial.global_transform.looking_at(Vector3(target.x, target.y, target.z), Vector3.UP)
-		var dest_rotation = Quat(spatial.global_transform.basis).slerp(Quat(dest_transform.basis), speed)
-		spatial.global_transform = Transform(Basis(dest_rotation), global_pos)
+		var global_pos = spatial.global_transform
+		var dest_transform = global_pos
+		if global_pos.origin != target:
+			dest_transform = global_pos.looking_at(target, Vector3.UP)
+		var dest_rotation = Quat(global_pos.basis).slerp(Quat(dest_transform.basis), speed)
+		spatial.global_transform = Transform(Basis(dest_rotation), global_pos.origin)
 
-func find_target(node : Object, group_name : String, get_closest := true) -> Object:
-	var target_group = get_tree().get_nodes_in_group("target")
-	var distance_away = node.global_transform.origin.distance_to(target_group[0].global_transform.origin)
-	var return_target = target_group[0]
-	for index in target_group.size():
-		var distance = node.global_transform.origin.distance_to(target_group[index].global_transform.origin)
-		if get_closest == true and distance < distance_away:
-			distance_away = distance
-			return_target = target_group[index]
-		elif get_closest == false and distance > distance_away:
-			distance_away = distance
-			return_target = target_group[index]
-	return return_target
+func find_target(node : Object, group_name : String, get_closest := true):
+	var target_group = get_tree().get_nodes_in_group(group_name)
+	if !target_group.empty():
+		var distance_away = node.global_transform.origin.distance_to(target_group[0].global_transform.origin)
+		var return_target = target_group[0]
+		for index in target_group.size():
+			var distance = node.global_transform.origin.distance_to(target_group[index].global_transform.origin)
+			if get_closest == true and distance < distance_away:
+				distance_away = distance
+				return_target = target_group[index]
+			elif get_closest == false and distance > distance_away:
+				distance_away = distance
+				return_target = target_group[index]
+		return return_target
+
+func apply_surface_align(tform, new_up):
+	tform.basis.y = new_up
+	tform.basis.x = -tform.basis.z.cross(new_up)
+	tform.basis = tform.basis.orthonormalized()
+	return tform
 
 #func degrees_to_cardinal(angle):
 #	var directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
