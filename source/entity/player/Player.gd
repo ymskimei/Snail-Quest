@@ -94,7 +94,7 @@ func target_check():
 	var target_distance = target.get_global_translation().distance_to(get_global_translation())
 	var relative_facing = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
 	var max_enemy_distance = 15
-	var max_interactable_distance = 2
+	var max_interactable_distance = 5
 	if Input.is_action_pressed("cam_lock"):
 		targeting = true
 		if target is EnemyParent and target_distance < max_enemy_distance or ObjectInteractable and target_distance < max_interactable_distance:

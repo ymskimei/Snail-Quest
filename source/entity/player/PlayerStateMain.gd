@@ -118,10 +118,11 @@ func on_input_timer():
 func apply_aim_cursor():
 	if entity.targeting and entity.target_found or entity.cursor_activated:
 		var cursor = entity.cursor.instance()
-		if is_instance_valid(entity.get_parent().get_node("AimCursor")):
+		if is_instance_valid(entity.get_parent().get_node_or_null("AimCursor")):
 			entity.get_parent().get_node("AimCursor").queue_free()
 			entity.cursor_activated = false
 		else:
+			cursor.set_name("AimCursor")
 			entity.get_parent().add_child(cursor)
 			entity.cursor_activated = true
 

@@ -29,5 +29,5 @@ func level_cursor():
 		var tform = MathHelper.apply_surface_align(global_transform, normal)
 		global_transform = global_transform.interpolate_with(tform, 0.3)
 		var floor_height = $RayCast.get_collider().translation.y
-		print(floor_height)
+		#print(floor_height)
 		translation.y = floor_height + 1
