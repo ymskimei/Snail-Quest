@@ -2,17 +2,17 @@ extends CameraStateMain
 
 export var follow_speed = 3.5
 export var rotation_speed = 10
-export var offset = Vector3(0, 1, 0)
-export var lock_high_arm = 0.1
-export var lock_high_lens = 0.3
-export var lock_low_arm = -0.7
-export var lock_low_lens = -0.05
+export var offset = Vector3(0, 0.8, 0)
+export var lock_high_arm = 0.05
+export var lock_high_lens = 0.15
+export var lock_low_arm = -0.85
+export var lock_low_lens = -0.025
 export var lock_default_arm = -0.3
-export var lock_default_lens = 0.1
-export var zoom_normal = 60
-export var zoom_far = 75
-export var distance_normal = 5
-export var distance_far = 6
+export var lock_default_lens = 0.075
+export var zoom_normal = 40
+export var zoom_far = 50
+export var distance_normal = 10
+export var distance_far = 13
 
 var input_up = 0
 var input_down = 0
@@ -22,8 +22,8 @@ func enter() -> void:
 	tween_cam_pan(lock_default_arm, lock_default_lens)
 	tween_cam_zoom(zoom_normal, distance_normal)
 	zoomed_out = false
-	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom_normal, 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance_normal, 0.4, Tween.TRANS_EXPO, Tween.EASE_OUT)
+	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom_normal, 0.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance_normal, 0.5, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
 func unhandled_input(event):

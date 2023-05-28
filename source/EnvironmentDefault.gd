@@ -1,7 +1,7 @@
 extends Spatial
 
 onready var sky = $"%Sky"
-#onready var clouds = $"%Clouds"
+onready var clouds = $"%Clouds"
 onready var clouds_front = $"%CloudsFront"
 onready var clouds_back = $"%CloudsBack"
 onready var orbital = $"%Orbital"
@@ -50,7 +50,7 @@ func check_orbit(time, delta):
 	var player_pos = GlobalManager.player.global_translation
 	if camera_pos != null:
 		sky.global_translation = Vector3(camera_pos.x, camera_pos.y - 32, camera_pos.z)
-		#clouds.global_translation = Vector3(camera_pos.x, camera_pos.y + 16, camera_pos.z)
+		clouds.global_translation = Vector3(camera_pos.x, camera_pos.y + 16, camera_pos.z)
 		
 		clouds_front.global_translation = Vector3(camera_pos.x, camera_pos.y + 2, camera_pos.z)
 		clouds_back.global_translation = Vector3(camera_pos.x, camera_pos.y + 2, camera_pos.z)

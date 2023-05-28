@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "MeshInstance",
+"class": "AimCursor",
+"language": "GDScript",
+"path": "res://source/gui/GuiAimCursor.gd"
+}, {
 "base": "CameraStateMain",
 "class": "CameraStateIsom",
 "language": "GDScript",
@@ -23,6 +28,16 @@ _global_script_classes=[ {
 "class": "CameraStateMain",
 "language": "GDScript",
 "path": "res://source/entity/camera/CameraStateMain.gd"
+}, {
+"base": "Reference",
+"class": "CellEditor",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/typed_cells/cell_editor.gd"
+}, {
+"base": "CellEditor",
+"class": "CellEditorArray",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/typed_cells/cell_editor_array.gd"
 }, {
 "base": "Object",
 "class": "Chunk",
@@ -93,6 +108,11 @@ _global_script_classes=[ {
 "class": "EntityParent",
 "language": "GDScript",
 "path": "res://source/entity/EntityParent.gd"
+}, {
+"base": "Node",
+"class": "EntityStateParent",
+"language": "GDScript",
+"path": "res://source/entity/EntityStateParent.gd"
 }, {
 "base": "Node",
 "class": "GuiConsoleCategory",
@@ -179,15 +199,73 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/object/RoomTransition.gd"
 }, {
+"base": "GridContainer",
+"class": "SettingsGrid",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/settings_grid.gd"
+}, {
+"base": "Control",
+"class": "SheetsDockEditor",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/typed_editors/dock_base.gd"
+}, {
 "base": "Node",
 "class": "SnailQuest",
 "language": "GDScript",
 "path": "res://source/SnailQuest.gd"
+}, {
+"base": "Reference",
+"class": "SpreadsheetEditFormat",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/import_export/formats_edit/edit_base.gd"
+}, {
+"base": "SpreadsheetEditFormatTres",
+"class": "SpreadsheetEditFormatCsv",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/import_export/formats_edit/edit_csv.gd"
+}, {
+"base": "SpreadsheetEditFormat",
+"class": "SpreadsheetEditFormatTres",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/import_export/formats_edit/edit_tres.gd"
+}, {
+"base": "Reference",
+"class": "SpreadsheetExportFormatCsv",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/import_export/formats_export/export_csv.gd"
+}, {
+"base": "Resource",
+"class": "SpreadsheetImport",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/import_export/spreadsheet_import.gd"
+}, {
+"base": "Reference",
+"class": "SpreadsheetImportFormatCsv",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/import_export/formats_import/import_csv.gd"
+}, {
+"base": "Reference",
+"class": "TextEditingUtils",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/text_editing_utils.gd"
+}, {
+"base": "Button",
+"class": "ThemeIconButton",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/editor_icon_button.gd"
+}, {
+"base": "Control",
+"class": "ThemeStylebox",
+"language": "GDScript",
+"path": "res://addons/resources_speadsheet_view/editor_stylebox_overrider.gd"
 } ]
 _global_script_class_icons={
+"AimCursor": "",
 "CameraStateIsom": "",
 "CameraStateLock": "",
 "CameraStateMain": "",
+"CellEditor": "",
+"CellEditorArray": "",
 "Chunk": "",
 "DTS": "",
 "Dialogic": "",
@@ -202,6 +280,7 @@ _global_script_class_icons={
 "EnemyParent": "",
 "EnemyStateMain": "",
 "EntityParent": "",
+"EntityStateParent": "",
 "GuiConsoleCategory": "",
 "GuiConsoleCommand": "",
 "HistoryRow": "",
@@ -219,7 +298,18 @@ _global_script_class_icons={
 "ResourceLootTable": "",
 "ResourceSign": "",
 "RoomTransition": "",
-"SnailQuest": ""
+"SettingsGrid": "",
+"SheetsDockEditor": "",
+"SnailQuest": "",
+"SpreadsheetEditFormat": "",
+"SpreadsheetEditFormatCsv": "",
+"SpreadsheetEditFormatTres": "",
+"SpreadsheetExportFormatCsv": "",
+"SpreadsheetImport": "",
+"SpreadsheetImportFormatCsv": "",
+"TextEditingUtils": "",
+"ThemeIconButton": "",
+"ThemeStylebox": ""
 }
 
 [addons]
@@ -241,7 +331,7 @@ config/use_custom_user_dir=true
 boot_splash/image="res://assets/texture/gui/gui_splash.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-boot_splash/bg_color=Color( 0, 0, 0, 1 )
+boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://icon.png"
 
 [autoload]
@@ -473,7 +563,7 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/filters/sharpen_intensity=0.75
+quality/filters/sharpen_intensity=0.6
 quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
@@ -486,10 +576,10 @@ quality/shadow_atlas/quadrant_3_subdiv=5
 quality/shadows/filter_mode=0
 quality/shading/force_vertex_shading.mobile=false
 quality/shading/use_physical_light_attenuation=true
-quality/filters/anisotropic_filter_level=16
+quality/filters/anisotropic_filter_level=8
 quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 0, 0, 0, 1 )
-quality/filters/msaa=4
+quality/filters/msaa=3
 quality/filters/use_fxaa=true
 quality/filters/use_debanding=true
 environment/default_environment="res://resource/environment/environment_default.tres"

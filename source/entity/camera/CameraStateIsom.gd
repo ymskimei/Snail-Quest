@@ -3,13 +3,13 @@ extends CameraStateMain
 
 export var rotation_speed = 10
 export var offset = Vector3(0, 1, 0)
-export var follow_speed = 3.5
+export var follow_speed = 3
 export var lock_iso_arm = -0.5
 export var lock_iso_lens = 0.0
 export var zoom_iso_far = 15
-export var distance_iso_far = 50
+export var distance_iso_far = 80
 export var zoom_iso_normal = 15
-export var distance_iso_normal = 30
+export var distance_iso_normal = 40
 
 var rotation_timer_right = Timer.new()
 var rotation_timer_left = Timer.new()
@@ -106,8 +106,8 @@ func tween_overhead(direction):
 	entity.anim_tween.start()
 
 func tween_cam_zoom(zoom, distance):
-	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance, 0.5, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom, 0.35, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance, 0.35, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
 func exit() -> void:
