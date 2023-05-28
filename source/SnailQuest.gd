@@ -1,7 +1,7 @@
 class_name SnailQuest
 extends Node
 
-var game_master = preload("res://assets/world/world.tscn").instance()
+var world = preload("res://assets/world/world.tscn").instance()
 var title_screen = preload("res://assets/gui/gui_screen_title.tscn").instance()
 
 func _ready():
@@ -11,5 +11,5 @@ func _ready():
 func on_Game_Started():
 	print("demo")
 	yield(title_screen, "tree_exited")
-	add_child(game_master)
+	add_child(world)
 	

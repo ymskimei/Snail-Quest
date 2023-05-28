@@ -52,7 +52,7 @@ alignment = 2
 [node name="DisplayFramerate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
 unique_name_in_owner = true
 margin_right = 626.0
-margin_bottom = 106.0
+margin_bottom = 96.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -65,9 +65,9 @@ text = "00"
 
 [node name="DisplayGameTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
 unique_name_in_owner = true
-margin_top = 110.0
+margin_top = 100.0
 margin_right = 626.0
-margin_bottom = 216.0
+margin_bottom = 196.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -79,9 +79,9 @@ text = "00:00:00"
 
 [node name="DisplayPlayTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
 unique_name_in_owner = true
-margin_top = 220.0
+margin_top = 200.0
 margin_right = 626.0
-margin_bottom = 327.0
+margin_bottom = 296.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -92,9 +92,24 @@ bbcode_text = "00"
 tab_size = 5
 text = "00"
 
+[node name="DisplayChunkCoords" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+unique_name_in_owner = true
+margin_top = 300.0
+margin_right = 626.0
+margin_bottom = 396.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "0, 0"
+tab_size = 5
+text = "0, 0"
+
 [node name="DisplayCoordinate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
 unique_name_in_owner = true
-margin_top = 331.0
+margin_top = 400.0
 margin_right = 626.0
 margin_bottom = 1040.0
 rect_clip_content = false

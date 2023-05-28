@@ -13,6 +13,7 @@ gradient = SubResource( 1 )
 [resource]
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/normal_scale = null
 shader_param/specular = 1.0
 shader_param/specular_amount = 0.5
 shader_param/specular_smoothness = 0.02

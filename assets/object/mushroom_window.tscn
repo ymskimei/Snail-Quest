@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/model/interior_mushroom_window.mesh" type="ArrayMesh" id=1]
+
+[sub_resource type="CylinderShape" id=1]
+
+[node name="MushroomWindow" type="StaticBody"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 0.2, -8.74228e-09, 0, -1.19209e-07, 0 )
+shape = SubResource( 1 )
