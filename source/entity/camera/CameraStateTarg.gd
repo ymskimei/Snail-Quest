@@ -10,12 +10,14 @@ export var zoom_targeting = 50
 
 var bars_active : bool
 
+var bars_timer = Timer.new()
+
 func enter() -> void:
 	print("Camera State: TARGET")
 	player_rot = entity.player.rotation.y
 	tween_cam_zoom()
 	tween_cam_rotate(Tween.EASE_IN_OUT)
-	bars_timer()
+	add_bars_timer()
 	bars_active = false
 	rotation_complete = false
 
@@ -33,13 +35,14 @@ func physics_process(delta):
 	entity.translation = lerp(entity.translation, entity.player.translation + targeting_offset, 5 * delta)
 	return State.NULL
 
-func bars_timer():
-	var timer = Timer.new()
-	timer.set_one_shot(true)
-	timer.set_wait_time(0.2)
-	timer.connect("timeout", self, "on_bars_timer")
-	add_child(timer)
-	timer.start()
+func add_bars_timer():
+	if !is_instance_valid(get_node_or_null("BarsTimer")):
+		bars_timer.set_one_shot(true)
+		bars_timer.set_wait_time(0.2)
+		bars_timer.connect("timeout", self, "on_bars_timer")
+		bars_timer.set_name("BarsTimer")
+		add_child(bars_timer)
+	bars_timer.start()
 
 func on_bars_timer():
 	if entity.player.targeting:

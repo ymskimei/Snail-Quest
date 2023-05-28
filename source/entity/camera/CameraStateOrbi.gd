@@ -23,10 +23,14 @@ var look_around : bool
 var zoom_mode : bool
 var can_exit_mode : bool
 
+var spin_timer = Timer.new()
+var look_timer = Timer.new()
+
 func enter() -> void:
 	print("Camera State: ORBIT")
 	tween_cam_pan(lock_default_arm, lock_default_lens)
 	tween_cam_reset()
+	add_control_timers()
 	zoom_mode = false
 	look_around = false
 	distance = 0
@@ -65,7 +69,7 @@ func cam_panning(delta):
 		tween_cam_pan(lock_low_arm, lock_low_lens)
 	elif distance_to_player >= 2:
 		if Input.is_action_just_pressed("cam_zoom"):
-			look_timer()
+			look_timer.start()
 		if Input.is_action_just_released("cam_zoom"):
 			zoom_mode = true
 		if !zoom_mode:
@@ -94,28 +98,26 @@ func cam_zooming(delta):
 func cam_reset():
 	if Input.is_action_just_pressed("cam_left") or Input.is_action_just_pressed("cam_right") or Input.is_action_just_pressed("cam_up") or Input.is_action_just_pressed("cam_down"):
 		input_spin += 1
-		spin_timer()
+		spin_timer.start()
 		if input_spin >= 4:
 			tween_cam_reset()
 
-func spin_timer():
-	var timer = Timer.new()
-	timer.set_one_shot(true)
-	timer.set_wait_time(0.5)
-	timer.connect("timeout", self, "on_spin_timer")
-	add_child(timer)
-	timer.start()
+func add_control_timers():
+	if !is_instance_valid(get_node_or_null("SpinTimer")):
+		spin_timer.set_one_shot(true)
+		spin_timer.set_wait_time(0.5)
+		spin_timer.connect("timeout", self, "on_spin_timer")
+		spin_timer.set_name("SpinTimer")
+		add_child(spin_timer)
+	if !is_instance_valid(get_node_or_null("LookTimer")):
+		look_timer.set_one_shot(true)
+		look_timer.set_wait_time(0.25)
+		look_timer.connect("timeout", self, "on_look_timer")
+		look_timer.set_name("LookTimer")
+		add_child(look_timer)	
 
 func on_spin_timer():
 	input_spin = 0
-
-func look_timer():
-	var timer = Timer.new()
-	timer.set_one_shot(true)
-	timer.set_wait_time(0.25)
-	timer.connect("timeout", self, "on_look_timer")
-	add_child(timer)
-	timer.start()
 
 func on_look_timer():
 	if Input.is_action_pressed("cam_zoom"):

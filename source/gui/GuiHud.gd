@@ -30,18 +30,10 @@ var cam_timer = Timer.new()
 var pad_is_hidden : bool
 var cam_is_hidden : bool
 
-
 func _ready():
 	pad_is_hidden = true
 	cam_is_hidden = true
-	pad_timer.set_wait_time(8)
-	pad_timer.one_shot = true
-	pad_timer.connect("timeout", self, "on_pad_timeout")
-	add_child(pad_timer)
-	cam_timer.set_wait_time(8)
-	cam_timer.one_shot = true
-	cam_timer.connect("timeout", self, "on_cam_timeout")
-	add_child(cam_timer)
+	add_hud_timers()
 	equipment.connect("items_updated", self, "on_items_updated")
 	tools.connect("items_updated", self, "on_items_updated")
 
@@ -118,21 +110,31 @@ func update_cam_display():
 			"Look":
 				cam_icon.texture = cam_look
 
+func add_hud_timers():
+	pad_timer.set_wait_time(8)
+	pad_timer.one_shot = true
+	pad_timer.connect("timeout", self, "on_pad_timeout")
+	add_child(pad_timer)
+	cam_timer.set_wait_time(8)
+	cam_timer.one_shot = true
+	cam_timer.connect("timeout", self, "on_cam_timeout")
+	add_child(cam_timer)
+
 func reveal_pad():
 	if pad_is_hidden:
 		pad_is_hidden = false
 		anim_pad.play("SlidePad")
 	pad_timer.start()
 
-func on_pad_timeout():
-	pad_is_hidden = true
-	anim_pad.play_backwards("SlidePad")
-
 func reveal_cam():
 	if cam_is_hidden:
 		cam_is_hidden = false
 		anim_cam.play("SlideCam")
 	cam_timer.start()
+
+func on_pad_timeout():
+	pad_is_hidden = true
+	anim_pad.play_backwards("SlidePad")
 
 func on_cam_timeout():
 	cam_is_hidden = true
