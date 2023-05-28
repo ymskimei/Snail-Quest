@@ -447,8 +447,11 @@ shape = SubResource( 30 )
 [node name="CheckerFloor" type="Area" parent="Checkers"]
 unique_name_in_owner = true
 transform = Transform( -0.4, 0, 0, 0, 0.15, 0, 0, 0, -0.8, 0, 0, 0 )
+collision_layer = 13
+collision_mask = 13
 
 [node name="CheckerFloorCollision" type="CollisionShape" parent="Checkers/CheckerFloor"]
+transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 26 )
 
 [node name="PlayerArea" type="Area" parent="Checkers"]
@@ -524,3 +527,5 @@ anims/RESET = SubResource( 29 )
 [node name="DebugHealthBar" parent="." instance=ExtResource( 29 )]
 
 [connection signal="area_entered" from="AffectArea" to="." method="_on_Area_area_entered"]
+[connection signal="area_entered" from="Checkers/CheckerFloor" to="." method="_on_CheckerFloor_area_entered"]
+[connection signal="area_exited" from="Checkers/CheckerFloor" to="." method="_on_CheckerFloor_area_exited"]

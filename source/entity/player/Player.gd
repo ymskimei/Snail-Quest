@@ -27,8 +27,10 @@ var collider
 
 var targeting : bool
 var target_found : bool
+
 var can_move : bool
 var can_interact : bool
+
 var in_shell : bool
 var is_tool_equipped : bool
 var cursor_activated : bool

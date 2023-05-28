@@ -4,17 +4,17 @@ export var follow_speed = 5.5
 export var targeting_offset = Vector3(0, 1, 0)
 export var targeting_rotation = -0.5
 export var targeting_speed = 0.2
+
 export var distance_targeting = 5
 export var zoom_targeting = 50
-var player_rot : float
+
 var bars_active : bool
-var rotation_complete : bool
 
 func enter() -> void:
 	print("Camera State: TARGET")
 	player_rot = entity.player.rotation.y
 	tween_cam_zoom()
-	tween_cam_rotate()
+	tween_cam_rotate(Tween.EASE_IN_OUT)
 	bars_timer()
 	bars_active = false
 	rotation_complete = false
@@ -52,19 +52,12 @@ func on_bars_timer():
 	else:
 		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_reset)
 
-func tween_cam_rotate():
-	var adjusted_rot = entity.rotation.y + wrapf(player_rot - entity.rotation.y, -PI, PI)
-	entity.anim_tween.interpolate_property(entity, "rotation:y", entity.rotation.y, adjusted_rot, 0.5, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
-	entity.anim_tween.start()
-	yield(entity.anim_tween, "tween_completed")
-	rotation_complete = true
-
 func tween_cam_zoom():
 	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom_targeting, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance_targeting, 0.3, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
-func exit () -> void:
+func exit() -> void:
 	if bars_active:
 		if entity.player.target_found:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_unlock)
@@ -72,3 +65,4 @@ func exit () -> void:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_no_target_unlock)
 		entity.anim_bars.play("BarsDisappear")
 	tween_cam_zoom()
+	rotation_complete = false

@@ -3,17 +3,22 @@ extends CameraStateMain
 export var follow_speed = 3.5
 export var rotation_speed = 10
 export var offset = Vector3(0, 0.8, 0)
+
 export var lock_high_arm = 0.05
-export var lock_high_lens = 0.15
+export var lock_high_lens = 0.3
+
 export var lock_low_arm = -0.85
 export var lock_low_lens = -0.025
+
 export var lock_default_arm = -0.3
 export var lock_default_lens = 0.075
+
 export var zoom_normal = 40
-export var zoom_far = 50
 export var distance_normal = 8.5
+
 var distance = 0
 var input_spin = 0
+
 var look_around : bool
 var zoom_mode : bool
 var can_exit_mode : bool
@@ -21,7 +26,7 @@ var can_exit_mode : bool
 func enter() -> void:
 	print("Camera State: ORBIT")
 	tween_cam_pan(lock_default_arm, lock_default_lens)
-	cam_reset()
+	tween_cam_reset()
 	zoom_mode = false
 	look_around = false
 	distance = 0
@@ -60,8 +65,9 @@ func cam_panning(delta):
 		tween_cam_pan(lock_low_arm, lock_low_lens)
 	elif distance_to_player >= 2:
 		if Input.is_action_just_pressed("cam_zoom"):
-			zoom_mode = true
 			look_timer()
+		if Input.is_action_just_released("cam_zoom"):
+			zoom_mode = true
 		if !zoom_mode:
 			if Input.is_action_pressed("cam_up"):
 				tween_cam_pan(lock_high_arm, lock_high_lens)
@@ -79,9 +85,9 @@ func cam_zooming(delta):
 		distance += 15 * delta
 	else:
 		distance = 0
-	if Input.is_action_just_released("cam_zoom"):
+	if Input.is_action_just_pressed("cam_zoom"):
 		can_exit_mode = true
-	if can_exit_mode and Input.is_action_just_pressed("cam_zoom"):
+	if can_exit_mode and Input.is_action_just_released("cam_zoom"):
 		can_exit_mode = false
 		zoom_mode = false
 

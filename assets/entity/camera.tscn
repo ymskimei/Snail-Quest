@@ -103,9 +103,6 @@ script = ExtResource( 1 )
 
 [node name="Orbi" type="Node" parent="StateController"]
 script = ExtResource( 6 )
-lock_high_arm = 0.0
-lock_high_lens = 0.22
-lock_low_lens = -0.022
 
 [node name="Targ" type="Node" parent="StateController"]
 script = ExtResource( 5 )

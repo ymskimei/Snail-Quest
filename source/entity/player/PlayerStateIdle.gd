@@ -9,9 +9,9 @@ func enter() -> void:
 	entity.animator.play("PlayerIdleDefault")
 
 func input(_event: InputEvent) -> int:
-	if !entity.can_interact and Input.is_action_just_pressed("action_main") and entity.is_on_floor():
+	if !entity.can_interact and Input.is_action_just_pressed("action_main") and entity.ray_down.is_colliding():
 		return State.JUMP
-	if Input.is_action_just_pressed("action_defense") and entity.is_on_floor():
+	if Input.is_action_just_pressed("action_defense") and entity.ray_down.is_colliding():
 		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 		return State.HIDE
 	needle()
