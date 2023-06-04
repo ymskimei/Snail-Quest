@@ -1,0 +1,231 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/texture/item/slash.png" type="Texture" id=1]
+[ext_resource path="res://assets/model/needle.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://source/scripts/item/Mallet.gd" type="Script" id=3]
+[ext_resource path="res://assets/resource/animation/MalletStill.tres" type="Animation" id=4]
+[ext_resource path="res://assets/model/spool.mesh" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/resource/animation/MalletSlamDown.tres" type="Animation" id=6]
+[ext_resource path="res://assets/resource/animation/MalletChargeSlam.tres" type="Animation" id=7]
+[ext_resource path="res://assets/resource/animation/MalletSwingRight.tres" type="Animation" id=8]
+[ext_resource path="res://assets/resource/animation/MalletSwingLeft.tres" type="Animation" id=9]
+
+
+[sub_resource type="Shader" id=6]
+code = "shader_type particles;
+
+render_mode keep_data, disable_force, disable_velocity;
+
+void vertex() {
+	vec3 a = (EMISSION_TRANSFORM*vec4(0, -1, 0, 1)).xyz;
+	vec3 b = (EMISSION_TRANSFORM*vec4(0, 1, 0, 1)).xyz;
+	
+	if(CUSTOM.w == LIFETIME){
+		CUSTOM.z = LIFETIME;
+		CUSTOM.w = 0.0;
+	}
+	
+	if(CUSTOM.w == 0.0){
+		TRANSFORM[0].xyz = b;
+		TRANSFORM[1].xyz = a;
+		TRANSFORM[2].xyz = a;
+		TRANSFORM[3].xyz = b;
+	}
+	if(CUSTOM.w == 1.0){
+		TRANSFORM[0].xyz = b;
+		TRANSFORM[1].xyz = a;
+	}
+	
+	CUSTOM.w++;
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type spatial;
+
+render_mode unshaded, blend_add, world_vertex_coords, cull_disabled;
+uniform sampler2D tex;
+
+void vertex(){
+	vec3 a = mix(WORLD_MATRIX[3].xyz,WORLD_MATRIX[2].xyz,UV.y);
+	vec3 b = mix(WORLD_MATRIX[0].xyz,WORLD_MATRIX[1].xyz,UV.y);
+	VERTEX = mix(a, b, UV.x);
+	UV.x = (INSTANCE_CUSTOM.w-1.0 - UV.x) / INSTANCE_CUSTOM.z;
+}
+
+void fragment(){
+	vec4 T = texture(tex, UV);
+	ALBEDO = T.xyz;
+	ALPHA = T.w;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/tex = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=5]
+material = SubResource( 4 )
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="Animation" id=11]
+resource_name = "MalletSlam"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.21, 0.5 ),
+"transitions": PoolRealArray( 5.09824, 0.659754, 0.5 ),
+"update": 0,
+"values": [ Vector3( 25, 0, 0 ), Vector3( -180, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Mallet/MeshInstance2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.14, 0.21, 0.26, 0.32 ),
+"transitions": PoolRealArray( 2.5, 0.5, 2.7, 0.4 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 0.6 ), Vector3( 1, 1, 1 ), Vector3( 2, 2, 0.5 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.21 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_slam"
+} ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "MalletWeakSlam"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.5 ),
+"transitions": PoolRealArray( 5.09824, 0.659754, 0.5 ),
+"update": 0,
+"values": [ Vector3( 25, 0, 0 ), Vector3( -115, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Mallet/MeshInstance2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.08, 0.15, 0.2, 0.26 ),
+"transitions": PoolRealArray( 2.5, 0.5, 2.7, 0.4 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 0.6 ), Vector3( 1, 1, 1 ), Vector3( 1.7, 1.7, 0.7 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.15 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_slam"
+} ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "RESET"
+length = 0.01
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[node name="KinematicBody" type="RigidBody"]
+collision_layer = 0
+collision_mask = 12
+mode = 3
+mass = 0.00102041
+sleeping = true
+script = ExtResource( 3 )
+
+[node name="Mallet" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Mallet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0 )
+mesh = ExtResource( 2 )
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance2" type="MeshInstance" parent="Mallet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0 )
+mesh = ExtResource( 5 )
+skeleton = NodePath("../../..")
+
+[node name="Particles" type="Particles" parent="Mallet/MeshInstance2"]
+unique_name_in_owner = true
+transform = Transform( 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, -4.47035e-08, 1, 4.37114e-08, -1, -4.47035e-08, 0, 0.33, 0 )
+lifetime = 8.0
+speed_scale = 64.0
+fixed_fps = 64
+local_coords = false
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 5 )
+
+[node name="AttackArea" type="Area" parent="Mallet" groups=["attack"]]
+unique_name_in_owner = true
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Mallet/AttackArea"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 2.10202, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 1, 0 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_default_blend_time = 0.1
+anims/MalletChargeSlam = ExtResource( 7 )
+anims/MalletSlam = SubResource( 11 )
+anims/MalletSlamDown = ExtResource( 6 )
+anims/MalletStill = ExtResource( 4 )
+anims/MalletSwingLeft = ExtResource( 9 )
+anims/MalletSwingRight = ExtResource( 8 )
+anims/MalletWeakSlam = SubResource( 12 )
+anims/RESET = SubResource( 10 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

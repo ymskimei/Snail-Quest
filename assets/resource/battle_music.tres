@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourceAudioPlayer.gd" type="Script" id=1]
+
+
+[resource]
+script = ExtResource( 1 )
+bpm = 120
+measures = 4
+bars = 16

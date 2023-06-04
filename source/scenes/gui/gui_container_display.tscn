@@ -1,0 +1,93 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://source/scripts/gui/GuiItemDisplay.gd" type="Script" id=1]
+[ext_resource path="res://assets/resource/animation/GuiItemStill.tres" type="Animation" id=2]
+[ext_resource path="res://assets/resource/animation/GuiItemDisabled.tres" type="Animation" id=3]
+[ext_resource path="res://assets/resource/animation/GuiItemBounce.tres" type="Animation" id=4]
+[ext_resource path="res://assets/resource/equipped_player.tres" type="Resource" id=5]
+[ext_resource path="res://assets/gui/font/font_default.tres" type="DynamicFont" id=6]
+
+
+[sub_resource type="Animation" id=1]
+resource_name = "RESET"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("ItemSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ItemSprite:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ItemSprite:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[node name="Item" type="CenterContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = -64.0
+margin_right = 64.0
+margin_bottom = 64.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 1 )
+destination = ExtResource( 5 )
+
+[node name="ItemSprite" type="TextureRect" parent="."]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 64.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_pivot_offset = Vector2( 0, 10 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
+expand = true
+stretch_mode = 4
+
+[node name="ItemLabel" type="RichTextLabel" parent="."]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 64.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 6 )
+bbcode_enabled = true
+scroll_active = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/GuiItemBounce = ExtResource( 4 )
+anims/GuiItemDisabled = ExtResource( 3 )
+anims/GuiItemStill = ExtResource( 2 )
+anims/RESET = SubResource( 1 )

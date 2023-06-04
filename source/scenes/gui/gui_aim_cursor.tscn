@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://source/scripts/gui/GuiAimCursor.gd" type="Script" id=1]
+[ext_resource path="res://assets/texture/gui/aiming_target.png" type="Texture" id=2]
+
+[sub_resource type="CylinderMesh" id=33]
+
+[sub_resource type="SpatialMaterial" id=32]
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = ExtResource( 2 )
+uv1_scale = Vector3( 0.5, 0.5, 0.5 )
+uv1_offset = Vector3( 0.5, 0.5, 0.5 )
+uv1_triplanar = true
+
+[node name="AimCursor" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="."]
+transform = Transform( 0.7, 0, 0, 0, 0.001, 0, 0, 0, 0.7, 0, 0, 0 )
+mesh = SubResource( 33 )
+material/0 = SubResource( 32 )
+
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
+enabled = true
+cast_to = Vector3( 0, -20, 0 )
+collision_mask = 12
+collide_with_areas = true

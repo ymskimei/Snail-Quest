@@ -1,9 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=2]
-
-[ext_resource path="res://source/resource/ResourceLocation.gd" type="Script" id=1]
-
-[resource]
-script = ExtResource( 1 )
-room_path = "res://assets/world/dev/test_room_2.tscn"
-coordinates = Vector3( 0, 0, 7 )
-direction = "NORTH"

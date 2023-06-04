@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourceLootTable.gd" type="Script" id=1]
+[ext_resource path="res://assets/resource/item_test_2.tres" type="Resource" id=2]
+[ext_resource path="res://assets/resource/item_test_1.tres" type="Resource" id=3]
+[ext_resource path="res://assets/resource/item_samara.tres" type="Resource" id=4]
+[ext_resource path="res://assets/resource/item_test_0.tres" type="Resource" id=5]
+
+[resource]
+script = ExtResource( 1 )
+loot_table = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 4 ) ]

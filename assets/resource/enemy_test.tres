@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourceEntity.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+entity_name = "LilyPawn"
+health = 100
+max_health = 100
+strength = 10
+gravity = 50
+speed = 5
+acceleration = 0
+jump = 10
