@@ -8,9 +8,8 @@
 [ext_resource path="res://assets/shader/cel.shader" type="Shader" id=6]
 [ext_resource path="res://assets/model/logo.mesh" type="ArrayMesh" id=7]
 [ext_resource path="res://assets/resource/animation/GuiLogoAppear.tres" type="Animation" id=8]
-[ext_resource path="res://assets/shader/shine.gdshader" type="Shader" id=9]
+[ext_resource path="res://assets/shader/shine.shader" type="Shader" id=9]
 [ext_resource path="res://source/scenes/gui/gui_transition.tscn" type="PackedScene" id=10]
-
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 9 )

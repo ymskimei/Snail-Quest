@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_bass_day.ogg" type="AudioStream" id=1]
+[ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_perc_day.ogg" type="AudioStream" id=2]
+[ext_resource path="res://source/scripts/AudioPlayer.gd" type="Script" id=3]
+[ext_resource path="res://addons/audio_booth/source/music/MusicBooth.gd" type="Script" id=4]
+[ext_resource path="res://addons/audio_booth/source/music/containers/TrackContainer.gd" type="Script" id=5]
+[ext_resource path="res://addons/audio_booth/source/music/Song.gd" type="Script" id=6]
+[ext_resource path="res://addons/audio_booth/source/sfx/SoundBooth.gd" type="Script" id=7]
+
+[node name="AudioPlayer" type="Node"]
+script = ExtResource( 3 )
+
+[node name="SoundBooth" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="AmbieBooth" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="MusicBooth" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="SnailyTown" type="Node" parent="MusicBooth"]
+script = ExtResource( 6 )
+tempo = 120.0
+beats = 4
+
+[node name="TrackContainer" type="Node" parent="MusicBooth/SnailyTown"]
+script = ExtResource( 5 )
+
+[node name="Track0" type="AudioStreamPlayer" parent="MusicBooth/SnailyTown/TrackContainer"]
+stream = ExtResource( 2 )
+
+[node name="Track1" type="AudioStreamPlayer" parent="MusicBooth/SnailyTown/TrackContainer"]
+stream = ExtResource( 1 )

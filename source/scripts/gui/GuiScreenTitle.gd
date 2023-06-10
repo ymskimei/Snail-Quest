@@ -12,7 +12,7 @@ func _ready():
 	yield(anim, "animation_finished")
 	anim.play("GuiLogoIdle")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var cam = $World/SpringArm
 	cam.rotation.x = lerp(cam.rotation.x, Input.get_action_strength("cam_up") / 3 - Input.get_action_strength("cam_down") / 3, 0.1)
 	cam.rotation.y = lerp(cam.rotation.y, Input.get_action_strength("cam_left") / 3 - Input.get_action_strength("cam_right") / 3, 0.1)

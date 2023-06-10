@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/amb_water.ogg-6efa9578686cc668492cd38a0878c1c9.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/ambience/amb_water.ogg"
+dest_files=[ "res://import/amb_water.ogg-6efa9578686cc668492cd38a0878c1c9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

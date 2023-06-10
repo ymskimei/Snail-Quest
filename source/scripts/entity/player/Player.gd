@@ -18,7 +18,6 @@ var cursor = preload("res://source/scenes/gui/gui_aim_cursor.tscn")
 
 signal health_changed
 signal player_killed
-signal player_data(position)
 
 var snap_vector = Vector3.ZERO
 

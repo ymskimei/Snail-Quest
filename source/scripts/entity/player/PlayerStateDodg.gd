@@ -20,26 +20,26 @@ func enter() -> void:
 		elif entity.input.z < 0:
 			entity.animator.play("PlayerRollBack")
 		else:
-			dodge_complete
+			dodge_complete = true
 	else:
 		entity.animator.play("PlayerRollFront")
 	entity.in_shell = true
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	apply_facing(0.3)
+	apply_facing()
 	apply_movement(delta, true, deg2rad(45))
 	apply_gravity(delta)
 	entity.snap_vector = Vector3.DOWN
 	if Input.is_action_just_pressed("action_main") and !shell_jumped:
-		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)
+		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
 		shell_jumped = true
 		return State.JUMP
 	if dodge_complete:
 		if Input.is_action_pressed("action_defense"):
 			return State.HIDE
 		else:
-			AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)
+			AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
 			return State.IDLE
 #	if entity.is_colliding():
 #		Input.start_joy_vibration(0, 1, 1, 0.5)

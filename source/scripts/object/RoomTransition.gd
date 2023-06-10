@@ -8,7 +8,6 @@ onready var coordinates : Vector3
 onready var direction : String
 
 signal goto_room(room, coords, dir)
-signal goto_main
 
 func _ready():
 	room_path = resource.room_path

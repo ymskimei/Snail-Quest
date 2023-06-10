@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/amb_leaves.ogg-482c8577ce201417a512ba015704c2f8.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/ambience/amb_leaves.ogg"
+dest_files=[ "res://import/amb_leaves.ogg-482c8577ce201417a512ba015704c2f8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
