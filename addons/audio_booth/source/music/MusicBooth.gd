@@ -25,6 +25,9 @@ var current_song : Node = null
 onready var songs := {}
 
 func _ready() -> void:
+	reload_songs()
+
+func reload_songs() -> void:
 	for song in get_children():
 		song.connect("beat", self, "_on_beat")
 		song.connect("bar", self, "_on_bar")

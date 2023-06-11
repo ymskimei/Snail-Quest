@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/ost_snailytown_overlayaccomp_day.ogg-505f9347b3cd9ac8f55a43e61957387e.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/music/ost_snailytown_overlayaccomp_day.ogg"
+dest_files=[ "res://import/ost_snailytown_overlayaccomp_day.ogg-505f9347b3cd9ac8f55a43e61957387e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
