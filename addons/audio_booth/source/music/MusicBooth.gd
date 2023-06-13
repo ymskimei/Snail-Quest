@@ -1,7 +1,11 @@
 extends Node
 class_name MusicBooth
 
-enum PLAYMODES { PLAY, LOOP, SHUFFLE }
+enum PLAYMODES {
+	PLAY,
+	LOOP,
+	SHUFFLE
+}
 
 signal song_changed()
 

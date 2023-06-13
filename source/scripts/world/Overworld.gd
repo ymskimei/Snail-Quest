@@ -1,10 +1,10 @@
 extends Node
 
-var m_booth = AudioPlayer.music_booth
-var a_booth = AudioPlayer.ambie_booth
+var m_booth: MusicBooth  = AudioPlayer.music_booth
+var a_booth: MusicBooth = AudioPlayer.ambie_booth
 
-var enemy_near : bool
-var enemy_pursuing : bool
+var enemy_near: bool
+var enemy_pursuing: bool
 
 func _ready():
 	overworld_ambience()
@@ -13,16 +13,9 @@ func overworld_ambience():
 	AudioPlayer.init_ambience(AudioPlayer.amb_overworld)
 	a_booth.play_song("Overworld", 1.0)
 
-func get_percentage(value: float, min_y: float, max_y: float) -> float:
-	var percentage = clamp(value, min_y, max_y)
-	return (percentage - min_y) / (max_y - min_y)
-
-func lerp_gain(percentage: float, min_gain: float, max_gain: float) -> float:
-	return min_gain + (max_gain - min_gain) * percentage
-
 func set_ambience_eq():
-	var y_max = 512
-	var y_min = -256
+	var y_max = 256
+	var y_min = -128
 	var audio_listener = GlobalManager.camera.camera_lens.get_global_translation().y
 	var amount = clamp((audio_listener - y_min) / (y_max - y_min), 0, 1)
 	var hz_32 = lerp(-1.0, -16.0, amount)
@@ -49,20 +42,31 @@ func set_ambience_eq():
 
 func _physics_process(delta):
 	set_ambience_eq()
-#	if GlobalManager.player.near_enemy:
-#		if m_booth.is_song_playing("LayersTest"):
-#			m_booth.play_track(2, 5.0)
-#			m_booth.play_track(3, 5.0)
-#	else:
-#		if m_booth.is_song_playing("LayersTest"):
-#			m_booth.stop_track(2, 5.0)
-#			m_booth.stop_track(3, 5.0)
+	if m_booth.is_song_playing("LayersTest"):
+		if GlobalManager.player.enemy_detected:
+			init_combat_tracks()
+		else:
+			silence_combat_tracks()
 
 func _on_SnailyTown_body_entered(body):
 	if body is Player:
 		AudioPlayer.init_song(AudioPlayer.ost_layerstest)
 		m_booth.play_song("LayersTest", 5.0)
 		m_booth.play_track(1, 5.0)
+		#silence_combat_tracks()
+		m_booth.play_track(2, 0.0)
+		m_booth.play_track(3, 0.0)
+		m_booth.play_track(4, 0.0)
+
+func init_combat_tracks():
+	m_booth._get_song("LayersTest").get_child(0).get_child(2).set_volume_db(0.0)
+	m_booth._get_song("LayersTest").get_child(0).get_child(3).set_volume_db(0.0)
+	m_booth._get_song("LayersTest").get_child(0).get_child(4).set_volume_db(0.0)
+
+func silence_combat_tracks():
+	m_booth._get_song("LayersTest").get_child(0).get_child(2).set_volume_db(-60.0)
+	m_booth._get_song("LayersTest").get_child(0).get_child(3).set_volume_db(-60.0)
+	m_booth._get_song("LayersTest").get_child(0).get_child(4).set_volume_db(-60.0)
 
 func _on_SnailyTown_body_exited(body):
 	if body is Player:

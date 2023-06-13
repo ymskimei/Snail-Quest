@@ -13,6 +13,7 @@ onready var eye_point = $"%EyePoint"
 onready var ray_down = $"%RayDown"
 onready var ray_forward = $"%RayForward"
 onready var jump_check = $"%CheckerFloor"
+onready var danger_area = $DangerArea
 
 var cursor = preload("res://source/scenes/gui/gui_aim_cursor.tscn")
 
@@ -26,7 +27,7 @@ var collider
 
 var targeting : bool
 var target_found : bool
-var near_enemy : bool
+var enemy_detected : bool
 
 var can_move : bool
 var can_interact : bool
@@ -95,20 +96,15 @@ func target_check():
 	var relative_facing = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
 	var max_enemy_distance = 15
 	var max_interactable_distance = 5
-	if target is EnemyParent and target_distance < max_enemy_distance:
-		near_enemy = true
-	else:
-		near_enemy = false
 	if Input.is_action_pressed("cam_lock"):
 		targeting = true
-		if near_enemy or ObjectInteractable and target_distance < max_interactable_distance:
+		if enemy_detected or ObjectInteractable and target_distance < max_interactable_distance:
 			target_found = true
 		else:
 			target_found = false
 	else:
 		target = MathHelper.find_target(self, "target")
 		targeting = false
-
 	if target is ObjectInteractable and target_distance < max_interactable_distance and relative_facing >= 0:
 		can_interact = true
 		set_interaction_text(target.get_interaction_text())
@@ -119,6 +115,14 @@ func target_check():
 		can_interact = false
 		set_interaction_text("")
 
+func _on_DangerArea_body_entered(body):
+	if body is EnemyParent:
+		enemy_detected = true
+
+func _on_DangerArea_body_exited(body):
+	if body is EnemyParent:
+		enemy_detected = false
+
 func set_interaction_text(text):
 	if !text:
 		interaction_label.set_text("")
@@ -127,3 +131,6 @@ func set_interaction_text(text):
 		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
 		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
 		interaction_label.set_visible(true)
+
+
+
