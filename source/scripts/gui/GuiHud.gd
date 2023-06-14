@@ -49,7 +49,7 @@ func _process(_delta):
 	if !equipment.items[0] == tools.items[3]:
 		display_up.is_deselected_animation()
 
-func _unhandled_input(event):
+func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pad_right"):
 		display_right.destination.set_item(0, display_right.contained_item)
 		display_right.is_selected_animation()
@@ -68,7 +68,7 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("cam_zoom") or Input.is_action_just_pressed("cam_lock"):
 		reveal_cam()
 
-func update_item_slot_display(item_index):
+func update_item_slot_display():
 	tool_slot.item_display(equipment.items[0])
 	item_slot_1.item_display(equipment.items[1])
 	item_slot_2.item_display(equipment.items[2])
@@ -79,12 +79,12 @@ func update_item_slot_display(item_index):
 
 func update_inventory_display():
 	for item_index in equipment.items.size():
-		update_item_slot_display(item_index)
+		update_item_slot_display()
 
 func on_items_updated(index):
 	reveal_pad()
 	for item_index in index:
-		update_item_slot_display(item_index)
+		update_item_slot_display()
 
 func update_cam_display():
 	if is_instance_valid(GlobalManager.camera):

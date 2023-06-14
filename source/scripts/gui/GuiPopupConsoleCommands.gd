@@ -56,9 +56,6 @@ func on_command_quit(_console, _args):
 	get_tree().quit()
 
 func on_command_restart(_console, _args):
-#	var restart = get_tree().change_scene("res://assets/gui/gui_screen_title.tscn")
-#	if restart != 0:
-#		command_console.send_message("[color=#EA6A59]Title screen is missing[/color]\n")
 	get_tree().reload_current_scene()
 
 func on_command_time(_console, args):

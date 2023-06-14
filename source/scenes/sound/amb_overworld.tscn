@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/sound/ambience/amb_rain.ogg" type="AudioStream" id=1]
+[ext_resource path="res://assets/sound/ambience/amb_wind.ogg" type="AudioStream" id=2]
+[ext_resource path="res://addons/audio_booth/source/music/Song.gd" type="Script" id=3]
+[ext_resource path="res://addons/audio_booth/source/music/containers/TrackContainer.gd" type="Script" id=4]
+[ext_resource path="res://assets/sound/ambience/amb_thunder.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/sound/ambience/amb_water.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/sound/ambience/amb_leaves.ogg" type="AudioStream" id=7]
+
+[node name="Overworld" type="Node"]
+script = ExtResource( 3 )
+tempo = 120.0
+beats = 4
+
+[node name="TrackContainer" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="Track0Leaves" type="AudioStreamPlayer" parent="TrackContainer"]
+stream = ExtResource( 7 )
+bus = "Ambience"
+
+[node name="Track1Wind" type="AudioStreamPlayer" parent="TrackContainer"]
+stream = ExtResource( 2 )
+volume_db = -32.0
+bus = "Ambience"
+
+[node name="Track2Rain" type="AudioStreamPlayer" parent="TrackContainer"]
+stream = ExtResource( 1 )
+volume_db = -32.0
+bus = "Ambience"
+
+[node name="Track3Thunder" type="AudioStreamPlayer" parent="TrackContainer"]
+stream = ExtResource( 5 )
+volume_db = -32.0
+bus = "Ambience"
+
+[node name="Track4Water" type="AudioStreamPlayer" parent="TrackContainer"]
+stream = ExtResource( 6 )
+volume_db = -32.0
+bus = "Ambience"

@@ -37,7 +37,7 @@ func _ready():
 func input(_event: InputEvent) -> int:
 	return State.NULL
 
-func physics_process(delta: float) -> int:
+func physics_process(_delta: float) -> int:
 	entity.input = get_joy_input()
 	entity.direction = get_direction()
 	apply_aim_cursor()
@@ -54,7 +54,7 @@ func get_direction():
 	entity.direction = -entity.input.rotated(Vector3.UP, entity.player_cam.rotation.y)
 	return entity.direction
 
-func apply_facing(turn_speed):
+func apply_facing():
 	if entity.targeting:
 		if is_instance_valid(entity.target) and entity.target_found:
 			var target = entity.target.transform.origin
@@ -71,7 +71,6 @@ func apply_facing(turn_speed):
 			entity.global_transform.basis.get_euler().x = 0
 			entity.global_transform.basis.get_euler().z = 0
 		entity.global_transform = entity.global_transform.interpolate_with(tform, 0.3)
-
 	elif entity.cursor_activated:
 		MathHelper.slerp_look_at(entity, Vector3(GlobalManager.aim_cursor.global_translation.x, entity.transform.origin.y, GlobalManager.aim_cursor.global_translation.z), 0.3)
 		pass

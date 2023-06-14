@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourceMusic.gd" type="Script" id=1]
+[ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_perc_day.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_bass_day.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_bassaccomp_day.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_melodyaccomp_day.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_overlayaccomp_day.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_melody_day.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_melodyaccomp2_day.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_overlay_day.ogg" type="AudioStream" id=9]
+
+[resource]
+script = ExtResource( 1 )
+tempo = 120
+beats = 4
+tracks = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 6 ) ]

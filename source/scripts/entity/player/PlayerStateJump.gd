@@ -24,11 +24,11 @@ func input(_event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	apply_facing(0.65)
+	apply_facing()
 	apply_movement(delta, true, deg2rad(45))
 	apply_gravity(delta)
 	if dodge_roll():
-		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
+		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 		return State.DODG
 	if Input.is_action_pressed("action_main") and can_jump:
 		entity.snap_vector = Vector3.ZERO

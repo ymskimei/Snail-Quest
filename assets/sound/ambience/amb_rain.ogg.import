@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/amb_rain.ogg-ed16676649f116b37c4b72fa4965c1e2.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/ambience/amb_rain.ogg"
+dest_files=[ "res://import/amb_rain.ogg-ed16676649f116b37c4b72fa4965c1e2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

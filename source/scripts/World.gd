@@ -81,9 +81,9 @@ func load_chunks():
 	current_chunks.append_array(new_current.keys())
 
 #I did this part last night and I think it probably works or something
-func _get_player_chunk(player_pos):
-	var coords_x = floor(player_pos.x / GlobalManager.chunk_size)
-	var coords_z = floor(player_pos.z / GlobalManager.chunk_size)
+func _get_player_chunk(pos):
+	var coords_x = floor(pos.x / GlobalManager.chunk_size)
+	var coords_z = floor(pos.z / GlobalManager.chunk_size)
 	var chunk_coords = Vector2(coords_x, coords_z)
 	return chunk_coords
 

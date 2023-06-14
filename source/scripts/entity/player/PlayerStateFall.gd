@@ -10,7 +10,7 @@ func enter() -> void:
 
 func input(_event: InputEvent) -> int:
 	if Input.is_action_just_pressed("action_defense"):
-		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
+		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 		if entity.input == Vector3.ZERO:
 			return State.HIDE
 		else:
@@ -21,11 +21,11 @@ func input(_event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	apply_facing(0.4)
+	apply_facing()
 	apply_movement(delta, true, deg2rad(45))
 	apply_gravity(delta)
 	if dodge_roll():
-		AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
+		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 		return State.DODG
 	entity.snap_vector = Vector3.DOWN
 	if entity.input == Vector3.ZERO:

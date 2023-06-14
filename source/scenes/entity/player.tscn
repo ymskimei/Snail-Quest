@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://assets/materials/entity/player_eyes.tres" type="Material" id=1]
 [ext_resource path="res://source/scripts/entity/player/Player.gd" type="Script" id=2]
@@ -271,6 +271,8 @@ tracks/21/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 
+[sub_resource type="SphereShape" id=31]
+
 [node name="Player" type="KinematicBody"]
 collision_mask = 13
 script = ExtResource( 2 )
@@ -527,4 +529,12 @@ anims/RESET = SubResource( 29 )
 
 [node name="DebugHealthBar" parent="." instance=ExtResource( 29 )]
 
+[node name="DangerArea" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="DangerArea"]
+transform = Transform( 15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0 )
+shape = SubResource( 31 )
+
 [connection signal="area_entered" from="AffectArea" to="." method="_on_Area_area_entered"]
+[connection signal="body_entered" from="DangerArea" to="." method="_on_DangerArea_body_entered"]
+[connection signal="body_exited" from="DangerArea" to="." method="_on_DangerArea_body_exited"]

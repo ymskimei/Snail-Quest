@@ -24,7 +24,7 @@ enum State {
 func enter() -> void:
 	look_dir = entity.rotation.y
 
-func physics_process(delta: float) -> int:
+func physics_process(_delta: float) -> int:
 	check_target_loc()
 	return State.NULL
 

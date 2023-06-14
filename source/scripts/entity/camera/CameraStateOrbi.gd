@@ -4,13 +4,13 @@ export var follow_speed = 3.5
 export var rotation_speed = 10
 export var offset = Vector3(0, 0.8, 0)
 
-export var lock_high_arm = 0.05
+export var lock_high_arm = 0.0
 export var lock_high_lens = 0.3
 
 export var lock_low_arm = -0.85
 export var lock_low_lens = -0.025
 
-export var lock_default_arm = -0.3
+export var lock_default_arm = -0.2
 export var lock_default_lens = 0.075
 
 export var zoom_normal = 40

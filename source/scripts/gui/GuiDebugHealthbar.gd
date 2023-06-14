@@ -9,8 +9,8 @@ var new_value
 func _ready():
 	texture = $Viewport.get_texture()
 
-func _process(delta):
+func _process(_delta):
 	bar.value = lerp(bar.value, new_value, 0.2)
 
-func update_bar(amount, full):
+func update_bar(amount):
 	new_value = amount
