@@ -42,11 +42,11 @@ func set_ambience_eq():
 
 func _physics_process(delta):
 	set_ambience_eq()
-	if m_booth.is_song_playing("LayersTest"):
-		if GlobalManager.player.enemy_detected:
-			init_combat_tracks()
-		else:
-			silence_combat_tracks()
+#	if m_booth.is_song_playing("LayersTest"):
+#		if GlobalManager.player.enemy_detected:
+#			init_combat_tracks()
+#		else:
+#			silence_combat_tracks()
 
 func _on_SnailyTown_body_entered(body):
 	if body is Player:
@@ -54,19 +54,19 @@ func _on_SnailyTown_body_entered(body):
 		m_booth.play_song("LayersTest", 5.0)
 		m_booth.play_track(1, 5.0)
 		#silence_combat_tracks()
-		m_booth.play_track(2, 0.0)
-		m_booth.play_track(3, 0.0)
-		m_booth.play_track(4, 0.0)
-
-func init_combat_tracks():
-	m_booth._get_song("LayersTest").get_child(0).get_child(2).set_volume_db(0.0)
-	m_booth._get_song("LayersTest").get_child(0).get_child(3).set_volume_db(0.0)
-	m_booth._get_song("LayersTest").get_child(0).get_child(4).set_volume_db(0.0)
-
-func silence_combat_tracks():
-	m_booth._get_song("LayersTest").get_child(0).get_child(2).set_volume_db(-60.0)
-	m_booth._get_song("LayersTest").get_child(0).get_child(3).set_volume_db(-60.0)
-	m_booth._get_song("LayersTest").get_child(0).get_child(4).set_volume_db(-60.0)
+#		m_booth.play_track(2, 0.0)
+#		m_booth.play_track(3, 0.0)
+#		m_booth.play_track(4, 0.0)
+#
+#func init_combat_tracks():
+#	m_booth._get_song("LayersTest").get_child(0).get_child(2).set_volume_db(0.0)
+#	m_booth._get_song("LayersTest").get_child(0).get_child(3).set_volume_db(0.0)
+#	m_booth._get_song("LayersTest").get_child(0).get_child(4).set_volume_db(0.0)
+#
+#func silence_combat_tracks():
+#	m_booth._get_song("LayersTest").get_child(0).get_child(2).set_volume_db(-60.0)
+#	m_booth._get_song("LayersTest").get_child(0).get_child(3).set_volume_db(-60.0)
+#	m_booth._get_song("LayersTest").get_child(0).get_child(4).set_volume_db(-60.0)
 
 func _on_SnailyTown_body_exited(body):
 	if body is Player:
