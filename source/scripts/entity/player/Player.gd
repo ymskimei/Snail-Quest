@@ -2,6 +2,7 @@ class_name Player
 extends EntityParent
 
 export(Resource) var equipped
+export(Resource) var skin
 
 onready var player_cam = GlobalManager.camera
 onready var avatar = $PlayerAvatar
@@ -14,6 +15,8 @@ onready var ray_down = $"%RayDown"
 onready var ray_forward = $"%RayForward"
 onready var jump_check = $"%CheckerFloor"
 onready var danger_area = $DangerArea
+
+onready var is_active_player = false
 
 var cursor = preload("res://source/scenes/gui/gui_aim_cursor.tscn")
 
@@ -42,6 +45,10 @@ var target = null
 var cursor_pos : Vector3
 
 func _ready():
+	$"%MeshInstance".set_mesh(skin.mesh)
+	$"%MeshInstance".set_surface_material(0, skin.body_tex)
+	$"%MeshInstance".set_surface_material(1, skin.shell_tex)
+	$"%MeshInstance".set_surface_material(2, skin.eyes_tex)
 	states.ready(self)
 	can_move = true
 	set_interaction_text("")

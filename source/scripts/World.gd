@@ -43,7 +43,6 @@ func _process(_delta):
 func add_chunk(chunk: Chunk):
 	var instance = chunk.resource.instance()
 	instance.translation = chunk.real_pos()
-
 	current_instances[chunk.chunk_coord] = instance
 	add_child(instance)
 
@@ -57,7 +56,6 @@ func difference(arr1, arr2):
 func load_chunks():
 	var current_chunk = _get_player_chunk(GlobalManager.player.global_translation)
 	var new_current = {} # Being a dictionary means we don't have duplicates
-
 	for x in range(render_radius):
 		for z in range(render_radius):
 			if pow(x, 2) + pow(z, 2) < pow(render_radius, 2):
@@ -65,18 +63,15 @@ func load_chunks():
 				new_current[Vector2(+x+current_chunk.x, -z+current_chunk.y)] = null
 				new_current[Vector2(-x+current_chunk.x, +z+current_chunk.y)] = null
 				new_current[Vector2(-x+current_chunk.x, -z+current_chunk.y)] = null
-			
 	for pos in difference(current_chunks, new_current.keys()): # only in current / remove
 		if current_instances.has(pos):
 			var instance = current_instances[pos]
 			current_instances.erase(pos)
 			instance.queue_free()
-
 	for pos in difference(new_current.keys(), current_chunks): # only in new / add
 		if all_chunks.has(pos):
 			var chunk = all_chunks[pos]
 			add_chunk(chunk)
-
 	current_chunks.clear()
 	current_chunks.append_array(new_current.keys())
 
@@ -139,3 +134,21 @@ func check_for_transitions(room):
 				child.connect("goto_room", self, "_on_goto_room")
 				child.connect("goto_main", self, "_on_goto_main")
 
+func _unhandled_input(event):
+	if Input.is_action_just_pressed("swap"):
+		if $Player4.is_active_player:
+			$Player4.is_active_player = false
+			$Player.is_active_player = true
+		elif $Player3.is_active_player:
+			$Player3.is_active_player = false
+			$Player4.is_active_player = true
+		elif $Player2.is_active_player:
+			$Player2.is_active_player = false
+			$Player3.is_active_player = true
+		elif $Player.is_active_player:
+			$Player.is_active_player = false
+			$Player2.is_active_player = true
+		else:
+			$Player.is_active_player = true
+		GlobalManager.camera.update_player_target()
+		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_reset)

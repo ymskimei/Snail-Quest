@@ -18,6 +18,12 @@ func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
 	find_camera_lock_points()
 
+func update_player_target():
+	for p in get_parent().get_children():
+		if p is Player:
+			if p.is_active_player:
+				player = p
+
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
 

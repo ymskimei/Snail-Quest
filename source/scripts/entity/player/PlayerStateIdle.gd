@@ -9,9 +9,9 @@ func enter() -> void:
 	entity.animator.play("PlayerIdleDefault")
 
 func input(_event: InputEvent) -> int:
-	if !entity.can_interact and Input.is_action_just_pressed("action_main") and entity.ray_down.is_colliding():
+	if entity.is_active_player and !entity.can_interact and Input.is_action_just_pressed("action_main") and entity.ray_down.is_colliding():
 		return State.JUMP
-	if Input.is_action_just_pressed("action_defense") and entity.ray_down.is_colliding():
+	if entity.is_active_player and Input.is_action_just_pressed("action_defense") and entity.ray_down.is_colliding():
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 		return State.HIDE
 	needle()
@@ -26,7 +26,7 @@ func physics_process(delta: float) -> int:
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 		return State.DODG
 	entity.snap_vector = Vector3.DOWN
-	if entity.input != Vector3.ZERO and entity.is_on_floor():
+	if entity.is_active_player and entity.input != Vector3.ZERO and entity.is_on_floor():
 		return State.MOVE
 	elif !entity.is_on_floor():
 		return State.FALL

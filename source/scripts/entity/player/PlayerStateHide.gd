@@ -10,11 +10,11 @@ func enter() -> void:
 	entity.in_shell = true
 
 func input(_event: InputEvent) -> int:
-	if Input.is_action_just_released("action_defense"):
+	if entity.is_active_player and Input.is_action_just_released("action_defense"):
 		entity.animator.play_backwards("PlayerTuckDefault")
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
 		return State.IDLE
-	if Input.is_action_just_pressed("action_main") and !shell_jumped:
+	if entity.is_active_player and Input.is_action_just_pressed("action_main") and !shell_jumped:
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
 		shell_jumped = true
 		return State.JUMP

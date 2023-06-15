@@ -9,7 +9,7 @@ func enter() -> void:
 	entity.animator.play("PlayerFallDefault")
 
 func input(_event: InputEvent) -> int:
-	if Input.is_action_just_pressed("action_defense"):
+	if entity.is_active_player and Input.is_action_just_pressed("action_defense"):
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 		if entity.input == Vector3.ZERO:
 			return State.HIDE
@@ -35,7 +35,7 @@ func physics_process(delta: float) -> int:
 		entity.velocity.x += entity.velocity.x * delta
 		entity.velocity.z += entity.velocity.z * delta
 	if entity.is_on_floor():
-		if entity.input != Vector3.ZERO:
+		if entity.is_active_player and entity.input != Vector3.ZERO:
 			return State.MOVE
 		else:
 			return State.IDLE

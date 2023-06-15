@@ -76,7 +76,7 @@ func apply_facing():
 		pass
 
 func apply_movement(delta, no_sliding, angle):
-	if entity.can_move:
+	if entity.is_active_player and entity.can_move:
 		if entity.direction != Vector3.ZERO:
 			entity.velocity.x = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 8 * delta).x
 			entity.velocity.z = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 8 * delta).z
@@ -87,7 +87,7 @@ func apply_gravity(delta):
 	entity.velocity.y = clamp(entity.velocity.y, -entity.gravity, entity.jump)
 
 func dodge_roll():
-	if entity.can_move:
+	if entity.is_active_player and entity.can_move:
 		if Input.is_action_just_pressed("joy_up"):
 			input_up += 1
 			timer.start()

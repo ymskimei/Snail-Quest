@@ -30,7 +30,7 @@ func physics_process(delta: float) -> int:
 	if dodge_roll():
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 		return State.DODG
-	if Input.is_action_pressed("action_main") and can_jump:
+	if entity.is_active_player and Input.is_action_pressed("action_main") and can_jump:
 		entity.snap_vector = Vector3.ZERO
 		entity.velocity.y += (entity.jump * 50) * delta / 2
 	else:

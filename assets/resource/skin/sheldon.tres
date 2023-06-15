@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourcePlayerSkin.gd" type="Script" id=1]
+[ext_resource path="res://assets/model/snail.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/materials/entity/player_body.tres" type="Material" id=3]
+[ext_resource path="res://assets/materials/entity/player_eyes_squint.tres" type="Material" id=4]
+[ext_resource path="res://assets/materials/entity/player_eyes.tres" type="Material" id=5]
+[ext_resource path="res://assets/materials/entity/player_shell.tres" type="Material" id=6]
+[ext_resource path="res://assets/materials/entity/player_eyes_blink.tres" type="Material" id=7]
+
+[resource]
+script = ExtResource( 1 )
+mesh = ExtResource( 2 )
+shell_tex = ExtResource( 6 )
+body_tex = ExtResource( 3 )
+eyes_tex = ExtResource( 5 )
+eyes_blink_tex = ExtResource( 7 )
+eyes_squint_tex = ExtResource( 4 )

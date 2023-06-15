@@ -31,12 +31,12 @@ func physics_process(delta: float) -> int:
 	apply_movement(delta, true, deg2rad(45))
 	apply_gravity(delta)
 	entity.snap_vector = Vector3.DOWN
-	if Input.is_action_just_pressed("action_main") and !shell_jumped:
+	if entity.is_active_player and Input.is_action_just_pressed("action_main") and !shell_jumped:
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
 		shell_jumped = true
 		return State.JUMP
 	if dodge_complete:
-		if Input.is_action_pressed("action_defense"):
+		if entity.is_active_player and Input.is_action_pressed("action_defense"):
 			return State.HIDE
 		else:
 			AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
