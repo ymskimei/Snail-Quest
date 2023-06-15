@@ -161,7 +161,7 @@ resource_name = "New Anim"
 
 [sub_resource type="CylinderShape" id=6]
 
-[node name="trilobite" type="KinematicBody" groups=["enemy", "target"]]
+[node name="trilobite" type="RigidBody" groups=["enemy", "target"]]
 script = ExtResource( 3 )
 
 [node name="StateController" type="Node" parent="."]

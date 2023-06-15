@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/ost_snailytown_melodyaccomp2_day.ogg-d77758c847ce83c7596201d8b5dd9a01.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/music/snaily_town/ost_snailytown_melodyaccomp2_day.ogg"
+dest_files=[ "res://import/ost_snailytown_melodyaccomp2_day.ogg-d77758c847ce83c7596201d8b5dd9a01.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

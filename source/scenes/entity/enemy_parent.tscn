@@ -16,7 +16,6 @@
 [ext_resource path="res://assets/resource/animation/PawnFall.tres" type="Animation" id=15]
 [ext_resource path="res://assets/resource/animation/PawnIdle.tres" type="Animation" id=16]
 
-
 [sub_resource type="ArrayMesh" id=5]
 resource_name = "lily_pawn_Plane"
 surfaces/0 = {
@@ -80,7 +79,7 @@ tracks/2/keys = {
 "values": [ Vector3( 1, 1, 1 ) ]
 }
 
-[node name="EnemyParent" type="KinematicBody" groups=["enemy", "target"]]
+[node name="EnemyParent" type="RigidBody" groups=["enemy", "target"]]
 collision_mask = 15
 script = ExtResource( 2 )
 resource = ExtResource( 4 )
@@ -166,5 +165,4 @@ anims/RESET = SubResource( 9 )
 [connection signal="body_entered" from="SightArea" to="." method="_on_Area_body_entered"]
 [connection signal="body_exited" from="SightArea" to="." method="_on_Area_body_exited"]
 [connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_NavigationAgent_velocity_computed"]
-[connection signal="timeout" from="LookingTimer" to="." method="_on_LookingTimer_timeout"]
 [connection signal="timeout" from="FollowTimer" to="." method="_on_FollowTimer_timeout"]

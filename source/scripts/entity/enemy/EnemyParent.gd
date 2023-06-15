@@ -23,9 +23,9 @@ func _ready():
 	attack_area.monitorable = false
 	states.ready(self)
 
-func _physics_process(delta):
-	if states != null:
-		states.physics_process(delta)
+#func _physics_process(delta):
+#	if states != null:
+#		states.physics_process(delta)
 
 func inflict_damage(damage_amount):
 	set_current_health(health - damage_amount)
@@ -58,7 +58,8 @@ func _on_Area_body_exited(body):
 		follow_timer.start()
 
 func _on_NavigationAgent_velocity_computed(safe_velocity):
-	move_and_collide(safe_velocity)
+	#move_and_collide(safe_velocity)
+	pass
 
 func _on_FollowTimer_timeout():
 	print("escaped")

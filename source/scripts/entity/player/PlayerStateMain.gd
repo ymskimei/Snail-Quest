@@ -39,10 +39,13 @@ func input(_event: InputEvent) -> int:
 
 func physics_process(_delta: float) -> int:
 	entity.input = get_joy_input()
-	entity.direction = get_direction()
+#	entity.direction = get_direction()
 	apply_aim_cursor()
-	if entity.is_on_floor():
+	if entity.ray_down.is_colliding():
 		shell_jumped = false
+	return State.NULL
+
+func integrate_forces(state) -> int:
 	return State.NULL
 
 func get_joy_input():
@@ -54,41 +57,48 @@ func get_joy_input():
 		input /= input_length
 	return input
 
-func get_direction():
-	entity.direction = -entity.input.rotated(Vector3.UP, entity.player_cam.rotation.y)
-	return entity.direction
+#func get_direction():
+#	entity.direction = -entity.input.rotated(Vector3.UP, entity.player_cam.rotation.y)
+#	return entity.direction
+#
+#func apply_facing():
+#	if entity.targeting:
+#		if is_instance_valid(entity.target) and entity.target_found:
+#			var target = entity.target.transform.origin
+#			MathHelper.slerp_look_at(entity, Vector3(target.x, entity.transform.origin.y, target.z), 0.2)
+#	elif !entity.is_on_wall() and entity.can_move:
+#		if entity.velocity != Vector3.ZERO:
+#			var look_direction = atan2(-entity.velocity.x, -entity.velocity.z)
+#			entity.rotation.y = lerp_angle(entity.rotation.y, look_direction, 0.2)
+#		var tform = entity.global_transform
+#		if entity.ray_down.is_colliding():
+#			var normal = entity.ray_down.get_collision_normal()
+#			tform = MathHelper.apply_surface_align(entity.global_transform, normal)
+#		else:
+#			entity.global_transform.basis.get_euler().x = 0
+#			entity.global_transform.basis.get_euler().z = 0
+#		entity.global_transform = entity.global_transform.interpolate_with(tform, 0.3)
+#	elif entity.cursor_activated:
+#		MathHelper.slerp_look_at(entity, Vector3(GlobalManager.aim_cursor.global_translation.x, entity.transform.origin.y, GlobalManager.aim_cursor.global_translation.z), 0.3)
+#		pass
 
-func apply_facing():
-	if entity.targeting:
-		if is_instance_valid(entity.target) and entity.target_found:
-			var target = entity.target.transform.origin
-			MathHelper.slerp_look_at(entity, Vector3(target.x, entity.transform.origin.y, target.z), 0.2)
-	elif !entity.is_on_wall() and entity.can_move:
-		if entity.velocity != Vector3.ZERO:
-			var look_direction = atan2(-entity.velocity.x, -entity.velocity.z)
-			entity.rotation.y = lerp_angle(entity.rotation.y, look_direction, 0.2)
-		var tform = entity.global_transform
-		if entity.ray_down.is_colliding():
-			var normal = entity.ray_down.get_collision_normal()
-			tform = MathHelper.apply_surface_align(entity.global_transform, normal)
-		else:
-			entity.global_transform.basis.get_euler().x = 0
-			entity.global_transform.basis.get_euler().z = 0
-		entity.global_transform = entity.global_transform.interpolate_with(tform, 0.3)
-	elif entity.cursor_activated:
-		MathHelper.slerp_look_at(entity, Vector3(GlobalManager.aim_cursor.global_translation.x, entity.transform.origin.y, GlobalManager.aim_cursor.global_translation.z), 0.3)
-		pass
-
-func apply_movement(delta, no_sliding, angle):
+func apply_movement(delta):
 	if entity.is_active_player and entity.can_move:
-		if entity.direction != Vector3.ZERO:
-			entity.velocity.x = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 8 * delta).x
-			entity.velocity.z = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 8 * delta).z
-	entity.velocity = entity.move_and_slide_with_snap(entity.velocity, entity.snap_vector, Vector3.UP, no_sliding, 4, angle)
+		var x = -entity.input.rotated(Vector3.UP, entity.player_cam.rotation.y).x * entity.speed * 1.5
+		var y = entity.get_linear_velocity().y
+		var z = -entity.input.rotated(Vector3.UP, entity.player_cam.rotation.y).z * entity.speed * 1.5
+		entity.set_linear_velocity(entity.speed * Vector3(x, y, z) * delta * 8)
+#
+#func apply_movement(delta, no_sliding, angle):
+#	if entity.is_active_player and entity.can_move:
+#		if entity.direction != Vector3.ZERO:
+#			entity.velocity.x = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 8 * delta).x
+#			entity.velocity.z = entity.velocity.move_toward(entity.direction * entity.speed, entity.acceleration * 8 * delta).z
+#	entity.velocity = entity.move_and_slide_with_snap(entity.velocity, entity.snap_vector, Vector3.UP, no_sliding, 4, angle)
 
-func apply_gravity(delta):
-	entity.velocity.y += -entity.gravity * delta
-	entity.velocity.y = clamp(entity.velocity.y, -entity.gravity, entity.jump)
+#func apply_gravity(delta):
+#	entity.velocity.y += -entity.gravity * delta
+#	entity.velocity.y = clamp(entity.velocity.y, -entity.gravity, entity.jump)
 
 func dodge_roll():
 	if entity.is_active_player and entity.can_move:

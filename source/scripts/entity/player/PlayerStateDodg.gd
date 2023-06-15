@@ -27,9 +27,9 @@ func enter() -> void:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	apply_facing()
-	apply_movement(delta, true, deg2rad(45))
-	apply_gravity(delta)
+	#apply_facing()
+	apply_movement(delta)
+	#apply_gravity(delta)
 	entity.snap_vector = Vector3.DOWN
 	if entity.is_active_player and Input.is_action_just_pressed("action_main") and !shell_jumped:
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
@@ -44,6 +44,10 @@ func physics_process(delta: float) -> int:
 #	if entity.is_colliding():
 #		Input.start_joy_vibration(0, 1, 1, 0.5)
 #		on_dodge_timer()
+	return State.NULL
+
+func integrate_forces(state) -> int:
+	.integrate_forces(state)
 	return State.NULL
 
 func dodge_timer():

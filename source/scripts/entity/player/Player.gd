@@ -65,6 +65,9 @@ func _physics_process(delta : float) -> void:
 	else:
 		eye_point.visible = true
 
+func _integrate_forces(state) -> void:
+	states.integrate_forces(state)
+
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
 

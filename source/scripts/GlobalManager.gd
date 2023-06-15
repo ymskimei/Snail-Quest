@@ -2,7 +2,7 @@ extends Node
 
 var version_number = "0.3.0-pre-alpha"
 
-var player : KinematicBody
+var player : RigidBody
 var aim_cursor : Spatial
 var camera : SpringArm
 var play_time : Node

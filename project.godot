@@ -94,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/enemy/EnemyStateMain.gd"
 }, {
-"base": "KinematicBody",
+"base": "RigidBody",
 "class": "EntityParent",
 "language": "GDScript",
 "path": "res://source/scripts/entity/EntityParent.gd"
@@ -613,6 +613,7 @@ swap={
 3d/smooth_trimesh_collision=true
 common/enable_pause_aware_picking=true
 3d/physics_engine="Bullet"
+3d/default_gravity=10.0
 
 [rendering]
 
