@@ -46,9 +46,13 @@ func physics_process(_delta: float) -> int:
 	return State.NULL
 
 func get_joy_input():
-	entity.input.x = Input.get_action_strength("joy_left") - Input.get_action_strength("joy_right")
-	entity.input.z = Input.get_action_strength("joy_up") - Input.get_action_strength("joy_down")
-	return entity.input.normalized()
+	var input = entity.input
+	input.x = Input.get_action_strength("joy_left") - Input.get_action_strength("joy_right")
+	input.z = Input.get_action_strength("joy_up") - Input.get_action_strength("joy_down")
+	var input_length = input.length()
+	if input_length > 1:
+		input /= input_length
+	return input
 
 func get_direction():
 	entity.direction = -entity.input.rotated(Vector3.UP, entity.player_cam.rotation.y)

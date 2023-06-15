@@ -25,6 +25,7 @@ func _ready():
 	check_for_transitions(room_current)
 	GlobalManager.game_time.set_time(480) #temporary time set
 	register_chunks()
+	$Player.is_active_player = true
 
 #The chunk stuff initiates here
 func register_chunks():
