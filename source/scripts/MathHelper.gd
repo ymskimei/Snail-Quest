@@ -1,5 +1,12 @@
 extends Node
 
+func rigid_look_at(state, position, target):
+	var up_dir = Vector3(0, 1, 0)
+	var cur_dir = position.basis.xform(Vector3(0, 0, 1))
+	var target_dir = (target - position.origin).normalized()
+	var rotation_angle = acos(cur_dir.x) - acos(target_dir.x)
+	state.set_angular_velocity(up_dir * (rotation_angle / state.get_step()))
+
 func safe_look_at(spatial : Spatial, target : Vector3) -> void:
 	var origin : Vector3 = spatial.global_transform.origin
 	var v_z := (origin - target).normalized()

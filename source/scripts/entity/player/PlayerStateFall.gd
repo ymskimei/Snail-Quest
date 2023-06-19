@@ -21,19 +21,15 @@ func input(_event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	#apply_facing()
-	apply_movement(delta)
-	#apply_gravity(delta)
 	if dodge_roll():
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 		return State.DODG
-	entity.snap_vector = Vector3.DOWN
-	if entity.input == Vector3.ZERO:
-		entity.velocity.x += entity.velocity.x * air_friction * delta
-		entity.velocity.z += entity.velocity.z * air_friction * delta
-	else:
-		entity.velocity.x += entity.velocity.x * delta
-		entity.velocity.z += entity.velocity.z * delta
+#	if entity.input == Vector3.ZERO:
+#		entity.linear_velocity.x += entity.linear_velocity.x * air_friction * delta
+#		entity.linear_velocity.z += entity.linear_velocity.z * air_friction * delta
+#	else:
+#		entity.linear_velocity.x += entity.linear_velocity.x * delta
+#		entity.linear_velocity.z += entity.linear_velocity.z * delta
 	if entity.ray_down.is_colliding():
 		if entity.is_active_player and entity.input != Vector3.ZERO:
 			return State.MOVE
@@ -43,6 +39,7 @@ func physics_process(delta: float) -> int:
 
 func integrate_forces(state) -> int:
 	.integrate_forces(state)
+	apply_movement()
 	return State.NULL
 
 func exit() -> void:

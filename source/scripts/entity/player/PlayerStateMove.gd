@@ -5,8 +5,6 @@ func enter() -> void:
 	entity.speed = entity.resource.speed
 	entity.animator.set_speed_scale(1)
 	entity.animator.play("PlayerMoveDefault")
-#	var id = entity.skeleton.find_bone("BoneEyeballMainController")
-#	print("Bone ID: ", id)
 
 func input(_event: InputEvent) -> int:
 	if entity.is_active_player and !entity.can_interact and Input.is_action_just_pressed("action_main") and entity.ray_down.is_colliding():
@@ -20,12 +18,9 @@ func input(_event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	#apply_facing()
-	apply_movement(delta)
 	if dodge_roll():
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 		return State.DODG
-	entity.snap_vector = Vector3.DOWN
 	var anim_speed = clamp((abs(entity.velocity.x) + abs(entity.velocity.z)), 0, 2)
 	entity.animator.set_speed_scale(anim_speed)
 	if !entity.ray_down.is_colliding():
@@ -36,4 +31,5 @@ func physics_process(delta: float) -> int:
 
 func integrate_forces(state) -> int:
 	.integrate_forces(state)
+	apply_movement()
 	return State.NULL

@@ -20,19 +20,19 @@ script = ExtResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2156.38, -11.7604, 5968 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2156.38, -11.7604, 5970 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2156.38, -27.6119, 5970 )
 skin = ExtResource( 8 )
 
 [node name="Player2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2154.9, -11.7604, 5970 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2154.9, -27.6119, 5970 )
 skin = ExtResource( 7 )
 
 [node name="Player3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2157.65, -11.7604, 5970 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2157.65, -27.6119, 5970 )
 skin = ExtResource( 10 )
 
 [node name="Player4" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2158.76, -11.7604, 5970 )
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2158.76, -27.6119, 5970 )
 skin = ExtResource( 9 )
 
 [node name="GameTime" type="Node" parent="."]
