@@ -32,5 +32,5 @@ func integrate_forces(state) -> void:
 func unhandled_input(event: InputEvent) -> void:
 	if current_state.has_method("input"):
 		var new_state = current_state.input(event)
-		if new_state != PlayerStateMain.State.NULL:
+		if new_state != 0:
 			change_state(new_state)

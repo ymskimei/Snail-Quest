@@ -31,6 +31,7 @@
 [ext_resource path="res://source/scenes/gui/gui_debug_healthbar.tscn" type="PackedScene" id=29]
 
 [sub_resource type="PhysicsMaterial" id=32]
+friction = 0.5
 
 [sub_resource type="Skin" id=3]
 resource_name = "Skin"
@@ -278,11 +279,12 @@ tracks/21/keys = {
 [node name="Player" type="RigidBody"]
 collision_mask = 13
 mode = 2
-mass = 1.5
+mass = 0.28
 physics_material_override = SubResource( 32 )
 continuous_cd = true
 contacts_reported = 1
 contact_monitor = true
+can_sleep = false
 script = ExtResource( 2 )
 resource = ExtResource( 3 )
 equipped = ExtResource( 27 )

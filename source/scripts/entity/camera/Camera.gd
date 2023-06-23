@@ -14,6 +14,8 @@ func _ready():
 	states.ready(self)
 	GlobalManager.register_camera(self)
 
+
+
 func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
 	find_camera_lock_points()

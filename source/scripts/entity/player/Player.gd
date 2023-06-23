@@ -42,6 +42,8 @@ var target = null
 
 var cursor_pos : Vector3
 
+var last_vel := Vector3.ZERO
+
 func _ready():
 	$"%MeshInstance".set_mesh(skin.mesh)
 	$"%MeshInstance".set_surface_material(0, skin.body_tex)
@@ -65,6 +67,7 @@ func _physics_process(delta : float) -> void:
 
 func _integrate_forces(state) -> void:
 	states.integrate_forces(state)
+	rotation.y = lerp_angle(rotation.y, atan2(-last_vel.x, -last_vel.z), 1.0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)

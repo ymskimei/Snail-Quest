@@ -1,7 +1,7 @@
 class_name PlayerStateMain
 extends Node
 
-var entity: Player
+var entity
 
 var direction := Vector3.ZERO
 
@@ -80,8 +80,11 @@ func apply_movement():
 		direction.x = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).x
 		direction.z = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).z
 		#entity.set_linear_velocity(entity.speed * direction / 7)
-		entity.linear_velocity.x = lerp(entity.linear_velocity.x, entity.speed * direction.x, 0.5)
-		entity.linear_velocity.z = lerp(entity.linear_velocity.z, entity.speed * direction.z, 0.5)
+		if direction != Vector3.ZERO:
+			entity.linear_velocity.x = lerp(entity.linear_velocity.x, entity.speed * direction.x, 0.5)
+			entity.linear_velocity.z = lerp(entity.linear_velocity.z, entity.speed * direction.z, 0.5)
+			if entity.linear_velocity != Vector3.ZERO:
+				entity.last_vel = entity.linear_velocity
 
 func dodge_roll():
 	if entity.is_active_player and entity.can_move:
