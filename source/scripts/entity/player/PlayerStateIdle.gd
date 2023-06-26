@@ -7,9 +7,9 @@ func enter() -> void:
 	entity.animator.play("PlayerIdleDefault")
 
 func input(_event: InputEvent) -> int:
-	if entity.is_active_player and !entity.can_interact and Input.is_action_just_pressed("action_main") and entity.ray_down.is_colliding():
+	if entity.is_active_player and !entity.can_interact and Input.is_action_just_pressed("action_main") and is_on_floor:
 		return State.JUMP
-	if entity.is_active_player and Input.is_action_just_pressed("action_defense") and entity.ray_down.is_colliding():
+	if entity.is_active_player and Input.is_action_just_pressed("action_defense") and is_on_floor:
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 		return State.HIDE
 	needle()
@@ -21,9 +21,9 @@ func physics_process(delta: float) -> int:
 	if dodge_roll():
 		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 		return State.DODG
-	if entity.is_active_player and entity.input != Vector3.ZERO and entity.ray_down.is_colliding():
+	if entity.is_active_player and direction != Vector3.ZERO and is_on_floor:
 		return State.MOVE
-	elif !entity.ray_down.is_colliding():
+	elif !is_on_floor:
 		return State.FALL
 	return State.NULL
 	

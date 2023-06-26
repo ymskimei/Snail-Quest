@@ -12,4 +12,9 @@ func on_Game_Started():
 	print("demo")
 	yield(title_screen, "tree_exited")
 	add_child(world)
-	
+
+#func _unhandled_input(event):
+#	if Input.get_connected_joypads().size() >= 0:
+#		print("controller")
+#	else:
+#		print("keyboard")

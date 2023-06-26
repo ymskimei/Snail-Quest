@@ -11,9 +11,8 @@ onready var states = $StateController
 onready var interaction_label = $Gui/InteractionLabel
 onready var animator = $Animation/AnimationPlayer
 onready var eye_point = $"%EyePoint"
-onready var ray_down = $"%RayDown"
+onready var climbing_rays = $"%ClimbingRays"
 onready var ray_forward = $"%RayForward"
-onready var jump_check = $"%CheckerFloor"
 onready var danger_area = $DangerArea
 
 onready var is_active_player = false

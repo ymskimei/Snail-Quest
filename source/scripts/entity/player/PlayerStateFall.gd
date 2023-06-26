@@ -30,7 +30,7 @@ func physics_process(delta: float) -> int:
 #	else:
 #		entity.linear_velocity.x += entity.linear_velocity.x * delta
 #		entity.linear_velocity.z += entity.linear_velocity.z * delta
-	if entity.ray_down.is_colliding():
+	if is_on_floor:
 		if entity.is_active_player and entity.input != Vector3.ZERO:
 			return State.MOVE
 		else:

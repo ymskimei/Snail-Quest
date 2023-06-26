@@ -13,6 +13,7 @@ var input_right = 0
 var shell_jumped : bool
 var previous_swing : bool
 var action_combat_held : bool
+var is_on_floor : bool
 
 var timer = Timer.new()
 
@@ -41,12 +42,33 @@ func input(_event: InputEvent) -> int:
 
 func physics_process(_delta: float) -> int:
 	apply_aim_cursor()
-	if entity.ray_down.is_colliding():
+	if is_on_floor:
 		shell_jumped = false
 	return State.NULL
 
 func integrate_forces(state) -> int:
+	set_gravity_direction()
 	return State.NULL
+
+func set_gravity_direction():
+	var climbing_normal = Vector3.ZERO
+	var norm_avg = Vector3.ZERO
+	var rays_colliding := 0
+	for ray in entity.climbing_rays.get_children():
+		var r : RayCast = ray
+		if r.is_colliding():
+			rays_colliding += 1
+			norm_avg += r.get_collision_normal()
+	if norm_avg:
+		climbing_normal = norm_avg / rays_colliding
+	else:
+		climbing_normal = Vector3.UP
+	if rays_colliding >= 1:
+		is_on_floor = true
+	else:
+		is_on_floor = false
+	entity.global_transform = MathHelper.apply_surface_align(entity.global_transform, climbing_normal)
+	entity.add_central_force(25 * -climbing_normal)
 
 func get_joy_input():
 	var input = entity.input
@@ -58,27 +80,14 @@ func get_joy_input():
 	return input
 
 func apply_facing():
-#	if entity.targeting:
-#		if is_instance_valid(entity.target) and entity.target_found:
-#			var target = entity.target.transform.origin
-#			entity.rotation.y = lerp_angle(entity.rotation.y, target, 0.2)
 	if get_joy_input() != Vector3.ZERO:
 		entity.rotation.y = lerp_angle(entity.rotation.y, atan2(-entity.linear_velocity.x, -entity.linear_velocity.z), 1.0)
-#		if entity.ray_down.is_colliding():
-#			var normal = entity.ray_down.get_collision_normal()
-#			tform = MathHelper.apply_surface_align(entity.global_transform, normal)
-#		else:
-#			entity.global_transform.basis.get_euler().x = 0
-#			entity.global_transform.basis.get_euler().z = 0
-#		entity.global_transform = entity.global_transform.interpolate_with(tform, 0.3)
-#	elif entity.cursor_activated:
-#		MathHelper.rigid_look_at(entity, Vector3(GlobalManager.aim_cursor.global_translation.x, entity.transform.origin.y, GlobalManager.aim_cursor.global_translation.z), 0.3)
-#		pass
 
 func apply_movement():
 	if entity.is_active_player and entity.can_move:
 		direction.x = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).x
 		direction.z = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).z
+		direction = entity.transform.basis.xform(direction)
 		#entity.set_linear_velocity(entity.speed * direction / 7)
 		if direction != Vector3.ZERO:
 			entity.linear_velocity.x = lerp(entity.linear_velocity.x, entity.speed * direction.x, 0.5)

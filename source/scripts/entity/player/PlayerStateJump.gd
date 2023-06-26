@@ -37,7 +37,7 @@ func physics_process(delta: float) -> int:
 func integrate_forces(state) -> int:
 	.integrate_forces(state)
 	apply_movement()
-	if entity.is_active_player and Input.is_action_pressed("action_main") and entity.ray_down.is_colliding() and can_jump:
+	if entity.is_active_player and Input.is_action_pressed("action_main") and is_on_floor and can_jump:
 		entity.apply_central_impulse(entity.jump * entity.global_transform.basis.y)
 	return State.NULL
 

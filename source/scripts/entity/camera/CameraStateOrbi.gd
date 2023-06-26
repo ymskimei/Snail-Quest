@@ -61,7 +61,7 @@ func cam_tracking(delta):
 	velocity = velocity.linear_interpolate(rotation * sensitivity / 3, delta * rotation_speed)
 	entity.rotation.y += (deg2rad(velocity.x))
 	entity.translation = lerp(entity.translation, entity.player.translation + offset, follow_speed * delta)
-	entity.spring_length = lerp(entity.spring_length, clamp(entity.spring_length + distance, 4, 20), 10 * delta)
+	entity.spring_length = lerp(entity.spring_length, clamp(entity.spring_length + distance, 4, 30), 10 * delta)
 
 func cam_panning(delta):
 	var distance_to_player = entity.camera_lens.get_global_translation().distance_to(entity.player.get_global_translation())

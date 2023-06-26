@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://assets/materials/entity/player_eyes.tres" type="Material" id=1]
 [ext_resource path="res://source/scripts/entity/player/Player.gd" type="Script" id=2]
@@ -31,7 +31,6 @@
 [ext_resource path="res://source/scenes/gui/gui_debug_healthbar.tscn" type="PackedScene" id=29]
 
 [sub_resource type="PhysicsMaterial" id=32]
-friction = 0.5
 
 [sub_resource type="Skin" id=3]
 resource_name = "Skin"
@@ -103,8 +102,6 @@ bind/20/pose = Transform( 1.85192, 0, -0.0265158, 0, 1.88897, 0, 0.0259982, 0, 1
 [sub_resource type="SphereShape" id=28]
 
 [sub_resource type="BoxShape" id=30]
-
-[sub_resource type="BoxShape" id=26]
 
 [sub_resource type="BoxShape" id=24]
 extents = Vector3( 0.5, 0.5, 0.5 )
@@ -281,6 +278,7 @@ collision_mask = 13
 mode = 2
 mass = 0.28
 physics_material_override = SubResource( 32 )
+gravity_scale = 0.0
 continuous_cd = true
 contacts_reported = 1
 contact_monitor = true
@@ -456,29 +454,61 @@ shape = SubResource( 30 )
 
 [node name="Checkers" type="Spatial" parent="."]
 
-[node name="CheckerFloor" type="Area" parent="Checkers"]
+[node name="ClimbingRays" type="Spatial" parent="Checkers"]
 unique_name_in_owner = true
-transform = Transform( -0.4, 0, 0, 0, 0.15, 0, 0, 0, -0.8, 0, 0, 0 )
-collision_layer = 13
-collision_mask = 13
 
-[node name="CheckerFloorCollision" type="CollisionShape" parent="Checkers/CheckerFloor"]
-transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 26 )
+[node name="Ray" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.1 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray2" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0.2, 0.1 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray3" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0, 0.2, 0.1 )
+enabled = true
+cast_to = Vector3( 0, -0.85, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray4" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.2, 0.1 )
+enabled = true
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray5" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.2, 0.1 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray6" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0.2, 0.1 )
+enabled = true
+cast_to = Vector3( 0, -0.85, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray7" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, 8.74228e-08, 1, 0, -1, 8.74228e-08, 0, 0.2, 0.1 )
+enabled = true
+collision_mask = 12
+collide_with_areas = true
 
 [node name="PlayerArea" type="Area" parent="Checkers"]
 
 [node name="PlayerHitbox" type="CollisionShape" parent="Checkers/PlayerArea"]
 transform = Transform( 0.7, 0, 0, 0, 0.9, 0, 0, 0, 1.4, 0, 0.45, 0 )
 shape = SubResource( 24 )
-
-[node name="RayDown" type="RayCast" parent="Checkers"]
-unique_name_in_owner = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.1 )
-enabled = true
-cast_to = Vector3( 0, -0.7, 0 )
-collision_mask = 12
-collide_with_areas = true
 
 [node name="RayForward" type="RayCast" parent="Checkers"]
 unique_name_in_owner = true
