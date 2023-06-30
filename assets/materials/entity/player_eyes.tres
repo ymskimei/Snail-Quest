@@ -1,17 +1,23 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=2]
+[gd_resource type="ShaderMaterial" load_steps=7 format=2]
 
-[ext_resource path="res://assets/texture/entity/player_eyes.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/entity/snail_eyes.png" type="Texture" id=1]
 [ext_resource path="res://assets/shader/cel.shader" type="Shader" id=2]
+[ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=3]
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+params_specular_mode = 3
+albedo_texture = ExtResource( 3 )
 
 [sub_resource type="Gradient" id=1]
 interpolation_mode = 1
-offsets = PoolRealArray( 0.362162, 0.491892, 0.689189 )
-colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 )
+offsets = PoolRealArray( 0.09, 0.163333 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
 [resource]
+next_pass = SubResource( 3 )
 shader = ExtResource( 2 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/normal_scale = 16.0

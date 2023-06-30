@@ -78,16 +78,16 @@ func get_joy_input():
 	if input_length > 1:
 		input /= input_length
 	return input
-
-func apply_facing():
-	if get_joy_input() != Vector3.ZERO:
-		entity.rotation.y = lerp_angle(entity.rotation.y, atan2(-entity.linear_velocity.x, -entity.linear_velocity.z), 1.0)
+#
+#func apply_facing():
+#	if get_joy_input() != Vector3.ZERO:
+#		entity.rotation.y = lerp_angle(entity.rotation.y, atan2(-entity.linear_velocity.x, -entity.linear_velocity.z), 1.0)
 
 func apply_movement():
 	if entity.is_active_player and entity.can_move:
 		direction.x = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).x
 		direction.z = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).z
-		direction = entity.transform.basis.xform(direction)
+		#direction = entity.transform.basis.xform(direction)
 		#entity.set_linear_velocity(entity.speed * direction / 7)
 		if direction != Vector3.ZERO:
 			entity.linear_velocity.x = lerp(entity.linear_velocity.x, entity.speed * direction.x, 0.5)

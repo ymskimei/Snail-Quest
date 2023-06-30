@@ -1,18 +1,38 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://source/scripts/resource/ResourcePlayerSkin.gd" type="Script" id=1]
-[ext_resource path="res://assets/model/snail.mesh" type="ArrayMesh" id=2]
-[ext_resource path="res://assets/materials/entity/player_body.tres" type="Material" id=3]
-[ext_resource path="res://assets/materials/entity/player_eyes_squint.tres" type="Material" id=4]
-[ext_resource path="res://assets/materials/entity/player_eyes.tres" type="Material" id=5]
-[ext_resource path="res://assets/materials/entity/player_shell.tres" type="Material" id=6]
-[ext_resource path="res://assets/materials/entity/player_eyes_blink.tres" type="Material" id=7]
+[ext_resource path="res://assets/texture/entity/snail_body.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/entity/snail_shell_accent_0.png" type="Texture" id=3]
+[ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=4]
+[ext_resource path="res://assets/model/snail_shell.mesh" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/model/snail_body.mesh" type="ArrayMesh" id=6]
+[ext_resource path="res://assets/model/snail_eye_left.mesh" type="ArrayMesh" id=7]
+[ext_resource path="res://assets/model/snail_eye_right.mesh" type="ArrayMesh" id=8]
 
 [resource]
 script = ExtResource( 1 )
-mesh = ExtResource( 2 )
-shell_tex = ExtResource( 6 )
-body_tex = ExtResource( 3 )
-eyes_tex = ExtResource( 5 )
-eyes_blink_tex = ExtResource( 7 )
-eyes_squint_tex = ExtResource( 4 )
+mesh_shell = ExtResource( 5 )
+mesh_body = ExtResource( 6 )
+mesh_eye_left = ExtResource( 7 )
+mesh_eye_right = ExtResource( 8 )
+shape_conch = 0.0
+shape_conch_size = 0.0
+shape_conical_horizontal = 0.0
+shape_conical_horizontal_size = 0.0
+shape_conical_vertical = 0.0
+shape_conical_vertical_size = 0.0
+shape_flat = 0.0
+shape_flat_size = 0.0
+shape_globular_size = 0.5
+shape_body_fat = 0.6
+shape_body_length = 0.35
+shape_eye_left_size = 0.0
+shape_eye_right_size = 0.0
+pattern_shell = ExtResource( 3 )
+pattern_body = ExtResource( 2 )
+pattern_eyes = ExtResource( 4 )
+color_shell_base = "B7774D"
+color_shell_accent = "9E4D51"
+color_body = "B7F3F4"
+color_eye_left = "B52478"
+color_eye_right = "B52478"

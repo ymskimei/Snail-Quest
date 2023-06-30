@@ -1,7 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=2]
+[gd_resource type="ShaderMaterial" load_steps=7 format=2]
 
-[ext_resource path="res://assets/texture/entity/player_shell.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/entity/snail_shell.png" type="Texture" id=1]
 [ext_resource path="res://assets/shader/cel.shader" type="Shader" id=2]
+[ext_resource path="res://assets/texture/entity/snail_shell_accent_0.png" type="Texture" id=3]
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_transparent = true
+params_diffuse_mode = 4
+albedo_texture = ExtResource( 3 )
 
 [sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0.039604, 0.0445545 )
@@ -11,8 +17,9 @@ colors = PoolColorArray( 0.208984, 0.208984, 0.208984, 1, 1, 1, 1, 1 )
 gradient = SubResource( 7 )
 
 [resource]
+next_pass = SubResource( 9 )
 shader = ExtResource( 2 )
-shader_param/albedo = Color( 1, 0.94902, 0.85098, 1 )
+shader_param/albedo = Color( 1, 0.988235, 0.988235, 1 )
 shader_param/normal_scale = null
 shader_param/specular = 0.0
 shader_param/specular_amount = 0.0

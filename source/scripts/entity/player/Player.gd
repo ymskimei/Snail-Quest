@@ -44,10 +44,7 @@ var cursor_pos : Vector3
 var last_vel := Vector3.ZERO
 
 func _ready():
-	$"%MeshInstance".set_mesh(skin.mesh)
-	$"%MeshInstance".set_surface_material(0, skin.body_tex)
-	$"%MeshInstance".set_surface_material(1, skin.shell_tex)
-	$"%MeshInstance".set_surface_material(2, skin.eyes_tex)
+	update_player_appearance()
 	states.ready(self)
 	can_move = true
 	set_interaction_text("")
@@ -142,5 +139,39 @@ func set_interaction_text(text):
 		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
 		interaction_label.set_visible(true)
 
-
-
+func update_player_appearance():
+	var shell = $"%Shell"
+	var body = $"%Body"
+	var eye_left = $"%EyeLeft"
+	var eye_right = $"%EyeRight"
+	var shell_mat = shell.get_surface_material(0)
+	var shell_accent_mat = shell.get_surface_material(0).get_next_pass()
+	var body_mat = body.get_surface_material(0)
+	var eye_left_mat = eye_left.get_surface_material(0).get_next_pass()
+	var eye_right_mat = eye_right.get_surface_material(0).get_next_pass()
+	shell.set_mesh(skin.mesh_shell)
+	body.set_mesh(skin.mesh_body)
+	eye_left.set_mesh(skin.mesh_eye_left)
+	eye_right.set_mesh(skin.mesh_eye_right)
+	shell.set("blend_shapes/Conch", skin.shape_conch)
+	shell.set("blend_shapes/ConchSize", skin.shape_conch_size)
+	shell.set("blend_shapes/ConicalHorizontal", skin.shape_conical_horizontal)
+	shell.set("blend_shapes/ConicalHorizontalSize", skin.shape_conical_horizontal_size)
+	shell.set("blend_shapes/ConicalVertical", skin.shape_conical_vertical)
+	shell.set("blend_shapes/ConicalVerticalSize", skin.shape_conical_vertical_size)
+	shell.set("blend_shapes/Flat", skin.shape_flat)
+	shell.set("blend_shapes/FlatSize", skin.shape_flat_size)
+	shell.set("blend_shapes/GlobularSize", skin.shape_globular_size)
+	body.set("blend_shapes/Default", skin.shape_body_fat)
+	body.set("blend_shapes/Length", skin.shape_body_length)
+	eye_left.set("blend_shapes/Size", skin.shape_eye_left_size)
+	eye_right.set("blend_shapes/Size", skin.shape_eye_right_size)
+	shell_accent_mat.set_texture(SpatialMaterial.TEXTURE_ALBEDO, skin.pattern_shell)
+	body_mat.set_shader_param("texture_albedo", skin.pattern_body)
+	eye_left_mat.set_texture(SpatialMaterial.TEXTURE_ALBEDO, skin.pattern_eyes)
+	eye_right_mat.set_texture(SpatialMaterial.TEXTURE_ALBEDO, skin.pattern_eyes)
+	shell_mat.set_shader_param("albedo", Color(skin.color_shell_base))
+	shell_accent_mat.set_albedo(Color(skin.color_shell_accent))
+	body_mat.set_shader_param("albedo", Color(skin.color_body))
+	eye_left_mat.set_albedo(Color(skin.color_eye_left))
+	eye_right_mat.set_albedo(Color(skin.color_eye_right))

@@ -349,7 +349,7 @@ bones/34/enabled = true
 bones/34/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( -0.5248, 4.47035e-07, -0.851225, -0.85056, -0.039534, 0.52439, -0.0336521, 0.999218, 0.0207479, 0.297469, 1.97038, 1.07182 )
+transform = Transform( -0.524801, 9.53674e-07, -0.851224, -0.850561, -0.0395336, 0.524389, -0.0336518, 0.999218, 0.0207478, 0.297471, 1.97039, 1.07181 )
 bone_name = "Eye.L"
 
 [node name="LeftEye" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -358,7 +358,7 @@ mesh = SubResource( 7 )
 material/0 = ExtResource( 1 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( -0.5248, -4.17233e-07, 0.851226, 0.85056, -0.0395341, 0.52439, 0.0336522, 0.999218, 0.0207478, -0.297469, 1.97038, 1.07182 )
+transform = Transform( -0.524799, -3.8743e-07, 0.851226, 0.85056, -0.0395344, 0.52439, 0.0336523, 0.999217, 0.020747, -0.297464, 1.97039, 1.07181 )
 bone_name = "Eye.R"
 
 [node name="RightEye" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]
