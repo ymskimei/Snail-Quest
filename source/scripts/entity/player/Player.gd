@@ -44,7 +44,7 @@ var cursor_pos : Vector3
 var last_vel := Vector3.ZERO
 
 func _ready():
-	update_player_appearance()
+	#update_player_appearance()
 	states.ready(self)
 	can_move = true
 	set_interaction_text("")
@@ -139,8 +139,29 @@ func set_interaction_text(text):
 		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
 		interaction_label.set_visible(true)
 
+func update_shell_shape(increment):
+	match int(increment):
+		0:
+			skin.shape_conch = 1.0
+		1:
+			skin.shape_conch = 0.5
+			skin.shape_conical_horizontal = 0.5
+		2:
+			skin.shape_conical_horizontal = 1.0
+		3:
+			skin.shape_conical_horizontal = 0.5
+		5:
+			skin.shape_flat = 0.5
+		6:
+			skin.shape_flat = 1.0
+		7:
+			skin.shape_flat = 0.5
+			skin.shape_conical_vertical = 0.5
+		8:
+			skin.shape_conical_vertical = 1.0
+
 func update_player_appearance():
-	var shell = $"%Shell"
+	var shell = $"%MeshInstance"
 	var body = $"%Body"
 	var eye_left = $"%EyeLeft"
 	var eye_right = $"%EyeRight"

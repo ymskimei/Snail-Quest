@@ -429,7 +429,7 @@ bones/23/enabled = true
 bones/23/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="PlayerAvatar/Skeleton"]
-transform = Transform( 1, 5.26197e-08, -8.54398e-08, 7.83184e-08, -2.15368e-08, 1, 9.77889e-09, -1, 5.44824e-08, -0.16407, 0.780284, -0.564601 )
+transform = Transform( 1, 5.54137e-08, 7.8463e-08, 3.61168e-07, -5.86733e-08, 0.999999, 8.3819e-09, -1, 1.07917e-07, -0.16407, 0.780282, -0.564601 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="PlayerAvatar/Skeleton/BoneAttachment"]
@@ -440,7 +440,7 @@ blend_shapes/Size = 0.0
 material/0 = ExtResource( 1 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="PlayerAvatar/Skeleton"]
-transform = Transform( 1, -4.79631e-08, 5.56347e-08, -4.85798e-08, -1.5134e-08, 1, -4.19095e-09, -1, 5.4948e-08, 0.16407, 0.780283, -0.564601 )
+transform = Transform( 1, -5.82077e-08, -9.33669e-08, -3.31365e-07, -5.84405e-08, 0.999999, -1.11759e-08, -1, 1.08383e-07, 0.16407, 0.780282, -0.564601 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="PlayerAvatar/Skeleton/BoneAttachment2"]
@@ -459,7 +459,7 @@ blend_shapes/Fat = 0.0
 blend_shapes/Length = 0.0
 material/0 = ExtResource( 5 )
 
-[node name="Shell" type="MeshInstance" parent="PlayerAvatar/Skeleton"]
+[node name="MeshInstance" type="MeshInstance" parent="PlayerAvatar/Skeleton"]
 unique_name_in_owner = true
 mesh = ExtResource( 24 )
 skin = SubResource( 46 )
