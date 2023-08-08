@@ -5,6 +5,7 @@
 [ext_resource path="res://addons/audio_booth/source/sfx/SoundBooth.gd" type="Script" id=7]
 
 [node name="AudioPlayer" type="Node"]
+pause_mode = 2
 script = ExtResource( 3 )
 
 [node name="AmbieBooth" type="Node" parent="."]

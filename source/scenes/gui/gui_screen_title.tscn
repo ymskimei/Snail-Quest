@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=1]
 [ext_resource path="res://source/scripts/gui/GuiScreenTitle.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/resource/animation/GuiLogoAppear.tres" type="Animation" id=8]
 [ext_resource path="res://assets/shader/shine.shader" type="Shader" id=9]
 [ext_resource path="res://source/scenes/gui/gui_transition.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/sound/music/ost_layerstest_bass.ogg" type="AudioStream" id=11]
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 9 )
@@ -379,6 +380,11 @@ text = "Options"
 [node name="GuiOptions" parent="." instance=ExtResource( 3 )]
 
 [node name="GuiTransition" parent="." instance=ExtResource( 10 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+autoplay = true
+bus = "Music"
 
 [connection signal="pressed" from="ButtonContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="ButtonContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]

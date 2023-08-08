@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/Chunk.gd"
 }, {
+"base": "CanvasLayer",
+"class": "ColorFilter",
+"language": "GDScript",
+"path": "res://source/scripts/ColorFilter.gd"
+}, {
 "base": "Reference",
 "class": "DTS",
 "language": "GDScript",
@@ -100,6 +105,11 @@ _global_script_classes=[ {
 "path": "res://source/scripts/entity/Entity.gd"
 }, {
 "base": "Node",
+"class": "EntityStateParent",
+"language": "GDScript",
+"path": "res://source/scripts/entity/EntityStateParent.gd"
+}, {
+"base": "Node",
 "class": "GuiConsoleCategory",
 "language": "GDScript",
 "path": "res://source/scripts/gui/GuiPopupConsoleCategory.gd"
@@ -138,6 +148,16 @@ _global_script_classes=[ {
 "class": "ObjectInteractable",
 "language": "GDScript",
 "path": "res://source/scripts/object/ObjectInteractable.gd"
+}, {
+"base": "EntityParent",
+"class": "Player",
+"language": "GDScript",
+"path": "res://source/scripts/entity/player/Player.gd"
+}, {
+"base": "Node",
+"class": "PlayerStateMain",
+"language": "GDScript",
+"path": "res://source/scripts/entity/player/PlayerStateMain.gd"
 }, {
 "base": "Resource",
 "class": "ResourceAudioPlayer",
@@ -255,6 +275,7 @@ _global_script_class_icons={
 "CameraStateLock": "",
 "CameraStateMain": "",
 "Chunk": "",
+"ColorFilter": "",
 "DTS": "",
 "Dialogic": "",
 "DialogicAnimaPropertiesHelper": "",
@@ -586,6 +607,20 @@ gui_debug={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+gui_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":45,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+gui_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":61,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
 debug_save={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":59,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
@@ -644,6 +679,12 @@ dialogic_default_action={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+gui_options={
+"deadzone": 0.51,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":79,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

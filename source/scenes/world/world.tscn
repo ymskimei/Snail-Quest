@@ -52,6 +52,10 @@ skin = ExtResource( 9 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2148.17, -19.6951, 5970.03 )
 continuous_cd = true
 
+[node name="Audio" type="Spatial" parent="."]
+pause_mode = 2
+script = ExtResource( 7 )
+
 [node name="GameTime" type="Node" parent="."]
 script = ExtResource( 4 )
 
