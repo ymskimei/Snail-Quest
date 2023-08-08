@@ -7,8 +7,6 @@
 [ext_resource path="res://assets/resource/equipped_player.tres" type="Resource" id=5]
 [ext_resource path="res://assets/resource/gui_tool.tres" type="Resource" id=6]
 
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "Exit"
 length = 0.2

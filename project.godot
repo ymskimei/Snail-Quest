@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
+"base": "Spatial",
 "class": "AimCursor",
 "language": "GDScript",
 "path": "res://source/scripts/gui/GuiAimCursor.gd"
@@ -19,12 +19,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/camera/CameraStateIsom.gd"
 }, {
-"base": "Reference",
+"base": "CameraStateMain",
 "class": "CameraStateLock",
 "language": "GDScript",
 "path": "res://source/scripts/entity/camera/CameraStateLock.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "CameraStateMain",
 "language": "GDScript",
 "path": "res://source/scripts/entity/camera/CameraStateMain.gd"
@@ -33,6 +33,11 @@ _global_script_classes=[ {
 "class": "Chunk",
 "language": "GDScript",
 "path": "res://source/scripts/Chunk.gd"
+}, {
+"base": "CanvasLayer",
+"class": "ColorFilter",
+"language": "GDScript",
+"path": "res://source/scripts/ColorFilter.gd"
 }, {
 "base": "Reference",
 "class": "DTS",
@@ -99,12 +104,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/EntityParent.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "EntityStateParent",
 "language": "GDScript",
 "path": "res://source/scripts/entity/EntityStateParent.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "GuiConsoleCategory",
 "language": "GDScript",
 "path": "res://source/scripts/gui/GuiPopupConsoleCategory.gd"
@@ -124,7 +129,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/gui/GuiInventoryParent.gd"
 }, {
-"base": "Reference",
+"base": "Spatial",
 "class": "ItemParent",
 "language": "GDScript",
 "path": "res://source/scripts/object/ItemParent.gd"
@@ -139,7 +144,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/MusicBooth.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "ObjectInteractable",
 "language": "GDScript",
 "path": "res://source/scripts/object/ObjectInteractable.gd"
@@ -154,7 +159,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/player/PlayerStateMain.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "ResourceAudioPlayer",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceAudioPlayer.gd"
@@ -169,17 +174,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceInventory.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "ResourceItem",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceItem.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "ResourceLocation",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceLocation.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "ResourceLootTable",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceLootTable.gd"
@@ -189,7 +194,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceMusic.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "ResourceSign",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceSign.gd"
@@ -245,6 +250,7 @@ _global_script_class_icons={
 "CameraStateLock": "",
 "CameraStateMain": "",
 "Chunk": "",
+"ColorFilter": "",
 "DTS": "",
 "Dialogic": "",
 "DialogicAnimaPropertiesHelper": "",
@@ -568,6 +574,20 @@ gui_debug={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+gui_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":45,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+gui_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":61,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
 debug_save={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":123,"unicode":0,"echo":false,"script":null)
@@ -585,6 +605,12 @@ dialogic_default_action={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+gui_options={
+"deadzone": 0.51,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":79,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

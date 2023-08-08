@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://source/scenes/entity/camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scenes/entity/player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://source/scripts/GameTime.gd" type="Script" id=4]
 [ext_resource path="res://source/scripts/PlayTime.gd" type="Script" id=5]
 [ext_resource path="res://source/scenes/gui/gui_transition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://source/scripts/world/Audio.gd" type="Script" id=7]
 
 [node name="GameMaster" type="Node"]
 script = ExtResource( 3 )
@@ -17,6 +18,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2447, 0, 5968 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2447, 0, 5970 )
+
+[node name="Audio" type="Spatial" parent="."]
+pause_mode = 2
+script = ExtResource( 7 )
 
 [node name="GameTime" type="Node" parent="."]
 script = ExtResource( 4 )
