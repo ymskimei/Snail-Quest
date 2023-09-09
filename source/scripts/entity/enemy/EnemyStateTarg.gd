@@ -1,6 +1,6 @@
 extends EnemyStateMain
 
-func enter():
+func enter() -> void:
 	print("Enemy State: TARG")
 	entity.anim.play("PawnMove")
 	snap_vector = Vector3.DOWN

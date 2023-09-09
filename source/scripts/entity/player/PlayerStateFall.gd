@@ -1,6 +1,6 @@
 extends PlayerStateMain
 
-export var air_friction = -3.5
+export var air_friction: float = -3.5
 
 func enter() -> void:
 	print("Player State: FALL")
@@ -39,7 +39,7 @@ func physics_process(delta: float) -> int:
 			return State.IDLE
 	return State.NULL
 
-func integrate_forces(state) -> int:
+func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	if entity.can_move:
 		apply_movement()

@@ -1,13 +1,13 @@
 extends CameraStateMain
 
-export var follow_speed = 18
-export var rotation_speed = 10
+export var follow_speed: int = 18
+export var rotation_speed: int = 10
 
-export var offset = Vector3(0, 0.9, 0)
+export var offset: Vector3 = Vector3(0, 0.9, 0)
 
 func enter() -> void:
 	print("Camera State: LOOK")
-	target_rot = entity.target.rotation.y
+	target_rot = entity.cam_target.rotation.y
 	tween_cam_rotate(Tween.EASE_OUT)
 	AudioPlayer.play_sfx(AudioPlayer.sfx_cam_first_person)
 	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, -1.5, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -21,11 +21,11 @@ func physics_process(delta: float) -> int:
 	if Input.is_action_just_pressed("cam_zoom"):
 		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_third_person)
 		return State.ORBI
-	if entity.t.arget:
+	if entity.lock_target:
 		return State.TARG
 	return State.NULL
 
-func cam_movement(delta):
+func cam_movement(delta: float) -> void:
 	rotation.x = (Input.get_action_strength("cam_left") - Input.get_action_strength("cam_right")) / 2
 	rotation.y = (Input.get_action_strength("cam_up") - Input.get_action_strength("cam_down")) / 1.5
 	velocity = velocity.linear_interpolate(rotation * sensitivity / 3, delta * rotation_speed)

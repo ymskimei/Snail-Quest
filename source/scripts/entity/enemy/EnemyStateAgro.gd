@@ -2,7 +2,7 @@ extends EnemyStateMain
 
 var timer = Timer.new()
 
-func enter():
+func enter() -> void:
 	print("Enemy State: AGRO")
 	entity.anim.play("PawnIdle")
 	snap_vector = Vector3.DOWN
@@ -27,7 +27,7 @@ func physics_process(delta: float) -> int:
 		return State.JUMP
 	return State.NULL
 
-func end_wait():
+func end_wait() -> void:
 	if randi() % 3:
 		state_done = true  
 	rotate()

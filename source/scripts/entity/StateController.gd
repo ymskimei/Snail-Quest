@@ -1,19 +1,19 @@
 extends Node
 
 var current_state
-var et
+var et: Spatial
 
-func ready(entity) -> void:
+func ready(entity: Spatial) -> void:
 	et = entity
 	for child in get_children():
 		child.entity = entity
 	change_state(1) # default state
 
-func change_state(new_state: int) -> void:
+func change_state(new_state) -> void:
 	if current_state:
 		current_state.exit()
 	# Subtract 1 to account for NULL
-	current_state = get_children()[new_state-1]
+	current_state = get_children()[new_state - 1]
 	current_state.enter()
 
 # Passing methods
@@ -23,7 +23,7 @@ func physics_process(delta: float) -> void:
 		if new_state != 0: # not null state
 			change_state(new_state)
 
-func integrate_forces(state) -> void:
+func integrate_forces(state: PhysicsDirectBodyState) -> void:
 	if current_state.has_method("integrate_forces"):
 		var new_state = current_state.integrate_forces(state)
 		if new_state != 0: # not null state

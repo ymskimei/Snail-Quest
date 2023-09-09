@@ -1,10 +1,9 @@
 extends PlayerStateMain
 
-var dodge_complete : bool
+var dodge_complete: bool = false
 
 func enter() -> void:
 	print("Player State: DODG")
-	dodge_complete = false
 	dodge_timer()
 	entity.animator.set_speed_scale(1)
 	entity.animator.play("PlayerTuckDefault")
@@ -42,12 +41,12 @@ func physics_process(delta: float) -> int:
 #		on_dodge_timer()
 	return State.NULL
 
-func integrate_forces(state) -> int:
+func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	apply_movement()
 	return State.NULL
 
-func dodge_timer():
+func dodge_timer() -> void:
 	var timer = Timer.new()
 	timer.set_one_shot(true)
 	timer.set_wait_time(0.65)
@@ -55,6 +54,6 @@ func dodge_timer():
 	add_child(timer)
 	timer.start()
 
-func on_dodge_timer():
+func on_dodge_timer() -> void:
 	dodge_complete = true
 	entity.in_shell = false

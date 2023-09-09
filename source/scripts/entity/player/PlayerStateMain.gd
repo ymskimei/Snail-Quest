@@ -1,21 +1,21 @@
 class_name PlayerStateMain
 extends Node
 
-var entity
+var entity: PhysicsBody
 
 var direction := Vector3.ZERO
 
-var input_up = 0
-var input_down = 0
-var input_left = 0
-var input_right = 0
+var input_up: int = 0
+var input_down: int = 0
+var input_left: int = 0
+var input_right: int = 0
 
 var shell_jumped : bool
 var previous_swing : bool
 var action_combat_held : bool
 var is_on_floor : bool
 
-var timer = Timer.new()
+var timer: Timer = Timer.new()
 
 enum State {
 	NULL,
@@ -46,11 +46,11 @@ func physics_process(_delta: float) -> int:
 		shell_jumped = false
 	return State.NULL
 
-func integrate_forces(state) -> int:
+func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	set_gravity_direction()
 	return State.NULL
 
-func set_gravity_direction():
+func set_gravity_direction() -> void:
 	var climbing_normal = Vector3.ZERO
 	var norm_avg = Vector3.ZERO
 	var rays_colliding := 0
@@ -70,7 +70,7 @@ func set_gravity_direction():
 	entity.global_transform = MathHelper.apply_surface_align(entity.global_transform, climbing_normal)
 	entity.add_central_force(25 * -climbing_normal)
 
-func get_joy_input():
+func get_joy_input() -> Vector3:
 	var input = entity.input
 	input.x = Input.get_action_strength("joy_left") - Input.get_action_strength("joy_right")
 	input.z = Input.get_action_strength("joy_up") - Input.get_action_strength("joy_down")
@@ -83,7 +83,7 @@ func get_joy_input():
 #	if get_joy_input() != Vector3.ZERO:
 #		entity.rotation.y = lerp_angle(entity.rotation.y, atan2(-entity.linear_velocity.x, -entity.linear_velocity.z), 1.0)
 
-func apply_movement():
+func apply_movement() -> void:
 	if entity.is_active_player:
 		direction.x = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).x
 		direction.z = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).z
@@ -95,30 +95,42 @@ func apply_movement():
 			if entity.linear_velocity != Vector3.ZERO:
 				entity.last_vel = entity.linear_velocity
 
-func dodge_roll():
+func dodge_roll() -> bool:
 	if entity.is_active_player:
 		if Input.is_action_just_pressed("joy_up"):
 			input_up += 1
 			timer.start()
 			if input_up >= 2:
 				return true
-		if Input.is_action_just_pressed("joy_down"):
+			else:
+				return false
+		elif Input.is_action_just_pressed("joy_down"):
 			input_down += 1
 			timer.start()
 			if input_down >= 2:
 				return true
-		if Input.is_action_just_pressed("joy_left"):
+			else:
+				return false
+		elif Input.is_action_just_pressed("joy_left"):
 			input_left += 1
 			timer.start()
 			if input_left >= 2:
 				return true
-		if Input.is_action_just_pressed("joy_right"):
+			else:
+				return false
+		elif Input.is_action_just_pressed("joy_right"):
 			input_right += 1
 			timer.start()
 			if input_right >= 2:
 				return true
+			else:
+				return false
+		else:
+			return false
+	else:
+		return false
 
-func on_input_timer():
+func on_input_timer() -> void:
 	input_up = 0
 	input_down = 0
 	input_left = 0
@@ -128,7 +140,7 @@ func on_input_timer():
 	else:
 		action_combat_held = false
 
-func apply_aim_cursor():
+func apply_aim_cursor() -> void:
 	if entity.targeting and entity.target_found or entity.cursor_activated:
 		var cursor = entity.cursor.instance()
 		if is_instance_valid(entity.get_parent().get_node_or_null("AimCursor")):
@@ -139,7 +151,7 @@ func apply_aim_cursor():
 			entity.get_parent().add_child(cursor)
 			entity.cursor_activated = true
 
-func needle():
+func needle() -> void:
 	var needle = entity.eye_point.get_node_or_null("Needle")
 	if is_instance_valid(needle):
 #		if Input.is_action_just_released("action_combat"):
@@ -168,7 +180,7 @@ func needle():
 #			var throw_dir = entity.transform.basis.xform(Vector3(0, 0, -1).normalized())
 #			detatched_needle.throw(throw_dir)
 
-func mallet():
+func mallet() -> void:
 	var mallet = entity.eye_point.get_node_or_null("Mallet")
 	if is_instance_valid(mallet):
 		if Input.is_action_just_pressed("action_combat"):

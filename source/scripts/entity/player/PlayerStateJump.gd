@@ -36,7 +36,7 @@ func physics_process(delta: float) -> int:
 		return State.FALL
 	return State.NULL
 
-func integrate_forces(state) -> int:
+func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	if entity.can_move:
 		apply_movement()
@@ -44,5 +44,5 @@ func integrate_forces(state) -> int:
 			entity.apply_central_impulse(entity.jump * entity.global_transform.basis.y)
 	return State.NULL
 
-func on_timeout():
+func on_timeout() -> void:
 	can_jump = false

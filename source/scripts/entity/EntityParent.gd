@@ -3,20 +3,20 @@ extends RigidBody
 
 export(Resource) var resource
 
-onready var entity_name : String
-onready var health : int
-onready var max_health : int
-onready var strength : int
-onready var gravity : int
-onready var speed : int
-onready var acceleration : int
-onready var jump : int
+onready var entity_name: String
+onready var health: int
+onready var max_health: int
+onready var strength: int
+onready var gravity: int
+onready var speed: int
+onready var acceleration: int
+onready var jump: int
 
-var velocity = Vector3.ZERO
-var direction = Vector3.ZERO
-var input = Vector3.ZERO
+var velocity: Vector3 = Vector3.ZERO
+var direction: Vector3 = Vector3.ZERO
+var input: Vector3 = Vector3.ZERO
 
-func _ready():
+func _ready() -> void:
 	entity_name = resource.entity_name
 	health = resource.health
 	max_health = resource.max_health
@@ -27,18 +27,18 @@ func _ready():
 	jump = resource.jump
 	debug_healthbar()
 
-func get_coords():
+func get_coords() -> Vector3:
 	var x = round(global_transform.origin.x)
 	var y = round(global_transform.origin.y)
 	var z = round(global_transform.origin.z)
 	var coords = [x, y, z]
 	return coords
 
-func set_coords(position : Vector3, angle : String):
+func set_coords(position: Vector3, angle: String) -> void:
 	set_global_translation(position)
 	set_global_rotation(Vector3(0, deg2rad(MathHelper.cardinal_to_degrees(angle)), 0))
 
-func strike_flash(ar):
+func strike_flash(ar: Spatial) -> void:
 	var flash = OmniLight.new()
 	var tween = Tween.new()
 	flash.omni_range = 10
@@ -57,7 +57,7 @@ func strike_flash(ar):
 	flash.queue_free()
 	tween.queue_free()
 
-func debug_healthbar():
+func debug_healthbar() -> void:
 	if is_instance_valid($DebugHealthBar):
 		$DebugHealthBar.update_bar(health)
 		if is_instance_valid($"%MeshInstance"):

@@ -1,21 +1,21 @@
 class_name MainCamera
 extends SpringArm
 
-onready var cam_target = get_parent().get_node_or_null("Player")
-onready var camera_lens = $CameraLens
-onready var anim_tween = $Animation/AnimationCam
-onready var anim_bars = $Animation/AnimationBars
-onready var anim_wobble = $Animation/AnimationWobble
-onready var states = $StateController
+onready var cam_target: Spatial = get_parent().get_node_or_null("Player")
+onready var camera_lens: Camera = $CameraLens
+onready var anim_tween: Tween = $Animation/AnimationCam
+onready var anim_bars: AnimationPlayer = $Animation/AnimationBars
+onready var anim_wobble: AnimationPlayer = $Animation/AnimationWobble
+onready var states: Node = $StateController
 
-var debug_cam : bool
-var targeting_vehicle : bool
-var lock_target
-var lock_to_point : bool
+var lock_target: Spatial
+var lock_to_point: bool
+var debug_cam: bool
+var targeting_vehicle: bool
 
 signal target_updated
 
-func _ready():
+func _ready() -> void:
 	states.ready(self)
 	GlobalManager.register_camera(self)
 
@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
 	find_camera_lock_points()
 
-func update_target():
+func update_target() -> void:
 	if is_instance_valid(GlobalManager.vehicle):
 		targeting_vehicle = true
 		cam_target = GlobalManager.vehicle
@@ -37,10 +37,10 @@ func update_target():
 				if p.is_active_player:
 					cam_target = p
 
-func target_updated():
+func target_updated() -> void:
 	emit_signal("target_updated", cam_target)
 
-func find_camera_lock_points():
+func find_camera_lock_points() -> void:
 	if is_instance_valid(lock_target):
 		var lock_distance = lock_target.get_global_translation().distance_to(cam_target.get_global_translation())
 		var max_lock_distance = 17
@@ -52,7 +52,7 @@ func find_camera_lock_points():
 		lock_to_point = false
 		lock_target = MathHelper.find_target(self, "camera")
 
-func set_coords(position : Vector3, angle : String, flipped : bool):
+func set_coords(position: Vector3, angle: String, flipped: bool) -> void:
 	var rot = deg2rad(MathHelper.cardinal_to_degrees(angle))
 	if flipped:
 		if !rot == 0:
