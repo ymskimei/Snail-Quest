@@ -59,18 +59,26 @@ func set_display_coordinates():
 func toggle_command_console():
 	if Input.is_action_just_pressed("gui_debug"):
 		if can_pause == true:
-			get_tree().set_deferred("paused", true)
-			command_console.visible = true
-			command_console.command_input.grab_focus()
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			if command_console.command_display.bbcode_text == "":
-				command_console.welcome_message()
-			can_pause = false
+			open_command_console()
 		else:
-			command_console.visible = false
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			get_tree().set_deferred("paused", false)
-			can_pause = true
+			close_command_console()
+
+func open_command_console():
+	GuiMain.debug_open = true
+	get_tree().set_deferred("paused", true)
+	command_console.visible = true
+	command_console.command_input.grab_focus()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if command_console.command_display.bbcode_text == "":
+		command_console.welcome_message()
+	can_pause = false
+
+func close_command_console():
+	GuiMain.debug_open = false
+	command_console.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	get_tree().set_deferred("paused", false)
+	can_pause = true
 
 func show_debug_information():
 	if debug_information.visible == false:

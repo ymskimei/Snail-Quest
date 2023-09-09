@@ -14,7 +14,7 @@ var bars_timer = Timer.new()
 
 func enter() -> void:
 	print("Camera State: TARGET")
-	player_rot = entity.player.rotation.y
+	target_rot = entity.cam_target.rotation.y
 	tween_cam_zoom()
 	tween_cam_rotate(Tween.EASE_IN_OUT)
 	add_bars_timer()
@@ -22,17 +22,17 @@ func enter() -> void:
 	rotation_complete = false
 
 func physics_process(delta):
-	if is_instance_valid(entity.player.target):
-		if entity.player.target_found:
-			MathHelper.slerp_look_at(entity, entity.player.target.global_transform.origin, targeting_speed)
+	if is_instance_valid(entity.cam_target.target):
+		if entity.cam_target.target_found:
+			MathHelper.slerp_look_at(entity, entity.cam_target.target.global_transform.origin, targeting_speed)
 			entity.rotation.x = lerp(entity.rotation.x, targeting_rotation, follow_speed * delta)
-			if !entity.player.targeting:
+			if !entity.cam_target.targeting:
 				return State.ORBI
 		else:
 			entity.rotation.x = lerp(entity.rotation.x, -0.15, follow_speed * delta)
-			if !entity.player.targeting and rotation_complete:
+			if !entity.cam_target.targeting and rotation_complete:
 				return State.ORBI
-	entity.translation = lerp(entity.translation, entity.player.translation + targeting_offset, 5 * delta)
+	entity.translation = lerp(entity.translation, entity.cam_target.translation + targeting_offset, 5 * delta)
 	return State.NULL
 
 func add_bars_timer():
@@ -45,8 +45,8 @@ func add_bars_timer():
 	bars_timer.start()
 
 func on_bars_timer():
-	if entity.player.targeting:
-		if entity.player.target_found:
+	if entity.cam_target.targeting:
+		if entity.cam_target.target_found:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_lock)
 		else:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_no_target_lock)
@@ -62,7 +62,7 @@ func tween_cam_zoom():
 
 func exit() -> void:
 	if bars_active:
-		if entity.player.target_found:
+		if entity.cam_target.target_found:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_unlock)
 		else:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_no_target_unlock)

@@ -5,6 +5,7 @@ export(Resource) var tools
 
 onready var anim_pad = $AnimationPad
 onready var anim_cam = $AnimationCam
+onready var display_boost = $DisplayBoost
 
 onready var tool_slot = $"%ToolSlot"
 onready var item_slot_1 = $"%ItemSlot1"
@@ -48,6 +49,7 @@ func _process(_delta):
 		display_left.is_deselected_animation()
 	if !equipment.items[0] == tools.items[3]:
 		display_up.is_deselected_animation()
+	display_vehicle_boost()
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pad_right"):
@@ -139,3 +141,10 @@ func on_pad_timeout():
 func on_cam_timeout():
 	cam_is_hidden = true
 	anim_cam.play_backwards("SlideCam")
+
+func display_vehicle_boost():
+	if is_instance_valid(GlobalManager.vehicle):
+		var remaining = GlobalManager.vehicle.boost_remaining
+		display_boost.set_bbcode("[color=#C3EF5D]%s" % remaining)
+	else:
+		display_boost.set_bbcode("")

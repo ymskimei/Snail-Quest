@@ -1,39 +1,50 @@
 class_name MainCamera
 extends SpringArm
 
-onready var player = get_parent().get_node("Player")
+onready var cam_target = get_parent().get_node_or_null("Player")
 onready var camera_lens = $CameraLens
 onready var anim_tween = $Animation/AnimationCam
 onready var anim_bars = $Animation/AnimationBars
 onready var anim_wobble = $Animation/AnimationWobble
 onready var states = $StateController
+
+var debug_cam : bool
+var targeting_vehicle : bool
 var lock_target
 var lock_to_point : bool
+
+signal target_updated
 
 func _ready():
 	states.ready(self)
 	GlobalManager.register_camera(self)
 
-
+func _unhandled_input(event: InputEvent) -> void:
+	states.unhandled_input(event)
 
 func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
 	find_camera_lock_points()
 
-func update_player_target():
-	for p in get_parent().get_children():
-		if p is Player:
-			if p.is_active_player:
-				player = p
+func update_target():
+	if is_instance_valid(GlobalManager.vehicle):
+		targeting_vehicle = true
+		cam_target = GlobalManager.vehicle
+	else:
+		targeting_vehicle = false
+		for p in get_parent().get_children():
+			if p is Player:
+				if p.is_active_player:
+					cam_target = p
 
-func _unhandled_input(event: InputEvent) -> void:
-	states.unhandled_input(event)
+func target_updated():
+	emit_signal("target_updated", cam_target)
 
 func find_camera_lock_points():
 	if is_instance_valid(lock_target):
-		var target_distance = lock_target.get_global_translation().distance_to(player.get_global_translation())
+		var lock_distance = lock_target.get_global_translation().distance_to(cam_target.get_global_translation())
 		var max_lock_distance = 17
-		if target_distance < max_lock_distance:
+		if lock_distance < max_lock_distance:
 			lock_to_point = true
 		else:
 			lock_to_point = false

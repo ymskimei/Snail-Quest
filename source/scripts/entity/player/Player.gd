@@ -29,7 +29,7 @@ var targeting : bool
 var target_found : bool
 var enemy_detected : bool
 
-var can_move : bool
+var can_move := true
 var can_interact : bool
 
 var in_shell : bool
@@ -46,9 +46,9 @@ var last_vel := Vector3.ZERO
 func _ready():
 	#update_player_appearance()
 	states.ready(self)
-	can_move = true
 	set_interaction_text("")
 	GlobalManager.register_player(self)
+	player_cam.connect("target_updated", self, "_on_cam_target_updated")
 
 func _physics_process(delta : float) -> void:
 	states.physics_process(delta)
@@ -67,6 +67,15 @@ func _integrate_forces(state) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
+
+func _on_cam_target_updated(cam_target):
+	if is_instance_valid(cam_target):
+		can_move = true
+		print("can move")
+	else:
+		can_move = false
+		print("can't move")
+	print(can_move)
 
 func _on_Area_area_entered(area):
 	if area.is_in_group("danger"):
@@ -112,7 +121,7 @@ func target_check():
 	else:
 		target = MathHelper.find_target(self, "target")
 		targeting = false
-	if target is ObjectInteractable and target_distance < max_interactable_distance and relative_facing >= 0:
+	if (target is ObjectInteractable or target.is_in_group("mountable")) and target_distance < max_interactable_distance and relative_facing >= 0:
 		can_interact = true
 		set_interaction_text(target.get_interaction_text())
 		if Input.is_action_just_pressed("action_main"):

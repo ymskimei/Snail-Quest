@@ -84,7 +84,7 @@ func get_joy_input():
 #		entity.rotation.y = lerp_angle(entity.rotation.y, atan2(-entity.linear_velocity.x, -entity.linear_velocity.z), 1.0)
 
 func apply_movement():
-	if entity.is_active_player and entity.can_move:
+	if entity.is_active_player:
 		direction.x = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).x
 		direction.z = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).z
 		#direction = entity.transform.basis.xform(direction)
@@ -96,7 +96,7 @@ func apply_movement():
 				entity.last_vel = entity.linear_velocity
 
 func dodge_roll():
-	if entity.is_active_player and entity.can_move:
+	if entity.is_active_player:
 		if Input.is_action_just_pressed("joy_up"):
 			input_up += 1
 			timer.start()
@@ -154,10 +154,10 @@ func needle():
 #		if entity.targeting:
 #			needle.directionaaal_swing()
 		if Input.is_action_just_pressed("action_combat"):
-			entity.can_move = false
+			#entity.can_move = false
 			entity.cursor_activated = true
 		if Input.is_action_just_released("action_combat"):
-			entity.can_move = true
+			#entity.can_move = true
 			entity.cursor_activated = false
 #			var last_pos = needle.global_transform
 #			entity.eye_point.remove_child(needle)
@@ -175,11 +175,11 @@ func mallet():
 			timer.start()
 			yield(timer, "timeout")
 			if action_combat_held == true:
-				entity.can_move = false
+				#entity.can_move = false
 				entity.animator.play("PlayerSlamDefault")
 				mallet.slam()
 		elif Input.is_action_just_released("action_combat"):
-			entity.can_move = true
+			#entity.can_move = true
 			entity.animator.play("PlayerIdleDefault")
 			mallet.end_slam()
 		if Input.is_action_just_released("action_combat") and action_combat_held == false:

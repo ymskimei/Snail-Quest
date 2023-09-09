@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://source/scenes/gui/gui_container_equipment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scripts/gui/GuiHud.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/texture/gui/gui_hud_cam_pan.png" type="Texture" id=10]
 [ext_resource path="res://assets/texture/gui/clock_minute_hand_temp.png" type="Texture" id=11]
 [ext_resource path="res://assets/texture/gui/gui_hud_pad.png" type="Texture" id=12]
+[ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=13]
 [ext_resource path="res://source/scenes/gui/gui_container_display.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/resource/gui_tool.tres" type="Resource" id=15]
 
@@ -373,3 +374,13 @@ anims/SlidePad = SubResource( 1 )
 [node name="AnimationCam" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 4 )
 anims/SlideCam = SubResource( 5 )
+
+[node name="DisplayBoost" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 936.0
+margin_top = 907.0
+margin_right = -876.0
+margin_bottom = -104.0
+theme = ExtResource( 13 )
+bbcode_enabled = true

@@ -37,7 +37,7 @@ export var night = 1080
 export var transition_speed = 15
 
 func _physics_process(delta):
-	if GlobalManager.game_time != null:
+	if is_instance_valid(GlobalManager.game_time):
 		var time = GlobalManager.game_time.get_raw_time()
 		check_orbit(time, delta)
 		check_environment(time)

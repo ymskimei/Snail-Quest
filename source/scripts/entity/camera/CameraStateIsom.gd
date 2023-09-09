@@ -33,13 +33,13 @@ func enter() -> void:
 
 func physics_process(delta):
 	cam_movement(delta)
-	if entity.player.targeting:
+	if entity.cam_target.targeting:
 		return State.TARG
 	apply_cam_zoom()
 	return State.NULL
 
 func cam_movement(delta):
-	entity.translation = lerp(entity.translation, entity.player.translation + offset, follow_speed * delta)
+	entity.translation = lerp(entity.translation, entity.cam_target.translation + offset, follow_speed * delta)
 	if Input.is_action_just_pressed("cam_right"):
 		tween_isometric(45)
 		rotation_timer_right.start()

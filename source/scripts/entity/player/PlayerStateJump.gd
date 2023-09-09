@@ -15,18 +15,20 @@ func enter() -> void:
 	entity.animator.play("PlayerJumpDefault")
 
 func input(_event: InputEvent) -> int:
-	if Input.is_action_just_pressed("action_defense"):
-		if entity.input == Vector3.ZERO:
-			return State.HIDE
-		else:
-			return State.DODG
+	if entity.can_move:
+		if Input.is_action_just_pressed("action_defense"):
+			if entity.input == Vector3.ZERO:
+				return State.HIDE
+			else:
+				return State.DODG
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	if dodge_roll():
-		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
-		return State.DODG
+	if entity.can_move:
+		if dodge_roll():
+			AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
+			return State.DODG
 		#entity.velocity.y += (entity.jump * 50) * delta / 2
 #	else:
 #		return State.FALL
@@ -36,9 +38,10 @@ func physics_process(delta: float) -> int:
 
 func integrate_forces(state) -> int:
 	.integrate_forces(state)
-	apply_movement()
-	if entity.is_active_player and Input.is_action_pressed("action_main") and is_on_floor and can_jump:
-		entity.apply_central_impulse(entity.jump * entity.global_transform.basis.y)
+	if entity.can_move:
+		apply_movement()
+		if entity.is_active_player and Input.is_action_pressed("action_main") and is_on_floor and can_jump:
+			entity.apply_central_impulse(entity.jump * entity.global_transform.basis.y)
 	return State.NULL
 
 func on_timeout():

@@ -13,8 +13,8 @@ export var lock_low_lens = -0.025
 export var lock_default_arm = -0.2
 export var lock_default_lens = 0.075
 
-export var zoom_normal = 40
-export var distance_normal = 8.5
+export var fov = 40
+export var arm = 8.5
 
 var distance = 0
 var input_spin = 0
@@ -45,13 +45,18 @@ func unhandled_input(event):
 		rotation = Vector2.ZERO
 
 func physics_process(delta):
-	cam_tracking(delta)
-	cam_panning(delta)
-	cam_reset()
 	if look_around:
 		return State.LOOK
-	if entity.player.targeting:
+	if entity.cam_target is Player and entity.cam_target.targeting:
 		return State.TARG
+	if is_instance_valid(entity.cam_target):
+		cam_tracking(delta)
+		cam_panning(delta)
+		cam_reset()
+	else:
+		return State.FREE
+	if entity.targeting_vehicle:
+		return State.VEHI
 	return State.NULL
 
 func cam_tracking(delta):
@@ -59,14 +64,14 @@ func cam_tracking(delta):
 	rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 3
 	velocity = velocity.linear_interpolate(rotation * sensitivity / 3, delta * rotation_speed)
 	entity.rotation.y += (deg2rad(velocity.x))
-	entity.translation = lerp(entity.translation, entity.player.translation + offset, follow_speed * delta)
+	entity.translation = lerp(entity.translation, entity.cam_target.translation + offset, follow_speed * delta)
 	entity.spring_length = lerp(entity.spring_length, clamp(entity.spring_length + distance, 4, 30), 10 * delta)
 
 func cam_panning(delta):
-	var distance_to_player = entity.camera_lens.get_global_translation().distance_to(entity.player.get_global_translation())
-	if distance_to_player <= 1.5:
+	var distance_to_target = entity.camera_lens.get_global_translation().distance_to(entity.cam_target.get_global_translation())
+	if distance_to_target <= 1.5:
 		tween_cam_pan(lock_low_arm, lock_low_lens)
-	elif distance_to_player >= 2:
+	elif distance_to_target >= 2:
 		if Input.is_action_just_pressed("cam_zoom"):
 			look_timer.start()
 		if Input.is_action_just_released("cam_zoom"):
@@ -113,7 +118,7 @@ func add_control_timers():
 		look_timer.set_wait_time(0.25)
 		look_timer.connect("timeout", self, "on_look_timer")
 		look_timer.set_name("LookTimer")
-		add_child(look_timer)	
+		add_child(look_timer)
 
 func on_spin_timer():
 	input_spin = 0
@@ -127,6 +132,6 @@ func tween_cam_zoom(dist):
 	entity.anim_tween.start()
 
 func tween_cam_reset():
-	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom_normal, 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance_normal, 0.4, Tween.TRANS_EXPO, Tween.EASE_OUT)
+	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, fov, 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, arm, 0.4, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	entity.anim_tween.start()

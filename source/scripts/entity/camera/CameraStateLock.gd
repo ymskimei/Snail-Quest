@@ -12,7 +12,7 @@ func enter() -> void:
 
 func physics_process(delta):
 	if is_instance_valid(entity.lock_target):
-		MathHelper.slerp_look_at(entity.camera_lens, (entity.player.translation / 3) + Vector3(0, 2, 0), follow_speed * delta)
+		MathHelper.slerp_look_at(entity.camera_lens, (entity.cam_target.translation / 3) + Vector3(0, 2, 0), follow_speed * delta)
 		entity.rotation = lerp(entity.rotation, entity.lock_target.rotation, follow_speed * delta)
 		entity.translation = lerp(entity.translation, entity.lock_target.translation, follow_speed * delta)
 		if !entity.lock_to_point:

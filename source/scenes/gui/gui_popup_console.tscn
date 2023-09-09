@@ -6,7 +6,6 @@
 [ext_resource path="res://source/scenes/gui/gui_popup_console_category.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/scripts/gui/GuiPopupConsoleCommands.gd" type="Script" id=5]
 
-
 [node name="PanelContainer" type="PanelContainer"]
 margin_right = 1920.0
 margin_bottom = 1080.0
@@ -88,6 +87,9 @@ help = "Give the version number of the project."
 argument_names = [ "string" ]
 argument_types = [ 3 ]
 help = "Set the aspect ratio of the window."
+
+[node name="cam" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+help = "Toggle free roaming camera for debug viewing."
 
 [node name="quit" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
 help = "Shut down the game process."

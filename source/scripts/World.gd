@@ -151,5 +151,5 @@ func _unhandled_input(event):
 			$Player2.is_active_player = true
 		else:
 			$Player.is_active_player = true
-		GlobalManager.camera.update_player_target()
+		GlobalManager.camera.update_target()
 		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_reset)

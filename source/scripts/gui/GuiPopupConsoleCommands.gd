@@ -21,6 +21,7 @@ func on_command_clear(_console, _args):
 
 func on_command_debug(_console, _args):
 	GuiMain.debug.show_debug_information()
+	GuiMain.debug.close_command_console()
 
 func on_command_help(_console, _args):
 	var message = "[color=#7F7F7F]————[/color] [color=#A8A8A8]?[/color] Help [color=#A8A8A8]?[/color] [color=#7F7F7F]————[/color]\n"
@@ -52,11 +53,21 @@ func on_command_aspect(_console, _args):
 		ProjectSettings.set_setting("display/window/size/width", 1920)
 		print(wide)
 
+func on_command_cam(_console, args):
+	var cam = GlobalManager.camera
+	if cam.cam_target != null:
+		cam.cam_target = null
+	else:
+		cam.update_target()
+	cam.target_updated()
+	GuiMain.debug.close_command_console()
+
 func on_command_quit(_console, _args):
 	get_tree().quit()
 
 func on_command_restart(_console, _args):
 	get_tree().reload_current_scene()
+	GuiMain.debug.close_command_console()
 
 func on_command_time(_console, args):
 	GlobalManager.game_time.set_time(args[0])
