@@ -67,6 +67,7 @@ func set_gravity_direction() -> void:
 		is_on_floor = true
 	else:
 		is_on_floor = false
+	entity.rotation.y = lerp_angle(entity.rotation.y, atan2(-entity.last_vel.x, -entity.last_vel.z), 1.0)
 	entity.global_transform = MathHelper.apply_surface_align(entity.global_transform, climbing_normal)
 	entity.add_central_force(25 * -climbing_normal)
 
@@ -85,13 +86,16 @@ func get_joy_input() -> Vector3:
 
 func apply_movement() -> void:
 	if entity.is_active_player:
+		#direction.y = -get_joy_input().rotated(Vector3.FORWARD, entity.rotation.z).y
+		#direction.y = -get_joy_input().rotated(Vector3.RIGHT, entity.rotation.x).y
 		direction.x = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).x
 		direction.z = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).z
+		#direction.x = -get_joy_input().rotated(Vector3.FORWARD, entity.rotation.z).x
+		#direction.z = -get_joy_input().rotated(Vector3.RIGHT, entity.rotation.x).z
 		#direction = entity.transform.basis.xform(direction)
 		#entity.set_linear_velocity(entity.speed * direction / 7)
 		if direction != Vector3.ZERO:
-			entity.linear_velocity.x = lerp(entity.linear_velocity.x, entity.speed * direction.x, 0.5)
-			entity.linear_velocity.z = lerp(entity.linear_velocity.z, entity.speed * direction.z, 0.5)
+			entity.linear_velocity = lerp(entity.linear_velocity, entity.speed * direction, 0.5)
 			if entity.linear_velocity != Vector3.ZERO:
 				entity.last_vel = entity.linear_velocity
 

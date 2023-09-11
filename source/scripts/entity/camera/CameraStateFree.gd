@@ -12,7 +12,7 @@ func enter() -> void:
 
 func physics_process(delta: float) -> int:
 	cam_movement(delta)
-	movement_speed()
+	cam_speed()
 	if is_instance_valid(entity.cam_target):
 		if entity.targeting_vehicle:
 			return State.VEHI
@@ -28,14 +28,14 @@ func cam_movement(delta: float) -> void:
 	entity.camera_lens.rotation.y += (deg2rad(velocity.x))
 	entity.camera_lens.rotation.x += clamp(deg2rad(velocity.y), -90, 90)
 
-func movement_speed() -> void:
+func cam_speed() -> void:
 	if Input.is_action_pressed("debug_cam_speed_up") and movement_speed < max_movement_speed:
 		movement_speed += 1
 	elif Input.is_action_pressed("debug_cam_speed_down") and movement_speed >= min_movement_speed:
 		movement_speed += -1
 
 func get_joy_input() -> Vector3:
-	var input : Vector3
+	var input: Vector3
 	input.x = Input.get_action_strength("joy_left") - Input.get_action_strength("joy_right")
 	input.z = Input.get_action_strength("joy_up") - Input.get_action_strength("joy_down")
 	input.y = Input.get_action_strength("debug_cam_lower") - Input.get_action_strength("debug_cam_higher")

@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	states.integrate_forces(state)
-	rotation.y = lerp_angle(rotation.y, atan2(-last_vel.x, -last_vel.z), 1.0)
+	#rotation.y = lerp_angle(rotation.y, atan2(-last_vel.x, -last_vel.z), 1.0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)

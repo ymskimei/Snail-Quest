@@ -1,6 +1,6 @@
 extends Node
 
-var m_booth: MusicBooth  = AudioPlayer.music_booth
+var m_booth: MusicBooth = AudioPlayer.music_booth
 var a_booth: MusicBooth = AudioPlayer.ambie_booth
 
 var enemy_near: bool

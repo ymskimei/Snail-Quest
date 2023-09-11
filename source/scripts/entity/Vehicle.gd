@@ -80,7 +80,6 @@ func mount():
 	GlobalManager.camera.update_target()
 	player.can_move = false
 	mounted = true
-	print("mounted")
 
 func unmount():
 	var player = GlobalManager.player
@@ -88,5 +87,4 @@ func unmount():
 	GlobalManager.camera.update_target()
 	player.can_move = false
 	mounted = false
-	print("unmounted")
 	engine_force = 0
