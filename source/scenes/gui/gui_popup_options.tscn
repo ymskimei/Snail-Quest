@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=1]
 [ext_resource path="res://source/scripts/gui/GuiPopupOptions.gd" type="Script" id=2]
 [ext_resource path="res://assets/texture/gui/gui_options.png" type="Texture" id=3]
+[ext_resource path="res://assets/texture/gui/gui_button_temp.png" type="Texture" id=4]
 
 [node name="GuiOptions" type="Popup"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -42,6 +44,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Video" type="Tabs" parent="Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 58.0
@@ -253,7 +256,6 @@ size_flags_horizontal = 10
 align = 2
 
 [node name="Controls" type="Tabs" parent="Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -275,14 +277,166 @@ custom_constants/margin_top = 32
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
 
-[node name="Grid" type="GridContainer" parent="Tabs/Controls/Margin"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Tabs/Controls/Margin"]
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 1240.0
 margin_bottom = 608.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tabs/Controls/Margin/ScrollContainer"]
+margin_right = 1196.0
+margin_bottom = 704.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 32
+
+[node name="Grid" type="GridContainer" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
+margin_right = 1196.0
+margin_bottom = 152.0
 custom_constants/vseparation = 40
 custom_constants/hseparation = 0
 columns = 2
+
+[node name="LabelCameraSensitivity" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
+margin_right = 351.0
+margin_bottom = 48.0
+theme = ExtResource( 1 )
+text = "Camera Sensitivity"
+
+[node name="BarCameraSensitivity" type="HSlider" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
+margin_left = 428.0
+margin_right = 1196.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 768, 0 )
+size_flags_horizontal = 10
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.1
+tick_count = 10
+ticks_on_borders = true
+
+[node name="LabelCameraInvert" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
+margin_top = 96.0
+margin_right = 351.0
+margin_bottom = 144.0
+theme = ExtResource( 1 )
+text = "Camera Invert"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
+margin_left = 351.0
+margin_top = 88.0
+margin_right = 1196.0
+margin_bottom = 152.0
+custom_constants/separation = 64
+
+[node name="LabelHorizontal" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
+margin_top = 8.0
+margin_right = 199.0
+margin_bottom = 56.0
+theme = ExtResource( 1 )
+text = "Horizontal"
+
+[node name="CheckBoxHorizontal" type="CheckBox" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
+margin_left = 349.0
+margin_right = 413.0
+margin_bottom = 64.0
+size_flags_horizontal = 10
+align = 2
+
+[node name="LabelVertical" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
+margin_left = 477.0
+margin_top = 8.0
+margin_right = 630.0
+margin_bottom = 56.0
+theme = ExtResource( 1 )
+text = "Vertical"
+
+[node name="CheckBoxVertical" type="CheckBox" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
+margin_left = 781.0
+margin_right = 845.0
+margin_bottom = 64.0
+size_flags_horizontal = 10
+align = 2
+
+[node name="LabelControlMapping" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
+margin_top = 184.0
+margin_right = 1196.0
+margin_bottom = 232.0
+theme = ExtResource( 1 )
+text = "Control Mapping"
+
+[node name="HSeparator" type="HSeparator" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
+margin_top = 264.0
+margin_right = 1196.0
+margin_bottom = 268.0
+
+[node name="LabelControlMapping2" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
+margin_top = 300.0
+margin_right = 1196.0
+margin_bottom = 348.0
+theme = ExtResource( 1 )
+text = "Control Mapping"
+
+[node name="MarginContainer" type="MarginContainer" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
+margin_top = 380.0
+margin_right = 1196.0
+margin_bottom = 704.0
+custom_constants/margin_right = 320
+custom_constants/margin_left = 320
+
+[node name="GridContainer" type="GridContainer" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer"]
+margin_left = 320.0
+margin_right = 876.0
+margin_bottom = 324.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 40
+columns = 2
+
+[node name="LabelActionButton" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+margin_top = 25.0
+margin_right = 286.0
+margin_bottom = 73.0
+theme = ExtResource( 1 )
+text = "Action Button"
+
+[node name="TextureButtonAction" type="TextureButton" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+margin_left = 458.0
+margin_right = 556.0
+margin_bottom = 98.0
+size_flags_horizontal = 10
+texture_normal = ExtResource( 4 )
+
+[node name="LabelCombatButton" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+margin_top = 163.0
+margin_right = 286.0
+margin_bottom = 211.0
+theme = ExtResource( 1 )
+text = "Combat Button"
+
+[node name="TextureButtonCombat" type="TextureButton" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+margin_left = 458.0
+margin_top = 138.0
+margin_right = 556.0
+margin_bottom = 236.0
+size_flags_horizontal = 10
+texture_normal = ExtResource( 4 )
+
+[node name="LabelDefenseButton" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+margin_top = 276.0
+margin_right = 286.0
+margin_bottom = 324.0
+theme = ExtResource( 1 )
+text = "Combat Button"
+
+[node name="TextureButtonDefense" type="TextureButton" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+visible = false
+margin_left = 498.0
+margin_top = 276.0
+margin_right = 596.0
+margin_bottom = 374.0
+size_flags_horizontal = 10
+texture_normal = ExtResource( 4 )
 
 [node name="Misc" type="Tabs" parent="Tabs"]
 visible = false
@@ -330,3 +484,4 @@ columns = 2
 [connection signal="value_changed" from="Tabs/Audio/Margin/Grid/BarSfxVolume" to="." method="_on_BarSfxVolume_value_changed"]
 [connection signal="toggled" from="Tabs/Audio/Margin/Grid/CheckBoxHeadphones" to="." method="_on_CheckBoxHeadphones_toggled"]
 [connection signal="toggled" from="Tabs/Audio/Margin/Grid/CheckBoxMono" to="." method="_on_CheckBoxMono_toggled"]
+[connection signal="button_down" from="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer/TextureButtonAction" to="." method="_on_TextureButtonAction_button_down"]

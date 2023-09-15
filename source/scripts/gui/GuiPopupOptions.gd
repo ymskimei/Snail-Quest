@@ -155,7 +155,6 @@ func select_resolution(index):
 func select_filter(index):
 	var size = filter_dict.get(filter.get_item_text(index))
 	GlobalManager.screen.set_type(index)
-	
 
 #func _on_ButtonRight_pressed():
 #	$Tabs.current_tab += 1
@@ -165,3 +164,5 @@ func select_filter(index):
 #	$Tabs.current_tab -= 1
 #	#current = clamp(current, 0, 3)
 
+func _on_TextureButtonAction_button_down():
+	pass # Replace with function body.
