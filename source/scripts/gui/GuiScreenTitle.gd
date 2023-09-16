@@ -37,6 +37,7 @@ func _physics_process(_delta: float) -> void:
 	#cam.translation.x = lerp(cam.translation.x, Input.get_action_strength("cam_left") * 0.2 - Input.get_action_strength("cam_right") * 0.2, 0.1)
 
 func _on_StartButton_pressed() -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
 	var fade = $GuiTransition/AnimationPlayer
 	fade.play("GuiTransitionFade")
 	#anim.play("GuiLogoDisappear")
@@ -45,6 +46,7 @@ func _on_StartButton_pressed() -> void:
 	queue_free()
 
 func _on_OptionsButton_pressed() -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
 	screen_options.popup_centered()
 
 func set_title_splash() -> void:
