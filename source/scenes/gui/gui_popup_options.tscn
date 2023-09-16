@@ -1,11 +1,105 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=1]
 [ext_resource path="res://source/scripts/gui/GuiPopupOptions.gd" type="Script" id=2]
 [ext_resource path="res://assets/texture/gui/gui_options.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/gui/gui_button_temp.png" type="Texture" id=4]
 
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+// MODES
+// 0 - DEBUG
+// 1 - MULTIPLY
+// 2 - SCREEN
+// 3 - SOFTLIGHT
+// 4 - HARDLIGHT
+// 5 - OVERLAY
+uniform int mode :hint_range(0,5) = 5;
+uniform bool linearColorSpace = false;
+uniform vec4 color1 :hint_color = vec4(1, 0.5, 0.8, 1);
+uniform vec4 color2 :hint_color = vec4(0.4, 0.8, 1, 1);
+uniform vec2 direction = vec2(1.0, 1.0);
+uniform float opacity :hint_range(0, 1) = 0.5;
+
+ vec3 srgb_to_linear(vec3 c){
+	return c * (c * (c * 0.305306011 + 0.682171111) + 0.012522878);
+}
+
+vec3 linear_to_srgb(vec3 c){
+	return max(1.055 * pow(c, vec3(0.416666667)) - 0.055, 0.0);
+}
+
+void fragment(){
+	vec2 uv = FRAGCOORD.xy / (1.0 / SCREEN_PIXEL_SIZE).xy;
+	vec4 src = texture(SCREEN_TEXTURE, uv);
+	
+	vec3 c_a = src.rgb;
+	vec3 grad1 = color1.rgb;
+	vec3 grad2 = color2.rgb;
+	vec3 c_f;
+	
+	if (linearColorSpace){ 
+		c_a = linear_to_srgb(c_a);
+		grad1 = linear_to_srgb(grad1);
+		grad2 = linear_to_srgb(grad2);
+	}
+
+	float param = dot(uv - 0.5, direction);
+	vec3 c_b = mix(grad1, grad2, param + 0.5);
+	
+	if (mode == 0){       // DEBUG
+		c_f = c_b;
+	}else if (mode == 1){ // MULTIPLY
+		c_f = c_a * c_b;
+	}else if (mode == 2){ // SCREEN
+		c_f = 1.0 - (1.0 - c_a) * (1.0 - c_b);
+	}else if (mode == 3){ // SOFTLIGHT
+		vec3 c_u = c_a * c_b * 2.0 + (1.0 - c_b * 2.0) * c_a * c_a;
+		vec3 c_d = (1.0 - c_b) * c_a * 2.0 + (c_b * 2.0 - 1.0) * sqrt(c_a);
+		c_f = mix(c_u, c_d, c_b + 0.5);
+	}else if (mode == 4){ // HARDLIGHT
+		vec3 c_u = c_a * c_b * 2.0;
+		vec3 c_d = 1.0 - (1.0 - c_a) * (1.0 - c_b) * 2.0;
+		c_f = mix(c_u, c_d, c_b + 0.5);
+	}else if (mode == 5){ // OVERLAY
+		vec3 c_u = c_a * c_b * 2.0;
+		vec3 c_d = 1.0 - (1.0 - c_a) * (1.0 - c_b) * 2.0;
+		c_f = mix (c_u, c_d, c_a + 0.5);
+	}
+	
+	if (linearColorSpace){
+		c_f = srgb_to_linear(c_f);
+	}
+
+	COLOR = vec4(c_f, opacity);
+    }"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/mode = 1
+shader_param/linearColorSpace = false
+shader_param/color1 = Color( 0.0705882, 0.0627451, 0.356863, 1 )
+shader_param/color2 = Color( 0.113725, 0.235294, 0.458824, 1 )
+shader_param/direction = Vector2( 0, 3 )
+shader_param/opacity = 0.7
+
 [node name="GuiOptions" type="Popup"]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.337255 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -14,42 +108,46 @@ margin_left = -640.0
 margin_top = -360.0
 margin_right = 640.0
 margin_bottom = 360.0
-rect_min_size = Vector2( 1280, 720 )
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
 
-[node name="Background" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Background" type="TextureRect" parent="MarginContainer"]
+margin_right = 1280.0
+margin_bottom = 720.0
 texture = ExtResource( 3 )
 expand = true
 
-[node name="ButtonLeft" type="Button" parent="."]
-margin_right = 350.0
-margin_bottom = 58.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Background"]
+margin_right = 1280.0
+margin_bottom = 720.0
+alignment = 1
+
+[node name="ButtonLeft" type="Button" parent="MarginContainer/Background/HBoxContainer"]
+margin_right = 638.0
+margin_bottom = 48.0
 focus_neighbour_right = NodePath("../ButtonRight")
+size_flags_horizontal = 3
+size_flags_vertical = 0
 text = "←"
 
-[node name="ButtonRight" type="Button" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -350.0
-margin_bottom = 58.0
+[node name="ButtonRight" type="Button" parent="MarginContainer/Background/HBoxContainer"]
+margin_left = 642.0
+margin_right = 1280.0
+margin_bottom = 48.0
 focus_neighbour_left = NodePath("../ButtonLeft")
+size_flags_horizontal = 3
+size_flags_vertical = 0
 text = "→"
 
-[node name="Tabs" type="TabContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Tabs" type="TabContainer" parent="MarginContainer/Background"]
+margin_right = 1280.0
+margin_bottom = 720.0
 
-[node name="Video" type="Tabs" parent="Tabs"]
-visible = false
+[node name="Video" type="Tabs" parent="MarginContainer/Background/Tabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 58.0
 theme = ExtResource( 1 )
 
-[node name="Margin" type="MarginContainer" parent="Tabs/Video"]
+[node name="Margin" type="MarginContainer" parent="MarginContainer/Background/Tabs/Video"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 32
@@ -57,83 +155,83 @@ custom_constants/margin_top = 32
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
 
-[node name="Grid" type="GridContainer" parent="Tabs/Video/Margin"]
+[node name="Grid" type="GridContainer" parent="MarginContainer/Background/Tabs/Video/Margin"]
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 1248.0
-margin_bottom = 630.0
+margin_bottom = 644.0
 custom_constants/vseparation = 32
 custom_constants/hseparation = 0
 columns = 2
 
-[node name="LabelFullscreen" type="Label" parent="Tabs/Video/Margin/Grid"]
-margin_top = 8.0
-margin_right = 350.0
-margin_bottom = 56.0
+[node name="LabelFullscreen" type="Label" parent="MarginContainer/Background/Tabs/Video/Margin/Grid"]
+margin_top = 25.0
+margin_right = 556.0
+margin_bottom = 73.0
 text = "GUI_OPTIONS_FULLSCREEN"
 
-[node name="CheckBoxFullscreen" type="CheckBox" parent="Tabs/Video/Margin/Grid"]
-margin_left = 1152.0
+[node name="CheckBoxFullscreen" type="CheckBox" parent="MarginContainer/Background/Tabs/Video/Margin/Grid"]
+margin_left = 1118.0
 margin_right = 1216.0
-margin_bottom = 64.0
+margin_bottom = 98.0
 size_flags_horizontal = 10
 align = 2
 
-[node name="LabelResolution" type="Label" parent="Tabs/Video/Margin/Grid"]
-margin_top = 104.0
-margin_right = 350.0
-margin_bottom = 152.0
+[node name="LabelResolution" type="Label" parent="MarginContainer/Background/Tabs/Video/Margin/Grid"]
+margin_top = 154.0
+margin_right = 556.0
+margin_bottom = 202.0
 text = "GUI_OPTIONS_RESOLUTION"
 
-[node name="ButtonResolution" type="OptionButton" parent="Tabs/Video/Margin/Grid"]
-margin_left = 1006.0
-margin_top = 96.0
+[node name="ButtonResolution" type="OptionButton" parent="MarginContainer/Background/Tabs/Video/Margin/Grid"]
+margin_left = 974.0
+margin_top = 130.0
 margin_right = 1216.0
-margin_bottom = 160.0
+margin_bottom = 226.0
 size_flags_horizontal = 10
 text = "Item 0"
 
-[node name="LabelFilter" type="Label" parent="Tabs/Video/Margin/Grid"]
-margin_top = 200.0
-margin_right = 350.0
-margin_bottom = 248.0
+[node name="LabelFilter" type="Label" parent="MarginContainer/Background/Tabs/Video/Margin/Grid"]
+margin_top = 282.0
+margin_right = 556.0
+margin_bottom = 330.0
 text = "GUI_OPTIONS_FILTER"
 
-[node name="ButtonFilter" type="OptionButton" parent="Tabs/Video/Margin/Grid"]
-margin_left = 1120.0
-margin_top = 192.0
+[node name="ButtonFilter" type="OptionButton" parent="MarginContainer/Background/Tabs/Video/Margin/Grid"]
+margin_left = 1088.0
+margin_top = 258.0
 margin_right = 1216.0
-margin_bottom = 256.0
+margin_bottom = 354.0
 size_flags_horizontal = 10
 
-[node name="LabelFps" type="Label" parent="Tabs/Video/Margin/Grid"]
-margin_top = 296.0
-margin_right = 350.0
-margin_bottom = 344.0
+[node name="LabelFps" type="Label" parent="MarginContainer/Background/Tabs/Video/Margin/Grid"]
+margin_top = 410.0
+margin_right = 556.0
+margin_bottom = 458.0
 text = "GUI_OPTIONS_FPS"
 
-[node name="ButtonFps" type="OptionButton" parent="Tabs/Video/Margin/Grid"]
-margin_left = 1120.0
-margin_top = 288.0
+[node name="ButtonFps" type="OptionButton" parent="MarginContainer/Background/Tabs/Video/Margin/Grid"]
+margin_left = 1088.0
+margin_top = 386.0
 margin_right = 1216.0
-margin_bottom = 352.0
+margin_bottom = 482.0
 size_flags_horizontal = 10
 
-[node name="LabelVsync" type="Label" parent="Tabs/Video/Margin/Grid"]
-margin_top = 392.0
-margin_right = 350.0
-margin_bottom = 440.0
+[node name="LabelVsync" type="Label" parent="MarginContainer/Background/Tabs/Video/Margin/Grid"]
+margin_top = 539.0
+margin_right = 556.0
+margin_bottom = 587.0
 text = "GUI_OPTIONS_VSYNC"
 
-[node name="CheckBoxVsync" type="CheckBox" parent="Tabs/Video/Margin/Grid"]
-margin_left = 1152.0
-margin_top = 384.0
+[node name="CheckBoxVsync" type="CheckBox" parent="MarginContainer/Background/Tabs/Video/Margin/Grid"]
+margin_left = 1118.0
+margin_top = 514.0
 margin_right = 1216.0
-margin_bottom = 448.0
+margin_bottom = 612.0
 size_flags_horizontal = 10
 align = 2
 
-[node name="Audio" type="Tabs" parent="Tabs"]
+[node name="Audio" type="Tabs" parent="MarginContainer/Background/Tabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -143,7 +241,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 theme = ExtResource( 1 )
 
-[node name="Margin" type="MarginContainer" parent="Tabs/Audio"]
+[node name="Margin" type="MarginContainer" parent="MarginContainer/Background/Tabs/Audio"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -157,7 +255,7 @@ custom_constants/margin_top = 32
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
 
-[node name="Grid" type="GridContainer" parent="Tabs/Audio/Margin"]
+[node name="Grid" type="GridContainer" parent="MarginContainer/Background/Tabs/Audio/Margin"]
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 1445.0
@@ -166,13 +264,13 @@ custom_constants/vseparation = 40
 custom_constants/hseparation = 0
 columns = 2
 
-[node name="LabelVolumeMaster" type="Label" parent="Tabs/Audio/Margin/Grid"]
+[node name="LabelVolumeMaster" type="Label" parent="MarginContainer/Background/Tabs/Audio/Margin/Grid"]
 margin_right = 333.0
 margin_bottom = 48.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_VOLUME_MASTER"
 
-[node name="BarVolumeMaster" type="HSlider" parent="Tabs/Audio/Margin/Grid"]
+[node name="BarVolumeMaster" type="HSlider" parent="MarginContainer/Background/Tabs/Audio/Margin/Grid"]
 margin_left = 440.0
 margin_right = 1208.0
 margin_bottom = 48.0
@@ -184,14 +282,14 @@ step = 0.1
 tick_count = 10
 ticks_on_borders = true
 
-[node name="LabelVolumeMusic" type="Label" parent="Tabs/Audio/Margin/Grid"]
+[node name="LabelVolumeMusic" type="Label" parent="MarginContainer/Background/Tabs/Audio/Margin/Grid"]
 margin_top = 88.0
 margin_right = 333.0
 margin_bottom = 136.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_VOLUME_MUSIC"
 
-[node name="BarVolumeMusic" type="HSlider" parent="Tabs/Audio/Margin/Grid"]
+[node name="BarVolumeMusic" type="HSlider" parent="MarginContainer/Background/Tabs/Audio/Margin/Grid"]
 margin_left = 440.0
 margin_top = 88.0
 margin_right = 1208.0
@@ -204,14 +302,14 @@ step = 0.1
 tick_count = 10
 ticks_on_borders = true
 
-[node name="LabelVolumeSfx" type="Label" parent="Tabs/Audio/Margin/Grid"]
+[node name="LabelVolumeSfx" type="Label" parent="MarginContainer/Background/Tabs/Audio/Margin/Grid"]
 margin_top = 176.0
 margin_right = 333.0
 margin_bottom = 224.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_VOLUME_SFX"
 
-[node name="BarVolumeSfx" type="HSlider" parent="Tabs/Audio/Margin/Grid"]
+[node name="BarVolumeSfx" type="HSlider" parent="MarginContainer/Background/Tabs/Audio/Margin/Grid"]
 margin_left = 440.0
 margin_top = 176.0
 margin_right = 1208.0
@@ -224,14 +322,14 @@ step = 0.1
 tick_count = 10
 ticks_on_borders = true
 
-[node name="LabelHeadphones" type="Label" parent="Tabs/Audio/Margin/Grid"]
+[node name="LabelHeadphones" type="Label" parent="MarginContainer/Background/Tabs/Audio/Margin/Grid"]
 margin_top = 272.0
 margin_right = 333.0
 margin_bottom = 320.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_HEADPHONES"
 
-[node name="CheckBoxHeadphones" type="CheckBox" parent="Tabs/Audio/Margin/Grid"]
+[node name="CheckBoxHeadphones" type="CheckBox" parent="MarginContainer/Background/Tabs/Audio/Margin/Grid"]
 margin_left = 1144.0
 margin_top = 264.0
 margin_right = 1208.0
@@ -239,14 +337,14 @@ margin_bottom = 328.0
 size_flags_horizontal = 10
 align = 2
 
-[node name="LabelMono" type="Label" parent="Tabs/Audio/Margin/Grid"]
+[node name="LabelMono" type="Label" parent="MarginContainer/Background/Tabs/Audio/Margin/Grid"]
 margin_top = 376.0
 margin_right = 333.0
 margin_bottom = 424.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_MONO"
 
-[node name="CheckBoxMono" type="CheckBox" parent="Tabs/Audio/Margin/Grid"]
+[node name="CheckBoxMono" type="CheckBox" parent="MarginContainer/Background/Tabs/Audio/Margin/Grid"]
 margin_left = 1144.0
 margin_top = 368.0
 margin_right = 1208.0
@@ -254,7 +352,7 @@ margin_bottom = 432.0
 size_flags_horizontal = 10
 align = 2
 
-[node name="Controls" type="Tabs" parent="Tabs"]
+[node name="Controls" type="Tabs" parent="MarginContainer/Background/Tabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -263,7 +361,7 @@ margin_top = 58.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Margin" type="MarginContainer" parent="Tabs/Controls"]
+[node name="Margin" type="MarginContainer" parent="MarginContainer/Background/Tabs/Controls"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -277,33 +375,33 @@ custom_constants/margin_top = 32
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Tabs/Controls/Margin"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Background/Tabs/Controls/Margin"]
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 1240.0
 margin_bottom = 608.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Tabs/Controls/Margin/ScrollContainer"]
-margin_right = 1892.0
-margin_bottom = 624.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer"]
+margin_right = 1960.0
+margin_bottom = 658.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 32
 
-[node name="Grid" type="GridContainer" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
+[node name="Grid" type="GridContainer" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
 margin_right = 1892.0
 margin_bottom = 152.0
 custom_constants/vseparation = 40
 custom_constants/hseparation = 0
 columns = 2
 
-[node name="LabelCameraSensitivity" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
+[node name="LabelCameraSensitivity" type="Label" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
 margin_right = 533.0
 margin_bottom = 48.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_SENSITIVITY"
 
-[node name="BarCameraSensitivity" type="HSlider" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
+[node name="BarCameraSensitivity" type="HSlider" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
 margin_left = 1124.0
 margin_right = 1892.0
 margin_bottom = 48.0
@@ -315,35 +413,35 @@ step = 0.1
 tick_count = 10
 ticks_on_borders = true
 
-[node name="LabelCameraInvert" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
+[node name="LabelCameraInvert" type="Label" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
 margin_top = 96.0
 margin_right = 533.0
 margin_bottom = 144.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_INVERT"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid"]
 margin_left = 533.0
 margin_top = 88.0
 margin_right = 1892.0
 margin_bottom = 152.0
 custom_constants/separation = 64
 
-[node name="LabelHorizontal" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
+[node name="LabelHorizontal" type="Label" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
 margin_top = 8.0
 margin_right = 550.0
 margin_bottom = 56.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_HORIZONTAL"
 
-[node name="CheckBoxHorizontal" type="CheckBox" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
+[node name="CheckBoxHorizontal" type="CheckBox" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
 margin_left = 614.0
 margin_right = 678.0
 margin_bottom = 64.0
 size_flags_horizontal = 10
 align = 2
 
-[node name="LabelVertical" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
+[node name="LabelVertical" type="Label" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
 margin_left = 742.0
 margin_top = 8.0
 margin_right = 1231.0
@@ -351,33 +449,33 @@ margin_bottom = 56.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_VERTICAL"
 
-[node name="CheckBoxVertical" type="CheckBox" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
+[node name="CheckBoxVertical" type="CheckBox" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/Grid/HBoxContainer"]
 margin_left = 1295.0
 margin_right = 1359.0
 margin_bottom = 64.0
 size_flags_horizontal = 10
 align = 2
 
-[node name="HSeparator" type="HSeparator" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
 margin_top = 184.0
 margin_right = 1892.0
 margin_bottom = 188.0
 
-[node name="LabelControls" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
+[node name="LabelControls" type="Label" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
 margin_top = 220.0
 margin_right = 1892.0
 margin_bottom = 268.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_CONTROLS"
 
-[node name="MarginContainer" type="MarginContainer" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer"]
 margin_top = 300.0
 margin_right = 1892.0
 margin_bottom = 624.0
 custom_constants/margin_right = 320
 custom_constants/margin_left = 320
 
-[node name="GridContainer" type="GridContainer" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer"]
 margin_left = 320.0
 margin_right = 1572.0
 margin_bottom = 324.0
@@ -386,28 +484,28 @@ size_flags_vertical = 3
 custom_constants/vseparation = 40
 columns = 2
 
-[node name="LabelButtonAction" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+[node name="LabelButtonAction" type="Label" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
 margin_top = 25.0
 margin_right = 665.0
 margin_bottom = 73.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_BUTTON_ACTION"
 
-[node name="TextureButtonAction" type="TextureButton" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+[node name="TextureButtonAction" type="TextureButton" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
 margin_left = 1154.0
 margin_right = 1252.0
 margin_bottom = 98.0
 size_flags_horizontal = 10
 texture_normal = ExtResource( 4 )
 
-[node name="LabelButtonCombat" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+[node name="LabelButtonCombat" type="Label" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
 margin_top = 163.0
 margin_right = 665.0
 margin_bottom = 211.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_BUTTON_COMBAT"
 
-[node name="TextureButtonCombat" type="TextureButton" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+[node name="TextureButtonCombat" type="TextureButton" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
 margin_left = 1154.0
 margin_top = 138.0
 margin_right = 1252.0
@@ -415,14 +513,14 @@ margin_bottom = 236.0
 size_flags_horizontal = 10
 texture_normal = ExtResource( 4 )
 
-[node name="LabelButtonDefense" type="Label" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+[node name="LabelButtonDefense" type="Label" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
 margin_top = 276.0
 margin_right = 665.0
 margin_bottom = 324.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_BUTTON_DEFENSE"
 
-[node name="TextureButtonDefense" type="TextureButton" parent="Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+[node name="TextureButtonDefense" type="TextureButton" parent="MarginContainer/Background/Tabs/Controls/Margin/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
 visible = false
 margin_left = 498.0
 margin_top = 276.0
@@ -431,7 +529,8 @@ margin_bottom = 374.0
 size_flags_horizontal = 10
 texture_normal = ExtResource( 4 )
 
-[node name="Misc" type="Tabs" parent="Tabs"]
+[node name="Misc" type="Tabs" parent="MarginContainer/Background/Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -440,7 +539,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 theme = ExtResource( 1 )
 
-[node name="Margin" type="MarginContainer" parent="Tabs/Misc"]
+[node name="Margin" type="MarginContainer" parent="MarginContainer/Background/Tabs/Misc"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -454,7 +553,7 @@ custom_constants/margin_top = 32
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
 
-[node name="Grid" type="GridContainer" parent="Tabs/Misc/Margin"]
+[node name="Grid" type="GridContainer" parent="MarginContainer/Background/Tabs/Misc/Margin"]
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 1240.0
@@ -463,30 +562,30 @@ custom_constants/vseparation = 40
 custom_constants/hseparation = 0
 columns = 2
 
-[node name="LabelLanguage" type="Label" parent="Tabs/Misc/Margin/Grid"]
+[node name="LabelLanguage" type="Label" parent="MarginContainer/Background/Tabs/Misc/Margin/Grid"]
 margin_top = 8.0
 margin_right = 510.0
 margin_bottom = 56.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_LANGUAGE"
 
-[node name="ButtonLanguage" type="OptionButton" parent="Tabs/Misc/Margin/Grid"]
+[node name="ButtonLanguage" type="OptionButton" parent="MarginContainer/Background/Tabs/Misc/Margin/Grid"]
 margin_left = 1112.0
 margin_right = 1208.0
 margin_bottom = 64.0
 size_flags_horizontal = 10
 
-[connection signal="pressed" from="ButtonLeft" to="." method="_on_ButtonLeft_pressed"]
-[connection signal="pressed" from="ButtonRight" to="." method="_on_ButtonRight_pressed"]
-[connection signal="tab_changed" from="Tabs" to="." method="_on_Tabs_tab_changed"]
-[connection signal="toggled" from="Tabs/Video/Margin/Grid/CheckBoxFullscreen" to="." method="_on_CheckBoxFullscreen_toggled"]
-[connection signal="item_selected" from="Tabs/Video/Margin/Grid/ButtonResolution" to="." method="_on_ButtonResolution_item_selected"]
-[connection signal="item_selected" from="Tabs/Video/Margin/Grid/ButtonFilter" to="." method="_on_ButtonFilter_item_selected"]
-[connection signal="item_selected" from="Tabs/Video/Margin/Grid/ButtonFps" to="." method="_on_ButtonFps_item_selected"]
-[connection signal="toggled" from="Tabs/Video/Margin/Grid/CheckBoxVsync" to="." method="_on_CheckBoxVsync_toggled"]
-[connection signal="value_changed" from="Tabs/Audio/Margin/Grid/BarVolumeMaster" to="." method="_on_BarVolumeMaster_value_changed"]
-[connection signal="value_changed" from="Tabs/Audio/Margin/Grid/BarVolumeMusic" to="." method="_on_BarVolumeMusic_value_changed"]
-[connection signal="value_changed" from="Tabs/Audio/Margin/Grid/BarVolumeSfx" to="." method="_on_BarVolumeSfx_value_changed"]
-[connection signal="toggled" from="Tabs/Audio/Margin/Grid/CheckBoxHeadphones" to="." method="_on_CheckBoxHeadphones_toggled"]
-[connection signal="toggled" from="Tabs/Audio/Margin/Grid/CheckBoxMono" to="." method="_on_CheckBoxMono_toggled"]
-[connection signal="item_selected" from="Tabs/Misc/Margin/Grid/ButtonLanguage" to="." method="_on_ButtonLanguage_item_selected"]
+[connection signal="pressed" from="MarginContainer/Background/HBoxContainer/ButtonLeft" to="." method="_on_ButtonLeft_pressed"]
+[connection signal="pressed" from="MarginContainer/Background/HBoxContainer/ButtonRight" to="." method="_on_ButtonRight_pressed"]
+[connection signal="tab_changed" from="MarginContainer/Background/Tabs" to="." method="_on_Tabs_tab_changed"]
+[connection signal="toggled" from="MarginContainer/Background/Tabs/Video/Margin/Grid/CheckBoxFullscreen" to="." method="_on_CheckBoxFullscreen_toggled"]
+[connection signal="item_selected" from="MarginContainer/Background/Tabs/Video/Margin/Grid/ButtonResolution" to="." method="_on_ButtonResolution_item_selected"]
+[connection signal="item_selected" from="MarginContainer/Background/Tabs/Video/Margin/Grid/ButtonFilter" to="." method="_on_ButtonFilter_item_selected"]
+[connection signal="item_selected" from="MarginContainer/Background/Tabs/Video/Margin/Grid/ButtonFps" to="." method="_on_ButtonFps_item_selected"]
+[connection signal="toggled" from="MarginContainer/Background/Tabs/Video/Margin/Grid/CheckBoxVsync" to="." method="_on_CheckBoxVsync_toggled"]
+[connection signal="value_changed" from="MarginContainer/Background/Tabs/Audio/Margin/Grid/BarVolumeMaster" to="." method="_on_BarVolumeMaster_value_changed"]
+[connection signal="value_changed" from="MarginContainer/Background/Tabs/Audio/Margin/Grid/BarVolumeMusic" to="." method="_on_BarVolumeMusic_value_changed"]
+[connection signal="value_changed" from="MarginContainer/Background/Tabs/Audio/Margin/Grid/BarVolumeSfx" to="." method="_on_BarVolumeSfx_value_changed"]
+[connection signal="toggled" from="MarginContainer/Background/Tabs/Audio/Margin/Grid/CheckBoxHeadphones" to="." method="_on_CheckBoxHeadphones_toggled"]
+[connection signal="toggled" from="MarginContainer/Background/Tabs/Audio/Margin/Grid/CheckBoxMono" to="." method="_on_CheckBoxMono_toggled"]
+[connection signal="item_selected" from="MarginContainer/Background/Tabs/Misc/Margin/Grid/ButtonLanguage" to="." method="_on_ButtonLanguage_item_selected"]

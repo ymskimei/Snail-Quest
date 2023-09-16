@@ -1,8 +1,9 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=1]
 [ext_resource path="res://source/scripts/gui/GuiScreenTitle.gd" type="Script" id=2]
 [ext_resource path="res://source/scenes/gui/gui_popup_options.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/resource/animation/CamWobble.tres" type="Animation" id=4]
 [ext_resource path="res://source/scenes/environment_default.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/shader/cel.shader" type="Shader" id=6]
 [ext_resource path="res://assets/model/logo.mesh" type="ArrayMesh" id=7]
@@ -246,6 +247,7 @@ far = 512.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/SpringArm"]
 anims/CamTitleStart = ExtResource( 15 )
+anims/CamWobble = ExtResource( 4 )
 
 [node name="EnvironmentDefault" parent="World" instance=ExtResource( 5 )]
 
@@ -1712,6 +1714,7 @@ alignment = 1
 [node name="LabelSplash" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
 margin_right = 1856.0
 margin_bottom = 49.0
+rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 2
 bbcode_enabled = true
@@ -1738,6 +1741,7 @@ alignment = 1
 margin_top = 329.0
 margin_right = 693.0
 margin_bottom = 378.0
+rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 12
 bbcode_enabled = true
