@@ -21,6 +21,7 @@ func _ready() -> void:
 	anim_daisy.play("DaisyBlossom")
 	anim_logo.play("GuiLogoAppear")
 	yield(anim_daisy, "animation_finished")
+	anim_cam.play("CamWobble")
 	anim_daisy.play("DaisyWiggle")
 	anim_logo.play("GuiLogoIdle")
 

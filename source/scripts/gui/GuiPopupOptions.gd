@@ -1,11 +1,11 @@
 extends Popup
 
-onready var fullscreen: CheckBox = $Tabs/Video/Margin/Grid/CheckBoxFullscreen
-onready var filter: OptionButton = $Tabs/Video/Margin/Grid/ButtonFilter
-onready var resolution: OptionButton = $Tabs/Video/Margin/Grid/ButtonResolution
-onready var framerate: OptionButton = $Tabs/Video/Margin/Grid/ButtonFps
-onready var vsync: CheckBox = $Tabs/Video/Margin/Grid/CheckBoxVsync
-onready var language: OptionButton = $Tabs/Misc/Margin/Grid/ButtonLanguage
+onready var fullscreen: CheckBox = $MarginContainer/Background/Tabs/Video/Margin/Grid/CheckBoxFullscreen
+onready var filter: OptionButton = $MarginContainer/Background/Tabs/Video/Margin/Grid/ButtonFilter
+onready var resolution: OptionButton = $MarginContainer/Background/Tabs/Video/Margin/Grid/ButtonResolution
+onready var framerate: OptionButton = $MarginContainer/Background/Tabs/Video/Margin/Grid/ButtonFps
+onready var vsync: CheckBox = $MarginContainer/Background/Tabs/Video/Margin/Grid/CheckBoxVsync
+onready var language: OptionButton = $MarginContainer/Background/Tabs/Misc/Margin/Grid/ButtonLanguage
 
 var resolution_dict: Dictionary = {
 	"2560x1440 (16:9)": Vector2(2560, 1440),

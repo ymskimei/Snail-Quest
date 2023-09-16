@@ -209,26 +209,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/object/RoomTransition.gd"
 }, {
-"base": "Reference",
-"class": "SkCsvWriter",
-"language": "GDScript",
-"path": "res://addons/string_keys/csv_writer.gd"
-}, {
-"base": "Reference",
-"class": "SkFileFinder",
-"language": "GDScript",
-"path": "res://addons/string_keys/file_finder.gd"
-}, {
-"base": "Reference",
-"class": "SkKeyFinder",
-"language": "GDScript",
-"path": "res://addons/string_keys/key_finder.gd"
-}, {
-"base": "Reference",
-"class": "SkModifiedFileTracker",
-"language": "GDScript",
-"path": "res://addons/string_keys/modified_file_tracker.gd"
-}, {
 "base": "Node",
 "class": "SnailQuest",
 "language": "GDScript",
@@ -263,16 +243,6 @@ _global_script_classes=[ {
 "class": "StingerContainer",
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/containers/StingerContainer.gd"
-}, {
-"base": "Reference",
-"class": "StringKeys",
-"language": "GDScript",
-"path": "res://addons/string_keys/string_keys.gd"
-}, {
-"base": "Resource",
-"class": "StringKeysOptions",
-"language": "GDScript",
-"path": "res://addons/string_keys/string_keys_options.gd"
 }, {
 "base": "Node",
 "class": "TrackContainer",
@@ -320,10 +290,6 @@ _global_script_class_icons={
 "ResourceMusic": "",
 "ResourceSign": "",
 "RoomTransition": "",
-"SkCsvWriter": "",
-"SkFileFinder": "",
-"SkKeyFinder": "",
-"SkModifiedFileTracker": "",
 "SnailQuest": "",
 "Song": "",
 "Sound": "",
@@ -331,8 +297,6 @@ _global_script_class_icons={
 "Sound3D": "",
 "SoundBooth": "",
 "StingerContainer": "",
-"StringKeys": "",
-"StringKeysOptions": "",
 "TrackContainer": ""
 }
 

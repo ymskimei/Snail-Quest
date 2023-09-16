@@ -118,6 +118,7 @@ script = ExtResource( 4 )
 script = ExtResource( 7 )
 
 [node name="CameraLens" type="Camera" parent="."]
+transform = Transform( 0.999994, 0, 0.00349065, 0, 1, 0, -0.00349065, 0, 0.999994, 0, 0, 0 )
 fov = 60.0
 near = 0.01
 far = 5120.0
