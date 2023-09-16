@@ -269,6 +269,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/containers/StingerContainer.gd"
 }, {
+"base": "Reference",
+"class": "StringKeys",
+"language": "GDScript",
+"path": "res://addons/string_keys/string_keys.gd"
+}, {
+"base": "Resource",
+"class": "StringKeysOptions",
+"language": "GDScript",
+"path": "res://addons/string_keys/string_keys_options.gd"
+}, {
 "base": "Node",
 "class": "TrackContainer",
 "language": "GDScript",
@@ -324,6 +334,8 @@ _global_script_class_icons={
 "SoundBooth": "",
 "StateMain": "",
 "StingerContainer": "",
+"StringKeys": "",
+"StringKeysOptions": "",
 "TrackContainer": ""
 }
 
@@ -701,6 +713,11 @@ gui_options={
 3d_physics/layer_3="World"
 3d_physics/layer_4="Object"
 3d_physics/layer_5="Interaction"
+
+[locale]
+
+translations=PoolStringArray( "res://translation.en_GB.translation", "res://translation.en_US.translation", "res://translation.es_AR.translation", "res://translation.es_MX.translation", "res://translation.ja_JP.translation", "res://translation.pr.translation" )
+locale_filter=[ 0, [  ] ]
 
 [physics]
 
