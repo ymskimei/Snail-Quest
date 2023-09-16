@@ -8,36 +8,36 @@ onready var vsync: CheckBox = $MarginContainer/Background/Tabs/Video/Margin/Grid
 onready var language: OptionButton = $MarginContainer/Background/Tabs/Misc/Margin/Grid/ButtonLanguage
 
 var resolution_dict: Dictionary = {
-	"2560x1440 (16:9)": Vector2(2560, 1440),
-	"1920x1080 (16:9)": Vector2(1920, 1080),
-	"1280x720 (16:9)": Vector2(1280, 720),
-	"1024x768 (4:3)": Vector2(1024, 768),
-	"800x600 (4:3)": Vector2(800, 600),
-	"640x480 (4:3)": Vector2(640, 480)
+	"GUI_OPTIONS_RESOLUTION_480": Vector2(640, 480),
+	"GUI_OPTIONS_RESOLUTION_600": Vector2(800, 600),
+	"GUI_OPTIONS_RESOLUTION_768": Vector2(1024, 768),
+	"GUI_OPTIONS_RESOLUTION_720": Vector2(1280, 720),
+	"GUI_OPTIONS_RESOLUTION_1080": Vector2(1920, 1080),
+	"GUI_OPTIONS_RESOLUTION_1440": Vector2(2560, 1440)
 }
 
 var filter_dict: Dictionary = {
-	"Contrasted": 0,
-	"Monochrome": 1,
-	"Protanopia": 2,
-	"Deuteranopia": 3,
-	"Tritanopia": 4,
-	"Achromatopsia": 5
+	"GUI_OPTIONS_FILTER_CONTRASTED": 0,
+	"GUI_OPTIONS_FILTER_MONOCHROME": 1,
+	"GUI_OPTIONS_FILTER_PROTANOPIA": 2,
+	"GUI_OPTIONS_FILTER_DEUTERANOPIA": 3,
+	"GUI_OPTIONS_FILTER_TRITANOPIA": 4,
+	"GUI_OPTIONS_FILTER_ACHROMATOPSIA": 5
 }
 
 var framerate_dict: Dictionary = {
-	"30 FPS": 30,
-	"60 FPS": 60,
-	"120 FPS": 120
+	"GUI_OPTIONS_FPS_30": 30,
+	"GUI_OPTIONS_FPS_60": 60,
+	"GUI_OPTIONS_FPS_120": 120
 }
 
 var language_dict: Dictionary = {
-	"English (United States)": "en_US",
-	"English (Great Britain)": "en_GB",
-	"Español": "es_MX",
-	"Rioplatense": "es_AR",
-	"日本語": "ja_JP",
-	"Pirate": "pr"
+	"GUI_OPTIONS_LANGUAGE_EN_US": "en_US",
+	"GUI_OPTIONS_LANGUAGE_EN_GB": "en_GB",
+	"GUI_OPTIONS_LANGUAGE_ES_MX": "es_MX",
+	"GUI_OPTIONS_LANGUAGE_ES_AR": "es_AR",
+	"GUI_OPTIONS_LANGUAGE_JA_JP": "ja_JP",
+	"GUI_OPTIONS_LANGUAGE_PR": "pr"
 }
 
 var last_focus: Control
@@ -84,19 +84,24 @@ func _on_button_focus_entered() -> void:
 
 ## Video Settings
 func _on_CheckBoxFullscreen_toggled(button_pressed: bool) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
 	OS.window_fullscreen = !OS.window_fullscreen
 
 func _on_ButtonResolution_item_selected(index: int) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
 	select_resolution(index)
 
 func _on_ButtonFilter_item_selected(index: int) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
 	select_filter(index)
 
 func _on_ButtonFps_item_selected(index: int) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
 	var fps = framerate_dict.get(framerate.get_item_text(index))
 	Engine.set_target_fps(fps)
 
 func _on_CheckBoxVsync_toggled(button_pressed: bool) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
 	OS.vsync_enabled = !OS.vsync_enabled
 
 ## Audio Settings
@@ -113,9 +118,11 @@ func _on_BarVolumeSfx_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(index, linear2db(value))
 
 func _on_CheckBoxHeadphones_toggled(button_pressed: bool) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
 	pass
 
 func _on_CheckBoxMono_toggled(button_pressed: bool) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
 	var mode = AudioServer.get_bus_effect(AudioServer.get_bus_index("Mode"), 0)
 	var mast = AudioServer.get_bus_effect(AudioServer.get_bus_index("Master"), 0)
 	if !mono_audio:
@@ -129,6 +136,7 @@ func _on_CheckBoxMono_toggled(button_pressed: bool) -> void:
 
 ## Misc Settings
 func _on_ButtonLanguage_item_selected(index: int) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
 	select_language(index)
 
 func add_resolution() -> void:
