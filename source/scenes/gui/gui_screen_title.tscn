@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=1]
 [ext_resource path="res://source/scripts/gui/GuiScreenTitle.gd" type="Script" id=2]
-[ext_resource path="res://source/scenes/gui/gui_popup_options.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/gui/theme/theme_title.tres" type="Theme" id=3]
 [ext_resource path="res://assets/resource/animation/CamWobble.tres" type="Animation" id=4]
 [ext_resource path="res://source/scenes/environment_default.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/shader/cel.shader" type="Shader" id=6]
@@ -216,7 +216,7 @@ resource_name = "RESET"
 [node name="GuiTitle" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
+theme = ExtResource( 3 )
 script = ExtResource( 2 )
 
 [node name="World" type="Spatial" parent="."]
@@ -1782,8 +1782,6 @@ bbcode_enabled = true
 bbcode_text = "test"
 text = "test"
 fit_content_height = true
-
-[node name="GuiOptions" parent="." instance=ExtResource( 3 )]
 
 [node name="GuiTransition" parent="." instance=ExtResource( 10 )]
 

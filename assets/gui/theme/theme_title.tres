@@ -1,0 +1,34 @@
+[gd_resource type="Theme" load_steps=10 format=2]
+
+[ext_resource path="res://assets/gui/font/font_default.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/texture/gui/icon_box_checked.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/gui/icon_box_selections.png" type="Texture" id=3]
+[ext_resource path="res://assets/texture/gui/icon_box_unchecked.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxTexture" id=1]
+
+[sub_resource type="StyleBoxTexture" id=2]
+
+[sub_resource type="StyleBoxTexture" id=3]
+
+[sub_resource type="StyleBoxTexture" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[resource]
+default_font = ExtResource( 1 )
+Button/styles/focus = SubResource( 1 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 3 )
+Button/styles/pressed = SubResource( 4 )
+CheckBox/icons/checked = ExtResource( 2 )
+CheckBox/icons/unchecked = ExtResource( 4 )
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+Label/fonts/font = ExtResource( 1 )
+OptionButton/constants/arrow_margin = 0
+OptionButton/constants/hseparation = 32
+OptionButton/icons/arrow = ExtResource( 3 )
+SpinBox/icons/updown = ExtResource( 3 )
+TabContainer/styles/panel = SubResource( 5 )

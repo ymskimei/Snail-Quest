@@ -124,11 +124,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogic/Example Assets/History/HistoryRow.gd"
 }, {
-"base": "Node",
-"class": "InputHelper",
-"language": "GDScript",
-"path": "res://source/scripts/InputHelper.gd"
-}, {
 "base": "CanvasLayer",
 "class": "InventoryParent",
 "language": "GDScript",
@@ -273,7 +268,6 @@ _global_script_class_icons={
 "GuiConsoleCategory": "",
 "GuiConsoleCommand": "",
 "HistoryRow": "",
-"InputHelper": "",
 "InventoryParent": "",
 "ItemParent": "",
 "MainCamera": "",
@@ -334,6 +328,7 @@ MathHelper="*res://source/scripts/MathHelper.gd"
 GlobalManager="*res://source/scripts/GlobalManager.gd"
 WorldSave="*res://source/scripts/WorldSave.gd"
 AudioPlayer="*res://source/scenes/audio_player.tscn"
+InputHelper="*res://source/scripts/InputHelper.gd"
 
 [debug]
 

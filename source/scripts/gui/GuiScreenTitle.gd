@@ -1,7 +1,6 @@
 extends Control
 
 onready var default_selection: Control = $"%StartButton"
-onready var screen_options: Popup = $GuiOptions
 onready var anim_cam: AnimationPlayer = $World/SpringArm/AnimationPlayer
 onready var anim_daisy: AnimationPlayer = $World/Daisy/AnimationPlayer
 onready var anim_logo: AnimationPlayer = $World/MeshInstance/AnimationPlayer
@@ -47,7 +46,6 @@ func _on_StartButton_pressed() -> void:
 
 func _on_OptionsButton_pressed() -> void:
 	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
-	screen_options.popup_centered()
 
 func set_title_splash() -> void:
 	var splashes: Array = [

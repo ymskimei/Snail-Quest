@@ -1,4 +1,3 @@
-class_name InputHelper
 extends Node
 
 var deadzone: float = 0.5
@@ -8,9 +7,9 @@ var device_index: int = -1
 var device_last_changed_at: int = 0
 
 const DEVICE_KEYBOARD = "keyboard"
-const DEVICE_CONTROLLER_TYPE_1 = "switch"
-const DEVICE_CONTROLLER_TYPE_2 = "playstation"
-const DEVICE_CONTROLLER_TYPE_3 = "xbox"
+const DEVICE_CONTROLLER_TYPE_1 = "n"
+const DEVICE_CONTROLLER_TYPE_2 = "p"
+const DEVICE_CONTROLLER_TYPE_3 = "x"
 const DEVICE_CONTROLLER_GENERIC = "generic"
 
 signal device_changed(device, device_index)
@@ -39,11 +38,11 @@ func _input(event: InputEvent) -> void:
 
 func get_simplified_device_name(raw_name: String) -> String:
 	match raw_name:
-		"N":
+		"n":
 			return DEVICE_CONTROLLER_TYPE_1
-		"P":
+		"p":
 			return DEVICE_CONTROLLER_TYPE_2
-		"X":
+		"x":
 			return DEVICE_CONTROLLER_TYPE_3
 		_:
 			return DEVICE_CONTROLLER_GENERIC
