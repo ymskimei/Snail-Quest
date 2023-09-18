@@ -169,3 +169,5 @@ color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

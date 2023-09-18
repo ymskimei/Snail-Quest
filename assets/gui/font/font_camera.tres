@@ -1,0 +1,13 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[ext_resource path="res://assets/gui/font/font_editor_bold.otf" type="DynamicFontData" id=1]
+
+[resource]
+size = 64
+outline_size = 6
+outline_color = Color( 0.705882, 0.505882, 0.0235294, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = -5
+extra_spacing_space = 2
+font_data = ExtResource( 1 )

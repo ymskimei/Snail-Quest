@@ -1,11 +1,12 @@
-extends Popup
+extends Control
 
-onready var fullscreen: CheckBox = $MarginContainer/Background/Tabs/Video/Margin/Grid/CheckBoxFullscreen
-onready var filter: OptionButton = $MarginContainer/Background/Tabs/Video/Margin/Grid/ButtonFilter
-onready var resolution: OptionButton = $MarginContainer/Background/Tabs/Video/Margin/Grid/ButtonResolution
-onready var framerate: OptionButton = $MarginContainer/Background/Tabs/Video/Margin/Grid/ButtonFps
-onready var vsync: CheckBox = $MarginContainer/Background/Tabs/Video/Margin/Grid/CheckBoxVsync
-onready var language: OptionButton = $MarginContainer/Background/Tabs/Misc/Margin/Grid/ButtonLanguage
+onready var tabs: TabContainer = $"%Tabs"
+onready var fullscreen: CheckBox = $"%CheckBoxFullscreen"
+onready var filter: OptionButton = $"%ButtonFilter"
+onready var resolution: OptionButton = $"%ButtonResolution"
+onready var framerate: OptionButton = $"%ButtonFps"
+onready var vsync: CheckBox = $"%CheckBoxVsync"
+onready var language: OptionButton = $"%ButtonLanguage"
 
 var resolution_dict: Dictionary = {
 	"GUI_OPTIONS_RESOLUTION_480": Vector2(640, 480),
@@ -40,9 +41,45 @@ var language_dict: Dictionary = {
 	"GUI_OPTIONS_LANGUAGE_PR": "pr"
 }
 
+const button_a: String = "res://assets/texture/gui/gui_button_a.png"
+const button_b: String = "res://assets/texture/gui/gui_button_b.png"
+const button_x: String = "res://assets/texture/gui/gui_button_x.png"
+const button_y: String = "res://assets/texture/gui/gui_button_y.png"
+const button_fork: String = "res://assets/texture/gui/gui_button_fork.png"
+const button_circle: String = "res://assets/texture/gui/gui_button_circle.png"
+const button_square: String = "res://assets/texture/gui/gui_button_square.png"
+const button_triangle: String = "res://assets/texture/gui/gui_button_triangle.png"
+const button_left: String = "res://assets/texture/gui/gui_button_left.png"
+const button_left_2: String = "res://assets/texture/gui/gui_button_left_2.png"
+const button_right: String = "res://assets/texture/gui/gui_button_right.png"
+const button_right_2: String = "res://assets/texture/gui/gui_button_right_2.png"
+const button_minus: String = "res://assets/texture/gui/gui_button_minus.png"
+const button_plus: String = "res://assets/texture/gui/gui_button_plus.png"
+const button_select: String = "res://assets/texture/gui/gui_button_select.png"
+const button_start: String = "res://assets/texture/gui/gui_button_start.png"
+const button_share: String = "res://assets/texture/gui/gui_button_share.png"
+const button_options: String = "res://assets/texture/gui/gui_button_options.png"
+const button_temp: String = "res://assets/texture/gui/gui_button_temp.png"
+const stick_left_press: String = "res://assets/texture/gui/gui_stick_left_press.png"
+const stick_right_press: String = "res://assets/texture/gui/gui_stick_right_press.png"
+const stick_left_up: String = "res://assets/texture/gui/gui_stick_left_up.png"
+const stick_left_down: String = "res://assets/texture/gui/gui_stick_left_down.png"
+const stick_left_left: String = "res://assets/texture/gui/gui_stick_left_left.png"
+const stick_left_right: String = "res://assets/texture/gui/gui_stick_left_right.png"
+const stick_right_up: String = "res://assets/texture/gui/gui_stick_right_up.png"
+const stick_right_down: String = "res://assets/texture/gui/gui_stick_right_down.png"
+const stick_right_left: String = "res://assets/texture/gui/gui_stick_right_left.png"
+const stick_right_right: String = "res://assets/texture/gui/gui_stick_right_right.png"
+const pad_up: String = "res://assets/texture/gui/gui_pad_up.png"
+const pad_down: String = "res://assets/texture/gui/gui_pad_down.png"
+const pad_left: String = "res://assets/texture/gui/gui_pad_left.png"
+const pad_right: String = "res://assets/texture/gui/gui_pad_right.png"
+
 var last_focus: Control
 var new_focus: Control
 var mono_audio: bool
+var can_remap: bool
+var remap_timer: Timer = Timer.new()
 
 func _ready() -> void:
 	add_resolution()
@@ -50,16 +87,192 @@ func _ready() -> void:
 #		add_filter()
 	add_framerate()
 	add_language()
+	remap_timer.set_wait_time(0.5)
+	remap_timer.one_shot = true
+	remap_timer.connect("timeout", self, "on_remap_timeout")
 	#get_default_focus()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("gui_left"):
-		$Tabs.current_tab -= 1
-	if Input.is_action_just_pressed("gui_right"):
-		$Tabs.current_tab += 1
+	if event.is_action_pressed("gui_left"):
+		tabs.current_tab -= 1
+	if event.is_action_pressed("gui_right"):
+		tabs.current_tab += 1
+		
+	if (event is InputEventKey or event is InputEventJoypadButton) and event.is_pressed():
+		for b in tabs.get_node("Controls").get_children():
+			if b is TextureButton and b.is_focused():
+				print("test3")
+				var current_control = b.name
+				if can_remap:
+					print("test")
+					if event is InputEventKey:
+						InputHelper.set_action_key(current_control, event.as_text())
+					elif event is InputEventJoypadButton:
+						InputHelper.set_action_button(current_control, event.button_index)
+					b.texture_normal = get_control_icon(event)
+				else:
+					can_remap = true
+					remap_timer.start()
+
+func get_control_icon(event: InputEvent) -> String:
+	var i = InputHelper
+	match event.button_index:
+		0:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_b
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_fork
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_a
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		1:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_a
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_circle
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_b
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		2:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_y
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_square
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_x
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		3:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_x
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_triangle
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_y
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		4:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_left
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_left
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_left
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		5:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_right
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_right
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_right
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		6:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_left_2
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_left_2
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_left_2
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		7:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_right_2
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_right_2
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_right_2
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		8:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return stick_left_press
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return stick_left_press
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return stick_left_press
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		9:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return stick_right_press
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return stick_right_press
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return stick_right_press
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		10:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_minus
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_share
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_select
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		11:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_plus
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_options
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_start
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		12:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return pad_up
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return pad_up
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return pad_up
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return pad_up
+		_:
+			return button_temp
+
+#func _process(_delta: float):
+#	for b in tabs.get_node("Controls").get_children():
+#		if b is TextureButton and b.is_hovered():
+#			if can_remap:
+#				if Input.is_
+#			else:
+#				can_remap = true
 
 func get_default_focus() -> void:
-	for tab in $Tabs.get_children():
+	for tab in tabs.get_children():
 		for controls in tab.get_node("Margin").get_node("Grid").get_children():
 			if controls is BaseButton or Range:
 				controls.connect("focus_entered", self, "_on_button_focus_entered")
@@ -73,14 +286,14 @@ func get_buttons(tab: Control):
 func _on_Tabs_tab_changed() -> void:
 #	if last_focus:
 #		last_focus.grab_focus()
-	for controls in $Tabs.get_children():
+	for controls in tabs.get_children():
 		if controls is BaseButton or Range:
 			controls.set_focus_mode(2)
 			controls.grab_focus()
 			break
 
 func _on_button_focus_entered() -> void:
-	last_focus = $Tabs.get_focus_owner()
+	last_focus = tabs.get_focus_owner()
 
 ## Video Settings
 func _on_CheckBoxFullscreen_toggled(button_pressed: bool) -> void:
@@ -179,10 +392,12 @@ func select_resolution(index: int) -> void:
 	var size = resolution_dict.get(resolution.get_item_text(index))
 	OS.set_window_size(size)
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT, SceneTree.STRETCH_ASPECT_KEEP, size)
+	print("Display resolution set to: " + size)
 
 func select_filter(index: int) -> void:
 	var filter = filter_dict.get(filter.get_item_text(index))
 	GlobalManager.screen.set_type(filter)
+	print("Screen filter set to: " + filter)
 
 func select_language(index: int) -> void:
 	var lang = language_dict.get(language.get_item_text(index))
@@ -196,3 +411,6 @@ func select_language(index: int) -> void:
 #func _on_ButtonLeft_pressed():
 #	$Tabs.current_tab -= 1
 #	#current = clamp(current, 0, 3)
+
+func on_remap_timeout():
+	can_remap = false
