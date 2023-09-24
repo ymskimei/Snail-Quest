@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
+"base": "Spatial",
 "class": "AimCursor",
 "language": "GDScript",
 "path": "res://source/scripts/gui/GuiAimCursor.gd"
@@ -19,12 +19,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/camera/CameraStateIsom.gd"
 }, {
-"base": "Reference",
+"base": "CameraStateMain",
 "class": "CameraStateLock",
 "language": "GDScript",
 "path": "res://source/scripts/entity/camera/CameraStateLock.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "CameraStateMain",
 "language": "GDScript",
 "path": "res://source/scripts/entity/camera/CameraStateMain.gd"
@@ -99,12 +99,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/EntityParent.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "EntityStateParent",
 "language": "GDScript",
 "path": "res://source/scripts/entity/EntityStateParent.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "GuiConsoleCategory",
 "language": "GDScript",
 "path": "res://source/scripts/gui/GuiPopupConsoleCategory.gd"
@@ -124,7 +124,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/gui/GuiInventoryParent.gd"
 }, {
-"base": "Reference",
+"base": "Spatial",
 "class": "ItemParent",
 "language": "GDScript",
 "path": "res://source/scripts/object/ItemParent.gd"
@@ -139,7 +139,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/MusicBooth.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "ObjectInteractable",
 "language": "GDScript",
 "path": "res://source/scripts/object/ObjectInteractable.gd"
@@ -154,7 +154,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/player/PlayerStateMain.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "ResourceAudioPlayer",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceAudioPlayer.gd"
@@ -169,17 +169,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceInventory.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "ResourceItem",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceItem.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "ResourceLocation",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceLocation.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "ResourceLootTable",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceLootTable.gd"
@@ -189,7 +189,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceMusic.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "ResourceSign",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceSign.gd"
@@ -601,6 +601,7 @@ dialogic_default_action={
 3d/smooth_trimesh_collision=true
 common/enable_pause_aware_picking=true
 3d/physics_engine="Bullet"
+2d/default_gravity=0
 
 [rendering]
 
