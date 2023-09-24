@@ -12,7 +12,7 @@ func enter() -> void:
 	add_child(jump_timer)
 	jump_timer.start()
 	entity.animator.set_speed_scale(1)
-	entity.animator.play("PlayerJumpDefault")
+	entity.animator.play("SnailJump")
 
 func input(_event: InputEvent) -> int:
 	if entity.can_move:
@@ -39,9 +39,9 @@ func physics_process(delta: float) -> int:
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	if entity.can_move:
-		apply_movement()
-		if entity.is_active_player and Input.is_action_pressed("action_main") and is_on_floor and can_jump:
-			entity.apply_central_impulse(entity.jump * entity.global_transform.basis.y)
+		apply_movement(state, 1)
+		if entity.is_active_player and Input.is_action_pressed("action_main") and can_jump:
+			state.apply_central_impulse((entity.jump * 0.45) * entity.global_transform.basis.y)
 	return State.NULL
 
 func on_timeout() -> void:

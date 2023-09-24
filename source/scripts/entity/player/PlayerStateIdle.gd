@@ -4,7 +4,7 @@ func enter() -> void:
 	print("Player State: IDLE")
 	entity.speed = entity.resource.speed
 	entity.animator.set_speed_scale(1)
-	entity.animator.play("PlayerIdleDefault")
+	entity.animator.play("SnailIdle")
 
 func input(_event: InputEvent) -> int:
 	if entity.can_move:
@@ -32,5 +32,5 @@ func physics_process(delta: float) -> int:
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	if entity.can_move:
-		apply_movement()
+		apply_movement(state, 2.05)
 	return State.NULL

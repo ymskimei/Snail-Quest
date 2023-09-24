@@ -3,9 +3,9 @@ extends PlayerStateMain
 func enter() -> void:
 	print("Player State: HIDE")
 	entity.animator.set_speed_scale(1)
-	entity.animator.play("PlayerTuckDefault")
+	#entity.animator.play("PlayerTuckDefault")
 	yield(entity.animator, "animation_finished")
-	entity.animator.play("PlayerHideDefault")
+	#entity.animator.play("PlayerHideDefault")
 	entity.in_shell = true
 
 func input(_event: InputEvent) -> int:

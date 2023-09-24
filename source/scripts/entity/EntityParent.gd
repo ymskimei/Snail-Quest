@@ -60,5 +60,5 @@ func strike_flash(ar: Spatial) -> void:
 func debug_healthbar() -> void:
 	if is_instance_valid($DebugHealthBar):
 		$DebugHealthBar.update_bar(health)
-		if is_instance_valid($"%MeshInstance"):
-			$DebugHealthBar.translation.y = $"%MeshInstance".get_aabb().size.y + 0.5
+		if is_instance_valid($"%Body"):
+			$DebugHealthBar.translation.y = $"%Body".get_aabb().size.y + 1

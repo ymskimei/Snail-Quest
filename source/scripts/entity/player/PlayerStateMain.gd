@@ -5,6 +5,8 @@ var entity: PhysicsBody
 
 var direction := Vector3.ZERO
 
+var climbing_normal = Vector3.ZERO
+
 var input_up: int = 0
 var input_down: int = 0
 var input_left: int = 0
@@ -41,6 +43,7 @@ func input(_event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(_delta: float) -> int:
+	#entity.rotation.y = lerp_angle(entity.rotation.y, atan2(-entity.last_vel.x, -entity.last_vel.z), 0.5)
 	apply_aim_cursor()
 	if is_on_floor:
 		shell_jumped = false
@@ -51,7 +54,6 @@ func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	return State.NULL
 
 func set_gravity_direction() -> void:
-	var climbing_normal = Vector3.ZERO
 	var norm_avg = Vector3.ZERO
 	var rays_colliding := 0
 	for ray in entity.climbing_rays.get_children():
@@ -67,7 +69,6 @@ func set_gravity_direction() -> void:
 		is_on_floor = true
 	else:
 		is_on_floor = false
-	entity.rotation.y = lerp_angle(entity.rotation.y, atan2(-entity.last_vel.x, -entity.last_vel.z), 1.0)
 	entity.global_transform = MathHelper.apply_surface_align(entity.global_transform, climbing_normal)
 	entity.add_central_force(25 * -climbing_normal)
 
@@ -84,7 +85,7 @@ func get_joy_input() -> Vector3:
 #	if get_joy_input() != Vector3.ZERO:
 #		entity.rotation.y = lerp_angle(entity.rotation.y, atan2(-entity.linear_velocity.x, -entity.linear_velocity.z), 1.0)
 
-func apply_movement() -> void:
+func apply_movement(state, multiplier) -> void:
 	if entity.is_active_player:
 		#direction.y = -get_joy_input().rotated(Vector3.FORWARD, entity.rotation.z).y
 		#direction.y = -get_joy_input().rotated(Vector3.RIGHT, entity.rotation.x).y
@@ -95,9 +96,12 @@ func apply_movement() -> void:
 		#direction = entity.transform.basis.xform(direction)
 		#entity.set_linear_velocity(entity.speed * direction / 7)
 		if direction != Vector3.ZERO:
-			entity.linear_velocity = lerp(entity.linear_velocity, entity.speed * direction, 0.5)
-			if entity.linear_velocity != Vector3.ZERO:
-				entity.last_vel = entity.linear_velocity
+			#state.add_force((entity.speed * 2) * direction, -direction)
+			state.add_central_force((entity.speed * multiplier) * direction)
+			entity.avatar.rotation.y = lerp_angle(entity.avatar.rotation.y, atan2(-direction.x, -direction.z), 0.1)
+			#entity.linear_velocity = lerp(entity.linear_velocity, entity.speed * direction, 0.5)
+			#if entity.linear_velocity != Vector3.ZERO:
+			#	entity.last_vel = entity.linear_velocity
 
 func dodge_roll() -> bool:
 	if entity.is_active_player:

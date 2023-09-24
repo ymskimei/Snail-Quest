@@ -2,7 +2,7 @@ extends CameraStateMain
 
 export var follow_speed: float = 3.5
 export var rotation_speed: int = 10
-export var offset: Vector3 = Vector3(0, 0.8, 0)
+export var offset: Vector3 = Vector3(0, 0.5, 0)
 
 export var lock_high_arm: float = 0.0
 export var lock_high_lens: float = 0.3
@@ -13,8 +13,8 @@ export var lock_low_lens: float = -0.025
 export var lock_default_arm: float = -0.2
 export var lock_default_lens: float = 0.075
 
-export var fov: int = 40
-export var arm: float = 8.5
+export var fov: int = 30
+export var arm: float = 9
 
 var distance: float = 0
 var input_spin: int = 0
@@ -62,7 +62,7 @@ func physics_process(delta: float):
 func cam_tracking(delta: float) -> void:
 	rotation.x = Input.get_action_strength("cam_left") - Input.get_action_strength("cam_right")
 	rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 3
-	velocity = velocity.linear_interpolate(rotation * sensitivity / 3, delta * rotation_speed)
+	velocity = velocity.linear_interpolate(rotation * sensitivity / 5, delta * rotation_speed)
 	entity.rotation.y += (deg2rad(velocity.x))
 	entity.translation = lerp(entity.translation, entity.cam_target.translation + offset, follow_speed * delta)
 	entity.spring_length = lerp(entity.spring_length, clamp(entity.spring_length + distance, 4, 30), 10 * delta)

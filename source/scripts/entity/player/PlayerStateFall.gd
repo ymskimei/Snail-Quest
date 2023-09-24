@@ -6,7 +6,7 @@ func enter() -> void:
 	print("Player State: FALL")
 	yield(entity.animator, "animation_finished")
 	entity.animator.set_speed_scale(1)
-	entity.animator.play("PlayerFallDefault")
+	entity.animator.play("SnailFall")
 
 func input(_event: InputEvent) -> int:
 	if entity.can_move:
@@ -42,7 +42,7 @@ func physics_process(delta: float) -> int:
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	if entity.can_move:
-		apply_movement()
+		apply_movement(state, 1)
 	return State.NULL
 
 func exit() -> void:

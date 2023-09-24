@@ -6,7 +6,7 @@ func enter() -> void:
 	print("Player State: DODG")
 	dodge_timer()
 	entity.animator.set_speed_scale(1)
-	entity.animator.play("PlayerTuckDefault")
+	#entity.animator.play("PlayerTuckDefault")
 	yield(entity.animator, "animation_finished")
 	entity.speed *= 2
 	if entity.targeting:
@@ -43,7 +43,7 @@ func physics_process(delta: float) -> int:
 
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
-	apply_movement()
+	apply_movement(state, 2.05)
 	return State.NULL
 
 func dodge_timer() -> void:

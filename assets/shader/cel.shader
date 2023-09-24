@@ -51,8 +51,8 @@ uniform float emission_energy = 1.0;
 uniform sampler2D texture_emission : hint_black_albedo;
 
 // UV scale and offset from base code.
-uniform vec2 uv_scale = vec2(1,1);
-uniform vec2 uv_offset = vec2(0,0);
+uniform vec3 uv_scale;
+uniform vec3 uv_offset;
 
 // Vertex function to deal with UV scale and offset, straight out of base code.
 void vertex() {
