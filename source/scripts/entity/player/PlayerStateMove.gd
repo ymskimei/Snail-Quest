@@ -20,7 +20,7 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	if entity.can_move:
-		if dodge_roll():
+		if roll():
 			AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 			return State.DODG
 	#var anim_speed = clamp((abs(entity.velocity.x) + abs(entity.velocity.z)), 0, 2)
@@ -34,5 +34,5 @@ func physics_process(delta: float) -> int:
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	if entity.can_move:
-		apply_movement(state, 2.2)
+		apply_movement(state, 3)
 	return State.NULL

@@ -12,7 +12,15 @@ func enter() -> void:
 	add_child(jump_timer)
 	jump_timer.start()
 	entity.animator.set_speed_scale(1)
-	entity.animator.play("SnailJump")
+	if jump_combo >= 2:
+		entity.animator.play("SnailFlip")
+	elif jump_combo == 1:
+		jump_combo += 1
+		entity.animator.play("SnailJump")
+		jump_combo_timer.start()
+	else:
+		jump_combo += 1
+		entity.animator.play("SnailJump")
 
 func input(_event: InputEvent) -> int:
 	if entity.can_move:
@@ -26,12 +34,9 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	if entity.can_move:
-		if dodge_roll():
+		if roll():
 			AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 			return State.DODG
-		#entity.velocity.y += (entity.jump * 50) * delta / 2
-#	else:
-#		return State.FALL
 	if !can_jump:
 		return State.FALL
 	return State.NULL
@@ -39,9 +44,16 @@ func physics_process(delta: float) -> int:
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	if entity.can_move:
-		apply_movement(state, 1)
+		apply_movement(state, 1.5)
 		if entity.is_active_player and Input.is_action_pressed("action_main") and can_jump:
-			state.apply_central_impulse((entity.jump * 0.45) * entity.global_transform.basis.y)
+			var multiplier
+			if jump_combo >= 3:
+				multiplier = 0.9
+			if jump_combo >= 2:
+				multiplier = 0.65
+			else:
+				multiplier = 0.6
+			state.apply_central_impulse((entity.jump * multiplier) * entity.global_transform.basis.y)
 	return State.NULL
 
 func on_timeout() -> void:

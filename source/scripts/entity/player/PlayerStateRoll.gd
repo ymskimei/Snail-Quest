@@ -3,10 +3,9 @@ extends PlayerStateMain
 func enter() -> void:
 	print("Player State: ROLL")
 	entity.animator.set_speed_scale(1)
-	entity.animator.play("PlayerTuckDefault")
+	entity.animator.play("SnailHide")
 	yield(entity.animator, "animation_finished")
-	entity.speed *= 1.8
-	entity.animator.play("PlayerRollFront")
+	entity.animator.play("SnailHidden")
 	AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 
 func input(_event: InputEvent) -> int:
@@ -16,18 +15,33 @@ func input(_event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	apply_facing(0.3)
-	apply_movement(delta, true, deg2rad(1))
-	apply_gravity(delta)
-	entity.snap_vector = Vector3.DOWN
-	if entity.input == Vector3.ZERO:
-		entity.velocity.x = lerp(entity.velocity.x, 0, 0.03)
-		entity.velocity.z = lerp(entity.velocity.z, 0, 0.03)
-		entity.animator.set_speed_scale(lerp(entity.animator.get_playing_speed(), 0, 0.03))
-	else:
-		var anim_speed = clamp((abs(entity.input.x) + abs(entity.input.z)), 0, 2)
-		entity.animator.set_speed_scale(anim_speed)
+	if entity.is_active_player and Input.is_action_just_pressed("action_main") and !shell_jumped:
+		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
+		shell_jumped = true
+		return State.JUMP
+	return State.NULL
+
+func integrate_forces(state: PhysicsDirectBodyState) -> int:
+	.integrate_forces(state)
+	if entity.can_move:
+		apply_movement(state, 1.5, true)
+	return State.NULL
+
+#	.physics_process(delta)
+#	apply_facing(0.3)
+#	apply_movement(delta, true, deg2rad(1))
+#	apply_gravity(delta)
+#	entity.snap_vector = Vector3.DOWN
+#	if entity.input == Vector3.ZERO:
+#		entity.velocity.x = lerp(entity.velocity.x, 0, 0.03)
+#		entity.velocity.z = lerp(entity.velocity.z, 0, 0.03)
+#		entity.animator.set_speed_scale(lerp(entity.animator.get_playing_speed(), 0, 0.03))
+#	else:
+#		var anim_speed = clamp((abs(entity.input.x) + abs(entity.input.z)), 0, 2)
+#		entity.animator.set_speed_scale(anim_speed)
 	return State.NULL
 
 func exit() -> void:
+	entity.avatar.translation = Vector3(0, -0.45, 0.05)
+	entity.avatar.rotation = Vector3.ZERO
 	AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)

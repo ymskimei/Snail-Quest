@@ -6,22 +6,22 @@ func enter() -> void:
 	print("Player State: DODG")
 	dodge_timer()
 	entity.animator.set_speed_scale(1)
-	#entity.animator.play("PlayerTuckDefault")
+	entity.animator.play("SnailHide")
 	yield(entity.animator, "animation_finished")
 	entity.speed *= 2
 	if entity.targeting:
 		if entity.input.x > 0:
-			entity.animator.play("PlayerRollLeft")
+			entity.animator.play("SnailRollFront")
 		elif entity.input.x < 0:
-			entity.animator.play("PlayerRollRight")
+			entity.animator.play("SnailRollFront")
 		elif entity.input.z > 0:
-			entity.animator.play("PlayerRollFront")
+			entity.animator.play("SnailRollFront")
 		elif entity.input.z < 0:
-			entity.animator.play("PlayerRollBack")
+			entity.animator.play("SnailRollBack")
 		else:
 			dodge_complete = true
 	else:
-		entity.animator.play("PlayerRollFront")
+		entity.animator.play("SnailRollFront")
 	entity.in_shell = true
 
 func physics_process(delta: float) -> int:

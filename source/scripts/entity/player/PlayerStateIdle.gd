@@ -20,9 +20,6 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	if entity.can_move:
-		if dodge_roll():
-			AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
-			return State.DODG
 		if entity.is_active_player and direction != Vector3.ZERO and is_on_floor:
 			return State.MOVE
 	elif !is_on_floor:

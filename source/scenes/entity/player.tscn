@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://assets/materials/entity/player_eyes.tres" type="Material" id=1]
 [ext_resource path="res://source/scripts/entity/player/Player.gd" type="Script" id=2]
@@ -19,6 +19,12 @@
 [ext_resource path="res://assets/model/snail_body.mesh" type="ArrayMesh" id=17]
 [ext_resource path="res://assets/model/snail_eye_left.mesh" type="ArrayMesh" id=18]
 [ext_resource path="res://assets/model/snail_shell.mesh" type="ArrayMesh" id=19]
+[ext_resource path="res://assets/resource/animation/SnailHide.tres" type="Animation" id=20]
+[ext_resource path="res://assets/resource/animation/SnailFlip.tres" type="Animation" id=21]
+[ext_resource path="res://assets/resource/animation/SnailHidden.tres" type="Animation" id=22]
+[ext_resource path="res://source/scripts/entity/player/PlayerStateRoll.gd" type="Script" id=23]
+[ext_resource path="res://assets/resource/animation/SnailRollFront.tres" type="Animation" id=24]
+[ext_resource path="res://assets/resource/animation/SnailRollBack.tres" type="Animation" id=25]
 [ext_resource path="res://assets/resource/equipped_player.tres" type="Resource" id=27]
 [ext_resource path="res://source/scenes/gui/gui_debug_healthbar.tscn" type="PackedScene" id=29]
 
@@ -109,6 +115,33 @@ bind/23/pose = Transform( 1, -2.70234e-16, 2.70234e-16, 2.70234e-16, 1, 7.30266e
 extents = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="SphereShape" id=31]
+
+[sub_resource type="Animation" id=41]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Armature:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Armature:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.45, 0.05 ) ]
+}
 
 [sub_resource type="Animation" id=40]
 resource_name = "SnailFall"
@@ -459,8 +492,9 @@ tracks/23/keys = PoolRealArray( 0, 1, 0, 0, 0, 0.0238835, 0.00347142, -0.0006671
 [node name="Player" type="RigidBody"]
 collision_mask = 13
 mode = 2
-mass = 0.2
+mass = 0.3
 physics_material_override = SubResource( 32 )
+gravity_scale = 0.0
 continuous_cd = true
 contacts_reported = 1
 contact_monitor = true
@@ -485,6 +519,9 @@ script = ExtResource( 14 )
 
 [node name="Hide" type="Node" parent="StateController"]
 script = ExtResource( 9 )
+
+[node name="Roll" type="Node" parent="StateController"]
+script = ExtResource( 23 )
 
 [node name="Dodg" type="Node" parent="StateController"]
 script = ExtResource( 15 )
@@ -624,7 +661,7 @@ bone_name = "BoneEyeballRight"
 unique_name_in_owner = true
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, 5.54137e-08, 7.8463e-08, 3.61168e-07, -5.86733e-08, 0.999999, 8.3819e-09, -1, 1.07917e-07, -0.16407, 0.780282, -0.564601 )
+transform = Transform( 0.999739, -0.0155681, -0.0166913, 0.0182522, 0.106153, 0.99418, -0.0137058, -0.994229, 0.10641, -0.160039, 0.752798, -0.564783 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -634,7 +671,7 @@ mesh = ExtResource( 16 )
 material/0 = ExtResource( 1 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, -5.82077e-08, -9.33669e-08, -3.31365e-07, -5.84405e-08, 0.999999, -1.11759e-08, -1, 1.08383e-07, 0.16407, 0.780282, -0.564601 )
+transform = Transform( 0.999876, 0.0152509, 0.00392922, -0.00547165, 0.10241, 0.994726, 0.0147682, -0.994627, 0.102481, 0.160124, 0.753786, -0.56485 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]
@@ -860,10 +897,6 @@ scroll_active = false
 [node name="TimerPoison" type="Timer" parent="Gui"]
 wait_time = 0.5
 
-[node name="AllowJump" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
 [node name="Animation" type="Node" parent="."]
 
 [node name="DebugHealthBar" parent="." instance=ExtResource( 29 )]
@@ -876,10 +909,16 @@ shape = SubResource( 31 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_default_blend_time = 0.2
+anims/RESET = SubResource( 41 )
 anims/SnailFall = SubResource( 40 )
+anims/SnailFlip = ExtResource( 21 )
+anims/SnailHidden = ExtResource( 22 )
+anims/SnailHide = ExtResource( 20 )
 anims/SnailIdle = ExtResource( 10 )
 anims/SnailJump = SubResource( 39 )
 anims/SnailMove = ExtResource( 4 )
+anims/SnailRollBack = ExtResource( 25 )
+anims/SnailRollFront = ExtResource( 24 )
 
 [connection signal="area_entered" from="AffectArea" to="." method="_on_Area_area_entered"]
 [connection signal="body_entered" from="DangerArea" to="." method="_on_DangerArea_body_entered"]

@@ -12,12 +12,15 @@ var input_down: int = 0
 var input_left: int = 0
 var input_right: int = 0
 
+var jump_combo: int = 0
+
 var shell_jumped : bool
 var previous_swing : bool
 var action_combat_held : bool
 var is_on_floor : bool
 
-var timer: Timer = Timer.new()
+var input_timer: Timer = Timer.new()
+var jump_combo_timer: Timer = Timer.new()
 
 enum State {
 	NULL,
@@ -26,6 +29,7 @@ enum State {
 	JUMP,
 	FALL,
 	HIDE,
+	ROLL,
 	DODG
 }
 
@@ -33,10 +37,14 @@ func enter() -> void:
 	pass
 
 func _ready():
-	timer.set_one_shot(true)
-	timer.set_wait_time(0.35)
-	timer.connect("timeout", self, "on_input_timer")
-	add_child(timer)
+	input_timer.set_one_shot(true)
+	input_timer.set_wait_time(0.35)
+	input_timer.connect("timeout", self, "on_input_timer")
+	jump_combo_timer.set_one_shot(true)
+	jump_combo_timer.set_wait_time(0.5)
+	jump_combo_timer.connect("timeout", self, "on_jump_combo_timer")
+	add_child(input_timer)
+	add_child(jump_combo_timer)
 	return State.NULL
 
 func input(_event: InputEvent) -> int:
@@ -70,7 +78,7 @@ func set_gravity_direction() -> void:
 	else:
 		is_on_floor = false
 	entity.global_transform = MathHelper.apply_surface_align(entity.global_transform, climbing_normal)
-	entity.add_central_force(25 * -climbing_normal)
+	entity.add_central_force(50 * -climbing_normal)
 
 func get_joy_input() -> Vector3:
 	var input = entity.input
@@ -85,50 +93,43 @@ func get_joy_input() -> Vector3:
 #	if get_joy_input() != Vector3.ZERO:
 #		entity.rotation.y = lerp_angle(entity.rotation.y, atan2(-entity.linear_velocity.x, -entity.linear_velocity.z), 1.0)
 
-func apply_movement(state, multiplier) -> void:
+func apply_movement(state: PhysicsDirectBodyState, multiplier: float, roll: bool = false) -> void:
 	if entity.is_active_player:
-		#direction.y = -get_joy_input().rotated(Vector3.FORWARD, entity.rotation.z).y
-		#direction.y = -get_joy_input().rotated(Vector3.RIGHT, entity.rotation.x).y
 		direction.x = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).x
 		direction.z = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).z
-		#direction.x = -get_joy_input().rotated(Vector3.FORWARD, entity.rotation.z).x
-		#direction.z = -get_joy_input().rotated(Vector3.RIGHT, entity.rotation.x).z
-		#direction = entity.transform.basis.xform(direction)
-		#entity.set_linear_velocity(entity.speed * direction / 7)
 		if direction != Vector3.ZERO:
-			#state.add_force((entity.speed * 2) * direction, -direction)
-			state.add_central_force((entity.speed * multiplier) * direction)
-			entity.avatar.rotation.y = lerp_angle(entity.avatar.rotation.y, atan2(-direction.x, -direction.z), 0.1)
-			#entity.linear_velocity = lerp(entity.linear_velocity, entity.speed * direction, 0.5)
-			#if entity.linear_velocity != Vector3.ZERO:
-			#	entity.last_vel = entity.linear_velocity
-
-func dodge_roll() -> bool:
+			if roll:
+				state.add_force((entity.speed * multiplier) * direction, -direction)
+			else:
+				state.add_central_force((entity.speed * multiplier) * direction)
+				entity.avatar.rotation.y = lerp_angle(entity.avatar.rotation.y, atan2(-direction.x, -direction.z), 0.1)
+	
+func roll() -> bool:
 	if entity.is_active_player:
 		if Input.is_action_just_pressed("joy_up"):
 			input_up += 1
-			timer.start()
+			input_timer.start()
 			if input_up >= 2:
 				return true
 			else:
 				return false
 		elif Input.is_action_just_pressed("joy_down"):
 			input_down += 1
-			timer.start()
+			input_timer.start()
 			if input_down >= 2:
 				return true
 			else:
 				return false
 		elif Input.is_action_just_pressed("joy_left"):
 			input_left += 1
-			timer.start()
+			input_timer.start()
 			if input_left >= 2:
 				return true
 			else:
 				return false
 		elif Input.is_action_just_pressed("joy_right"):
 			input_right += 1
-			timer.start()
+			input_timer.start()
 			if input_right >= 2:
 				return true
 			else:
@@ -147,6 +148,9 @@ func on_input_timer() -> void:
 		action_combat_held = true
 	else:
 		action_combat_held = false
+
+func on_jump_combo_timer() -> void:
+	jump_combo = 0
 
 func apply_aim_cursor() -> void:
 	if entity.targeting and entity.target_found or entity.cursor_activated:
@@ -192,8 +196,8 @@ func mallet() -> void:
 	var mallet = entity.eye_point.get_node_or_null("Mallet")
 	if is_instance_valid(mallet):
 		if Input.is_action_just_pressed("action_combat"):
-			timer.start()
-			yield(timer, "timeout")
+			input_timer.start()
+			yield(input_timer, "timeout")
 			if action_combat_held == true:
 				#entity.can_move = false
 				entity.animator.play("PlayerSlamDefault")
