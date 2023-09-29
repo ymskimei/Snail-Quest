@@ -128,7 +128,7 @@ script = ExtResource( 7 )
 [node name="CameraLens" type="Camera" parent="."]
 fov = 60.0
 near = 0.01
-far = 5120.0
+far = 8192.0
 
 [node name="Animation" type="Node" parent="."]
 

@@ -48,11 +48,11 @@ func integrate_forces(state: PhysicsDirectBodyState) -> int:
 		if entity.is_active_player and Input.is_action_pressed("action_main") and can_jump:
 			var multiplier
 			if jump_combo >= 3:
-				multiplier = 0.9
+				multiplier = 1.6
 			if jump_combo >= 2:
-				multiplier = 0.65
+				multiplier = 1.5
 			else:
-				multiplier = 0.6
+				multiplier = 1.4
 			state.apply_central_impulse((entity.jump * multiplier) * entity.global_transform.basis.y)
 	return State.NULL
 

@@ -23,6 +23,7 @@ export var mesh_eye_right: Mesh
 export var pattern_shell: Texture
 export var pattern_body: Texture
 export var pattern_eyes: Texture
+export var pattern_eyelids: Texture
 
 export var color_shell_base: String = "FFFFFF"
 export var color_shell_accent: String = "FFFFFF"

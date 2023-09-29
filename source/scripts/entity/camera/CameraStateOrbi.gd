@@ -61,7 +61,7 @@ func physics_process(delta: float):
 
 func cam_tracking(delta: float) -> void:
 	rotation.x = Input.get_action_strength("cam_left") - Input.get_action_strength("cam_right")
-	rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 3
+	#rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 3
 	velocity = velocity.linear_interpolate(rotation * sensitivity / 5, delta * rotation_speed)
 	entity.rotation.y += (deg2rad(velocity.x))
 	entity.translation = lerp(entity.translation, entity.cam_target.translation + offset, follow_speed * delta)

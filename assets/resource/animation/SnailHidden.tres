@@ -173,3 +173,27 @@ tracks/23/loop_wrap = true
 tracks/23/imported = false
 tracks/23/enabled = true
 tracks/23/keys = PoolRealArray( 0, 1, 1.16624e-17, -0.131445, 0.0197167, -0.193725, -5.23512e-17, 9.53668e-17, 0.981056, 1, 1, 1 )
+tracks/24/type = "value"
+tracks/24/path = NodePath("Armature:translation")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.45, 0.05 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("Armature:rotation_degrees")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0.01 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}

@@ -39,9 +39,8 @@ func integrate_forces(state: PhysicsDirectBodyState) -> int:
 #	else:
 #		var anim_speed = clamp((abs(entity.input.x) + abs(entity.input.z)), 0, 2)
 #		entity.animator.set_speed_scale(anim_speed)
-	return State.NULL
 
 func exit() -> void:
-	entity.avatar.translation = Vector3(0, -0.45, 0.05)
-	entity.avatar.rotation = Vector3.ZERO
+	entity.skeleton.translation = Vector3(0, -0.45, 0.05)
+	entity.skeleton.rotation = Vector3.ZERO
 	AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_out)

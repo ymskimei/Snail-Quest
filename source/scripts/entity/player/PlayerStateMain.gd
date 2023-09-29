@@ -88,21 +88,22 @@ func get_joy_input() -> Vector3:
 	if input_length > 1:
 		input /= input_length
 	return input
-#
+
 #func apply_facing():
 #	if get_joy_input() != Vector3.ZERO:
 #		entity.rotation.y = lerp_angle(entity.rotation.y, atan2(-entity.linear_velocity.x, -entity.linear_velocity.z), 1.0)
 
 func apply_movement(state: PhysicsDirectBodyState, multiplier: float, roll: bool = false) -> void:
 	if entity.is_active_player:
-		direction.x = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).x
-		direction.z = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y).z
+		direction = -get_joy_input().rotated(Vector3.UP, entity.player_cam.rotation.y)
+		direction = direction.rotated(Vector3.LEFT, -entity.rotation.x).rotated(Vector3.UP, -entity.rotation.y)
+
 		if direction != Vector3.ZERO:
 			if roll:
 				state.add_force((entity.speed * multiplier) * direction, -direction)
 			else:
 				state.add_central_force((entity.speed * multiplier) * direction)
-				entity.avatar.rotation.y = lerp_angle(entity.avatar.rotation.y, atan2(-direction.x, -direction.z), 0.1)
+				entity.skeleton.rotation.y = lerp_angle(entity.skeleton.rotation.y, atan2(-direction.x, -direction.z), 0.1)
 	
 func roll() -> bool:
 	if entity.is_active_player:

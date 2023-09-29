@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=9 format=2]
+[gd_resource type="Resource" load_steps=10 format=2]
 
 [ext_resource path="res://source/scripts/resource/ResourceSnailSkin.gd" type="Script" id=1]
 [ext_resource path="res://assets/model/snail_eye_right.mesh" type="ArrayMesh" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://assets/model/snail_body_thin.mesh" type="ArrayMesh" id=4]
 [ext_resource path="res://assets/model/snail_shell_small.mesh" type="ArrayMesh" id=5]
 [ext_resource path="res://assets/texture/entity/snail_body.png" type="Texture" id=6]
-[ext_resource path="res://assets/texture/entity/snail_shell_accent_0.png" type="Texture" id=7]
+[ext_resource path="res://assets/texture/entity/snail_shell_accent_1.png" type="Texture" id=7]
 [ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=8]
+[ext_resource path="res://assets/texture/entity/snail_eyelids_bottom_half.png" type="Texture" id=9]
 
 [resource]
 script = ExtResource( 1 )
@@ -18,6 +19,7 @@ mesh_eye_right = ExtResource( 2 )
 pattern_shell = ExtResource( 7 )
 pattern_body = ExtResource( 6 )
 pattern_eyes = ExtResource( 8 )
+pattern_eyelids = ExtResource( 9 )
 color_shell_base = "EDA436"
 color_shell_accent = "C45E67"
 color_body = "E8C0F9"
