@@ -47,7 +47,7 @@ func unhandled_input(event) -> void:
 func physics_process(delta: float):
 	if look_around:
 		return State.LOOK
-	if entity.cam_target is Player and entity.cam_target.targeting:
+	if entity.cam_target is Snail and entity.cam_target.targeting:
 		return State.TARG
 	if is_instance_valid(entity.cam_target):
 		cam_tracking(delta)

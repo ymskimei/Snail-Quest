@@ -33,8 +33,8 @@ func update_target() -> void:
 	else:
 		targeting_vehicle = false
 		for p in get_parent().get_children():
-			if p is Player:
-				if p.is_active_player:
+			if p is Entity:
+				if p.controllable:
 					cam_target = p
 
 func target_updated() -> void:

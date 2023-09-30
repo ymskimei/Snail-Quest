@@ -4,7 +4,7 @@ var version_number = "0.3.0-pre-alpha"
 
 var camera : SpringArm
 var aim_cursor : Spatial
-var player : PhysicsBody
+var player : Entity
 var vehicle : PhysicsBody
 var play_time : Node
 var game_time : Node
@@ -17,7 +17,7 @@ func register_camera(node : SpringArm):
 func register_aim_cursor(node : Spatial):
 	aim_cursor = node
 
-func register_player(node : PhysicsBody):
+func register_player(node : Entity):
 	player = node
 
 func register_vehicle(node : PhysicsBody):

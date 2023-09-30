@@ -19,11 +19,12 @@
 [ext_resource path="res://assets/model/seed_red.mesh" type="ArrayMesh" id=17]
 [ext_resource path="res://assets/resource/sign_test_3.tres" type="Resource" id=18]
 [ext_resource path="res://source/scenes/object/map/test_slide_0.tscn" type="PackedScene" id=19]
-[ext_resource path="res://source/scenes/entity/enemy_parent.tscn" type="PackedScene" id=20]
+[ext_resource path="res://source/scenes/entity/enemy.tscn" type="PackedScene" id=20]
 [ext_resource path="res://source/scenes/object/test_block.tscn" type="PackedScene" id=21]
 [ext_resource path="res://source/scenes/object/test_ramp.tscn" type="PackedScene" id=22]
 [ext_resource path="res://assets/resource/item/tool_needle.tres" type="Resource" id=23]
 [ext_resource path="res://assets/resource/item/tool_mallet.tres" type="Resource" id=24]
+
 
 
 [sub_resource type="Curve3D" id=11]

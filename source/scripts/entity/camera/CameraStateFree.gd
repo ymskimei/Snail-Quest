@@ -35,7 +35,7 @@ func cam_speed() -> void:
 		movement_speed += -1
 
 func get_joy_input() -> Vector3:
-	var input: Vector3
+	var input: Vector3 = Vector3.ZERO
 	input.x = Input.get_action_strength("joy_left") - Input.get_action_strength("joy_right")
 	input.z = Input.get_action_strength("joy_up") - Input.get_action_strength("joy_down")
 	input.y = Input.get_action_strength("debug_cam_lower") - Input.get_action_strength("debug_cam_higher")

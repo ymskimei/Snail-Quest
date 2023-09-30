@@ -25,7 +25,7 @@ func _ready():
 	check_for_transitions(room_current)
 	GlobalManager.game_time.set_time(480) #temporary time set
 	register_chunks()
-	$Player.is_active_player = true
+	$Player1.controllable = true
 
 #The chunk stuff initiates here
 func register_chunks():
@@ -137,19 +137,19 @@ func check_for_transitions(room):
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("swap"):
-		if $Player4.is_active_player:
-			$Player4.is_active_player = false
-			$Player.is_active_player = true
-		elif $Player3.is_active_player:
-			$Player3.is_active_player = false
-			$Player4.is_active_player = true
-		elif $Player2.is_active_player:
-			$Player2.is_active_player = false
-			$Player3.is_active_player = true
-		elif $Player.is_active_player:
-			$Player.is_active_player = false
-			$Player2.is_active_player = true
+		if $Player4.controllable:
+			$Player4.controllable = false
+			$Player1.controllable = true
+		elif $Player3.controllable:
+			$Player3.controllable = false
+			$Player4.controllable = true
+		elif $Player2.controllable:
+			$Player2.controllable = false
+			$Player3.controllable = true
+		elif $Player1.controllable:
+			$Player1.controllable = false
+			$Player2.controllable = true
 		else:
-			$Player.is_active_player = true
+			$Player1.controllable = true
 		GlobalManager.camera.update_target()
 		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_reset)

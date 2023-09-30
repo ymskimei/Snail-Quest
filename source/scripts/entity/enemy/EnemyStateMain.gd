@@ -1,7 +1,7 @@
 class_name EnemyStateMain
 extends Node
 
-var entity: EnemyParent
+var entity: Enemy
 
 var look_dir: float
 var target_distance: float
@@ -28,16 +28,16 @@ func physics_process(_delta: float) -> int:
 	check_target_loc()
 	return State.NULL
 
-func apply_gravity(delta: float) -> void:
-	entity.velocity.y += -entity.gravity * delta
-	entity.velocity.y = clamp(entity.velocity.y, -entity.gravity, entity.jump)
-	entity.velocity = entity.move_and_slide_with_snap(entity.velocity, snap_vector, Vector3.UP, true)
-
-func apply_movement(delta: float, speed: int) -> void:
-	var current = entity.transform.origin
-	var next = entity.navi_agent.get_next_location()
-	var velocity = (Vector3(next.x, current.y, next.z) - current).normalized() * delta * (entity.speed * speed)
-	entity.move_and_collide(velocity)
+#func apply_gravity(delta: float) -> void:
+#	entity.velocity.y += -entity.gravity * delta
+#	entity.velocity.y = clamp(entity.velocity.y, -entity.gravity, entity.jump)
+#	entity.velocity = entity.move_and_slide_with_snap(entity.velocity, snap_vector, Vector3.UP, true)
+#
+#func apply_movement(delta: float, speed: int) -> void:
+#	var current = entity.transform.origin
+#	var next = entity.navi_agent.get_next_location()
+#	var velocity = (Vector3(next.x, current.y, next.z) - current).normalized() * delta * (entity.speed * speed)
+#	entity.move_and_collide(velocity)
 
 func rotate() -> void:
 	look_dir = entity.rotation.y + deg2rad((randi() % 270) - 135)

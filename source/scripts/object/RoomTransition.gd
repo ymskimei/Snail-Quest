@@ -15,6 +15,6 @@ func _ready():
 	direction = resource.direction
 	
 func _on_Area_body_entered(body : PhysicsBody):
-	if body is Player:
+	if body is Snail:
 		print("test")
 		emit_signal("goto_room", load(room_path), coordinates, direction)

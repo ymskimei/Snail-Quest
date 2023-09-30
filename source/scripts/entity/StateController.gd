@@ -1,6 +1,6 @@
 extends Node
 
-var current_state
+var current_state: Node
 var et: Spatial
 
 func ready(entity: Spatial) -> void:
@@ -9,7 +9,7 @@ func ready(entity: Spatial) -> void:
 		child.entity = entity
 	change_state(1) # default state
 
-func change_state(new_state) -> void:
+func change_state(new_state: int) -> void:
 	if current_state:
 		current_state.exit()
 	# Subtract 1 to account for NULL
