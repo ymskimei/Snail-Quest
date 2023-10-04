@@ -1,13 +1,13 @@
 extends Node
 
-func rigid_look_at(state, position, target):
+func rigid_look_at(state: PhysicsDirectBodyState, position: Transform, target: Vector3) -> void:
 	var up_dir = Vector3(0, 1, 0)
 	var cur_dir = position.basis.xform(Vector3(0, 0, 1))
 	var target_dir = (target - position.origin).normalized()
 	var rotation_angle = acos(cur_dir.x) - acos(target_dir.x)
 	state.set_angular_velocity(up_dir * (rotation_angle / state.get_step()))
 
-func safe_look_at(spatial : Spatial, target : Vector3) -> void:
+func safe_look_at(spatial: Spatial, target: Vector3) -> void:
 	var origin : Vector3 = spatial.global_transform.origin
 	var v_z := (origin - target).normalized()
 	if origin == target:
@@ -21,7 +21,7 @@ func safe_look_at(spatial : Spatial, target : Vector3) -> void:
 	if up != Vector3.ZERO:
 		spatial.look_at(target, up)
 
-func slerp_look_at(spatial : Spatial, target : Vector3, speed) -> void:
+func slerp_look_at(spatial: Spatial, target: Vector3, speed: float) -> void:
 		var global_pos = spatial.global_transform
 		var dest_transform = global_pos
 		if global_pos.origin != target:
@@ -29,7 +29,7 @@ func slerp_look_at(spatial : Spatial, target : Vector3, speed) -> void:
 		var dest_rotation = Quat(global_pos.basis).slerp(Quat(dest_transform.basis).normalized(), speed)
 		spatial.global_transform = Transform(Basis(dest_rotation), global_pos.origin)
 
-func find_target(node : Object, group_name : String, get_closest := true):
+func find_target(node: Object, group_name: String, get_closest: = true) -> Spatial:
 	var target_group = get_tree().get_nodes_in_group(group_name)
 	if !target_group.empty():
 		var distance_away = node.global_transform.origin.distance_to(target_group[0].global_transform.origin)
@@ -43,8 +43,9 @@ func find_target(node : Object, group_name : String, get_closest := true):
 				distance_away = distance
 				return_target = target_group[index]
 		return return_target
+	return null
 
-func apply_surface_align(tform, new_up):
+func apply_surface_align(tform: Transform, new_up: Vector3) -> Transform:
 	tform.basis.y = new_up
 	tform.basis.x = -tform.basis.z.cross(new_up)
 	tform.basis = tform.basis.orthonormalized()
@@ -55,7 +56,7 @@ func apply_surface_align(tform, new_up):
 #	var i = int(round(angle / (360 / len(directions))))
 #	return directions[i % 8]
 
-func cardinal_to_degrees(direction):
+func cardinal_to_degrees(direction: String) -> int:
 	var result
 	match direction:
 		"NORTH":

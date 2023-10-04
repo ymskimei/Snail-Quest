@@ -14,7 +14,7 @@ func enter() -> void:
 func physics_process(delta: float) -> int:
 	cam_fov()
 	cam_speed()
-	cam_movement(movement_speed, delta)
+	cam_movement(delta)
 	entity.camera_lens.fov = lerp(entity.camera_lens.fov, cam_fov(), 0.25)
 	if is_instance_valid(entity.cam_target):
 		if entity.cam_target is VehicleBody:
@@ -23,11 +23,11 @@ func physics_process(delta: float) -> int:
 			return State.ORBI
 	return State.NULL
 
-func cam_movement(speed, delta: float) -> void:
-	entity.global_translation += -get_joy_input().rotated(Vector3.UP, entity.camera_lens.rotation.y) * speed * delta
+func cam_movement(delta: float) -> void:
+	entity.global_translation += -get_joy_input().rotated(Vector3.UP, entity.camera_lens.rotation.y) * movement_speed * delta
 	rotation.x = Input.get_action_strength("cam_left") - Input.get_action_strength("cam_right")
 	rotation.y = Input.get_action_strength("cam_up") - Input.get_action_strength("cam_down")
-	velocity = lerp(velocity, rotation * (sensitivity / 3), 0.3)
+	velocity = lerp(velocity, (rotation / 50) * fov * (sensitivity / 3), 0.3)
 	entity.camera_lens.rotation.y += deg2rad(velocity.x)
 	entity.camera_lens.rotation.x += clamp(deg2rad(velocity.y), -90, 90)
 

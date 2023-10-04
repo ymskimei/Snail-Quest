@@ -14,7 +14,10 @@ var bars_timer: Timer = Timer.new()
 
 func enter() -> void:
 	print("Camera State: TARGET")
-	target_rot = entity.cam_target.rotation.y
+	if entity.cam_target is Entity:
+		target_rot = entity.cam_target.skeleton.rotation.y
+	else:
+		target_rot = entity.cam_target.rotation.y
 	tween_cam_zoom()
 	tween_cam_rotate(Tween.EASE_IN_OUT)
 	add_bars_timer()
