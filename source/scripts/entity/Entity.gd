@@ -6,11 +6,11 @@ export(Resource) var equipped
 
 onready var cam: SpringArm = GlobalManager.camera
 
-onready var controllable = false
+onready var controllable: bool = false
 onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
 onready var attach_point: Spatial = $"%EyePoint"
-onready var animator: AnimationPlayer = $AnimationPlayer
+onready var anim: AnimationPlayer = $AnimationPlayer
 onready var proximity: Area = $Proximity
 
 onready var interaction_label: RichTextLabel = $Gui/InteractionLabel
@@ -19,9 +19,7 @@ onready var entity_name: String
 onready var health: int
 onready var max_health: int
 onready var strength: int
-onready var gravity: int
 onready var speed: int
-onready var acceleration: int
 onready var jump: int
 
 var velocity: Vector3 = Vector3.ZERO
@@ -31,7 +29,6 @@ var input: Vector3 = Vector3.ZERO
 var interactable = null
 var target = null
 
-var can_move: bool = true
 var can_interact: bool
 var targeting: bool
 var target_found: bool
@@ -41,13 +38,10 @@ signal health_changed
 signal entity_killed
 
 func _ready() -> void:
-	entity_name = resource.entity_name
 	health = resource.health
 	max_health = resource.max_health
 	strength = resource.strength
-	gravity = resource.gravity
 	speed = resource.speed
-	acceleration = resource.acceleration
 	jump = resource.jump
 	if is_instance_valid(proximity):
 		proximity.connect("area_entered", self, "_on_proximity_entered")
@@ -66,12 +60,6 @@ func _physics_process(delta: float) -> void:
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	pass
-
-func _on_cam_target_updated(cam_target) -> void:
-	if is_instance_valid(cam_target):
-		can_move = true
-	else:
-		can_move = false
 
 func set_entity_health(new_amount: int) -> void:
 	health = new_amount
@@ -154,6 +142,11 @@ func target_check() -> void:
 	else:
 		can_interact = false
 		set_interaction_text("")
+
+func is_controllable() -> bool:
+	if GlobalManager.controllable == self:
+		return true
+	return false
 
 #func strike_flash(ar: Spatial) -> void:
 #	var flash = OmniLight.new()

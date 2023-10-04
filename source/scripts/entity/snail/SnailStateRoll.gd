@@ -2,13 +2,12 @@ extends SnailStateMain
 
 func enter() -> void:
 	print("Snail State: ROLL")
-	entity.animator.set_speed_scale(1)
 	entity.animator.play("SnailHide")
 	yield(entity.animator, "animation_finished")
 	entity.animator.play("SnailHidden")
 	AudioPlayer.play_sfx(AudioPlayer.sfx_snail_shell_in)
 
-func input(_event: InputEvent) -> int:
+func unhandled_input(_event: InputEvent) -> int:
 	if Input.is_action_just_released("action_defense"):
 		return State.IDLE
 	return State.NULL
@@ -16,7 +15,6 @@ func input(_event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	if entity.controllable and Input.is_action_just_pressed("action_main") and !shell_jumped:
-		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
 		shell_jumped = true
 		return State.JUMP
 	return State.NULL
@@ -24,7 +22,7 @@ func physics_process(delta: float) -> int:
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	if entity.can_move:
-		apply_movement(entity, state, 1.5, true)
+		apply_movement(state, 1.5, true)
 	return State.NULL
 
 #	.physics_process(delta)

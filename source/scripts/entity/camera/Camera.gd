@@ -1,7 +1,7 @@
 class_name MainCamera
 extends SpringArm
 
-onready var cam_target: Spatial = get_parent().get_node_or_null("Player")
+onready var cam_target: Spatial
 onready var camera_lens: Camera = $CameraLens
 onready var anim_tween: Tween = $Animation/AnimationCam
 onready var anim_bars: AnimationPlayer = $Animation/AnimationBars
@@ -11,13 +11,12 @@ onready var states: Node = $StateController
 var lock_target: Spatial
 var lock_to_point: bool
 var debug_cam: bool
-var targeting_vehicle: bool
 
 signal target_updated
 
 func _ready() -> void:
 	states.ready(self)
-	GlobalManager.register_camera(self)
+	GlobalManager.set_camera(self)
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
@@ -25,17 +24,13 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
 	find_camera_lock_points()
+	update_target()
 
 func update_target() -> void:
-	if is_instance_valid(GlobalManager.vehicle):
-		targeting_vehicle = true
-		cam_target = GlobalManager.vehicle
+	if is_instance_valid(GlobalManager.controllable):
+		cam_target = GlobalManager.controllable
 	else:
-		targeting_vehicle = false
-		for p in get_parent().get_children():
-			if p is Entity:
-				if p.controllable:
-					cam_target = p
+		cam_target = null
 
 func target_updated() -> void:
 	emit_signal("target_updated", cam_target)

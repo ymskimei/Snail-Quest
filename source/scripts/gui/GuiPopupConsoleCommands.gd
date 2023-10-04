@@ -54,12 +54,11 @@ func on_command_aspect(_console, _args):
 		print(wide)
 
 func on_command_cam(_console, args):
-	var cam = GlobalManager.camera
-	if cam.cam_target != null:
-		cam.cam_target = null
+	if GlobalManager.controllable != null:
+		GlobalManager.prev_controllable = GlobalManager.controllable
+		GlobalManager.controllable = null
 	else:
-		cam.update_target()
-	cam.target_updated()
+		GlobalManager.controllable = GlobalManager.prev_controllable
 	GuiMain.debug.close_command_console()
 
 func on_command_quit(_console, _args):

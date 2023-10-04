@@ -3,9 +3,9 @@ extends Spatial
 
 export(Resource) var resource
 
-onready var room_path : String
-onready var coordinates : Vector3
-onready var direction : String
+onready var room_path: String
+onready var coordinates: Vector3
+onready var direction: String
 
 signal goto_room(room, coords, dir)
 

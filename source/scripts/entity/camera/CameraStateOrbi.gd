@@ -35,7 +35,7 @@ func enter() -> void:
 	look_around = false
 	distance = 0
 
-func unhandled_input(event) -> void:
+func unhandled_input(event: InputEvent) -> int:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotation = event.relative
 		controller = false
@@ -43,11 +43,12 @@ func unhandled_input(event) -> void:
 		controller = true
 	else:
 		rotation = Vector2.ZERO
+	return State.NULL
 
-func physics_process(delta: float):
+func physics_process(delta: float) -> int:
 	if look_around:
 		return State.LOOK
-	if entity.cam_target is Snail and entity.cam_target.targeting:
+	if entity.cam_target is Entity and entity.cam_target.targeting:
 		return State.TARG
 	if is_instance_valid(entity.cam_target):
 		cam_tracking(delta)
@@ -55,7 +56,7 @@ func physics_process(delta: float):
 		cam_reset()
 	else:
 		return State.FREE
-	if entity.targeting_vehicle:
+	if entity.cam_target is VehicleBody:
 		return State.VEHI
 	return State.NULL
 
@@ -65,6 +66,7 @@ func cam_tracking(delta: float) -> void:
 	velocity = velocity.linear_interpolate(rotation * sensitivity / 5, delta * rotation_speed)
 	entity.rotation.y += (deg2rad(velocity.x))
 	entity.translation = lerp(entity.translation, entity.cam_target.translation + offset, follow_speed * delta)
+	#entity.camera_lens.translation.y = lerp(entity.camera_lens.translation.y, GlobalManager.player.states.get_joy_input(), follow_speed * delta)
 	entity.spring_length = lerp(entity.spring_length, clamp(entity.spring_length + distance, 4, 30), 10 * delta)
 
 func cam_panning(delta: float) -> void:

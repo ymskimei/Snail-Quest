@@ -1,8 +1,6 @@
 class_name SnailStateMain
 extends StateMain
 
-var entity: PhysicsBody
-
 var input_up: int = 0
 var input_down: int = 0
 var input_left: int = 0
@@ -33,7 +31,7 @@ func enter() -> void:
 
 func _ready():
 	input_timer.set_one_shot(true)
-	input_timer.set_wait_time(0.35)
+	input_timer.set_wait_time(0.5)
 	input_timer.connect("timeout", self, "on_input_timer")
 	jump_combo_timer.set_one_shot(true)
 	jump_combo_timer.set_wait_time(0.5)
@@ -42,53 +40,41 @@ func _ready():
 	add_child(jump_combo_timer)
 	return State.NULL
 
-func input(_event: InputEvent) -> int:
+func unhandled_input(_event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(_delta: float) -> int:
 #	apply_aim_cursor()
-	if is_on_floor:
+	if is_on_floor():
 		shell_jumped = false
 	return State.NULL
 
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
-	set_gravity(entity, state, true)
+	set_gravity(state)
 	return State.NULL
 
-func roll() -> bool:
-	if entity.controllable:
-		if Input.is_action_just_pressed("joy_up"):
-			input_up += 1
-			input_timer.start()
-			if input_up >= 2:
-				return true
-			else:
-				return false
-		elif Input.is_action_just_pressed("joy_down"):
-			input_down += 1
-			input_timer.start()
-			if input_down >= 2:
-				return true
-			else:
-				return false
-		elif Input.is_action_just_pressed("joy_left"):
-			input_left += 1
-			input_timer.start()
-			if input_left >= 2:
-				return true
-			else:
-				return false
-		elif Input.is_action_just_pressed("joy_right"):
-			input_right += 1
-			input_timer.start()
-			if input_right >= 2:
-				return true
-			else:
-				return false
-		else:
-			return false
-	else:
-		return false
+func roll(event) -> bool:
+	if event.is_action_pressed("joy_up"):
+		input_up += 1
+		input_timer.start()
+		if input_up >= 2:
+			return true
+	elif event.is_action_pressed("joy_down"):
+		input_down += 1
+		input_timer.start()
+		if input_down >= 2:
+			return true
+	elif event.is_action_pressed("joy_left"):
+		input_left += 1
+		input_timer.start()
+		if input_left >= 2:
+			return true
+	elif event.is_action_pressed("joy_right"):
+		input_right += 1
+		input_timer.start()
+		if input_right >= 2:
+			return true
+	return false
 
 func on_input_timer() -> void:
 	input_up = 0

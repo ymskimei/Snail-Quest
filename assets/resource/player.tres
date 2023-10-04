@@ -4,11 +4,8 @@
 
 [resource]
 script = ExtResource( 1 )
-entity_name = "Player"
 health = 100
 max_health = 0
 strength = 5
-gravity = 50
-speed = 10
-acceleration = 8
-jump = 1
+speed = 11
+jump = 72

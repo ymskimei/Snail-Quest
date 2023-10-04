@@ -20,7 +20,7 @@ func enter() -> void:
 	tween_cam_reset()
 	distance = 0
 
-func unhandled_input(event: InputEvent) -> void:
+func unhandled_input(event: InputEvent) -> int:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotation = event.relative
 		controller = false
@@ -28,10 +28,11 @@ func unhandled_input(event: InputEvent) -> void:
 		controller = true
 	else:
 		rotation = Vector2.ZERO
+	return State.NULL
 
 func physics_process(delta: float) -> int:
 	cam_tracking(delta)
-	if !entity.targeting_vehicle:
+	if !entity.cam_target is VehicleBody:
 		return State.ORBI
 	return State.NULL
 

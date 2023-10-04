@@ -27,7 +27,7 @@ enum State {
 func enter() -> void:
 	pass
 
-func input(_event: InputEvent) -> int:
+func unhandled_input(_event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(_delta: float) -> int:

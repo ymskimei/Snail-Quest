@@ -47,14 +47,12 @@ func _physics_process(delta):
 func check_orbit(time, delta):
 	var day_percentage = float(time) / full_cycle
 	var camera_pos = GlobalManager.camera.camera_lens.global_translation
-	var player_pos = GlobalManager.player.global_translation
 	if camera_pos != null:
 		sky.global_translation = Vector3(camera_pos.x, camera_pos.y - 32, camera_pos.z)
 		clouds.global_translation = Vector3(camera_pos.x, camera_pos.y + 16, camera_pos.z)
 		clouds_front.global_translation = Vector3(camera_pos.x, camera_pos.y + 2, camera_pos.z)
 		clouds_back.global_translation = Vector3(camera_pos.x, camera_pos.y + 2, camera_pos.z)
 		orbital.global_translation = camera_pos
-	
 	orbital.rotation.x = lerp_angle(orbital.rotation.x, (-180 * PI / 180) + (day_percentage * (2 * PI)), 0.01)
 	if time in range (360, 1080):
 		light.rotation.x = lerp_angle(light.rotation.x, (180 * PI / 180) + (day_percentage * 4), 0.5 * delta)

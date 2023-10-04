@@ -10,7 +10,6 @@ onready var attack_area: Area = $"%AttackArea"
 onready var navi_agent: NavigationAgent = $NavigationAgent
 
 onready var follow_timer: Timer = $FollowTimer
-onready var anim: AnimationPlayer = $AnimationPlayer
 
 var target_seen: bool
 var is_pushed: bool

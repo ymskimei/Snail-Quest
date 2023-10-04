@@ -4,7 +4,7 @@ onready var engine = $AudioStreamPlayer3D
 onready var anim = $Tween
 
 var mounted: bool = false
-var max_speed: int = 1000
+var max_speed: int = 500
 var speed_multiplier: float = 1.5
 
 var boost_remaining: int = 10
@@ -30,6 +30,7 @@ func _ready():
 	engine.play()
 
 func _unhandled_input(event):
+	
 	if event.is_action_pressed("action_main"):
 		if can_boost and boost_remaining > 0:
 			boosting = true
@@ -41,7 +42,7 @@ func _unhandled_input(event):
 		speed_multiplier = 1.0
 		emit_signal("boosted", boosting)
 		boost_timer.stop()
-	if event.is_action_pressed("action_defense"):
+	if event.is_action_pressed("action_defense") and mounted:
 		unmount()
 
 func _physics_process(delta):
@@ -76,14 +77,14 @@ func interact():
 	mount()
 
 func mount():
-	var player = GlobalManager.player
+	var player = GlobalManager.controllable
 	GlobalManager.register_vehicle(self)
 	GlobalManager.camera.update_target()
 	player.can_move = false
 	mounted = true
 
 func unmount():
-	var player = GlobalManager.player
+	var player = GlobalManager.controllable
 	GlobalManager.deregister_vehicle()
 	GlobalManager.camera.update_target()
 	player.can_move = false

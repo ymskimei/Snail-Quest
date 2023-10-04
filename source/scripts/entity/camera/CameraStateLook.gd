@@ -17,7 +17,7 @@ func enter() -> void:
 func physics_process(delta: float) -> int:
 	if rotation_complete:
 		cam_movement(delta)
-		entity.cam_target.can_move = false
+		entity.cam_target.controllable = false
 	if Input.is_action_just_pressed("cam_zoom"):
 		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_third_person)
 		return State.ORBI
@@ -36,5 +36,5 @@ func cam_movement(delta: float) -> void:
 
 func exit() -> void:
 	entity.anim_wobble.stop()
-	entity.cam_target.can_move = true
+	entity.cam_target.controllable = true
 	rotation_complete = false

@@ -5,8 +5,9 @@
 [ext_resource path="res://assets/model/interior_mushroom_stem.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://source/scenes/object/camera_lock_point.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/scenes/object/mushroom_window.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/resource/location/exterior_house_player.tres" type="Resource" id=7]
+[ext_resource path="res://assets/resource/transition/exterior_house_player.tres" type="Resource" id=7]
 [ext_resource path="res://source/scenes/object/beam.tscn" type="PackedScene" id=8]
+
 
 
 [sub_resource type="CylinderShape" id=9]

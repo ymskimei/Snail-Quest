@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://source/scenes/gui/gui_debug_healthbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scenes/entity/state_controller.tscn" type="PackedScene" id=2]
@@ -29,7 +29,7 @@
 [ext_resource path="res://assets/resource/animation/SnailJump.tres" type="Animation" id=27]
 
 [sub_resource type="PhysicsMaterial" id=32]
-friction = 0.9
+friction = 0.98
 
 [sub_resource type="Skin" id=36]
 resource_name = "Skin"
@@ -111,9 +111,6 @@ bind/23/pose = Transform( 1, -2.70234e-16, 2.70234e-16, 2.70234e-16, 1, 7.30266e
 
 [sub_resource type="BoxShape" id=30]
 
-[sub_resource type="BoxShape" id=24]
-extents = Vector3( 0.5, 0.5, 0.5 )
-
 [sub_resource type="SphereShape" id=31]
 
 [sub_resource type="Animation" id=41]
@@ -146,7 +143,7 @@ tracks/1/keys = {
 [node name="Snail" type="RigidBody"]
 collision_mask = 13
 mode = 2
-mass = 0.3
+mass = 0.14
 physics_material_override = SubResource( 32 )
 gravity_scale = 0.0
 continuous_cd = true
@@ -311,7 +308,7 @@ bone_name = "BoneEyeballRight"
 unique_name_in_owner = true
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999644, 0.0241493, -0.0113053, 0.0193839, -0.366983, 0.930024, 0.0183103, -0.929914, -0.36732, -0.136717, 0.471665, -0.84632 )
+transform = Transform( 1, 5.54137e-08, 7.8463e-08, 3.61168e-07, -5.86733e-08, 0.999999, 8.3819e-09, -1, 1.07917e-07, -0.16407, 0.780282, -0.564601 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -321,7 +318,7 @@ mesh = ExtResource( 13 )
 material/0 = ExtResource( 7 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.998446, 0.0549233, 0.00945703, 0.0115651, -0.370189, 0.928883, 0.0545186, -0.927331, -0.370248, 0.183201, 0.475573, -0.834378 )
+transform = Transform( 1, -5.82077e-08, -9.33669e-08, -3.31365e-07, -5.84405e-08, 0.999999, -1.11759e-08, -1, 1.08383e-07, 0.16407, 0.780282, -0.564601 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]
@@ -355,169 +352,244 @@ transform = Transform( 0.36, 0, 0, 0, 0.5, 0, 0, 0, 0.72, 0, 0.45, 0 )
 shape = SubResource( 30 )
 
 [node name="Checkers" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42299, 0 )
 
 [node name="ClimbingRays" type="Spatial" parent="Checkers"]
 unique_name_in_owner = true
 
 [node name="Ray" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.1 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray2" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0.2, 0.1 )
+transform = Transform( 1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray3" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0, 0.2, 0.1 )
+transform = Transform( 1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray4" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.2, 0.1 )
+transform = Transform( 1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray5" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.2, 0.1 )
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray6" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0.2, 0.1 )
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray7" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 1, 0, 0, 0, 8.74228e-08, 1, 0, -1, 8.74228e-08, 0, 0.2, 0.1 )
+transform = Transform( 1, 0, 0, 0, 8.74228e-08, 1, 0, -1, 8.74228e-08, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray18" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 0.707107, 0.707107, 3.09086e-08, 0, -4.37114e-08, 1, 0.707107, -0.707107, -3.09086e-08, 0, 0.2, 0.1 )
+transform = Transform( 0.707107, 0.707107, 3.09086e-08, 0, -4.37114e-08, 1, 0.707107, -0.707107, -3.09086e-08, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -0.85, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray19" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, -0.707107, -3.09086e-08, 0, 0.2, 0.1 )
+transform = Transform( 0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, -0.707107, -3.09086e-08, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray20" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( -0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, 0.707107, 3.09086e-08, 0, 0.2, 0.1 )
+transform = Transform( -0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, 0.707107, 3.09086e-08, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray21" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( -0.707107, 0.707107, 3.09086e-08, 0, -4.37114e-08, 1, 0.707107, 0.707107, 3.09086e-08, 0, 0.2, 0.1 )
+transform = Transform( -0.707107, 0.707107, 3.09086e-08, 0, -4.37114e-08, 1, 0.707107, 0.707107, 3.09086e-08, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray8" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 0, 0.2, 0.1 )
+transform = Transform( 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray9" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0, 0.2, 0.1 )
+transform = Transform( 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray10" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 0, 0.2, 0.1 )
+transform = Transform( 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray11" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0, 1, 0, 0.2, 0.1 )
+transform = Transform( 0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0, 1, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray14" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 0.353553, -0.612372, 0.707107, 0.866025, 0.5, 0, -0.353553, 0.612372, 0.707107, 0, 0.2, 0.1 )
+transform = Transform( 0.353553, -0.612372, 0.707107, 0.866025, 0.5, 0, -0.353553, 0.612372, 0.707107, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray15" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( 0.353553, -0.612372, -0.707107, 0.866025, 0.5, 0, 0.353553, -0.612372, 0.707107, 0, 0.2, 0.1 )
+transform = Transform( 0.353553, -0.612372, -0.707107, 0.866025, 0.5, 0, 0.353553, -0.612372, 0.707107, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray16" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( -0.353553, 0.612372, -0.707107, 0.866025, 0.5, 0, 0.353553, -0.612372, -0.707107, 0, 0.2, 0.1 )
+transform = Transform( -0.353553, 0.612372, -0.707107, 0.866025, 0.5, 0, 0.353553, -0.612372, -0.707107, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray17" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( -0.353553, 0.612372, 0.707107, 0.866025, 0.5, 0, -0.353553, 0.612372, -0.707107, 0, 0.2, 0.1 )
+transform = Transform( -0.353553, 0.612372, 0.707107, 0.866025, 0.5, 0, -0.353553, 0.612372, -0.707107, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray12" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.2, 0.1 )
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
 [node name="Ray13" type="RayCast" parent="Checkers/ClimbingRays"]
-transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0.2, 0.1 )
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, -1.5, 0 )
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 
-[node name="PlayerArea" type="Area" parent="Checkers"]
-
-[node name="PlayerHitbox" type="CollisionShape" parent="Checkers/PlayerArea"]
-transform = Transform( 0.7, 0, 0, 0, 0.9, 0, 0, 0, 1.4, 0, 0.45, 0 )
-shape = SubResource( 24 )
-
-[node name="RayForward" type="RayCast" parent="Checkers"]
-unique_name_in_owner = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.1 )
+[node name="Ray22" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 0, 0 )
 enabled = true
-cast_to = Vector3( 0, 0, -1 )
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray23" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, -0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray24" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, -0.866025, 0.5, 0, -0.5, -0.866025, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray25" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray26" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray27" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 0.866026, 0.5, -8.74228e-08, 0.5, -0.866025, 0, -7.57104e-08, -4.37114e-08, -1, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray28" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 0.866026, -0.5, 8.74228e-08, -0.5, -0.866025, 0, 7.57104e-08, -4.37114e-08, -1, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray29" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 0.5, -0.866025, -8.74228e-08, -0.866025, -0.5, 0, -4.37114e-08, 7.57103e-08, -1, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray31" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 0.353553, -0.612372, -0.707107, -0.866025, -0.5, 0, -0.353553, 0.612372, -0.707107, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray32" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 0.353553, -0.612372, 0.707107, -0.866025, -0.5, 0, 0.353553, -0.612372, -0.707107, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray33" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( -0.353553, 0.612372, 0.707107, -0.866025, -0.5, 0, 0.353553, -0.612372, 0.707107, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray34" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( -0.353553, 0.612372, -0.707107, -0.866025, -0.5, 0, -0.353553, 0.612372, 0.707107, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
+collision_mask = 12
+collide_with_areas = true
+
+[node name="Ray30" type="RayCast" parent="Checkers/ClimbingRays"]
+transform = Transform( 0.5, 0.866025, -8.74228e-08, 0.866025, -0.5, 0, -4.37114e-08, -7.57103e-08, -1, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.7, 0 )
 collision_mask = 12
 collide_with_areas = true
 

@@ -16,7 +16,6 @@
 [ext_resource path="res://assets/resource/animation/PawnFall.tres" type="Animation" id=15]
 [ext_resource path="res://assets/resource/animation/PawnIdle.tres" type="Animation" id=16]
 
-
 [sub_resource type="ArrayMesh" id=5]
 resource_name = "lily_pawn_Plane"
 surfaces/0 = {

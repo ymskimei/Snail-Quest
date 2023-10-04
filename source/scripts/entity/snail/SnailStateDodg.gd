@@ -4,46 +4,46 @@ var dodge_complete: bool = false
 
 func enter() -> void:
 	print("Snail State: DODG")
+	#AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 	dodge_timer()
-	entity.animator.set_speed_scale(1)
-	entity.animator.play("SnailHide")
-	yield(entity.animator, "animation_finished")
-	entity.speed *= 2
+	entity.anim.play("SnailHide")
+	yield(entity.anim, "animation_finished")
 	if entity.targeting:
 		if entity.input.x > 0:
-			entity.animator.play("SnailRollFront")
+			entity.anim.play("SnailRollFront")
 		elif entity.input.x < 0:
-			entity.animator.play("SnailRollFront")
+			entity.anim.play("SnailRollFront")
 		elif entity.input.z > 0:
-			entity.animator.play("SnailRollFront")
+			entity.anim.play("SnailRollFront")
 		elif entity.input.z < 0:
-			entity.animator.play("SnailRollBack")
+			entity.anim.play("SnailRollBack")
 		else:
 			dodge_complete = true
 	else:
-		entity.animator.play("SnailRollFront")
+		entity.anim.play("SnailRollFront")
 	entity.in_shell = true
+
+func unhandled_input(event: InputEvent) -> int:
+	if event.is_action_pressed("action_main") and !shell_jumped:
+		shell_jumped = true
+		return State.JUMP
+	return State.NULL
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	if entity.controllable and Input.is_action_just_pressed("action_main") and !shell_jumped:
-		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
-		shell_jumped = true
-		return State.JUMP
 	if dodge_complete:
-		if entity.controllable and Input.is_action_pressed("action_defense"):
+		if Input.is_action_pressed("action_defense"):
 			return State.HIDE
 		else:
-			AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
 			return State.IDLE
-#	if entity.is_colliding():
-#		Input.start_joy_vibration(0, 1, 1, 0.5)
-#		on_dodge_timer()
+	#if entity.is_colliding():
+		#Input.start_joy_vibration(0, 1, 1, 0.5)
+		#on_dodge_timer()
 	return State.NULL
 
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
-	apply_movement(entity, state, 2.05)
+	apply_movement(state, 3.0)
 	return State.NULL
 
 func dodge_timer() -> void:
@@ -55,5 +55,6 @@ func dodge_timer() -> void:
 	timer.start()
 
 func on_dodge_timer() -> void:
+	#AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
 	dodge_complete = true
 	entity.in_shell = false

@@ -1,6 +1,8 @@
 class_name ResourceSnailSkin
 extends Resource
 
+export var entity_name : String = ""
+
 export var mesh_shell: Mesh
 export var mesh_body: Mesh
 export var mesh_eye_left: Mesh

@@ -42,16 +42,16 @@ func set_display_play_time():
 		display_play_time.set_bbcode("[color=#C3EF5D]??h, ??m, ??s")
 
 func set_display_chunk_coords():
-	if is_instance_valid(GlobalManager.player):
-		var coords_x = floor(GlobalManager.player.global_translation.x / GlobalManager.chunk_size)
-		var coords_z = floor(GlobalManager.player.global_translation.z / GlobalManager.chunk_size)
+	if is_instance_valid(GlobalManager.controllable):
+		var coords_x = floor(GlobalManager.controllable.global_translation.x / GlobalManager.chunk_size)
+		var coords_z = floor(GlobalManager.controllable.global_translation.z / GlobalManager.chunk_size)
 		display_chunk_coords.set_bbcode("[color=#C289FF]%s, [color=#62BC43]%s" % [coords_x, coords_z])
 	else:
 		display_chunk_coords.set_bbcode("?, ?")
 
 func set_display_coordinates():
-	if is_instance_valid(GlobalManager.player):
-		var coords = GlobalManager.player.get_coords()
+	if is_instance_valid(GlobalManager.controllable):
+		var coords = GlobalManager.controllable.get_coords()
 		display_coordinate.set_bbcode("[color=#E7738C]X: %s\n[color=#A3DD5D]Y: %s\n[color=#71B4F6]Z: %s" % [coords[0], coords[1], coords[2]])
 	else:
 		display_coordinate.set_bbcode("[color=#E7738C]X: ?\n[color=#A3DD5D]Y: ?\n[color=#71B4F6]Z: ?")

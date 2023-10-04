@@ -14,24 +14,31 @@ var cursor_activated: bool
 var cursor_pos: Vector3
 
 func _ready() -> void:
+	entity_name = skin.entity_name
 	states.ready(self)
 	update_appearance()
 	set_interaction_text("")
-	GlobalManager.register_player(self)
+
+func _input(event: InputEvent) -> void:
+	if is_controllable():
+		states.input(event)
 
 func _unhandled_input(event: InputEvent) -> void:
-	states.unhandled_input(event)
+	if is_controllable():
+		states.unhandled_input(event)
 
 func _physics_process(delta: float) -> void:
 	._physics_process(delta)
-	states.physics_process(delta)
+	if is_controllable():
+		states.physics_process(delta)
 	if in_shell:
 		attach_point.visible = false
 	else:
 		attach_point.visible = true
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
-	states.integrate_forces(state)
+	if is_controllable():
+		states.integrate_forces(state)
 
 func _on_proximity_entered(body) -> void:
 	if body is Enemy:

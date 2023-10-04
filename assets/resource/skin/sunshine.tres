@@ -12,6 +12,7 @@
 
 [resource]
 script = ExtResource( 1 )
+entity_name = "Sunshine"
 mesh_shell = ExtResource( 5 )
 mesh_body = ExtResource( 4 )
 mesh_eye_left = ExtResource( 3 )
