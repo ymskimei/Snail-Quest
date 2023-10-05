@@ -7,5 +7,5 @@ script = ExtResource( 1 )
 health = 100
 max_health = 0
 strength = 5
-speed = 11
-jump = 72
+speed = 10
+jump = 25

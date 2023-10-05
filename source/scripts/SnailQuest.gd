@@ -9,7 +9,6 @@ func _ready():
 	title_screen.connect("game_start", self, "on_Game_Started")
 
 func on_Game_Started():
-	print("demo")
 	yield(title_screen, "tree_exited")
 	add_child(world)
 

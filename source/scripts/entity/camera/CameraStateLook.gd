@@ -7,7 +7,7 @@ export var offset: Vector3 = Vector3(0, 0.9, 0)
 
 func enter() -> void:
 	print("Camera State: LOOK")
-	target_rot = entity.cam_target.rotation.y
+	target_rot = entity.cam_target.skeleton.rotation.y
 	tween_cam_rotate(Tween.EASE_OUT)
 	AudioPlayer.play_sfx(AudioPlayer.sfx_cam_first_person)
 	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, -1.5, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

@@ -4,62 +4,52 @@ export(Resource) var resource
 
 onready var anim: AnimationPlayer = $GuiTransition/AnimationPlayer
 
-onready var room_path: String
-onready var coordinates: Vector3
-onready var direction: String
-
-var room_current: Spatial
-
 var world = "res://source/scenes/world/chunktest/" #Scene for the chunk junk
-
 export var render_radius: int = 1 #Temporary variables for testing
 
 var all_chunks: Dictionary = {} # Dictionary of all chunks { Vector2 : Chunk }
 var current_instances: Dictionary = {} # Dictionary of instances { Vector2 : Instance }
 var current_chunks = [] # All currently existing chunk  / Array[Vector3]
 
-signal room_loaded
 signal game_end
+signal room_loaded
 
 func _ready() -> void:
 	GlobalManager.game_time.set_time(480) #Temporary time set
 	GlobalManager.set_controllable($Player1) #Temporary player set
-	room_path = resource.room_path
-	coordinates = resource.coordinates
-	direction = resource.direction
-	load_room(load(room_path), coordinates, direction)
-	yield(self, "room_loaded")
-	yield(anim, "animation_finished")
-	anim.play_backwards("GuiTransitionFade")
+	_on_goto_room(load(resource.room_path), resource.coordinates, resource.direction, false, false)
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(GlobalManager.controllable):
 		load_chunks()
 
-func _on_goto_room(room: PackedScene, coords: Vector3, dir: String) -> void:
-	get_tree().set_deferred("paused", true)
-	anim.play("GuiTransitionFade")
-	yield(anim, "animation_finished")
+func _on_goto_room(room: PackedScene, coords: Vector3, dir: String, pause: bool = true, fade_in: bool = true) -> void:
+	if pause:
+		get_tree().set_deferred("paused", true)
+	if fade_in:
+		anim.play("GuiTransitionFade")
+		yield(anim, "animation_finished")
 	load_room(room, coords, dir)
 	yield(self, "room_loaded")
 	anim.play_backwards("GuiTransitionFade")
-	get_tree().set_deferred("paused", false)
+	yield(anim, "animation_finished")
+	if get_tree().paused:
+		get_tree().set_deferred("paused", false)
+
+func load_room(room: PackedScene, coords: Vector3, dir: String) -> void:
+	var new_room = room.instance()
+	$Rooms.add_child(new_room)
+#	if is_instance_valid(room_current):
+#		room_current.queue_free()
+	register_chunks()
+	GlobalManager.controllable.set_coords(coords, dir)
+	GlobalManager.camera.set_coords(coords, dir, true)
+	get_transitions(new_room)
+	emit_signal("room_loaded")
 
 func _on_goto_main() -> void:
 	get_tree().set_deferred("paused", true)
 	emit_signal("game_end")
-
-func load_room(room: PackedScene, coords: Vector3, dir: String) -> void:
-	var room_new = room.instance()
-	$Rooms.add_child(room_new)
-	if is_instance_valid(room_current):
-		room_current.queue_free()
-	room_current = room_new
-	get_transitions(room_current)
-	register_chunks()
-	GlobalManager.controllable.set_coords(coords, dir)
-	GlobalManager.camera.set_coords(coords, dir, true)
-	emit_signal("room_loaded")
 
 #The chunk stuff initiates here
 func register_chunks() -> void:

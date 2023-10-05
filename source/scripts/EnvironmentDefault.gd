@@ -13,8 +13,8 @@ export var dawn_ambient_color = Color("F0C874")
 export var dawn_light_color = Color("9E9E9E")
 export var dawn_fog_color = Color("9FAB8B")
 
-export var day_sky_color = Color("8FA8FF")
-export var day_ambient_color = Color("FFFFFF")
+export var day_sky_color = Color("70BFFF")
+export var day_ambient_color = Color("FFFFFF")		
 export var day_light_color = Color("919181")
 export var day_fog_color = Color("899C99")
 

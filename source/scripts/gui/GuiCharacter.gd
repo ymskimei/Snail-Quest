@@ -26,9 +26,7 @@ func _physics_process(delta):
 	pass
 
 func _on_ShapeSlider_value_changed(value):
-	var player = GlobalManager.player
+	var player = GlobalManager.controllable
 	if shell_value != value:
-		if player.is_active_player:
-			player.update_shell_shape(value)
-			player.update_player_appearance()
-			shell_value = value
+		player.update_player_appearance()
+		shell_value = value

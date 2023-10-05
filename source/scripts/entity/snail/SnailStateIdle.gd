@@ -24,5 +24,5 @@ func physics_process(delta: float) -> int:
 	
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
-	apply_movement(state, 2.05)
+	apply_movement(state, 0)
 	return State.NULL

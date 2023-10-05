@@ -25,7 +25,7 @@ func set_gravity(state: PhysicsDirectBodyState) -> void:
 	else:
 		climbing_normal = Vector3.UP
 	entity.global_transform = MathHelper.apply_surface_align(entity.global_transform, climbing_normal)
-	state.add_central_force(50 * -climbing_normal)
+	state.add_central_force(lerp(15, 50, 0.1) * -climbing_normal)
 
 func get_joy_input() -> Vector3:
 	var input = entity.input

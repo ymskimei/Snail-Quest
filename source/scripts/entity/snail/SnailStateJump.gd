@@ -7,7 +7,7 @@ func enter() -> void:
 	print("Snail State: JUMP")
 	can_jump = true
 	jump_timer = Timer.new()
-	jump_timer.set_wait_time(0.3)
+	jump_timer.set_wait_time(0.2)
 	jump_timer.one_shot = true
 	jump_timer.connect("timeout", self, "on_timeout")
 	add_child(jump_timer)
@@ -22,7 +22,7 @@ func unhandled_input(event: InputEvent) -> int:
 			return State.DODG
 	if event.is_action_released("action_main"):
 		if is_instance_valid(jump_timer):
-			jump_timer.set_wait_time(0.15)
+			jump_timer.set_wait_time(0.05)
 			jump_timer.start()
 	return State.NULL
 
@@ -35,7 +35,7 @@ func physics_process(delta: float) -> int:
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	apply_movement(state, 0.5)
-	state.add_central_force(lerp(72, 10, 0.2) * entity.global_transform.basis.y)
+	state.add_central_force(lerp(70, 10, 0.5) * entity.global_transform.basis.y)
 	return State.NULL
 
 func combo_check():
