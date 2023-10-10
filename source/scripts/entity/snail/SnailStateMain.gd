@@ -23,7 +23,8 @@ enum State {
 	FALL,
 	HIDE,
 	ROLL,
-	DODG
+	DODG,
+	HANG
 }
 
 func enter() -> void:
@@ -51,6 +52,7 @@ func physics_process(_delta: float) -> int:
 
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	set_gravity(state)
+	apply_rotation()
 	return State.NULL
 
 func roll(event) -> bool:

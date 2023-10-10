@@ -2,6 +2,13 @@ extends Node
 
 var version_number: String = "0.3.0-pre-alpha"
 
+var worlds: String = "res://source/scenes/world/"
+var warps: String = "res://assets/resource/warp/"
+var entities: String = "res://source/scenes/entity/"
+var objects: String = "res://source/scenes/object/"
+var items: String = "res://source/scenes/item/"
+
+var world: Node
 var camera: SpringArm
 var controllable: PhysicsBody
 var prev_controllable: PhysicsBody
@@ -13,6 +20,9 @@ var chunk_size: int = 64
 
 func _ready() -> void:
 	pass
+
+func set_world(node: Node):
+	world = node
 
 func set_camera(node: SpringArm):
 	camera = node

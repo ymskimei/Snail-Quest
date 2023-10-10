@@ -1,14 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/resource/environment/environment_interior.tres" type="Environment" id=1]
 [ext_resource path="res://source/scenes/object/room_transition.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/model/interior_mushroom_stem.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://source/scenes/object/camera_lock_point.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/materials/environment/ray.tres" type="Material" id=5]
 [ext_resource path="res://source/scenes/object/mushroom_window.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/resource/transition/exterior_house_player.tres" type="Resource" id=7]
+[ext_resource path="res://assets/resource/warp/exterior_house_player.tres" type="Resource" id=7]
 [ext_resource path="res://source/scenes/object/beam.tscn" type="PackedScene" id=8]
-
-
 
 [sub_resource type="CylinderShape" id=9]
 
@@ -101,6 +100,7 @@ transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -4.125, 2, 
 [node name="MeshInstance2" parent="MushroomWindow" instance=ExtResource( 8 )]
 transform = Transform( 0.997269, 0.0508971, 0.0693294, -0.0610736, 1.624, 0.580452, -0.0415238, -1.1662, 0.811337, -0.07, -1.279, 0.836 )
 skeleton = NodePath("")
+material/0 = ExtResource( 5 )
 
 [node name="MushroomWindow2" parent="." instance=ExtResource( 6 )]
 transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 4.125, 2, -7.125 )
@@ -108,5 +108,6 @@ transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 4.125, 2, -
 [node name="MeshInstance3" parent="MushroomWindow2" instance=ExtResource( 8 )]
 transform = Transform( 0.997269, 0.0508974, 0.0693291, -0.0610736, 1.624, 0.580452, -0.0415237, -1.1662, 0.811337, -0.0364661, -1.279, 0.897466 )
 skeleton = NodePath("")
+material/0 = ExtResource( 5 )
 
 [node name="CameraLock" parent="." instance=ExtResource( 4 )]

@@ -20,14 +20,18 @@ func unhandled_input(event: InputEvent) -> int:
 			return State.HIDE
 		else:
 			return State.DODG
+	if event.is_action_pressed("action_main"):
+		entity.jump_memory()
 	if event.is_action_released("action_main"):
 		if is_instance_valid(jump_timer):
-			jump_timer.set_wait_time(0.05)
+			jump_timer.set_wait_time(0.075)
 			jump_timer.start()
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
+	if entity.ledge_usable and !entity.ray_front_top.is_colliding() and entity.ray_front_bottom.is_colliding():
+		return State.HANG
 	if !can_jump:
 		return State.FALL
 	return State.NULL
@@ -35,7 +39,7 @@ func physics_process(delta: float) -> int:
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	apply_movement(state, 0.5)
-	state.add_central_force(lerp(70, 10, 0.5) * entity.global_transform.basis.y)
+	state.add_central_force(lerp(65, 10, 0.6) * entity.global_transform.basis.y)
 	return State.NULL
 
 func combo_check():

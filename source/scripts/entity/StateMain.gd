@@ -6,7 +6,7 @@ var entity: Entity
 var climbing_normal: Vector3 = Vector3.ZERO
 var direction: Vector3 = Vector3.ZERO
 
-func set_gravity(state: PhysicsDirectBodyState) -> void:
+func set_gravity(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 	var can_climb: bool = false
 	if is_instance_valid(entity.climbing_rays):
 		var norm_avg = Vector3.ZERO
@@ -25,7 +25,7 @@ func set_gravity(state: PhysicsDirectBodyState) -> void:
 	else:
 		climbing_normal = Vector3.UP
 	entity.global_transform = MathHelper.apply_surface_align(entity.global_transform, climbing_normal)
-	state.add_central_force(lerp(15, 50, 0.1) * -climbing_normal)
+	state.add_central_force(lerp(15, gravity, 0.1) * -climbing_normal)
 
 func get_joy_input() -> Vector3:
 	var input = entity.input
@@ -44,7 +44,14 @@ func apply_movement(state: PhysicsDirectBodyState, multiplier: float, roll: bool
 			state.add_force((entity.speed * multiplier) * direction, -direction)
 		else:
 			state.add_central_force((entity.speed * multiplier) * direction)
-			entity.skeleton.rotation.y = lerp_angle(entity.skeleton.rotation.y, atan2(-direction.x, -direction.z), 0.1)
+			#entity.anim_tween.interpolate_property(entity.skeleton, "rotation:y", entity.skeleton.rotation.y, atan2(-direction.x, -direction.z), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			#entity.anim_tween.start()
+
+func apply_rotation():
+	var facing_dir = 0
+	if direction != Vector3.ZERO:
+		facing_dir = atan2(-direction.x, -direction.z)
+		entity.skeleton.rotation.y = lerp_angle(entity.skeleton.rotation.y, facing_dir, 0.25)
 
 func is_on_floor() -> bool:
 	if is_instance_valid(entity.climbing_rays):

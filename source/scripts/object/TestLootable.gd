@@ -4,7 +4,7 @@ export(Resource) var loot_table
 export var drop_min = 0
 export var drop_max = 5
 
-var item = preload("res://assets/object/item_parent.tscn")
+var item = preload("res://source/scenes/object/item_parent.tscn")
 
 func _ready():
 	randomize()

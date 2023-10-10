@@ -6,9 +6,8 @@
 [ext_resource path="res://source/scenes/object/grass.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/scenes/object/sign.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/scenes/object/room_transition.tscn" type="PackedScene" id=6]
-[ext_resource path="res://resource/location/interior_house_player.tres" type="Resource" id=7]
-[ext_resource path="res://resource/snaily_town_entrance.tres" type="Resource" id=8]
-
+[ext_resource path="res://assets/resource/warp/interior_house_player.tres" type="Resource" id=7]
+[ext_resource path="res://assets/resource/warp/exterior_house_player.tres" type="Resource" id=8]
 
 [node name="Room" type="Spatial"]
 

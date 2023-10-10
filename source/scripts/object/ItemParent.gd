@@ -40,7 +40,7 @@ func _physics_process(_delta):
 #		body.collision
 
 func _on_Area_body_entered(body):
-	if body is Player and $RigidBody.linear_velocity == Vector3.ZERO:
+	if body == GlobalManager.controllable and $RigidBody.linear_velocity == Vector3.ZERO:
 		player = body
 		display_timer.start()
 		if item.depletable:

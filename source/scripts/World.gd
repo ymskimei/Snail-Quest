@@ -17,6 +17,7 @@ signal room_loaded
 func _ready() -> void:
 	GlobalManager.game_time.set_time(480) #Temporary time set
 	GlobalManager.set_controllable($Player1) #Temporary player set
+	GlobalManager.set_world(self)
 	_on_goto_room(load(resource.room_path), resource.coordinates, resource.direction, false, false)
 
 func _process(_delta: float) -> void:
@@ -36,16 +37,18 @@ func _on_goto_room(room: PackedScene, coords: Vector3, dir: String, pause: bool 
 	if get_tree().paused:
 		get_tree().set_deferred("paused", false)
 
-func load_room(room: PackedScene, coords: Vector3, dir: String) -> void:
-	var new_room = room.instance()
-	$Rooms.add_child(new_room)
-#	if is_instance_valid(room_current):
-#		room_current.queue_free()
-	register_chunks()
-	GlobalManager.controllable.set_coords(coords, dir)
-	GlobalManager.camera.set_coords(coords, dir, true)
-	get_transitions(new_room)
-	emit_signal("room_loaded")
+func load_room(room: PackedScene, coords: Vector3, dir: String, keep_rooms: bool = false) -> void:
+	if is_instance_valid(room):
+		var new_room = room.instance()
+		if !keep_rooms:
+			for r in $Rooms.get_children():
+				$Rooms.remove_child(r)
+		$Rooms.add_child(new_room)
+		register_chunks()
+		GlobalManager.controllable.set_coords(coords, dir)
+		GlobalManager.camera.set_coords(coords, dir, true)
+		get_warps(new_room)
+		emit_signal("room_loaded")
 
 func _on_goto_main() -> void:
 	get_tree().set_deferred("paused", true)
@@ -123,9 +126,9 @@ func get_chunk_rows(path: String) -> Array:
 	directory.list_dir_end()
 	return rows_array
 
-func get_transitions(room: Spatial) -> void:
-	if is_instance_valid(room.find_node("Transitions")):
-		for child in room.find_node("Transitions").get_children():
+func get_warps(room: Spatial) -> void:
+	if is_instance_valid(room.find_node("Warps")):
+		for child in room.find_node("Warps").get_children():
 			if child is RoomTransition:
 				child.connect("goto_room", self, "_on_goto_room")
 

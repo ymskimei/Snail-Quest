@@ -4,6 +4,11 @@ extends Entity
 export(Resource) var skin
 
 onready var climbing_rays: Spatial = $Checkers/ClimbingRays
+onready var ray_front_top: RayCast = $Armature/Skeleton/Rays/RayFrontTop
+onready var ray_front_bottom: RayCast = $Armature/Skeleton/Rays/RayFrontBottom
+onready var ray_ledge_left: RayCast = $Armature/Skeleton/Rays/RayLedgeLeft
+onready var ray_ledge_right: RayCast = $Armature/Skeleton/Rays/RayLedgeRight
+onready var ray_bottom: RayCast = $Armature/Skeleton/Rays/RayBottom
 
 var cursor = preload("res://source/scenes/gui/gui_aim_cursor.tscn")
 

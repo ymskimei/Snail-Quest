@@ -76,3 +76,47 @@ func cardinal_to_degrees(direction: String) -> int:
 		"NORTHWEST":
 			result = 315
 	return result
+
+func get_file_paths(folder_path: String, extension: String, recursive: bool = true) -> Array:
+	var dir := Directory.new()
+	if dir.open(folder_path) != OK:
+		printerr("Could not open directory: ", folder_path)
+		return []
+	if dir.list_dir_begin(true, true) != OK:
+		printerr("Could not list contents of: ", folder_path)
+		return []
+	var file_paths := []
+	var file_name := dir.get_next()
+	while file_name != "":
+		if dir.current_is_dir():
+			if recursive:
+				var dir_path = dir.get_current_dir() + "/" + file_name
+				file_paths += get_file_paths(dir_path, extension, recursive)
+		else:
+			if file_name.get_extension() == extension:
+				var file_path = dir.get_current_dir() + "/" + file_name
+				file_paths.append(file_path)
+		file_name = dir.get_next()
+	return file_paths
+
+func get_file_names(folder_path: String, extension: String, recursive: bool = true) -> Array:
+	var dir := Directory.new()
+	if dir.open(folder_path) != OK:
+		printerr("Could not open directory: ", folder_path)
+		return []
+	if dir.list_dir_begin(true, true) != OK:
+		printerr("Could not list contents of: ", folder_path)
+		return []
+	var file_paths := []
+	var file_name := dir.get_next()
+	while file_name != "":
+		if dir.current_is_dir():
+			if recursive:
+				var dir_path = dir.get_current_dir() + "/" + file_name
+				file_paths += get_file_paths(dir_path, extension, recursive)
+		else:
+			if file_name.get_extension() == extension:
+				var file_path = dir.get_current_dir() + "/" + file_name
+				file_paths.append(file_path)
+		file_name = dir.get_next()
+	return file_paths

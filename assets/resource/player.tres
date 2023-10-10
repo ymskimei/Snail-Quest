@@ -8,4 +8,4 @@ health = 100
 max_health = 0
 strength = 5
 speed = 10
-jump = 25
+jump = 65
