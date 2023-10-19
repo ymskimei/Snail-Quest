@@ -31,4 +31,5 @@ material/0 = SubResource( 19 )
 script = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 anims/ObjectLeavesSway = ExtResource( 4 )

@@ -4,6 +4,7 @@
 // it into shader material by right clicking on it and see the base code. I used this base
 // code and added an adapted version of Roystan's methods for multiple light sources and more.
 shader_type spatial;
+render_mode cull_disabled, specular_toon, diffuse_toon, depth_draw_alpha_prepass;
 
 uniform vec4 albedo : hint_color = vec4(1.0);
 uniform sampler2D texture_albedo : hint_albedo;
@@ -50,8 +51,8 @@ uniform float emission_energy = 1.0;
 uniform sampler2D texture_emission : hint_black_albedo;
 
 // UV scale and offset from base code.
-uniform vec2 uv_scale = vec2(1,1);
-uniform vec2 uv_offset = vec2(0,0);
+uniform vec3 uv_scale;
+uniform vec3 uv_offset;
 
 // Vertex function to deal with UV scale and offset, straight out of base code.
 void vertex() {
@@ -60,6 +61,7 @@ void vertex() {
 
 void fragment() {
 	ALBEDO = albedo.rgb * texture(texture_albedo, UV).rgb;
+	ALPHA = albedo.a * texture(texture_albedo, UV).a;
 	NORMALMAP = texture(texture_normal, UV).rgb;
 	NORMALMAP_DEPTH = normal_scale;
 	ROUGHNESS = roughness * texture(texture_surface, UV).r;

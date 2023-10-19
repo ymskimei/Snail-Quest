@@ -2,7 +2,6 @@
 
 [ext_resource path="res://assets/materials/tile/test_ramp.tres" type="Material" id=1]
 
-
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "test_ramp_Cube"
 surfaces/0 = {

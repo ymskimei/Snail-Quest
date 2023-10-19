@@ -5,6 +5,7 @@ export(Resource) var tools
 
 onready var anim_pad = $AnimationPad
 onready var anim_cam = $AnimationCam
+onready var display_boost = $DisplayBoost
 
 onready var tool_slot = $"%ToolSlot"
 onready var item_slot_1 = $"%ItemSlot1"
@@ -48,6 +49,7 @@ func _process(_delta):
 		display_left.is_deselected_animation()
 	if !equipment.items[0] == tools.items[3]:
 		display_up.is_deselected_animation()
+	display_vehicle_boost()
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pad_right"):
@@ -64,7 +66,7 @@ func _unhandled_input(_event):
 		display_up.is_selected_animation()
 	if Input.is_action_just_pressed("pad_right") or Input.is_action_just_pressed("pad_down") or Input.is_action_just_pressed("pad_left") or Input.is_action_just_pressed("pad_up"):
 		reveal_pad()
-		GlobalManager.player.update_equipped_tool()
+		GlobalManager.controllable.update_equipped()
 	if Input.is_action_just_pressed("cam_zoom") or Input.is_action_just_pressed("cam_lock"):
 		reveal_cam()
 
@@ -99,8 +101,8 @@ func update_cam_display():
 			"Targ":
 				var bars_active = GlobalManager.camera.states.current_state.bars_active
 				if bars_active:
-					if is_instance_valid(GlobalManager.player):
-						var target_found = GlobalManager.player.target_found
+					if is_instance_valid(GlobalManager.controllable):
+						var target_found = GlobalManager.controllable.target_found
 						if target_found:
 							cam_icon.texture = cam_target
 						else:
@@ -139,3 +141,11 @@ func on_pad_timeout():
 func on_cam_timeout():
 	cam_is_hidden = true
 	anim_cam.play_backwards("SlideCam")
+
+func display_vehicle_boost():
+	if is_instance_valid(GlobalManager.controllable):
+		if GlobalManager.controllable is VehicleBody:
+			var remaining = GlobalManager.controllable.boost_remaining
+			display_boost.set_bbcode("[color=#C3EF5D]%s" % remaining)
+		else:
+			display_boost.set_bbcode("")

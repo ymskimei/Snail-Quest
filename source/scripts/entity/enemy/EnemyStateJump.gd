@@ -1,8 +1,8 @@
 extends EnemyStateMain
 
-var timer = Timer.new()
+var timer: Timer = Timer.new()
 
-func enter():
+func enter() -> void:
 	print("Enemy State: JUMP")
 	entity.anim.play("PawnJump")
 	snap_vector = Vector3.ZERO
@@ -23,5 +23,5 @@ func physics_process(delta: float) -> int:
 		return State.FALL
 	return State.NULL
 
-func end_wait():
+func end_wait() -> void:
 	state_done = true

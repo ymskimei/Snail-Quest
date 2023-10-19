@@ -1,41 +1,44 @@
 extends CameraStateMain
 
-export var follow_speed = 5.5
-export var targeting_offset = Vector3(0, 1, 0)
-export var targeting_rotation = -0.5
-export var targeting_speed = 0.2
+export var follow_speed: float = 5.5
+export var targeting_offset: Vector3 = Vector3(0, 1, 0)
+export var targeting_rotation: float = -0.5
+export var targeting_speed:float = 0.2
 
-export var distance_targeting = 5
-export var zoom_targeting = 50
+export var distance_targeting: int = 5
+export var zoom_targeting: int = 50
 
-var bars_active : bool
+var bars_active: bool
 
-var bars_timer = Timer.new()
+var bars_timer: Timer = Timer.new()
 
 func enter() -> void:
 	print("Camera State: TARGET")
-	player_rot = entity.player.rotation.y
+	if entity.cam_target is Entity:
+		target_rot = entity.cam_target.skeleton.rotation.y
+	else:
+		target_rot = entity.cam_target.rotation.y
 	tween_cam_zoom()
 	tween_cam_rotate(Tween.EASE_IN_OUT)
 	add_bars_timer()
 	bars_active = false
 	rotation_complete = false
 
-func physics_process(delta):
-	if is_instance_valid(entity.player.target):
-		if entity.player.target_found:
-			MathHelper.slerp_look_at(entity, entity.player.target.global_transform.origin, targeting_speed)
+func physics_process(delta: float) -> int:
+	if is_instance_valid(entity.cam_target.target):
+		if entity.cam_target.target_found:
+			MathHelper.slerp_look_at(entity, entity.cam_target.target.global_transform.origin, targeting_speed)
 			entity.rotation.x = lerp(entity.rotation.x, targeting_rotation, follow_speed * delta)
-			if !entity.player.targeting:
+			if !entity.cam_target.targeting:
 				return State.ORBI
 		else:
 			entity.rotation.x = lerp(entity.rotation.x, -0.15, follow_speed * delta)
-			if !entity.player.targeting and rotation_complete:
+			if !entity.cam_target.targeting and rotation_complete:
 				return State.ORBI
-	entity.translation = lerp(entity.translation, entity.player.translation + targeting_offset, 5 * delta)
+	entity.translation = lerp(entity.translation, entity.cam_target.translation + targeting_offset, 5 * delta)
 	return State.NULL
 
-func add_bars_timer():
+func add_bars_timer() -> void:
 	if !is_instance_valid(get_node_or_null("BarsTimer")):
 		bars_timer.set_one_shot(true)
 		bars_timer.set_wait_time(0.2)
@@ -44,9 +47,9 @@ func add_bars_timer():
 		add_child(bars_timer)
 	bars_timer.start()
 
-func on_bars_timer():
-	if entity.player.targeting:
-		if entity.player.target_found:
+func on_bars_timer() -> void:
+	if entity.cam_target.targeting:
+		if entity.cam_target.target_found:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_lock)
 		else:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_no_target_lock)
@@ -55,14 +58,14 @@ func on_bars_timer():
 	else:
 		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_reset)
 
-func tween_cam_zoom():
+func tween_cam_zoom() -> void:
 	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom_targeting, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance_targeting, 0.3, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
 func exit() -> void:
 	if bars_active:
-		if entity.player.target_found:
+		if entity.cam_target.target_found:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_unlock)
 		else:
 			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_no_target_unlock)

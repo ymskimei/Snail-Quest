@@ -1,8 +1,8 @@
 extends EnemyStateMain
 
-var timer = Timer.new()
+var timer: Timer = Timer.new()
 
-func enter():
+func enter() -> void:
 	print("Enemy State: FALL")
 	entity.anim.play("PawnIdle")
 	state_done = false
@@ -28,6 +28,6 @@ func physics_process(delta: float) -> int:
 				return State.IDLE
 	return State.NULL
 
-func end_wait():
+func end_wait() -> void:
 	entity.attack_area.monitorable = true
 	state_done = true

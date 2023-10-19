@@ -5,7 +5,6 @@
 [ext_resource path="res://source/scenes/gui/gui_popup_console.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/gui/theme/theme_debug.tres" type="Theme" id=4]
 
-
 [node name="GuiDebug" type="CanvasLayer"]
 pause_mode = 2
 layer = 3

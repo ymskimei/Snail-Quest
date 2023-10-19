@@ -113,19 +113,17 @@ environment = ExtResource( 1 )
 [node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment"]
 unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 16, 0 )
-light_color = Color( 0.690196, 0.690196, 0.690196, 1 )
-light_energy = 0.6
+light_color = Color( 0.560784, 0.560784, 0.560784, 1 )
+light_energy = 0.75
+light_indirect_energy = 0.0
 light_specular = 0.0
 light_bake_mode = 0
 shadow_enabled = true
-shadow_color = Color( 0.588235, 0.619608, 0.870588, 1 )
-directional_shadow_split_1 = 0.01
-directional_shadow_split_2 = 0.025
-directional_shadow_split_3 = 0.1
-directional_shadow_blend_splits = true
-directional_shadow_normal_bias = 0.5
-directional_shadow_bias_split_scale = 0.05
-directional_shadow_max_distance = 1024.0
+shadow_bias = 0.4
+directional_shadow_split_1 = 0.05
+directional_shadow_normal_bias = 0.1
+directional_shadow_bias_split_scale = 0.1
+directional_shadow_max_distance = 256.0
 
 [node name="Orbital" type="Spatial" parent="WorldEnvironment"]
 unique_name_in_owner = true

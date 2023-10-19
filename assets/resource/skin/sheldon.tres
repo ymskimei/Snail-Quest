@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourceSnailSkin.gd" type="Script" id=1]
+[ext_resource path="res://assets/texture/entity/snail_body_accent.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/entity/snail_shell_accent_0.png" type="Texture" id=3]
+[ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=4]
+[ext_resource path="res://assets/model/snail_shell.mesh" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/model/snail_body.mesh" type="ArrayMesh" id=6]
+[ext_resource path="res://assets/model/snail_eye_left.mesh" type="ArrayMesh" id=7]
+[ext_resource path="res://assets/model/snail_eye_right.mesh" type="ArrayMesh" id=8]
+
+[resource]
+script = ExtResource( 1 )
+entity_name = "Sheldon"
+mesh_shell = ExtResource( 5 )
+mesh_body = ExtResource( 6 )
+mesh_eye_left = ExtResource( 7 )
+mesh_eye_right = ExtResource( 8 )
+pattern_shell = ExtResource( 3 )
+pattern_body = ExtResource( 2 )
+pattern_eyes = ExtResource( 4 )
+color_shell_base = "B58556"
+color_shell_accent = "966445"
+color_body = "A0E7FF"
+color_body_accent = "85D3F7"
+color_eye_left = "C62F87"
+color_eye_right = "C62F87"

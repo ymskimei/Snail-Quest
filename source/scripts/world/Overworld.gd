@@ -1,6 +1,6 @@
 extends Node
 
-var m_booth: MusicBooth  = AudioPlayer.music_booth
+var m_booth: MusicBooth = AudioPlayer.music_booth
 var a_booth: MusicBooth = AudioPlayer.ambie_booth
 
 var enemy_near: bool
@@ -49,7 +49,7 @@ func _physics_process(delta):
 #			silence_combat_tracks()
 
 func _on_SnailyTown_body_entered(body):
-	if body is Player:
+	if body is Snail:
 		AudioPlayer.init_song(AudioPlayer.ost_layerstest)
 		m_booth.play_song("LayersTest", 5.0)
 		m_booth.play_track(1, 5.0)
@@ -69,5 +69,5 @@ func _on_SnailyTown_body_entered(body):
 #	m_booth._get_song("LayersTest").get_child(0).get_child(4).set_volume_db(-60.0)
 
 func _on_SnailyTown_body_exited(body):
-	if body is Player:
+	if body is Snail:
 		m_booth.stop_song(5.0)

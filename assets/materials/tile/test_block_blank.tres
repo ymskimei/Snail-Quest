@@ -1,13 +1,24 @@
-[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
 
-[sub_resource type="StreamTexture" id=1]
-flags = 23
-load_path = "res://import/test_block_blank.png-f61f01e76ec6fe207b11df34e3982d08.s3tc.stex"
+[ext_resource path="res://assets/shader/diffuse_gradient_1.tres" type="Texture" id=1]
+[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=2]
+[ext_resource path="res://assets/texture/tile/test_block_blank.png" type="Texture" id=3]
 
 [resource]
-params_diffuse_mode = 4
-params_specular_mode = 3
-albedo_texture = SubResource( 1 )
-metallic = 0.25
-uv1_scale = Vector3( 0.5, 0.5, 0.5 )
-uv1_triplanar = true
+shader = ExtResource( 2 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/normal_scale = null
+shader_param/specular = 0.0
+shader_param/specular_amount = 0.0
+shader_param/specular_smoothness = 0.0
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.0
+shader_param/rim_smoothness = 0.0
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv_scale = Vector3( 32, 32, 32 )
+shader_param/uv_offset = null
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/diffuse_curve = ExtResource( 1 )

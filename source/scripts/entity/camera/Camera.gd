@@ -1,31 +1,45 @@
 class_name MainCamera
 extends SpringArm
 
-onready var player = get_parent().get_node("Player")
-onready var camera_lens = $CameraLens
-onready var anim_tween = $Animation/AnimationCam
-onready var anim_bars = $Animation/AnimationBars
-onready var anim_wobble = $Animation/AnimationWobble
-onready var states = $StateController
-var lock_target
-var lock_to_point : bool
+onready var cam_target: Spatial
+onready var camera_lens: Camera = $CameraLens
+onready var anim_tween: Tween = $Animation/AnimationCam
+onready var anim_bars: AnimationPlayer = $Animation/AnimationBars
+onready var anim_wobble: AnimationPlayer = $Animation/AnimationWobble
+onready var states: Node = $StateController
 
-func _ready():
+var lock_target: Spatial
+var lock_to_point: bool
+var debug_cam: bool
+
+signal target_updated
+
+func _ready() -> void:
 	states.ready(self)
-	GlobalManager.register_camera(self)
-
-func _physics_process(delta: float) -> void:
-	states.physics_process(delta)
-	find_camera_lock_points()
+	GlobalManager.set_camera(self)
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
 
-func find_camera_lock_points():
+func _physics_process(delta: float) -> void:
+	states.physics_process(delta)
+	find_camera_lock_points()
+	update_target()
+
+func update_target() -> void:
+	if is_instance_valid(GlobalManager.controllable):
+		cam_target = GlobalManager.controllable
+	else:
+		cam_target = null
+
+func target_updated() -> void:
+	emit_signal("target_updated", cam_target)
+
+func find_camera_lock_points() -> void:
 	if is_instance_valid(lock_target):
-		var target_distance = lock_target.get_global_translation().distance_to(player.get_global_translation())
+		var lock_distance = lock_target.get_global_translation().distance_to(cam_target.get_global_translation())
 		var max_lock_distance = 17
-		if target_distance < max_lock_distance:
+		if lock_distance < max_lock_distance:
 			lock_to_point = true
 		else:
 			lock_to_point = false
@@ -33,7 +47,7 @@ func find_camera_lock_points():
 		lock_to_point = false
 		lock_target = MathHelper.find_target(self, "camera")
 
-func set_coords(position : Vector3, angle : String, flipped : bool):
+func set_coords(position: Vector3, angle: String, flipped: bool) -> void:
 	var rot = deg2rad(MathHelper.cardinal_to_degrees(angle))
 	if flipped:
 		if !rot == 0:

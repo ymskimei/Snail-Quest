@@ -13,8 +13,8 @@ export var dawn_ambient_color = Color("F0C874")
 export var dawn_light_color = Color("9E9E9E")
 export var dawn_fog_color = Color("9FAB8B")
 
-export var day_sky_color = Color("8FA8FF")
-export var day_ambient_color = Color("FFFFFF")
+export var day_sky_color = Color("70BFFF")
+export var day_ambient_color = Color("FFFFFF")		
 export var day_light_color = Color("919181")
 export var day_fog_color = Color("899C99")
 
@@ -37,7 +37,7 @@ export var night = 1080
 export var transition_speed = 15
 
 func _physics_process(delta):
-	if GlobalManager.game_time != null:
+	if is_instance_valid(GlobalManager.game_time):
 		var time = GlobalManager.game_time.get_raw_time()
 		check_orbit(time, delta)
 		check_environment(time)
@@ -47,14 +47,12 @@ func _physics_process(delta):
 func check_orbit(time, delta):
 	var day_percentage = float(time) / full_cycle
 	var camera_pos = GlobalManager.camera.camera_lens.global_translation
-	var player_pos = GlobalManager.player.global_translation
 	if camera_pos != null:
 		sky.global_translation = Vector3(camera_pos.x, camera_pos.y - 32, camera_pos.z)
 		clouds.global_translation = Vector3(camera_pos.x, camera_pos.y + 16, camera_pos.z)
 		clouds_front.global_translation = Vector3(camera_pos.x, camera_pos.y + 2, camera_pos.z)
 		clouds_back.global_translation = Vector3(camera_pos.x, camera_pos.y + 2, camera_pos.z)
 		orbital.global_translation = camera_pos
-	
 	orbital.rotation.x = lerp_angle(orbital.rotation.x, (-180 * PI / 180) + (day_percentage * (2 * PI)), 0.01)
 	if time in range (360, 1080):
 		light.rotation.x = lerp_angle(light.rotation.x, (180 * PI / 180) + (day_percentage * 4), 0.5 * delta)

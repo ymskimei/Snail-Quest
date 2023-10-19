@@ -1,29 +1,40 @@
 extends Node
 
-var version_number = "0.3.0-pre-alpha"
+var version_number: String = "0.3.0-pre-alpha"
 
-var player : KinematicBody
-var aim_cursor : Spatial
-var camera : SpringArm
-var play_time : Node
-var game_time : Node
-var chunk_start : Vector3
-var chunk_size = 64
+var worlds: String = "res://source/scenes/world/"
+var warps: String = "res://assets/resource/warp/"
+var entities: String = "res://source/scenes/entity/"
+var objects: String = "res://source/scenes/object/"
+var items: String = "res://source/scenes/item/"
 
-func register_camera(node):
+var world: Node
+var camera: SpringArm
+var controllable: PhysicsBody
+var prev_controllable: PhysicsBody
+var play_time: Node
+var game_time: Node
+
+var chunk_start: Vector3 = Vector3.ZERO
+var chunk_size: int = 64
+
+func _ready() -> void:
+	pass
+
+func set_world(node: Node):
+	world = node
+
+func set_camera(node: SpringArm):
 	camera = node
 
-func register_player(node):
-	player = node
+func set_controllable(node: Entity):
+	controllable = node
 
-func register_aim_cursor(node):
-	aim_cursor = node
-
-func register_play_time(node):
+func set_play_time(node: Node):
 	play_time = node
 
-func register_game_time(node):
+func set_game_time(node: Node):
 	game_time = node
 
-func register_chunk_start(vec):
+func set_chunk_start(vec: Vector3):
 	chunk_start = vec

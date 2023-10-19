@@ -6,7 +6,6 @@
 [ext_resource path="res://source/scenes/gui/gui_popup_console_category.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/scripts/gui/GuiPopupConsoleCommands.gd" type="Script" id=5]
 
-
 [node name="PanelContainer" type="PanelContainer"]
 margin_right = 1920.0
 margin_bottom = 1080.0
@@ -42,8 +41,6 @@ size_flags_vertical = 3
 
 [node name="CommandDisplay" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
-margin_right = 1882.0
-margin_bottom = 986.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -89,6 +86,9 @@ argument_names = [ "string" ]
 argument_types = [ 3 ]
 help = "Set the aspect ratio of the window."
 
+[node name="cam" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+help = "Toggle free roaming camera for debug viewing."
+
 [node name="quit" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
 help = "Shut down the game process."
 
@@ -99,6 +99,16 @@ help = "Return to the title screen of the game."
 argument_names = [ "int" ]
 argument_types = [ 0 ]
 help = "Set the game world's time of day."
+
+[node name="tp" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+argument_names = [ "x", "y", "z" ]
+argument_types = [ 1, 1, 1 ]
+help = "Transport to specific coordinates in the world"
+
+[node name="warp" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+argument_names = [ "transition" ]
+argument_types = [ 3 ]
+help = "Transport to a location via transition resource"
 
 [node name="Fun" parent="MarginContainer/VBoxContainer/ConsoleCommandList" instance=ExtResource( 4 )]
 

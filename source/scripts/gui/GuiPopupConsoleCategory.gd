@@ -1,10 +1,10 @@
 class_name GuiConsoleCategory
 extends Node
 
-export(NodePath) var command_handler_target = ".."
+export var command_handler_target: String = ".."
 export var module_description: String = ""
 
-var command_references : Dictionary
+var command_references: Dictionary
 var command_handler = null
 var command_console = null
 

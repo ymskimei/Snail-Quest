@@ -2,7 +2,6 @@
 
 [ext_resource path="res://source/scripts/object/RoomTransition.gd" type="Script" id=1]
 
-
 [sub_resource type="CylinderMesh" id=13]
 
 [sub_resource type="CylinderShape" id=14]

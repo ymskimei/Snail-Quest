@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://source/scenes/environment_default.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/resource/item/tool_mallet.tres" type="Resource" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://source/scenes/object/test_block_small.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/resource/item/tool_needle.tres" type="Resource" id=8]
 [ext_resource path="res://source/scenes/object/map/test_slide_0.tscn" type="PackedScene" id=9]
-[ext_resource path="res://source/scenes/entity/enemy_parent.tscn" type="PackedScene" id=10]
 [ext_resource path="res://source/scenes/object/sign.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/resource/sign_test_0.tres" type="Resource" id=12]
 [ext_resource path="res://assets/resource/sign_test_1.tres" type="Resource" id=13]
@@ -44,9 +43,6 @@ resource = ExtResource( 13 )
 [node name="Signpost3" parent="Objects" instance=ExtResource( 11 )]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 7, 0, 1 )
 resource = ExtResource( 14 )
-
-[node name="EnemyParent" parent="Objects" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 43 )
 
 [node name="TestRuler" parent="Objects" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.5, -6 )

@@ -3,9 +3,9 @@ extends Spatial
 
 export(Resource) var resource
 
-onready var room_path : String
-onready var coordinates : Vector3
-onready var direction : String
+onready var room_path: String
+onready var coordinates: Vector3
+onready var direction: String
 
 signal goto_room(room, coords, dir)
 
@@ -15,6 +15,6 @@ func _ready():
 	direction = resource.direction
 	
 func _on_Area_body_entered(body : PhysicsBody):
-	if body is Player:
+	if body is Snail:
 		print("test")
 		emit_signal("goto_room", load(room_path), coordinates, direction)

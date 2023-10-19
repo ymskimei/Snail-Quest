@@ -2,5 +2,5 @@ extends MeshInstance
 
 onready var anim = $AnimationPlayer
 
-func _ready():
+func _ready() -> void:
 	anim.play("ObjectLeavesSway")
