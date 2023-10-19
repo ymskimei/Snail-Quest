@@ -173,7 +173,7 @@ tracks/23/imported = false
 tracks/23/enabled = true
 tracks/23/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.05, 1, -6.67882e-18, 0.00640795, -0.0315468, -0.112766, -2.33013e-17, 4.24473e-17, 0.993622, 1, 1, 1, 0.1, 1, -1.14661e-17, 0.0778811, -0.0345043, -0.157195, -3.96261e-17, 7.21858e-17, 0.987568, 1, 1, 1, 0.15, 1, -1.28051e-17, 0.0830731, -0.0128159, -0.09548, -4.30179e-17, 7.83645e-17, 0.995431, 1, 1, 1, 0.2, 1, 0, -0.0157734, -0.00591502, -0.063129, -1.2373e-23, -1.4044e-23, 0.998005, 1, 1, 1, 0.23, 1, -4.82506e-18, -0.0657224, -0.0295751, -0.310629, -8.39426e-17, 1.52916e-16, 0.950531, 1, 1, 1, 0.29, 1, 1.16624e-17, -0.131445, 0.0197167, -0.193725, -5.23512e-17, 9.53668e-17, 0.981056, 1, 1, 1 )
 tracks/24/type = "value"
-tracks/24/path = NodePath("Armature/Skeleton:translation")
+tracks/24/path = NodePath("Armature:translation")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/imported = false
@@ -185,7 +185,7 @@ tracks/24/keys = {
 "values": [ Vector3( 0, -0.45, 0.05 ) ]
 }
 tracks/25/type = "value"
-tracks/25/path = NodePath("Armature/Skeleton:rotation_degrees")
+tracks/25/path = NodePath("Armature:rotation_degrees")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/imported = false

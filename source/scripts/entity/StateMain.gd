@@ -27,6 +27,23 @@ func set_gravity(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 	entity.global_transform = MathHelper.apply_surface_align(entity.global_transform, climbing_normal)
 	state.add_central_force(lerp(15, gravity, 0.1) * -climbing_normal)
 
+func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
+	if is_instance_valid(entity.climbing_rays):
+		var norm_avg = Vector3.ZERO
+		var rays_colliding := 0
+		for ray in entity.climbing_rays.get_children():
+			var r : RayCast = ray
+			if r.is_colliding():
+				rays_colliding += 1
+				norm_avg += r.get_collision_normal()
+		if !norm_avg:
+			climbing_normal = Vector3.UP
+		else:
+			climbing_normal = norm_avg / rays_colliding
+	else:
+		climbing_normal = Vector3.UP
+	entity.global_transform = MathHelper.apply_surface_align(entity.global_transform, climbing_normal)
+
 func get_joy_input() -> Vector3:
 	var input = entity.input
 	input.x = Input.get_action_strength("joy_left") - Input.get_action_strength("joy_right")
@@ -46,6 +63,11 @@ func apply_movement(state: PhysicsDirectBodyState, multiplier: float, roll: bool
 			state.add_central_force((entity.speed * multiplier) * direction)
 			#entity.anim_tween.interpolate_property(entity.skeleton, "rotation:y", entity.skeleton.rotation.y, atan2(-direction.x, -direction.z), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			#entity.anim_tween.start()
+
+func apply_shimmy(state: PhysicsDirectBodyState, multiplier: float) -> void:
+	direction = Vector3(-get_joy_input().x, 0, 0).rotated(Vector3.UP, entity.skeleton. rotation.y)
+	if direction != Vector3.ZERO:
+		state.add_central_force((entity.speed * multiplier) * direction)
 
 func apply_rotation():
 	var facing_dir = 0

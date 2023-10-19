@@ -319,7 +319,7 @@ tracks/23/imported = false
 tracks/23/enabled = true
 tracks/23/keys = PoolRealArray(  )
 tracks/24/type = "value"
-tracks/24/path = NodePath("Armature/Skeleton:translation")
+tracks/24/path = NodePath("Armature:translation")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/imported = false
@@ -328,10 +328,10 @@ tracks/24/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, -0.45, 0.05 ) ]
 }
 tracks/25/type = "value"
-tracks/25/path = NodePath("Armature/Skeleton:rotation_degrees")
+tracks/25/path = NodePath("Armature:rotation_degrees")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/imported = false
@@ -514,7 +514,7 @@ bone_name = "BoneEyeballRight"
 unique_name_in_owner = true
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999739, -0.0155681, -0.0166914, 0.0182521, 0.106153, 0.99418, -0.0137057, -0.994228, 0.10641, -0.160039, 0.752798, -0.564783 )
+transform = Transform( 1, 5.54137e-08, 7.8463e-08, 3.61168e-07, -5.86733e-08, 0.999999, 8.3819e-09, -1, 1.07917e-07, -0.16407, 0.780282, -0.564601 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -524,7 +524,7 @@ mesh = ExtResource( 13 )
 material/0 = ExtResource( 7 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999876, 0.0152511, 0.00392942, -0.00547172, 0.10241, 0.994726, 0.0147683, -0.994626, 0.102481, 0.160124, 0.753786, -0.56485 )
+transform = Transform( 1, -5.82077e-08, -9.33669e-08, -3.31365e-07, -5.84405e-08, 0.999999, -1.11759e-08, -1, 1.08383e-07, 0.16407, 0.780282, -0.564601 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]

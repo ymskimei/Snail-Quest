@@ -19,7 +19,8 @@ func physics_process(delta: float) -> int:
 	return State.NULL
 
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
-	apply_movement(state, 0.2)
+	set_hang_align(state)
+	apply_shimmy(state, 0.2)
 	if Input.is_action_pressed("joy_right"):
 		entity.anim.play("SnailShimmyRight")
 	elif Input.is_action_pressed("joy_left"):

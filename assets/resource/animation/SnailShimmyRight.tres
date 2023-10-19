@@ -174,7 +174,7 @@ tracks/23/imported = false
 tracks/23/enabled = true
 tracks/23/keys = PoolRealArray( 0, 1, 4.15573e-17, -0.314023, 0.188617, 0.449235, 0.00342209, 0.00056858, 0.893407, 1, 1, 1, 0.07, 1, 1.12816e-16, -0.31003, 0.201265, 0.442655, 0.0237233, 0.0435553, 0.895319, 1, 1, 1, 0.14, 1, 1.10278e-16, -0.32314, 0.204841, 0.471352, 0.0240205, 0.0440007, 0.880519, 1, 1, 1, 0.2, 1, 1.16623e-16, -0.34319, 0.210309, 0.518056, 0.00922096, 0.0143516, 0.855176, 1, 1, 1, 0.25, 1, 1.15354e-16, -0.353986, 0.213253, 0.541202, 0.00649554, 0.00785376, 0.840831, 1, 1, 1 )
 tracks/24/type = "value"
-tracks/24/path = NodePath("Armature/Skeleton:translation")
+tracks/24/path = NodePath("Armature:translation")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/imported = false
@@ -183,10 +183,10 @@ tracks/24/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, -0.45, 0 ) ]
 }
 tracks/25/type = "value"
-tracks/25/path = NodePath("Armature/Skeleton:rotation_degrees")
+tracks/25/path = NodePath("Armature:rotation_degrees")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/imported = false
