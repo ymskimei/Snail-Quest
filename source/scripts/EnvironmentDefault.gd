@@ -6,7 +6,13 @@ onready var clouds_front = $"%CloudsFront"
 onready var clouds_back = $"%CloudsBack"
 onready var orbital = $"%Orbital"
 onready var light = $"%DirectionalLight"
+
 onready var environment = $WorldEnvironment
+onready var cloud_area = $WorldEnvironment/Area
+
+export var cloud: PackedScene
+export var all_clouds: Array
+export var max_clouds: int = 30
 
 export var dawn_sky_color = Color("B8CFD9")
 export var dawn_ambient_color = Color("F0C874")
@@ -36,6 +42,13 @@ export var dusk = 960
 export var night = 1080	
 export var transition_speed = 15
 
+func _ready() -> void:
+	var cloud_timer = Timer.new()
+	cloud_timer.set_wait_time(2)
+	cloud_timer.connect("timeout", self, "on_cloud_timer")
+	add_child(cloud_timer)
+	cloud_timer.start()
+
 func _physics_process(delta):
 	if is_instance_valid(GlobalManager.game_time):
 		var time = GlobalManager.game_time.get_raw_time()
@@ -44,14 +57,30 @@ func _physics_process(delta):
 	clouds_front.rotation.y += 0.02 * delta
 	clouds_back.rotation.y += 0.01 * delta
 
+func on_cloud_timer():
+	print("ding")
+	randomize()
+	var x_range = Vector2(-64, 64)
+	var y_range = Vector2(-64, 0)
+	var random_x = randi() % int(x_range[1]- x_range[0]) + 1 + x_range[0]
+	var random_y =  randi() % int(y_range[1]-y_range[0]) + 1 + y_range[0]
+	var random_pos = Vector3(random_x, 50, random_y)
+	var new_cloud = cloud.instance()
+	if all_clouds.size() > max_clouds:
+		all_clouds.pop_front().queue_free()
+	all_clouds.append(new_cloud)
+	new_cloud.translation = random_pos
+	cloud_area.add_child(new_cloud)
+
 func check_orbit(time, delta):
 	var day_percentage = float(time) / full_cycle
 	var camera_pos = GlobalManager.camera.camera_lens.global_translation
 	if camera_pos != null:
-		sky.global_translation = Vector3(camera_pos.x, camera_pos.y - 32, camera_pos.z)
-		clouds.global_translation = Vector3(camera_pos.x, camera_pos.y + 16, camera_pos.z)
-		clouds_front.global_translation = Vector3(camera_pos.x, camera_pos.y + 2, camera_pos.z)
-		clouds_back.global_translation = Vector3(camera_pos.x, camera_pos.y + 2, camera_pos.z)
+		#global_translation = camera_pos
+		#sky.global_translation = Vector3(camera_pos.x, camera_pos.y - 32, camera_pos.z)
+		#clouds.global_translation = Vector3(camera_pos.x, camera_pos.y + 16, camera_pos.z)
+		#clouds_front.global_translation = Vector3(camera_pos.x, camera_pos.y + 2, camera_pos.z)
+		#clouds_back.global_translation = Vector3(camera_pos.x, camera_pos.y + 2, camera_pos.z)
 		orbital.global_translation = camera_pos
 	orbital.rotation.x = lerp_angle(orbital.rotation.x, (-180 * PI / 180) + (day_percentage * (2 * PI)), 0.01)
 	if time in range (360, 1080):
