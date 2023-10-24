@@ -7,105 +7,65 @@
 [ext_resource path="res://assets/model/sky.mesh" type="ArrayMesh" id=5]
 [ext_resource path="res://assets/materials/environment/sun.tres" type="Material" id=6]
 [ext_resource path="res://assets/materials/environment/moon.tres" type="Material" id=7]
-[ext_resource path="res://assets/materials/environment/sky_daytime.tres" type="Material" id=8]
-[ext_resource path="res://assets/materials/environment/clouds.tres" type="Material" id=9]
-[ext_resource path="res://assets/texture/environment/cloud_test_2.png" type="Texture" id=10]
-[ext_resource path="res://assets/model/environment_ring.mesh" type="ArrayMesh" id=11]
-[ext_resource path="res://assets/texture/environment/cloud_test_3.png" type="Texture" id=12]
-[ext_resource path="res://source/scenes/object/clouds/cloud.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/texture/environment/cloud_ring.png" type="Texture" id=8]
+[ext_resource path="res://source/scenes/particle/star.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/model/stars.mesh" type="ArrayMesh" id=10]
+[ext_resource path="res://source/scenes/object/cloud.tscn" type="PackedScene" id=13]
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0.405844, 0.587662 )
+colors = PoolColorArray( 0.235294, 0.615686, 0.980392, 1, 0.776471, 0.94902, 0.968627, 1 )
 
-[sub_resource type="Shader" id=6]
-code = "shader_type spatial;
-render_mode async_visible, blend_mix ,cull_back, diffuse_toon, specular_toon, unshaded;
-uniform vec4 albedo : hint_color;
-uniform sampler2D texture_albedo : hint_albedo;
-uniform float specular;
-uniform float metallic;
-uniform float roughness : hint_range(0,1);
-uniform float point_size : hint_range(0,128);
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
 
-void vertex() {
-	UV=UV*uv1_scale.xy+uv1_offset.xy;
-}
+[sub_resource type="SpatialMaterial" id=10]
+render_priority = -100
+flags_transparent = true
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+params_depth_draw_mode = 2
+params_line_width = 0.1
+albedo_texture = SubResource( 9 )
 
-void fragment() {
-	vec2 base_uv = UV;
-	vec4 albedo_tex = texture(texture_albedo,base_uv);
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
-	METALLIC = metallic;
-	ROUGHNESS = roughness;
-	SPECULAR = specular;
-	ALPHA = albedo.a * albedo_tex.a;
-	DEPTH = 120.00;
-}
-"
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("Viewport")
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 6 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/specular = 0.5
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/point_size = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-shader_param/uv2_scale = Vector3( 1, 1, 1 )
-shader_param/uv2_offset = Vector3( 0, 0, 0 )
-shader_param/texture_albedo = ExtResource( 10 )
+[sub_resource type="SpatialMaterial" id=15]
+resource_local_to_scene = true
+render_priority = -98
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = SubResource( 14 )
+uv1_scale = Vector3( 2, 1, 2 )
 
-[sub_resource type="Shader" id=3]
-code = "shader_type spatial;
-render_mode async_visible, blend_mix ,cull_back, diffuse_toon, specular_toon, unshaded;
-uniform vec4 albedo : hint_color;
-uniform sampler2D texture_albedo : hint_albedo;
-uniform float specular;
-uniform float metallic;
-uniform float roughness : hint_range(0,1);
-uniform float point_size : hint_range(0,128);
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
+[sub_resource type="Animation" id=16]
+resource_name = "Stars"
 
-void vertex() {
-	UV=UV*uv1_scale.xy+uv1_offset.xy;
-}
+[sub_resource type="SpatialMaterial" id=11]
+render_priority = -98
+flags_transparent = true
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+params_depth_draw_mode = 2
+params_line_width = 0.1
+albedo_texture = ExtResource( 8 )
 
-void fragment() {
-	vec2 base_uv = UV;
-	vec4 albedo_tex = texture(texture_albedo,base_uv);
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
-	METALLIC = metallic;
-	ROUGHNESS = roughness;
-	SPECULAR = specular;
-	ALPHA = albedo.a * albedo_tex.a;
-	DEPTH = 110.00;
-}
-"
-
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/specular = 0.5
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/point_size = 1.0
-shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/uv1_offset = Vector3( 0, 0, 0 )
-shader_param/uv2_scale = Vector3( 1, 1, 1 )
-shader_param/uv2_offset = Vector3( 0, 0, 0 )
-shader_param/texture_albedo = ExtResource( 12 )
+[sub_resource type="SpatialMaterial" id=12]
+render_priority = -99
+flags_transparent = true
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+params_depth_draw_mode = 2
+params_line_width = 0.1
+albedo_texture = ExtResource( 8 )
+depth_enabled = true
+depth_scale = 0.05
+depth_deep_parallax = false
+depth_flip_tangent = false
+depth_flip_binormal = false
 
 [sub_resource type="BoxShape" id=7]
-
-[sub_resource type="Animation" id=1]
-resource_name = "Dawn"
 
 [node name="EnvironmentDefault" type="Spatial"]
 script = ExtResource( 2 )
@@ -114,8 +74,7 @@ cloud = ExtResource( 13 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 1 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment"]
-unique_name_in_owner = true
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 16, 0 )
 light_color = Color( 0.560784, 0.560784, 0.560784, 1 )
 light_energy = 0.75
@@ -129,10 +88,9 @@ directional_shadow_normal_bias = 0.1
 directional_shadow_bias_split_scale = 0.1
 directional_shadow_max_distance = 256.0
 
-[node name="Orbital" type="Spatial" parent="WorldEnvironment"]
-unique_name_in_owner = true
+[node name="Orbital" type="Spatial" parent="."]
 
-[node name="Sun" type="Sprite3D" parent="WorldEnvironment/Orbital"]
+[node name="Sun" type="Sprite3D" parent="Orbital"]
 transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 16, 0 )
 material_override = ExtResource( 6 )
 billboard = 1
@@ -140,7 +98,7 @@ no_depth_test = true
 fixed_size = true
 texture = ExtResource( 3 )
 
-[node name="Moon" type="Sprite3D" parent="WorldEnvironment/Orbital"]
+[node name="Moon" type="Sprite3D" parent="Orbital"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -16, 0 )
 material_override = ExtResource( 7 )
 billboard = 1
@@ -148,40 +106,59 @@ no_depth_test = true
 fixed_size = true
 texture = ExtResource( 4 )
 
-[node name="Sky" type="MeshInstance" parent="WorldEnvironment"]
-unique_name_in_owner = true
-transform = Transform( 8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0 )
+[node name="Sky" type="MeshInstance" parent="."]
+transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
+sorting_use_aabb_center = false
+mesh = ExtResource( 5 )
+skeleton = NodePath("../WorldEnvironment")
+material/0 = SubResource( 10 )
+
+[node name="Stars" type="MeshInstance" parent="Sky"]
+mesh = ExtResource( 10 )
+material/0 = SubResource( 15 )
+
+[node name="Stars2" type="MeshInstance" parent="Sky"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+mesh = ExtResource( 10 )
+material/0 = SubResource( 15 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sky"]
+root_node = NodePath("../..")
+anims/Stars = SubResource( 16 )
+
+[node name="CloudRing" type="MeshInstance" parent="."]
+transform = Transform( 2040, 0, 0, 0, 64, 0, 0, 0, 2040, 0, 25, 0 )
 visible = false
 sorting_use_aabb_center = false
 mesh = ExtResource( 5 )
-material/0 = ExtResource( 8 )
+skeleton = NodePath("../WorldEnvironment")
+material/0 = SubResource( 11 )
 
-[node name="Clouds" type="MeshInstance" parent="WorldEnvironment"]
-unique_name_in_owner = true
-transform = Transform( 512, 0, 0, 0, 1, 0, 0, 0, 512, 0, 13.0416, 0 )
+[node name="CloudRing2" type="MeshInstance" parent="."]
+transform = Transform( 2056, 0, 0, 0, 128, 0, 0, 0, 2056, 0, 32, 0 )
 visible = false
-mesh = SubResource( 2 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 9 )
+sorting_use_aabb_center = false
+mesh = ExtResource( 5 )
+skeleton = NodePath("../WorldEnvironment")
+material/0 = SubResource( 12 )
 
-[node name="CloudsFront" type="MeshInstance" parent="WorldEnvironment"]
-unique_name_in_owner = true
-transform = Transform( 1, 0, 0, 0, 13, 0, 0, 0, 1, -0.0191762, -0.513662, 0.00299978 )
-mesh = ExtResource( 11 )
-material/0 = SubResource( 5 )
+[node name="Area" type="Area" parent="."]
 
-[node name="CloudsBack" type="MeshInstance" parent="WorldEnvironment"]
-unique_name_in_owner = true
-transform = Transform( 0.848528, 0, 0.848528, 0, 13, 0, -0.848528, 0, 0.848528, -0.0191762, -0.513662, 0.00299978 )
-mesh = ExtResource( 11 )
-material/0 = SubResource( 4 )
-
-[node name="Area" type="Area" parent="WorldEnvironment"]
-
-[node name="CollisionShape" type="CollisionShape" parent="WorldEnvironment/Area"]
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 7 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Dawn = SubResource( 1 )
-
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 5120, 5120 )
+transparent_bg = true
+msaa = 1
+hdr = false
+usage = 1
+render_target_v_flip = true
+
+[node name="Stars" type="Node2D" parent="Viewport"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 2560, 2560 )
+
+[node name="StarParticle" parent="Viewport/Stars" instance=ExtResource( 9 )]

@@ -1,6 +1,9 @@
-[gd_resource type="Environment" load_steps=2 format=2]
+[gd_resource type="Environment" load_steps=3 format=2]
+
+[sub_resource type="AtlasTexture" id=9]
 
 [sub_resource type="PanoramaSky" id=8]
+panorama = SubResource( 9 )
 
 [resource]
 background_mode = 1
