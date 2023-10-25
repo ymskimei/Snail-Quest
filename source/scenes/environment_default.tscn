@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/resource/environment/environment_default.tres" type="Environment" id=1]
 [ext_resource path="res://source/scripts/EnvironmentDefault.gd" type="Script" id=2]
@@ -10,7 +10,11 @@
 [ext_resource path="res://assets/texture/environment/cloud_ring.png" type="Texture" id=8]
 [ext_resource path="res://source/scenes/particle/star.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/model/stars.mesh" type="ArrayMesh" id=10]
+[ext_resource path="res://assets/resource/environment/night.tres" type="Resource" id=11]
+[ext_resource path="res://assets/resource/environment/day.tres" type="Resource" id=12]
 [ext_resource path="res://source/scenes/object/cloud.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/resource/environment/twilight.tres" type="Resource" id=14]
+[ext_resource path="res://assets/resource/environment/dawn.tres" type="Resource" id=15]
 
 [sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0.405844, 0.587662 )
@@ -69,6 +73,10 @@ depth_flip_binormal = false
 
 [node name="EnvironmentDefault" type="Spatial"]
 script = ExtResource( 2 )
+colors_dawn = ExtResource( 15 )
+colors_day = ExtResource( 12 )
+colors_twilight = ExtResource( 14 )
+colors_night = ExtResource( 11 )
 cloud = ExtResource( 13 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
