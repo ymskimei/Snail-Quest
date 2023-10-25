@@ -7,14 +7,18 @@
 [ext_resource path="res://assets/model/sky.mesh" type="ArrayMesh" id=5]
 [ext_resource path="res://assets/materials/environment/sun.tres" type="Material" id=6]
 [ext_resource path="res://assets/materials/environment/moon.tres" type="Material" id=7]
-[ext_resource path="res://assets/texture/environment/cloud_ring.png" type="Texture" id=8]
+[ext_resource path="res://source/scenes/object/rain_drop.tscn" type="PackedScene" id=8]
 [ext_resource path="res://source/scenes/particle/star.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/model/stars.mesh" type="ArrayMesh" id=10]
-[ext_resource path="res://assets/resource/environment/night.tres" type="Resource" id=11]
-[ext_resource path="res://assets/resource/environment/day.tres" type="Resource" id=12]
+[ext_resource path="res://assets/resource/environment/night_clear.tres" type="Resource" id=11]
+[ext_resource path="res://assets/resource/environment/day_clear.tres" type="Resource" id=12]
 [ext_resource path="res://source/scenes/object/cloud.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/resource/environment/twilight.tres" type="Resource" id=14]
-[ext_resource path="res://assets/resource/environment/dawn.tres" type="Resource" id=15]
+[ext_resource path="res://assets/resource/environment/twilight_clear.tres" type="Resource" id=14]
+[ext_resource path="res://assets/resource/environment/dawn_clear.tres" type="Resource" id=15]
+[ext_resource path="res://assets/resource/environment/twilight_storm.tres" type="Resource" id=16]
+[ext_resource path="res://assets/resource/environment/dawn_storm.tres" type="Resource" id=17]
+[ext_resource path="res://assets/resource/environment/night_storm.tres" type="Resource" id=18]
+[ext_resource path="res://assets/resource/environment/day_storm.tres" type="Resource" id=19]
 
 [sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0.405844, 0.587662 )
@@ -43,41 +47,21 @@ flags_unshaded = true
 albedo_texture = SubResource( 14 )
 uv1_scale = Vector3( 2, 1, 2 )
 
-[sub_resource type="Animation" id=16]
-resource_name = "Stars"
-
-[sub_resource type="SpatialMaterial" id=11]
-render_priority = -98
-flags_transparent = true
-flags_unshaded = true
-flags_do_not_receive_shadows = true
-params_depth_draw_mode = 2
-params_line_width = 0.1
-albedo_texture = ExtResource( 8 )
-
-[sub_resource type="SpatialMaterial" id=12]
-render_priority = -99
-flags_transparent = true
-flags_unshaded = true
-flags_do_not_receive_shadows = true
-params_depth_draw_mode = 2
-params_line_width = 0.1
-albedo_texture = ExtResource( 8 )
-depth_enabled = true
-depth_scale = 0.05
-depth_deep_parallax = false
-depth_flip_tangent = false
-depth_flip_binormal = false
-
-[sub_resource type="BoxShape" id=7]
-
 [node name="EnvironmentDefault" type="Spatial"]
 script = ExtResource( 2 )
-colors_dawn = ExtResource( 15 )
-colors_day = ExtResource( 12 )
-colors_twilight = ExtResource( 14 )
-colors_night = ExtResource( 11 )
+environment_current = ExtResource( 12 )
+environment_clear = ExtResource( 12 )
+environment_storm = ExtResource( 19 )
+colors_dawn_clear = ExtResource( 15 )
+colors_dawn_storm = ExtResource( 17 )
+colors_day_clear = ExtResource( 12 )
+colors_day_storm = ExtResource( 19 )
+colors_twilight_clear = ExtResource( 14 )
+colors_twilight_storm = ExtResource( 16 )
+colors_night_clear = ExtResource( 11 )
+colors_night_storm = ExtResource( 18 )
 cloud = ExtResource( 13 )
+rain_drop = ExtResource( 8 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 1 )
@@ -130,30 +114,9 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0
 mesh = ExtResource( 10 )
 material/0 = SubResource( 15 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sky"]
-root_node = NodePath("../..")
-anims/Stars = SubResource( 16 )
+[node name="Clouds" type="Position3D" parent="."]
 
-[node name="CloudRing" type="MeshInstance" parent="."]
-transform = Transform( 2040, 0, 0, 0, 64, 0, 0, 0, 2040, 0, 25, 0 )
-visible = false
-sorting_use_aabb_center = false
-mesh = ExtResource( 5 )
-skeleton = NodePath("../WorldEnvironment")
-material/0 = SubResource( 11 )
-
-[node name="CloudRing2" type="MeshInstance" parent="."]
-transform = Transform( 2056, 0, 0, 0, 128, 0, 0, 0, 2056, 0, 32, 0 )
-visible = false
-sorting_use_aabb_center = false
-mesh = ExtResource( 5 )
-skeleton = NodePath("../WorldEnvironment")
-material/0 = SubResource( 12 )
-
-[node name="Area" type="Area" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 7 )
+[node name="Downpour" type="Position3D" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
 
