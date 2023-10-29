@@ -7,6 +7,9 @@ func _physics_process(delta: float) -> void:
 	if is_instance_valid(GlobalManager.camera):
 		sprite.look_at(GlobalManager.camera.global_translation, Vector3.UP)
 
+func _integrate_forces(state: PhysicsDirectBodyState):
+	add_central_force(Vector3(-2, 0, 0))
+
 func fade_away() -> void:
 	anim.play("FadeAway")
 	yield(anim, "animation_finished")

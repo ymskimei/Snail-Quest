@@ -51,6 +51,7 @@ export var transition_speed: int = 5
 export var storm_frequency: int = 10
 
 var time: int = 0
+var cloudy: bool
 
 func _ready() -> void:
 	var cloud_timer = Timer.new()
@@ -73,8 +74,8 @@ func _physics_process(delta: float) -> void:
 	if is_instance_valid(GlobalManager.game_time):
 		time = GlobalManager.game_time.get_raw_time()
 		set_orbit(delta)
-		set_environment_by_time()
 		set_environment(delta)
+		set_environment_by_time()
 
 func set_environment_by_time() -> void:
 	if time in range(time_dawn, time_day):
@@ -89,6 +90,10 @@ func set_environment_by_time() -> void:
 	else:
 		environment_clear = colors_night_clear
 		environment_storm = colors_night_storm
+	if cloudy:
+		environment_current = environment_storm
+	else:
+		environment_current = environment_clear
 	check_environment_variables()
 
 func check_environment_variables() -> void:
@@ -124,6 +129,7 @@ func set_environment(delta: float):
 	var current_fog_depth_end = environment.environment.fog_depth_end
 	current_sky_color.set_color(0, lerp(current_sky_color.get_color(0), sky_color_1, 1 * delta))
 	current_sky_color.set_color(1, lerp(current_sky_color.get_color(1), sky_color_2, 1 * delta))
+	current_sky_color.set_color(2, lerp(current_sky_color.get_color(2), sky_color_1, 1 * delta))
 	for c in all_clouds:
 		if c.sprite.modulate != cloud_color:
 			c.sprite.modulate = lerp(c.sprite.modulate, cloud_color, 1 * delta)
@@ -141,6 +147,7 @@ func set_environment(delta: float):
 	$Tween.start()
 
 func on_cloud_timer() -> void:
+	print(environment_current)
 	randomize()
 	var x_range = Vector2(-cloud_range_width, cloud_range_width)
 	var y_range = Vector2(-cloud_range_width, cloud_range_width)
@@ -174,11 +181,11 @@ func on_rain_timer() -> void:
 func on_weather_timer() -> void:
 	randomize()
 	var weather = randi() % 100
-	if environment_current == environment_clear:
+	if !cloudy:
 		if weather <= storm_frequency:
-			environment_current = environment_storm
+			cloudy = true
 		else:
-			environment_current = environment_clear
+			cloudy = false
 	else:
 		if weather <= (storm_frequency / 2):
-			environment_current = environment_clear
+			cloudy = false
