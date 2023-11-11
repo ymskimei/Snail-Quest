@@ -15,11 +15,11 @@ func _ready() -> void:
 	set_title_splash()
 	version.set_bbcode("[color=#EFEFEF] Version " + GlobalManager.version_number)
 	info.set_bbcode("[right][color=#EFEFEF] © 2023 Studio Kuwagata")
-	default_selection.grab_focus()
 	anim_cam.play("CamTitleStart")
 	anim_daisy.play("DaisyBlossom")
 	anim_logo.play("GuiLogoAppear")
 	yield(anim_daisy, "animation_finished")
+	default_selection.grab_focus()
 	anim_cam.play("CamWobble")
 	anim_daisy.play("DaisyWiggle")
 	anim_logo.play("GuiLogoIdle")
@@ -45,6 +45,7 @@ func _on_StartButton_pressed() -> void:
 	queue_free()
 
 func _on_OptionsButton_pressed() -> void:
+	GuiMain.menu_popup()
 	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
 
 func set_title_splash() -> void:
