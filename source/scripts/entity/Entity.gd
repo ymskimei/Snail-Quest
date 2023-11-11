@@ -1,7 +1,7 @@
 class_name Entity
-extends ObjectParent
+extends Interactable
 
-export(Resource) var resource
+export(Resource) var identity
 export(Resource) var equipped
 
 onready var cam: SpringArm = GlobalManager.camera
@@ -33,6 +33,7 @@ var target_found: bool
 var enemy_detected: bool
 var jump_in_memory: bool
 var ledge_usable: bool
+var npc: bool
 
 var jump_memory_timer: Timer = Timer.new()
 var ledge_timer: Timer = Timer.new()
@@ -41,12 +42,14 @@ signal health_changed
 signal entity_killed
 
 func _ready() -> void:
-	if is_instance_valid(resource):
-		health = resource.health
-		max_health = resource.max_health
-		strength = resource.strength
-		speed = resource.speed
-		jump = resource.jump
+	if is_instance_valid(identity):
+		entity_name = identity.entity_name
+		character = identity.character
+		health = identity.health
+		max_health = identity.max_health
+		strength = identity.strength
+		speed = identity.speed
+		jump = identity.jump
 	jump_memory_timer.set_wait_time(0.075)
 	jump_memory_timer.one_shot = true
 	jump_memory_timer.connect("timeout", self, "on_jump_memory_timeout")
@@ -125,10 +128,10 @@ func target_check() -> void:
 	var target_distance = target.get_global_translation().distance_to(get_global_translation())
 	var relative_facing = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
 	var max_enemy_distance = 15
-	var max_interactable_distance = 5
+	var max_interactable_distance = 2
 	if Input.is_action_pressed("cam_lock"):
 		targeting = true
-		if enemy_detected or ObjectInteractable and target_distance < max_interactable_distance:
+		if enemy_detected or !target.is_controlled() and target_distance < max_interactable_distance:
 			target_found = true
 		else:
 			target_found = false
@@ -136,7 +139,7 @@ func target_check() -> void:
 		target = MathHelper.find_target(self, "target")
 		targeting = false
 
-	if (target is ObjectInteractable or target.is_in_group("mountable")) and target_distance < max_interactable_distance and relative_facing >= 0:
+	if (!target.is_controlled() and target.character) and target_distance < max_interactable_distance and relative_facing >= 0:
 		can_interact = true
 		set_interaction_text(target.get_interaction_text())
 		if Input.is_action_just_pressed("action_main"):

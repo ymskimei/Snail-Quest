@@ -1,0 +1,33 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://assets/model/snail_eye_right.mesh" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/model/snail_eye_left.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/model/snail_body_wide.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/model/snail_shell_large.mesh" type="ArrayMesh" id=4]
+[ext_resource path="res://assets/texture/entity/snail_body.png" type="Texture" id=5]
+[ext_resource path="res://assets/texture/entity/snail_shell_accent_2.png" type="Texture" id=6]
+[ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=7]
+[ext_resource path="res://source/scripts/resource/ResourceIdentitySnail.gd" type="Script" id=8]
+
+[resource]
+script = ExtResource( 8 )
+entity_name = "Fubward"
+character = false
+health = 0
+max_health = 0
+strength = 0
+speed = 0
+jump = 0
+mesh_shell = ExtResource( 4 )
+mesh_body = ExtResource( 3 )
+mesh_eye_left = ExtResource( 2 )
+mesh_eye_right = ExtResource( 1 )
+pattern_shell = ExtResource( 6 )
+pattern_body = ExtResource( 5 )
+pattern_eyes = ExtResource( 7 )
+color_shell_base = "9E6763"
+color_shell_accent = "535C89"
+color_body = "80BB7A"
+color_body_accent = "6AA37F"
+color_eye_left = "5B332F"
+color_eye_right = "5B332F"

@@ -2,7 +2,8 @@
 
 [ext_resource path="res://source/scripts/gui/GuiCharacter.gd" type="Script" id=1]
 [ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=2]
-[ext_resource path="res://assets/resource/skin/sheldon.tres" type="Resource" id=3]
+[ext_resource path="res://assets/resource/identity/sheldon.tres" type="Resource" id=3]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Exit"

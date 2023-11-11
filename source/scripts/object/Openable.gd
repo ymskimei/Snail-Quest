@@ -1,4 +1,4 @@
-extends ObjectInteractable
+extends Interactable
 
 var is_opened: bool
 
@@ -15,4 +15,3 @@ func interact() -> void:
 		yield(anim, "animation_finished")
 		is_opened = true
 	#trigger_dialog()
-

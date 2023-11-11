@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourceIdentitySnail.gd" type="Script" id=1]
+[ext_resource path="res://assets/texture/entity/snail_body_accent.png" type="Texture" id=2]
+[ext_resource path="res://assets/model/snail_body_thin.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=4]
+[ext_resource path="res://assets/model/snail_shell.mesh" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/texture/entity/snail_shell_accent_2.png" type="Texture" id=6]
+[ext_resource path="res://assets/model/snail_eye_left.mesh" type="ArrayMesh" id=7]
+[ext_resource path="res://assets/model/snail_eye_right.mesh" type="ArrayMesh" id=8]
+
+
+[resource]
+script = ExtResource( 1 )
+entity_name = "Sheldon"
+mesh_shell = ExtResource( 5 )
+mesh_body = ExtResource( 3 )
+mesh_eye_left = ExtResource( 7 )
+mesh_eye_right = ExtResource( 8 )
+pattern_shell = ExtResource( 6 )
+pattern_body = ExtResource( 2 )
+pattern_eyes = ExtResource( 4 )
+color_shell_base = "DDFAFF"
+color_shell_accent = "B5D5FF"
+color_body = "66A0FF"
+color_body_accent = "498FFF"
+color_eye_left = "4BAF48"
+color_eye_right = "4BAF48"
