@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://addons/dialogic/Nodes/TextBubble.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/dialogic/Example Assets/backgrounds/GlossaryBackground.tres" type="StyleBox" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://addons/dialogic/Example Assets/Sound Effects/Beep.wav" type="AudioStream" id=9]
 [ext_resource path="res://addons/dialogic/Nodes/DialogicCustomEvents.gd" type="Script" id=10]
 [ext_resource path="res://addons/dialogic/Nodes/History.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/sound/sfx_sign_next.ogg" type="AudioStream" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0 )
@@ -38,15 +39,16 @@ __meta__ = {
 }
 
 [node name="TextBubble" parent="." instance=ExtResource( 1 )]
-margin_left = 505.0
-margin_top = 873.0
-margin_right = 1415.0
+margin_left = 320.0
+margin_top = 528.0
+margin_right = 1600.0
 margin_bottom = 1040.0
 
 [node name="Options" type="VBoxContainer" parent="."]
 visible = false
+margin_top = 296.0
 margin_right = 1920.0
-margin_bottom = 1080.0
+margin_bottom = 1376.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -84,7 +86,7 @@ random_strategy = 2
 
 [node name="Passing" type="AudioStreamPlayer" parent="FX/Audio"]
 script = ExtResource( 8 )
-samples = [ ExtResource( 9 ) ]
+samples = [ ExtResource( 12 ) ]
 random_strategy = 2
 
 [node name="Hovering" type="AudioStreamPlayer" parent="FX/Audio"]
@@ -94,7 +96,7 @@ random_strategy = 2
 
 [node name="Selecting" type="AudioStreamPlayer" parent="FX/Audio"]
 script = ExtResource( 8 )
-samples = [ ExtResource( 9 ) ]
+samples = [ ExtResource( 12 ) ]
 random_strategy = 2
 
 [node name="DefinitionInfo" type="PanelContainer" parent="."]
@@ -178,7 +180,7 @@ script = ExtResource( 10 )
 [node name="TouchScreenButton" type="TouchScreenButton" parent="."]
 shape = SubResource( 2 )
 shape_visible = false
-action = "dialogic_default_action"
+action = "action_main"
 visibility_mode = 1
 
 [connection signal="timeout" from="DefinitionInfo/Timer" to="." method="_on_Definition_Timer_timeout"]

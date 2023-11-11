@@ -7,6 +7,7 @@ var title_screen = preload("res://source/scenes/gui/gui_screen_title.tscn").inst
 func _ready():
 	add_child(title_screen)
 	title_screen.connect("game_start", self, "on_Game_Started")
+	Dialogic.prepare()
 
 func on_Game_Started():
 	yield(title_screen, "tree_exited")

@@ -13,8 +13,8 @@ export var lock_low_lens: float = -0.025
 export var lock_default_arm: float = -0.2
 export var lock_default_lens: float = 0.075
 
-export var fov: int = 30
-export var arm: float = 9
+export var fov: int = 40
+export var arm: float = 6
 
 var distance: float = 0
 var input_spin: int = 0

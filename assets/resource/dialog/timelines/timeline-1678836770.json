@@ -1,7 +1,7 @@
 {
 	"events": [
 		{
-			"background": "res://assets/gui/gui_dialogue_box_default.tscn",
+			"background": "res://source/scenes/gui/gui_dialogue_box_default.tscn",
 			"event_id": "dialogic_021",
 			"fade_duration": 0.2
 		},
@@ -73,7 +73,7 @@
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.4.5",
+		"dialogic-version": "1.5",
 		"file": "timeline-1678836770.json",
 		"name": "test_dialogue_0"
 	}
