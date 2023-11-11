@@ -90,7 +90,6 @@ func _ready() -> void:
 	remap_timer.set_wait_time(0.5)
 	remap_timer.one_shot = true
 	remap_timer.connect("timeout", self, "on_remap_timeout")
-	#get_default_focus()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("gui_left"):
