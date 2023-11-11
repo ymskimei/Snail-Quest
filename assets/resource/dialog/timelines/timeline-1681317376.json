@@ -7,12 +7,12 @@
 			"text": "Welcome to Snaily Town!"
 		},
 		{
-			"emit_signal": "dialogue_ended",
+			"emit_signal": "dialog_ended",
 			"event_id": "dialogic_040"
 		}
 	],
 	"metadata": {
-		"dialogic-version": "1.4.5",
+		"dialogic-version": "1.5",
 		"file": "timeline-1681317376.json",
 		"name": "snaily_town_entrance"
 	}

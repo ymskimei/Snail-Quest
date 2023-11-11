@@ -7,7 +7,7 @@
 			"text": "This is the first sign. Congratulations for using it! You're the first in the history of this entire game to do that.\nWell anyway, you can go now... Like, any moment now. Seriously, go."
 		},
 		{
-			"emit_signal": "dialogue_ended",
+			"emit_signal": "dialog_ended",
 			"event_id": "dialogic_040"
 		}
 	],

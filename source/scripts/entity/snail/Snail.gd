@@ -15,11 +15,13 @@ var cursor = preload("res://source/scenes/gui/gui_aim_cursor.tscn")
 var in_shell: bool
 var is_tool_equipped: bool
 var cursor_activated: bool
+var attached_to_location: bool
 
 var cursor_pos: Vector3
 
 func _ready() -> void:
-	entity_name = skin.entity_name
+	if is_instance_valid(skin):
+		entity_name = skin.entity_name
 	states.ready(self)
 	update_appearance()
 	set_interaction_text("")
@@ -36,10 +38,18 @@ func _physics_process(delta: float) -> void:
 	._physics_process(delta)
 	if is_controllable():
 		states.physics_process(delta)
+	elif is_instance_valid(GlobalManager.controllable) and self == GlobalManager.prev_controllable:
+		if GlobalManager.controllable.get("grab_point"):
+			anim.play("SnailGrab")
+			global_translation = GlobalManager.controllable.grab_point.global_translation
+			global_rotation.x = GlobalManager.controllable.grab_point.global_rotation.x
+			global_rotation.y = 0
+			global_rotation.z = GlobalManager.controllable.grab_point.global_rotation.z
 	if in_shell:
 		attach_point.visible = false
 	else:
 		attach_point.visible = true
+	#print(GlobalManager.controllable)
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	if is_controllable():
@@ -56,6 +66,10 @@ func _on_proximity_exited(body) -> void:
 func _on_Area_area_entered(area) -> void:
 	if area.is_in_group("danger"):
 		damage_entity(area.get_parent().strength)
+	if area.is_in_group("attachable"):
+		GlobalManager.set_prev_controllable(self)
+		GlobalManager.set_controllable(area.get_parent().get_parent().get_parent())
+		attached_to_location = true
 
 func update_appearance() -> void:
 	var shell = $"%Shell"
@@ -71,26 +85,27 @@ func update_appearance() -> void:
 	var eye_right_mat = eye_right.get_surface_material(0).get_next_pass()
 	var eyelid_left_mat = eye_left.get_surface_material(0).get_next_pass().get_next_pass()
 	var eyelid_right_mat = eye_right.get_surface_material(0).get_next_pass().get_next_pass()
-	shell.set_mesh(skin.mesh_shell)
-	body.set_mesh(skin.mesh_body)
-	eye_left.set_mesh(skin.mesh_eye_left)
-	eye_right.set_mesh(skin.mesh_eye_right)
-	shell_accent_mat.set_shader_param("texture_albedo", skin.pattern_shell)
-	body_accent_mat.set_shader_param("texture_albedo", skin.pattern_body)
-	eye_left_mat.set_shader_param("texture_albedo", skin.pattern_eyes)
-	eye_right_mat.set_shader_param("texture_albedo", skin.pattern_eyes)
-	shell_mat.set_shader_param("albedo", Color(skin.color_shell_base))
-	shell_accent_mat.set_shader_param("albedo", Color(skin.color_shell_accent))
-	shell_body_mat.set_shader_param("albedo", Color(skin.color_body))
-	body_mat.set_shader_param("albedo", Color(skin.color_body))
-	body_accent_mat.set_shader_param("albedo", Color(skin.color_body_accent))
-	eye_left_mat.set_shader_param("albedo", Color(skin.color_eye_left))
-	eye_right_mat.set_shader_param("albedo", Color(skin.color_eye_right))
-	if skin.pattern_eyelids != null:
-		eyelid_left_mat.set_shader_param("texture_albedo", skin.pattern_eyelids)
-		eyelid_right_mat.set_shader_param("texture_albedo", skin.pattern_eyelids)
-		eyelid_left_mat.set_shader_param("albedo", Color(skin.color_body_accent))
-		eyelid_right_mat.set_shader_param("albedo", Color(skin.color_body_accent))
-	else:
-		eyelid_left_mat.set_shader_param("albedo", Color(0, 0, 0, 0))
-		eyelid_right_mat.set_shader_param("albedo", Color(0, 0, 0, 0))
+	if is_instance_valid(skin):
+		shell.set_mesh(skin.mesh_shell)
+		body.set_mesh(skin.mesh_body)
+		eye_left.set_mesh(skin.mesh_eye_left)
+		eye_right.set_mesh(skin.mesh_eye_right)
+		shell_accent_mat.set_shader_param("texture_albedo", skin.pattern_shell)
+		body_accent_mat.set_shader_param("texture_albedo", skin.pattern_body)
+		eye_left_mat.set_shader_param("texture_albedo", skin.pattern_eyes)
+		eye_right_mat.set_shader_param("texture_albedo", skin.pattern_eyes)
+		shell_mat.set_shader_param("albedo", Color(skin.color_shell_base))
+		shell_accent_mat.set_shader_param("albedo", Color(skin.color_shell_accent))
+		shell_body_mat.set_shader_param("albedo", Color(skin.color_body))
+		body_mat.set_shader_param("albedo", Color(skin.color_body))
+		body_accent_mat.set_shader_param("albedo", Color(skin.color_body_accent))
+		eye_left_mat.set_shader_param("albedo", Color(skin.color_eye_left))
+		eye_right_mat.set_shader_param("albedo", Color(skin.color_eye_right))
+		if skin.pattern_eyelids != null:
+			eyelid_left_mat.set_shader_param("texture_albedo", skin.pattern_eyelids)
+			eyelid_right_mat.set_shader_param("texture_albedo", skin.pattern_eyelids)
+			eyelid_left_mat.set_shader_param("albedo", Color(skin.color_body_accent))
+			eyelid_right_mat.set_shader_param("albedo", Color(skin.color_body_accent))
+		else:
+			eyelid_left_mat.set_shader_param("albedo", Color(0, 0, 0, 0))
+			eyelid_right_mat.set_shader_param("albedo", Color(0, 0, 0, 0))

@@ -1,19 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/materials/object/test_sign.tres" type="Material" id=1]
 [ext_resource path="res://assets/model/sign.mesh" type="ArrayMesh" id=2]
-[ext_resource path="res://source/scripts/object/ObjectSignpost.gd" type="Script" id=3]
+[ext_resource path="res://source/scripts/object/Sign.gd" type="Script" id=3]
+[ext_resource path="res://assets/resource/sign_test_0.tres" type="Resource" id=4]
 
 [sub_resource type="BoxShape" id=2]
 
 [sub_resource type="BoxShape" id=3]
 
-[node name="SignpostModel" type="StaticBody" groups=["target"]]
+[node name="Sign" type="RigidBody" groups=["target"]]
 pause_mode = 2
 collision_layer = 8
+mode = 1
 script = ExtResource( 3 )
+dialog = ExtResource( 4 )
 
-[node name="Sign" type="MeshInstance" parent="."]
+[node name="SignModel" type="MeshInstance" parent="."]
 mesh = ExtResource( 2 )
 material/0 = ExtResource( 1 )
 

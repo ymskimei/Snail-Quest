@@ -94,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/enemy/EnemyStateMain.gd"
 }, {
-"base": "RigidBody",
+"base": "ObjectParent",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://source/scripts/entity/Entity.gd"
@@ -134,10 +134,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/MusicBooth.gd"
 }, {
-"base": "Node",
+"base": "ObjectParent",
 "class": "ObjectInteractable",
 "language": "GDScript",
 "path": "res://source/scripts/object/ObjectInteractable.gd"
+}, {
+"base": "RigidBody",
+"class": "ObjectParent",
+"language": "GDScript",
+"path": "res://source/scripts/ObjectParent.gd"
 }, {
 "base": "Resource",
 "class": "ResourceAudioPlayer",
@@ -191,7 +196,7 @@ _global_script_classes=[ {
 }, {
 "base": "Spatial",
 "class": "RoomTransition",
-"language": "GDScript",
+"language": "",
 "path": "res://source/scripts/object/RoomTransition.gd"
 }, {
 "base": "Entity",
@@ -276,6 +281,7 @@ _global_script_class_icons={
 "MainCamera": "",
 "MusicBooth": "",
 "ObjectInteractable": "",
+"ObjectParent": "",
 "ResourceAudioPlayer": "",
 "ResourceEntity": "",
 "ResourceEnvironment": "",

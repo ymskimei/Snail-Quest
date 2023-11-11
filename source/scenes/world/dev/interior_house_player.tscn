@@ -3,11 +3,12 @@
 [ext_resource path="res://assets/resource/environment/environment_interior.tres" type="Environment" id=1]
 [ext_resource path="res://source/scenes/object/room_transition.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/model/interior_mushroom_stem.mesh" type="ArrayMesh" id=3]
-[ext_resource path="res://source/scenes/object/camera_lock_point.tscn" type="PackedScene" id=4]
+[ext_resource path="res://source/scenes/object/lock_target.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/materials/environment/ray.tres" type="Material" id=5]
 [ext_resource path="res://source/scenes/object/mushroom_window.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/resource/warp/exterior_house_player.tres" type="Resource" id=7]
 [ext_resource path="res://source/scenes/object/beam.tscn" type="PackedScene" id=8]
+
 
 [sub_resource type="CylinderShape" id=9]
 
