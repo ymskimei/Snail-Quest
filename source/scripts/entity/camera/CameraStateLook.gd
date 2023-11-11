@@ -15,6 +15,8 @@ func enter() -> void:
 	entity.anim_wobble.play("Wobble")
 
 func physics_process(delta: float) -> int:
+	if entity.lock_to_point == true:
+		return State.LOCK
 	if rotation_complete:
 		cam_movement(delta)
 		entity.cam_target.controllable = false

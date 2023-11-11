@@ -1,5 +1,5 @@
 class_name Entity
-extends RigidBody
+extends ObjectParent
 
 export(Resource) var resource
 export(Resource) var equipped
@@ -10,8 +10,6 @@ onready var controllable: bool = false
 onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
 onready var attach_point: Spatial = $"%EyePoint"
-onready var anim: AnimationPlayer = $AnimationPlayer
-onready var anim_tween: Tween = $Tween
 onready var proximity: Area = $Proximity
 
 onready var interaction_label: RichTextLabel = $Gui/InteractionLabel
@@ -43,24 +41,21 @@ signal health_changed
 signal entity_killed
 
 func _ready() -> void:
-	health = resource.health
-	max_health = resource.max_health
-	strength = resource.strength
-	speed = resource.speed
-	jump = resource.jump
-
+	if is_instance_valid(resource):
+		health = resource.health
+		max_health = resource.max_health
+		strength = resource.strength
+		speed = resource.speed
+		jump = resource.jump
 	jump_memory_timer.set_wait_time(0.075)
 	jump_memory_timer.one_shot = true
 	jump_memory_timer.connect("timeout", self, "on_jump_memory_timeout")
 	add_child(jump_memory_timer)
-
 	ledge_timer.set_wait_time(1)
 	ledge_timer.one_shot = true
 	ledge_timer.connect("timeout", self, "on_ledge_timeout")
 	add_child(ledge_timer)
-
 	ledge_usable = true
-
 	if is_instance_valid(proximity):
 		proximity.connect("area_entered", self, "_on_proximity_entered")
 		proximity.connect("area_exited", self, "_on_proximity_exited")
@@ -117,18 +112,6 @@ func update_equipped() -> void:
 			equipped_tool.set_name(tool_item.item_name)
 			attach_point.add_child(equipped_tool)
 
-func get_coords() -> Vector3:
-	var x = round(global_transform.origin.x)
-	var y = round(global_transform.origin.y)
-	var z = round(global_transform.origin.z)
-	var coords = [x, y, z]
-	return coords
-
-func set_coords(position: Vector3, angle: String = "Default") -> void:
-	set_global_translation(position)
-	if !angle == "Default":
-		set_global_rotation(Vector3(0, deg2rad(MathHelper.cardinal_to_degrees(angle)), 0))
-
 func set_interaction_text(text) -> void:
 	if !text:
 		interaction_label.set_text("")
@@ -152,6 +135,7 @@ func target_check() -> void:
 	else:
 		target = MathHelper.find_target(self, "target")
 		targeting = false
+
 	if (target is ObjectInteractable or target.is_in_group("mountable")) and target_distance < max_interactable_distance and relative_facing >= 0:
 		can_interact = true
 		set_interaction_text(target.get_interaction_text())
@@ -161,11 +145,6 @@ func target_check() -> void:
 	else:
 		can_interact = false
 		set_interaction_text("")
-
-func is_controllable() -> bool:
-	if GlobalManager.controllable == self:
-		return true
-	return false
 
 func jump_memory() -> void:
 	jump_in_memory = true

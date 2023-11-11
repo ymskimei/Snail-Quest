@@ -3,8 +3,8 @@
 [sub_resource type="Gradient" id=1]
 resource_local_to_scene = true
 interpolation_mode = 1
-offsets = PoolRealArray( 0, 0.257895 )
-colors = PoolColorArray( 0.397461, 0.397461, 0.397461, 1, 1, 1, 1, 1 )
+offsets = PoolRealArray( 0, 0.327338 )
+colors = PoolColorArray( 0.478027, 0.478027, 0.478027, 1, 1, 1, 1, 1 )
 
 [resource]
 resource_local_to_scene = true

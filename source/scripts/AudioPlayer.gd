@@ -35,6 +35,9 @@ const sfx_mallet_charge_1 = "res://assets/sound/sfx_mallet_charge_1.ogg"
 const sfx_mallet_charge_2 = "res://assets/sound/sfx_mallet_charge_2.ogg"
 const sfx_mallet_slam = "res://assets/sound/sfx_mallet_slam.ogg"
 const sfx_mallet_full_slam = "res://assets/sound/sfx_mallet_full_slam.ogg"
+const sfx_switch_on = "res://assets/sound/sfx_switch_on.ogg"
+const sfx_switch_off = "res://assets/sound/sfx_switch_off.ogg"
+const sfx_door_open = "res://assets/sound/sfx_door_open.ogg"
 
 #Soundtrack
 const ost_snailytown = "res://source/scenes/sound/snaily_town.tscn"
@@ -61,7 +64,7 @@ func play_sfx(path: String):
 	yield(sfx, "finished")
 	sfx.queue_free()
 
-func play_pos_sfx(path: String, spatial: Vector3):
+func play_pos_sfx(path: String, spatial: Vector3 = Vector3.ZERO):
 	var sfx = AudioStreamPlayer3D.new()
 	var sound_effect = import_sound(path)
 	sfx.stream = sound_effect
