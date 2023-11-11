@@ -1,4 +1,4 @@
-extends ObjectParent
+extends Interactable
 
 func _ready():
 	var switch = get_node_or_null("Switch")

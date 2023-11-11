@@ -12,6 +12,8 @@ var boost_max: int = 10
 var boosting: bool = false
 var can_boost: bool = true
 
+var character: bool
+
 var boost_timer: Timer = Timer.new()
 var boost_replenish: Timer = Timer.new()
 
@@ -90,3 +92,8 @@ func unmount():
 	player.can_move = false
 	mounted = false
 	engine_force = 0
+
+func is_controlled() -> bool:
+	if GlobalManager.controllable == self:
+		return true
+	return false

@@ -45,6 +45,9 @@
 			"event_id": "dialogic_013"
 		},
 		{
+			"event_id": "dialogic_013"
+		},
+		{
 			"emit_signal": "dialog_ended",
 			"event_id": "dialogic_040"
 		}

@@ -1,4 +1,4 @@
-extends ObjectParent
+extends Interactable
 
 onready var rod: RigidBody = $Lever/Handle
 onready var grab_point: Position3D = $Lever/Handle/Position3D
@@ -13,7 +13,7 @@ func _ready() -> void:
 	camera_target_proxy = get_node_or_null("CameraTarget")
 
 func _input(event: InputEvent) -> void:
-	if is_controllable():
+	if is_controlled():
 		current_camera_target = true
 		var rotation_timer_right: Timer = Timer.new()
 		if Input.is_action_pressed("joy_down") and !active:
@@ -32,8 +32,3 @@ func _input(event: InputEvent) -> void:
 			GlobalManager.set_controllable(GlobalManager.prev_controllable)
 	else:
 		current_camera_target = false
-
-func is_controllable() -> bool:
-	if GlobalManager.controllable == self:
-		return true
-	return false

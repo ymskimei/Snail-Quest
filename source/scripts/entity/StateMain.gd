@@ -64,8 +64,8 @@ func apply_movement(state: PhysicsDirectBodyState, multiplier: float, roll: bool
 				state.add_central_force((entity.speed * multiplier) * direction)
 				#entity.anim_tween.interpolate_property(entity.skeleton, "rotation:y", entity.skeleton.rotation.y, atan2(-direction.x, -direction.z), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				#entity.anim_tween.start()
-		else:
-			state.linear_velocity = Vector3.ZERO
+#		else:
+#			state.linear_velocity = Vector3.ZERO
 
 func apply_shimmy(state: PhysicsDirectBodyState, multiplier: float) -> void:
 	direction = Vector3(-get_joy_input().x, 0, 0).rotated(Vector3.UP, entity.skeleton. rotation.y)
