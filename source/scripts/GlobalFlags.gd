@@ -2,5 +2,5 @@ extends Node
 
 #Main Events
 
-#Dialogic
-var izabell_met: bool
+#Dialog
+var izabell_has_met: bool = false

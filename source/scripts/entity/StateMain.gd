@@ -54,7 +54,7 @@ func get_joy_input() -> Vector3:
 	return input
 
 func apply_movement(state: PhysicsDirectBodyState, multiplier: float, roll: bool = false) -> void:
-	if !entity.attached_to_location:
+	if !entity.attached_to_location and !entity.interacting:
 		direction = -get_joy_input().rotated(Vector3.UP, entity.cam.rotation.y)
 		direction = direction.rotated(Vector3.LEFT, -entity.rotation.x).rotated(Vector3.RIGHT, -entity.rotation.y)
 		if direction != Vector3.ZERO:

@@ -34,55 +34,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/Chunk.gd"
 }, {
-"base": "Reference",
-"class": "DTS",
+"base": "Resource",
+"class": "DialogueResource",
 "language": "GDScript",
-"path": "res://addons/dialogic/Localization/translation_service.gd"
-}, {
-"base": "Node",
-"class": "Dialogic",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicClass.gd"
-}, {
-"base": "Reference",
-"class": "DialogicAnimaPropertiesHelper",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/Anima/DialogicAnimaPropertiesHelper.gd"
-}, {
-"base": "Node",
-"class": "DialogicAnimaResources",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/Anima/DialogicAnimaResources.gd"
-}, {
-"base": "Control",
-"class": "DialogicBackgroundMusic",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/BackgroundMusic.gd"
-}, {
-"base": "Node",
-"class": "DialogicCustomEvents",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/DialogicCustomEvents.gd"
-}, {
-"base": "Node",
-"class": "DialogicDefinitionsUtil",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicDefinitionsUtil.gd"
-}, {
-"base": "Node",
-"class": "DialogicParser",
-"language": "GDScript",
-"path": "res://addons/dialogic/Parser/DialogicParser.gd"
-}, {
-"base": "Reference",
-"class": "DialogicResources",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicResources.gd"
-}, {
-"base": "Reference",
-"class": "DialogicUtil",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicUtil.gd"
+"path": "res://addons/dialogue_manager/dialogue_resource.gd"
 }, {
 "base": "Entity",
 "class": "Enemy",
@@ -108,11 +63,6 @@ _global_script_classes=[ {
 "class": "GuiConsoleCommand",
 "language": "GDScript",
 "path": "res://source/scripts/gui/GuiPopupConsoleCommand.gd"
-}, {
-"base": "PanelContainer",
-"class": "HistoryRow",
-"language": "GDScript",
-"path": "res://addons/dialogic/Example Assets/History/HistoryRow.gd"
 }, {
 "base": "RigidBody",
 "class": "Interactable",
@@ -255,22 +205,12 @@ _global_script_class_icons={
 "CameraStateLock": "",
 "CameraStateMain": "",
 "Chunk": "",
-"DTS": "",
-"Dialogic": "",
-"DialogicAnimaPropertiesHelper": "",
-"DialogicAnimaResources": "",
-"DialogicBackgroundMusic": "",
-"DialogicCustomEvents": "",
-"DialogicDefinitionsUtil": "",
-"DialogicParser": "",
-"DialogicResources": "",
-"DialogicUtil": "",
+"DialogueResource": "",
 "Enemy": "",
 "EnemyStateMain": "",
 "Entity": "",
 "GuiConsoleCategory": "",
 "GuiConsoleCommand": "",
-"HistoryRow": "",
 "Interactable": "",
 "InventoryParent": "",
 "ItemParent": "",
@@ -328,12 +268,13 @@ default_bus_layout="res://assets/default_bus_layout.tres"
 [autoload]
 
 SaveData="*res://source/scripts/SaveData.gd"
+GlobalManager="*res://source/scripts/GlobalManager.gd"
+GlobalFlags="*res://source/scripts/GlobalFlags.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GuiMain="*res://source/scenes/gui/gui_main.tscn"
 MathHelper="*res://source/scripts/MathHelper.gd"
-GlobalManager="*res://source/scripts/GlobalManager.gd"
 WorldSave="*res://source/scripts/WorldSave.gd"
 AudioPlayer="*res://source/scenes/audio_player.tscn"
-GlobalFlags="*res://source/scripts/GlobalFlags.gd"
 
 [debug]
 
@@ -362,7 +303,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/zylann.scatter/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/zylann.scatter/plugin.cfg" )
 
 [global]
 

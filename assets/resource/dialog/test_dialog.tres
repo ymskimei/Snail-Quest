@@ -1,0 +1,160 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/dialogue_manager/dialogue_resource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+resource_version = 20
+syntax_version = 2
+raw_text = "~ test_dialog
+
+~ opener
+if izabell_has_met == false
+	Izabell: Hi there, new friend!! I'm barely alive... But, I'm trying to be?
+	Izabell: Well, that was nice meeting you anyway! Yay!!
+	set izabell_has_met = true
+	=> END
+else:
+	Izabell: Well hi!! Again? Did you really want to chat more? Because I've not got anything new to say, you know.
+	- I know, but you're cool!
+		Izabell: Really?? Thank you so much!! You're cool too.
+	- Oh, I forgot about that.
+		Izabell: It's not a problemmm, just come back later or something!
+	=> END"
+errors = [  ]
+titles = {
+"opener": "3",
+"test_dialog": "2"
+}
+lines = {
+"0": {
+"next_id": "",
+"text": "test_dialog",
+"type": "title"
+},
+"10": {
+"next_id": "11",
+"next_id_after": "14",
+"parent_id": "8",
+"replacements": [  ],
+"responses": PoolStringArray( "10", "12" ),
+"text": "I know, but you're cool!",
+"translation_key": "I know, but you're cool!",
+"type": "response"
+},
+"11": {
+"character": "Izabell",
+"character_replacements": [  ],
+"next_id": "14",
+"parent_id": "10",
+"replacements": [  ],
+"text": "Really?? Thank you so much!! You're cool too.",
+"translation_key": "Really?? Thank you so much!! You're cool too.",
+"type": "dialogue"
+},
+"12": {
+"next_id": "13",
+"next_id_after": "14",
+"parent_id": "8",
+"replacements": [  ],
+"text": "Oh, I forgot about that.",
+"translation_key": "Oh, I forgot about that.",
+"type": "response"
+},
+"13": {
+"character": "Izabell",
+"character_replacements": [  ],
+"next_id": "14",
+"parent_id": "12",
+"replacements": [  ],
+"text": "It's not a problemmm, just come back later or something!",
+"translation_key": "It's not a problemmm, just come back later or something!",
+"type": "dialogue"
+},
+"14": {
+"next_id": "end",
+"parent_id": "8",
+"type": "goto"
+},
+"2": {
+"next_id": "3",
+"text": "opener",
+"type": "title"
+},
+"3": {
+"condition": {
+"expression": [ {
+"type": "variable",
+"value": "izabell_has_met"
+}, {
+"type": "comparison",
+"value": "=="
+}, {
+"type": "bool",
+"value": false
+} ]
+},
+"next_conditional_id": "8",
+"next_id": "4",
+"next_id_after": "end!",
+"type": "condition"
+},
+"4": {
+"character": "Izabell",
+"character_replacements": [  ],
+"next_id": "5",
+"parent_id": "3",
+"replacements": [  ],
+"text": "Hi there, new friend!! I'm barely alive... But, I'm trying to be?",
+"translation_key": "Hi there, new friend!! I'm barely alive... But, I'm trying to be?",
+"type": "dialogue"
+},
+"5": {
+"character": "Izabell",
+"character_replacements": [  ],
+"next_id": "6",
+"parent_id": "3",
+"replacements": [  ],
+"text": "Well, that was nice meeting you anyway! Yay!!",
+"translation_key": "Well, that was nice meeting you anyway! Yay!!",
+"type": "dialogue"
+},
+"6": {
+"mutation": {
+"expression": [ {
+"type": "variable",
+"value": "izabell_has_met"
+}, {
+"type": "assignment",
+"value": "="
+}, {
+"type": "bool",
+"value": true
+} ]
+},
+"next_id": "7",
+"parent_id": "3",
+"type": "mutation"
+},
+"7": {
+"next_id": "end",
+"parent_id": "3",
+"type": "goto"
+},
+"8": {
+"next_conditional_id": "end!",
+"next_id": "9",
+"next_id_after": "end!",
+"type": "condition"
+},
+"9": {
+"character": "Izabell",
+"character_replacements": [  ],
+"next_id": "10",
+"parent_id": "8",
+"replacements": [  ],
+"text": "Well hi!! Again? Did you really want to chat more? Because I've not got anything new to say, you know.",
+"translation_key": "Well hi!! Again? Did you really want to chat more? Because I've not got anything new to say, you know.",
+"type": "dialogue"
+}
+}
