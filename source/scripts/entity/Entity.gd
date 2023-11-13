@@ -24,16 +24,15 @@ onready var jump: int
 var direction: Vector3 = Vector3.ZERO
 var input: Vector3 = Vector3.ZERO
 
-var interactable = null
 var target = null
 
 var can_interact: bool
+var interacting : bool
 var targeting: bool
 var target_found: bool
 var enemy_detected: bool
 var jump_in_memory: bool
 var ledge_usable: bool
-var npc: bool
 
 var jump_memory_timer: Timer = Timer.new()
 var ledge_timer: Timer = Timer.new()
@@ -65,14 +64,18 @@ func _ready() -> void:
 	display_debug_healthbar()
 	cam.connect("target_updated", self, "_on_cam_target_updated")
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	pass
 
+func _unhandled_input(event: InputEvent) -> void:
+	if is_instance_valid(target):
+		target_interact(event)
+
 func _physics_process(delta: float) -> void:
-	if !is_instance_valid(target):
-		target = MathHelper.find_target(self, "target")
-	else:
+	if is_instance_valid(target):
 		target_check()
+	else:
+		target = MathHelper.find_target(self, "target")
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	pass
@@ -115,18 +118,8 @@ func update_equipped() -> void:
 			equipped_tool.set_name(tool_item.item_name)
 			attach_point.add_child(equipped_tool)
 
-func set_interaction_text(text) -> void:
-	if !text:
-		interaction_label.set_text("")
-		interaction_label.set_visible(false)
-	else:
-		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
-		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
-		interaction_label.set_visible(true)
-
 func target_check() -> void:
 	var target_distance = target.get_global_translation().distance_to(get_global_translation())
-	var relative_facing = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
 	var max_enemy_distance = 15
 	var max_interactable_distance = 2
 	if Input.is_action_pressed("cam_lock"):
@@ -139,15 +132,31 @@ func target_check() -> void:
 		target = MathHelper.find_target(self, "target")
 		targeting = false
 
+func target_interact(event) -> void:
+	var target_distance = target.get_global_translation().distance_to(get_global_translation())
+	var relative_facing = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
+	var max_interactable_distance = 2
 	if (!target.is_controlled() and target.character) and target_distance < max_interactable_distance and relative_facing >= 0:
 		can_interact = true
 		set_interaction_text(target.get_interaction_text())
-		if Input.is_action_just_pressed("action_main"):
+		if event.is_action_pressed("action_main"):
+			interacting = true
 			target.interact()
 			set_interaction_text("")
+			yield(target, "interaction_ended")
+			interacting = false
 	else:
 		can_interact = false
 		set_interaction_text("")
+
+func set_interaction_text(text) -> void:
+	if !text:
+		interaction_label.set_text("")
+		interaction_label.set_visible(false)
+	else:
+		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
+		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
+		interaction_label.set_visible(true)
 
 func jump_memory() -> void:
 	jump_in_memory = true
