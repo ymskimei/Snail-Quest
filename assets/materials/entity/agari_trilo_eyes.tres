@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
 [ext_resource path="res://assets/texture/entity/agari_trilo_eyes.png" type="Texture" id=1]
-[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=2]
+[ext_resource path="res://assets/shader/cel_no.shader" type="Shader" id=2]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.323843, 0.341637 )
