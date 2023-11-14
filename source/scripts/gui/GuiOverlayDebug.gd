@@ -46,6 +46,10 @@ func set_display_chunk_coords():
 		var coords_x = floor(GlobalManager.controllable.global_translation.x / GlobalManager.chunk_size)
 		var coords_z = floor(GlobalManager.controllable.global_translation.z / GlobalManager.chunk_size)
 		display_chunk_coords.set_bbcode("[color=#C289FF]%s, [color=#62BC43]%s" % [coords_x, coords_z])
+	elif is_instance_valid(GlobalManager.camera):
+		var coords_x = floor(GlobalManager.camera.global_translation.x / GlobalManager.chunk_size)
+		var coords_z = floor(GlobalManager.camera.global_translation.z / GlobalManager.chunk_size)
+		display_chunk_coords.set_bbcode("[color=#C289FF]%s, [color=#62BC43]%s" % [coords_x, coords_z])
 	else:
 		display_chunk_coords.set_bbcode("?, ?")
 

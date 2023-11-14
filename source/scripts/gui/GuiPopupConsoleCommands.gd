@@ -83,8 +83,9 @@ func on_command_time(_console, args: Array) -> void:
 	command_console.send_message("The world's time has been set to [color=#C3EF5D]%s[/color]\n" % args[0])
 
 func on_command_tp(_console, args: Array) -> void:
-	GlobalManager.controllable.set_coords(Vector3(args[0], args[1], args[2]))
-	#GlobalManager.camera.set_coords(Vector3(args[0], args[1], args[2]))
+	if is_instance_valid(GlobalManager.controllable):
+		GlobalManager.controllable.set_coords(Vector3(args[0], args[1], args[2]))
+	GlobalManager.camera.set_coords(Vector3(args[0], args[1], args[2]))
 
 func on_command_version(_console, _args: Array) -> void:
 	command_console.send_message("Snail Quest is on version [color=#C3EF5D]%s[/color]\n" % GlobalManager.version_number)

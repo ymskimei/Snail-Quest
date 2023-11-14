@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourceEnvironment.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+sky_color_1 = Color( 0.733333, 0.686275, 0.835294, 1 )
+sky_color_2 = Color( 0.956863, 0.737255, 0.921569, 1 )
+cloud_color = Color( 0.74902, 0.772549, 0.796078, 1 )
+ambient_color = Color( 0.717647, 0.647059, 0.564706, 1 )
+light_color = Color( 0.52549, 0.517647, 0.458824, 1 )
+fog_color = Color( 0.835294, 0.678431, 0.878431, 1 )
+fog_depth_begin = 2
+fog_depth_end = 512
+stars_level = 0

@@ -150,6 +150,11 @@ _global_script_classes=[ {
 "path": "res://source/scripts/resource/ResourceEntity.gd"
 }, {
 "base": "Resource",
+"class": "ResourceEnvironment",
+"language": "GDScript",
+"path": "res://source/scripts/resource/ResourceEnvironment.gd"
+}, {
+"base": "Resource",
 "class": "ResourceEquipped",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceInventory.gd"
@@ -273,6 +278,7 @@ _global_script_class_icons={
 "ObjectInteractable": "",
 "ResourceAudioPlayer": "",
 "ResourceEntity": "",
+"ResourceEnvironment": "",
 "ResourceEquipped": "",
 "ResourceItem": "",
 "ResourceLocation": "",
