@@ -29,19 +29,19 @@ func slerp_look_at(spatial: Spatial, target: Vector3, speed: float) -> void:
 		var dest_rotation = Quat(global_pos.basis).slerp(Quat(dest_transform.basis).normalized(), speed)
 		spatial.global_transform = Transform(Basis(dest_rotation), global_pos.origin)
 
-func find_target(node: Object, group_name: String, get_closest: = true) -> Spatial:
-	var target_group = get_tree().get_nodes_in_group(group_name)
-	if !target_group.empty():
-		var distance_away = node.global_transform.origin.distance_to(target_group[0].global_transform.origin)
-		var return_target = target_group[0]
-		for index in target_group.size():
-			var distance = node.global_transform.origin.distance_to(target_group[index].global_transform.origin)
+func find_target(node: Spatial, group_name: String, get_closest: = true) -> Spatial:
+	var targets: Array = get_tree().get_nodes_in_group(group_name)
+	if !targets.empty():
+		var distance_away: float = node.global_transform.origin.distance_to(targets[0].global_transform.origin)
+		var return_target: Spatial = targets[0]
+		for i in targets.size():
+			var distance: float = node.global_transform.origin.distance_to(targets[i].global_transform.origin)
 			if get_closest == true and distance < distance_away:
 				distance_away = distance
-				return_target = target_group[index]
+				return_target = targets[i]
 			elif get_closest == false and distance > distance_away:
 				distance_away = distance
-				return_target = target_group[index]
+				return_target = targets[i]
 		return return_target
 	return null
 

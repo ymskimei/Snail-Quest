@@ -1,4 +1,4 @@
-extends Spatial
+ extends Spatial
 
 onready var sky = $"%Sky"
 onready var clouds = $"%Clouds"
