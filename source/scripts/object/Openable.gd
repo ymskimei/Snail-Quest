@@ -2,6 +2,9 @@ extends Interactable
 
 var is_opened: bool
 
+func _ready() -> void:
+	character = true
+
 func get_interaction_text() -> String:
 	return "open box"
 
@@ -10,8 +13,10 @@ func interact() -> void:
 		anim.play("Close")
 		yield(anim, "animation_finished")
 		is_opened = false
+		emit_signal("interaction_ended")
 	else:
 		anim.play("Open")
 		yield(anim, "animation_finished")
 		is_opened = true
+		emit_signal("interaction_ended")
 	#trigger_dialog()

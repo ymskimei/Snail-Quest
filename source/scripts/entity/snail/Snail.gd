@@ -7,6 +7,7 @@ onready var ray_front_bottom: RayCast = $Armature/Skeleton/Rays/RayFrontBottom
 onready var ray_ledge_left: RayCast = $Armature/Skeleton/Rays/RayLedgeLeft
 onready var ray_ledge_right: RayCast = $Armature/Skeleton/Rays/RayLedgeRight
 onready var ray_bottom: RayCast = $Armature/Skeleton/Rays/RayBottom
+onready var char_target: Position3D = $CharTarget
 
 var cursor = preload("res://source/scenes/gui/gui_aim_cursor.tscn")
 
@@ -21,6 +22,10 @@ func _ready() -> void:
 	states.ready(self)
 	update_appearance()
 	set_interaction_text("")
+#	if character:
+#		char_target.visible = true
+#	elif !character:
+#		char_target.visible = false
 
 func _input(event: InputEvent) -> void:
 	if is_controlled():
@@ -47,8 +52,7 @@ func _physics_process(delta: float) -> void:
 		attach_point.visible = true
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
-	if is_controlled():
-		states.integrate_forces(state)
+	states.integrate_forces(state)
 
 func _on_proximity_entered(body) -> void:
 	if body is Enemy:

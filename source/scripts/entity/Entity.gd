@@ -11,9 +11,7 @@ onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
 onready var attach_point: Spatial = $"%EyePoint"
 onready var proximity: Area = $Proximity
-
 onready var interaction_label: RichTextLabel = $Gui/InteractionLabel
-
 onready var entity_name: String
 onready var health: int
 onready var max_health: int
@@ -76,6 +74,8 @@ func _physics_process(delta: float) -> void:
 		target_check()
 	else:
 		target = MathHelper.find_target(self, "target")
+#	if is_instance_valid(identity):
+#		print(identity.entity_name + " is character: " + str(is_in_group("target")))
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	pass
@@ -133,9 +133,11 @@ func target_check() -> void:
 		targeting = false
 
 func target_interact(event) -> void:
-	var target_distance = target.get_global_translation().distance_to(get_global_translation())
-	var relative_facing = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
-	var max_interactable_distance = 2
+	var target_distance: float  = target.get_global_translation().distance_to(get_global_translation())
+	var relative_facing: float = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
+	var max_interactable_distance: float = 2.5
+#	if target.has_child("MeshInstance"):
+#		target_distance = target.get_aabb().distance_to(get_global_translation())
 	if (!target.is_controlled() and target.character) and target_distance < max_interactable_distance and relative_facing >= 0:
 		can_interact = true
 		set_interaction_text(target.get_interaction_text())
@@ -157,6 +159,12 @@ func set_interaction_text(text) -> void:
 		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
 		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
 		interaction_label.set_visible(true)
+
+func get_interaction_text():
+	return "chat"
+
+func interact():
+	trigger_dialog()
 
 func jump_memory() -> void:
 	jump_in_memory = true

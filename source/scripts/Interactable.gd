@@ -6,6 +6,8 @@ export(Resource) var dialog
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var anim_tween: Tween = $Tween
 
+const fallback: DialogueResource = preload("res://assets/resource/dialog/error_fallback.tres")
+
 var character: bool
 
 signal interaction_ended
@@ -14,7 +16,10 @@ func get_interaction_text():
 	return "interact"
 
 func trigger_dialog() -> void:
-	show_dialog_balloon("opener", dialog)
+	if is_instance_valid(dialog):
+		show_dialog_balloon("opener", dialog)
+	else:
+		show_dialog_balloon("opener", fallback)
 	yield(DialogueManager, "dialogue_finished")
 	emit_signal("interaction_ended")
 

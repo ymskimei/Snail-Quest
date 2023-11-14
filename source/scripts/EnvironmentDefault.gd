@@ -1,4 +1,4 @@
-extends Spatial
+ extends Spatial
 
 onready var sky: MeshInstance = $Sky
 onready var orbital: Spatial = $Orbital
