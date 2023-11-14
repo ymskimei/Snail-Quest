@@ -11,9 +11,9 @@ export var pattern_body: Texture
 export var pattern_eyes: Texture
 export var pattern_eyelids: Texture
 
-export var color_shell_base: String = "FFFFFF"
-export var color_shell_accent: String = "FFFFFF"
-export var color_body: String = "FFFFFF"
-export var color_body_accent: String = "FFFFFF"
-export var color_eye_left: String = "FFFFFF"
-export var color_eye_right: String = "FFFFFF"
+export var color_shell_base: Color = Color("FFFFFF")
+export var color_shell_accent: Color = Color("FFFFFF")
+export var color_body: Color = Color("FFFFFF")
+export var color_body_accent: Color = Color("FFFFFF")
+export var color_eye_left: Color = Color("FFFFFF")
+export var color_eye_right: Color = Color("FFFFFF")

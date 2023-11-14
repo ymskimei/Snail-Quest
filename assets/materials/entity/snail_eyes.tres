@@ -1,10 +1,11 @@
-[gd_resource type="ShaderMaterial" load_steps=10 format=2]
+[gd_resource type="ShaderMaterial" load_steps=11 format=2]
 
 [ext_resource path="res://assets/texture/entity/snail_eyes.png" type="Texture" id=1]
 [ext_resource path="res://assets/shader/cel.shader" type="Shader" id=2]
 [ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=3]
 [ext_resource path="res://assets/shader/diffuse_gradient_1.tres" type="Texture" id=4]
 [ext_resource path="res://assets/texture/entity/snail_eyelids_top.png" type="Texture" id=5]
+[ext_resource path="res://assets/shader/cel_no.shader" type="Shader" id=6]
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
@@ -31,7 +32,7 @@ shader_param/diffuse_curve = ExtResource( 4 )
 resource_local_to_scene = true
 render_priority = 1
 next_pass = SubResource( 4 )
-shader = ExtResource( 2 )
+shader = ExtResource( 6 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/normal_scale = null
 shader_param/specular = 0.5
@@ -58,7 +59,7 @@ gradient = SubResource( 1 )
 [resource]
 resource_local_to_scene = true
 next_pass = SubResource( 3 )
-shader = ExtResource( 2 )
+shader = ExtResource( 6 )
 shader_param/albedo = Color( 1, 1, 1, 1 )
 shader_param/normal_scale = 16.0
 shader_param/specular = 1.0
