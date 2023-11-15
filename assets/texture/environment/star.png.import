@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<<< HEAD:assets/texture/environment/star.png.import
 path="res://import/star.png-c73c7f7345b2f97567cb0025ecb21816.stex"
+========
+path="res://import/tile_decor_0.png-0b65919d082dcb41c1b57557a103974a.stex"
+>>>>>>>> 6564e0afe828ef7f175f5d433a9cb2e53ff01d17:assets/texture/tile/tile_decor_0.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<<< HEAD:assets/texture/environment/star.png.import
 source_file="res://assets/texture/environment/star.png"
 dest_files=[ "res://import/star.png-c73c7f7345b2f97567cb0025ecb21816.stex" ]
+========
+source_file="res://assets/texture/tile/tile_decor_0.png"
+dest_files=[ "res://import/tile_decor_0.png-0b65919d082dcb41c1b57557a103974a.stex" ]
+>>>>>>>> 6564e0afe828ef7f175f5d433a9cb2e53ff01d17:assets/texture/tile/tile_decor_0.png.import
 
 [params]
 

@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<<< HEAD:assets/texture/tile/tile_decor_1.png.import
 path="res://import/tile_decor_1.png-f47c3c40353d3fb7ae3c68fe7469206f.stex"
+========
+path="res://import/gui_dialog_box.png-c3a8f28fa13f173bfb702c18b832fbbf.stex"
+>>>>>>>> 6564e0afe828ef7f175f5d433a9cb2e53ff01d17:assets/texture/gui/gui_dialog_box.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<<< HEAD:assets/texture/tile/tile_decor_1.png.import
 source_file="res://assets/texture/tile/tile_decor_1.png"
 dest_files=[ "res://import/tile_decor_1.png-f47c3c40353d3fb7ae3c68fe7469206f.stex" ]
+========
+source_file="res://assets/texture/gui/gui_dialog_box.png"
+dest_files=[ "res://import/gui_dialog_box.png-c3a8f28fa13f173bfb702c18b832fbbf.stex" ]
+>>>>>>>> 6564e0afe828ef7f175f5d433a9cb2e53ff01d17:assets/texture/gui/gui_dialog_box.png.import
 
 [params]
 
