@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://source/scripts/object/Switch.gd" type="Script" id=1]
-[ext_resource path="res://assets/shader/cel_no.shader" type="Shader" id=2]
-[ext_resource path="res://assets/shader/diffuse_gradient_1.tres" type="Texture" id=3]
+[ext_resource path="res://assets/materials/object/switch_rod.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/object/switch_base.tres" type="Material" id=3]
+[ext_resource path="res://assets/materials/object/switch_ball.tres" type="Material" id=4]
+[ext_resource path="res://assets/materials/object/switch_rod_grip.tres" type="Material" id=5]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "switch_Cube001"
@@ -17,24 +19,6 @@ surfaces/0 = {
 "skeleton_aabb": [  ],
 "vertex_count": 100
 }
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 2 )
-shader_param/albedo = Color( 0.662745, 0.662745, 0.662745, 1 )
-shader_param/normal_scale = null
-shader_param/specular = 0.5
-shader_param/specular_amount = 0.7
-shader_param/specular_smoothness = 0.05
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.0
-shader_param/rim_smoothness = 0.0
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
-shader_param/diffuse_curve = ExtResource( 3 )
 
 [sub_resource type="ArrayMesh" id=4]
 resource_name = "switch_Cube002"
@@ -61,64 +45,9 @@ surfaces/1 = {
 "vertex_count": 26
 }
 
-[sub_resource type="ShaderMaterial" id=5]
-render_priority = 1
-shader = ExtResource( 2 )
-shader_param/albedo = Color( 1, 0.388235, 0.388235, 0.721569 )
-shader_param/normal_scale = null
-shader_param/specular = 1.0
-shader_param/specular_amount = 0.5
-shader_param/specular_smoothness = 0.0
-shader_param/rim = 1.0
-shader_param/rim_amount = 0.4
-shader_param/rim_smoothness = 0.1
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
-shader_param/diffuse_curve = ExtResource( 3 )
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 2 )
-shader_param/albedo = Color( 0.541176, 0.541176, 0.541176, 1 )
-shader_param/normal_scale = null
-shader_param/specular = 0.0
-shader_param/specular_amount = 0.0
-shader_param/specular_smoothness = 0.0
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.0
-shader_param/rim_smoothness = 0.0
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
-shader_param/diffuse_curve = ExtResource( 3 )
-
 [sub_resource type="SphereMesh" id=10]
 radial_segments = 16
 rings = 8
-
-[sub_resource type="ShaderMaterial" id=11]
-shader = ExtResource( 2 )
-shader_param/albedo = Color( 0.243137, 0, 0.239216, 1 )
-shader_param/normal_scale = null
-shader_param/specular = 0.0
-shader_param/specular_amount = 0.0
-shader_param/specular_smoothness = 0.0
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.0
-shader_param/rim_smoothness = 0.0
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/emission_energy = 1.0
-shader_param/uv_scale = null
-shader_param/uv_offset = null
-shader_param/diffuse_curve = ExtResource( 3 )
 
 [sub_resource type="SphereShape" id=7]
 
@@ -170,7 +99,7 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 [node name="Base" type="MeshInstance" parent="Lever"]
 mesh = SubResource( 1 )
 skeleton = NodePath("../..")
-material/0 = SubResource( 2 )
+material/0 = ExtResource( 3 )
 
 [node name="Handle" type="RigidBody" parent="Lever"]
 collision_layer = 8
@@ -180,13 +109,13 @@ mode = 1
 [node name="Rod" type="MeshInstance" parent="Lever/Handle"]
 mesh = SubResource( 4 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 5 )
-material/1 = SubResource( 6 )
+material/0 = ExtResource( 5 )
+material/1 = ExtResource( 2 )
 
 [node name="Ball" type="MeshInstance" parent="Lever/Handle"]
 transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 3.35, 0 )
 mesh = SubResource( 10 )
-material/0 = SubResource( 11 )
+material/0 = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Lever/Handle"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35, 0 )

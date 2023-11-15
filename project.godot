@@ -218,6 +218,7 @@ _global_script_class_icons={
 "MusicBooth": "",
 "ResourceAudioPlayer": "",
 "ResourceDialog": "",
+"ResourceEnvironment": "",
 "ResourceEquipped": "",
 "ResourceIdentity": "",
 "ResourceIdentitySnail": "",

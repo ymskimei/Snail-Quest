@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://source/scenes/environment_default.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/materials/tile/test_block_blank.tres" type="Material" id=2]
-[ext_resource path="res://assets/materials/tile/test_block_gray.tres" type="Material" id=3]
+[ext_resource path="res://assets/shader/cel_no.shader" type="Shader" id=3]
 [ext_resource path="res://source/scenes/object/switch.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/scenes/object/sign.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/scenes/object/door.tscn" type="PackedScene" id=6]
@@ -10,6 +10,35 @@
 [ext_resource path="res://assets/resource/dialog/test_dialog.tres" type="Resource" id=8]
 [ext_resource path="res://source/scenes/entity/snail.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/resource/identity/izabell.tres" type="Resource" id=10]
+[ext_resource path="res://assets/resource/identity/sunshine.tres" type="Resource" id=11]
+[ext_resource path="res://assets/resource/identity/fubward.tres" type="Resource" id=12]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/use_diffuse = true
+shader_param/use_specular = false
+shader_param/use_rim = false
+shader_param/use_light = false
+shader_param/use_shadow = true
+shader_param/albedo_color = Color( 1, 1, 1, 1 )
+shader_param/shade_color = Color( 0.607843, 0.658824, 0.694118, 1 )
+shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/normal_scale = null
+shader_param/shade_threshold = 0.0
+shader_param/shade_softness = 0.01
+shader_param/specular_glossiness = 15.0
+shader_param/specular_threshold = 0.5
+shader_param/specular_softness = 0.1
+shader_param/rim_threshold = 0.25
+shader_param/rim_softness = 0.05
+shader_param/rim_spread = 0.5
+shader_param/shadow_threshold = 0.7
+shader_param/shadow_softness = 0.1
+shader_param/emission_energy = 1.0
+shader_param/uv_scale = Vector3( 16, 16, 16 )
+shader_param/uv_offset = Vector3( 0, 0, 0 )
 
 [node name="Room" type="Spatial"]
 
@@ -28,32 +57,32 @@ material = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, -9 )
 width = 16.0
 height = 32.0
-material = ExtResource( 3 )
+material = SubResource( 1 )
 
 [node name="CSGInvert" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -9 )
 operation = 2
 width = 6.0
 height = 6.0
-material = ExtResource( 3 )
+material = SubResource( 1 )
 
 [node name="CSGWall2" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, 9 )
 width = 16.0
 height = 32.0
-material = ExtResource( 3 )
+material = SubResource( 1 )
 
 [node name="CSGWall3" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 17, 3.93403e-07 )
 width = 16.0
 height = 32.0
-material = ExtResource( 3 )
+material = SubResource( 1 )
 
 [node name="CSGWall4" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9, 17, -3.93403e-07 )
 width = 16.0
 height = 32.0
-material = ExtResource( 3 )
+material = SubResource( 1 )
 
 [node name="CSGFloor2" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18 )
@@ -65,19 +94,19 @@ material = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, -27 )
 width = 16.0
 height = 32.0
-material = ExtResource( 3 )
+material = SubResource( 1 )
 
 [node name="CSGWall6" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 17, -18 )
 width = 16.0
 height = 32.0
-material = ExtResource( 3 )
+material = SubResource( 1 )
 
 [node name="CSGWall7" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9, 17, -18 )
 width = 16.0
 height = 32.0
-material = ExtResource( 3 )
+material = SubResource( 1 )
 
 [node name="Objects" type="Spatial" parent="."]
 
@@ -98,13 +127,6 @@ transform = Transform( 0.966844, -0.100948, 0.23457, -0.00790893, 0.906273, 0.42
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0739462, 0.92962, -21.7702 )
 
 [node name="EnvironmentDefault" parent="." instance=ExtResource( 1 )]
-dawn_ambient_color = Color( 0.823529, 0.733333, 0.486275, 1 )
-dawn_light_color = Color( 0.635294, 0.611765, 0.576471, 1 )
-day_light_color = Color( 0.556863, 0.537255, 0.494118, 1 )
-dusk_ambient_color = Color( 0.576471, 0.372549, 0.372549, 1 )
-dusk_light_color = Color( 0.85098, 0.662745, 0.447059, 1 )
-night_ambient_color = Color( 0.403922, 0.356863, 0.478431, 1 )
-night_light_color = Color( 0.368627, 0.478431, 0.533333, 1 )
 
 [node name="Warps" type="Spatial" parent="."]
 
@@ -112,3 +134,13 @@ night_light_color = Color( 0.368627, 0.478431, 0.533333, 1 )
 transform = Transform( -0.819222, 0, -0.573476, 0, 1, 0, 0.573476, 0, -0.819222, -5.26544, 0.562079, -21.725 )
 dialog = ExtResource( 8 )
 identity = ExtResource( 10 )
+
+[node name="Snail2" parent="." instance=ExtResource( 9 )]
+transform = Transform( -0.994779, 0, 0.102046, 0, 1, 0, -0.102046, 0, -0.994779, -3.47718, 0.562079, -21.725 )
+dialog = ExtResource( 8 )
+identity = ExtResource( 12 )
+
+[node name="Snail3" parent="." instance=ExtResource( 9 )]
+transform = Transform( -0.8785, 0, 0.477742, 0, 1, 0, -0.477742, 0, -0.8785, -2.32174, 0.562079, -21.725 )
+dialog = ExtResource( 8 )
+identity = ExtResource( 11 )

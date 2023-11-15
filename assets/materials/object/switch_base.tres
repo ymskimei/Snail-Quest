@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://assets/shader/cel_no.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/use_diffuse = true
+shader_param/use_specular = false
+shader_param/use_rim = true
+shader_param/use_light = false
+shader_param/use_shadow = false
+shader_param/albedo_color = Color( 0.662745, 0.686275, 0.698039, 1 )
+shader_param/shade_color = Color( 0.533333, 0.564706, 0.572549, 1 )
+shader_param/specular_color = Color( 0.74902, 0.74902, 0.74902, 0.760784 )
+shader_param/rim_color = Color( 0.4, 0.470588, 0.470588, 0 )
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/normal_scale = null
+shader_param/shade_threshold = 0.0
+shader_param/shade_softness = 0.01
+shader_param/specular_glossiness = 15.0
+shader_param/specular_threshold = 0.5
+shader_param/specular_softness = 0.1
+shader_param/rim_threshold = 0.7
+shader_param/rim_softness = 0.0
+shader_param/rim_spread = 0.0
+shader_param/shadow_threshold = 0.7
+shader_param/shadow_softness = 0.1
+shader_param/emission_energy = 1.0
+shader_param/uv_scale = Vector3( 1, 1, 1 )
+shader_param/uv_offset = Vector3( 0, 0, 0 )

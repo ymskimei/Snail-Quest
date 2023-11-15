@@ -4,7 +4,7 @@ extends RigidBody
 export(Resource) var dialog
 
 onready var anim: AnimationPlayer = $AnimationPlayer
-onready var anim_tween: Tween = $Tween
+
 
 const fallback: DialogueResource = preload("res://assets/resource/dialog/error_fallback.tres")
 

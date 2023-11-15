@@ -1,24 +1,32 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[ext_resource path="res://assets/shader/diffuse_gradient_1.tres" type="Texture" id=1]
-[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=2]
+[ext_resource path="res://assets/shader/cel_no.shader" type="Shader" id=1]
 [ext_resource path="res://assets/texture/tile/test_block_blank.png" type="Texture" id=3]
 
 [resource]
-shader = ExtResource( 2 )
-shader_param/albedo = Color( 1, 1, 1, 1 )
-shader_param/normal_scale = null
-shader_param/specular = 0.0
-shader_param/specular_amount = 0.0
-shader_param/specular_smoothness = 0.0
-shader_param/rim = 0.0
-shader_param/rim_amount = 0.0
-shader_param/rim_smoothness = 0.0
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
+shader = ExtResource( 1 )
+shader_param/use_diffuse = true
+shader_param/use_specular = false
+shader_param/use_rim = false
+shader_param/use_light = false
+shader_param/use_shadow = true
+shader_param/albedo_color = Color( 1, 1, 1, 1 )
+shader_param/shade_color = Color( 0.52549, 0.713726, 0.639216, 1 )
+shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/normal_scale = null
+shader_param/shade_threshold = 0.0
+shader_param/shade_softness = 0.01
+shader_param/specular_glossiness = 15.0
+shader_param/specular_threshold = 0.5
+shader_param/specular_softness = 0.1
+shader_param/rim_threshold = 0.25
+shader_param/rim_softness = 0.05
+shader_param/rim_spread = 0.5
+shader_param/shadow_threshold = 0.7
+shader_param/shadow_softness = 0.0
 shader_param/emission_energy = 1.0
-shader_param/uv_scale = Vector3( 32, 32, 32 )
-shader_param/uv_offset = null
+shader_param/uv_scale = Vector3( 1, 1, 1 )
+shader_param/uv_offset = Vector3( 0, 0, 0 )
 shader_param/texture_albedo = ExtResource( 3 )
-shader_param/diffuse_curve = ExtResource( 1 )
