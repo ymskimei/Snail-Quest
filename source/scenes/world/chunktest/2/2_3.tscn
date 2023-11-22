@@ -3,7 +3,8 @@
 [ext_resource path="res://assets/materials/tile/test_block_gray.tres" type="Material" id=1]
 [ext_resource path="res://source/scripts/ChunkBase.gd" type="Script" id=2]
 [ext_resource path="res://assets/materials/environment/leaf.tres" type="Material" id=3]
-[ext_resource path="res://assets/gui/font/font_default.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/gui/font/font_mochi_pop_p_one.tres" type="DynamicFont" id=4]
+
 
 
 [node name="Chunk" type="Spatial"]

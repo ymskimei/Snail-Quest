@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 onready var tabs: TabContainer = $"%Tabs"
 onready var fullscreen: CheckBox = $"%CheckBoxFullscreen"
@@ -272,9 +272,10 @@ func get_control_icon(event: InputEvent) -> String:
 
 func get_default_focus() -> void:
 	for tab in tabs.get_children():
-		for controls in tab.get_node("Margin").get_node("Grid").get_children():
-			if controls is BaseButton or Range:
-				controls.connect("focus_entered", self, "_on_button_focus_entered")
+		for c in tab.get_children():
+			if c is BaseButton or Range:
+				c.grab_focus()
+			break
 
 func get_buttons(tab: Control):
 	for n in tab.get_node("Margin").get_node("Grid").get_children():

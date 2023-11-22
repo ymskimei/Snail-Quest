@@ -4,7 +4,8 @@
 [ext_resource path="res://assets/shader/cel.shader" type="Shader" id=2]
 [ext_resource path="res://assets/materials/tile/test_block_gray.tres" type="Material" id=3]
 [ext_resource path="res://assets/resource/diffuse/default.tres" type="Gradient" id=4]
-[ext_resource path="res://assets/gui/font/font_default.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/gui/font/font_mochi_pop_p_one.tres" type="DynamicFont" id=5]
+
 
 
 [sub_resource type="GradientTexture" id=1]

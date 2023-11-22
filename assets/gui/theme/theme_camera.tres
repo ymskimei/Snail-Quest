@@ -1,10 +1,10 @@
-[gd_resource type="Theme" load_steps=14 format=2]
+[gd_resource type="Theme" load_steps=16 format=2]
 
 [ext_resource path="res://assets/texture/gui/icon_box_unchecked.png" type="Texture" id=1]
 [ext_resource path="res://assets/texture/gui/gui_options_grabber.png" type="Texture" id=2]
 [ext_resource path="res://assets/texture/gui/icon_box_checked.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/gui/icon_box_selections.png" type="Texture" id=4]
-[ext_resource path="res://assets/gui/font/font_camera.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/gui/font/font_nishiki_teki.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/texture/gui/gui_options_scroll.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxTexture" id=1]
@@ -25,8 +25,20 @@ region_rect = Rect2( 0, 0, 32, 64 )
 texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 32, 64 )
 
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://assets/gui/font/font_camera_bold.ttf"
+
+[sub_resource type="DynamicFont" id=9]
+size = 64
+outline_size = 8
+outline_color = Color( 0.482353, 0.392157, 0.196078, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = -11
+font_data = SubResource( 8 )
+
 [resource]
-default_font = ExtResource( 5 )
+default_font = SubResource( 9 )
 Button/styles/focus = SubResource( 1 )
 Button/styles/hover = SubResource( 2 )
 Button/styles/normal = SubResource( 3 )
@@ -39,6 +51,7 @@ HSlider/icons/grabber_highlight = null
 Label/fonts/font = ExtResource( 5 )
 OptionButton/constants/arrow_margin = 0
 OptionButton/constants/hseparation = 32
+OptionButton/fonts/font = ExtResource( 5 )
 OptionButton/icons/arrow = ExtResource( 4 )
 SpinBox/icons/updown = ExtResource( 4 )
 TabContainer/styles/panel = SubResource( 5 )

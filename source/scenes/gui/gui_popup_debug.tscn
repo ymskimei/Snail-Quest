@@ -1,9 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://source/scripts/gui/GuiOverlayDebug.gd" type="Script" id=1]
-[ext_resource path="res://assets/gui/font/font_default.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/gui/font/font_mochi_pop_p_one.tres" type="DynamicFont" id=2]
 [ext_resource path="res://source/scenes/gui/gui_popup_console.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/gui/theme/theme_debug.tres" type="Theme" id=4]
+
+
 
 [node name="GuiDebug" type="CanvasLayer"]
 pause_mode = 2

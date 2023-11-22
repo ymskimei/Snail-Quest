@@ -1,8 +1,9 @@
 extends Node
 
 onready var debug = $GuiDebug
-onready var menu = $GuiCamera
+onready var menu = $GuiOptions
 onready var blur = $GuiBlur
+onready var cursor = $GuiCursor
 
 var debug_open : bool
 var game_paused : bool
@@ -20,13 +21,13 @@ func _input(event: InputEvent):
 
 func menu_popup():
 		if !menu_open:
-			game_paused = true
 			menu.set_visible(true)
 			blur.set_visible(true)
-			menu.find_node("GuiOptions").fullscreen.grab_focus()
+			cursor.set_visible(true)
+			menu.get_default_focus()
 			menu_open = true
 		else:
-			game_paused = false
 			menu.set_visible(false)
 			blur.set_visible(false)
+			cursor.set_visible(false)
 			menu_open = false

@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=4 format=2]
 
-[ext_resource path="res://assets/gui/font/font_default.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/gui/font/font_mochi_pop_p_one.tres" type="DynamicFont" id=1]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )

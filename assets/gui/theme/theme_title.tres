@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=10 format=2]
 
-[ext_resource path="res://assets/gui/font/font_default.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/gui/font/font_mochi_pop_p_one.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/texture/gui/icon_box_checked.png" type="Texture" id=2]
 [ext_resource path="res://assets/texture/gui/icon_box_selections.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/gui/icon_box_unchecked.png" type="Texture" id=4]
