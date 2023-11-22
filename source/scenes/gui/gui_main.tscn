@@ -1,15 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://source/scenes/gui/gui_popup_debug.tscn" type="PackedScene" id=1]
-[ext_resource path="res://source/scenes/gui/gui_camera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://source/scenes/gui/gui_options.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/scripts/gui/GuiMain.gd" type="Script" id=3]
 [ext_resource path="res://source/scenes/gui/gui_hud.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/scenes/gui/gui_popup_item.tscn" type="PackedScene" id=5]
+[ext_resource path="res://source/scripts/gui/GuiCursor.gd" type="Script" id=6]
+[ext_resource path="res://assets/texture/gui/gui_cursor.png" type="Texture" id=7]
 
-[sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("GuiCamera/TextureRect/Viewport")
-
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
 
 uniform float lod: hint_range(0.0, 5) = 0.0;
@@ -20,7 +19,7 @@ void fragment(){
 }"
 
 [sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+shader = SubResource( 6 )
 shader_param/lod = 3.0
 
 [node name="GuiMain" type="Node"]
@@ -33,29 +32,8 @@ script = ExtResource( 3 )
 
 [node name="GuiDebug" parent="." instance=ExtResource( 1 )]
 
-[node name="GuiCamera" type="CanvasLayer" parent="."]
-pause_mode = 2
+[node name="GuiOptions" parent="." instance=ExtResource( 2 )]
 visible = false
-
-[node name="TextureRect" type="TextureRect" parent="GuiCamera"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = SubResource( 1 )
-
-[node name="Viewport" type="Viewport" parent="GuiCamera/TextureRect"]
-size = Vector2( 1920, 1080 )
-transparent_bg = true
-msaa = 2
-fxaa = true
-render_target_v_flip = true
-
-[node name="Camera" type="Camera" parent="GuiCamera/TextureRect/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, -4429.8, 4 )
-fov = 55.0
-far = 50.0
-
-[node name="Camera2" parent="GuiCamera/TextureRect/Viewport" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 0.999048, 0.0436194, 0, -0.0436194, 0.999048, 0.15, -4429.87, 0 )
 
 [node name="GuiBlur" type="CanvasLayer" parent="."]
 layer = 0
@@ -65,3 +43,13 @@ visible = false
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="GuiCursor" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="Cursor" type="TextureRect" parent="GuiCursor"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 7 )
+script = ExtResource( 6 )
