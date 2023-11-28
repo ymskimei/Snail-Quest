@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=1]
-[ext_resource path="res://source/scripts/gui/GuiPopupOptions.gd" type="Script" id=2]
+[ext_resource path="res://source/scripts/gui/GuiOptions.gd" type="Script" id=2]
 [ext_resource path="res://assets/texture/gui/gui_button_options_tab_audio.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/gui/gui_button_temp.png" type="Texture" id=4]
 [ext_resource path="res://assets/texture/gui/gui_button_temp_hover.png" type="Texture" id=5]
@@ -70,6 +70,7 @@ size_flags_vertical = 0
 custom_constants/separation = 16
 
 [node name="ButtonVideo" type="TextureButton" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_right = 256.0
 margin_bottom = 128.0
 texture_normal = ExtResource( 13 )
@@ -380,56 +381,57 @@ custom_constants/separation = 32
 
 [node name="Grid" type="GridContainer" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer"]
 margin_right = 1072.0
-margin_bottom = 188.0
+margin_bottom = 280.0
 custom_constants/vseparation = 40
 custom_constants/hseparation = 0
 columns = 2
 
 [node name="LabelHorizontal" type="Label" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid"]
+margin_top = 23.0
 margin_right = 663.0
-margin_bottom = 52.0
+margin_bottom = 75.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_HORIZONTAL"
 
 [node name="CheckBoxHorizontal" type="CheckBox" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid"]
-margin_left = 1048.0
+margin_left = 974.0
 margin_right = 1072.0
-margin_bottom = 52.0
+margin_bottom = 98.0
 size_flags_horizontal = 10
 align = 2
 
 [node name="LabelVertical" type="Label" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid"]
-margin_top = 92.0
+margin_top = 161.0
 margin_right = 663.0
-margin_bottom = 144.0
+margin_bottom = 213.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_VERTICAL"
 
 [node name="CheckBoxVertical" type="CheckBox" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid"]
-margin_left = 1048.0
-margin_top = 92.0
+margin_left = 974.0
+margin_top = 138.0
 margin_right = 1072.0
-margin_bottom = 144.0
+margin_bottom = 236.0
 size_flags_horizontal = 10
 align = 2
 
 [node name="HSeparator" type="HSeparator" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid"]
-margin_top = 184.0
+margin_top = 276.0
 margin_right = 663.0
-margin_bottom = 188.0
+margin_bottom = 280.0
 size_flags_vertical = 0
 
 [node name="LabelCameraSensitivity" type="Label" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer"]
-margin_top = 220.0
+margin_top = 312.0
 margin_right = 1072.0
-margin_bottom = 272.0
+margin_bottom = 364.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_SENSITIVITY"
 
 [node name="BarCameraSensitivity" type="HSlider" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer"]
-margin_top = 304.0
+margin_top = 396.0
 margin_right = 768.0
-margin_bottom = 320.0
+margin_bottom = 412.0
 rect_min_size = Vector2( 768, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 1
@@ -439,9 +441,9 @@ tick_count = 10
 ticks_on_borders = true
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer"]
-margin_top = 352.0
+margin_top = 444.0
 margin_right = 1072.0
-margin_bottom = 480.0
+margin_bottom = 572.0
 custom_constants/margin_right = 128
 custom_constants/margin_left = 128
 
@@ -505,15 +507,15 @@ visible = false
 margin_top = 16.0
 margin_right = 1920.0
 margin_bottom = 1064.0
-custom_constants/margin_right = 256
+custom_constants/margin_right = 288
 custom_constants/margin_top = 64
-custom_constants/margin_left = 256
+custom_constants/margin_left = 288
 custom_constants/margin_bottom = 64
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/MarginContainer/MarginContainer"]
-margin_left = 256.0
+margin_left = 288.0
 margin_top = 64.0
-margin_right = 1664.0
+margin_right = 1632.0
 margin_bottom = 984.0
 size_flags_vertical = 3
 texture = ExtResource( 15 )
@@ -534,61 +536,88 @@ custom_constants/margin_bottom = 64
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer"]
 margin_left = 128.0
 margin_top = 64.0
-margin_right = 1280.0
+margin_right = 1216.0
 margin_bottom = 856.0
+rect_clip_content = false
 
-[node name="GridContainer" type="GridContainer" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer"]
-margin_right = 1152.0
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer"]
+margin_right = 1088.0
+margin_bottom = 792.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 48
+alignment = 1
+
+[node name="NinePatchRect" type="TextureButton" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer"]
+margin_left = 160.0
+margin_right = 928.0
+margin_bottom = 128.0
+size_flags_horizontal = 6
+size_flags_vertical = 0
+texture_normal = ExtResource( 14 )
+
+[node name="LabelControls" type="Label" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 1
+theme = ExtResource( 1 )
+text = "GUI_OPTIONS_RESET"
+align = 1
+valign = 1
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer"]
+margin_top = 176.0
+margin_right = 1088.0
 margin_bottom = 792.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 40
 columns = 2
 
-[node name="LabelButtonAction" type="Label" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/GridContainer"]
+[node name="LabelButtonAction" type="Label" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
 margin_top = 23.0
 margin_right = 809.0
 margin_bottom = 75.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_BUTTON_ACTION"
 
-[node name="action_main" type="TextureButton" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/GridContainer"]
-margin_left = 1054.0
-margin_right = 1152.0
+[node name="action_main" type="TextureButton" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+margin_left = 990.0
+margin_right = 1088.0
 margin_bottom = 98.0
 size_flags_horizontal = 10
 texture_normal = ExtResource( 4 )
 texture_hover = ExtResource( 5 )
 texture_focused = ExtResource( 6 )
 
-[node name="LabelButtonCombat" type="Label" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/GridContainer"]
+[node name="LabelButtonCombat" type="Label" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
 margin_top = 161.0
 margin_right = 809.0
 margin_bottom = 213.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_BUTTON_COMBAT"
 
-[node name="action_combat" type="TextureButton" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/GridContainer"]
-margin_left = 1054.0
+[node name="action_combat" type="TextureButton" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+margin_left = 990.0
 margin_top = 138.0
-margin_right = 1152.0
+margin_right = 1088.0
 margin_bottom = 236.0
 size_flags_horizontal = 10
 texture_normal = ExtResource( 4 )
 texture_hover = ExtResource( 5 )
 texture_focused = ExtResource( 6 )
 
-[node name="LabelButtonDefense" type="Label" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/GridContainer"]
+[node name="LabelButtonDefense" type="Label" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
 margin_top = 299.0
 margin_right = 809.0
 margin_bottom = 351.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_BUTTON_DEFENSE"
 
-[node name="action_defense" type="TextureButton" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/GridContainer"]
-margin_left = 1054.0
+[node name="action_defense" type="TextureButton" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
+margin_left = 990.0
 margin_top = 276.0
-margin_right = 1152.0
+margin_right = 1088.0
 margin_bottom = 374.0
 size_flags_horizontal = 10
 texture_normal = ExtResource( 4 )
@@ -604,3 +633,23 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 12 )
 stretch_mode = 2
+
+[connection signal="pressed" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ButtonVideo" to="." method="_on_ButtonVideo_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ButtonAudio" to="." method="_on_ButtonAudio_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ButtonControls" to="." method="_on_ButtonControls_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ButtonMisc" to="." method="_on_ButtonMisc_pressed"]
+[connection signal="toggled" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Video/Grid/CheckBoxFullscreen" to="." method="_on_CheckBoxFullscreen_toggled"]
+[connection signal="item_selected" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Video/Grid/ButtonResolution" to="." method="_on_ButtonResolution_item_selected"]
+[connection signal="item_selected" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Video/Grid/ButtonFilter" to="." method="_on_ButtonFilter_item_selected"]
+[connection signal="item_selected" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Video/Grid/ButtonFps" to="." method="_on_ButtonFps_item_selected"]
+[connection signal="toggled" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Video/Grid/CheckBoxVsync" to="." method="_on_CheckBoxVsync_toggled"]
+[connection signal="toggled" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer/Grid/CheckBoxHeadphones" to="." method="_on_CheckBoxHeadphones_toggled"]
+[connection signal="toggled" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer/Grid/CheckBoxMono" to="." method="_on_CheckBoxMono_toggled"]
+[connection signal="value_changed" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer/BarVolumeMaster" to="." method="_on_BarVolumeMaster_value_changed"]
+[connection signal="value_changed" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer/BarVolumeMusic" to="." method="_on_BarVolumeMusic_value_changed"]
+[connection signal="value_changed" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer/BarVolumeSfx" to="." method="_on_BarVolumeSfx_value_changed"]
+[connection signal="toggled" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid/CheckBoxHorizontal" to="." method="_on_CheckBoxHorizontal_toggled"]
+[connection signal="toggled" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid/CheckBoxVertical" to="." method="_on_CheckBoxVertical_toggled"]
+[connection signal="value_changed" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/BarCameraSensitivity" to="." method="_on_BarCameraSensitivity_value_changed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/MarginContainer/NinePatchRect" to="." method="_on_NinePatchRect_pressed"]
+[connection signal="item_selected" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Misc/Grid/ButtonLanguage" to="." method="_on_ButtonLanguage_item_selected"]

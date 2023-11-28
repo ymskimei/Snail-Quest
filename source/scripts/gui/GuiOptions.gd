@@ -1,60 +1,451 @@
-extends Popup
+extends CanvasLayer
 
-onready var display_resolution = $Tabs/Video/Margin/Grid/ButtonDisplayResolution
-onready var framerate = $Tabs/Video/Margin/Grid/ButtonFramerate
-onready var vertical_sync = $Tabs/Video/Margin/Grid/CheckBoxVerticalSync
-onready var master_volume = $Tabs/Audio/Margin/Grid/BarMasterVolume
-onready var music_volume = $Tabs/Audio/Margin/Grid/BarMusicVolume
-onready var sfx_volume = $Tabs/Audio/Margin/Grid/BarSfxVolume
+onready var tabs: TabContainer = $"%Tabs"
+onready var video: TextureButton = $"%ButtonVideo"
+onready var fullscreen: CheckBox = $"%CheckBoxFullscreen"
+onready var filter: OptionButton = $"%ButtonFilter"
+onready var resolution: OptionButton = $"%ButtonResolution"
+onready var framerate: OptionButton = $"%ButtonFps"
+onready var vsync: CheckBox = $"%CheckBoxVsync"
+onready var language: OptionButton = $"%ButtonLanguage"
 
-var display_resolution_dict: Dictionary = {
-	"2560x1440 (16:9)": Vector2(2560, 1440),
-	"1920x1080 (16:9)": Vector2(1920, 1080),
-	"1280x720 (16:9)": Vector2(1280, 720),
-	"1024x768 (4:3)": Vector2(1024, 768),
-	"800x600 (4:3)": Vector2(800, 600),
-	"640x480 (4:3)": Vector2(640, 480)
+var resolution_dict: Dictionary = {
+	"GUI_OPTIONS_RESOLUTION_480": Vector2(640, 480),
+	"GUI_OPTIONS_RESOLUTION_600": Vector2(800, 600),
+	"GUI_OPTIONS_RESOLUTION_768": Vector2(1024, 768),
+	"GUI_OPTIONS_RESOLUTION_720": Vector2(1280, 720),
+	"GUI_OPTIONS_RESOLUTION_1080": Vector2(1920, 1080),
+	"GUI_OPTIONS_RESOLUTION_1440": Vector2(2560, 1440)
 }
 
-func _ready():
-	add_display_resolution()
+var filter_dict: Dictionary = {
+	"GUI_OPTIONS_FILTER_CONTRASTED": 0,
+	"GUI_OPTIONS_FILTER_MONOCHROME": 1,
+	"GUI_OPTIONS_FILTER_PROTANOPIA": 2,
+	"GUI_OPTIONS_FILTER_DEUTERANOPIA": 3,
+	"GUI_OPTIONS_FILTER_TRITANOPIA": 4,
+	"GUI_OPTIONS_FILTER_ACHROMATOPSIA": 5
+}
+
+var framerate_dict: Dictionary = {
+	"GUI_OPTIONS_FPS_30": 30,
+	"GUI_OPTIONS_FPS_60": 60,
+	"GUI_OPTIONS_FPS_120": 120
+}
+
+var language_dict: Dictionary = {
+	"GUI_OPTIONS_LANGUAGE_EN_US": "en_US",
+	"GUI_OPTIONS_LANGUAGE_EN_GB": "en_GB",
+	"GUI_OPTIONS_LANGUAGE_ES_MX": "es_MX",
+	"GUI_OPTIONS_LANGUAGE_ES_AR": "es_AR",
+	"GUI_OPTIONS_LANGUAGE_JA_JP": "ja_JP",
+	"GUI_OPTIONS_LANGUAGE_PR": "pr"
+}
+
+const button_a: String = "res://assets/texture/gui/gui_button_a.png"
+const button_b: String = "res://assets/texture/gui/gui_button_b.png"
+const button_x: String = "res://assets/texture/gui/gui_button_x.png"
+const button_y: String = "res://assets/texture/gui/gui_button_y.png"
+const button_fork: String = "res://assets/texture/gui/gui_button_fork.png"
+const button_circle: String = "res://assets/texture/gui/gui_button_circle.png"
+const button_square: String = "res://assets/texture/gui/gui_button_square.png"
+const button_triangle: String = "res://assets/texture/gui/gui_button_triangle.png"
+const button_left: String = "res://assets/texture/gui/gui_button_left.png"
+const button_left_2: String = "res://assets/texture/gui/gui_button_left_2.png"
+const button_right: String = "res://assets/texture/gui/gui_button_right.png"
+const button_right_2: String = "res://assets/texture/gui/gui_button_right_2.png"
+const button_minus: String = "res://assets/texture/gui/gui_button_minus.png"
+const button_plus: String = "res://assets/texture/gui/gui_button_plus.png"
+const button_select: String = "res://assets/texture/gui/gui_button_select.png"
+const button_start: String = "res://assets/texture/gui/gui_button_start.png"
+const button_share: String = "res://assets/texture/gui/gui_button_share.png"
+const button_options: String = "res://assets/texture/gui/gui_button_options.png"
+const button_temp: String = "res://assets/texture/gui/gui_button_temp.png"
+const stick_left_press: String = "res://assets/texture/gui/gui_stick_left_press.png"
+const stick_right_press: String = "res://assets/texture/gui/gui_stick_right_press.png"
+const stick_left_up: String = "res://assets/texture/gui/gui_stick_left_up.png"
+const stick_left_down: String = "res://assets/texture/gui/gui_stick_left_down.png"
+const stick_left_left: String = "res://assets/texture/gui/gui_stick_left_left.png"
+const stick_left_right: String = "res://assets/texture/gui/gui_stick_left_right.png"
+const stick_right_up: String = "res://assets/texture/gui/gui_stick_right_up.png"
+const stick_right_down: String = "res://assets/texture/gui/gui_stick_right_down.png"
+const stick_right_left: String = "res://assets/texture/gui/gui_stick_right_left.png"
+const stick_right_right: String = "res://assets/texture/gui/gui_stick_right_right.png"
+const pad_up: String = "res://assets/texture/gui/gui_pad_up.png"
+const pad_down: String = "res://assets/texture/gui/gui_pad_down.png"
+const pad_left: String = "res://assets/texture/gui/gui_pad_left.png"
+const pad_right: String = "res://assets/texture/gui/gui_pad_right.png"
+
+var last_focus: Control
+var new_focus: Control
+var mono_audio: bool
+var can_remap: bool
+var remap_timer: Timer = Timer.new()
+
+func _ready() -> void:
+	add_resolution()
+#	if GlobalManager.screen != null:
+#		add_filter()
+	add_framerate()
+	add_language()
+	remap_timer.set_wait_time(0.5)
+	remap_timer.one_shot = true
+	remap_timer.connect("timeout", self, "on_remap_timeout")
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("gui_left"):
+		tabs.current_tab -= 1
+	if event.is_action_pressed("gui_right"):
+		tabs.current_tab += 1
+	if (event is InputEventKey or event is InputEventJoypadButton) and event.is_pressed():
+		for b in tabs.get_node("Controls").get_children():
+			if b is TextureButton and b.is_focused():
+				print("test3")
+				var current_control = b.name
+				if can_remap:
+					print("test")
+					if event is InputEventKey:
+						InputHelper.set_action_key(current_control, event.as_text())
+					elif event is InputEventJoypadButton:
+						InputHelper.set_action_button(current_control, event.button_index)
+					b.texture_normal = get_control_icon(event)
+				else:
+					can_remap = true
+					remap_timer.start()
+
+func get_control_icon(event: InputEvent) -> String:
+	var i = InputHelper
+	match event.button_index:
+		0:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_b
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_fork
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_a
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		1:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_a
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_circle
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_b
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		2:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_y
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_square
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_x
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		3:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_x
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_triangle
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_y
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		4:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_left
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_left
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_left
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		5:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_right
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_right
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_right
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		6:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_left_2
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_left_2
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_left_2
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		7:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_right_2
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_right_2
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_right_2
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		8:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return stick_left_press
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return stick_left_press
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return stick_left_press
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		9:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return stick_right_press
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return stick_right_press
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return stick_right_press
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		10:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_minus
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_share
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_select
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		11:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return button_plus
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return button_options
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return button_start
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return button_temp
+		12:
+			if i.device == i.DEVICE_CONTROLLER_TYPE_1:
+				return pad_up
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_2:
+				return pad_up
+			elif i.device == i.DEVICE_CONTROLLER_TYPE_3:
+				return pad_up
+			elif i.device == i.DEVICE_KEYBOARD:
+				return button_temp
+			else:
+				return pad_up
+		_:
+			return button_temp
+
+#func _process(_delta: float):
+#	for b in tabs.get_node("Controls").get_children():
+#		if b is TextureButton and b.is_hovered():
+#			if can_remap:
+#				if Input.is_
+#			else:
+#				can_remap = true
+
+func get_default_focus() -> void:
+	video.grab_focus()
+#	for tab in tabs.get_children():
+#		for c in tab.get_children():
+#			if c is BaseButton or Range:
+#				c.grab_focus()
+#			break
+
+func get_buttons(tab: Control):
+	for n in tab.get_node("Margin").get_node("Grid").get_children():
+		if n is BaseButton or Range:
+			print("found")
+			return n
+
+func _on_Tabs_tab_changed() -> void:
+#	if last_focus:
+#		last_focus.grab_focus()
+	for controls in tabs.get_children():
+		if controls is BaseButton or Range:
+			controls.set_focus_mode(2)
+			controls.grab_focus()
+			break
+
+func _on_button_focus_entered() -> void:
+	last_focus = tabs.get_focus_owner()
+
+func _on_ButtonVideo_pressed():
+	tabs.current_tab = 0
+
+func _on_ButtonAudio_pressed():
+	tabs.current_tab = 1
+
+func _on_ButtonControls_pressed():
+	tabs.current_tab = 2
+
+func _on_ButtonMisc_pressed():
+	tabs.current_tab = 3
 
 ## Video Settings
-func _on_ButtonDisplayResolution_item_selected(index):
-	select_display_resolution(index)
+func _on_CheckBoxFullscreen_toggled(button_pressed: bool) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
+	OS.window_fullscreen = !OS.window_fullscreen
 
-#func _on_ButtonFramerate_item_selected(index):
-#	pass
+func _on_ButtonResolution_item_selected(index: int) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
+	select_resolution(index)
 
-#func _on_CheckBoxVerticalSync_toggled(button_pressed):
-#	pass
+func _on_ButtonFilter_item_selected(index: int) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
+	select_filter(index)
+
+func _on_ButtonFps_item_selected(index: int) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
+	var fps = framerate_dict.get(framerate.get_item_text(index))
+	Engine.set_target_fps(fps)
+
+func _on_CheckBoxVsync_toggled(button_pressed: bool) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
+	OS.vsync_enabled = !OS.vsync_enabled
 
 ## Audio Settings
-#func _on_BarMasterVolume_value_changed(value):
-#	pass
+func _on_BarVolumeMaster_value_changed(value: float) -> void:
+	var index = AudioServer.get_bus_index("Master")
+	AudioServer.set_bus_volume_db(index, linear2db(value))
 
-#func _on_BarMusicVolume_value_changed(value):
-#	pass
+func _on_BarVolumeMusic_value_changed(value: float) -> void:
+	var index = AudioServer.get_bus_index("Music")
+	AudioServer.set_bus_volume_db(index, linear2db(value))
 
-#func _on_BarSfxVolume_value_changed(value):
-#	pass
+func _on_BarVolumeSfx_value_changed(value: float) -> void:
+	var index = AudioServer.get_bus_index("SFX")
+	AudioServer.set_bus_volume_db(index, linear2db(value))
 
-func add_display_resolution():
+func _on_CheckBoxHeadphones_toggled(button_pressed: bool) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
+	pass
+
+func _on_CheckBoxMono_toggled(button_pressed: bool) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
+	var mode = AudioServer.get_bus_effect(AudioServer.get_bus_index("Mode"), 0)
+	var mast = AudioServer.get_bus_effect(AudioServer.get_bus_index("Master"), 0)
+	if !mono_audio:
+		mode.pan = 1
+		mast.pan = 0.5
+		mono_audio = true
+	else:
+		mode.pan = 0
+		mast.pan = 0
+		mono_audio = false
+
+## Controls Settings
+func _on_CheckBoxHorizontal_toggled(button_pressed):
+	if button_pressed:
+		GlobalManager.control_invert_horizontal = true
+	else:
+		GlobalManager.control_invert_horizontal = false
+
+func _on_CheckBoxVertical_toggled(button_pressed):
+	if button_pressed:
+		GlobalManager.control_invert_vertical = true
+	else:
+		GlobalManager.control_invert_vertical = false
+
+func _on_BarCameraSensitivity_value_changed(value):
+	pass # Replace with function body.
+
+func _on_NinePatchRect_pressed():
+	pass # Replace with function body.
+
+## Misc Settings
+func _on_ButtonLanguage_item_selected(index: int) -> void:
+	AudioPlayer.play_sfx(AudioPlayer.sfx_bell_tone_next)
+	select_language(index)
+
+func add_resolution() -> void:
 	var current_resolution = get_viewport().get_size()
 	var index = 0
-	for resolution in display_resolution_dict:
-		display_resolution.add_item(resolution, index)
-		if display_resolution_dict[resolution] == current_resolution:
-			display_resolution._select_int(index)
+	for r in resolution_dict:
+		resolution.add_item(r, index)
+		if resolution_dict[r] == current_resolution:
+			resolution._select_int(index)
 		index += 1
 
-func select_display_resolution(index):
-	var size = display_resolution_dict.get(display_resolution.get_item_text(index))
+func add_filter() -> void:
+	var current_filter = GlobalManager.screen.get_type()
+	var index = 0
+	for r in filter_dict:
+		filter.add_item(r, index)
+		if filter_dict[r] == current_filter:
+			filter._select_int(index)
+		index += 1
+
+func add_framerate() -> void:
+	var current_fps = Engine.get_frames_per_second()
+	var index = 0
+	for r in framerate_dict:
+		framerate.add_item(r, index)
+		if framerate_dict[r] == current_fps:
+			framerate._select_int(index)
+		index += 1
+
+func add_language() -> void:
+	var current_lang = TranslationServer.get_locale()
+	var index = 0
+	for r in language_dict:
+		language.add_item(r, index)
+		if language_dict[r] == current_lang:
+			language._select_int(index)
+		index += 1
+
+func select_resolution(index: int) -> void:
+	var size = resolution_dict.get(resolution.get_item_text(index))
 	OS.set_window_size(size)
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT, SceneTree.STRETCH_ASPECT_KEEP, size)
+	print("Display resolution set to: " + str(size))
 
-#CONTROLS TODO:
-#	Invert toggle
-#	Lefty toggle
-#	Camera target toggle/hold toggle
-#	Advanced (keybind setting) with reset
+func select_filter(index: int) -> void:
+	var filter = filter_dict.get(filter.get_item_text(index))
+	GlobalManager.screen.set_type(filter)
+	print("Screen filter set to: " + filter)
+
+func select_language(index: int) -> void:
+	var lang = language_dict.get(language.get_item_text(index))
+	TranslationServer.set_locale(lang)
+	print("Language set to: " + lang)
+
+#func _on_ButtonRight_pressed():
+#	$Tabs.current_tab += 1
+#	#current = clamp(current, 0, 3)
+#
+#func _on_ButtonLeft_pressed():
+#	$Tabs.current_tab -= 1
+#	#current = clamp(current, 0, 3)
+
+func on_remap_timeout():
+	can_remap = false
+
+
+

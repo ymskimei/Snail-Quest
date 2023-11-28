@@ -12,6 +12,7 @@ onready var info: RichTextLabel = $MarginContainer/HBoxContainer/MarginContainer
 signal game_start
 
 func _ready() -> void:
+	GlobalManager.connect("game_focus", self, "on_game_focused")
 	set_title_splash()
 	version.set_bbcode("[color=#EFEFEF] Version " + GlobalManager.version_number)
 	info.set_bbcode("[right][color=#EFEFEF] © 2023 Studio Kuwagata")
@@ -25,6 +26,10 @@ func _ready() -> void:
 	anim_logo.play("GuiLogoIdle")
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed('gui_pause'):
+		if GuiMain.menu_open:
+			GuiMain.menu_popup()
+			default_selection.grab_focus()
 	if event.is_action_pressed("gui_debug"):
 		set_title_splash()
 
@@ -43,6 +48,10 @@ func _on_StartButton_pressed() -> void:
 	yield(fade, "animation_finished")
 	emit_signal("game_start")
 	queue_free()
+
+func on_game_focused(is_focused) -> void:
+	if is_focused:
+		default_selection.grab_focus()
 
 func _on_OptionsButton_pressed() -> void:
 	GuiMain.menu_popup()

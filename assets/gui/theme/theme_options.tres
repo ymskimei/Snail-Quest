@@ -53,6 +53,7 @@ OptionButton/constants/arrow_margin = 0
 OptionButton/constants/hseparation = 32
 OptionButton/fonts/font = ExtResource( 5 )
 OptionButton/icons/arrow = ExtResource( 4 )
+PopupMenu/fonts/font = ExtResource( 5 )
 SpinBox/icons/updown = ExtResource( 4 )
 TabContainer/styles/panel = SubResource( 5 )
 VScrollBar/styles/grabber = SubResource( 6 )
