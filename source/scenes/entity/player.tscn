@@ -30,7 +30,6 @@
 [ext_resource path="res://assets/resource/animation/PlayerSlamDefault.tres" type="Animation" id=28]
 [ext_resource path="res://source/scenes/gui/gui_debug_healthbar.tscn" type="PackedScene" id=29]
 
-
 [sub_resource type="Skin" id=3]
 resource_name = "Skin"
 bind_count = 21
