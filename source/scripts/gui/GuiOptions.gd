@@ -9,6 +9,8 @@ onready var framerate: OptionButton = $"%ButtonFps"
 onready var vsync: CheckBox = $"%CheckBoxVsync"
 onready var language: OptionButton = $"%ButtonLanguage"
 
+onready var anim: AnimationPlayer = $AnimationPlayer
+
 var resolution_dict: Dictionary = {
 	"GUI_OPTIONS_RESOLUTION_480": Vector2(640, 480),
 	"GUI_OPTIONS_RESOLUTION_600": Vector2(800, 600),
@@ -272,11 +274,6 @@ func get_control_icon(event: InputEvent) -> String:
 
 func get_default_focus() -> void:
 	video.grab_focus()
-#	for tab in tabs.get_children():
-#		for c in tab.get_children():
-#			if c is BaseButton or Range:
-#				c.grab_focus()
-#			break
 
 func get_buttons(tab: Control):
 	for n in tab.get_node("Margin").get_node("Grid").get_children():
@@ -285,8 +282,6 @@ func get_buttons(tab: Control):
 			return n
 
 func _on_Tabs_tab_changed() -> void:
-#	if last_focus:
-#		last_focus.grab_focus()
 	for controls in tabs.get_children():
 		if controls is BaseButton or Range:
 			controls.set_focus_mode(2)
@@ -436,16 +431,5 @@ func select_language(index: int) -> void:
 	TranslationServer.set_locale(lang)
 	print("Language set to: " + lang)
 
-#func _on_ButtonRight_pressed():
-#	$Tabs.current_tab += 1
-#	#current = clamp(current, 0, 3)
-#
-#func _on_ButtonLeft_pressed():
-#	$Tabs.current_tab -= 1
-#	#current = clamp(current, 0, 3)
-
 func on_remap_timeout():
 	can_remap = false
-
-
-

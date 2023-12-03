@@ -3,6 +3,9 @@ extends Node
 const SAVE_PATH = "user://save_data.json"
 var game_data = {}
 
+var game_focused: bool = true
+signal game_focus(is_focused)
+
 func _process(_delta):
 	if Input.is_action_just_pressed("debug_save"):
 		save_data()
@@ -34,3 +37,12 @@ func load_data():
 	GlobalManager.play_time.played_time = 0
 	GlobalManager.play_time.reset_start()
 	file.close()
+
+func _notification(what):
+	match what:
+		NOTIFICATION_WM_FOCUS_IN:
+			game_focused = true
+			emit_signal("game_focus", game_focused)
+		NOTIFICATION_WM_FOCUS_OUT:
+			game_focused = false
+			emit_signal("game_focus", game_focused)

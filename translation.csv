@@ -44,7 +44,7 @@ GUI_OPTIONS_CONTROLS	Control Mapping	Control Mapping				Crew Mapping
 GUI_OPTIONS_BUTTON_ACTION	Action Button	Action Button				Attack Button
 GUI_OPTIONS_BUTTON_COMBAT	Combat Button	Combat Button				Dual Button
 GUI_OPTIONS_BUTTON_DEFENSE	Defense Button	Defence Button				Retreat Button
-GUI_OPTIONS_LANGUAGE	Change Language	Change Language				Switch Tongue
+GUI_OPTIONS_LANGUAGE	Language	Language				Tongue
 GUI_OPTIONS_LANGUAGE_EN_US	English (United States)	English (United States)				English (The Colonies)
 GUI_OPTIONS_LANGUAGE_EN_GB	English (Great Britain)	English (Great Britain)				English (The Empire)
 GUI_OPTIONS_LANGUAGE_ES_MX	Español (Spanish)	Español (Spanish)				Español (Spanish)

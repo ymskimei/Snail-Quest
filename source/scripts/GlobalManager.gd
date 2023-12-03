@@ -39,11 +39,3 @@ func set_game_time(node: Node):
 func set_chunk_start(vec: Vector3):
 	chunk_start = vec
 
-func _notification(what):
-	match what:
-		NOTIFICATION_WM_FOCUS_IN:
-			game_focused = true
-			emit_signal("game_focus", game_focused)
-		NOTIFICATION_WM_FOCUS_OUT:
-			game_focused = false
-			emit_signal("game_focus", game_focused)
