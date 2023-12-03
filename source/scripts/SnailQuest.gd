@@ -14,4 +14,3 @@ func on_Game_Started():
 	print("demo")
 	yield(title_screen, "tree_exited")
 	screen_canvas.add_child(world)
-	

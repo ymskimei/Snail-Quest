@@ -71,6 +71,7 @@ func toggle_command_console():
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			get_tree().set_deferred("paused", false)
 			can_pause = true
+			GuiMain.current_focused.grab_focus()
 
 func show_debug_information():
 	if debug_information.visible == false:

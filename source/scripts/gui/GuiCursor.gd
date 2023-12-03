@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 onready var cursor: TextureRect = $Cursor
-onready var anim: AnimationPlayer = $Cursor/AnimationPlayer
+onready var anim: AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	get_viewport().connect("gui_focus_changed", self, "_on_gui_focus_changed")

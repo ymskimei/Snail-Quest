@@ -64,7 +64,7 @@ func _unhandled_input(_event):
 		display_up.is_selected_animation()
 	if Input.is_action_just_pressed("pad_right") or Input.is_action_just_pressed("pad_down") or Input.is_action_just_pressed("pad_left") or Input.is_action_just_pressed("pad_up"):
 		reveal_pad()
-		GlobalManager.player.update_equipped_tool()
+		#GlobalManager.player.update_equipped_tool()
 	if Input.is_action_just_pressed("cam_zoom") or Input.is_action_just_pressed("cam_lock"):
 		reveal_cam()
 

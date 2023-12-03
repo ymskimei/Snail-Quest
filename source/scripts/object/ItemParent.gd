@@ -7,8 +7,8 @@ onready var mesh : Mesh
 onready var material : Material
 onready var body = $RigidBody
 
-var tools = preload("res://resource/gui_tool.tres")
-var items = preload("res://resource/gui_item.tres")
+var tools = preload("res://assets/resource/gui_tool.tres")
+var items = preload("res://assets/resource/gui_item.tres")
 
 var collecting : bool
 var player : Spatial

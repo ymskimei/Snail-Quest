@@ -138,4 +138,3 @@ func check_for_transitions(room):
 			if child is RoomTransition:
 				child.connect("goto_room", self, "_on_goto_room")
 				child.connect("goto_main", self, "_on_goto_main")
-
