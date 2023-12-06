@@ -1,13 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://source/scenes/environment_default.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/materials/tile/test_block_blank.tres" type="Material" id=2]
-[ext_resource path="res://assets/materials/tile/test_block_gray.tres" type="Material" id=3]
-[ext_resource path="res://assets/materials/tile/test_block_4.tres" type="Material" id=4]
+[ext_resource path="res://assets/materials/tile/dev/tile_floor.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/tile/dev/tile_wall.tres" type="Material" id=3]
+[ext_resource path="res://assets/texture/tile/dev/tile_cm_10.png" type="Texture" id=4]
 [ext_resource path="res://source/scenes/object/sign.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/resource/sign_test_0.tres" type="Resource" id=6]
-[ext_resource path="res://assets/resource/sign_test_1.tres" type="Resource" id=7]
-[ext_resource path="res://assets/resource/sign_test_3.tres" type="Resource" id=18]
+
+[sub_resource type="SpatialMaterial" id=4]
+params_diffuse_mode = 4
+params_specular_mode = 1
+albedo_texture = ExtResource( 4 )
+uv1_scale = Vector3( 0.25, 0.25, 0.25 )
+uv1_triplanar = true
 
 [sub_resource type="CubeMesh" id=2]
 
@@ -55,7 +59,7 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
+material = SubResource( 4 )
 
 [node name="GrayBox3" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 5, -30 )
@@ -70,7 +74,7 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
+material = SubResource( 4 )
 
 [node name="GrayBox5" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 5, -22 )
@@ -85,7 +89,7 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
+material = SubResource( 4 )
 
 [node name="GrayBox6" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 5, -10 )
@@ -100,7 +104,7 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
+material = SubResource( 4 )
 
 [node name="GrayBox2" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 4, -30 )
@@ -115,7 +119,7 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
+material = SubResource( 4 )
 
 [node name="GrayBox" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 3, -30 )
@@ -130,7 +134,7 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
+material = SubResource( 4 )
 
 [node name="GrayBox7" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 26, 0, -16 )
@@ -145,7 +149,7 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
+material = SubResource( 4 )
 
 [node name="Objects" type="Spatial" parent="."]
 
@@ -162,15 +166,12 @@ shape = SubResource( 3 )
 
 [node name="SignpostModel3" parent="Objects" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9 )
-resource = ExtResource( 6 )
 
 [node name="SignpostModel" parent="Objects" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -9 )
-resource = ExtResource( 7 )
 
 [node name="SignpostModel2" parent="Objects" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -9 )
-resource = ExtResource( 18 )
 
 [node name="EnvironmentDefault" parent="." instance=ExtResource( 1 )]
 

@@ -1,22 +1,20 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://source/scenes/environment_default.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/resource/item/tool_mallet.tres" type="Resource" id=2]
-[ext_resource path="res://source/scenes/object/test_block.tscn" type="PackedScene" id=3]
-[ext_resource path="res://source/scenes/object/map/test_map_00.tscn" type="PackedScene" id=4]
-[ext_resource path="res://source/scenes/object/test_ramp.tscn" type="PackedScene" id=5]
-[ext_resource path="res://source/scenes/object/test_ramp_small.tscn" type="PackedScene" id=6]
-[ext_resource path="res://source/scenes/object/test_block_small.tscn" type="PackedScene" id=7]
+[ext_resource path="res://source/scenes/object/dev/block.tscn" type="PackedScene" id=3]
+[ext_resource path="res://source/scenes/object/map/test_map_0.tscn" type="PackedScene" id=4]
+[ext_resource path="res://source/scenes/object/dev/ramp.tscn" type="PackedScene" id=5]
+[ext_resource path="res://source/scenes/object/dev/slope.tscn" type="PackedScene" id=6]
+[ext_resource path="res://source/scenes/object/dev/block_small.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/resource/item/tool_needle.tres" type="Resource" id=8]
-[ext_resource path="res://source/scenes/object/map/test_slide_0.tscn" type="PackedScene" id=9]
+[ext_resource path="res://source/scenes/object/map/test_slide.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/materials/tile/dev/tile_cm_10.tres" type="Material" id=10]
 [ext_resource path="res://source/scenes/object/sign.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/resource/sign_test_0.tres" type="Resource" id=12]
-[ext_resource path="res://assets/resource/sign_test_1.tres" type="Resource" id=13]
-[ext_resource path="res://assets/resource/sign_test_3.tres" type="Resource" id=14]
-[ext_resource path="res://source/scenes/object/test_breakable.tscn" type="PackedScene" id=15]
-[ext_resource path="res://assets/materials/tile/test_block_4.tres" type="Material" id=16]
-[ext_resource path="res://source/scenes/object/test_ruler.tscn" type="PackedScene" id=17]
-[ext_resource path="res://assets/materials/tile/test_block_gray.tres" type="Material" id=18]
+[ext_resource path="res://assets/materials/tile/dev/tile_special.tres" type="Material" id=12]
+[ext_resource path="res://source/scenes/object/dev/breakable.tscn" type="PackedScene" id=15]
+[ext_resource path="res://source/scenes/object/dev/ruler.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/materials/tile/dev/tile_wall.tres" type="Material" id=18]
 [ext_resource path="res://source/scenes/object/item_parent.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/resource/item_test_1.tres" type="Resource" id=21]
 
@@ -34,15 +32,12 @@ polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 6 ), PoolIntArray( 6, 
 
 [node name="Signpost" parent="Objects" instance=ExtResource( 11 )]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -5, 0, 1 )
-resource = ExtResource( 12 )
 
 [node name="Signpost2" parent="Objects" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5 )
-resource = ExtResource( 13 )
 
 [node name="Signpost3" parent="Objects" instance=ExtResource( 11 )]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 7, 0, 1 )
-resource = ExtResource( 14 )
 
 [node name="TestRuler" parent="Objects" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.5, -6 )
@@ -88,7 +83,7 @@ navmesh = SubResource( 7 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
 [node name="TestSlide" parent="NavigationMeshInstance" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 78.3797, -0.126436, 2.05049 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 79.208, 1.26961, 2.24079 )
 
 [node name="TestBlock3" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, -1, 13 )
@@ -180,7 +175,7 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 16 )
+material = ExtResource( 10 )
 
 [node name="GrayBox5" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner"]
 transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 1, 48, 6, 12 )
@@ -195,7 +190,7 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 16 )
+material = ExtResource( 10 )
 
 [node name="GrayBox6" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner"]
 transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 1, 48, 13, 4 )
@@ -210,7 +205,7 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 20.0
-material = ExtResource( 16 )
+material = ExtResource( 10 )
 
 [node name="GrayBox7" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner"]
 transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 1, 40, 2, 17 )
@@ -220,7 +215,7 @@ material = ExtResource( 18 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 operation = 2
 height = 0.001
-material = ExtResource( 16 )
+material = ExtResource( 10 )
 
 [node name="GrayBox8" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner"]
 transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 1, 40, 2, 21 )
@@ -230,7 +225,7 @@ material = ExtResource( 18 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 operation = 2
 height = 0.001
-material = ExtResource( 16 )
+material = ExtResource( 10 )
 
 [node name="GrayBox9" type="CSGBox" parent="NavigationMeshInstance/CSGCombiner"]
 transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 1, 40, 4, 19 )
@@ -242,7 +237,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 operation = 2
 height = 0.001
 depth = 6.0
-material = ExtResource( 16 )
+material = ExtResource( 10 )
 
 [node name="EnvironmentDefault" parent="." instance=ExtResource( 1 )]
 
@@ -251,6 +246,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 7 )
 
 [node name="MeshInstance" type="MeshInstance" parent="KinematicBody"]
 mesh = SubResource( 8 )
+material/0 = ExtResource( 12 )
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 shape = SubResource( 9 )

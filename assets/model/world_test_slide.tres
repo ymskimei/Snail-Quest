@@ -1,6 +1,6 @@
 [gd_resource type="ArrayMesh" load_steps=2 format=2]
 
-[ext_resource path="res://assets/materials/tile/test_block_gold.tres" type="Material" id=1]
+[ext_resource path="res://assets/materials/tile/dev/tile_special.tres" type="Material" id=1]
 
 [resource]
 resource_name = "test_slide_0_Plane001"
@@ -12,6 +12,7 @@ surfaces/0 = {
 "format": 2194711,
 "index_count": 18216,
 "material": ExtResource( 1 ),
+"name": "floor",
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 3442
