@@ -54,15 +54,18 @@ func get_joy_input() -> Vector3:
 	return input
 
 func apply_movement(state: PhysicsDirectBodyState, multiplier: float, roll: bool = false) -> void:
-	direction = -get_joy_input().rotated(Vector3.UP, entity.cam.rotation.y)
-	direction = direction.rotated(Vector3.LEFT, -entity.rotation.x).rotated(Vector3.RIGHT, -entity.rotation.y)
-	if direction != Vector3.ZERO:
-		if roll:
-			state.add_force((entity.speed * multiplier) * direction, -direction)
-		else:
-			state.add_central_force((entity.speed * multiplier) * direction)
-			#entity.anim_tween.interpolate_property(entity.skeleton, "rotation:y", entity.skeleton.rotation.y, atan2(-direction.x, -direction.z), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			#entity.anim_tween.start()
+	if entity.is_controlled() and !entity.attached_to_location and !entity.interacting:
+		direction = -get_joy_input().rotated(Vector3.UP, entity.cam.rotation.y)
+		direction = direction.rotated(Vector3.LEFT, -entity.rotation.x).rotated(Vector3.RIGHT, -entity.rotation.y)
+		if direction != Vector3.ZERO:
+			if roll:
+				state.add_force((entity.speed * multiplier) * direction, -direction)
+			else:
+				state.add_central_force((entity.speed * multiplier) * direction)
+				#entity.anim_tween.interpolate_property(entity.skeleton, "rotation:y", entity.skeleton.rotation.y, atan2(-direction.x, -direction.z), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+				#entity.anim_tween.start()
+#		else:
+#			state.linear_velocity = Vector3.ZERO
 
 func apply_shimmy(state: PhysicsDirectBodyState, multiplier: float) -> void:
 	direction = Vector3(-get_joy_input().x, 0, 0).rotated(Vector3.UP, entity.skeleton. rotation.y)

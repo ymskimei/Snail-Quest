@@ -1,7 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=2]
 
-[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=1]
+[ext_resource path="res://assets/shader/cel_old.shader" type="Shader" id=1]
 [ext_resource path="res://assets/texture/environment/cloud_test.png" type="Texture" id=2]
+
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.501587, 0.51746 )

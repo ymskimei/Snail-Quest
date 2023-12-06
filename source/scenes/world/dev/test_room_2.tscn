@@ -1,9 +1,8 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://source/scenes/environment_default.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/materials/tile/test_block_blank.tres" type="Material" id=2]
-[ext_resource path="res://assets/materials/tile/test_block_gray.tres" type="Material" id=3]
-[ext_resource path="res://assets/materials/tile/test_block_4.tres" type="Material" id=4]
+[ext_resource path="res://assets/materials/tile/dev/tile_floor.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/tile/dev/tile_wall.tres" type="Material" id=3]
 [ext_resource path="res://source/scenes/object/sign.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/scenes/object/room_transition.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/resource/warp/interior_house_player.tres" type="Resource" id=7]
@@ -13,14 +12,13 @@
 [ext_resource path="res://assets/resource/item_test_0.tres" type="Resource" id=11]
 [ext_resource path="res://assets/resource/item_test_2.tres" type="Resource" id=12]
 [ext_resource path="res://assets/resource/item/tool_spool.tres" type="Resource" id=13]
-[ext_resource path="res://source/scenes/object/test_breakable.tscn" type="PackedScene" id=14]
+[ext_resource path="res://source/scenes/object/dev/breakable.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/materials/item/seed_red.tres" type="Material" id=15]
 [ext_resource path="res://assets/materials/item/seed_stem.tres" type="Material" id=16]
 [ext_resource path="res://assets/model/seed_red.mesh" type="ArrayMesh" id=17]
-[ext_resource path="res://assets/resource/sign_test_3.tres" type="Resource" id=18]
-[ext_resource path="res://source/scenes/object/map/test_slide_0.tscn" type="PackedScene" id=19]
-[ext_resource path="res://source/scenes/object/test_block.tscn" type="PackedScene" id=21]
-[ext_resource path="res://source/scenes/object/test_ramp.tscn" type="PackedScene" id=22]
+[ext_resource path="res://source/scenes/object/map/test_slide.tscn" type="PackedScene" id=19]
+[ext_resource path="res://source/scenes/object/dev/block.tscn" type="PackedScene" id=21]
+[ext_resource path="res://source/scenes/object/dev/ramp.tscn" type="PackedScene" id=22]
 [ext_resource path="res://assets/resource/item/tool_needle.tres" type="Resource" id=23]
 [ext_resource path="res://assets/resource/item/tool_mallet.tres" type="Resource" id=24]
 
@@ -91,7 +89,6 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
 
 [node name="GrayBox3" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -26 )
@@ -106,7 +103,6 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
 
 [node name="GrayBox5" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -18 )
@@ -121,7 +117,6 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
 
 [node name="GrayBox6" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -4 )
@@ -136,7 +131,6 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
 
 [node name="GrayBox2" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, -26 )
@@ -151,7 +145,6 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
 
 [node name="GrayBox" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 3, -26 )
@@ -166,7 +159,6 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
 
 [node name="GrayBox7" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 26, 0, -11 )
@@ -181,11 +173,9 @@ operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
-material = ExtResource( 4 )
 
 [node name="SignpostModel" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0 )
-resource = ExtResource( 18 )
 
 [node name="Objects" type="Spatial" parent="."]
 
@@ -351,13 +341,6 @@ shape = SubResource( 10 )
 anims/Movement = SubResource( 12 )
 
 [node name="EnvironmentDefault" parent="." instance=ExtResource( 1 )]
-dawn_ambient_color = Color( 0.823529, 0.733333, 0.486275, 1 )
-dawn_light_color = Color( 0.635294, 0.611765, 0.576471, 1 )
-day_light_color = Color( 0.556863, 0.537255, 0.494118, 1 )
-dusk_ambient_color = Color( 0.576471, 0.372549, 0.372549, 1 )
-dusk_light_color = Color( 0.85098, 0.662745, 0.447059, 1 )
-night_ambient_color = Color( 0.403922, 0.356863, 0.478431, 1 )
-night_light_color = Color( 0.368627, 0.478431, 0.533333, 1 )
 
 [node name="Warps" type="Spatial" parent="."]
 

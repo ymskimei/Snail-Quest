@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="SphereMesh" id=11]
+
+[node name="CameraLock" type="MeshInstance" groups=["lock_target"]]
+visible = false
+mesh = SubResource( 11 )

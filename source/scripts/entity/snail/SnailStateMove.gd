@@ -32,7 +32,7 @@ func physics_process(delta: float) -> int:
 	if entity.ray_front_bottom.is_colliding():
 		if entity.ray_front_top.is_colliding() and !entity.ray_bottom.is_colliding():
 			return State.FALL
-	if entity.jump_in_memory:
+	if entity.jump_in_memory and !entity.can_interact:
 		return State.JUMP
 	if !direction:
 		return State.IDLE

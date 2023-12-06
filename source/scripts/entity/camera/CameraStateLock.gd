@@ -1,20 +1,23 @@
 class_name CameraStateLock
 extends CameraStateMain
 
-export var offset: Vector3 = Vector3(0, 1, 0)
-export var follow_speed: int = 4
+export var follow_speed: int = 10
 
 func enter() -> void:
 	print("Camera State: LOCKED")
-	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, 20, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, 17, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, 35, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, 1, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
 func physics_process(delta: float) -> int:
 	if is_instance_valid(entity.lock_target):
-		MathHelper.slerp_look_at(entity.camera_lens, (entity.cam_target.translation / 3) + Vector3(0, 2, 0), follow_speed * delta)
-		entity.rotation = lerp(entity.rotation, entity.lock_target.rotation, follow_speed * delta)
-		entity.translation = lerp(entity.translation, entity.lock_target.translation, follow_speed * delta)
+		var targ: Spatial = entity.lock_target
+		if "camera_target_proxy" in entity.lock_target:
+			if entity.lock_target.camera_target_proxy != null:
+				targ = entity.lock_target.camera_target_proxy
+		#MathHelper.slerp_look_at(entity.camera_lens, targ.translation, follow_speed * delta)
+		entity.rotation = lerp(entity.rotation, targ.rotation, follow_speed * delta)
+		entity.translation = lerp(entity.translation, targ.translation, follow_speed * delta)
 		if !entity.lock_to_point:
 			return State.ORBI
 	else:

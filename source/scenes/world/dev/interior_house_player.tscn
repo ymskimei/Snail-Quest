@@ -1,17 +1,115 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/resource/environment/environment_interior.tres" type="Environment" id=1]
 [ext_resource path="res://source/scenes/object/room_transition.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/model/interior_mushroom_stem.mesh" type="ArrayMesh" id=3]
-[ext_resource path="res://source/scenes/object/camera_lock_point.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/materials/environment/ray.tres" type="Material" id=5]
+[ext_resource path="res://source/scenes/object/lock_target.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=5]
 [ext_resource path="res://source/scenes/object/mushroom_window.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/resource/warp/exterior_house_player.tres" type="Resource" id=7]
 [ext_resource path="res://source/scenes/object/beam.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/texture/tile/plank_floor.png" type="Texture" id=9]
+[ext_resource path="res://assets/texture/tile/mushroom_wall.png" type="Texture" id=10]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 5 )
+shader_param/use_diffuse = true
+shader_param/use_specular = false
+shader_param/use_rim = false
+shader_param/use_light = true
+shader_param/use_shadow = false
+shader_param/albedo_color = Color( 1, 1, 1, 1 )
+shader_param/shade_color = Color( 1, 1, 1, 1 )
+shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/normal_scale = 0.0
+shader_param/shade_threshold = 0.0
+shader_param/shade_softness = 0.0
+shader_param/specular_glossiness = 15.0
+shader_param/specular_threshold = 0.5
+shader_param/specular_softness = 0.0
+shader_param/rim_threshold = 0.25
+shader_param/rim_softness = 0.0
+shader_param/rim_spread = 0.5
+shader_param/shadow_threshold = 0.7
+shader_param/shadow_softness = 0.0
+shader_param/emission_energy = 1.0
+shader_param/screen_scale = 10.0
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/use_triplanar = false
+shader_param/texture_albedo = ExtResource( 10 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 5 )
+shader_param/use_diffuse = true
+shader_param/use_specular = false
+shader_param/use_rim = false
+shader_param/use_light = true
+shader_param/use_shadow = false
+shader_param/albedo_color = Color( 1, 1, 1, 1 )
+shader_param/shade_color = Color( 0.564706, 0.4, 0.4, 1 )
+shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/normal_scale = 0.0
+shader_param/shade_threshold = 0.0
+shader_param/shade_softness = 0.0
+shader_param/specular_glossiness = 15.0
+shader_param/specular_threshold = 0.5
+shader_param/specular_softness = 0.0
+shader_param/rim_threshold = 0.25
+shader_param/rim_softness = 0.0
+shader_param/rim_spread = 0.5
+shader_param/shadow_threshold = 0.7
+shader_param/shadow_softness = 0.0
+shader_param/emission_energy = 1.0
+shader_param/screen_scale = 10.0
+shader_param/uv_scale = Vector3( 0.125, 0.125, 0.125 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/use_triplanar = true
+shader_param/texture_albedo = ExtResource( 9 )
 
 [sub_resource type="CylinderShape" id=9]
 
 [sub_resource type="BoxShape" id=10]
+
+[sub_resource type="Gradient" id=11]
+colors = PoolColorArray( 1, 1, 1, 0, 1, 0.922089, 0.566406, 1 )
+
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 5 )
+shader_param/use_diffuse = false
+shader_param/use_specular = false
+shader_param/use_rim = true
+shader_param/use_light = true
+shader_param/use_shadow = false
+shader_param/albedo_color = Color( 1, 1, 1, 1 )
+shader_param/shade_color = Color( 1, 1, 1, 1 )
+shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/rim_color = Color( 1, 0.909804, 0.670588, 0.74902 )
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/normal_scale = 0.0
+shader_param/shade_threshold = 0.0
+shader_param/shade_softness = 0.0
+shader_param/specular_glossiness = 15.0
+shader_param/specular_threshold = 0.5
+shader_param/specular_softness = 0.0
+shader_param/rim_threshold = 0.5
+shader_param/rim_softness = 0.0
+shader_param/rim_spread = 0.5
+shader_param/shadow_threshold = 0.7
+shader_param/shadow_softness = 0.0
+shader_param/emission_energy = 0.0
+shader_param/screen_scale = 10.0
+shader_param/uv_scale = Vector3( 1, 1, 1 )
+shader_param/uv_offset = Vector3( 1, 0, 0 )
+shader_param/use_triplanar = false
+shader_param/texture_albedo = SubResource( 12 )
 
 [node name="Room" type="Spatial"]
 
@@ -24,6 +122,8 @@ collision_mask = 9
 transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 3.7, 0 )
 mesh = ExtResource( 3 )
 skeleton = NodePath("../..")
+material/0 = SubResource( 3 )
+material/1 = SubResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 8, 0, 0, 0, 0.5, 0, 0, 0, 8, 0, 0, 0 )
@@ -80,6 +180,7 @@ shape = SubResource( 10 )
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 0.965926, 3.394e-08, 0.258819, -0.258819, 1.26666e-07, 0.965926, 0, -1, 1.31134e-07, 0, 5, 0 )
 light_color = Color( 0.933333, 0.909804, 0.854902, 1 )
+light_energy = 0.4
 light_specular = 16.0
 shadow_bias = 0.673
 omni_range = 10.0
@@ -100,7 +201,7 @@ transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -4.125, 2, 
 [node name="MeshInstance2" parent="MushroomWindow" instance=ExtResource( 8 )]
 transform = Transform( 0.997269, 0.0508971, 0.0693294, -0.0610736, 1.624, 0.580452, -0.0415238, -1.1662, 0.811337, -0.07, -1.279, 0.836 )
 skeleton = NodePath("")
-material/0 = ExtResource( 5 )
+material/0 = SubResource( 13 )
 
 [node name="MushroomWindow2" parent="." instance=ExtResource( 6 )]
 transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 4.125, 2, -7.125 )
@@ -108,6 +209,6 @@ transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 4.125, 2, -
 [node name="MeshInstance3" parent="MushroomWindow2" instance=ExtResource( 8 )]
 transform = Transform( 0.997269, 0.0508974, 0.0693291, -0.0610736, 1.624, 0.580452, -0.0415237, -1.1662, 0.811337, -0.0364661, -1.279, 0.897466 )
 skeleton = NodePath("")
-material/0 = ExtResource( 5 )
+material/0 = SubResource( 13 )
 
 [node name="CameraLock" parent="." instance=ExtResource( 4 )]

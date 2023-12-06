@@ -21,8 +21,7 @@ func physics_process(delta: float) -> int:
 
 func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
-	if entity.can_move:
-		apply_movement(state, 1.5, true)
+	apply_movement(state, 1.5, true)
 	return State.NULL
 
 #	.physics_process(delta)

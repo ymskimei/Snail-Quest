@@ -10,8 +10,8 @@ var items: String = "res://source/scenes/item/"
 
 var world: Node
 var camera: SpringArm
-var controllable: PhysicsBody
-var prev_controllable: PhysicsBody
+var controllable: Spatial
+var prev_controllable: Spatial
 var play_time: Node
 var game_time: Node
 
@@ -27,8 +27,11 @@ func set_world(node: Node):
 func set_camera(node: SpringArm):
 	camera = node
 
-func set_controllable(node: Entity):
+func set_controllable(node: Spatial):
 	controllable = node
+
+func set_prev_controllable(node: Spatial):
+	prev_controllable = node
 
 func set_play_time(node: Node):
 	play_time = node

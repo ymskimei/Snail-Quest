@@ -21,3 +21,4 @@ params_specular_mode = 3
 albedo_texture = SubResource( 2 )
 metallic_specular = 0.0
 roughness = 0.01
+uv1_scale = Vector3( 2, 2, 2 )

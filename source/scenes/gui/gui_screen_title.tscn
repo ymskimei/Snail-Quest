@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/gui/theme/theme_title.tres" type="Theme" id=3]
 [ext_resource path="res://assets/resource/animation/CamWobble.tres" type="Animation" id=4]
 [ext_resource path="res://source/scenes/environment_default.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=6]
+[ext_resource path="res://assets/shader/cel_old.shader" type="Shader" id=6]
 [ext_resource path="res://assets/model/logo.mesh" type="ArrayMesh" id=7]
 [ext_resource path="res://assets/resource/animation/GuiLogoAppear.tres" type="Animation" id=8]
 [ext_resource path="res://assets/shader/shine.shader" type="Shader" id=9]
@@ -24,6 +24,7 @@
 [ext_resource path="res://assets/materials/environment/leaf.tres" type="Material" id=23]
 [ext_resource path="res://assets/model/grass.mesh" type="ArrayMesh" id=24]
 [ext_resource path="res://assets/materials/environment/stem.tres" type="Material" id=25]
+
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 9 )

@@ -5,6 +5,7 @@
 	"folders": {
 		"Characters": {
 			"files": [
+				"character-1699687832.json",
 				"character-1678838024.json",
 				"character-1678844174.json"
 			],
@@ -39,7 +40,7 @@
 			},
 			"metadata": {
 				"color": null,
-				"folded": false
+				"folded": true
 			}
 		},
 		"Timelines": {
@@ -50,7 +51,30 @@
 				"timeline-1681317376.json"
 			],
 			"folders": {
+				"Izabell": {
+					"files": [
 
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": false
+					}
+				},
+				"Melon": {
+					"files": [
+						"timeline-1699685968.json"
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": false
+					}
+				}
 			},
 			"metadata": {
 				"color": null,

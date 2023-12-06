@@ -1,4 +1,4 @@
-extends Spatial
+ extends Spatial
 
 onready var sky: MeshInstance = $Sky
 onready var orbital: Spatial = $Orbital
@@ -147,7 +147,7 @@ func set_environment(delta: float):
 	$Tween.start()
 
 func on_cloud_timer() -> void:
-	print(environment_current)
+	#print(environment_current)
 	randomize()
 	var x_range = Vector2(-cloud_range_width, cloud_range_width)
 	var y_range = Vector2(-cloud_range_width, cloud_range_width)

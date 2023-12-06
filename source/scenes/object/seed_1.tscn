@@ -1,8 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/materials/entity/snail_shell.tres" type="Material" id=1]
-
-
+[ext_resource path="res://assets/materials/tile/dev/tile_special.tres" type="Material" id=1]
 
 [sub_resource type="SphereMesh" id=2]
 
