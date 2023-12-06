@@ -77,7 +77,6 @@ func update_appearance() -> void:
 	var eye_right = $"%EyeRight"
 	var shell_mat = shell.get_surface_material(0)
 	var shell_accent_mat = shell.get_surface_material(0).get_next_pass()
-	#var shell_body_mat = shell.get_surface_material(1)
 	var body_mat = body.get_surface_material(0)
 	var body_accent_mat = body.get_surface_material(0).get_next_pass()
 	var eye_left_mat = eye_left.get_surface_material(0).get_next_pass()
