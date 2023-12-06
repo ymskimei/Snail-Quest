@@ -1,9 +1,18 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://source/scripts/resource/ResourceEntity.gd" type="Script" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "class_name ResourceEntity
+extends Resource
+
+export var health : int
+export var max_health : int
+export var strength : int
+export var speed : int
+export var jump : int
+"
 
 [resource]
-script = ExtResource( 1 )
+script = SubResource( 1 )
 health = 100
 max_health = 0
 strength = 5

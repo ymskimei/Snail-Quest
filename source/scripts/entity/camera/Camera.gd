@@ -37,15 +37,21 @@ func target_updated() -> void:
 
 func find_camera_lock_points() -> void:
 	if is_instance_valid(lock_target):
-		var lock_distance = lock_target.get_global_translation().distance_to(cam_target.get_global_translation())
-		var max_lock_distance = 17
-		if lock_distance < max_lock_distance:
-			lock_to_point = true
+		if "current_camera_target" in lock_target:
+			if lock_target.current_camera_target:
+				lock_to_point = true
+			else:
+				lock_to_point = false
 		else:
-			lock_to_point = false
+			var lock_distance = lock_target.get_global_translation().distance_to(cam_target.get_global_translation())
+			var max_lock_distance = 17
+			if lock_distance < max_lock_distance:
+				lock_to_point = true
+			else:
+				lock_to_point = false
 	else:
 		lock_to_point = false
-		lock_target = MathHelper.find_target(self, "camera")
+		lock_target = MathHelper.find_target(self, "lock_target")
 
 func set_coords(position: Vector3, angle: String, flipped: bool) -> void:
 	var rot = deg2rad(MathHelper.cardinal_to_degrees(angle))

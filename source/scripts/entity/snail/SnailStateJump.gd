@@ -5,6 +5,7 @@ var jump_timer: Timer
 
 func enter() -> void:
 	print("Snail State: JUMP")
+	entity.attached_to_location = false
 	can_jump = true
 	jump_timer = Timer.new()
 	jump_timer.set_wait_time(0.2)
@@ -31,7 +32,9 @@ func unhandled_input(event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
 	if entity.ledge_usable and !entity.ray_front_top.is_colliding() and entity.ray_front_bottom.is_colliding():
-		return State.HANG
+		if is_instance_valid(entity.ray_front_top.get_collider()):
+			if !entity.ray_front_top.get_collider().is_in_group.attachable:
+				return State.HANG
 	if !can_jump:
 		return State.FALL
 	return State.NULL

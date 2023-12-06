@@ -55,8 +55,9 @@ func set_display_chunk_coords():
 
 func set_display_coordinates():
 	if is_instance_valid(GlobalManager.controllable):
-		var coords = GlobalManager.controllable.get_coords()
-		display_coordinate.set_bbcode("[color=#E7738C]X: %s\n[color=#A3DD5D]Y: %s\n[color=#71B4F6]Z: %s" % [coords[0], coords[1], coords[2]])
+		if GlobalManager.controllable.has_method("get_coords"):
+			var coords = GlobalManager.controllable.get_coords()
+			display_coordinate.set_bbcode("[color=#E7738C]X: %s\n[color=#A3DD5D]Y: %s\n[color=#71B4F6]Z: %s" % [coords[0], coords[1], coords[2]])
 	else:
 		display_coordinate.set_bbcode("[color=#E7738C]X: ?\n[color=#A3DD5D]Y: ?\n[color=#71B4F6]Z: ?")
 

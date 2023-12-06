@@ -15,7 +15,7 @@ func unhandled_input(event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 	.physics_process(delta)
-	if entity.jump_in_memory:
+	if entity.jump_in_memory and !entity.can_interact:
 		return State.JUMP
 	if direction != Vector3.ZERO:
 		if is_on_floor():

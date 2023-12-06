@@ -1,7 +1,7 @@
 class_name Entity
-extends RigidBody
+extends Interactable
 
-export(Resource) var resource
+export(Resource) var identity
 export(Resource) var equipped
 
 onready var cam: SpringArm = GlobalManager.camera
@@ -10,12 +10,8 @@ onready var controllable: bool = false
 onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
 onready var attach_point: Spatial = $"%EyePoint"
-onready var anim: AnimationPlayer = $AnimationPlayer
-onready var anim_tween: Tween = $Tween
 onready var proximity: Area = $Proximity
-
 onready var interaction_label: RichTextLabel = $Gui/InteractionLabel
-
 onready var entity_name: String
 onready var health: int
 onready var max_health: int
@@ -26,10 +22,10 @@ onready var jump: int
 var direction: Vector3 = Vector3.ZERO
 var input: Vector3 = Vector3.ZERO
 
-var interactable = null
 var target = null
 
 var can_interact: bool
+var interacting : bool
 var targeting: bool
 var target_found: bool
 var enemy_detected: bool
@@ -43,38 +39,43 @@ signal health_changed
 signal entity_killed
 
 func _ready() -> void:
-	health = resource.health
-	max_health = resource.max_health
-	strength = resource.strength
-	speed = resource.speed
-	jump = resource.jump
-
+	if is_instance_valid(identity):
+		entity_name = identity.entity_name
+		character = identity.character
+		health = identity.health
+		max_health = identity.max_health
+		strength = identity.strength
+		speed = identity.speed
+		jump = identity.jump
 	jump_memory_timer.set_wait_time(0.075)
 	jump_memory_timer.one_shot = true
 	jump_memory_timer.connect("timeout", self, "on_jump_memory_timeout")
 	add_child(jump_memory_timer)
-
 	ledge_timer.set_wait_time(1)
 	ledge_timer.one_shot = true
 	ledge_timer.connect("timeout", self, "on_ledge_timeout")
 	add_child(ledge_timer)
-
 	ledge_usable = true
-
 	if is_instance_valid(proximity):
 		proximity.connect("area_entered", self, "_on_proximity_entered")
 		proximity.connect("area_exited", self, "_on_proximity_exited")
 	display_debug_healthbar()
 	cam.connect("target_updated", self, "_on_cam_target_updated")
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	pass
 
+func _unhandled_input(event: InputEvent) -> void:
+	if is_instance_valid(target):
+		target_interact(event)
+
 func _physics_process(delta: float) -> void:
-	if !is_instance_valid(target):
-		target = MathHelper.find_target(self, "target")
-	else:
+	if is_instance_valid(target):
 		target_check()
+	else:
+		target = MathHelper.find_target(self, "target")
+#	if is_instance_valid(identity):
+#		print(identity.entity_name + " is character: " + str(is_in_group("target")))
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	pass
@@ -117,17 +118,38 @@ func update_equipped() -> void:
 			equipped_tool.set_name(tool_item.item_name)
 			attach_point.add_child(equipped_tool)
 
-func get_coords() -> Vector3:
-	var x = round(global_transform.origin.x)
-	var y = round(global_transform.origin.y)
-	var z = round(global_transform.origin.z)
-	var coords = [x, y, z]
-	return coords
+func target_check() -> void:
+	var target_distance = target.get_global_translation().distance_to(get_global_translation())
+	var max_enemy_distance = 15
+	var max_interactable_distance = 2
+	if Input.is_action_pressed("cam_lock"):
+		targeting = true
+		if enemy_detected or !target.is_controlled() and target_distance < max_interactable_distance:
+			target_found = true
+		else:
+			target_found = false
+	else:
+		target = MathHelper.find_target(self, "target")
+		targeting = false
 
-func set_coords(position: Vector3, angle: String = "Default") -> void:
-	set_global_translation(position)
-	if !angle == "Default":
-		set_global_rotation(Vector3(0, deg2rad(MathHelper.cardinal_to_degrees(angle)), 0))
+func target_interact(event) -> void:
+	var target_distance: float  = target.get_global_translation().distance_to(get_global_translation())
+	var relative_facing: float = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
+	var max_interactable_distance: float = 2.5
+#	if target.has_child("MeshInstance"):
+#		target_distance = target.get_aabb().distance_to(get_global_translation())
+	if (!target.is_controlled() and target.character) and target_distance < max_interactable_distance and relative_facing >= 0:
+		can_interact = true
+		set_interaction_text(target.get_interaction_text())
+		if event.is_action_pressed("action_main"):
+			interacting = true
+			target.interact()
+			set_interaction_text("")
+			yield(target, "interaction_ended")
+			interacting = false
+	else:
+		can_interact = false
+		set_interaction_text("")
 
 func set_interaction_text(text) -> void:
 	if !text:
@@ -138,34 +160,11 @@ func set_interaction_text(text) -> void:
 		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
 		interaction_label.set_visible(true)
 
-func target_check() -> void:
-	var target_distance = target.get_global_translation().distance_to(get_global_translation())
-	var relative_facing = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
-	var max_enemy_distance = 15
-	var max_interactable_distance = 5
-	if Input.is_action_pressed("cam_lock"):
-		targeting = true
-		if enemy_detected or ObjectInteractable and target_distance < max_interactable_distance:
-			target_found = true
-		else:
-			target_found = false
-	else:
-		target = MathHelper.find_target(self, "target")
-		targeting = false
-	if (target is ObjectInteractable or target.is_in_group("mountable")) and target_distance < max_interactable_distance and relative_facing >= 0:
-		can_interact = true
-		set_interaction_text(target.get_interaction_text())
-		if Input.is_action_just_pressed("action_main"):
-			target.interact()
-			set_interaction_text("")
-	else:
-		can_interact = false
-		set_interaction_text("")
+func get_interaction_text():
+	return "chat"
 
-func is_controllable() -> bool:
-	if GlobalManager.controllable == self:
-		return true
-	return false
+func interact():
+	trigger_dialog()
 
 func jump_memory() -> void:
 	jump_in_memory = true

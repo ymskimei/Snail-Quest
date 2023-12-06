@@ -34,55 +34,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/Chunk.gd"
 }, {
-"base": "Reference",
-"class": "DTS",
+"base": "Resource",
+"class": "DialogueResource",
 "language": "GDScript",
-"path": "res://addons/dialogic/Localization/translation_service.gd"
-}, {
-"base": "Node",
-"class": "Dialogic",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicClass.gd"
-}, {
-"base": "Reference",
-"class": "DialogicAnimaPropertiesHelper",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/Anima/DialogicAnimaPropertiesHelper.gd"
-}, {
-"base": "Node",
-"class": "DialogicAnimaResources",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/Anima/DialogicAnimaResources.gd"
-}, {
-"base": "Control",
-"class": "DialogicBackgroundMusic",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/BackgroundMusic.gd"
-}, {
-"base": "Node",
-"class": "DialogicCustomEvents",
-"language": "GDScript",
-"path": "res://addons/dialogic/Nodes/DialogicCustomEvents.gd"
-}, {
-"base": "Node",
-"class": "DialogicDefinitionsUtil",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicDefinitionsUtil.gd"
-}, {
-"base": "Node",
-"class": "DialogicParser",
-"language": "GDScript",
-"path": "res://addons/dialogic/Parser/DialogicParser.gd"
-}, {
-"base": "Reference",
-"class": "DialogicResources",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicResources.gd"
-}, {
-"base": "Reference",
-"class": "DialogicUtil",
-"language": "GDScript",
-"path": "res://addons/dialogic/Other/DialogicUtil.gd"
+"path": "res://addons/dialogue_manager/dialogue_resource.gd"
 }, {
 "base": "Entity",
 "class": "Enemy",
@@ -94,7 +49,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/enemy/EnemyStateMain.gd"
 }, {
-"base": "RigidBody",
+"base": "Interactable",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://source/scripts/entity/Entity.gd"
@@ -109,10 +64,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/gui/GuiPopupConsoleCommand.gd"
 }, {
-"base": "PanelContainer",
-"class": "HistoryRow",
+"base": "RigidBody",
+"class": "Interactable",
 "language": "GDScript",
-"path": "res://addons/dialogic/Example Assets/History/HistoryRow.gd"
+"path": "res://source/scripts/Interactable.gd"
 }, {
 "base": "CanvasLayer",
 "class": "InventoryParent",
@@ -134,20 +89,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/MusicBooth.gd"
 }, {
-"base": "Node",
-"class": "ObjectInteractable",
-"language": "GDScript",
-"path": "res://source/scripts/object/ObjectInteractable.gd"
-}, {
 "base": "Resource",
 "class": "ResourceAudioPlayer",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceAudioPlayer.gd"
 }, {
 "base": "Resource",
-"class": "ResourceEntity",
+"class": "ResourceDialog",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceEntity.gd"
+"path": "res://source/scripts/resource/ResourceDialog.gd"
 }, {
 "base": "Resource",
 "class": "ResourceEnvironment",
@@ -158,6 +108,16 @@ _global_script_classes=[ {
 "class": "ResourceEquipped",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceInventory.gd"
+}, {
+"base": "Resource",
+"class": "ResourceIdentity",
+"language": "GDScript",
+"path": "res://source/scripts/resource/ResourceIdentity.gd"
+}, {
+"base": "ResourceIdentity",
+"class": "ResourceIdentitySnail",
+"language": "GDScript",
+"path": "res://source/scripts/resource/ResourceIdentitySnail.gd"
 }, {
 "base": "Resource",
 "class": "ResourceItem",
@@ -178,16 +138,6 @@ _global_script_classes=[ {
 "class": "ResourceMusic",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceMusic.gd"
-}, {
-"base": "Resource",
-"class": "ResourceSign",
-"language": "GDScript",
-"path": "res://source/scripts/resource/ResourceSign.gd"
-}, {
-"base": "Resource",
-"class": "ResourceSnailSkin",
-"language": "GDScript",
-"path": "res://source/scripts/resource/ResourceSnailSkin.gd"
 }, {
 "base": "Spatial",
 "class": "RoomTransition",
@@ -255,37 +205,27 @@ _global_script_class_icons={
 "CameraStateLock": "",
 "CameraStateMain": "",
 "Chunk": "",
-"DTS": "",
-"Dialogic": "",
-"DialogicAnimaPropertiesHelper": "",
-"DialogicAnimaResources": "",
-"DialogicBackgroundMusic": "",
-"DialogicCustomEvents": "",
-"DialogicDefinitionsUtil": "",
-"DialogicParser": "",
-"DialogicResources": "",
-"DialogicUtil": "",
+"DialogueResource": "",
 "Enemy": "",
 "EnemyStateMain": "",
 "Entity": "",
 "GuiConsoleCategory": "",
 "GuiConsoleCommand": "",
-"HistoryRow": "",
+"Interactable": "",
 "InventoryParent": "",
 "ItemParent": "",
 "MainCamera": "",
 "MusicBooth": "",
-"ObjectInteractable": "",
 "ResourceAudioPlayer": "",
-"ResourceEntity": "",
+"ResourceDialog": "",
 "ResourceEnvironment": "",
 "ResourceEquipped": "",
+"ResourceIdentity": "",
+"ResourceIdentitySnail": "",
 "ResourceItem": "",
 "ResourceLocation": "",
 "ResourceLootTable": "",
 "ResourceMusic": "",
-"ResourceSign": "",
-"ResourceSnailSkin": "",
 "RoomTransition": "",
 "Snail": "",
 "SnailQuest": "",
@@ -329,9 +269,11 @@ default_bus_layout="res://assets/default_bus_layout.tres"
 [autoload]
 
 SaveData="*res://source/scripts/SaveData.gd"
+GlobalManager="*res://source/scripts/GlobalManager.gd"
+GlobalFlags="*res://source/scripts/GlobalFlags.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GuiMain="*res://source/scenes/gui/gui_main.tscn"
 MathHelper="*res://source/scripts/MathHelper.gd"
-GlobalManager="*res://source/scripts/GlobalManager.gd"
 WorldSave="*res://source/scripts/WorldSave.gd"
 AudioPlayer="*res://source/scenes/audio_player.tscn"
 
@@ -362,7 +304,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/zylann.scatter/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/zylann.scatter/plugin.cfg" )
 
 [global]
 
@@ -673,13 +615,13 @@ quality/filters/sharpen_intensity=0.5
 quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-quality/directional_shadow/size=6144
-quality/shadow_atlas/size=6144
+quality/directional_shadow/size=5120
+quality/shadow_atlas/size=5120
 quality/shadow_atlas/quadrant_0_subdiv=3
 quality/shadow_atlas/quadrant_1_subdiv=4
 quality/shadow_atlas/quadrant_2_subdiv=5
 quality/shadow_atlas/quadrant_3_subdiv=6
-quality/shadows/filter_mode=0
+quality/shadows/filter_mode=2
 quality/shading/force_vertex_shading.mobile=false
 quality/shading/use_physical_light_attenuation=true
 quality/filters/anisotropic_filter_level=8

@@ -1,7 +1,6 @@
 [gd_resource type="ArrayMesh" load_steps=2 format=2]
 
-[ext_resource path="res://assets/materials/tile/test_map_1.tres" type="Material" id=1]
-
+[ext_resource path="res://assets/materials/tile/grass_top.material" type="Material" id=1]
 
 [resource]
 resource_name = "testmap2EPICVERSION_TestMap"
@@ -13,6 +12,7 @@ surfaces/0 = {
 "format": 2194711,
 "index_count": 6576,
 "material": ExtResource( 1 ),
+"name": "floor",
 "primitive": 4,
 "skeleton_aabb": [  ],
 "vertex_count": 2142

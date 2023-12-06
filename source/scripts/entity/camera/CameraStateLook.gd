@@ -15,14 +15,14 @@ func enter() -> void:
 	entity.anim_wobble.play("Wobble")
 
 func physics_process(delta: float) -> int:
+	if entity.lock_to_point == true:
+		return State.LOCK
 	if rotation_complete:
 		cam_movement(delta)
 		entity.cam_target.controllable = false
 	if Input.is_action_just_pressed("cam_zoom"):
 		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_third_person)
 		return State.ORBI
-	if entity.lock_target:
-		return State.TARG
 	return State.NULL
 
 func cam_movement(delta: float) -> void:

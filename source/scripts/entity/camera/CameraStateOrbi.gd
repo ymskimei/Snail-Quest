@@ -13,8 +13,8 @@ export var lock_low_lens: float = -0.025
 export var lock_default_arm: float = -0.2
 export var lock_default_lens: float = 0.075
 
-export var fov: int = 30
-export var arm: float = 9
+export var fov: int = 40
+export var arm: float = 6
 
 var distance: float = 0
 var input_spin: int = 0
@@ -46,6 +46,8 @@ func unhandled_input(event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(delta: float) -> int:
+	if entity.lock_to_point == true:
+		return State.LOCK
 	if look_around:
 		return State.LOOK
 	if entity.cam_target is Entity and entity.cam_target.targeting:
@@ -69,6 +71,10 @@ func cam_tracking(delta: float) -> void:
 	#entity.camera_lens.translation.y = lerp(entity.camera_lens.translation.y, GlobalManager.player.states.get_joy_input(), follow_speed * delta)
 	entity.spring_length = lerp(entity.spring_length, clamp(entity.spring_length + distance, 4, 30), 10 * delta)
 
+func cam_lifting(delta: float) -> void:
+	rotation.y = Input.get_action_strength("cam_up") - Input.get_action_strength("cam_down")
+	entity.rotation.x += clamp(velocity.y * delta, deg2rad(-45), deg2rad(20))
+
 func cam_panning(delta: float) -> void:
 	var distance_to_target = entity.camera_lens.get_global_translation().distance_to(entity.cam_target.get_global_translation())
 	if distance_to_target <= 1.5:
@@ -79,12 +85,13 @@ func cam_panning(delta: float) -> void:
 		if Input.is_action_just_released("cam_zoom"):
 			zoom_mode = true
 		if !zoom_mode:
-			if Input.is_action_pressed("cam_up"):
-				tween_cam_pan(lock_high_arm, lock_high_lens)
-			elif Input.is_action_pressed("cam_down"):
-				tween_cam_pan(lock_low_arm, lock_low_lens)
-			else:
-				tween_cam_pan(lock_default_arm, lock_default_lens)
+			cam_lifting(delta)
+#			if Input.is_action_pressed("cam_up"):
+#				tween_cam_pan(lock_high_arm, lock_high_lens)
+#			elif Input.is_action_pressed("cam_down"):
+#				tween_cam_pan(lock_low_arm, lock_low_lens)
+#			else:
+#				tween_cam_pan(lock_default_arm, lock_default_lens)
 		else:
 			cam_zooming(delta)
 
