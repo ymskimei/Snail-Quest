@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://source/scenes/environment_default.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/materials/tile/test_block_blank.tres" type="Material" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/resource/identity/izabell.tres" type="Resource" id=10]
 [ext_resource path="res://assets/resource/identity/sunshine.tres" type="Resource" id=11]
 [ext_resource path="res://assets/resource/identity/fubward.tres" type="Resource" id=12]
+[ext_resource path="res://assets/texture/tile/test_block_gray.png" type="Texture" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -20,8 +21,9 @@ shader_param/use_specular = false
 shader_param/use_rim = false
 shader_param/use_light = false
 shader_param/use_shadow = true
+shader_param/use_triplanar = true
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 0.607843, 0.658824, 0.694118, 1 )
+shader_param/shade_color = Color( 0.776471, 0.72549, 0.843137, 1 )
 shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/emission = Color( 0, 0, 0, 1 )
@@ -35,12 +37,14 @@ shader_param/rim_threshold = 0.25
 shader_param/rim_softness = 0.05
 shader_param/rim_spread = 0.5
 shader_param/shadow_threshold = 0.7
-shader_param/shadow_softness = 0.1
+shader_param/shadow_softness = 0.0
 shader_param/emission_energy = 1.0
-shader_param/uv_scale = Vector3( 16, 16, 16 )
+shader_param/uv_scale = Vector3( 1, 1, 1 )
 shader_param/uv_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 13 )
 
 [node name="Room" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="CSGCombiner" type="CSGCombiner" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
@@ -79,7 +83,7 @@ height = 32.0
 material = SubResource( 1 )
 
 [node name="CSGWall4" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9, 17, -3.93403e-07 )
+transform = Transform( -2.98023e-08, 0, 1, 0, 1, 0, -1, 0, -2.98023e-08, 9, 17, 0 )
 width = 16.0
 height = 32.0
 material = SubResource( 1 )
@@ -111,14 +115,14 @@ material = SubResource( 1 )
 [node name="Objects" type="Spatial" parent="."]
 
 [node name="Sign" parent="Objects" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.74644, 0, -6.67141 )
+transform = Transform( 0.976706, 0, -0.214582, 0, 1, 0, 0.214582, 0, 0.976706, 4.23033, 0, -6.64016 )
 dialog = ExtResource( 8 )
 
 [node name="Door" parent="Objects" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -9 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5 )
 
 [node name="Switch" parent="Objects/Door" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -3, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -3, 3.91193 )
 
 [node name="CameraTarget" type="Position3D" parent="Objects/Door/Switch"]
 transform = Transform( 0.966844, -0.100948, 0.23457, -0.00790893, 0.906273, 0.422618, -0.255247, -0.410461, 0.875426, 2, 7, 6 )

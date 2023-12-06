@@ -2,37 +2,30 @@
 
 importer="texture"
 type="StreamTexture"
-<<<<<<<< HEAD:assets/texture/tile/tile_decor_0.png.import
-path="res://import/tile_decor_0.png-0b65919d082dcb41c1b57557a103974a.stex"
-========
-path="res://import/tile_decor_1.png-f47c3c40353d3fb7ae3c68fe7469206f.stex"
->>>>>>>> 6564e0afe828ef7f175f5d433a9cb2e53ff01d17:assets/texture/tile/tile_decor_1.png.import
+path.s3tc="res://import/tile_decor_0.png-0b65919d082dcb41c1b57557a103974a.s3tc.stex"
+path.etc="res://import/tile_decor_0.png-0b65919d082dcb41c1b57557a103974a.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
-<<<<<<<< HEAD:assets/texture/tile/tile_decor_0.png.import
 source_file="res://assets/texture/tile/tile_decor_0.png"
-dest_files=[ "res://import/tile_decor_0.png-0b65919d082dcb41c1b57557a103974a.stex" ]
-========
-source_file="res://assets/texture/tile/tile_decor_1.png"
-dest_files=[ "res://import/tile_decor_1.png-f47c3c40353d3fb7ae3c68fe7469206f.stex" ]
->>>>>>>> 6564e0afe828ef7f175f5d433a9cb2e53ff01d17:assets/texture/tile/tile_decor_1.png.import
+dest_files=[ "res://import/tile_decor_0.png-0b65919d082dcb41c1b57557a103974a.s3tc.stex", "res://import/tile_decor_0.png-0b65919d082dcb41c1b57557a103974a.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=true
 flags/filter=true
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=2
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
@@ -40,5 +33,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

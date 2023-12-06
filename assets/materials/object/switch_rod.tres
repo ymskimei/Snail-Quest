@@ -9,6 +9,7 @@ shader_param/use_specular = false
 shader_param/use_rim = false
 shader_param/use_light = false
 shader_param/use_shadow = false
+shader_param/use_triplanar = false
 shader_param/albedo_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 shader_param/shade_color = Color( 0.623529, 0.623529, 0.623529, 1 )
 shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
