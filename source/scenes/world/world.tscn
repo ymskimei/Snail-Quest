@@ -56,6 +56,10 @@ continuous_cd = true
 pause_mode = 2
 script = ExtResource( 7 )
 
+[node name="Audio" type="Spatial" parent="."]
+pause_mode = 2
+script = ExtResource( 7 )
+
 [node name="GameTime" type="Node" parent="."]
 script = ExtResource( 4 )
 

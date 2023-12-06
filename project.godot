@@ -105,6 +105,11 @@ _global_script_classes=[ {
 "path": "res://source/scripts/entity/Entity.gd"
 }, {
 "base": "Node",
+"class": "EntityStateParent",
+"language": "GDScript",
+"path": "res://source/scripts/entity/EntityStateParent.gd"
+}, {
+"base": "Node",
 "class": "GuiConsoleCategory",
 "language": "GDScript",
 "path": "res://source/scripts/gui/GuiPopupConsoleCategory.gd"
