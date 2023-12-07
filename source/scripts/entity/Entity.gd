@@ -11,7 +11,6 @@ onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
 onready var attach_point: Spatial = $"%EyePoint"
 onready var proximity: Area = $Proximity
-onready var interaction_label: RichTextLabel = $Gui/InteractionLabel
 onready var entity_name: String
 onready var health: int
 onready var max_health: int
@@ -153,12 +152,12 @@ func target_interact(event) -> void:
 
 func set_interaction_text(text) -> void:
 	if !text:
-		interaction_label.set_text("")
-		interaction_label.set_visible(false)
+		GuiMain.hud.interaction_label.set_text("")
+		GuiMain.hud.interaction_label.set_visible(false)
 	else:
 		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
-		interaction_label.set_text("Press %s to %s" % [interaction_key, text])
-		interaction_label.set_visible(true)
+		GuiMain.hud.interaction_label.set_text("Press %s to %s" % [interaction_key, text])
+		GuiMain.hud.interaction_label.set_visible(true)
 
 func get_interaction_text():
 	return "chat"

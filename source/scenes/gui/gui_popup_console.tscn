@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/gui/theme/theme_debug.tres" type="Theme" id=1]
+[ext_resource path="res://assets/gui/theme/debug_old.tres" type="Theme" id=1]
 [ext_resource path="res://source/scripts/gui/GuiPopupConsole.gd" type="Script" id=2]
 [ext_resource path="res://source/scenes/gui/gui_popup_command.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/scenes/gui/gui_popup_console_category.tscn" type="PackedScene" id=4]
@@ -36,6 +36,7 @@ alignment = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
 margin_right = 1882.0
 margin_bottom = 986.0
+rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 

@@ -3,9 +3,10 @@ extends CanvasLayer
 export(Resource) var equipment
 export(Resource) var tools
 
-onready var anim_pad = $AnimationPad
-onready var anim_cam = $AnimationCam
-onready var display_boost = $DisplayBoost
+onready var anim_pad: AnimationPlayer = $AnimationPad
+onready var anim_cam: AnimationPlayer = $AnimationCam
+onready var display_boost: RichTextLabel  = $DisplayBoost
+onready var interaction_label: RichTextLabel = $InteractionLabel
 
 onready var tool_slot = $"%ToolSlot"
 onready var item_slot_1 = $"%ItemSlot1"

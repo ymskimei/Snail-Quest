@@ -1,0 +1,52 @@
+GUI_TITLE_START	Start Game	Start Game				Set Sail
+GUI_TITLE_OPTIONS	Options	Options				Maintenance
+GUI_TITLE_SPLASH_0	There will never be splash text in the game ever	There will never be splash text in the game ever				Thar will never be splash writin' in the game ever
+GUI_TITLE_SPLASH_1	Pillow, or closet?	Pillow, or closet?				Piller, er closet?
+GUI_TITLE_SPLASH_2	Why are there two generals?	Why are there two generals?				Why thar be two generals?
+GUI_TITLE_SPLASH_3	Currently, yes, I am a pumpkin	Currently, yes, I am a pumpkin				Currently, yar, I be a pumpkin
+GUI_TITLE_SPLASH_4	I like touching old pennies	I like touching old pennies				I like touching old doubloons
+GUI_TITLE_SPLASH_5	Grapes r gren or purpol	Grapes r gren or purpol				Grapes arrr gren or purpol
+GUI_TITLE_SPLASH_6	Somebody kick Razzbow already	Somebody kick Razzbow already				Some lubber throw Razzbow overboard
+GUI_TITLE_SPLASH_7	Here you are my good sir, a complimentary boog	Here you are my fine chap, a complimentary boog				Here ye are my matey, a complimentary boog
+GUI_TITLE_SPLASH_8	(x^2 + 5x +6) = (x+3)(x+2) = math = Eddie wins against dragone	(x^2 + 5x +6) = (x+3)(x+2) = maths = Eddie wins against dragone				(2 paces) + 5 paces + 6) = (3 east )(x weast) = Eddie finds the treasar
+GUI_TITLE_SPLASH_9	I dont follow monkey lore	I dont follow monkey lore				I dont follow monkey tales
+GUI_OPTIONS_FULLSCREEN	Fullscreen Window	Fullscreen Window				Fullscreen Winder
+GUI_OPTIONS_RESOLUTION	Display Resolution	Display Resolution				Porthole Quality
+GUI_OPTIONS_RESOLUTION_480	640x480 (4:3)	640x480 (4:3)				
+GUI_OPTIONS_RESOLUTION_600	800x600 (4:3)	800x600 (4:3)				
+GUI_OPTIONS_RESOLUTION_768	1024x768 (4:3)	1024x768 (4:3)				
+GUI_OPTIONS_RESOLUTION_720	1280x720 (16:9)	1280x720 (16:9)				
+GUI_OPTIONS_RESOLUTION_1080	1920x1080 (16:9)	1920x1080 (16:9)				
+GUI_OPTIONS_RESOLUTION_1440	2560x1440 (16:9)	2560x1440 (16:9)				
+GUI_OPTIONS_FILTER	Screen Filter	Screen Filter				Eyepatch Type
+GUI_OPTIONS_FILTER_CONTRASTED	Contrasted	Contrasted				High-focus
+GUI_OPTIONS_FILTER_MONOCHROME	Monochrome	Monochrome				Moving pictures
+GUI_OPTIONS_FILTER_PROTANOPIA	Protanopia (For Debug)	Protanopia (For Debug)				Anti-red Eyepatch
+GUI_OPTIONS_FILTER_DEUTERANOPIA	Deuteranopia (For Debug)	Deuteranopia (For Debug)				Anti-green Eyepatch
+GUI_OPTIONS_FILTER_TRITANOPIA	Tritanopia (For Debug)	Tritanopia (For Debug)				Yeller-blue Eyepatch
+GUI_OPTIONS_FILTER_ACHROMATOPSIA	Achromatopsia (For Debug)	Achromatopsia (For Debug)				Daylight Eyepatch
+GUI_OPTIONS_FPS	Framerate	Framerate				Framerrrrate
+GUI_OPTIONS_FPS_30	30	30				Seasick
+GUI_OPTIONS_FPS_60	60	60				Captain's Speed
+GUI_OPTIONS_FPS_120	120	120				Cannon Operator
+GUI_OPTIONS_VSYNC	Vertical Sync	Vertical Sync				Screen waves
+GUI_OPTIONS_VOLUME_MASTER	Master Volume	Master Volume				Captain's Volume
+GUI_OPTIONS_VOLUME_MUSIC	Music Volume	Music Volume				Bard's volume
+GUI_OPTIONS_VOLUME_SFX	Effects Volume	Effects Volume				Sea's volume
+GUI_OPTIONS_HEADPHONES	Headphones Mode	Headphones Mode				Pirate Cap Mode
+GUI_OPTIONS_MONO	Toggle Mono	Toggle Mono				Use Earpatch
+GUI_OPTIONS_SENSITIVITY	Camera Sensitivity	Camera Sensitivity				Camera sway
+GUI_OPTIONS_INVERT	Camera Invert	Camera Invert				Camera reverse
+GUI_OPTIONS_HORIZONTAL	Horizontal	Horizontal				Longitude
+GUI_OPTIONS_VERTICAL	Vertical	Vertical				Latitude
+GUI_OPTIONS_CONTROLS	Control Mapping	Control Mapping				Crew Mapping
+GUI_OPTIONS_BUTTON_ACTION	Action Button	Action Button				Attack Button
+GUI_OPTIONS_BUTTON_COMBAT	Combat Button	Combat Button				Dual Button
+GUI_OPTIONS_BUTTON_DEFENSE	Defense Button	Defence Button				Retreat Button
+GUI_OPTIONS_LANGUAGE	Language	Change Language				Switch Tongue
+GUI_OPTIONS_LANGUAGE_EN_US	English (United States)	English (United States)				English (The Colonies)
+GUI_OPTIONS_LANGUAGE_EN_GB	English (Great Britain)	English (Great Britain)				English (The Empire)
+GUI_OPTIONS_LANGUAGE_ES_MX	Español (Spanish)	Español (Spanish)				Español (Spanish)
+GUI_OPTIONS_LANGUAGE_ES_AR	Rioplatense (Argentina)	Rioplatense (Argentina)				Rioplatense (Argentina)
+GUI_OPTIONS_LANGUAGE_JA_JP	日本語 (Japanese)	日本語 (Japanese)				日本語 (Japanese)
+GUI_OPTIONS_LANGUAGE_PR	Pirate (ARRGGGH!!)	Pirate (ARRGGGH!!)				Pirate (ARRGGGH!!)

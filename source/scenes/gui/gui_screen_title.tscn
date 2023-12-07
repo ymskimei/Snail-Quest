@@ -1,10 +1,11 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=50 format=2]
 
+[ext_resource path="res://assets/gui/theme/menu.tres" type="Theme" id=1]
 [ext_resource path="res://source/scripts/gui/GuiScreenTitle.gd" type="Script" id=2]
-[ext_resource path="res://assets/gui/theme/theme_title.tres" type="Theme" id=3]
+[ext_resource path="res://assets/gui/font/font_mochi_pop_p_one.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/resource/animation/CamWobble.tres" type="Animation" id=4]
 [ext_resource path="res://source/scenes/environment_default.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/shader/cel_old.shader" type="Shader" id=6]
+[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=6]
 [ext_resource path="res://assets/model/logo.mesh" type="ArrayMesh" id=7]
 [ext_resource path="res://assets/resource/animation/GuiLogoAppear.tres" type="Animation" id=8]
 [ext_resource path="res://assets/shader/shine.shader" type="Shader" id=9]
@@ -17,14 +18,44 @@
 [ext_resource path="res://assets/resource/animation/DaisyWiggle.tres" type="Animation" id=16]
 [ext_resource path="res://assets/resource/animation/GuiLogoIdle.tres" type="Animation" id=17]
 [ext_resource path="res://assets/resource/animation/GuiLogoDisappear.tres" type="Animation" id=18]
-[ext_resource path="res://assets/materials/Material.material" type="Material" id=19]
-[ext_resource path="res://assets/materials/Material_001.material" type="Material" id=20]
+[ext_resource path="res://assets/texture/gui/icon_box_selections.png" type="Texture" id=19]
+[ext_resource path="res://assets/texture/gui/icon_box_unchecked.png" type="Texture" id=20]
 [ext_resource path="res://assets/model/town_snaily.mesh" type="ArrayMesh" id=21]
 [ext_resource path="res://assets/model/daisy.mesh" type="ArrayMesh" id=22]
 [ext_resource path="res://assets/materials/environment/leaf.tres" type="Material" id=23]
 [ext_resource path="res://assets/model/grass.mesh" type="ArrayMesh" id=24]
-[ext_resource path="res://assets/materials/environment/stem.tres" type="Material" id=25]
+[ext_resource path="res://assets/model/mushroom.mesh" type="ArrayMesh" id=25]
+[ext_resource path="res://assets/texture/gui/logo_bg.png" type="Texture" id=26]
+[ext_resource path="res://assets/texture/gui/icon_box_checked.png" type="Texture" id=27]
+[ext_resource path="res://assets/texture/gui/logo_text.png" type="Texture" id=28]
 
+[sub_resource type="StyleBoxTexture" id=1]
+
+[sub_resource type="StyleBoxTexture" id=2]
+
+[sub_resource type="StyleBoxTexture" id=3]
+
+[sub_resource type="StyleBoxTexture" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="Theme" id=26]
+default_font = ExtResource( 3 )
+Button/styles/focus = SubResource( 1 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 3 )
+Button/styles/pressed = SubResource( 4 )
+CheckBox/icons/checked = ExtResource( 27 )
+CheckBox/icons/unchecked = ExtResource( 20 )
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+Label/fonts/font = ExtResource( 3 )
+OptionButton/constants/arrow_margin = 0
+OptionButton/constants/hseparation = 32
+OptionButton/icons/arrow = ExtResource( 19 )
+SpinBox/icons/updown = ExtResource( 19 )
+TabContainer/styles/panel = SubResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 9 )
@@ -33,30 +64,35 @@ shader_param/cycle_interval = 1.0
 shader_param/shine_speed = 1.0
 shader_param/shine_width = 5.0
 
-[sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0.222222, 0.232804 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 3 )
-
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=29]
 next_pass = SubResource( 9 )
 shader = ExtResource( 6 )
-shader_param/albedo = Color( 0.866667, 0.784314, 0.223529, 1 )
-shader_param/normal_scale = null
-shader_param/specular = 0.8
-shader_param/specular_amount = 0.6
-shader_param/specular_smoothness = 0.02
-shader_param/rim = 1.0
-shader_param/rim_amount = 0.6
-shader_param/rim_smoothness = 0.02
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/emission = Color( 1, 0.909804, 0.4, 1 )
+shader_param/use_diffuse = true
+shader_param/use_specular = false
+shader_param/use_rim = false
+shader_param/use_light = true
+shader_param/use_shadow = false
+shader_param/albedo_color = Color( 1, 0.992157, 0.384314, 1 )
+shader_param/shade_color = Color( 0.898039, 0.776471, 0.113725, 1 )
+shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/normal_scale = 0.0
+shader_param/shade_threshold = -0.25
+shader_param/shade_softness = 0.0
+shader_param/specular_glossiness = 15.0
+shader_param/specular_threshold = 0.5
+shader_param/specular_softness = 0.0
+shader_param/rim_threshold = 0.25
+shader_param/rim_softness = 0.0
+shader_param/rim_spread = 0.5
+shader_param/shadow_threshold = 0.7
+shader_param/shadow_softness = 0.0
 shader_param/emission_energy = 1.0
+shader_param/screen_scale = 10.0
 shader_param/uv_scale = Vector2( 1, 1 )
 shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/diffuse_curve = SubResource( 2 )
+shader_param/use_triplanar = false
 
 [sub_resource type="ShaderMaterial" id=11]
 
@@ -68,24 +104,35 @@ shader_param/cycle_interval = 1.0
 shader_param/shine_speed = 1.0
 shader_param/shine_width = 15.0
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=30]
 next_pass = SubResource( 10 )
 shader = ExtResource( 6 )
-shader_param/albedo = Color( 1, 0.745098, 0.298039, 1 )
+shader_param/use_diffuse = true
+shader_param/use_specular = false
+shader_param/use_rim = false
+shader_param/use_light = true
+shader_param/use_shadow = false
+shader_param/albedo_color = Color( 0.839216, 0.533333, 0.0980392, 1 )
+shader_param/shade_color = Color( 0.960784, 0.639216, 0.188235, 1 )
+shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/normal_scale = -16.0
-shader_param/specular = 1.0
-shader_param/specular_amount = 0.0
-shader_param/specular_smoothness = 0.0
-shader_param/rim = 0.1
-shader_param/rim_amount = 0.5
-shader_param/rim_smoothness = 0.02
-shader_param/metallic = 0.0
-shader_param/roughness = 1.0
-shader_param/emission = Color( 0.952941, 0.67451, 0.227451, 1 )
+shader_param/shade_threshold = -0.25
+shader_param/shade_softness = 0.0
+shader_param/specular_glossiness = 15.0
+shader_param/specular_threshold = 0.5
+shader_param/specular_softness = 0.0
+shader_param/rim_threshold = 0.25
+shader_param/rim_softness = 0.0
+shader_param/rim_spread = 0.5
+shader_param/shadow_threshold = 0.7
+shader_param/shadow_softness = 0.0
 shader_param/emission_energy = 0.5
+shader_param/screen_scale = 10.0
 shader_param/uv_scale = Vector2( 2, 2 )
 shader_param/uv_offset = Vector2( 0, 0 )
-shader_param/diffuse_curve = SubResource( 2 )
+shader_param/use_triplanar = false
 
 [sub_resource type="Animation" id=20]
 resource_name = "RESET"
@@ -213,20 +260,62 @@ surfaces/1 = {
 [sub_resource type="Animation" id=19]
 resource_name = "RESET"
 
+[sub_resource type="ShaderMaterial" id=31]
+
+[sub_resource type="Shader" id=32]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec4 fore_color : hint_color = vec4(0.5, 0.75, 1.0, 1.0);
+uniform vec4 back_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+
+void fragment() {
+	float aspect = (1.0 / TEXTURE_PIXEL_SIZE).y / (1.0 / TEXTURE_PIXEL_SIZE).x;
+	float value;
+	vec2 uv = UV.xy / (1.0 / TEXTURE_PIXEL_SIZE).x;
+	uv -= vec2(0.5, 0.35 * aspect);
+	float rot = radians(45.0); // radians(45.0*sin(iTime));
+	vec2 part1 = vec2(cos(rot), -sin(rot));
+	vec2 part2 = vec2(sin(rot), cos(rot));
+	mat2 m = mat2(part1, part2);
+	uv = m * uv;
+	uv += vec2(0.5, 0.5*aspect);
+	uv.y += 0.5 * (1.0-aspect);
+	vec2 pos = 10.0 * uv;
+	vec2 rep = fract(pos);
+	float dist = 2.0 * min(min(rep.x, 1.0 - rep.x), min(rep.y, 1.0 - rep.y));
+	float squareDist = length((floor(pos) + vec2(0.5)) - vec2(5.0));
+	float edge = sin(TIME - squareDist * 0.5) * 0.5 + 0.5;
+	edge = (TIME - squareDist * 0.5) * 0.5;
+	edge = 2.0 * fract(edge * 0.5);
+	value = fract (dist * 2.0);
+	value = mix(value, 1.0 - value, step(1.0, edge));
+	edge = pow(abs(1.0 - edge), 2.0);
+	value = smoothstep( edge - 0.25, edge, 0.95 * value);
+	value += squareDist * 0.1;
+	COLOR = mix(back_color, fore_color, value);
+}"
+
+[sub_resource type="ShaderMaterial" id=33]
+shader = SubResource( 32 )
+shader_param/fore_color = Color( 1, 1, 1, 1 )
+shader_param/back_color = Color( 0.835294, 0.117647, 0.87451, 1 )
+
 [node name="GuiTitle" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 3 )
+theme = SubResource( 26 )
 script = ExtResource( 2 )
 
 [node name="World" type="Spatial" parent="."]
 
 [node name="MeshInstance" type="MeshInstance" parent="World"]
 transform = Transform( -0.0187209, -0.235246, -1.94351, 0.0770884, 0.968693, -0.47198, 0.996848, -0.0793291, -8.49536e-08, -1.38939, 19, -0.140768 )
+visible = false
 mesh = ExtResource( 7 )
 skeleton = NodePath("../..")
-material/0 = SubResource( 4 )
-material/1 = SubResource( 5 )
+material/0 = SubResource( 29 )
+material/1 = SubResource( 30 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/MeshInstance"]
 root_node = NodePath("../..")
@@ -276,1429 +365,117 @@ anims/RESET = SubResource( 19 )
 transform = Transform( -0.0613447, 0, -0.998117, 0, 1, 0, 0.998117, 0, -0.0613447, 30.894, 0, 4.19552 )
 mesh = ExtResource( 21 )
 skeleton = NodePath("../SpringArm/AnimationPlayer")
-material/0 = ExtResource( 19 )
-material/1 = ExtResource( 20 )
-material/2 = ExtResource( 20 )
 
 [node name="SnailyTownOld2" type="MeshInstance" parent="World/SnailyTownOld"]
 transform = Transform( 0.503201, 0, -0.86417, 0, 1, 0, 0.86417, 0, 0.503201, 3.46799, -3.60409, -122.151 )
 mesh = ExtResource( 21 )
 skeleton = NodePath("../../SpringArm/AnimationPlayer")
-material/0 = ExtResource( 19 )
-material/1 = ExtResource( 20 )
-material/2 = ExtResource( 20 )
 
 [node name="SnailyTownOld3" type="MeshInstance" parent="World/SnailyTownOld"]
 transform = Transform( -3.83047, 0, -0.949176, 0, 6.4795, 0, 1.60956, 0, -3.71222, 3.46798, -12.4717, -122.151 )
 mesh = ExtResource( 21 )
 skeleton = NodePath("../../SpringArm/AnimationPlayer")
-material/0 = ExtResource( 19 )
-material/1 = ExtResource( 20 )
-material/2 = ExtResource( 20 )
 
 [node name="Daisy" type="MeshInstance" parent="World/SnailyTownOld"]
 transform = Transform( 0.947143, 0, 0.320811, 0, 1, 0, -0.320811, 0, 0.947143, -25.7589, -10.1907, -32.5877 )
 mesh = ExtResource( 22 )
 blend_shapes/Blossom = 0.0
 blend_shapes/Wiggle = 0.0
-material/0 = ExtResource( 12 )
-material/1 = ExtResource( 13 )
 
 [node name="Daisy2" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.920191, 0, -0.39147, 0, 1, 0, 0.39147, 0, 0.920191, 2.05234, -10.5962, -34.297 )
+transform = Transform( 0.987145, 0, -0.15983, 0, 1, 0, 0.15983, 0, 0.987145, 34.9291, -10.1907, -36.3176 )
 mesh = ExtResource( 22 )
 blend_shapes/Blossom = 0.0
 blend_shapes/Wiggle = 0.0
-material/0 = ExtResource( 12 )
-material/1 = ExtResource( 13 )
 
 [node name="Daisy3" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.787581, 0, 0.616211, 0, 1, 0, -0.616211, 0, 0.787581, 26.1823, -7.90935, -43.6837 )
+transform = Transform( 0.608014, 0, 0.793927, 0, 1, 0, -0.793927, 0, 0.608014, -28.4259, -10.1907, -113.289 )
 mesh = ExtResource( 22 )
 blend_shapes/Blossom = 0.0
 blend_shapes/Wiggle = 0.0
-material/0 = ExtResource( 12 )
-material/1 = ExtResource( 13 )
-
-[node name="Daisy4" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.796245, 0, -0.604974, 0, 1, 0, 0.604974, 0, 0.796245, 15.2736, -12.6263, -17.7347 )
-mesh = ExtResource( 22 )
-blend_shapes/Blossom = 0.0
-blend_shapes/Wiggle = 0.0
-material/0 = ExtResource( 12 )
-material/1 = ExtResource( 13 )
-
-[node name="Daisy5" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.534809, 0, 0.844973, 0, 1, 0, -0.844973, 0, 0.534809, -10.0403, -7.90935, -18.1196 )
-mesh = ExtResource( 22 )
-blend_shapes/Blossom = 0.0
-blend_shapes/Wiggle = 0.0
-material/0 = ExtResource( 12 )
-material/1 = ExtResource( 13 )
-
-[node name="Daisy6" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.979953, 0, -0.199231, 0, 1, 0, 0.199231, 0, 0.979953, -25.3222, -0.829166, -73.2733 )
-mesh = ExtResource( 22 )
-blend_shapes/Blossom = 0.0
-blend_shapes/Wiggle = 0.0
-material/0 = ExtResource( 12 )
-material/1 = ExtResource( 13 )
-
-[node name="Daisy7" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.621066, 0, 0.78376, 0, 1, 0, -0.78376, 0, 0.621066, 29.6648, -3.63075, -76.6529 )
-mesh = ExtResource( 22 )
-blend_shapes/Blossom = 0.0
-blend_shapes/Wiggle = 0.0
-material/0 = ExtResource( 12 )
-material/1 = ExtResource( 13 )
 
 [node name="Grass" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.0613447, 0, 0.998117, 0, 1, 0, -0.998117, 0, -0.0613447, -19.7096, 6.74219, -58.2539 )
+transform = Transform( -0.0200874, 0, 0.9998, 0, 1, 0, -0.9998, 0, -0.0200874, 22.2464, 10.2378, -71.0243 )
 mesh = ExtResource( 24 )
 skeleton = NodePath("../../..")
 material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
+material/1 = ExtResource( 23 )
 
 [node name="Grass2" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.603946, 0, 0.797026, 0, 1, 0, -0.797026, 0, -0.603946, -19.2053, 6.74219, -50.0487 )
+transform = Transform( -0.0200874, 0, 0.9998, 0, 1, 0, -0.9998, 0, -0.0200874, -20.281, 10.2378, -68.4105 )
 mesh = ExtResource( 24 )
 skeleton = NodePath("../../..")
 material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
+material/1 = ExtResource( 23 )
 
 [node name="Grass3" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.985845, 0, -0.167664, 0, 1, 0, 0.167664, 0, -0.985845, -26.6202, 6.74219, -53.2585 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass4" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.851178, 0, 0.524878, 0, 1, 0, -0.524878, 0, -0.851178, -26.236, 6.74219, -47.0064 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass5" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.355596, 0, 0.93464, 0, 1, 0, -0.93464, 0, -0.355596, -11.0306, 6.74219, -65.1796 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass6" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.813772, 0, 0.581186, 0, 1, 0, -0.581186, 0, -0.813772, -8.10738, 6.74219, -57.4963 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass7" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.891285, 0, -0.453446, 0, 1, 0, 0.453446, 0, -0.891285, -16.1415, 6.74219, -58.3542 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass8" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.968814, 0, 0.247794, 0, 1, 0, -0.247794, 0, -0.968814, -13.9141, 6.74219, -52.4997 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass9" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.133606, 0, 0.991035, 0, 1, 0, -0.991035, 0, 0.133606, 4.12631, 6.74219, -70.0021 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass10" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.437712, 0, 0.899116, 0, 1, 0, -0.899116, 0, -0.437712, 3.02798, 6.74219, -61.8551 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass11" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.999638, 0, 0.0269272, 0, 1, 0, -0.0269272, 0, -0.999638, -3.62259, 6.74219, -66.4435 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass12" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.733078, 0, 0.680146, 0, 1, 0, -0.680146, 0, -0.733078, -4.45949, 6.74219, -60.2358 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass13" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.167371, 0, 0.985894, 0, 1, 0, -0.985894, 0, -0.167371, 13.9848, 6.74219, -75.1111 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass14" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.685451, 0, 0.72812, 0, 1, 0, -0.72812, 0, -0.685451, 15.3607, 6.74219, -67.0063 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass15" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.962362, 0, -0.271777, 0, 1, 0, 0.271777, 0, -0.962362, 7.646, 6.74219, -69.4078 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass16" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.90227, 0, 0.431174, 0, 1, 0, -0.431174, 0, -0.90227, 8.69439, 6.74219, -63.2322 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass17" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.764956, 0, 0.644084, 0, 1, 0, -0.644084, 0, 0.764956, 31.3086, 6.74219, -73.0784 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass18" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.280114, 0, 0.959968, 0, 1, 0, -0.959968, 0, 0.280114, 25.0201, 6.74219, -67.7836 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass19" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.722148, 0, 0.691741, 0, 1, 0, -0.691741, 0, -0.722148, 23.1789, 6.74219, -75.6508 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass20" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.0857648, 0, 0.996317, 0, 1, 0, -0.996317, 0, -0.0857648, 18.3873, 6.74219, -71.6164 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass21" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.538624, 0, 0.842548, 0, 1, 0, -0.842548, 0, 0.538624, 42.0424, 6.74219, -70.2363 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass22" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.018256, 0, 0.999835, 0, 1, 0, -0.999835, 0, -0.018256, 37.6145, 6.74219, -63.31 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass23" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.895287, 0, 0.445496, 0, 1, 0, -0.445496, 0, -0.895287, 33.5155, 6.74219, -70.2728 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass24" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.378374, 0, 0.925655, 0, 1, 0, -0.925655, 0, -0.378374, 30.1416, 6.74219, -64.9953 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass25" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.875449, 0, 0.483313, 0, 1, 0, -0.483313, 0, 0.875449, 54.9476, 6.74219, -60.9388 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass26" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.461161, 0, 0.887318, 0, 1, 0, -0.887318, 0, 0.461161, 47.7508, 6.74219, -56.9656 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass27" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.574106, 0, 0.818783, 0, 1, 0, -0.818783, 0, -0.574106, 47.4721, 6.74219, -65.0407 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass28" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.109301, 0, 0.994011, 0, 1, 0, -0.994011, 0, 0.109301, 41.9883, 6.74219, -62.0133 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass29" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.691956, 0, 0.721943, 0, 1, 0, -0.721943, 0, 0.691956, 64.9254, 6.74219, -56.0668 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass30" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.176209, 0, 0.984355, 0, 1, 0, -0.984355, 0, 0.176209, 59.2371, 6.74219, -50.132 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass31" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.791758, 0, 0.610837, 0, 1, 0, -0.610837, 0, -0.791758, 56.5679, 6.74219, -57.7582 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass32" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.19146, 0, 0.981503, 0, 1, 0, -0.981503, 0, -0.19146, 52.2335, 6.74219, -53.236 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass33" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.940254, 0, 0.340479, 0, 1, 0, -0.340479, 0, -0.940254, -51.9881, 6.74219, -31.3252 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass34" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.971427, 0, -0.237347, 0, 1, 0, 0.237347, 0, -0.971427, -44.2586, 6.74219, -28.5262 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass35" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.238042, 0, -0.971258, 0, 1, 0, 0.971258, 0, -0.238042, -50.1515, 6.74219, -22.9984 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass36" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.819984, 0, -0.57239, 0, 1, 0, 0.57239, 0, -0.819984, -44.2619, 6.74219, -20.8656 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass37" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.998978, 0, 0.0452407, 0, 1, 0, -0.0452407, 0, -0.998978, -54.8931, 6.74219, -42.0421 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass38" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.856782, 0, -0.515683, 0, 1, 0, 0.515683, 0, -0.856782, -46.6809, 6.74219, -41.6702 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass39" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.0617804, 0, -0.998093, 0, 1, 0, 0.998093, 0, 0.0617804, -50.6618, 6.74219, -34.6392 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass40" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.612495, 0, -0.790478, 0, 1, 0, 0.790478, 0, -0.612495, -44.4043, 6.74219, -34.3556 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass41" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.856259, 0, 0.516549, 0, 1, 0, -0.516549, 0, -0.856259, -53.2931, 6.74219, -57.8671 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass42" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.999024, 0, -0.0442298, 0, 1, 0, 0.0442298, 0, -0.999024, -46.254, 6.74219, -53.6207 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass43" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.422081, 0, -0.906561, 0, 1, 0, 0.906561, 0, -0.422081, -53.1081, 6.74219, -49.3421 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass44" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.915511, 0, -0.402301, 0, 1, 0, 0.402301, 0, -0.915511, -47.7446, 6.74219, -46.1064 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass45" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.971187, 0, 0.238331, 0, 1, 0, -0.238331, 0, -0.971187, -54.0621, 6.74219, -68.9441 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass46" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.940599, 0, -0.339527, 0, 1, 0, 0.339527, 0, -0.940599, -46.0784, 6.74219, -66.985 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass47" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.133173, 0, -0.991095, 0, 1, 0, 0.991095, 0, -0.133173, -51.3486, 6.74219, -60.8605 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass48" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.754312, 0, -0.656521, 0, 1, 0, 0.656521, 0, -0.754312, -45.2651, 6.74219, -59.3676 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass49" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.00439823, 0, 0.99999, 0, 1, 0, -0.99999, 0, 0.00439823, -17.5329, 10.2378, -74.6173 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass50" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.550248, 0, 0.835002, 0, 1, 0, -0.835002, 0, -0.550248, -17.5691, 10.2378, -66.3967 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass51" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.994734, 0, -0.102497, 0, 1, 0, 0.102497, 0, -0.994734, -24.7569, 10.2378, -70.0871 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass52" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.814835, 0, 0.579694, 0, 1, 0, -0.579694, 0, -0.814835, -24.7845, 10.2378, -63.8232 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass53" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.29339, 0, 0.955993, 0, 1, 0, -0.955993, 0, -0.29339, -8.41742, 10.2378, -80.9576 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass54" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.773808, 0, 0.633422, 0, 1, 0, -0.633422, 0, -0.773808, -6.00556, 10.2378, -73.0987 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass55" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.919164, 0, -0.393878, 0, 1, 0, 0.393878, 0, -0.919164, -13.966, 10.2378, -74.4829 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass56" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.95043, 0, 0.310943, 0, 1, 0, -0.310943, 0, -0.95043, -12.1282, 10.2378, -68.4946 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass57" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.198461, 0, 0.980109, 0, 1, 0, -0.980109, 0, 0.198461, 7.02373, 10.2378, -84.7733 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass58" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.377663, 0, 0.925944, 0, 1, 0, -0.925944, 0, -0.377663, 5.39225, 10.2378, -76.7161 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass59" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.995706, 0, 0.0925792, 0, 1, 0, -0.0925792, 0, -0.995706, -0.942325, 10.2378, -81.7318 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass60" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.686784, 0, 0.726864, 0, 1, 0, -0.726864, 0, -0.686784, -2.18547, 10.2378, -75.5925 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass61" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.102202, 0, 0.994764, 0, 1, 0, -0.994764, 0, -0.102202, 17.1968, 10.2378, -89.2232 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass62" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.636106, 0, 0.771603, 0, 1, 0, -0.771603, 0, -0.636106, 18.0369, 10.2378, -81.0456 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass63" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.978146, 0, -0.207929, 0, 1, 0, 0.207929, 0, -0.978146, 10.4967, 10.2378, -83.9489 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass64" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.871976, 0, 0.489551, 0, 1, 0, -0.489551, 0, -0.871976, 11.1369, 10.2378, -77.7178 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass65" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.80564, 0, 0.592407, 0, 1, 0, -0.592407, 0, 0.80564, 34.3494, 10.2378, -86.0562 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass66" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.342611, 0, 0.939479, 0, 1, 0, -0.939479, 0, 0.342611, 27.7265, 10.2378, -81.1861 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass67" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.675115, 0, 0.737715, 0, 1, 0, -0.737715, 0, -0.675115, 26.4065, 10.2378, -89.1575 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass68" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.0200874, 0, 0.9998, 0, 1, 0, -0.9998, 0, -0.0200874, 21.36, 10.2378, -85.4467 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass69" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.592843, 0, 0.80532, 0, 1, 0, -0.80532, 0, 0.592843, 44.8732, 10.2378, -82.5147 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass70" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.0475067, 0, 0.998873, 0, 1, 0, -0.998873, 0, 0.0475067, 39.9997, 10.2378, -75.8944 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass71" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.864066, 0, 0.503383, 0, 1, 0, -0.503383, 0, -0.864066, 36.3672, 10.2378, -83.1117 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass72" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.316709, 0, 0.948526, 0, 1, 0, -0.948526, 0, -0.316709, 32.6536, 10.2378, -78.0672 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass73" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.905325, 0, 0.424721, 0, 1, 0, -0.424721, 0, 0.905325, 57.1394, 10.2378, -72.389 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass74" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.51849, 0, 0.855085, 0, 1, 0, -0.855085, 0, 0.51849, 49.697, 10.2378, -68.8975 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass75" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.519042, 0, 0.85475, 0, 1, 0, -0.85475, 0, -0.519042, 49.9496, 10.2378, -76.9734 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass76" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.174405, 0, 0.984677, 0, 1, 0, -0.984677, 0, 0.174405, 44.2787, 10.2378, -74.313 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass77" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.737916, 0, 0.674897, 0, 1, 0, -0.674897, 0, 0.737916, 66.7753, 10.2378, -66.8716 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass78" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.240533, 0, 0.970643, 0, 1, 0, -0.970643, 0, 0.240533, 60.7092, 10.2378, -61.3235 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass79" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.749893, 0, 0.661562, 0, 1, 0, -0.661562, 0, -0.749893, 58.5471, 10.2378, -69.1088 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass80" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.126528, 0, 0.991966, 0, 1, 0, -0.991966, 0, -0.126528, 53.9248, 10.2378, -64.8812 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass81" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.915839, 0, 0.401549, 0, 1, 0, -0.401549, 0, -0.915839, -51.5118, 10.2378, -49.8687 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass82" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.984928, 0, -0.172978, 0, 1, 0, 0.172978, 0, -0.984928, -43.9829, 10.2378, -46.5677 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass83" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.301372, 0, -0.95351, 0, 1, 0, 0.95351, 0, -0.301372, -50.2265, 10.2378, -41.4392 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass84" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.855836, 0, -0.517252, 0, 1, 0, 0.517252, 0, -0.855836, -44.4898, 10.2378, -38.9239 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass85" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.993844, 0, 0.11081, 0, 1, 0, -0.11081, 0, -0.993844, -53.706, 10.2378, -60.7534 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass86" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.888827, 0, -0.458248, 0, 1, 0, 0.458248, 0, -0.888827, -45.536, 10.2378, -59.8425 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass87" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.0039619, 0, -0.999995, 0, 1, 0, 0.999995, 0, -0.0039619, -49.9704, 10.2378, -53.0884 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass88" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.663132, 0, -0.748507, 0, 1, 0, 0.748507, 0, -0.663132, -43.7451, 10.2378, -52.3941 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass89" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.820453, 0, 0.571717, 0, 1, 0, -0.571717, 0, -0.820453, -51.0692, 10.2378, -76.439 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass90" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.999771, 0, 0.0215358, 0, 1, 0, -0.0215358, 0, -0.999771, -44.3245, 10.2378, -71.739 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass91" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.48076, 0, -0.876855, 0, 1, 0, 0.876855, 0, -0.48076, -51.445, 10.2378, -67.9202 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass92" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.939976, 0, -0.34125, 0, 1, 0, 0.34125, 0, -0.939976, -46.3057, 10.2378, -64.3391 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass93" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.953421, 0, 0.301656, 0, 1, 0, -0.301656, 0, -0.953421, -51.1084, 10.2378, -87.5426 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass94" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.960884, 0, -0.276964, 0, 1, 0, 0.276964, 0, -0.960884, -43.2707, 10.2378, -85.0629 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass95" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.198034, 0, -0.980198, 0, 1, 0, 0.980198, 0, -0.198034, -48.9321, 10.2378, -79.2981 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass96" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.795836, 0, -0.605517, 0, 1, 0, 0.605517, 0, -0.795836, -42.96, 10.2378, -77.4085 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass97" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.252272, 0, 0.967657, 0, 1.67699, 0, -0.967657, 0, 0.252272, -2.80398, -5.60138, -111.241 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass98" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.325965, 0, 0.945383, 0, 1.67699, 0, -0.945383, 0, -0.325965, -4.87782, -5.60138, -103.286 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass99" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.989077, 0, 0.147413, 0, 1.67699, 0, -0.147413, 0, -0.989077, -10.9258, -5.60138, -108.644 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass100" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.645606, 0, 0.763673, 0, 1.67699, 0, -0.763673, 0, -0.645606, -12.5061, -5.60138, -102.583 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass101" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.0471239, 0, 0.99889, 0, 1.67699, 0, -0.99889, 0, -0.0471239, 7.5992, -5.60138, -115.122 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass102" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.592535, 0, 0.805547, 0, 1.67699, 0, -0.805547, 0, -0.592535, 7.98661, -5.60138, -106.911 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass103" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.988134, 0, -0.153607, 0, 1.67699, 0, 0.153607, 0, -0.988134, 0.618204, -5.60138, -110.226 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass104" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.843618, 0, 0.536947, 0, 1.67699, 0, -0.536947, 0, -0.843618, 0.913377, -5.60138, -103.969 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass105" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.435341, 0, 0.900267, 0, 1.67699, 0, -0.900267, 0, 0.435341, 23.5043, -5.60138, -114.989 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass106" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.136217, 0, 0.99068, 0, 1.67699, 0, -0.99068, 0, -0.136217, 19.9255, -5.60138, -107.588 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass107" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.941637, 0, 0.336636, 0, 1.67699, 0, -0.336636, 0, -0.941637, 15.0328, -5.60138, -114.019 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass108" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.485055, 0, 0.874487, 0, 1.67699, 0, -0.874487, 0, -0.485055, 12.3058, -5.60138, -108.379 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass109" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.147706, 0, 0.989033, 0, 1.67699, 0, -0.989033, 0, 0.147706, 34.4631, -5.60138, -116.777 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass110" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.424865, 0, 0.90526, 0, 1.67699, 0, -0.90526, 0, -0.424865, 33.2489, -5.60138, -108.647 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass111" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.999156, 0, 0.0411607, 0, 1.67699, 0, -0.0411607, 0, -0.999156, 26.6643, -5.60138, -113.329 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass112" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.723319, 0, 0.690519, 0, 1.67699, 0, -0.690519, 0, -0.723319, 25.7391, -5.60138, -107.134 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass113" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.927395, 0, 0.374089, 0, 1.67699, 0, -0.374089, 0, 0.927395, 50.2944, -5.60138, -109.455 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass114" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.564911, 0, 0.825155, 0, 1.67699, 0, -0.825155, 0, 0.564911, 42.6706, -5.60138, -106.38 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass115" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.47106, 0, 0.882105, 0, 1.67699, 0, -0.882105, 0, -0.47106, 43.3687, -5.60138, -114.429 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass116" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.228505, 0, 0.973546, 0, 1.67699, 0, -0.973546, 0, 0.228505, 37.5596, -5.60138, -112.086 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass117" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.774052, 0, 0.633127, 0, 1.67699, 0, -0.633127, 0, 0.774052, 59.611, -5.60138, -103.414 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass118" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.293757, 0, 0.955885, 0, 1.67699, 0, -0.955885, 0, 0.293757, 53.2478, -5.60138, -98.2093 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass119" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.712224, 0, 0.701956, 0, 1.67699, 0, -0.701956, 0, -0.712224, 51.5188, -5.60138, -106.102 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass120" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.0715668, 0, 0.99744, 0, 1.67699, 0, -0.99744, 0, -0.0715668, 46.6702, -5.60138, -102.136 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass121" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.982378, 0, 0.186919, 0, 1.67699, 0, -0.186919, 0, 0.982378, 68.9827, -5.60138, -90.5626 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass122" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.714365, 0, 0.699777, 0, 1.67699, 0, -0.699777, 0, 0.714365, 60.9069, -5.60138, -89.026 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass123" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.290836, 0, 0.956776, 0, 1.67699, 0, -0.956776, 0, -0.290836, 63.1545, -5.60138, -96.7868 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass124" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.41317, 0, 0.910658, 0, 1.67699, 0, -0.910658, 0, 0.41317, 57.0011, -5.60138, -95.6161 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass125" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.882245, 0, 0.470798, 0, 1.67699, 0, -0.470798, 0, 0.882245, 76.9493, -5.60138, -82.8276 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass126" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.473751, 0, 0.880661, 0, 1.67699, 0, -0.880661, 0, 0.473751, 69.6967, -5.60138, -78.9574 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass127" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.562388, 0, 0.826876, 0, 1.67699, 0, -0.826876, 0, -0.562388, 69.5329, -5.60138, -87.0357 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass128" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.123447, 0, 0.992355, 0, 1.67699, 0, -0.992355, 0, 0.123447, 64.0065, -5.60138, -84.0865 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass129" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.787636, 0, 0.616145, 0, 1.67699, 0, -0.616145, 0, -0.787636, -41.8593, -5.60138, -95.6927 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass130" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.997057, 0, 0.0767018, 0, 1.67699, 0, -0.0767018, 0, -0.997057, -35.3843, -5.60138, -90.6277 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass131" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.52844, 0, -0.848975, 0, 1.67699, 0, 0.848975, 0, -0.52844, -42.7048, -5.60138, -87.2079 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass132" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.957383, 0, -0.288832, 0, 1.67699, 0, 0.288832, 0, -0.957383, -37.7711, -5.60138, -83.3483 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass133" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.935313, 0, 0.353835, 0, 1.67699, 0, -0.353835, 0, -0.935313, -41.2853, -5.60138, -106.782 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass134" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.97471, 0, -0.22349, 0, 1.67699, 0, 0.22349, 0, -0.97471, -33.5965, -5.60138, -103.873 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass135" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.251851, 0, -0.96777, 0, 1.67699, 0, 0.96777, 0, -0.251851, -39.5675, -5.60138, -98.4295 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass136" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.828055, 0, -0.560656, 0, 1.67699, 0, 0.560656, 0, -0.828055, -33.7089, -5.60138, -96.2132 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass137" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.653026, 0, 0.757339, 0, 1.67699, 0, -0.757339, 0, -0.653026, -34.8407, -5.60138, -121.323 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass138" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.963195, 0, 0.26882, 0, 1.67699, 0, -0.26882, 0, -0.963195, -29.4723, -5.60138, -115.097 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass139" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.683212, 0, -0.730225, 0, 1.67699, 0, 0.730225, 0, -0.683212, -37.3175, -5.60138, -113.164 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass140" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.995244, 0, -0.0974616, 0, 1.67699, 0, 0.0974616, 0, -0.995244, -33.227, -5.60138, -108.42 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass141" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.848818, 0, 0.528693, 0, 1.67699, 0, -0.528693, 0, -0.848818, -32.1248, -5.60138, -132.09 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass142" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.999554, 0, -0.029998, 0, 1.67699, 0, 0.029998, 0, -0.999554, -25.147, -5.60138, -127.744 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass143" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.43495, 0, -0.90046, 0, 1.67699, 0, 0.90046, 0, -0.43495, -32.0613, -5.60138, -123.563 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass144" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.921148, 0, -0.389221, 0, 1.67699, 0, 0.389221, 0, -0.921148, -26.7443, -5.60138, -120.251 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass145" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.315335, 0, 0.948982, 0, 1.67699, 0, -0.948982, 0, 0.315335, 4.35631, 0.260723, -126.115 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass146" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.263116, 0, 0.964766, 0, 1.67699, 0, -0.964766, 0, -0.263116, 1.76404, 0.260723, -118.314 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass147" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.977248, 0, 0.21211, 0, 1.67699, 0, -0.21211, 0, -0.977248, -3.91869, 0.260723, -124.057 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass148" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.594009, 0, 0.80446, 0, 1.67699, 0, -0.80446, 0, -0.594009, -5.89394, 0.260723, -118.113 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass149" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.0186393, 0, 0.999828, 0, 1.67699, 0, -0.999828, 0, 0.0186393, 14.9922, 0.260723, -129.304 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass150" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.538302, 0, 0.842756, 0, 1.67699, 0, -0.842756, 0, -0.538302, 14.839, 0.260723, -121.085 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass151" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.996094, 0, -0.0883206, 0, 1.67699, 0, 0.0883206, 0, -0.996094, 7.70439, 0.260723, -124.877 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass152" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.806498, 0, 0.591241, 0, 1.67699, 0, -0.591241, 0, -0.806498, 7.58763, 0.260723, -118.614 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass153" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.493579, 0, 0.869702, 0, 1.67699, 0, -0.869702, 0, 0.493579, 30.854, 0.260723, -128.126 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass154" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.070801, 0, 0.997492, 0, 1.67699, 0, -0.997492, 0, -0.070801, 26.7966, 0.260723, -120.976 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass155" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.917472, 0, 0.397805, 0, 1.67699, 0, -0.397805, 0, -0.917472, 22.3371, 0.260723, -127.714 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass156" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.426522, 0, 0.904482, 0, 1.67699, 0, -0.904482, 0, -0.426522, 19.2453, 0.260723, -122.266 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass157" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.2124, 0, 0.977186, 0, 1.67699, 0, -0.977186, 0, 0.2124, 41.9067, 0.260723, -129.189 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass158" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.364439, 0, 0.93123, 0, 1.67699, 0, -0.93123, 0, -0.364439, 40.1606, 0.260723, -121.156 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass159" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.994289, 0, 0.10675, 0, 1.67699, 0, -0.10675, 0, -0.994289, 33.8981, 0.260723, -126.262 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass160" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.676363, 0, 0.736572, 0, 1.67699, 0, -0.736572, 0, -0.676363, 32.5677, 0.260723, -120.141 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass161" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.94998, 0, 0.312319, 0, 1.67699, 0, -0.312319, 0, 0.94998, 57.2224, 0.260723, -120.843 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass162" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.61793, 0, 0.786237, 0, 1.67699, 0, -0.786237, 0, 0.61793, 49.4129, 0.260723, -118.275 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass163" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.412056, 0, 0.911161, 0, 1.67699, 0, -0.911161, 0, -0.412056, 50.6388, 0.260723, -126.261 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass164" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.292006, 0, 0.95642, 0, 1.67699, 0, -0.95642, 0, 0.292006, 44.6882, 0.260723, -124.305 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass165" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.813996, 0, 0.580876, 0, 1.67699, 0, -0.580876, 0, 0.813996, 66.1218, 0.260723, -114.202 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass166" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.355955, 0, 0.934506, 0, 1.67699, 0, -0.934506, 0, 0.355955, 59.4303, 0.260723, -109.427 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass167" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.664542, 0, 0.747256, 0, 1.67699, 0, -0.747256, 0, -0.664542, 58.2238, 0.260723, -117.416 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass168" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.00584659, 0, 0.999987, 0, 1.67699, 0, -0.999987, 0, -0.00584659, 53.1251, 0.260723, -113.778 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass169" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.99254, 0, 0.121939, 0, 1.67699, 0, -0.121939, 0, 0.99254, 74.6284, 0.260723, -100.762 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass170" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.758819, 0, 0.651307, 0, 1.67699, 0, -0.651307, 0, 0.758819, 66.4691, 0.260723, -99.7599 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass171" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.227315, 0, 0.973824, 0, 1.67699, 0, -0.973824, 0, -0.227315, 69.222, 0.260723, -107.356 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass172" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.472137, 0, 0.88153, 0, 1.67699, 0, -0.88153, 0, 0.472137, 63.0048, 0.260723, -106.592 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass173" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.911285, 0, 0.411786, 0, 1.67699, 0, -0.411786, 0, 0.911285, 82.0693, 0.260723, -92.5205 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass174" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.530616, 0, 0.847615, 0, 1.67699, 0, -0.847615, 0, 0.530616, 74.578, 0.260723, -89.1354 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass175" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.506817, 0, 0.862057, 0, 1.67699, 0, -0.862057, 0, -0.506817, 74.9456, 0.260723, -97.2069 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass176" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( 0.188412, 0, 0.982094, 0, 1.67699, 0, -0.982094, 0, 0.188412, 69.2374, 0.260723, -94.6275 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass177" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.745432, 0, 0.666587, 0, 1.67699, 0, -0.666587, 0, -0.745432, -35.6365, 0.260723, -113.168 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass178" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.989859, 0, 0.142077, 0, 1.67699, 0, -0.142077, 0, -0.989859, -29.5086, 0.260723, -107.688 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass179" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.583105, 0, -0.812402, 0, 1.67699, 0, 0.812402, 0, -0.583105, -37.038, 0.260723, -104.757 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass180" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.974298, 0, -0.225275, 0, 1.67699, 0, 0.225275, 0, -0.974298, -32.3687, 0.260723, -100.581 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass181" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.91003, 0, 0.414552, 0, 1.67699, 0, -0.414552, 0, -0.91003, -34.335, 0.260723, -124.195 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass182" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.987293, 0, -0.158935, 0, 1.67699, 0, 0.158935, 0, -0.987293, -26.854, 0.260723, -120.787 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass183" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.314922, 0, -0.949122, 0, 1.67699, 0, 0.949122, 0, -0.314922, -33.1699, 0.260723, -115.748 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass184" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.863118, 0, -0.505012, 0, 1.67699, 0, 0.505012, 0, -0.863118, -27.4696, 0.260723, -113.151 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass185" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.601831, 0, 0.798628, 0, 1.67699, 0, -0.798628, 0, -0.601831, -26.9484, 0.260723, -138.281 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass186" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.943441, 0, 0.331553, 0, 1.67699, 0, -0.331553, 0, -0.943441, -22.0009, 0.260723, -131.716 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass187" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.729736, 0, -0.683735, 0, 1.67699, 0, 0.683735, 0, -0.729736, -29.9562, 0.260723, -130.302 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass188" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.999499, 0, -0.0318294, 0, 1.67699, 0, 0.0318294, 0, -0.999499, -26.1864, 0.260723, -125.3 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass189" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.81223, 0, 0.583346, 0, 1.67699, 0, -0.583346, 0, -0.81223, -23.5307, 0.260723, -148.846 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass190" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.999365, 0, 0.0357717, 0, 1.67699, 0, -0.0357717, 0, -0.999365, -16.8536, 0.260723, -144.051 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass191" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.4932, 0, -0.869921, 0, 1.67699, 0, 0.869921, 0, -0.4932, -24.0278, 0.260723, -140.334 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
-
-[node name="Grass192" type="MeshInstance" parent="World/SnailyTownOld"]
-transform = Transform( -0.944743, 0, -0.327828, 0, 1.67699, 0, 0.327828, 0, -0.944743, -18.94, 0.260723, -136.679 )
-mesh = ExtResource( 24 )
-skeleton = NodePath("../../..")
-material/0 = ExtResource( 23 )
-material/1 = ExtResource( 25 )
+transform = Transform( -0.0200874, 0, 0.999801, 0, 1, 0, -0.999801, 0, -0.0200874, -1.83766, 7.33468, -95.4331 )
+mesh = ExtResource( 24 )
+skeleton = NodePath("../../..")
+material/0 = ExtResource( 23 )
+material/1 = ExtResource( 23 )
+
+[node name="Mushroom" type="MeshInstance" parent="World/SnailyTownOld"]
+transform = Transform( -0.240364, 0, -0.970683, 0, 1, 0, 0.970683, 0, -0.240364, 7.59715, 0, -49.8754 )
+mesh = ExtResource( 25 )
+blend_shapes/Cap = 0.2
+blend_shapes/Height = 1.0
+blend_shapes/Pinch = 1.0
+blend_shapes/Warp = -1.0
+
+[node name="Mushroom3" type="MeshInstance" parent="World/SnailyTownOld"]
+transform = Transform( -0.240364, 0, -0.970683, 0, 1, 0, 0.970683, 0, -0.240364, -27.3332, 0, -155.377 )
+mesh = ExtResource( 25 )
+blend_shapes/Cap = 0.2
+blend_shapes/Height = 1.0
+blend_shapes/Pinch = 1.0
+blend_shapes/Warp = -1.0
+
+[node name="Mushroom2" type="MeshInstance" parent="World/SnailyTownOld"]
+transform = Transform( 0.965385, -0.260821, 0.00212748, 0.260821, 0.965254, -0.0160302, 0.00212747, 0.0160302, 0.99987, -6.52223, 0, -26.3329 )
+mesh = ExtResource( 25 )
+blend_shapes/Cap = 0.2
+blend_shapes/Height = 1.0
+blend_shapes/Pinch = 1.0
+blend_shapes/Warp = -1.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -349.0
+margin_right = 480.0
+margin_bottom = 151.0
+rect_scale = Vector2( 0.8, 0.8 )
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2"]
+margin_right = 800.0
+margin_bottom = 500.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 28 )
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer2/TextureRect"]
+show_behind_parent = true
+material = SubResource( 31 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -600.0
+margin_top = -400.0
+margin_right = 600.0
+margin_bottom = 400.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 26 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 1 )
 custom_constants/margin_right = 32
 custom_constants/margin_top = 32
 custom_constants/margin_left = 32
@@ -1713,7 +490,7 @@ alignment = 1
 
 [node name="LabelSplash" type="RichTextLabel" parent="MarginContainer/HBoxContainer"]
 margin_right = 1856.0
-margin_bottom = 49.0
+margin_bottom = 44.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -1738,8 +515,8 @@ custom_constants/separation = 32
 alignment = 1
 
 [node name="LabelVersion" type="RichTextLabel" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
-margin_top = 329.0
-margin_right = 693.0
+margin_top = 334.0
+margin_right = 687.0
 margin_bottom = 378.0
 rect_clip_content = false
 size_flags_horizontal = 3
@@ -1750,13 +527,13 @@ text = "test"
 fit_content_height = true
 
 [node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
-margin_left = 725.0
-margin_right = 1131.0
+margin_left = 719.0
+margin_right = 1136.0
 margin_bottom = 378.0
 
 [node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
-margin_right = 406.0
+margin_right = 417.0
 margin_bottom = 187.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1764,15 +541,15 @@ text = "GUI_TITLE_START"
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer"]
 margin_top = 191.0
-margin_right = 406.0
+margin_right = 417.0
 margin_bottom = 378.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "GUI_TITLE_OPTIONS"
 
 [node name="LabelInfo" type="RichTextLabel" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
-margin_left = 1163.0
-margin_top = 329.0
+margin_left = 1168.0
+margin_top = 334.0
 margin_right = 1856.0
 margin_bottom = 378.0
 rect_clip_content = false
@@ -1790,6 +567,14 @@ stream = ExtResource( 11 )
 volume_db = -80.0
 autoplay = true
 bus = "Music"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+show_behind_parent = true
+material = SubResource( 33 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]

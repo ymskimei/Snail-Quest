@@ -95,10 +95,10 @@ func _ready() -> void:
 	remap_timer.connect("timeout", self, "on_remap_timeout")
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("gui_left"):
-		tabs.current_tab -= 1
-	if event.is_action_pressed("gui_right"):
-		tabs.current_tab += 1
+#	if event.is_action_pressed("ui_left"):
+#		tabs.current_tab -= 1
+#	if event.is_action_pressed("ui_right"):
+#		tabs.current_tab += 1
 	if (event is InputEventKey or event is InputEventJoypadButton) and event.is_pressed():
 		for b in tabs.get_node("Controls").get_children():
 			if b is TextureButton and b.is_focused():
@@ -422,9 +422,9 @@ func select_resolution(index: int) -> void:
 	print("Display resolution set to: " + str(size))
 
 func select_filter(index: int) -> void:
-	var filter = filter_dict.get(filter.get_item_text(index))
-	GlobalManager.screen.set_type(filter)
-	print("Screen filter set to: " + filter)
+	var new_filter = filter_dict.get(filter.get_item_text(index))
+	GlobalManager.screen.set_type(new_filter)
+	print("Screen filter set to: " + new_filter)
 
 func select_language(index: int) -> void:
 	var lang = language_dict.get(language.get_item_text(index))

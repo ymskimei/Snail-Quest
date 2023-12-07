@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://source/scenes/gui/gui_debug_healthbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scenes/entity/state_controller.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/materials/entity/snail_shell.tres" type="Material" id=6]
 [ext_resource path="res://assets/materials/entity/snail_eyes.tres" type="Material" id=7]
 [ext_resource path="res://assets/materials/entity/snail_body.tres" type="Material" id=8]
-[ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=9]
 [ext_resource path="res://assets/model/snail_body.mesh" type="ArrayMesh" id=10]
 [ext_resource path="res://assets/model/snail_eye_left.mesh" type="ArrayMesh" id=11]
 [ext_resource path="res://assets/model/snail_shell.mesh" type="ArrayMesh" id=12]
@@ -425,7 +424,7 @@ bones/7/name = "EyeCenter.L"
 bones/7/parent = 6
 bones/7/rest = Transform( 0.98911, -0.00749677, 0.146989, -0.146993, 2.38419e-07, 0.989137, -0.00741538, -0.999972, -0.00110173, 0.00569856, 0.134216, 0.0029342 )
 bones/7/enabled = true
-bones/7/bound_children = [ NodePath("BoneAttachment") ]
+bones/7/bound_children = [  ]
 bones/8/name = "Stalk4.R"
 bones/8/parent = 1
 bones/8/rest = Transform( 0.984805, 0.173026, 0.0148803, -2.78354e-05, 0.0858412, -0.996309, -0.173665, 0.981169, 0.0845417, 0.0776723, 0.157739, 0.2027 )
@@ -455,7 +454,7 @@ bones/13/name = "EyeCenter.R"
 bones/13/parent = 12
 bones/13/rest = Transform( 0.98911, 0.00749677, -0.146989, 0.146993, 2.38419e-07, 0.989137, 0.00741538, -0.999972, -0.00110173, -0.00303061, 0.134613, 0.00295423 )
 bones/13/enabled = true
-bones/13/bound_children = [ NodePath("BoneAttachment2") ]
+bones/13/bound_children = [  ]
 bones/14/name = "EyeMainController"
 bones/14/parent = 1
 bones/14/rest = Transform( 1, -1.56945e-43, 5.85619e-37, -1.56945e-43, 1, 5.34499e-07, -5.85619e-37, -5.34499e-07, 1, 0.0216394, 0.502939, 0.734361 )
@@ -877,25 +876,6 @@ visible = false
 [node name="EyeMainControl" type="Position3D" parent="IK"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.9 )
 visible = false
-
-[node name="Gui" type="Node" parent="."]
-
-[node name="InteractionLabel" type="RichTextLabel" parent="Gui"]
-anchor_left = 0.4
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -131.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource( 9 )
-bbcode_enabled = true
-bbcode_text = "Press A to Interact"
-text = "Press A to Interact"
-scroll_active = false
-
-[node name="TimerPoison" type="Timer" parent="Gui"]
-wait_time = 0.5
 
 [node name="Proximity" type="Area" parent="."]
 

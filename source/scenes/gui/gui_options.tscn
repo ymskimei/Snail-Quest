@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://assets/gui/theme/theme_options.tres" type="Theme" id=1]
+[ext_resource path="res://assets/gui/theme/menu.tres" type="Theme" id=1]
 [ext_resource path="res://source/scripts/gui/GuiOptions.gd" type="Script" id=2]
 [ext_resource path="res://assets/texture/gui/gui_button_options_tab_audio.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/gui/gui_button_temp.png" type="Texture" id=4]

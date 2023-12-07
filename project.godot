@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/Chunk.gd"
 }, {
+"base": "CanvasLayer",
+"class": "ColorFilter",
+"language": "GDScript",
+"path": "res://source/scripts/ColorFilter.gd"
+}, {
 "base": "Resource",
 "class": "DialogueResource",
 "language": "GDScript",
@@ -205,6 +210,7 @@ _global_script_class_icons={
 "CameraStateLock": "",
 "CameraStateMain": "",
 "Chunk": "",
+"ColorFilter": "",
 "DialogueResource": "",
 "Enemy": "",
 "EnemyStateMain": "",
@@ -276,6 +282,7 @@ GuiMain="*res://source/scenes/gui/gui_main.tscn"
 MathHelper="*res://source/scripts/MathHelper.gd"
 WorldSave="*res://source/scripts/WorldSave.gd"
 AudioPlayer="*res://source/scenes/audio_player.tscn"
+InputHelper="*res://source/scripts/InputHelper.gd"
 
 [debug]
 
@@ -304,7 +311,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/zylann.scatter/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/multimesh_scatter/plugin.cfg" )
 
 [global]
 
@@ -597,6 +604,10 @@ dialogic_default_action={
 3d_physics/layer_4="Object"
 3d_physics/layer_5="Interaction"
 
+[locale]
+
+translations=PoolStringArray( "res://source/translations/translation.en_GB.translation", "res://source/translations/translation.en_US.translation", "res://source/translations/translation.es_AR.translation", "res://source/translations/translation.es_MX.translation", "res://source/translations/translation.ja_JP.translation", "res://source/translations/translation.pr.translation" )
+
 [physics]
 
 3d/smooth_trimesh_collision=true
@@ -625,7 +636,6 @@ quality/shadows/filter_mode=2
 quality/shading/force_vertex_shading.mobile=false
 quality/shading/use_physical_light_attenuation=true
 quality/filters/anisotropic_filter_level=8
-environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_clear_color=Color( 0.823529, 0.823529, 0.823529, 1 )
 quality/filters/use_fxaa=true
 quality/filters/use_debanding=true
-environment/default_environment="res://environment_editor.tres"

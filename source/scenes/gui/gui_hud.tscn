@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://source/scenes/gui/gui_container_equipment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scripts/gui/GuiHud.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://assets/texture/gui/gui_hud_shell.png" type="Texture" id=21]
 [ext_resource path="res://assets/texture/gui/gui_hud_slime_fill.png" type="Texture" id=22]
 [ext_resource path="res://assets/texture/gui/gui_hud_shell_fill.png" type="Texture" id=23]
+[ext_resource path="res://assets/gui/theme/menu.tres" type="Theme" id=24]
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 19 )
@@ -457,3 +458,18 @@ anchor_bottom = 1.0
 margin_left = -412.0
 margin_top = -138.0
 margin_right = 410.0
+
+[node name="InteractionLabel" type="RichTextLabel" parent="."]
+anchor_left = 0.4
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -131.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+theme = ExtResource( 24 )
+bbcode_enabled = true
+bbcode_text = "Press A to Interact"
+text = "Press A to Interact"
+scroll_active = false

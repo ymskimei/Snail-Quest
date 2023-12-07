@@ -1,19 +1,25 @@
 extends CanvasLayer
 
-var can_pause : bool = true
+var can_pause: bool = true
 
-onready var debug_information = $"%DebugInformation"
-onready var display_framerate = $"%DisplayFramerate"
-onready var display_game_time = $"%DisplayGameTime"
-onready var display_play_time = $"%DisplayPlayTime"
-onready var display_chunk_coords = $"%DisplayChunkCoords"
-onready var display_coordinate = $"%DisplayCoordinate"
-onready var command_console = $"%GuiConsole"
+onready var debug_information: VBoxContainer = $MarginContainer/HBoxContainer/DebugInformation
+onready var display_framerate: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayFramerate
+onready var display_game_time: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayGameTime
+onready var display_play_time: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayPlayTime
+onready var display_camera_target: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayCameraTarget
+onready var display_controllable: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayControllable
+onready var display_controllable_target: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayControllableTarget
+onready var display_chunk_coords: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayChunkCoords
+onready var display_coordinate: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayCoordinate
+onready var command_console: PanelContainer = $MarginContainer/HBoxContainer/ConsoleContainer/GuiConsole
 
 func _process(_delta):
 	set_display_framerate()
 	set_display_world_time()
 	set_display_play_time()
+	set_display_camera_target()
+	set_display_controllable()
+	set_display_controllable_target()
 	set_display_chunk_coords()
 	set_display_coordinates()
 	toggle_command_console()
@@ -29,17 +35,35 @@ func set_display_framerate():
 
 func set_display_world_time():
 	if is_instance_valid(GlobalManager.game_time):
-		var game_time = GlobalManager.game_time
-		display_game_time.set_bbcode("[color=#C3EF5D]%s" % game_time.get_time(false))
+		display_game_time.set_bbcode("[color=#C3EF5D]%s" % GlobalManager.game_time.get_time(false))
 	else:
 		display_game_time.set_bbcode("[color=#C3EF5D]??:??")
 
 func set_display_play_time():
 	if is_instance_valid(GlobalManager.play_time):
-		var play_time = GlobalManager.play_time
-		display_play_time.set_bbcode("[color=#C3EF5D]%s" % play_time.get_time())
+		display_play_time.set_bbcode("[color=#C3EF5D]%s" % GlobalManager.play_time.get_time())
 	else:
 		display_play_time.set_bbcode("[color=#C3EF5D]??h, ??m, ??s")
+
+func set_display_camera_target():
+	if is_instance_valid(GlobalManager.camera):
+		if is_instance_valid(GlobalManager.camera.cam_target):
+			display_camera_target.set_bbcode("[color=#71B4F6]Cam Target: %s" % GlobalManager.camera.cam_target.name)
+	else:
+		display_camera_target.set_bbcode("[color=#71B4F6]Cam Target: ??")
+
+func set_display_controllable():
+	if is_instance_valid(GlobalManager.controllable):
+		display_controllable.set_bbcode("[color=#C289FF]Controlling: %s" % GlobalManager.controllable.name)
+	else:
+		display_controllable.set_bbcode("[color=#C289FF]Controlling: ??")
+
+func set_display_controllable_target():
+	if is_instance_valid(GlobalManager.controllable):
+		if is_instance_valid(GlobalManager.controllable.target):
+			display_controllable_target.set_bbcode("[color=#E7738C]Target: %s" % GlobalManager.controllable.target.name)
+	else:
+		display_controllable_target.set_bbcode("[color=#E7738C]Target: ??")
 
 func set_display_chunk_coords():
 	if is_instance_valid(GlobalManager.controllable):

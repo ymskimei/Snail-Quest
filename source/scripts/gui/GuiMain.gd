@@ -1,10 +1,10 @@
 extends Node
 
-onready var debug: CanvasLayer = $GuiDebug
-onready var menu: CanvasLayer = $GuiOptions
-onready var cursor: CanvasLayer = $GuiCursor
-onready var hud: CanvasLayer = $GuiHud
-onready var blur_anim: AnimationPlayer = $GuiBlur/AnimationPlayer
+onready var debug: CanvasLayer = $Debug
+onready var menu: CanvasLayer = $Options
+onready var cursor: CanvasLayer = $Cursor
+onready var hud: CanvasLayer = $HUD
+onready var blur_anim: AnimationPlayer = $Blur/AnimationPlayer
 
 var game_paused: bool = false
 var menu_open: bool = false
@@ -26,14 +26,17 @@ func _process(_delta: float):
 		get_tree().set_deferred("paused", false)
 	if menu_open:
 		cursor.set_visible(true)
-		hud.set_visible(false)
 	else:
 		cursor.set_visible(false)
+	if is_instance_valid(GlobalManager.controllable):
 		hud.set_visible(true)
+	else:
+		hud.set_visible(false)
 
 func _input(event: InputEvent):
-	if event.is_action_pressed("gui_options"):
-		menu_popup()
+	if GuiMain.menu_open:
+		if event.is_action_pressed("gui_pause"):
+			menu_popup()
 
 func menu_popup():
 		if !menu_open:
