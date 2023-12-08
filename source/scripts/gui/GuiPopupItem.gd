@@ -1,7 +1,7 @@
 extends InventoryParent
 
 func _process(_delta):
-	if is_instance_valid(GlobalManager.controllable):
+	if is_instance_valid(SnailQuest.controllable):
 		if Input.is_action_just_pressed("gui_items") and !items_open and !GuiMain.game_paused:
 			GuiMain.game_paused = true
 			items_open = true

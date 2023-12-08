@@ -2,16 +2,16 @@ class_name AimCursor
 extends Spatial
 
 func _ready():
-	global_translation = GlobalManager.player.global_translation
-	GlobalManager.register_aim_cursor(self)
+	global_translation = SnailQuest.player.global_translation
+	SnailQuest.register_aim_cursor(self)
 
 func _physics_process(delta):
 	level_cursor()
 	$Mesh.rotation.y += 5 * delta
-	var player = GlobalManager.player
+	var player = SnailQuest.player
 	var new_pos = Vector3.ZERO
 	if player.cursor_activated:
-		new_pos = player.global_translation + cursor_movement().rotated(Vector3.UP, GlobalManager.camera.rotation.y)
+		new_pos = player.global_translation + cursor_movement().rotated(Vector3.UP, SnailQuest.camera.rotation.y)
 	elif player.targeting:
 		if is_instance_valid(player.target):
 			new_pos = player.target.global_translation

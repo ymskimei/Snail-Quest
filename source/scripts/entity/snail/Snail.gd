@@ -38,13 +38,13 @@ func _physics_process(delta: float) -> void:
 	._physics_process(delta)
 	if is_controlled():
 		states.physics_process(delta)
-	elif is_instance_valid(GlobalManager.controllable) and self == GlobalManager.prev_controllable:
-		if GlobalManager.controllable.get("grab_point"):
+	elif is_instance_valid(SnailQuest.controllable) and self == SnailQuest.prev_controllable:
+		if SnailQuest.controllable.get("grab_point"):
 			anim.play("SnailGrab")
-			global_translation = GlobalManager.controllable.grab_point.global_translation
-			global_rotation.x = GlobalManager.controllable.grab_point.global_rotation.x
+			global_translation = SnailQuest.controllable.grab_point.global_translation
+			global_rotation.x = SnailQuest.controllable.grab_point.global_rotation.x
 			global_rotation.y = 0
-			global_rotation.z = GlobalManager.controllable.grab_point.global_rotation.z
+			global_rotation.z = SnailQuest.controllable.grab_point.global_rotation.z
 	if in_shell:
 		attach_point.visible = false
 	else:
@@ -66,8 +66,8 @@ func _on_Area_area_entered(area) -> void:
 	if area.is_in_group("danger"):
 		damage_entity(area.get_parent().strength)
 	if area.is_in_group("attachable"):
-		GlobalManager.set_prev_controllable(self)
-		GlobalManager.set_controllable(area.get_parent().get_parent().get_parent())
+		SnailQuest.set_prev_controllable(self)
+		SnailQuest.set_controllable(area.get_parent().get_parent().get_parent())
 		attached_to_location = true
 
 func update_appearance() -> void:

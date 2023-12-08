@@ -38,11 +38,11 @@ func on_command_categories(_console, _args: Array) -> void:
 	command_console.send_message(message)
 
 func on_command_cam(_console, args: Array) -> void:
-	if GlobalManager.controllable != null:
-		GlobalManager.prev_controllable = GlobalManager.controllable
-		GlobalManager.controllable = null
+	if SnailQuest.controllable != null:
+		SnailQuest.prev_controllable = SnailQuest.controllable
+		SnailQuest.controllable = null
 	else:
-		GlobalManager.controllable = GlobalManager.prev_controllable
+		SnailQuest.controllable = SnailQuest.prev_controllable
 	GuiMain.debug.close_command_console()
 
 func on_command_clear(_console, _args: Array) -> void:
@@ -73,38 +73,38 @@ func on_command_say(_console, args: Array) -> void:
 
 #func on_command_spawn(_console, args: Array) -> void:
 #	var object: String = args[0] + ".tres"
-#	var all_entities: Array = MathHelper.get_file_paths(GlobalManager.entiies_folder, "tscn")
-#	var all_objects: Array = MathHelper.get_file_paths(GlobalManager.entiies_folder, "tscn")
-#	var all_items: Array = MathHelper.get_file_paths(GlobalManager.entiies_folder, "tscn")	
+#	var all_entities: Array = MathHelper.get_file_paths(SnailQuest.entiies_folder, "tscn")
+#	var all_objects: Array = MathHelper.get_file_paths(SnailQuest.entiies_folder, "tscn")
+#	var all_items: Array = MathHelper.get_file_paths(SnailQuest.entiies_folder, "tscn")	
 #	var found_world: String = ""
 
 func on_command_time(_console, args: Array) -> void:
-	GlobalManager.game_time.set_time(args[0])
+	SnailQuest.game_time.set_time(args[0])
 	command_console.send_message("The world's time has been set to [color=#C3EF5D]%s[/color]\n" % args[0])
 
 func on_command_tp(_console, args: Array) -> void:
-	if is_instance_valid(GlobalManager.controllable):
-		GlobalManager.controllable.set_coords(Vector3(args[0], args[1], args[2]))
-	GlobalManager.camera.set_coords(Vector3(args[0], args[1], args[2]))
+	if is_instance_valid(SnailQuest.controllable):
+		SnailQuest.controllable.set_coords(Vector3(args[0], args[1], args[2]))
+	SnailQuest.camera.set_coords(Vector3(args[0], args[1], args[2]))
 
 func on_command_version(_console, _args: Array) -> void:
-	command_console.send_message("Snail Quest is on version [color=#C3EF5D]%s[/color]\n" % GlobalManager.version_number)
+	command_console.send_message("Snail Quest is on version [color=#C3EF5D]%s[/color]\n" % SnailQuest.version_number)
 
 func on_command_warp(_console, args: Array) -> void:
 	var directory = Directory.new();
-	var warp_path: String = GlobalManager.warps + args[0] + ".tres"
-	var all_worlds: Array = Utility.math.get_file_paths(GlobalManager.worlds, "tscn")
+	var warp_path: String = SnailQuest.warps + args[0] + ".tres"
+	var all_worlds: Array = Utility.math.get_file_paths(SnailQuest.worlds, "tscn")
 	var found_world: String = ""
-	if is_instance_valid(GlobalManager.world):
+	if is_instance_valid(SnailQuest.world):
 		if all_worlds.size() > 0:
 			for w in all_worlds:
 				if w.ends_with(args[0] + ".tscn"):
 					found_world = w
 		if directory.file_exists(warp_path):
 			var warp = load(warp_path)
-			GlobalManager.world.load_room(load(warp.room_path), warp.coordinates, warp.direction)
+			SnailQuest.world.load_room(load(warp.room_path), warp.coordinates, warp.direction)
 		elif found_world != "":
-			GlobalManager.world.load_room(load(found_world), Vector3.ZERO, "NORTH")
+			SnailQuest.world.load_room(load(found_world), Vector3.ZERO, "NORTH")
 		else:
 			var message = "[color=#A8A8A8]This warp's resource does not exist![/color]"
 			command_console.send_message(message)

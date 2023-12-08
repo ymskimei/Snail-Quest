@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://source/scenes/environment_default.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/scenes/world/environment_default.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scenes/object/map/map_0.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/scenes/object/dev/block.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/scenes/object/dev/ramp.tscn" type="PackedScene" id=5]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/materials/tile/moss.material" type="Material" id=9]
 [ext_resource path="res://assets/sound/music/ost_sound_test.ogg" type="AudioStream" id=10]
 [ext_resource path="res://source/scenes/object/seed_1.tscn" type="PackedScene" id=11]
+
 
 [sub_resource type="CubeMesh" id=1]
 

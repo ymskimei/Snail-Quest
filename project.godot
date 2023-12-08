@@ -32,12 +32,7 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "Chunk",
 "language": "GDScript",
-"path": "res://source/scripts/Chunk.gd"
-}, {
-"base": "CanvasLayer",
-"class": "ColorFilter",
-"language": "GDScript",
-"path": "res://source/scripts/ColorFilter.gd"
+"path": "res://source/scripts/world/Chunk.gd"
 }, {
 "base": "Resource",
 "class": "DialogueResource",
@@ -154,11 +149,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/snail/Snail.gd"
 }, {
-"base": "Node",
-"class": "SnailQuest",
-"language": "GDScript",
-"path": "res://source/scripts/SnailQuest.gd"
-}, {
 "base": "StateMain",
 "class": "SnailStateMain",
 "language": "GDScript",
@@ -210,7 +200,6 @@ _global_script_class_icons={
 "CameraStateLock": "",
 "CameraStateMain": "",
 "Chunk": "",
-"ColorFilter": "",
 "DialogueResource": "",
 "Enemy": "",
 "EnemyStateMain": "",
@@ -234,7 +223,6 @@ _global_script_class_icons={
 "ResourceMusic": "",
 "RoomTransition": "",
 "Snail": "",
-"SnailQuest": "",
 "SnailStateMain": "",
 "Song": "",
 "Sound": "",
@@ -259,7 +247,7 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 
 config/name="Snail Quest"
 config/description="A small snail on an adventure to save his homeland! "
-run/main_scene="res://source/scenes/snail_quest.tscn"
+run/main_scene="res://source/scenes/game.tscn"
 config/use_hidden_project_data_directory=false
 config/use_custom_user_dir=true
 boot_splash/image="res://assets/texture/gui/gui_splash.png"
@@ -275,13 +263,12 @@ default_bus_layout="res://assets/default_bus_layout.tres"
 [autoload]
 
 SaveData="*res://source/scripts/SaveData.gd"
-GlobalManager="*res://source/scripts/GlobalManager.gd"
-GlobalFlags="*res://source/scripts/GlobalFlags.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GuiMain="*res://source/scenes/ui/gui_main.tscn"
-WorldSave="*res://source/scripts/WorldSave.gd"
+WorldSave="*res://source/scripts/world/WorldSave.gd"
 AudioPlayer="*res://source/scenes/audio_player.tscn"
 Utility="*res://source/scenes/utility.tscn"
+SnailQuest="*res://source/scenes/snail_quest.tscn"
 
 [debug]
 

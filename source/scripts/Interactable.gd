@@ -5,7 +5,6 @@ export(Resource) var dialog
 
 onready var anim: AnimationPlayer = $AnimationPlayer
 
-
 const fallback: DialogueResource = preload("res://assets/resource/dialog/error_fallback.tres")
 
 var character: bool
@@ -48,6 +47,6 @@ func set_coords(position: Vector3, angle: String = "Default") -> void:
 		set_global_rotation(Vector3(0, deg2rad(Utility.math.cardinal_to_degrees(angle)), 0))
 
 func is_controlled() -> bool:
-	if GlobalManager.controllable == self:
+	if SnailQuest.controllable == self:
 		return true
 	return false

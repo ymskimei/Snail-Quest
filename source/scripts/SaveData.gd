@@ -16,8 +16,8 @@ func save_data():
 	var file = File.new()
 	file.open(SAVE_PATH, File.WRITE)
 	game_data = {
-		game_time = GlobalManager.game_time.get_raw_time(),
-		play_time = GlobalManager.played_time.get_time()
+		game_time = SnailQuest.game_time.get_raw_time(),
+		play_time = SnailQuest.played_time.get_time()
 	}
 	file.store_line(to_json(game_data))
 	file.close()
@@ -32,10 +32,10 @@ func load_data():
 		save_data()
 	file.open(SAVE_PATH, File.READ)
 	var data = parse_json(file.get_line())
-	GlobalManager.game_time.game_time = data.game_time
-	GlobalManager.play_time.previous_time = data.play_time
-	GlobalManager.play_time.played_time = 0
-	GlobalManager.play_time.reset_start()
+	SnailQuest.game_time.game_time = data.game_time
+	SnailQuest.play_time.previous_time = data.play_time
+	SnailQuest.play_time.played_time = 0
+	SnailQuest.play_time.reset_start()
 	file.close()
 
 func _notification(what):

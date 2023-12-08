@@ -67,7 +67,7 @@ func _unhandled_input(_event):
 		display_up.is_selected_animation()
 	if Input.is_action_just_pressed("pad_right") or Input.is_action_just_pressed("pad_down") or Input.is_action_just_pressed("pad_left") or Input.is_action_just_pressed("pad_up"):
 		reveal_pad()
-		#GlobalManager.controllable.update_equipped()
+		#SnailQuest.controllable.update_equipped()
 	if Input.is_action_just_pressed("cam_zoom") or Input.is_action_just_pressed("cam_lock"):
 		reveal_cam()
 
@@ -90,20 +90,20 @@ func on_items_updated(index):
 		update_item_slot_display()
 
 func update_cam_display():
-	if is_instance_valid(GlobalManager.camera):
-		var state = str(GlobalManager.camera.states.current_state.get_name())
+	if is_instance_valid(SnailQuest.camera):
+		var state = str(SnailQuest.camera.states.current_state.get_name())
 		match state:
 			"Orbi": 
-				var zoom_mode = GlobalManager.camera.states.current_state.zoom_mode
+				var zoom_mode = SnailQuest.camera.states.current_state.zoom_mode
 				if zoom_mode:
 					cam_icon.texture = cam_zoom
 				else:
 					cam_icon.texture = cam_pan
 			"Targ":
-				var bars_active = GlobalManager.camera.states.current_state.bars_active
+				var bars_active = SnailQuest.camera.states.current_state.bars_active
 				if bars_active:
-					if is_instance_valid(GlobalManager.controllable):
-						var target_found = GlobalManager.controllable.target_found
+					if is_instance_valid(SnailQuest.controllable):
+						var target_found = SnailQuest.controllable.target_found
 						if target_found:
 							cam_icon.texture = cam_target
 						else:
@@ -144,9 +144,9 @@ func on_cam_timeout():
 	anim_cam.play_backwards("SlideCam")
 
 func display_vehicle_boost():
-	if is_instance_valid(GlobalManager.controllable):
-		if GlobalManager.controllable is VehicleBody:
-			var remaining = GlobalManager.controllable.boost_remaining
+	if is_instance_valid(SnailQuest.controllable):
+		if SnailQuest.controllable is VehicleBody:
+			var remaining = SnailQuest.controllable.boost_remaining
 			display_boost.set_bbcode("[color=#C3EF5D]%s" % remaining)
 		else:
 			display_boost.set_bbcode("")

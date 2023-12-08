@@ -29,6 +29,6 @@ func _input(event: InputEvent) -> void:
 			active = false
 			emit_signal("activated", active)
 		elif Input.is_action_pressed("action_main"):
-			GlobalManager.set_controllable(GlobalManager.prev_controllable)
+			SnailQuest.set_controllable(SnailQuest.prev_controllable)
 	else:
 		current_camera_target = false

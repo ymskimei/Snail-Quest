@@ -28,7 +28,7 @@ func _process(_delta: float):
 		cursor.set_visible(true)
 	else:
 		cursor.set_visible(false)
-	if is_instance_valid(GlobalManager.controllable):
+	if is_instance_valid(SnailQuest.controllable):
 		hud.set_visible(true)
 	else:
 		hud.set_visible(false)

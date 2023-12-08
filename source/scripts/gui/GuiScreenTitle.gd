@@ -13,7 +13,7 @@ signal game_start
 
 func _ready() -> void:
 	set_title_splash()
-	version.set_bbcode("[color=#EFEFEF] Version " + GlobalManager.version_number)
+	version.set_bbcode("[color=#EFEFEF] Version " + SnailQuest.version_number)
 	info.set_bbcode("[right][color=#EFEFEF] © 2023 Studio Kuwagata")
 	default_selection.grab_focus()
 	anim_cam.play("CamTitleStart")

@@ -4,7 +4,7 @@ extends Interactable
 export(Resource) var identity
 export(Resource) var equipped
 
-onready var cam: SpringArm = GlobalManager.camera
+onready var cam: SpringArm = SnailQuest.camera
 
 onready var controllable: bool = false
 onready var states: Node = $StateController

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-resource_version = 21
+resource_version = 22
 syntax_version = 2
 raw_text = "~ opener
 if izabell_has_met == false

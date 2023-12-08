@@ -10,7 +10,7 @@ func _ready() -> void:
 	second_timer.connect("timeout", self, "on_unpaused_second")
 	add_child(second_timer)
 	second_timer.start()
-	GlobalManager.set_game_time(self)
+	SnailQuest.set_game_time(self)
 
 func time_converted(hour24: bool) -> Array:
 	var hour = int(game_time / 60)

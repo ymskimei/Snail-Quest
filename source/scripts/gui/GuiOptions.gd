@@ -358,15 +358,15 @@ func _on_CheckBoxMono_toggled(button_pressed: bool) -> void:
 ## Controls Settings
 func _on_CheckBoxHorizontal_toggled(button_pressed):
 	if button_pressed:
-		GlobalManager.control_invert_horizontal = true
+		SnailQuest.control_invert_horizontal = true
 	else:
-		GlobalManager.control_invert_horizontal = false
+		SnailQuest.control_invert_horizontal = false
 
 func _on_CheckBoxVertical_toggled(button_pressed):
 	if button_pressed:
-		GlobalManager.control_invert_vertical = true
+		SnailQuest.control_invert_vertical = true
 	else:
-		GlobalManager.control_invert_vertical = false
+		SnailQuest.control_invert_vertical = false
 
 func _on_BarCameraSensitivity_value_changed(value):
 	pass # Replace with function body.
@@ -389,7 +389,7 @@ func add_resolution() -> void:
 		index += 1
 
 func add_filter() -> void:
-	var current_filter = GlobalManager.screen.get_type()
+	var current_filter = SnailQuest.screen.get_type()
 	var index = 0
 	for r in filter_dict:
 		filter.add_item(r, index)
@@ -423,7 +423,7 @@ func select_resolution(index: int) -> void:
 
 func select_filter(index: int) -> void:
 	var new_filter = filter_dict.get(filter.get_item_text(index))
-	GlobalManager.screen.set_type(new_filter)
+	SnailQuest.screen.set_type(new_filter)
 	print("Screen filter set to: " + new_filter)
 
 func select_language(index: int) -> void:

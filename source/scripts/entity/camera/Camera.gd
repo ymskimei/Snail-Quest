@@ -16,7 +16,7 @@ signal target_updated
 
 func _ready() -> void:
 	states.ready(self)
-	GlobalManager.set_camera(self)
+	SnailQuest.set_camera(self)
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
@@ -27,8 +27,8 @@ func _physics_process(delta: float) -> void:
 	update_target()
 
 func update_target() -> void:
-	if is_instance_valid(GlobalManager.controllable):
-		cam_target = GlobalManager.controllable
+	if is_instance_valid(SnailQuest.controllable):
+		cam_target = SnailQuest.controllable
 	else:
 		cam_target = null
 
