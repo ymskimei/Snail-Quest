@@ -72,7 +72,7 @@ func _physics_process(delta: float) -> void:
 	if is_instance_valid(target):
 		target_check()
 	else:
-		target = MathHelper.find_target(self, "target")
+		target = Utility.math.find_target(self, "target")
 #	if is_instance_valid(identity):
 #		print(identity.entity_name + " is character: " + str(is_in_group("target")))
 
@@ -128,7 +128,7 @@ func target_check() -> void:
 		else:
 			target_found = false
 	else:
-		target = MathHelper.find_target(self, "target")
+		target = Utility.math.find_target(self, "target")
 		targeting = false
 
 func target_interact(event) -> void:

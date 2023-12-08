@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://source/scenes/gui/gui_debug_healthbar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/scenes/ui/gui_debug_healthbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scripts/entity/enemy/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://source/scenes/entity/state_controller.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/resource/identity/enemy_test.tres" type="Resource" id=4]
@@ -15,6 +15,7 @@
 [ext_resource path="res://source/scripts/entity/enemy/EnemyStateAgro.gd" type="Script" id=14]
 [ext_resource path="res://assets/resource/animation/PawnFall.tres" type="Animation" id=15]
 [ext_resource path="res://assets/resource/animation/PawnIdle.tres" type="Animation" id=16]
+
 
 
 [sub_resource type="ArrayMesh" id=5]

@@ -27,7 +27,7 @@ func enter() -> void:
 func physics_process(delta: float) -> int:
 	if is_instance_valid(entity.cam_target.target):
 		if entity.cam_target.target_found:
-			MathHelper.slerp_look_at(entity, entity.cam_target.target.global_transform.origin, targeting_speed)
+			Utility.math.slerp_look_at(entity, entity.cam_target.target.global_transform.origin, targeting_speed)
 			entity.rotation.x = lerp(entity.rotation.x, targeting_rotation, follow_speed * delta)
 			if !entity.cam_target.targeting:
 				return State.ORBI

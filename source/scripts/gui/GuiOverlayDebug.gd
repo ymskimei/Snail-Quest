@@ -60,7 +60,7 @@ func set_display_controllable():
 
 func set_display_controllable_target():
 	if is_instance_valid(GlobalManager.controllable):
-		if is_instance_valid(GlobalManager.controllable.target):
+		if GlobalManager.controllable is Entity:
 			display_controllable_target.set_bbcode("[color=#E7738C]Target: %s" % GlobalManager.controllable.target.name)
 	else:
 		display_controllable_target.set_bbcode("[color=#E7738C]Target: ??")

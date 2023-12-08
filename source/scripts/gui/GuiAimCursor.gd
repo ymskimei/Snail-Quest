@@ -26,7 +26,7 @@ func cursor_movement():
 func level_cursor():
 	if $RayCast.is_colliding():
 		var normal = $RayCast.get_collision_normal()
-		var tform = MathHelper.apply_surface_align(global_transform, normal)
+		var tform = Utility.math.apply_surface_align(global_transform, normal)
 		global_transform = global_transform.interpolate_with(tform, 0.3)
 		var floor_height = $RayCast.get_collider().translation.y
 		#print(floor_height)

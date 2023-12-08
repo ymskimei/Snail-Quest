@@ -2,7 +2,7 @@ class_name SnailQuest
 extends Node
 
 var world = preload("res://source/scenes/world/world.tscn").instance()
-var title_screen = preload("res://source/scenes/gui/gui_screen_title.tscn").instance()
+var title_screen = preload("res://source/scenes/ui/gui_screen_title.tscn").instance()
 
 func _ready():
 	add_child(title_screen)

@@ -20,9 +20,9 @@ func _process(_delta):
 						var item = child.contained_item
 						if Input.is_action_just_pressed("action_item_0"):
 							if item == equipment.items[2]:
-								equipment.replace_item(equipment.items, equipment.items[2], null)
-							equipment.set_item(1, item)
+								Utility.item.replace_item(equipment.items, equipment.items[2], null)
+							Utility.item.set_item(equipment.items, 1, item)
 						elif Input.is_action_just_pressed("action_item_1"):
 							if item == child.destination.items[1]:
-								equipment.replace_item(equipment.items, equipment.items[1], null)
-							equipment.set_item(2, item)
+								Utility.item.replace_item(equipment.items, equipment.items[1], null)
+							Utility.item.set_item(equipment.items, 2, item)

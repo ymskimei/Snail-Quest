@@ -82,7 +82,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "ItemParent",
 "language": "GDScript",
-"path": "res://source/scripts/object/ItemParent.gd"
+"path": "res://source/scripts/item/Item.gd"
 }, {
 "base": "SpringArm",
 "class": "MainCamera",
@@ -110,11 +110,6 @@ _global_script_classes=[ {
 "path": "res://source/scripts/resource/ResourceEnvironment.gd"
 }, {
 "base": "Resource",
-"class": "ResourceEquipped",
-"language": "GDScript",
-"path": "res://source/scripts/resource/ResourceInventory.gd"
-}, {
-"base": "Resource",
 "class": "ResourceIdentity",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceIdentity.gd"
@@ -123,6 +118,11 @@ _global_script_classes=[ {
 "class": "ResourceIdentitySnail",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceIdentitySnail.gd"
+}, {
+"base": "Resource",
+"class": "ResourceInventory",
+"language": "GDScript",
+"path": "res://source/scripts/resource/ResourceInventory.gd"
 }, {
 "base": "Resource",
 "class": "ResourceItem",
@@ -225,9 +225,9 @@ _global_script_class_icons={
 "ResourceAudioPlayer": "",
 "ResourceDialog": "",
 "ResourceEnvironment": "",
-"ResourceEquipped": "",
 "ResourceIdentity": "",
 "ResourceIdentitySnail": "",
+"ResourceInventory": "",
 "ResourceItem": "",
 "ResourceLocation": "",
 "ResourceLootTable": "",
@@ -278,11 +278,10 @@ SaveData="*res://source/scripts/SaveData.gd"
 GlobalManager="*res://source/scripts/GlobalManager.gd"
 GlobalFlags="*res://source/scripts/GlobalFlags.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-GuiMain="*res://source/scenes/gui/gui_main.tscn"
-MathHelper="*res://source/scripts/MathHelper.gd"
+GuiMain="*res://source/scenes/ui/gui_main.tscn"
 WorldSave="*res://source/scripts/WorldSave.gd"
 AudioPlayer="*res://source/scenes/audio_player.tscn"
-InputHelper="*res://source/scripts/InputHelper.gd"
+Utility="*res://source/scenes/utility.tscn"
 
 [debug]
 
@@ -311,7 +310,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/multimesh_scatter/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/multimesh_scatter/plugin.cfg" )
 
 [global]
 

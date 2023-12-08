@@ -4,4 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-items = [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ]
+kons = 0
+keys = 0
+boss_key = false
+items = [ null, null, null ]

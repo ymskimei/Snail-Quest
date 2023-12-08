@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://source/scripts/utility/ItemHelper.gd" type="Script" id=1]
+[ext_resource path="res://source/scripts/utility/InputHelper.gd" type="Script" id=2]
+[ext_resource path="res://source/scripts/utility/MathHelper.gd" type="Script" id=3]
+[ext_resource path="res://source/scripts/utility/Utility.gd" type="Script" id=4]
+
+[node name="Utility" type="Node"]
+script = ExtResource( 4 )
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Math" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="Item" type="Node" parent="."]
+script = ExtResource( 1 )

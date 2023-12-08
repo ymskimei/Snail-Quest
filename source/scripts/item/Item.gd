@@ -7,8 +7,8 @@ onready var mesh : Mesh
 onready var material : Material
 onready var body = $RigidBody
 
-var tools = preload("res://assets/resource/gui_tool.tres")
-var items = preload("res://assets/resource/gui_item.tres")
+var tools = preload("res://assets/resource/pad_tools.tres")
+var items = preload("res://assets/resource/inventory.tres")
 
 var collecting : bool
 var player : Spatial
@@ -44,10 +44,10 @@ func _on_Area_body_entered(body):
 		player = body
 		display_timer.start()
 		if item.depletable:
-			items.add_item(item, 1)
+			Utility.item.add_item(items.items, item, 1)
 		else:
 			var slot = item.specific_slot
-			tools.set_item(slot, item)
+			Utility.item.set_item(tools.items, slot, item)
 		AudioPlayer.play_sfx(AudioPlayer.sfx_item_pickup)
 		collecting = true
 	pass

@@ -6,8 +6,6 @@
 [ext_resource path="res://assets/texture/gui/gui_tool_container_focus.png" type="Texture" id=4]
 [ext_resource path="res://assets/gui/font/font_mochi_pop_p_one.tres" type="DynamicFont" id=6]
 
-
-
 [node name="Item" type="CenterContainer"]
 anchor_left = 0.5
 anchor_top = 0.5

@@ -54,20 +54,20 @@ func _process(_delta):
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pad_right"):
-		display_right.destination.set_item(0, display_right.contained_item)
+		Utility.item.set_item(display_right.destination.items, 0, display_right.contained_item)
 		display_right.is_selected_animation()
 	if Input.is_action_just_pressed("pad_down"):
-		display_down.destination.set_item(0, display_down.contained_item)
+		Utility.item.set_item(display_down.destination.items, 0, display_down.contained_item)
 		display_down.is_selected_animation()
 	if Input.is_action_just_pressed("pad_left"):
-		display_left.destination.set_item(0, display_left.contained_item)
+		Utility.item.set_item(display_left.destination.items, 0, display_left.contained_item)
 		display_left.is_selected_animation()
 	if Input.is_action_just_pressed("pad_up"):
-		display_up.destination.set_item(0, display_up.contained_item)
+		Utility.item.set_item(display_up.destination.items, 0, display_up.contained_item)
 		display_up.is_selected_animation()
 	if Input.is_action_just_pressed("pad_right") or Input.is_action_just_pressed("pad_down") or Input.is_action_just_pressed("pad_left") or Input.is_action_just_pressed("pad_up"):
 		reveal_pad()
-		GlobalManager.controllable.update_equipped()
+		#GlobalManager.controllable.update_equipped()
 	if Input.is_action_just_pressed("cam_zoom") or Input.is_action_just_pressed("cam_lock"):
 		reveal_cam()
 

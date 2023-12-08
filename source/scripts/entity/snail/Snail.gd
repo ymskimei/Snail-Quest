@@ -8,7 +8,7 @@ onready var ray_ledge_left: RayCast = $Armature/Skeleton/Rays/RayLedgeLeft
 onready var ray_ledge_right: RayCast = $Armature/Skeleton/Rays/RayLedgeRight
 onready var ray_bottom: RayCast = $Armature/Skeleton/Rays/RayBottom
 
-var cursor = preload("res://source/scenes/gui/gui_aim_cursor.tscn")
+var cursor = preload("res://source/scenes/ui/gui_aim_cursor.tscn")
 
 var in_shell: bool
 var is_tool_equipped: bool

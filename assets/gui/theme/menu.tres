@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=18 format=2]
 
-[ext_resource path="res://assets/gui/font/font_nishiki_teki.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/gui/font/font_nishiki_teki_40.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/texture/gui/icon_box_selections.png" type="Texture" id=2]
 [ext_resource path="res://assets/texture/gui/icon_box_unchecked.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/gui/gui_options_grabber.png" type="Texture" id=4]

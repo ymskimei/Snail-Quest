@@ -107,16 +107,16 @@ func _unhandled_input(event: InputEvent) -> void:
 				if can_remap:
 					print("test")
 					if event is InputEventKey:
-						InputHelper.set_action_key(current_control, event.as_text())
+						Utility.input.set_action_key(current_control, event.as_text())
 					elif event is InputEventJoypadButton:
-						InputHelper.set_action_button(current_control, event.button_index)
+						Utility.input.set_action_button(current_control, event.button_index)
 					b.texture_normal = get_control_icon(event)
 				else:
 					can_remap = true
 					remap_timer.start()
 
 func get_control_icon(event: InputEvent) -> String:
-	var i = InputHelper
+	var i = Utility.input
 	match event.button_index:
 		0:
 			if i.device == i.DEVICE_CONTROLLER_TYPE_1:

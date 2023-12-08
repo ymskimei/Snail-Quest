@@ -93,7 +93,7 @@ func on_command_version(_console, _args: Array) -> void:
 func on_command_warp(_console, args: Array) -> void:
 	var directory = Directory.new();
 	var warp_path: String = GlobalManager.warps + args[0] + ".tres"
-	var all_worlds: Array = MathHelper.get_file_paths(GlobalManager.worlds, "tscn")
+	var all_worlds: Array = Utility.math.get_file_paths(GlobalManager.worlds, "tscn")
 	var found_world: String = ""
 	if is_instance_valid(GlobalManager.world):
 		if all_worlds.size() > 0:
