@@ -9,13 +9,11 @@ onready var display_boost: RichTextLabel  = $DisplayBoost
 onready var interaction_label: RichTextLabel = $InteractionLabel
 
 onready var tool_slot = $"%ToolSlot"
+
 onready var item_slot_1 = $"%ItemSlot1"
 onready var item_slot_2 = $"%ItemSlot2"
-
-onready var display_left = $"%ToolDisplayLeft"
-onready var display_down = $"%ToolDisplayBottom"
-onready var display_right = $"%ToolDisplayRight"
-onready var display_up = $"%ToolDisplayTop"
+onready var item_slot_3 = $"%ItemSlot3"
+onready var item_slot_4 = $"%ItemSlot4"
 
 onready var cam_icon = $"%CamIcon"
 
@@ -42,31 +40,31 @@ func _ready():
 func _process(_delta):
 	update_cam_display()
 	update_inventory_display()
-	if !equipment.items[0] == tools.items[0]:
-		display_right.is_deselected_animation()
-	if !equipment.items[0] == tools.items[1]:
-		display_down.is_deselected_animation()
-	if !equipment.items[0] == tools.items[2]:
-		display_left.is_deselected_animation()
-	if !equipment.items[0] == tools.items[3]:
-		display_up.is_deselected_animation()
+#	if !equipment.items[0] == tools.items[0]:
+#		display_right.is_deselected_animation()
+#	if !equipment.items[0] == tools.items[1]:
+#		display_down.is_deselected_animation()
+#	if !equipment.items[0] == tools.items[2]:
+#		display_left.is_deselected_animation()
+#	if !equipment.items[0] == tools.items[3]:
+#		display_up.is_deselected_animation()
 	display_vehicle_boost()
 
 func _unhandled_input(_event):
-	if Input.is_action_just_pressed("pad_right"):
-		Utility.item.set_item(display_right.destination.items, 0, display_right.contained_item)
-		display_right.is_selected_animation()
-	if Input.is_action_just_pressed("pad_down"):
-		Utility.item.set_item(display_down.destination.items, 0, display_down.contained_item)
-		display_down.is_selected_animation()
-	if Input.is_action_just_pressed("pad_left"):
-		Utility.item.set_item(display_left.destination.items, 0, display_left.contained_item)
-		display_left.is_selected_animation()
-	if Input.is_action_just_pressed("pad_up"):
-		Utility.item.set_item(display_up.destination.items, 0, display_up.contained_item)
-		display_up.is_selected_animation()
-	if Input.is_action_just_pressed("pad_right") or Input.is_action_just_pressed("pad_down") or Input.is_action_just_pressed("pad_left") or Input.is_action_just_pressed("pad_up"):
-		reveal_pad()
+#	if Input.is_action_just_pressed("pad_right"):
+#		Utility.item.set_item(display_right.destination.items, 0, display_right.contained_item)
+#		display_right.is_selected_animation()
+#	if Input.is_action_just_pressed("pad_down"):
+#		Utility.item.set_item(display_down.destination.items, 0, display_down.contained_item)
+#		display_down.is_selected_animation()
+#	if Input.is_action_just_pressed("pad_left"):
+#		Utility.item.set_item(display_left.destination.items, 0, display_left.contained_item)
+#		display_left.is_selected_animation()
+#	if Input.is_action_just_pressed("pad_up"):
+#		Utility.item.set_item(display_up.destination.items, 0, display_up.contained_item)
+#		display_up.is_selected_animation()
+#	if Input.is_action_just_pressed("pad_right") or Input.is_action_just_pressed("pad_down") or Input.is_action_just_pressed("pad_left") or Input.is_action_just_pressed("pad_up"):
+#		reveal_pad()
 		#SnailQuest.controllable.update_equipped()
 	if Input.is_action_just_pressed("cam_zoom") or Input.is_action_just_pressed("cam_lock"):
 		reveal_cam()
@@ -75,10 +73,8 @@ func update_item_slot_display():
 	tool_slot.item_display(equipment.items[0])
 	item_slot_1.item_display(equipment.items[1])
 	item_slot_2.item_display(equipment.items[2])
-	display_right.item_display(tools.items[0])
-	display_down.item_display(tools.items[1])
-	display_left.item_display(tools.items[2])
-	display_up.item_display(tools.items[3])
+	item_slot_3.item_display(equipment.items[3])
+	item_slot_4.item_display(equipment.items[4])
 
 func update_inventory_display():
 	for item_index in equipment.items.size():

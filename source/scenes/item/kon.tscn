@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/shader/cel.shader" type="Shader" id=1]
 [ext_resource path="res://assets/shader/shine.shader" type="Shader" id=2]
 [ext_resource path="res://assets/texture/object/kon.png" type="Texture" id=3]
+[ext_resource path="res://source/scenes/world/environment_default.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SpatialMaterial" id=3]
 resource_name = "Material.001"
@@ -130,3 +131,5 @@ transform = Transform( 0.835029, 0, 0, 0, 0.835029, 0, 0, 0, 0.835029, 0, 0, 0 )
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 7 )
+
+[node name="EnvironmentDefault" parent="." instance=ExtResource( 4 )]

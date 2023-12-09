@@ -18,11 +18,31 @@ func _process(_delta):
 				if child.is_in_group("item_button") and child.get_node("Button").has_focus():
 						var equipment = child.destination
 						var item = child.contained_item
-						if Input.is_action_just_pressed("action_item_0"):
-							if item == equipment.items[2]:
-								Utility.item.replace_item(equipment.items, equipment.items[2], null)
+						if Input.is_action_just_pressed("pad_up"):
+							if item_match(item, equipment.items) != 0:
+								Utility.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
 							Utility.item.set_item(equipment.items, 1, item)
-						elif Input.is_action_just_pressed("action_item_1"):
-							if item == child.destination.items[1]:
-								Utility.item.replace_item(equipment.items, equipment.items[1], null)
+						elif Input.is_action_just_pressed("pad_right"):
+							if item_match(item, equipment.items) != 0:
+								Utility.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
 							Utility.item.set_item(equipment.items, 2, item)
+						elif Input.is_action_just_pressed("pad_down"):
+							if item_match(item, equipment.items) != 0:
+								Utility.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
+							Utility.item.set_item(equipment.items, 3, item)
+						elif Input.is_action_just_pressed("pad_left"):
+							if item_match(item, equipment.items) != 0:
+								Utility.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
+							Utility.item.set_item(equipment.items, 4, item)
+
+func item_match(i, index: Array) -> int:
+	if i == index[1]:
+		return 1
+	elif i == index[2]:
+		return 2
+	elif i == index[3]:
+		return 3
+	elif i == index[4]:
+		return 4
+	else:
+		return 0

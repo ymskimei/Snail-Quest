@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://source/scenes/ui/gui_container_equipment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scripts/gui/GuiHud.gd" type="Script" id=2]
@@ -18,20 +18,14 @@
 [ext_resource path="res://assets/gui/font/font_nishiki_teki_50.tres" type="DynamicFont" id=16]
 [ext_resource path="res://assets/texture/gui/sprite_kon.png" type="Texture" id=17]
 [ext_resource path="res://assets/texture/gui/gui_hud_shadow_background.png" type="Texture" id=18]
-[ext_resource path="res://assets/shader/canvas_perspective.tres" type="Shader" id=19]
+[ext_resource path="res://assets/gui/font/font_mochi_pop_p_one.tres" type="DynamicFont" id=19]
 [ext_resource path="res://assets/shader/color_editor.tres" type="Shader" id=20]
 [ext_resource path="res://assets/texture/gui/gui_hud_shell.png" type="Texture" id=21]
 [ext_resource path="res://assets/texture/gui/gui_hud_slime_fill.png" type="Texture" id=22]
 [ext_resource path="res://assets/texture/gui/gui_hud_shell_fill.png" type="Texture" id=23]
 [ext_resource path="res://assets/gui/theme/menu.tres" type="Theme" id=24]
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 19 )
-shader_param/fov = 90.0
-shader_param/cull_back = true
-shader_param/y_rot = 0.0
-shader_param/x_rot = 0.0
-shader_param/inset = 0.0
+[ext_resource path="res://assets/texture/gui/chat_bubble.png" type="Texture" id=25]
+[ext_resource path="res://assets/texture/gui/map_iconn.png" type="Texture" id=26]
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 20 )
@@ -44,14 +38,6 @@ shader_param/greenVal = 1.0
 shader_param/blueVal = 1.0
 shader_param/tint_color = Color( 1, 1, 1, 1 )
 shader_param/tint_effect_factor = 0.0
-
-[sub_resource type="Animation" id=2]
-resource_name = "RESET"
-
-[sub_resource type="Animation" id=1]
-resource_name = "SlidePad"
-length = 0.7
-step = 0.01
 
 [sub_resource type="Animation" id=4]
 resource_name = "RESET"
@@ -106,29 +92,36 @@ margin_bottom = 1080.0
 rect_scale = Vector2( 0.75, 0.75 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
+custom_constants/margin_right = -64
+custom_constants/margin_top = -96
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
 
 [node name="HBoxContainer" type="VBoxContainer" parent="FaceButtons"]
-margin_right = 1920.0
+margin_top = -96.0
+margin_right = 1984.0
 margin_bottom = 1080.0
 
 [node name="Container" type="MarginContainer" parent="FaceButtons/HBoxContainer"]
-margin_right = 1920.0
-margin_bottom = 368.0
-
-[node name="MarginBackground" type="MarginContainer" parent="FaceButtons/HBoxContainer/Container"]
-margin_left = 1488.0
-margin_right = 1920.0
-margin_bottom = 368.0
+margin_left = 1294.0
+margin_right = 1984.0
+margin_bottom = 608.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
-custom_constants/margin_right = -48
-custom_constants/margin_top = -16
-custom_constants/margin_bottom = -96
+
+[node name="MarginBackground" type="MarginContainer" parent="FaceButtons/HBoxContainer/Container"]
+margin_left = 146.0
+margin_right = 690.0
+margin_bottom = 608.0
+size_flags_horizontal = 8
+size_flags_vertical = 4
+custom_constants/margin_right = 64
+custom_constants/margin_top = 128
 
 [node name="TextureRect" type="TextureRect" parent="FaceButtons/HBoxContainer/Container/MarginBackground"]
-margin_top = -16.0
+margin_top = 128.0
 margin_right = 480.0
-margin_bottom = 464.0
+margin_bottom = 608.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource( 4 )
@@ -136,17 +129,17 @@ stretch_mode = 4
 
 [node name="TextureRect2" type="TextureRect" parent="FaceButtons/HBoxContainer/Container/MarginBackground"]
 margin_left = 80.0
-margin_top = 64.0
+margin_top = 208.0
 margin_right = 400.0
-margin_bottom = 384.0
+margin_bottom = 528.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 18 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="FaceButtons/HBoxContainer/Container/MarginBackground"]
-margin_top = -16.0
+margin_top = 128.0
 margin_right = 480.0
-margin_bottom = 464.0
+margin_bottom = 608.0
 custom_constants/margin_right = 156
 custom_constants/margin_top = 156
 custom_constants/margin_left = 156
@@ -173,58 +166,67 @@ texture = ExtResource( 5 )
 stretch_mode = 3
 
 [node name="MarginContainer3" type="MarginContainer" parent="FaceButtons/HBoxContainer/Container/MarginBackground"]
-margin_top = -16.0
+margin_top = 128.0
 margin_right = 480.0
-margin_bottom = 464.0
+margin_bottom = 608.0
 custom_constants/margin_right = 100
 custom_constants/margin_top = 100
 custom_constants/margin_left = 100
 custom_constants/margin_bottom = 100
 
-[node name="ItemSlot1" parent="FaceButtons/HBoxContainer/Container/MarginBackground/MarginContainer3" groups=["hud_slot"] instance=ExtResource( 1 )]
-unique_name_in_owner = true
-material = SubResource( 6 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 252.0
-margin_top = 100.0
-margin_right = 380.0
-margin_bottom = 228.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-
-[node name="ItemSlot2" parent="FaceButtons/HBoxContainer/Container/MarginBackground/MarginContainer3" groups=["hud_slot"] instance=ExtResource( 1 )]
-unique_name_in_owner = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="ItemSprite" type="TextureRect" parent="FaceButtons/HBoxContainer/Container/MarginBackground/MarginContainer3"]
 margin_left = 100.0
 margin_top = 252.0
 margin_right = 228.0
 margin_bottom = 380.0
-grow_horizontal = 2
-grow_vertical = 2
+rect_min_size = Vector2( 128, 128 )
 size_flags_horizontal = 0
 size_flags_vertical = 8
+texture = ExtResource( 25 )
+stretch_mode = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="FaceButtons/HBoxContainer/Container"]
-margin_left = 1344.0
-margin_right = 1920.0
-margin_bottom = 328.0
+[node name="ItemLabel" type="RichTextLabel" parent="FaceButtons/HBoxContainer/Container/MarginBackground/MarginContainer3/ItemSprite"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
+margin_right = 64.0
+margin_bottom = 64.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 19 )
+bbcode_enabled = true
+
+[node name="ItemSprite2" type="TextureRect" parent="FaceButtons/HBoxContainer/Container/MarginBackground/MarginContainer3"]
+margin_left = 252.0
+margin_top = 100.0
+margin_right = 380.0
+margin_bottom = 228.0
+rect_min_size = Vector2( 128, 128 )
 size_flags_horizontal = 8
 size_flags_vertical = 0
-custom_constants/margin_right = 256
-custom_constants/margin_top = 8
+texture = ExtResource( 26 )
+stretch_mode = 6
+
+[node name="ItemLabel" type="RichTextLabel" parent="FaceButtons/HBoxContainer/Container/MarginBackground/MarginContainer3/ItemSprite2"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
+margin_right = 64.0
+margin_bottom = 64.0
+rect_clip_content = false
+custom_fonts/normal_font = ExtResource( 19 )
+bbcode_enabled = true
+
+[node name="MarginContainer" type="MarginContainer" parent="FaceButtons/HBoxContainer/Container"]
+margin_top = 144.0
+margin_right = 690.0
+margin_bottom = 464.0
+size_flags_horizontal = 8
+size_flags_vertical = 4
+custom_constants/margin_right = 370
 
 [node name="TextureRect" type="TextureRect" parent="FaceButtons/HBoxContainer/Container/MarginContainer"]
-margin_top = 8.0
 margin_right = 320.0
-margin_bottom = 328.0
+margin_bottom = 320.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 13 )
@@ -265,17 +267,18 @@ texture = ExtResource( 6 )
 stretch_mode = 3
 
 [node name="MarginCollected" type="MarginContainer" parent="FaceButtons/HBoxContainer"]
-margin_left = 1657.0
-margin_top = 372.0
-margin_right = 1920.0
-margin_bottom = 468.0
+margin_left = 1615.0
+margin_top = 612.0
+margin_right = 1984.0
+margin_bottom = 612.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
-custom_constants/margin_right = 64
+custom_constants/margin_right = 170
+custom_constants/margin_top = -96
 
 [node name="HBoxContainer" type="HBoxContainer" parent="FaceButtons/HBoxContainer/MarginCollected"]
+margin_top = -96.0
 margin_right = 199.0
-margin_bottom = 96.0
 custom_constants/separation = 16
 
 [node name="Label" type="Label" parent="FaceButtons/HBoxContainer/MarginCollected/HBoxContainer"]
@@ -296,10 +299,8 @@ texture = ExtResource( 17 )
 [node name="ToolPad" type="MarginContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = -400.0
-margin_top = 696.0
-margin_right = -16.0
-margin_bottom = 1080.0
+margin_top = -384.0
+margin_right = 384.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
@@ -320,13 +321,31 @@ rect_pivot_offset = Vector2( 128, 128 )
 texture = ExtResource( 12 )
 stretch_mode = 6
 
+[node name="ToolTop" type="MarginContainer" parent="ToolPad"]
+margin_right = 384.0
+margin_bottom = 384.0
+custom_constants/margin_top = 128
+custom_constants/margin_left = 192
+
+[node name="ItemSlot1" parent="ToolPad/ToolTop" groups=["hud_slot"] instance=ExtResource( 14 )]
+unique_name_in_owner = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 192.0
+margin_top = 128.0
+margin_right = 192.0
+margin_bottom = 128.0
+grow_horizontal = 0
+
 [node name="ToolRight" type="MarginContainer" parent="ToolPad"]
 margin_right = 384.0
 margin_bottom = 384.0
 custom_constants/margin_top = 192
 custom_constants/margin_left = 256
 
-[node name="ToolDisplayRight" parent="ToolPad/ToolRight" groups=["hud_slot"] instance=ExtResource( 14 )]
+[node name="ItemSlot2" parent="ToolPad/ToolRight" groups=["hud_slot"] instance=ExtResource( 14 )]
 unique_name_in_owner = true
 anchor_left = 0.0
 anchor_top = 0.0
@@ -341,7 +360,7 @@ margin_bottom = 192.0
 margin_right = 384.0
 margin_bottom = 384.0
 
-[node name="ToolDisplayBottom" parent="ToolPad/ToolBottom" groups=["hud_slot"] instance=ExtResource( 14 )]
+[node name="ItemSlot3" parent="ToolPad/ToolBottom" groups=["hud_slot"] instance=ExtResource( 14 )]
 unique_name_in_owner = true
 anchor_left = 0.0
 anchor_top = 0.0
@@ -358,7 +377,7 @@ margin_bottom = 384.0
 custom_constants/margin_top = 192
 custom_constants/margin_left = 128
 
-[node name="ToolDisplayLeft" parent="ToolPad/ToolLeft" groups=["hud_slot"] instance=ExtResource( 14 )]
+[node name="ItemSlot4" parent="ToolPad/ToolLeft" groups=["hud_slot"] instance=ExtResource( 14 )]
 unique_name_in_owner = true
 anchor_left = 0.0
 anchor_top = 0.0
@@ -368,24 +387,6 @@ margin_left = 128.0
 margin_top = 192.0
 margin_right = 128.0
 margin_bottom = 192.0
-
-[node name="ToolTop" type="MarginContainer" parent="ToolPad"]
-margin_right = 384.0
-margin_bottom = 384.0
-custom_constants/margin_top = 128
-custom_constants/margin_left = 192
-
-[node name="ToolDisplayTop" parent="ToolPad/ToolTop" groups=["hud_slot"] instance=ExtResource( 14 )]
-unique_name_in_owner = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 192.0
-margin_top = 128.0
-margin_right = 192.0
-margin_bottom = 128.0
-grow_horizontal = 0
 
 [node name="CamMode" type="MarginContainer" parent="."]
 anchor_left = 1.0
@@ -446,10 +447,6 @@ texture = ExtResource( 9 )
 stretch_mode = 6
 
 [node name="Tween" type="Tween" parent="Clock"]
-
-[node name="AnimationPad" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 2 )
-anims/SlidePad = SubResource( 1 )
 
 [node name="AnimationCam" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 4 )
