@@ -34,9 +34,6 @@ var ledge_usable: bool
 var jump_memory_timer: Timer = Timer.new()
 var ledge_timer: Timer = Timer.new()
 
-signal health_changed
-signal entity_killed
-
 func _ready() -> void:
 	if is_instance_valid(identity):
 		entity_name = identity.entity_name
@@ -58,8 +55,10 @@ func _ready() -> void:
 	if is_instance_valid(proximity):
 		proximity.connect("area_entered", self, "_on_proximity_entered")
 		proximity.connect("area_exited", self, "_on_proximity_exited")
-	display_debug_healthbar()
+	update_debug_healthbar()
 	cam.connect("target_updated", self, "_on_cam_target_updated")
+	#temp until can be updated from a save file
+	SnailQuest.emit_signal("health_changed", health, max_health, is_controlled())
 
 func _input(event: InputEvent) -> void:
 	pass
@@ -67,6 +66,11 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if is_instance_valid(target):
 		target_interact(event)
+	if is_controlled():
+		if event.is_action_pressed("debug_cam_fov_down"):
+			set_entity_health(1)
+		if event.is_action_pressed("debug_cam_fov_up"):
+			set_entity_health(-1)
 
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(target):
@@ -80,31 +84,41 @@ func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	pass
 
 func set_entity_health(new_amount: int) -> void:
-	health = new_amount
-	emit_signal("health_changed", new_amount)
-	display_debug_healthbar()
-	if health <= 0:
+	health += new_amount
+	if health > max_health:
+		health = max_health
+	elif health <= 0:
+		health = 0
 		kill_entity()
 		print(str(self.name) +" Died")
+	SnailQuest.emit_signal("health_changed", health, max_health, is_controlled())
+	print(str(self.name) +" Health: " + str(health))
+	update_debug_healthbar()
 
+func set_entity_max_health(new_amount: int) -> void:
+	max_health += new_amount
+	health = max_health
+	SnailQuest.emit_signal("health_changed", health, max_health, is_controlled())
+	print(str(self.name) +" Health: " + str(health))
+	update_debug_healthbar()
+	
 func _on_proximity_entered(body) -> void:
 	pass
 
 func _on_proximity_exited(body) -> void:
 	pass
 
-func damage_entity(damage_amount: int) -> void:
-	set_entity_health(health - damage_amount)
-	print(str(self.name) +" Health: " + str(health))
-
 func kill_entity() -> void:
-	emit_signal("entity_killed")
+	SnailQuest.emit_signal("entity_killed", is_controlled())
 
-func display_debug_healthbar() -> void:
+func update_debug_healthbar() -> void:
 	if is_instance_valid($DebugHealthBar):
-		$DebugHealthBar.update_bar(health)
-		if is_instance_valid($"%Body"):
+		$DebugHealthBar.update_bar(health, max_health)
+		if is_instance_valid($"%Body") and is_controlled() == false:
+			$DebugHealthBar.show()
 			$DebugHealthBar.translation.y = $"%Body".get_aabb().size.y + 1
+		else:
+			$DebugHealthBar.hide()
 
 func update_equipped() -> void:
 	for child in attach_point.get_children():

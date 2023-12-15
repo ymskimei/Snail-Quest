@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/texture/gui/gui_tool_container.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/gui/menu/gui_tool_container.png" type="Texture" id=1]
 [ext_resource path="res://source/scripts/gui/GuiItemContainer.gd" type="Script" id=2]
-[ext_resource path="res://assets/texture/gui/gui_tool_container_hover.png" type="Texture" id=3]
-[ext_resource path="res://assets/texture/gui/gui_tool_container_focus.png" type="Texture" id=4]
+[ext_resource path="res://assets/texture/gui/menu/gui_tool_container_hover.png" type="Texture" id=3]
+[ext_resource path="res://assets/texture/gui/menu/gui_tool_container_focus.png" type="Texture" id=4]
 [ext_resource path="res://assets/gui/font/font_mochi_pop_p_one.tres" type="DynamicFont" id=6]
 
 [node name="Item" type="CenterContainer"]

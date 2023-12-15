@@ -8,6 +8,11 @@ onready var anim_cam: AnimationPlayer = $AnimationCam
 onready var display_boost: RichTextLabel  = $DisplayBoost
 onready var interaction_label: RichTextLabel = $InteractionLabel
 
+onready var shell_stock: VBoxContainer = $MarginContainer/HBoxContainer/MarginContainer/ShellStock
+onready var shell: TextureRect = $MarginContainer/HBoxContainer/TextureRect/Shell
+onready var slime: TextureRect = $MarginContainer/HBoxContainer/TextureRect/Slime
+onready var shell_anim: AnimationPlayer = $MarginContainer/HBoxContainer/TextureRect/AnimationPlayer
+
 onready var tool_slot = $"%ToolSlot"
 
 onready var item_slot_1 = $"%ItemSlot1"
@@ -17,12 +22,20 @@ onready var item_slot_4 = $"%ItemSlot4"
 
 onready var cam_icon = $"%CamIcon"
 
-var cam_iso = preload("res://assets/texture/gui/gui_hud_cam_iso.png")
-var cam_look = preload("res://assets/texture/gui/gui_hud_cam_look.png")
-var cam_pan = preload("res://assets/texture/gui/gui_hud_cam_pan.png")
-var cam_no_target = preload("res://assets/texture/gui/gui_hud_cam_no_target.png")
-var cam_target = preload("res://assets/texture/gui/gui_hud_cam_target.png")
-var cam_zoom = preload("res://assets/texture/gui/gui_hud_cam_zoom.png")
+var shell_stock_icons: Array = []
+
+var cam_iso = preload("res://assets/texture/gui/hud/camera_isometric.png")
+var cam_look = preload("res://assets/texture/gui/hud/camera_look.png")
+var cam_pan = preload("res://assets/texture/gui/hud/camera_pan.png")
+var cam_no_target = preload("res://assets/texture/gui/hud/camera_target_found.png")
+var cam_target = preload("res://assets/texture/gui/hud/camera_target_none.png")
+var cam_zoom = preload("res://assets/texture/gui/hud/camera_zoom.png")
+
+var shell_1 = preload("res://assets/texture/gui/hud/shell_1.png")
+var shell_2 = preload("res://assets/texture/gui/hud/shell_2.png")
+var shell_3 = preload("res://assets/texture/gui/hud/shell_3.png")
+var shell_stock_full = preload("res://assets/texture/gui/hud/shell_stock_full.png")
+var shell_stock_empty = preload("res://assets/texture/gui/hud/shell_stock_empty.png")
 
 var pad_timer = Timer.new()
 var cam_timer = Timer.new()
@@ -30,14 +43,16 @@ var cam_timer = Timer.new()
 var pad_is_hidden : bool
 var cam_is_hidden : bool
 
-func _ready():
+func _ready() -> void:
 	pad_is_hidden = true
 	cam_is_hidden = true
 	add_hud_timers()
 	equipment.connect("items_updated", self, "on_items_updated")
 	tools.connect("items_updated", self, "on_items_updated")
+	SnailQuest.connect("health_changed", self, "on_health_changed")
+	shell_stock_icons = get_tree().get_nodes_in_group("stock")
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	update_cam_display()
 	update_inventory_display()
 #	if !equipment.items[0] == tools.items[0]:
@@ -50,42 +65,56 @@ func _process(_delta):
 #		display_up.is_deselected_animation()
 	display_vehicle_boost()
 
-func _unhandled_input(_event):
-#	if Input.is_action_just_pressed("pad_right"):
-#		Utility.item.set_item(display_right.destination.items, 0, display_right.contained_item)
-#		display_right.is_selected_animation()
-#	if Input.is_action_just_pressed("pad_down"):
-#		Utility.item.set_item(display_down.destination.items, 0, display_down.contained_item)
-#		display_down.is_selected_animation()
-#	if Input.is_action_just_pressed("pad_left"):
-#		Utility.item.set_item(display_left.destination.items, 0, display_left.contained_item)
-#		display_left.is_selected_animation()
-#	if Input.is_action_just_pressed("pad_up"):
+func _unhandled_input(_event: InputEvent) -> void:
+#	if Input.is_action_just_pressed("action_combat"):
 #		Utility.item.set_item(display_up.destination.items, 0, display_up.contained_item)
-#		display_up.is_selected_animation()
-#	if Input.is_action_just_pressed("pad_right") or Input.is_action_just_pressed("pad_down") or Input.is_action_just_pressed("pad_left") or Input.is_action_just_pressed("pad_up"):
-#		reveal_pad()
-		#SnailQuest.controllable.update_equipped()
+#		SnailQuest.controllable.update_equipped()
 	if Input.is_action_just_pressed("cam_zoom") or Input.is_action_just_pressed("cam_lock"):
 		reveal_cam()
 
-func update_item_slot_display():
+func on_health_changed(health, max_health, b) -> void:
+	var fract = 3
+	if health % fract == 0 and health != 0:
+		shell_anim.play("Disappear")
+		if shell_anim.is_playing():
+			yield(shell_anim, "animation_finished")
+			shell_anim.play("Appear")
+		shell.texture = shell_3
+	elif health % fract == 2:
+		shell.texture = shell_2
+	elif health % fract == 1:
+		shell.texture = shell_1
+	else:
+		shell_anim.play("Disappear")
+		yield(shell_anim, "animation_finished")
+		shell.texture = null
+	for i in range(shell_stock_icons.size()):
+		if (i * fract) >= max_health - (fract + 1):
+			shell_stock_icons[i].hide()
+		else:
+			shell_stock_icons[i].show()
+		if (i * fract) <= health - (fract + 1):
+			shell_stock_icons[i].texture = shell_stock_full
+		else:
+			shell_stock_icons[i].texture = shell_stock_empty
+
+func update_item_slot_display() -> void:
 	tool_slot.item_display(equipment.items[0])
 	item_slot_1.item_display(equipment.items[1])
 	item_slot_2.item_display(equipment.items[2])
 	item_slot_3.item_display(equipment.items[3])
 	item_slot_4.item_display(equipment.items[4])
 
-func update_inventory_display():
+func update_inventory_display() -> void:
 	for item_index in equipment.items.size():
 		update_item_slot_display()
 
-func on_items_updated(index):
+func on_items_updated(index) -> void:
 	reveal_pad()
 	for item_index in index:
 		update_item_slot_display()
 
-func update_cam_display():
+func update_cam_display() -> void:
 	if is_instance_valid(SnailQuest.camera):
 		var state = str(SnailQuest.camera.states.current_state.get_name())
 		match state:
@@ -109,7 +138,7 @@ func update_cam_display():
 			"Look":
 				cam_icon.texture = cam_look
 
-func add_hud_timers():
+func add_hud_timers() -> void:
 	pad_timer.set_wait_time(8)
 	pad_timer.one_shot = true
 	pad_timer.connect("timeout", self, "on_pad_timeout")
@@ -119,27 +148,27 @@ func add_hud_timers():
 	cam_timer.connect("timeout", self, "on_cam_timeout")
 	add_child(cam_timer)
 
-func reveal_pad():
+func reveal_pad() -> void:
 	if pad_is_hidden:
 		pad_is_hidden = false
 		anim_pad.play("SlidePad")
 	pad_timer.start()
 
-func reveal_cam():
+func reveal_cam() -> void:
 	if cam_is_hidden:
 		cam_is_hidden = false
 		anim_cam.play("SlideCam")
 	cam_timer.start()
 
-func on_pad_timeout():
+func on_pad_timeout() -> void:
 	pad_is_hidden = true
 	anim_pad.play_backwards("SlidePad")
 
-func on_cam_timeout():
+func on_cam_timeout() -> void:
 	cam_is_hidden = true
 	anim_cam.play_backwards("SlideCam")
 
-func display_vehicle_boost():
+func display_vehicle_boost() -> void:
 	if is_instance_valid(SnailQuest.controllable):
 		if SnailQuest.controllable is VehicleBody:
 			var remaining = SnailQuest.controllable.boost_remaining

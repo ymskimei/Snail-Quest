@@ -1,10 +1,10 @@
 [gd_resource type="Theme" load_steps=18 format=2]
 
 [ext_resource path="res://assets/gui/font/font_nishiki_teki_40.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/texture/gui/icon_box_selections.png" type="Texture" id=2]
-[ext_resource path="res://assets/texture/gui/icon_box_unchecked.png" type="Texture" id=3]
+[ext_resource path="res://assets/texture/gui/menu/icon_box_selections.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/gui/menu/icon_box_unchecked.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/gui/gui_options_grabber.png" type="Texture" id=4]
-[ext_resource path="res://assets/texture/gui/icon_box_checked.png" type="Texture" id=5]
+[ext_resource path="res://assets/texture/gui/menu/icon_box_checked.png" type="Texture" id=5]
 [ext_resource path="res://assets/texture/gui/gui_options_scroll.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxTexture" id=1]

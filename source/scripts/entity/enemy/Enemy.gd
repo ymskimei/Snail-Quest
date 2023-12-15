@@ -27,7 +27,7 @@ func _on_Area_area_entered(area: Area) -> void:
 		var damage = area.get_parent().get_parent().strength
 		#if damage >= 0.15 * max_health:
 			#strike_flash(area)
-		damage_entity(damage)
+		set_entity_health(-damage)
 #		if !follow_timer.is_stopped():
 #			follow_timer.start()
 

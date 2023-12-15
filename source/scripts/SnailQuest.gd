@@ -16,10 +16,12 @@ var objects: String = "res://source/scenes/object/"
 var items: String = "res://source/scenes/item/"
 
 var starting_world = preload("res://source/scenes/world/world.tscn").instance()
-var title_screen = preload("res://source/scenes/ui/gui_screen_title.tscn").instance()
 
 var chunk_start: Vector3 = Vector3.ZERO
 var chunk_size: int = 64
+
+signal health_changed(health, max_health, b)
+signal entity_killed(b)
 
 #EventFlags
 var izabell_has_met: bool = false

@@ -2,7 +2,8 @@
 
 [ext_resource path="res://assets/texture/item/slash.png" type="Texture" id=1]
 [ext_resource path="res://assets/model/needle.mesh" type="ArrayMesh" id=2]
-[ext_resource path="res://source/scripts/item/Needle.gd" type="Script" id=3]
+[ext_resource path="res://source/scripts/item/tool/Needle.gd" type="Script" id=3]
+
 
 
 [sub_resource type="BoxShape" id=1]

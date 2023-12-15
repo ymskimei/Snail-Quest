@@ -3,9 +3,12 @@ extends Spatial
 
 export(Resource) var item
 
-onready var mesh : Mesh
-onready var material : Material
-onready var body = $RigidBody
+onready var mesh: Mesh
+onready var material: Material
+onready var item_body: RigidBody = $RigidBody
+onready var proxy_path: Script
+
+var sound: String = AudioPlayer.sfx_item_pickup
 
 var tools = preload("res://assets/resource/pad_tools.tres")
 var items = preload("res://assets/resource/inventory.tres")
@@ -20,7 +23,11 @@ var idle_timer = Timer.new()
 
 func _ready():
 	$"%MeshInstance".set_mesh(item.mesh)
-	body.set_bounce(0.5)
+	item_body.set_bounce(0.5)
+	if item.proxy_path != "":
+		proxy_path = load(str(item.proxy_path))
+	if item.sound != "":
+		sound = item.sound
 	display_timer.set_wait_time(1)
 	display_timer.one_shot = true
 	display_timer.connect("timeout", self, "on_display_timeout")
@@ -32,7 +39,7 @@ func _ready():
 
 func _physics_process(_delta):
 	if collecting:
-		body.translation = Vector3.ZERO
+		item_body.translation = Vector3.ZERO
 		translation = player.translation + collection_offset
 	if item.depletable:
 		idle_timer.start()
@@ -48,13 +55,22 @@ func _on_Area_body_entered(body):
 		else:
 			var slot = item.specific_slot
 			Utility.item.set_item(tools.items, slot, item)
-		AudioPlayer.play_sfx(AudioPlayer.sfx_item_pickup)
+		AudioPlayer.play_sfx(sound)
 		collecting = true
 	pass
 
 func on_display_timeout():
 	collecting = false
+	if proxy_path is Script:
+		var proxy = Node.new()
+		proxy.set_script(proxy_path)
+		add_child(proxy)
+		#proxy.connect("ended", self, "on_proxy_ended")
+		#yield(proxy, "ended")
 	queue_free()
+
+func on_proxy_ended():
+	pass
 
 func on_idle_timeout():
 	print("test")

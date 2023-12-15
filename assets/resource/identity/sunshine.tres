@@ -14,8 +14,8 @@
 script = ExtResource( 1 )
 entity_name = "Sunshine"
 character = false
-health = 0
-max_health = 0
+health = 3
+max_health = 3
 strength = 0
 speed = 0
 jump = 0

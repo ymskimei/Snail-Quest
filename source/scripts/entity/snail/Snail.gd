@@ -64,7 +64,7 @@ func _on_proximity_exited(body) -> void:
 
 func _on_Area_area_entered(area) -> void:
 	if area.is_in_group("danger"):
-		damage_entity(area.get_parent().strength)
+		set_entity_health(-(area.get_parent().strength))
 	if area.is_in_group("attachable"):
 		SnailQuest.set_prev_controllable(self)
 		SnailQuest.set_controllable(area.get_parent().get_parent().get_parent())

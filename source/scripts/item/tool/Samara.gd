@@ -20,20 +20,20 @@ func _ready():
 
 func _physics_process(delta):
 	$MeshInstance.rotation.y += 20 * delta
-	if is_instance_valid(GlobalManager.player):
+	if is_instance_valid(SnailQuest.controllable):
 		if returning:
-			global_translation = lerp(global_translation, GlobalManager.player.global_translation, speed * delta)
+			global_translation = lerp(global_translation, SnailQuest.controllable.global_translation, speed * delta)
 		else:
-			var direction = GlobalManager.player.global_transform.basis.z.normalized()
+			var direction = SnailQuest.controllable.global_transform.basis.z.normalized()
 			global_translation = lerp(global_translation, direction * speed, delta)
 	
 func get_direction() -> Vector3:
-	var direction = GlobalManager.player.transform.basis.xform(Vector3(0, 0, -1))
+	var direction = SnailQuest.controllable.transform.basis.xform(Vector3(0, 0, -1))
 	return direction.normalized()
 
 func _on_Area_body_entered(body):
-	if body is Player and returning:
-		GlobalManager.player.equipped.set_item(0, resource)
+	if body is Entity and returning:
+		SnailQuest.controllable.equipped.set_item(0, resource)
 		queue_free()
 
 func on_timeout():

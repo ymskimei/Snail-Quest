@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=6 format=2]
 
 [ext_resource path="res://source/scripts/resource/ResourceItem.gd" type="Script" id=1]
-[ext_resource path="res://assets/texture/gui/gui_item_test_deletable.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/gui/item/item_test_deletable.png" type="Texture" id=2]
 [ext_resource path="res://assets/shader/cel.shader" type="Shader" id=3]
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -40,7 +40,8 @@ material = SubResource( 2 )
 script = ExtResource( 1 )
 item_name = "Dummy Item 3"
 description = "This item is not stackable and can be depleted on use."
-item_path = ""
+proxy_path = "res://source/scripts/item/Whorl.gd"
+sound = "res://assets/sound/sfx_heal.ogg"
 mesh = SubResource( 1 )
 sprite = ExtResource( 2 )
 amount = 1

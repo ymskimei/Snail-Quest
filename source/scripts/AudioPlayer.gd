@@ -23,6 +23,7 @@ const sfx_cam_no_target_unlock = "res://assets/sound/sfx_cam_no_target_unlock.og
 const sfx_cam_first_person = "res://assets/sound/sfx_cam_first_person.ogg"
 const sfx_cam_third_person = "res://assets/sound/sfx_cam_third_person.ogg"
 const sfx_item_pickup = "res://assets/sound/sfx_item_pickup.ogg"
+const sfx_health_pickup = "res://assets/sound/sfx_heal.ogg"
 const sfx_bell_tone_next = "res://assets/sound/sfx_bell_tone_next.ogg"
 const sfx_bell_tone_success = "res://assets/sound/sfx_bell_tone_success.ogg"
 const sfx_bell_tone_error = "res://assets/sound/sfx_bell_tone_error.ogg"

@@ -29,7 +29,8 @@ func _process(_delta: float):
 	else:
 		cursor.set_visible(false)
 	if is_instance_valid(SnailQuest.controllable):
-		hud.set_visible(true)
+		if SnailQuest.controllable is Entity or VehicleBody:
+			hud.set_visible(true)
 	else:
 		hud.set_visible(false)
 
