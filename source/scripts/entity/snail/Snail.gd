@@ -105,3 +105,16 @@ func update_appearance() -> void:
 		eyelid_right_mat.set_shader_param("texture_albedo", identity.pattern_eyelids)
 		eyelid_left_mat.set_shader_param("albedo_color", identity.color_body_accent)
 		eyelid_right_mat.set_shader_param("albedo_color", identity.color_body_accent)
+
+func get_sound_slide(s: bool) -> void:
+	if s:
+		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_slide_backward, global_translation, 1.0, -1.0)
+	else:
+		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_slide_forward, global_translation, 1.25, -1.0)
+
+func get_sound_hide(s: bool) -> void:
+	if s:
+		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, global_translation, 1.0, 0.0)
+	else:
+		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, global_translation, 0.5, 0.0)
+	

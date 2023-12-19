@@ -3,7 +3,7 @@ extends CameraStateMain
 export var follow_speed: int = 18
 export var rotation_speed: int = 10
 
-export var offset: Vector3 = Vector3(0, 0.9, 0)
+export var offset: Vector3 = Vector3(0, 0.1, 0)
 
 func enter() -> void:
 	print("Camera State: LOOK")

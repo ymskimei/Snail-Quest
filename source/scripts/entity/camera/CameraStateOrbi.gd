@@ -55,6 +55,7 @@ func physics_process(delta: float) -> int:
 	if is_instance_valid(entity.cam_target):
 		cam_tracking(delta)
 		cam_panning(delta)
+		cam_velocity(delta)
 		cam_reset()
 	else:
 		return State.FREE
@@ -62,18 +63,20 @@ func physics_process(delta: float) -> int:
 		return State.VEHI
 	return State.NULL
 
+func cam_velocity(delta: float) -> void:
+	velocity = velocity.linear_interpolate(rotation * sensitivity / 5, delta * rotation_speed)
+
 func cam_tracking(delta: float) -> void:
 	rotation.x = Input.get_action_strength("cam_left") - Input.get_action_strength("cam_right")
-	#rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 3
-	velocity = velocity.linear_interpolate(rotation * sensitivity / 5, delta * rotation_speed)
-	entity.rotation.y += (deg2rad(velocity.x))
+	rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 2
 	entity.translation = lerp(entity.translation, entity.cam_target.translation + offset, follow_speed * delta)
-	#entity.camera_lens.translation.y = lerp(entity.camera_lens.translation.y, GlobalManager.player.states.get_joy_input(), follow_speed * delta)
 	entity.spring_length = lerp(entity.spring_length, clamp(entity.spring_length + distance, 4, 30), 10 * delta)
+	entity.rotation.y += (deg2rad(velocity.x))
 
 func cam_lifting(delta: float) -> void:
 	rotation.y = Input.get_action_strength("cam_up") - Input.get_action_strength("cam_down")
-	entity.rotation.x += clamp(velocity.y * delta, deg2rad(-45), deg2rad(20))
+	entity.rotation.x += velocity.y * delta
+	entity.rotation.x = lerp(entity.rotation.x, clamp(entity.rotation.x, deg2rad(-60), deg2rad(-15)), 6 * delta)
 
 func cam_panning(delta: float) -> void:
 	var distance_to_target = entity.camera_lens.get_global_translation().distance_to(entity.cam_target.get_global_translation())

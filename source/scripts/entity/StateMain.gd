@@ -5,6 +5,7 @@ var entity: Entity
 
 var climbing_normal: Vector3 = Vector3.ZERO
 var direction: Vector3 = Vector3.ZERO
+var facing_dir: float = 0
 
 func set_gravity(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 	var can_climb: bool = false
@@ -73,10 +74,9 @@ func apply_shimmy(state: PhysicsDirectBodyState, multiplier: float) -> void:
 		state.add_central_force((entity.speed * multiplier) * direction)
 
 func apply_rotation():
-	var facing_dir = 0
 	if direction != Vector3.ZERO:
 		facing_dir = atan2(-direction.x, -direction.z)
-		entity.skeleton.rotation.y = lerp_angle(entity.skeleton.rotation.y, facing_dir, 0.25)
+		entity.skeleton.rotation.y = lerp_angle(entity.skeleton.rotation.y, facing_dir, 0.2)
 
 func is_on_floor() -> bool:
 	if is_instance_valid(entity.climbing_rays):

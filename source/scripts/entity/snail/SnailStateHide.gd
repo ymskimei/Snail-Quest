@@ -2,7 +2,6 @@ extends SnailStateMain
 
 func enter() -> void:
 	print("Snail State: HIDE")
-	AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, entity.global_translation)
 	entity.anim.play("SnailHide")
 	yield(entity.anim, "animation_finished")
 	entity.anim.play("SnailHidden")
@@ -26,8 +25,9 @@ func integrate_forces(state: PhysicsDirectBodyState) -> int:
 	.integrate_forces(state)
 	return State.NULL
 
+func left_shell() -> void:
+	entity.anim.play("SnailUnhide")
+	yield(entity.anim, "animation_finished")
+
 func exit() -> void:
-	AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, entity.global_translation)
-	entity.anim.play_backwards("SnailHide")
-	#yield(entity.anim, "animation_finished")
 	entity.in_shell = false

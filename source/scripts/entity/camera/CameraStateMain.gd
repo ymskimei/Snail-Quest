@@ -1,7 +1,7 @@
 class_name CameraStateMain
 extends Node
 
-export var sensitivity: int = 10
+export var sensitivity: int = 15
 
 var entity: MainCamera
 var rotation: Vector2

@@ -16,7 +16,7 @@ func overworld_ambience():
 func set_ambience_eq():
 	var y_max = 256
 	var y_min = -128
-	var audio_listener = GlobalManager.camera.camera_lens.get_global_translation().y
+	var audio_listener = SnailQuest.camera.camera_lens.get_global_translation().y
 	var amount = clamp((audio_listener - y_min) / (y_max - y_min), 0, 1)
 	var hz_32 = lerp(-1.0, -16.0, amount)
 	var hz_100 = lerp(2.0, -4.0, amount)

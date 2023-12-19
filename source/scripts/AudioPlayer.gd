@@ -31,6 +31,9 @@ const sfx_bell_tone_error = "res://assets/sound/sfx_bell_tone_error.ogg"
 #Positional Sound Effects
 const sfx_snail_shell_in = "res://assets/sound/sfx_snail_shell_in.ogg"
 const sfx_snail_shell_out = "res://assets/sound/sfx_snail_shell_out.ogg"
+const sfx_snail_slide = "res://assets/sound/sfx_slide.ogg"
+const sfx_snail_slide_forward = "res://assets/sound/sfx_slide_forward.ogg"
+const sfx_snail_slide_backward = "res://assets/sound/sfx_slide_backward.ogg"
 const sfx_needle_swipe_0 = "res://assets/sound/sfx_needle_swipe_0.ogg"
 const sfx_needle_swipe_1 = "res://assets/sound/sfx_needle_swipe_1.ogg"
 const sfx_needle_swipe_2 = "res://assets/sound/sfx_needle_swipe_2.ogg"
@@ -57,18 +60,20 @@ func init_song(path: String):
 	music_booth.add_child(song)
 	music_booth.reload_songs()
 
-func play_sfx(path: String):
+func play_sfx(path: String, pitch: float = 1.0, volume: float = 0.0):
 	var sfx = AudioStreamPlayer.new()
 	var sound_effect = import_sound(path)
 	sfx.stream = sound_effect
 	sfx.set_volume_db(-8.0)
 	sfx.set_bus("SFX")
 	sound_booth.add_child(sfx)
+	sfx.set_pitch_scale(pitch)
+	sfx.set_volume_db(volume)
 	sfx.play()
 	yield(sfx, "finished")
 	sfx.queue_free()
 
-func play_pos_sfx(path: String, spatial: Vector3 = Vector3.ZERO):
+func play_pos_sfx(path: String, spatial: Vector3 = Vector3.ZERO, pitch: float = 1.0, volume: float = 0.0):
 	var sfx = AudioStreamPlayer3D.new()
 	var sound_effect = import_sound(path)
 	sfx.stream = sound_effect
@@ -78,6 +83,8 @@ func play_pos_sfx(path: String, spatial: Vector3 = Vector3.ZERO):
 	sfx.set_bus("SFX")
 	sound_booth.add_child(sfx)
 	sfx.global_translation = spatial
+	sfx.pitch_scale = pitch
+	sfx.unit_db = volume
 	sfx.play()
 	yield(sfx, "finished")
 	sfx.queue_free()
