@@ -1,6 +1,6 @@
 extends Node
 
-var deadzone: float = 0.5
+var deadzone: float = 0.25
 
 var device: String = DEVICE_CONTROLLER_GENERIC
 var device_index: int = -1
@@ -35,6 +35,7 @@ func _input(event: InputEvent) -> void:
 		device = next_device
 		device_index = next_device_index
 		emit_signal("device_changed", device, device_index)
+		get_all_devices()
 
 func get_simplified_device_name(raw_name: String) -> String:
 	match raw_name:
@@ -50,12 +51,12 @@ func get_simplified_device_name(raw_name: String) -> String:
 func has_gamepad() -> bool:
 	return Input.get_connected_joypads().size() > 0
 
-func guess_device_name() -> String:
+func guess_device_name(i: int = 0) -> String:
 	var connected_joypads = Input.get_connected_joypads()
 	if connected_joypads.size() == 0:
 		return DEVICE_KEYBOARD
 	else:
-		return get_simplified_device_name(Input.get_joy_name(0))
+		return get_simplified_device_name(Input.get_joy_name(i))
 
 func reset_all_actions() -> void:
 	InputMap.load_from_globals()
@@ -148,26 +149,23 @@ func set_action_button(target_action: String, button: int, swap_if_taken: bool =
 func rumble_small(target_device: int = 0) -> void:
 	Input.start_joy_vibration(target_device, 0.4, 0, 0.1)
 
-
 func rumble_medium(target_device: int = 0) -> void:
 	Input.start_joy_vibration(target_device, 0, 0.7, 0.1)
-
 
 func rumble_large(target_device: int = 0) -> void:
 	Input.start_joy_vibration(target_device, 0, 1, 0.1)
 
-
 func start_rumble_small(target_device: int = 0) -> void:
 	Input.start_joy_vibration(target_device, 0.4, 0, 0)
-
 
 func start_rumble_medium(target_device: int = 0) -> void:
 	Input.start_joy_vibration(target_device, 0, 0.7, 0)
 
-
 func start_rumble_large(target_device: int = 0) -> void:
 	Input.start_joy_vibration(target_device, 0, 1, 0)
 
-
 func stop_rumble(target_device: int = 0) -> void:
 	Input.stop_joy_vibration(target_device)
+
+func get_all_devices():
+	print("Device 0: " + guess_device_name(0) + "\nDevice 1: " + guess_device_name(1) + "\nDevice 2: " + guess_device_name(2) + "\nDevice 3: " + guess_device_name(3))

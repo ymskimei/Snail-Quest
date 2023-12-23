@@ -49,9 +49,3 @@ func set_game_time(node: Node):
 
 func set_chunk_start(vec: Vector3):
 	chunk_start = vec
-
-#func _unhandled_input(event):
-#	if Input.get_connected_joypads().size() >= 0:
-#		print("controller")
-#	else:
-#		print("keyboard")

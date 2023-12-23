@@ -16,22 +16,21 @@ func _ready() -> void:
 	get_viewport().connect("gui_focus_changed", self, "_on_gui_focus_changed")
 
 func _process(_delta: float):
-	if SnailQuest.controllable == null or get_tree().set_deferred("paused", true):
+	if SnailQuest.controllable == null or get_tree().paused == true:
 		hud.hide()
 		cursor.show()
 	elif SnailQuest.controllable is Entity or VehicleBody:
 		hud.show()
 		cursor.hide()
-	#get_tree().set_deferred("paused", false)
 
-func _input(event: InputEvent):
+func _unhandled_input(event: InputEvent):
 	if debug.visible:
 		if event.is_action_pressed("gui_debug"):
 			get_menu()
 	else:
 		if event.is_action_pressed("gui_debug"):
 			get_menu(debug)
-		if is_instance_valid(SnailQuest.controllable):
+		if SnailQuest.controllable:
 			if event.is_action_pressed("gui_pause"):
 				get_menu(options)
 			if event.is_action_pressed("gui_items"):

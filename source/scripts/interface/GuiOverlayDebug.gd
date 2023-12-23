@@ -13,6 +13,7 @@ onready var command_console: PanelContainer = $MarginContainer/HBoxContainer/Con
 
 func _ready() -> void:
 	default_focus = command_console.command_input
+	command_console.welcome_message()
 
 func _process(_delta: float) -> void:
 	set_display_framerate()
