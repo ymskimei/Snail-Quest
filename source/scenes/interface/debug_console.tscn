@@ -1,0 +1,121 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/interface/theme/menu.tres" type="Theme" id=1]
+[ext_resource path="res://source/scripts/interface/GuiPopupConsole.gd" type="Script" id=2]
+[ext_resource path="res://source/scenes/interface/debug_command.tscn" type="PackedScene" id=3]
+[ext_resource path="res://source/scenes/interface/debug_category.tscn" type="PackedScene" id=4]
+[ext_resource path="res://source/scripts/interface/GuiPopupConsoleCommands.gd" type="Script" id=5]
+
+[node name="PanelContainer" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 44.0
+margin_top = 44.0
+margin_right = 1876.0
+margin_bottom = 1036.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 1817.0
+margin_bottom = 977.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 1802.0
+margin_bottom = 915.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CommandDisplay" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+tab_size = 3
+scroll_following = true
+
+[node name="CommandInput" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 919.0
+margin_right = 1802.0
+margin_bottom = 962.0
+placeholder_text = "Enter a command"
+placeholder_alpha = 0.8
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="ConsoleCommandList" type="Node" parent="MarginContainer/VBoxContainer"]
+script = ExtResource( 5 )
+
+[node name="Information" parent="MarginContainer/VBoxContainer/ConsoleCommandList" instance=ExtResource( 4 )]
+module_description = " related commands."
+
+[node name="categories" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Information" instance=ExtResource( 3 )]
+help = "Show all respective categories for commands."
+
+[node name="clear" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Information" instance=ExtResource( 3 )]
+help = "Delete all previously sent messages from the console window."
+
+[node name="debug" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Information" instance=ExtResource( 3 )]
+help = "Toggle the debug information and statistics display."
+
+[node name="help" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Information" instance=ExtResource( 3 )]
+help = "Display a list of assistance and all usable commands."
+
+[node name="version" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Information" instance=ExtResource( 3 )]
+help = "Give the version number of the project."
+
+[node name="Utility" parent="MarginContainer/VBoxContainer/ConsoleCommandList" instance=ExtResource( 4 )]
+
+[node name="aspect" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+argument_names = [ "string" ]
+argument_types = [ 3 ]
+help = "Set the aspect ratio of the window."
+
+[node name="cam" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+help = "Toggle free roaming camera for debug viewing."
+
+[node name="quit" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+help = "Shut down the game process."
+
+[node name="restart" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+help = "Return to the title screen of the game."
+
+[node name="time" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+argument_names = [ "int" ]
+argument_types = [ 0 ]
+help = "Set the game world's time of day."
+
+[node name="tp" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+argument_names = [ "x", "y", "z" ]
+argument_types = [ 1, 1, 1 ]
+help = "Transport to specific coordinates in the world"
+
+[node name="warp" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Utility" instance=ExtResource( 3 )]
+argument_names = [ "transition" ]
+argument_types = [ 3 ]
+help = "Transport to a location via transition resource"
+
+[node name="Fun" parent="MarginContainer/VBoxContainer/ConsoleCommandList" instance=ExtResource( 4 )]
+
+[node name="say" parent="MarginContainer/VBoxContainer/ConsoleCommandList/Fun" instance=ExtResource( 3 )]
+argument_names = [ "text" ]
+argument_types = [ 3 ]
+help = "Repeat inputted text back into the command console."
+
+[connection signal="text_entered" from="MarginContainer/VBoxContainer/CommandInput" to="." method="_on_CommandInput_text_entered"]

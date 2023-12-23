@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://assets/model/samara.mesh" type="ArrayMesh" id=1]
-[ext_resource path="res://assets/texture/gui/item/tool_samara.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/interface/item/tool_samara.png" type="Texture" id=2]
 [ext_resource path="res://source/scripts/resource/ResourceItem.gd" type="Script" id=3]
 
 [resource]

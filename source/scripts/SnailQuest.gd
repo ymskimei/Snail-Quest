@@ -1,5 +1,8 @@
 extends Node
 
+onready var interface: Node = $Interface
+onready var audio: Node = $Audio
+
 var version_number: String = "0.3.0-pre-alpha"
 
 var world: Node

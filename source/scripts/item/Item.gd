@@ -8,7 +8,7 @@ onready var material: Material
 onready var item_body: RigidBody = $RigidBody
 onready var proxy_path: Script
 
-var sound: String = AudioPlayer.sfx_item_pickup
+var sound: String = SnailQuest.audio.sfx_item_pickup
 
 var tools = preload("res://assets/resource/pad_tools.tres")
 var items = preload("res://assets/resource/inventory.tres")
@@ -55,7 +55,7 @@ func _on_Area_body_entered(body):
 		else:
 			var slot = item.specific_slot
 			Utility.item.set_item(tools.items, slot, item)
-		AudioPlayer.play_sfx(sound)
+		SnailQuest.audio.play_sfx(sound)
 		collecting = true
 	pass
 

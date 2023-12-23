@@ -1,7 +1,7 @@
 extends Node
 
-onready var m_booth: MusicBooth = AudioPlayer.music_booth
-onready var a_booth: MusicBooth = AudioPlayer.ambie_booth
+onready var m_booth: MusicBooth = SnailQuest.audio.music_booth
+onready var a_booth: MusicBooth = SnailQuest.audio.ambie_booth
 
 var enemy_near: bool
 var enemy_pursuing: bool
@@ -10,7 +10,7 @@ func _ready():
 	overworld_ambience()
 
 func overworld_ambience():
-	AudioPlayer.init_ambience(AudioPlayer.amb_overworld)
+	SnailQuest.audio.init_ambience(SnailQuest.audio.amb_overworld)
 	a_booth.play_song("Overworld", 1.0)
 
 func set_ambience_eq():
@@ -50,7 +50,7 @@ func _physics_process(delta):
 
 func _on_SnailyTown_body_entered(body):
 	if body is Snail:
-		AudioPlayer.init_song(AudioPlayer.ost_layerstest)
+		SnailQuest.audio.init_song(SnailQuest.audio.ost_layerstest)
 		m_booth.play_song("LayersTest", 5.0)
 		m_booth.play_track(1, 5.0)
 		#silence_combat_tracks()

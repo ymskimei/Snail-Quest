@@ -69,6 +69,7 @@ light_specular = 0.0
 light_bake_mode = 0
 shadow_enabled = true
 shadow_color = Color( 0.643137, 0.643137, 0.643137, 1 )
+shadow_bias = 0.5
 directional_shadow_split_1 = 0.05
 directional_shadow_normal_bias = 0.1
 directional_shadow_bias_split_scale = 0.1

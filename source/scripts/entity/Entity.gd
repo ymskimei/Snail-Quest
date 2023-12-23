@@ -166,12 +166,12 @@ func target_interact(event) -> void:
 
 func set_interaction_text(text) -> void:
 	if !text:
-		GuiMain.hud.interaction_label.set_text("")
-		GuiMain.hud.interaction_label.set_visible(false)
+		SnailQuest.interface.hud.interaction_label.set_text("")
+		SnailQuest.interface.hud.interaction_label.set_visible(false)
 	else:
 		var interaction_key = OS.get_scancode_string(InputMap.get_action_list("action_main")[0].scancode)
-		GuiMain.hud.interaction_label.set_text("Press %s to %s" % [interaction_key, text])
-		GuiMain.hud.interaction_label.set_visible(true)
+		SnailQuest.interface.hud.interaction_label.set_text("Press %s to %s" % [interaction_key, text])
+		SnailQuest.interface.hud.interaction_label.set_visible(true)
 
 func get_interaction_text():
 	return "chat"

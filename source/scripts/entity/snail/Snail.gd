@@ -8,7 +8,7 @@ onready var ray_ledge_left: RayCast = $Armature/Skeleton/Rays/RayLedgeLeft
 onready var ray_ledge_right: RayCast = $Armature/Skeleton/Rays/RayLedgeRight
 onready var ray_bottom: RayCast = $Armature/Skeleton/Rays/RayBottom
 
-var cursor = preload("res://source/scenes/ui/gui_aim_cursor.tscn")
+var cursor = preload("res://source/scenes/interface/cursor_aim.tscn")
 
 var in_shell: bool
 var is_tool_equipped: bool
@@ -108,13 +108,13 @@ func update_appearance() -> void:
 
 func get_sound_slide(s: bool) -> void:
 	if s:
-		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_slide_backward, global_translation, 1.0, -1.0)
+		SnailQuest.audio.play_pos_sfx(SnailQuest.audio.sfx_snail_slide_backward, global_translation, 1.0, -1.0)
 	else:
-		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_slide_forward, global_translation, 1.25, -1.0)
+		SnailQuest.audio.play_pos_sfx(SnailQuest.audio.sfx_snail_slide_forward, global_translation, 1.25, -1.0)
 
 func get_sound_hide(s: bool) -> void:
 	if s:
-		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_in, global_translation, 1.0, 0.0)
+		SnailQuest.audio.play_pos_sfx(SnailQuest.audio.sfx_snail_shell_in, global_translation, 1.0, 0.0)
 	else:
-		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_snail_shell_out, global_translation, 0.5, 0.0)
+		SnailQuest.audio.play_pos_sfx(SnailQuest.audio.sfx_snail_shell_out, global_translation, 0.5, 0.0)
 	
