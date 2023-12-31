@@ -43,14 +43,14 @@ func on_command_cam(_console, args: Array) -> void:
 		SnailQuest.controllable = null
 	else:
 		SnailQuest.controllable = SnailQuest.prev_controllable
-	SnailQuest.interface.debug.close_command_console()
+	#SnailQuest.interface.debug.command_console.close_command_console()
 
 func on_command_clear(_console, _args: Array) -> void:
 	command_console.clear_console()
 
 func on_command_debug(_console, _args: Array) -> void:
 	SnailQuest.interface.debug.show_debug_information()
-	SnailQuest.interface.debug.close_command_console()
+	#command_console.close_command_console()
 
 func on_command_help(_console, _args: Array) -> void:
 	var message = "[color=#7F7F7F]————[/color] [color=#A8A8A8]?[/color] Help [color=#A8A8A8]?[/color] [color=#7F7F7F]————[/color]\n"
@@ -66,7 +66,7 @@ func on_command_quit(_console, _args: Array) -> void:
 
 func on_command_restart(_console, _args: Array) -> void:
 	get_tree().reload_current_scene()
-	SnailQuest.interface.debug.close_command_console()
+	#command_console.close_command_console()
 
 func on_command_say(_console, args: Array) -> void:
 	command_console.send_message(args[0])

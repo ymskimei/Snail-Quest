@@ -49,6 +49,10 @@ func get_menu(new_menu: CanvasLayer = null) -> void:
 		previous_menu.pop_front().open()
 		if previous_focus.size() > 0 and is_instance_valid(previous_focus[0]):
 			previous_focus.pop_front().grab_focus()
+#		for m in previous_menu:
+#			if m.visible == true:
+#				break
+#			else:
 		blur.play_backwards("Blur")
 		pause(false)
 
