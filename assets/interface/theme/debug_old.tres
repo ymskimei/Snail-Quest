@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=7 format=2]
+
+[ext_resource path="res://assets/interface/font/mochi_pop_p_one_32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/texture/interface/menu/npatch_debug.png" type="Texture" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxTexture" id=42]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 128, 128 )
+margin_left = 44.0
+margin_right = 44.0
+margin_top = 44.0
+margin_bottom = 44.0
+
+[resource]
+default_font = ExtResource( 1 )
+LineEdit/styles/focus = SubResource( 2 )
+LineEdit/styles/normal = SubResource( 3 )
+LineEdit/styles/read_only = SubResource( 4 )
+PanelContainer/styles/panel = SubResource( 42 )

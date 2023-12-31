@@ -16,7 +16,7 @@ signal target_updated
 
 func _ready() -> void:
 	states.ready(self)
-	GlobalManager.set_camera(self)
+	SnailQuest.set_camera(self)
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
@@ -27,8 +27,8 @@ func _physics_process(delta: float) -> void:
 	update_target()
 
 func update_target() -> void:
-	if is_instance_valid(GlobalManager.controllable):
-		cam_target = GlobalManager.controllable
+	if is_instance_valid(SnailQuest.controllable):
+		cam_target = SnailQuest.controllable
 	else:
 		cam_target = null
 
@@ -51,10 +51,10 @@ func find_camera_lock_points() -> void:
 				lock_to_point = false
 	else:
 		lock_to_point = false
-		lock_target = MathHelper.find_target(self, "lock_target")
+		lock_target = Utility.math.find_target(self, "lock_target")
 
 func set_coords(position: Vector3, angle: String, flipped: bool) -> void:
-	var rot = deg2rad(MathHelper.cardinal_to_degrees(angle))
+	var rot = deg2rad(Utility.math.cardinal_to_degrees(angle))
 	if flipped:
 		if !rot == 0:
 			rot /= 0.5

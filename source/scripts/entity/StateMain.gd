@@ -5,6 +5,7 @@ var entity: Entity
 
 var climbing_normal: Vector3 = Vector3.ZERO
 var direction: Vector3 = Vector3.ZERO
+var facing_dir: float = 0
 
 func set_gravity(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 	var can_climb: bool = false
@@ -24,7 +25,7 @@ func set_gravity(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 			climbing_normal = norm_avg / rays_colliding
 	else:
 		climbing_normal = Vector3.UP
-	entity.global_transform = MathHelper.apply_surface_align(entity.global_transform, climbing_normal)
+	entity.global_transform = Utility.math.apply_surface_align(entity.global_transform, climbing_normal)
 	state.add_central_force(lerp(15, gravity, 0.1) * -climbing_normal)
 
 func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
@@ -42,7 +43,7 @@ func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 			climbing_normal = norm_avg / rays_colliding
 	else:
 		climbing_normal = Vector3.UP
-	entity.global_transform = MathHelper.apply_surface_align(entity.global_transform, climbing_normal)
+	entity.global_transform = Utility.math.apply_surface_align(entity.global_transform, climbing_normal)
 
 func get_joy_input() -> Vector3:
 	var input = entity.input
@@ -73,10 +74,9 @@ func apply_shimmy(state: PhysicsDirectBodyState, multiplier: float) -> void:
 		state.add_central_force((entity.speed * multiplier) * direction)
 
 func apply_rotation():
-	var facing_dir = 0
 	if direction != Vector3.ZERO:
 		facing_dir = atan2(-direction.x, -direction.z)
-		entity.skeleton.rotation.y = lerp_angle(entity.skeleton.rotation.y, facing_dir, 0.25)
+		entity.skeleton.rotation.y = lerp_angle(entity.skeleton.rotation.y, facing_dir, 0.2)
 
 func is_on_floor() -> bool:
 	if is_instance_valid(entity.climbing_rays):

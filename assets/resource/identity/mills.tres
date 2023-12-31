@@ -13,8 +13,8 @@
 script = ExtResource( 1 )
 entity_name = "Sheldon"
 character = false
-health = 50
-max_health = 100
+health = 30
+max_health = 30
 strength = 5
 speed = 10
 jump = 65

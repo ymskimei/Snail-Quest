@@ -5,19 +5,19 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/use_diffuse = false
+shader_param/use_diffuse = true
 shader_param/use_specular = false
 shader_param/use_rim = false
 shader_param/use_light = true
 shader_param/use_shadow = false
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 1, 1, 1, 1 )
+shader_param/shade_color = Color( 0.933333, 0.803922, 0.733333, 1 )
 shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/normal_scale = 0.0
-shader_param/shade_threshold = 0.0
-shader_param/shade_softness = 0.0
+shader_param/shade_threshold = -0.25
+shader_param/shade_softness = 0.25
 shader_param/specular_glossiness = 15.0
 shader_param/specular_threshold = 0.5
 shader_param/specular_softness = 0.0

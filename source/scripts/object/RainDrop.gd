@@ -7,8 +7,8 @@ func _physics_process(delta: float) -> void:
 	if is_instance_valid(sprite):
 		if ray.is_colliding():
 			sprite.queue_free()
-		if is_instance_valid(GlobalManager.camera):
-			sprite.look_at(GlobalManager.camera.global_translation, Vector3.UP)
+		if is_instance_valid(SnailQuest.camera):
+			sprite.look_at(SnailQuest.camera.global_translation, Vector3.UP)
 	for p in get_children():
 		if p is Particles2D:
 			p.one_shot = true

@@ -27,7 +27,7 @@ func enter() -> void:
 func physics_process(delta: float) -> int:
 	if is_instance_valid(entity.cam_target.target):
 		if entity.cam_target.target_found:
-			MathHelper.slerp_look_at(entity, entity.cam_target.target.global_transform.origin, targeting_speed)
+			Utility.math.slerp_look_at(entity, entity.cam_target.target.global_transform.origin, targeting_speed)
 			entity.rotation.x = lerp(entity.rotation.x, targeting_rotation, follow_speed * delta)
 			if !entity.cam_target.targeting:
 				return State.ORBI
@@ -50,13 +50,13 @@ func add_bars_timer() -> void:
 func on_bars_timer() -> void:
 	if entity.cam_target.targeting:
 		if entity.cam_target.target_found:
-			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_lock)
+			SnailQuest.audio.play_sfx(SnailQuest.audio.sfx_cam_target_lock)
 		else:
-			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_no_target_lock)
+			SnailQuest.audio.play_sfx(SnailQuest.audio.sfx_cam_no_target_lock)
 		entity.anim_bars.play("BarsAppear")
 		bars_active = true
 	else:
-		AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_reset)
+		SnailQuest.audio.play_sfx(SnailQuest.audio.sfx_cam_target_reset)
 
 func tween_cam_zoom() -> void:
 	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom_targeting, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -66,9 +66,9 @@ func tween_cam_zoom() -> void:
 func exit() -> void:
 	if bars_active:
 		if entity.cam_target.target_found:
-			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_target_unlock)
+			SnailQuest.audio.play_sfx(SnailQuest.audio.sfx_cam_target_unlock)
 		else:
-			AudioPlayer.play_sfx(AudioPlayer.sfx_cam_no_target_unlock)
+			SnailQuest.audio.play_sfx(SnailQuest.audio.sfx_cam_no_target_unlock)
 		entity.anim_bars.play("BarsDisappear")
 	tween_cam_zoom()
 	rotation_complete = false

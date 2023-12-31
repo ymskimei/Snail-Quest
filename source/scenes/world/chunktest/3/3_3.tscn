@@ -1,9 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/materials/tile/dev/tile_wall.tres" type="Material" id=1]
-[ext_resource path="res://source/scripts/ChunkBase.gd" type="Script" id=2]
+[ext_resource path="res://source/scripts/world/ChunkBase.gd" type="Script" id=2]
 [ext_resource path="res://assets/materials/environment/leaf.tres" type="Material" id=3]
-[ext_resource path="res://assets/gui/font/font_default.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/interface/font/mochi_pop_p_one_32.tres" type="DynamicFont" id=4]
+
+
 
 
 

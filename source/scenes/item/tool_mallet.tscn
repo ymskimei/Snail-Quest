@@ -2,13 +2,14 @@
 
 [ext_resource path="res://assets/texture/item/slash.png" type="Texture" id=1]
 [ext_resource path="res://assets/model/needle.mesh" type="ArrayMesh" id=2]
-[ext_resource path="res://source/scripts/item/Mallet.gd" type="Script" id=3]
+[ext_resource path="res://source/scripts/item/tool/Mallet.gd" type="Script" id=3]
 [ext_resource path="res://assets/resource/animation/MalletStill.tres" type="Animation" id=4]
 [ext_resource path="res://assets/model/spool.mesh" type="ArrayMesh" id=5]
 [ext_resource path="res://assets/resource/animation/MalletSlamDown.tres" type="Animation" id=6]
 [ext_resource path="res://assets/resource/animation/MalletChargeSlam.tres" type="Animation" id=7]
 [ext_resource path="res://assets/resource/animation/MalletSwingRight.tres" type="Animation" id=8]
 [ext_resource path="res://assets/resource/animation/MalletSwingLeft.tres" type="Animation" id=9]
+
 
 
 [sub_resource type="Shader" id=6]

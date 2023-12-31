@@ -8,7 +8,7 @@ onready var ray_ledge_left: RayCast = $Armature/Skeleton/Rays/RayLedgeLeft
 onready var ray_ledge_right: RayCast = $Armature/Skeleton/Rays/RayLedgeRight
 onready var ray_bottom: RayCast = $Armature/Skeleton/Rays/RayBottom
 
-var cursor = preload("res://source/scenes/gui/gui_aim_cursor.tscn")
+var cursor = preload("res://source/scenes/interface/cursor_aim.tscn")
 
 var in_shell: bool
 var is_tool_equipped: bool
@@ -38,13 +38,13 @@ func _physics_process(delta: float) -> void:
 	._physics_process(delta)
 	if is_controlled():
 		states.physics_process(delta)
-	elif is_instance_valid(GlobalManager.controllable) and self == GlobalManager.prev_controllable:
-		if GlobalManager.controllable.get("grab_point"):
+	elif is_instance_valid(SnailQuest.controllable) and self == SnailQuest.prev_controllable:
+		if SnailQuest.controllable.get("grab_point"):
 			anim.play("SnailGrab")
-			global_translation = GlobalManager.controllable.grab_point.global_translation
-			global_rotation.x = GlobalManager.controllable.grab_point.global_rotation.x
+			global_translation = SnailQuest.controllable.grab_point.global_translation
+			global_rotation.x = SnailQuest.controllable.grab_point.global_rotation.x
 			global_rotation.y = 0
-			global_rotation.z = GlobalManager.controllable.grab_point.global_rotation.z
+			global_rotation.z = SnailQuest.controllable.grab_point.global_rotation.z
 	if in_shell:
 		attach_point.visible = false
 	else:
@@ -64,10 +64,10 @@ func _on_proximity_exited(body) -> void:
 
 func _on_Area_area_entered(area) -> void:
 	if area.is_in_group("danger"):
-		damage_entity(area.get_parent().strength)
+		set_entity_health(-(area.get_parent().strength))
 	if area.is_in_group("attachable"):
-		GlobalManager.set_prev_controllable(self)
-		GlobalManager.set_controllable(area.get_parent().get_parent().get_parent())
+		SnailQuest.set_prev_controllable(self)
+		SnailQuest.set_controllable(area.get_parent().get_parent().get_parent())
 		attached_to_location = true
 
 func update_appearance() -> void:
@@ -105,3 +105,16 @@ func update_appearance() -> void:
 		eyelid_right_mat.set_shader_param("texture_albedo", identity.pattern_eyelids)
 		eyelid_left_mat.set_shader_param("albedo_color", identity.color_body_accent)
 		eyelid_right_mat.set_shader_param("albedo_color", identity.color_body_accent)
+
+func get_sound_slide(s: bool) -> void:
+	if s:
+		SnailQuest.audio.play_pos_sfx(SnailQuest.audio.sfx_snail_slide_backward, global_translation, 1.0, -1.0)
+	else:
+		SnailQuest.audio.play_pos_sfx(SnailQuest.audio.sfx_snail_slide_forward, global_translation, 1.25, -1.0)
+
+func get_sound_hide(s: bool) -> void:
+	if s:
+		SnailQuest.audio.play_pos_sfx(SnailQuest.audio.sfx_snail_shell_in, global_translation, 1.0, 0.0)
+	else:
+		SnailQuest.audio.play_pos_sfx(SnailQuest.audio.sfx_snail_shell_out, global_translation, 0.5, 0.0)
+	

@@ -1,0 +1,44 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourceItem.gd" type="Script" id=1]
+[ext_resource path="res://assets/texture/interface/item/item_test_stackable.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/tile/dev/tile_deg_45.png" type="Texture" id=3]
+[ext_resource path="res://assets/shader/diffuse_gradient_1.tres" type="Texture" id=4]
+[ext_resource path="res://assets/shader/cel_old.shader" type="Shader" id=5]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/normal_scale = 0.0
+shader_param/specular = 0.0
+shader_param/specular_amount = 0.0
+shader_param/specular_smoothness = 0.0
+shader_param/rim = 0.0
+shader_param/rim_amount = 0.0
+shader_param/rim_smoothness = 0.0
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/emission_energy = 1.0
+shader_param/uv_scale = Vector3( 1, 1, 1 )
+shader_param/uv_offset = null
+shader_param/texture_albedo = ExtResource( 3 )
+shader_param/diffuse_curve = ExtResource( 4 )
+
+[sub_resource type="PrismMesh" id=1]
+material = SubResource( 2 )
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Dummy Item 2"
+description = "This item is stackable to a maximum and not deletable."
+proxy_path = ""
+sound = ""
+mesh = SubResource( 1 )
+sprite = ExtResource( 2 )
+amount = 1
+max_amount = 15
+specific_slot = 0
+stackable = true
+depletable = true
+loot_chance = 3

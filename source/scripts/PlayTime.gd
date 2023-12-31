@@ -6,7 +6,7 @@ var previous_time: int = 0
 
 func _ready() -> void:
 	reset_start()
-	GlobalManager.set_play_time(self)
+	SnailQuest.set_play_time(self)
 
 func _process(_delta: float) -> void:
 	calculate_play_time()

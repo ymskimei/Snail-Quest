@@ -32,7 +32,6 @@ func _ready():
 	engine.play()
 
 func _unhandled_input(event):
-	
 	if event.is_action_pressed("action_main"):
 		if can_boost and boost_remaining > 0:
 			boosting = true
@@ -79,21 +78,21 @@ func interact():
 	mount()
 
 func mount():
-	var player = GlobalManager.controllable
-	GlobalManager.register_vehicle(self)
-	GlobalManager.camera.update_target()
-	player.can_move = false
+	var driver = SnailQuest.controllable
+	SnailQuest.register_vehicle(self)
+	SnailQuest.camera.update_target()
+	driver.can_move = false
 	mounted = true
 
 func unmount():
-	var player = GlobalManager.controllable
-	GlobalManager.deregister_vehicle()
-	GlobalManager.camera.update_target()
-	player.can_move = false
+	var driver = SnailQuest.controllable
+	SnailQuest.deregister_vehicle()
+	SnailQuest.camera.update_target()
+	driver.can_move = false
 	mounted = false
 	engine_force = 0
 
 func is_controlled() -> bool:
-	if GlobalManager.controllable == self:
+	if SnailQuest.controllable == self:
 		return true
 	return false

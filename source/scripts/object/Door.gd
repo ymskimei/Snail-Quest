@@ -7,7 +7,7 @@ func _ready():
 
 func on_activated(is_active):
 	if is_active:
-		AudioPlayer.play_pos_sfx(AudioPlayer.sfx_door_open, global_translation)
+		SnailQuest.audio.play_pos_sfx(SnailQuest.audio.sfx_door_open, global_translation)
 		anim.play("Open")
 	else:
 		anim.play_backwards("Open")

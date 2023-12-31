@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode async_visible, blend_mix, depth_draw_alpha_prepass;
+render_mode async_visible, blend_mix, depth_draw_alpha_prepass, cull_disabled;
 
 uniform bool use_diffuse = false;
 uniform bool use_specular = false;
@@ -13,7 +13,7 @@ uniform vec4 specular_color: hint_color = vec4(0.75);
 uniform vec4 rim_color: hint_color = vec4(0.75);
 uniform vec4 emission: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 
-uniform float normal_scale: hint_range(-16, 16) = 0.0;
+uniform float normal_scale: hint_range(-16, 16) = 0.1;
 uniform float shade_threshold : hint_range(-1.0, 1.0) = 0.0;
 uniform float shade_softness : hint_range(0.0, 1.0) = 0.0;
 uniform float specular_glossiness : hint_range(1.0, 100.0) = 15.0;

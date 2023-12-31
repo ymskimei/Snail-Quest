@@ -4,6 +4,7 @@
 resource_name = "SnailMove"
 length = 0.5
 loop = true
+step = 0.01
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:EyeCenter.L")
 tracks/0/interp = 1
@@ -195,4 +196,21 @@ tracks/25/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/26/type = "method"
+tracks/26/path = NodePath(".")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0.1, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "get_sound_slide"
+}, {
+"args": [ true ],
+"method": "get_sound_slide"
+} ]
 }
