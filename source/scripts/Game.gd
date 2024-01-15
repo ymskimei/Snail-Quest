@@ -4,7 +4,7 @@ onready var interface: Node = $Interface
 
 #temp info
 var info: Dictionary = {
-	"title": "Snail Quest",
+	"title": "TITLE",
 	"version": "0.3.0-pre-alpha",
 	"author": "© 2023 Studio Kuwagata"
 }

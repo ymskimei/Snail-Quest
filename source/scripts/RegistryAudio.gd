@@ -8,6 +8,7 @@ const water: String = "water"
 const wind: String = "wind"
 
 const cam_first_person: String = "cam_first_person"
+const cam_third_person: String = "cam_third_person"
 const cam_iso_down: String = "cam_iso_down"
 const cam_iso_rotate_0: String = "cam_iso_rotate_0"
 const cam_iso_rotate_1: String = "cam_iso_rotate_1"

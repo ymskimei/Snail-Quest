@@ -240,7 +240,7 @@ margin_right = 664.0
 margin_bottom = 98.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "GUI_OPTIONS_FULLSCREEN"
+text = "OPTIONS_FULLSCREEN"
 valign = 1
 
 [node name="CheckBoxFullscreen" type="CheckBox" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Video/Grid"]
@@ -258,7 +258,7 @@ margin_right = 664.0
 margin_bottom = 200.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "GUI_OPTIONS_RESOLUTION"
+text = "OPTIONS_RESOLUTION"
 valign = 1
 
 [node name="ButtonResolution" type="OptionButton" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Video/Grid"]
@@ -284,7 +284,7 @@ margin_top = 206.0
 margin_right = 664.0
 margin_bottom = 302.0
 size_flags_vertical = 1
-text = "GUI_OPTIONS_FILTER"
+text = "OPTIONS_FILTER"
 valign = 1
 
 [node name="ButtonFilter" type="OptionButton" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Video/Grid"]
@@ -310,7 +310,7 @@ margin_top = 308.0
 margin_right = 664.0
 margin_bottom = 404.0
 size_flags_vertical = 1
-text = "GUI_OPTIONS_FPS"
+text = "OPTIONS_FPS"
 valign = 1
 
 [node name="ButtonFps" type="OptionButton" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Video/Grid"]
@@ -336,7 +336,7 @@ margin_top = 410.0
 margin_right = 664.0
 margin_bottom = 508.0
 size_flags_vertical = 1
-text = "GUI_OPTIONS_VSYNC"
+text = "OPTIONS_VSYNC"
 valign = 1
 
 [node name="CheckBoxVsync" type="CheckBox" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Video/Grid"]
@@ -375,7 +375,7 @@ margin_top = 23.0
 margin_right = 677.0
 margin_bottom = 75.0
 theme = ExtResource( 1 )
-text = "GUI_OPTIONS_HEADPHONES"
+text = "OPTIONS_HEADPHONES"
 
 [node name="CheckBoxHeadphones" type="CheckBox" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer/Grid"]
 unique_name_in_owner = true
@@ -390,7 +390,7 @@ margin_top = 137.0
 margin_right = 677.0
 margin_bottom = 189.0
 theme = ExtResource( 1 )
-text = "GUI_OPTIONS_MONO"
+text = "OPTIONS_MONO"
 
 [node name="CheckBoxMono" type="CheckBox" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer/Grid"]
 unique_name_in_owner = true
@@ -406,7 +406,7 @@ margin_top = 244.0
 margin_right = 1072.0
 margin_bottom = 296.0
 theme = ExtResource( 1 )
-text = "GUI_OPTIONS_VOLUME_MASTER"
+text = "OPTIONS_VOLUME_MASTER"
 
 [node name="BarVolumeMaster" type="HSlider" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer"]
 margin_top = 328.0
@@ -426,7 +426,7 @@ margin_top = 376.0
 margin_right = 1072.0
 margin_bottom = 428.0
 theme = ExtResource( 1 )
-text = "GUI_OPTIONS_VOLUME_MUSIC"
+text = "OPTIONS_VOLUME_MUSIC"
 
 [node name="BarVolumeMusic" type="HSlider" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer"]
 margin_top = 460.0
@@ -445,7 +445,7 @@ margin_top = 508.0
 margin_right = 1072.0
 margin_bottom = 560.0
 theme = ExtResource( 1 )
-text = "GUI_OPTIONS_VOLUME_SFX"
+text = "OPTIONS_VOLUME_SFX"
 
 [node name="BarVolumeSfx" type="HSlider" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer"]
 margin_top = 592.0
@@ -484,7 +484,7 @@ margin_top = 23.0
 margin_right = 663.0
 margin_bottom = 75.0
 theme = ExtResource( 1 )
-text = "GUI_OPTIONS_HORIZONTAL"
+text = "OPTIONS_HORIZONTAL"
 
 [node name="CheckBoxHorizontal" type="CheckBox" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid"]
 margin_left = 974.0
@@ -498,7 +498,7 @@ margin_top = 161.0
 margin_right = 663.0
 margin_bottom = 213.0
 theme = ExtResource( 1 )
-text = "GUI_OPTIONS_VERTICAL"
+text = "OPTIONS_VERTICAL"
 
 [node name="CheckBoxVertical" type="CheckBox" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid"]
 margin_left = 974.0
@@ -519,7 +519,7 @@ margin_top = 312.0
 margin_right = 1072.0
 margin_bottom = 364.0
 theme = ExtResource( 1 )
-text = "GUI_OPTIONS_SENSITIVITY"
+text = "OPTIONS_SENSITIVITY"
 
 [node name="BarCameraSensitivity" type="HSlider" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer"]
 margin_top = 396.0
@@ -553,7 +553,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 1
 theme = ExtResource( 1 )
-text = "GUI_OPTIONS_CONTROLS"
+text = "OPTIONS_CONTROLS"
 align = 1
 valign = 1
 
@@ -578,7 +578,7 @@ margin_top = 22.0
 margin_right = 614.0
 margin_bottom = 74.0
 theme = ExtResource( 1 )
-text = "GUI_OPTIONS_LANGUAGE"
+text = "OPTIONS_LANGUAGE"
 
 [node name="ButtonLanguage" type="OptionButton" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Misc/Grid"]
 unique_name_in_owner = true

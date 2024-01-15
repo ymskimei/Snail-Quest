@@ -17,18 +17,24 @@ func _input(event: InputEvent) -> void:
 		current_camera_target = true
 		var rotation_timer_right: Timer = Timer.new()
 		if Input.is_action_pressed("joy_down") and !active:
-			anim.play_backwards("Switch")
-			SB.utility.audio.play_pos_sfx(RegistryAudio.switch_on, global_translation)
-			yield(anim, "animation_finished")
-			active = true
-			emit_signal("activated", active)
+			_activate_switch()
 		elif Input.is_action_pressed("joy_up") and active:
-			anim.play("Switch")
-			SB.utility.audio.play_pos_sfx(RegistryAudio.switch_off, global_translation)
-			yield(anim, "animation_finished")
-			active = false
-			emit_signal("activated", active)
+			_deactivate_switch()
 		elif Input.is_action_pressed("action_main"):
 			SB.set_controllable(SB.prev_controllable)
 	else:
 		current_camera_target = false
+
+func _activate_switch() -> void:
+	anim.play_backwards("Switch")
+	SB.utility.audio.play_pos_sfx(RegistryAudio.switch_on, global_translation)
+	yield(anim, "animation_finished")
+	active = true
+	emit_signal("activated", active)
+
+func _deactivate_switch() -> void:
+	anim.play("Switch")
+	SB.utility.audio.play_pos_sfx(RegistryAudio.switch_off, global_translation)
+	yield(anim, "animation_finished")
+	active = false
+	emit_signal("activated", active)

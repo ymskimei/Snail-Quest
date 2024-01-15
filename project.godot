@@ -64,10 +64,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/snowball_framework/source/scripts/entity/Entity.gd"
 }, {
-"base": "RigidBody",
+"base": "InteractableParent",
 "class": "Interactable",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/object/Interactable.gd"
+"path": "res://source/scripts/object/Interactable.gd"
+}, {
+"base": "RigidBody",
+"class": "InteractableParent",
+"language": "GDScript",
+"path": "res://addons/snowball_framework/source/scripts/object/InteractableParent.gd"
 }, {
 "base": "Node",
 "class": "InterfaceParent",
@@ -232,6 +237,7 @@ _global_script_class_icons={
 "EnemyStateMain": "",
 "Entity": "",
 "Interactable": "",
+"InteractableParent": "",
 "InterfaceParent": "",
 "InventoryParent": "",
 "Item": "",

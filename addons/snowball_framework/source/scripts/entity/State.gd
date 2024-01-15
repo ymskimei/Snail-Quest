@@ -43,7 +43,7 @@ func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 			climbing_normal = norm_avg / rays_colliding
 	else:
 		climbing_normal = Vector3.UP
-	entity.global_transform = SB.math.apply_surface_align(entity.global_transform, climbing_normal)
+	entity.global_transform = SB.utility.apply_surface_align(entity.global_transform, climbing_normal)
 
 func get_joy_input() -> Vector3:
 	var input = entity.input

@@ -13,7 +13,7 @@ signal game_start
 
 func _ready() -> void:
 	set_title_splash()
-	version.set_bbcode("[color=#EFEFEF] Version " + SB.game.info["version"])
+	version.set_bbcode("[color=#EFEFEF]" + TranslationServer.translate("TITLE") + " " + TranslationServer.translate("TITLE_VERSION") + " " + SB.game.info["version"])
 	info.set_bbcode("[right][color=#EFEFEF] " + SB.game.info["author"])
 	default_selection.grab_focus()
 	anim_cam.play("CamTitleStart")
@@ -50,16 +50,16 @@ func _on_OptionsButton_pressed() -> void:
 
 func set_title_splash() -> void:
 	var splashes: Array = [
-		"GUI_TITLE_SPLASH_0",
-		"GUI_TITLE_SPLASH_1",
-		"GUI_TITLE_SPLASH_2",
-		"GUI_TITLE_SPLASH_3",
-		"GUI_TITLE_SPLASH_4",
-		"GUI_TITLE_SPLASH_5",
-		"GUI_TITLE_SPLASH_6",
-		"GUI_TITLE_SPLASH_7",
-		"GUI_TITLE_SPLASH_8",
-		"GUI_TITLE_SPLASH_9"
+		"TITLE_SPLASH_0",
+		"TITLE_SPLASH_1",
+		"TITLE_SPLASH_2",
+		"TITLE_SPLASH_3",
+		"TITLE_SPLASH_4",
+		"TITLE_SPLASH_5",
+		"TITLE_SPLASH_6",
+		"TITLE_SPLASH_7",
+		"TITLE_SPLASH_8",
+		"TITLE_SPLASH_9"
 	]
 	randomize()
 	splash.set_bbcode("[tornado radius=3 freq=2][color=#FFF896]" + TranslationServer.translate(splashes[randi() % splashes.size()]))
