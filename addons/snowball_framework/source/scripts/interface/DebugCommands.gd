@@ -49,7 +49,7 @@ func on_command_clear(_console, _args: Array) -> void:
 	command_console.clear_console()
 
 func on_command_debug(_console, _args: Array) -> void:
-	SB.interface.debug.show_debug_information()
+	SB.game.interface.debug.show_debug_information()
 	#command_console.close_command_console()
 
 func on_command_help(_console, _args: Array) -> void:
@@ -81,7 +81,7 @@ func on_command_say(_console, args: Array) -> void:
 
 func on_command_time(_console, args: Array) -> void:
 	SB.game_time.set_time(args[0])
-	command_console.send_message("The world's time has been set to [color=#C3EF5D]%s[/color]\n" % args[0])
+	command_console.send_message("In-game time set to [color=#C3EF5D]%s[/color]\n" % args[0])
 
 func on_command_tp(_console, args: Array) -> void:
 	if is_instance_valid(SB.controllable):
@@ -89,7 +89,7 @@ func on_command_tp(_console, args: Array) -> void:
 	SB.camera.set_coords(Vector3(args[0], args[1], args[2]))
 
 func on_command_version(_console, _args: Array) -> void:
-	command_console.send_message("Snail Quest is on version [color=#C3EF5D]%s[/color]\n" % SB.version_number)
+	command_console.send_message("%s is on version [color=#C3EF5D]%s[/color]\n" % [SB.game.info["title"], SB.game.info["version"]])
 
 func on_command_warp(_console, args: Array) -> void:
 	var directory = Directory.new();
@@ -107,9 +107,10 @@ func on_command_warp(_console, args: Array) -> void:
 		elif found_world != "":
 			SB.world.load_room(load(found_world), Vector3.ZERO, "NORTH")
 		else:
-			var message = "[color=#A8A8A8]This warp's resource does not exist![/color]"
+			var message = "[color=#A8A8A8]This warp does not exist![/color]"
 			command_console.send_message(message)
 
 #immortal - enable/disable invincibility
 #sethealth - add or remove health to an entity
 #kill - set an entity's health to 0 instantly
+#summon - bring an item, object, or entity into being

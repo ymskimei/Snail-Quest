@@ -1,4 +1,4 @@
-class_name GuiConsoleCategory
+class_name DebugConsoleCategory
 extends Node
 
 export var command_handler_target: String = ".."
@@ -30,7 +30,7 @@ func has_command(command: String):
 
 func _build_command_dictionary(target: Node):
 	for child in target.get_children():
-		if child is GuiConsoleCommand:
+		if child is DebugConsoleCommand:
 			var namespace = child.get_name_space_to(self)
 			child.call_back = namespace.join("_")
 			command_references[namespace.join(".")] = child

@@ -129,7 +129,7 @@ func get_chunk_rows(path: String) -> Array:
 func get_warps(room: Spatial) -> void:
 	if is_instance_valid(room.find_node("Warps")):
 		for child in room.find_node("Warps").get_children():
-			if child is RoomTransition:
+			if child is Warp:
 				child.connect("goto_room", self, "_on_goto_room")
 
 #I did this part last night and I think it probably works or something

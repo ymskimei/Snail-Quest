@@ -5,8 +5,8 @@ onready var command_display = $"%CommandDisplay"
 
 export var message_buffer_limit = 100
 
-var message_buffer : PoolStringArray = []
-var command_modules : Array = []
+var message_buffer: PoolStringArray = []
+var command_modules: Array = []
 
 func welcome_message():
 	message_buffer = []
@@ -16,11 +16,11 @@ func welcome_message():
 	command_display.bbcode_text += "   More information will be displayed here at a later date.\n"
 	command_display.bbcode_text += "   Use the command 'help' for more.\n\n"
 	
-func add_command_module(module : GuiConsoleCategory):
+func add_command_module(module: DebugConsoleCategory):
 	module.command_console = self
 	command_modules.push_back(module)
 
-func send_message(message):
+func send_message(message: String):
 	message_buffer.push_back(message)
 	if message_buffer.size() > message_buffer_limit:
 		message_buffer.remove(0)
@@ -30,7 +30,7 @@ func clear_console():
 	message_buffer = []
 	command_display.bbcode_text = ""
 
-func parse_input(input):
+func parse_input(input: String):
 	var token = input.split(" ", false, 1)
 	if token.size() == 0:
 		return
@@ -48,7 +48,7 @@ func parse_input(input):
 		arguments = token[1]
 	command_module.command_entered(command, arguments)
 
-func _on_CommandInput_text_entered(input):
+func _on_CommandInput_text_entered(input: String):
 	command_input.clear()
 	if input.length() == 0:
 		return

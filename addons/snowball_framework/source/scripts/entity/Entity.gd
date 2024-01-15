@@ -1,8 +1,8 @@
 class_name Entity
 extends Interactable
 
-export(Resource) var identity
-export(Resource) var inventory
+export var identity: Resource
+export var inventory: Resource
 
 onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
@@ -35,27 +35,13 @@ var jump_memory_timer: Timer = Timer.new()
 var ledge_timer: Timer = Timer.new()
 
 func _ready() -> void:
-	if is_instance_valid(identity):
-		entity_name = identity.entity_name
-		character = identity.character
-		health = identity.health
-		max_health = identity.max_health
-		strength = identity.strength
-		speed = identity.speed
-		jump = identity.jump
-	jump_memory_timer.set_wait_time(0.075)
-	jump_memory_timer.one_shot = true
-	jump_memory_timer.connect("timeout", self, "on_jump_memory_timeout")
-	add_child(jump_memory_timer)
-	ledge_timer.set_wait_time(1)
-	ledge_timer.one_shot = true
-	ledge_timer.connect("timeout", self, "on_ledge_timeout")
-	add_child(ledge_timer)
+	_set_identity()
+	_set_display_health()
+	_get_timers()
 	ledge_usable = true
 	if is_instance_valid(proximity):
 		proximity.connect("area_entered", self, "_on_proximity_entered")
 		proximity.connect("area_exited", self, "_on_proximity_exited")
-	set_display_health()
 	SB.camera.connect("target_updated", self, "_on_cam_target_updated")
 	#temp until can be updated from a save file
 	SB.emit_signal("health_changed", health, max_health, is_controlled())
@@ -83,6 +69,26 @@ func _physics_process(delta: float) -> void:
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	pass
 
+func _set_identity() -> void:
+	if is_instance_valid(identity):
+		entity_name = identity.entity_name
+		character = identity.character
+		health = identity.health
+		max_health = identity.max_health
+		strength = identity.strength
+		speed = identity.speed
+		jump = identity.jump
+
+func _get_timers():
+	jump_memory_timer.set_wait_time(0.075)
+	jump_memory_timer.one_shot = true
+	jump_memory_timer.connect("timeout", self, "on_jump_memory_timeout")
+	add_child(jump_memory_timer)
+	ledge_timer.set_wait_time(1)
+	ledge_timer.one_shot = true
+	ledge_timer.connect("timeout", self, "on_ledge_timeout")
+	add_child(ledge_timer)
+
 func set_entity_health(new_amount: int) -> void:
 	health += new_amount
 	if health > max_health:
@@ -93,16 +99,16 @@ func set_entity_health(new_amount: int) -> void:
 		print(str(self.name) +" Died")
 	SB.emit_signal("health_changed", health, max_health, is_controlled())
 	print(str(self.name) +" Health: " + str(health))
-	set_display_health()
+	_set_display_health()
 
 func set_entity_max_health(new_amount: int) -> void:
 	max_health += new_amount
 	health = max_health
 	SB.emit_signal("health_changed", health, max_health, is_controlled())
 	print(str(self.name) +" Health: " + str(health))
-	set_display_health()
+	_set_display_health()
 
-func set_display_health() -> void:
+func _set_display_health() -> void:
 	if is_instance_valid($DebugHealthBar):
 		$DebugHealthBar.update_bar(body, health, max_health)
 

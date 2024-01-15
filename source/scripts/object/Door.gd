@@ -7,7 +7,7 @@ func _ready():
 
 func on_activated(is_active):
 	if is_active:
-		SB.audio.play_pos_sfx(RegistryAudio.door_open, global_translation)
+		SB.utility.audio.play_pos_sfx(RegistryAudio.door_open, global_translation)
 		anim.play("Open")
 	else:
 		anim.play_backwards("Open")

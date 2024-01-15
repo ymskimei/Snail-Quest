@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/snowball_framework/source/scripts/interface/DebugOverlay.gd" type="Script" id=1]
-[ext_resource path="res://assets/interface/theme/menu.tres" type="Theme" id=2]
+[ext_resource path="res://addons/snowball_framework/assets/interface/theme/debug.tres" type="Theme" id=2]
 [ext_resource path="res://addons/snowball_framework/source/scenes/interface/debug_console.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/interface/theme/debug_old.tres" type="Theme" id=4]
 
 [node name="GuiDebug" type="CanvasLayer"]
 pause_mode = 2
@@ -19,7 +18,6 @@ margin_right = -20.0
 margin_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_right = 1880.0
@@ -51,7 +49,7 @@ margin_left = 1254.0
 margin_right = 1880.0
 margin_bottom = 1040.0
 size_flags_horizontal = 3
-theme = ExtResource( 4 )
+theme = ExtResource( 2 )
 alignment = 2
 
 [node name="DisplayFramerate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]

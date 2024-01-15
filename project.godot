@@ -34,6 +34,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/world/Chunk.gd"
 }, {
+"base": "Node",
+"class": "DebugConsoleCategory",
+"language": "GDScript",
+"path": "res://addons/snowball_framework/source/scripts/interface/DebugConsoleCategory.gd"
+}, {
+"base": "Node",
+"class": "DebugConsoleCommand",
+"language": "GDScript",
+"path": "res://addons/snowball_framework/source/scripts/interface/DebugConsoleCommand.gd"
+}, {
 "base": "Resource",
 "class": "DialogueResource",
 "language": "GDScript",
@@ -53,16 +63,6 @@ _global_script_classes=[ {
 "class": "Entity",
 "language": "GDScript",
 "path": "res://addons/snowball_framework/source/scripts/entity/Entity.gd"
-}, {
-"base": "Node",
-"class": "GuiConsoleCategory",
-"language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/DebugConsoleCategory.gd"
-}, {
-"base": "Node",
-"class": "GuiConsoleCommand",
-"language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/DebugConsoleCommand.gd"
 }, {
 "base": "RigidBody",
 "class": "Interactable",
@@ -225,12 +225,12 @@ _global_script_class_icons={
 "CameraStateLock": "",
 "CameraStateMain": "",
 "Chunk": "",
+"DebugConsoleCategory": "",
+"DebugConsoleCommand": "",
 "DialogueResource": "",
 "Enemy": "",
 "EnemyStateMain": "",
 "Entity": "",
-"GuiConsoleCategory": "",
-"GuiConsoleCommand": "",
 "Interactable": "",
 "InterfaceParent": "",
 "InventoryParent": "",
@@ -291,10 +291,10 @@ default_bus_layout="res://assets/default_bus_layout.tres"
 
 [autoload]
 
-SaveData="*res://addons/snowball_framework/source/scripts/utility/Data.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-WorldSave="*res://source/scripts/world/WorldSave.gd"
 SB="*res://addons/snowball_framework/source/scenes/sb.tscn"
+EventFlags="*res://source/scripts/EventFlags.gd"
+WorldSave="*res://source/scripts/world/WorldSave.gd"
 
 [debug]
 
