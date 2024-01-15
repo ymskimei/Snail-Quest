@@ -1,7 +1,7 @@
 [gd_scene load_steps=36 format=2]
 
-[ext_resource path="res://source/scenes/interface/container_equipment.tscn" type="PackedScene" id=1]
-[ext_resource path="res://source/scripts/interface/GuiHud.gd" type="Script" id=2]
+[ext_resource path="res://addons/snowball_framework/source/scenes/interface/container_equipment.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/scripts/interface/Hud.gd" type="Script" id=2]
 [ext_resource path="res://assets/texture/interface/item/item_kon.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/interface/hud/frame_generic_2.png" type="Texture" id=4]
 [ext_resource path="res://assets/texture/interface/hud/slime.png" type="Texture" id=5]
@@ -13,7 +13,7 @@
 [ext_resource path="res://assets/texture/interface/control/button_y.png" type="Texture" id=11]
 [ext_resource path="res://assets/texture/interface/control/button_b.png" type="Texture" id=12]
 [ext_resource path="res://assets/texture/interface/hud/clock_hand_temp.png" type="Texture" id=13]
-[ext_resource path="res://source/scenes/interface/container.tscn" type="PackedScene" id=14]
+[ext_resource path="res://addons/snowball_framework/source/scenes/interface/container.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/resource/pad_tools.tres" type="Resource" id=15]
 [ext_resource path="res://assets/interface/font/nishiki_teki_50.tres" type="DynamicFont" id=16]
 [ext_resource path="res://assets/texture/interface/hud/frame_generic.png" type="Texture" id=17]
@@ -27,6 +27,7 @@
 [ext_resource path="res://assets/texture/interface/hud/shell_stock_full.png" type="Texture" id=25]
 [ext_resource path="res://assets/texture/interface/hud/camera_pan.png" type="Texture" id=26]
 [ext_resource path="res://assets/texture/interface/hud/frame_tool.png" type="Texture" id=27]
+
 
 [sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 20 )

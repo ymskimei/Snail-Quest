@@ -1,30 +1,21 @@
 class_name Menu
-extends CanvasLayer
-
-onready var anim: AnimationPlayer
-
-var default_focus: Control
-var recent_focus: Control
+extends MenuParent
 
 func _ready() -> void:
-	get_viewport().connect("gui_focus_changed", self, "_on_gui_focus_changed")
 	if is_instance_valid($AnimationPlayer):
 		anim = $AnimationPlayer
 
-func open(toggle: bool = false) -> void:
-	if toggle:
-		show()
-		if is_instance_valid(anim):
-			anim.play("Appear")
-		if is_instance_valid(recent_focus):
-			recent_focus.grab_focus()
-		if is_instance_valid(default_focus):
-			default_focus.grab_focus()
-	else:
-		if anim:
-			anim.play("Disappear")
-			yield(anim, "animation_finished")
-		hide()
+func get_sound_switch():
+	SB.utility.audio.play_sfx(RegistryAudio.tone_switch)
 
-func _on_gui_focus_changed(node: Node):
-	recent_focus = node
+func get_sound_success():
+	SB.utility.audio.play_sfx(RegistryAudio.tone_success)
+
+func get_sound_next():
+	SB.utility.audio.play_sfx(RegistryAudio.tone_next)
+	
+func get_sound_exit():
+	SB.utility.audio.play_sfx(RegistryAudio.tone_exit)
+
+func get_sound_error():
+	SB.utility.audio.play_sfx(RegistryAudio.tone_error)

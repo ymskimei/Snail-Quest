@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/cam_perspective.ogg-1c4549c0c604d22a133000c9ed9c760c.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/cam_perspective.ogg"
+dest_files=[ "res://import/cam_perspective.ogg-1c4549c0c604d22a133000c9ed9c760c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

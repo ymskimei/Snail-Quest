@@ -1,7 +1,7 @@
 [gd_scene load_steps=42 format=2]
 
-[ext_resource path="res://source/scenes/interface/debug_healthbar.tscn" type="PackedScene" id=1]
-[ext_resource path="res://source/scenes/entity/state_controller.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/snowball_framework/source/scenes/interface/debug_healthbar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/snowball_framework/source/scenes/entity/state_controller.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/resource/animation/SnailIdle.tres" type="Animation" id=3]
 [ext_resource path="res://assets/resource/animation/SnailMove.tres" type="Animation" id=4]
 [ext_resource path="res://assets/resource/animation/SnailHide.tres" type="Animation" id=5]
@@ -34,6 +34,7 @@
 [ext_resource path="res://assets/resource/animation/SnailSpin.tres" type="Animation" id=32]
 [ext_resource path="res://assets/resource/animation/SnailLedge.tres" type="Animation" id=33]
 [ext_resource path="res://assets/resource/animation/SnailGrab.tres" type="Animation" id=34]
+
 
 [sub_resource type="PhysicsMaterial" id=32]
 

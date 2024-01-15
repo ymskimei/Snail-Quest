@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/cam_target_reset.ogg-7f90dc8a6a103dc030ff1ea1ab936f7b.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/cam_target_reset.ogg"
+dest_files=[ "res://import/cam_target_reset.ogg-7f90dc8a6a103dc030ff1ea1ab936f7b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

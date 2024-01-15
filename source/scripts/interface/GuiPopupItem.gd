@@ -24,20 +24,20 @@ func set_hud_items() -> void:
 				var item = child.contained_item
 				if Input.is_action_just_pressed("pad_up"):
 					if item_match(item, equipment.items) != 0:
-						Utility.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
-					Utility.item.set_item(equipment.items, 1, item)
+						SB.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
+					SB.item.set_item(equipment.items, 1, item)
 				elif Input.is_action_just_pressed("pad_right"):
 					if item_match(item, equipment.items) != 0:
-						Utility.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
-					Utility.item.set_item(equipment.items, 2, item)
+						SB.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
+					SB.item.set_item(equipment.items, 2, item)
 				elif Input.is_action_just_pressed("pad_down"):
 					if item_match(item, equipment.items) != 0:
-						Utility.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
-					Utility.item.set_item(equipment.items, 3, item)
+						SB.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
+					SB.item.set_item(equipment.items, 3, item)
 				elif Input.is_action_just_pressed("pad_left"):
 					if item_match(item, equipment.items) != 0:
-						Utility.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
-					Utility.item.set_item(equipment.items, 4, item)
+						SB.item.replace_item(equipment.items, equipment.items[item_match(item, equipment.items)], null)
+					SB.item.set_item(equipment.items, 4, item)
 
 func item_match(i, index: Array) -> int:
 	if i == index[1]:

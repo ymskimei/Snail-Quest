@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=7 format=2]
 
 [ext_resource path="res://assets/interface/font/mochi_pop_p_one_32.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/texture/interface/menu/npatch_debug.png" type="Texture" id=2]
+[ext_resource path="res://addons/snowball_framework/assets/texture/interface/npatch_debug.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 

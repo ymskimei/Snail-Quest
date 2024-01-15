@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/snail_slide.ogg-07f2ea3899ca2ba67242e713e642274c.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/snail_slide.ogg"
+dest_files=[ "res://import/snail_slide.ogg-07f2ea3899ca2ba67242e713e642274c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

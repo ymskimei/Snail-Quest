@@ -18,17 +18,17 @@ func _input(event: InputEvent) -> void:
 		var rotation_timer_right: Timer = Timer.new()
 		if Input.is_action_pressed("joy_down") and !active:
 			anim.play_backwards("Switch")
-			SnailQuest.audio.play_pos_sfx(SnailQuest.audio.sfx_switch_on, global_translation)
+			SB.audio.play_pos_sfx(RegistryAudio.sfx_switch_on, global_translation)
 			yield(anim, "animation_finished")
 			active = true
 			emit_signal("activated", active)
 		elif Input.is_action_pressed("joy_up") and active:
 			anim.play("Switch")
-			SnailQuest.audio.play_pos_sfx(SnailQuest.audio.sfx_switch_off, global_translation)
+			SB.audio.play_pos_sfx(RegistryAudio.sfx_switch_off, global_translation)
 			yield(anim, "animation_finished")
 			active = false
 			emit_signal("activated", active)
 		elif Input.is_action_pressed("action_main"):
-			SnailQuest.set_controllable(SnailQuest.prev_controllable)
+			SB.set_controllable(SB.prev_controllable)
 	else:
 		current_camera_target = false

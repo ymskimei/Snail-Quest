@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/interface/theme/menu.tres" type="Theme" id=1]
-[ext_resource path="res://source/scripts/interface/GuiOptions.gd" type="Script" id=2]
+[ext_resource path="res://source/scripts/interface/Options.gd" type="Script" id=2]
 [ext_resource path="res://assets/texture/interface/menu/button_tab_audio.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/interface/control/temp_normal.png" type="Texture" id=4]
 [ext_resource path="res://assets/texture/interface/control/temp_hover.png" type="Texture" id=5]
@@ -643,8 +643,8 @@ custom_constants/separation = 48
 alignment = 1
 
 [node name="NinePatchRect" type="TextureButton" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer"]
-margin_left = 160.0
-margin_right = 928.0
+margin_left = 16.0
+margin_right = 784.0
 margin_bottom = 128.0
 size_flags_horizontal = 6
 size_flags_vertical = 0
@@ -661,23 +661,23 @@ valign = 1
 
 [node name="GridContainer" type="GridContainer" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer"]
 margin_top = 176.0
-margin_right = 1088.0
-margin_bottom = 792.0
+margin_right = 800.0
+margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 40
 columns = 2
 
 [node name="LabelButtonAction" type="Label" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
-margin_top = 23.0
-margin_right = 809.0
-margin_bottom = 75.0
+margin_top = 27.0
+margin_right = 678.0
+margin_bottom = 70.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_BUTTON_ACTION"
 
 [node name="action_main" type="TextureButton" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
-margin_left = 990.0
-margin_right = 1088.0
+margin_left = 702.0
+margin_right = 800.0
 margin_bottom = 98.0
 size_flags_horizontal = 10
 texture_normal = ExtResource( 4 )
@@ -685,16 +685,16 @@ texture_hover = ExtResource( 5 )
 texture_focused = ExtResource( 6 )
 
 [node name="LabelButtonCombat" type="Label" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
-margin_top = 161.0
-margin_right = 809.0
-margin_bottom = 213.0
+margin_top = 165.0
+margin_right = 678.0
+margin_bottom = 208.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_BUTTON_COMBAT"
 
 [node name="action_combat" type="TextureButton" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
-margin_left = 990.0
+margin_left = 702.0
 margin_top = 138.0
-margin_right = 1088.0
+margin_right = 800.0
 margin_bottom = 236.0
 size_flags_horizontal = 10
 texture_normal = ExtResource( 4 )
@@ -702,16 +702,16 @@ texture_hover = ExtResource( 5 )
 texture_focused = ExtResource( 6 )
 
 [node name="LabelButtonDefense" type="Label" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
-margin_top = 299.0
-margin_right = 809.0
-margin_bottom = 351.0
+margin_top = 303.0
+margin_right = 678.0
+margin_bottom = 346.0
 theme = ExtResource( 1 )
 text = "GUI_OPTIONS_BUTTON_DEFENSE"
 
 [node name="action_defense" type="TextureButton" parent="ColorRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer/ScrollContainer/VBoxContainer/GridContainer"]
-margin_left = 990.0
+margin_left = 702.0
 margin_top = 276.0
-margin_right = 1088.0
+margin_right = 800.0
 margin_bottom = 374.0
 size_flags_horizontal = 10
 texture_normal = ExtResource( 4 )
@@ -751,5 +751,4 @@ anims/RESET = SubResource( 7 )
 [connection signal="toggled" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid/CheckBoxHorizontal" to="." method="_on_CheckBoxHorizontal_toggled"]
 [connection signal="toggled" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid/CheckBoxVertical" to="." method="_on_CheckBoxVertical_toggled"]
 [connection signal="value_changed" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/BarCameraSensitivity" to="." method="_on_BarCameraSensitivity_value_changed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/MarginContainer/NinePatchRect" to="." method="_on_NinePatchRect_pressed"]
 [connection signal="item_selected" from="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Misc/Grid/ButtonLanguage" to="." method="_on_ButtonLanguage_item_selected"]

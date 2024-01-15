@@ -71,8 +71,8 @@ func _ready() -> void:
 	weather_timer.start()
 
 func _physics_process(delta: float) -> void:
-	if is_instance_valid(SnailQuest.game_time):
-		time = SnailQuest.game_time.get_raw_time()
+	if is_instance_valid(SB.game_time):
+		time = SB.game_time.get_raw_time()
 		set_orbit(delta)
 		set_environment(delta)
 		set_environment_by_time()
@@ -109,7 +109,7 @@ func check_environment_variables() -> void:
 
 func set_orbit(delta: float) -> void:
 	var day_percentage = float(time) / full_cycle
-	var camera_pos = SnailQuest.camera.camera_lens.global_translation
+	var camera_pos = SB.camera.camera_lens.global_translation
 	if camera_pos != null:
 		orbital.global_translation = camera_pos
 		sky.global_translation = lerp(sky.global_translation, Vector3(camera_pos.x, camera_pos.y + 15, camera_pos.z), 0.9)

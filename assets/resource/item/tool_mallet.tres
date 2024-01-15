@@ -1,14 +1,17 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=5 format=2]
 
 [ext_resource path="res://assets/model/player.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://assets/texture/interface/item/tool_mallet.png" type="Texture" id=2]
-[ext_resource path="res://source/scripts/resource/ResourceItem.gd" type="Script" id=3]
+[ext_resource path="res://addons/snowball_framework/source/scripts/resource/ResourceItem.gd" type="Script" id=3]
+[ext_resource path="res://assets/resource/inventory.tres" type="Resource" id=4]
 
 [resource]
 script = ExtResource( 3 )
 item_name = "Mallet"
 description = "A tough and powerful hammer!"
+destination = ExtResource( 4 )
 proxy_path = ""
+sound = ""
 mesh = ExtResource( 1 )
 sprite = ExtResource( 2 )
 amount = 1

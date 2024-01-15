@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/needle_swipe_2.ogg-776d7e1b7eaea446aa75eb428dd2c24e.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/needle_swipe_2.ogg"
+dest_files=[ "res://import/needle_swipe_2.ogg-776d7e1b7eaea446aa75eb428dd2c24e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -34,7 +34,7 @@ func _ready() -> void:
 	for property in temp_node.get_property_list():
 		_node_properties.append(property.name)
 	temp_node.free()
-	
+
 	# Load the config file (if there is one) so we can set up any global state objects
 	add_child(settings)
 	for node_name in settings.get_runtime_value("states", []):
@@ -422,7 +422,6 @@ func get_state_value(property: String, extra_game_states: Array):
 
 	printerr("'%s' is not a property on any game states (%s)." % [property, str(get_game_states(extra_game_states))])
 	assert(false, "Missing property on current scene or game state. See Output for details.")
-
 
 # Set a value on the current scene or game state
 func set_state_value(property: String, value, extra_game_states: Array) -> void:

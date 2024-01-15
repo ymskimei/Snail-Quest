@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/lightning_5.ogg-9b45259337ee09d49e07ee45a7570e43.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/lightning_5.ogg"
+dest_files=[ "res://import/lightning_5.ogg-9b45259337ee09d49e07ee45a7570e43.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -9,4 +9,4 @@ func _init(_chunk_coord: Vector2, _resource: Resource):
 	resource = _resource
 
 func real_pos() -> Vector3 :
-	return Vector3(chunk_coord.x, 0, chunk_coord.y) * SnailQuest.chunk_size + Vector3(SnailQuest.chunk_size, 0, SnailQuest.chunk_size) / 2;
+	return Vector3(chunk_coord.x, 0, chunk_coord.y) * SB.chunk_size + Vector3(SB.chunk_size, 0, SB.chunk_size) / 2;
