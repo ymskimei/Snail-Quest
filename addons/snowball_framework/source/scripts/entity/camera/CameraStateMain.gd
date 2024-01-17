@@ -1,7 +1,7 @@
 class_name CameraStateMain
 extends Node
 
-export var sensitivity: int = 15
+var sensitivity: int = 15
 
 var entity: MainCamera
 var rotation: Vector2
@@ -33,9 +33,15 @@ func unhandled_input(_event: InputEvent) -> int:
 func physics_process(_delta: float) -> int:
 	return State.NULL
 
+func target_controlled() -> bool:
+	if entity.target == SB.controlled:
+		return true
+	else:
+		return false
+
 func tween_cam_pan(arm: float, lens: float) -> void:
 	entity.anim_tween.interpolate_property(entity, "rotation:x", entity.rotation.x, arm, 0.15, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	entity.anim_tween.interpolate_property(entity.camera_lens, "rotation:x", entity.camera_lens.rotation.x, lens, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity.lens, "rotation:x", entity.lens.rotation.x, lens, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
 func tween_cam_rotate(ease_type: int) -> void:

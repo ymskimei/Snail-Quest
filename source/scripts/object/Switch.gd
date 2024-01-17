@@ -2,28 +2,20 @@ extends Interactable
 
 onready var rod: RigidBody = $Lever/Handle
 onready var grab_point: Position3D = $Lever/Handle/Position3D
-onready var camera_target_proxy: Spatial
 
-export var current_camera_target: bool = false
-export var active: bool = false
+var active: bool = false
 
 signal activated(is_active)
 
-func _ready() -> void:
-	camera_target_proxy = get_node_or_null("CameraTarget")
-
 func _input(event: InputEvent) -> void:
 	if is_controlled():
-		current_camera_target = true
 		var rotation_timer_right: Timer = Timer.new()
-		if Input.is_action_pressed("joy_down") and !active:
+		if Input.is_action_pressed(SB.utility.input.i_stick_main_down) and !active:
 			_activate_switch()
-		elif Input.is_action_pressed("joy_up") and active:
+		elif Input.is_action_pressed(SB.utility.input.i_stick_main_up) and active:
 			_deactivate_switch()
-		elif Input.is_action_pressed("action_main"):
-			SB.set_controllable(SB.prev_controllable)
-	else:
-		current_camera_target = false
+		elif Input.is_action_pressed(SB.utility.input.i_action_main):
+			SB.set_controlled(SB.prev_controlled)
 
 func _activate_switch() -> void:
 	anim.play_backwards("Switch")

@@ -124,6 +124,9 @@ material = SubResource( 1 )
 transform = Transform( 0.976706, 0, -0.214582, 0, 1, 0, 0.214582, 0, 0.976706, 4.23033, 0, -6.64016 )
 dialog = ExtResource( 8 )
 
+[node name="CameraTarget" type="Position3D" parent="Objects/Sign"]
+transform = Transform( 0.988932, 0.069706, -0.130971, -0.00790893, 0.906273, 0.422618, 0.148156, -0.416905, 0.896794, 3.43192, 1.72575, -2.4001 )
+
 [node name="Door" parent="Objects" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -9 )
 

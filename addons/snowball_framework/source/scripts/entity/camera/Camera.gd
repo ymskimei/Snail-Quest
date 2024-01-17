@@ -1,15 +1,17 @@
 class_name MainCamera
 extends SpringArm
 
-onready var cam_target: Spatial
-onready var camera_lens: Camera = $CameraLens
+onready var lens: Camera = $CameraLens
+
 onready var anim_tween: Tween = $Animation/AnimationCam
 onready var anim_bars: AnimationPlayer = $Animation/AnimationBars
 onready var anim_wobble: AnimationPlayer = $Animation/AnimationWobble
 onready var states: Node = $StateController
 
-var lock_target: Spatial
-var lock_to_point: bool
+var target: Spatial
+var positioner: Position3D
+var override: Position3D
+
 var debug_cam: bool
 
 signal target_updated
@@ -23,35 +25,34 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
-	find_camera_lock_points()
-	update_target()
+	_update_positioner()
+	_update_target()
 
-func update_target() -> void:
-	if is_instance_valid(SB.controllable):
-		cam_target = SB.controllable
-	else:
-		cam_target = null
-
-func target_updated() -> void:
-	emit_signal("target_updated", cam_target)
-
-func find_camera_lock_points() -> void:
-	if is_instance_valid(lock_target):
-		if "current_camera_target" in lock_target:
-			if lock_target.current_camera_target:
-				lock_to_point = true
-			else:
-				lock_to_point = false
+func _update_target() -> void:
+	if is_instance_valid(override):
+		target = override
+	elif is_instance_valid(positioner):
+		target = positioner
+	elif is_instance_valid(SB.controlled):
+		if is_instance_valid(SB.controlled.target_proxy):
+			target = SB.controlled.target_proxy
 		else:
-			var lock_distance = lock_target.get_global_translation().distance_to(cam_target.get_global_translation())
-			var max_lock_distance = 17
-			if lock_distance < max_lock_distance:
-				lock_to_point = true
-			else:
-				lock_to_point = false
+			target = SB.controlled
 	else:
-		lock_to_point = false
-		lock_target = SB.utility.find_target(self, "lock_target")
+		target = null
+
+#func target_updated() -> void:
+#	emit_signal("target_updated", cam_target)
+
+func _update_positioner() -> void:
+	var p = SB.utility.find_target(self, "positioner")
+	if is_instance_valid(SB.controlled) and p:
+		var distance = p.get_global_translation().distance_to(SB.controlled.get_global_translation())
+		var max_distance = 17
+		if distance < max_distance:
+			positioner = p
+		else:
+			positioner = null
 
 func set_coords(position: Vector3, angle: String, flipped: bool) -> void:
 	var rot = deg2rad(SB.utility.cardinal_to_degrees(angle))

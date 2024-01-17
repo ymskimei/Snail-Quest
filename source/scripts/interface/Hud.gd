@@ -156,9 +156,9 @@ func on_cam_timeout() -> void:
 	anim_cam.play_backwards("SlideCam")
 
 func display_vehicle_boost() -> void:
-	if is_instance_valid(SB.controllable):
-		if SB.controllable is VehicleBody:
-			var remaining = SB.controllable.boost_remaining
+	if is_instance_valid(SB.controlled):
+		if SB.controlled is VehicleBody:
+			var remaining = SB.controlled.boost_remaining
 			display_boost.set_bbcode("[color=#C3EF5D]%s" % remaining)
 		else:
 			display_boost.set_bbcode("")

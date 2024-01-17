@@ -35,7 +35,6 @@
 [ext_resource path="res://assets/resource/animation/SnailLedge.tres" type="Animation" id=33]
 [ext_resource path="res://assets/resource/animation/SnailGrab.tres" type="Animation" id=34]
 
-
 [sub_resource type="PhysicsMaterial" id=32]
 
 [sub_resource type="Skin" id=36]

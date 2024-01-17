@@ -8,13 +8,13 @@ var filter_dict: Dictionary = {
 }
 
 var framerate_dict: Dictionary = {
-	"GUI_OPTIONS_FPS_30": 30,
-	"GUI_OPTIONS_FPS_60": 60,
-	"GUI_OPTIONS_FPS_120": 120
+	"OPTIONS_FPS_30": 30,
+	"OPTIONS_FPS_60": 60,
+	"OPTIONS_FPS_120": 120
 }
 
 var language_dict: Dictionary = {
-	"GUI_OPTIONS_LANGUAGE_EN_US": "en_US"
+	"OPTIONS_LANGUAGE_EN_US": "en_US"
 }
 
 func add_to_dict(button: OptionButton, dict: Dictionary, current: String) -> void:

@@ -25,7 +25,7 @@ margin_bottom = 1040.0
 alignment = 1
 
 [node name="ConsoleContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-margin_right = 1880.0
+margin_right = 1250.0
 margin_bottom = 1040.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -40,11 +40,10 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 32.0
 margin_top = 32.0
-margin_right = 1848.0
+margin_right = 1218.0
 margin_bottom = 1008.0
 
 [node name="DebugInformation" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-visible = false
 margin_left = 1254.0
 margin_right = 1880.0
 margin_bottom = 1040.0
@@ -54,7 +53,7 @@ alignment = 2
 
 [node name="DisplayFramerate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
 margin_right = 626.0
-margin_bottom = 74.0
+margin_bottom = 68.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -65,9 +64,9 @@ tab_size = 5
 text = "00"
 
 [node name="DisplayGameTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 78.0
+margin_top = 72.0
 margin_right = 626.0
-margin_bottom = 152.0
+margin_bottom = 141.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -77,9 +76,9 @@ tab_size = 5
 text = "00:00:00"
 
 [node name="DisplayPlayTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 156.0
+margin_top = 145.0
 margin_right = 626.0
-margin_bottom = 230.0
+margin_bottom = 214.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -90,9 +89,9 @@ tab_size = 5
 text = "00"
 
 [node name="DisplayCameraTarget" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 234.0
+margin_top = 218.0
 margin_right = 626.0
-margin_bottom = 308.0
+margin_bottom = 286.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -102,10 +101,10 @@ bbcode_text = "00"
 tab_size = 5
 text = "00"
 
-[node name="DisplayControllable" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 312.0
+[node name="DisplayControlled" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 290.0
 margin_right = 626.0
-margin_bottom = 386.0
+margin_bottom = 359.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -115,10 +114,23 @@ bbcode_text = "00"
 tab_size = 5
 text = "00"
 
-[node name="DisplayControllableTarget" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 390.0
+[node name="DisplayControlledTarget" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 363.0
 margin_right = 626.0
-margin_bottom = 464.0
+margin_bottom = 432.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+bbcode_text = "00"
+tab_size = 5
+text = "00"
+
+[node name="DisplayPrevControlled" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 436.0
+margin_right = 626.0
+margin_bottom = 505.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -129,9 +141,9 @@ tab_size = 5
 text = "00"
 
 [node name="DisplayChunkCoords" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 468.0
+margin_top = 509.0
 margin_right = 626.0
-margin_bottom = 542.0
+margin_bottom = 577.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -142,7 +154,7 @@ tab_size = 5
 text = "0, 0"
 
 [node name="DisplayCoordinate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 546.0
+margin_top = 581.0
 margin_right = 626.0
 margin_bottom = 1040.0
 rect_clip_content = false

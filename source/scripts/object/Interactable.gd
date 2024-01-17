@@ -9,6 +9,7 @@ func trigger_dialog() -> void:
 	else:
 		show_dialog_balloon("opener", fallback)
 	yield(DialogueManager, "dialogue_finished")
+	dialog_end()
 	emit_signal("interaction_ended")
 
 func show_dialog_balloon(title: String, local_resource: DialogueResource = null, extra_game_states: Array = []) -> void:
@@ -18,3 +19,6 @@ func show_dialog_balloon(title: String, local_resource: DialogueResource = null,
 		balloon.dialogue_line = dialog_line
 		get_tree().current_scene.add_child(balloon)
 		show_dialog_balloon(yield(balloon, "actioned"), local_resource, extra_game_states)
+
+func dialog_end() -> void:
+	pass

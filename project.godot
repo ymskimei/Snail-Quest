@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/interface/CursorAim.gd"
 }, {
+"base": "AudioStreamPlayer",
+"class": "AudioStreamPlayerADSR",
+"language": "GDScript",
+"path": "res://addons/addons/midi/ADSR.gd"
+}, {
+"base": "Reference",
+"class": "Bank",
+"language": "GDScript",
+"path": "res://addons/addons/midi/Bank.gd"
+}, {
 "base": "CameraStateMain",
 "class": "CameraStateIsom",
 "language": "GDScript",
@@ -105,6 +115,11 @@ _global_script_classes=[ {
 "path": "res://addons/snowball_framework/source/scripts/interface/MenuParent.gd"
 }, {
 "base": "Node",
+"class": "MidiPlayer",
+"language": "GDScript",
+"path": "res://addons/addons/midi/MidiPlayer.gd"
+}, {
+"base": "Node",
 "class": "MusicBooth",
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/MusicBooth.gd"
@@ -169,6 +184,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceMusic.gd"
 }, {
+"base": "Reference",
+"class": "SMF",
+"language": "GDScript",
+"path": "res://addons/addons/midi/SMF.gd"
+}, {
 "base": "Entity",
 "class": "Snail",
 "language": "GDScript",
@@ -204,6 +224,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/sfx/SoundBooth.gd"
 }, {
+"base": "Reference",
+"class": "SoundFont",
+"language": "GDScript",
+"path": "res://addons/addons/midi/SoundFont.gd"
+}, {
 "base": "Node",
 "class": "StateMain",
 "language": "GDScript",
@@ -226,6 +251,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AimCursor": "",
+"AudioStreamPlayerADSR": "",
+"Bank": "",
 "CameraStateIsom": "",
 "CameraStateLock": "",
 "CameraStateMain": "",
@@ -244,6 +271,7 @@ _global_script_class_icons={
 "MainCamera": "",
 "Menu": "",
 "MenuParent": "",
+"MidiPlayer": "res://addons/addons/midi/icon.png",
 "MusicBooth": "",
 "Options": "",
 "RegistryAudio": "",
@@ -257,6 +285,7 @@ _global_script_class_icons={
 "ResourceLocation": "",
 "ResourceLootTable": "",
 "ResourceMusic": "",
+"SMF": "",
 "Snail": "",
 "SnailStateMain": "",
 "Song": "",
@@ -264,6 +293,7 @@ _global_script_class_icons={
 "Sound2D": "",
 "Sound3D": "",
 "SoundBooth": "",
+"SoundFont": "",
 "StateMain": "",
 "StingerContainer": "",
 "TrackContainer": "",

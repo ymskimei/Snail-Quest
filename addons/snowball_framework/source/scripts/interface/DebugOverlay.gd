@@ -5,8 +5,9 @@ onready var display_framerate: RichTextLabel = $MarginContainer/HBoxContainer/De
 onready var display_game_time: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayGameTime
 onready var display_play_time: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayPlayTime
 onready var display_camera_target: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayCameraTarget
-onready var display_controllable: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayControllable
-onready var display_controllable_target: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayControllableTarget
+onready var display_controlled: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayControlled
+onready var display_controlled_target: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayControlledTarget
+onready var display_prev_controlled: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayPrevControlled
 onready var display_chunk_coords: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayChunkCoords
 onready var display_coordinate: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayCoordinate
 onready var command_console: PanelContainer = $MarginContainer/HBoxContainer/ConsoleContainer/GuiConsole
@@ -20,8 +21,9 @@ func _process(_delta: float) -> void:
 	set_display_world_time()
 	set_display_play_time()
 	set_display_camera_target()
-	set_display_controllable()
-	set_display_controllable_target()
+	set_display_controlled()
+	set_display_controlled_target()
+	set_display_prev_controlled()
 	set_display_chunk_coords()
 	set_display_coordinates()
 
@@ -48,28 +50,34 @@ func set_display_play_time() -> void:
 
 func set_display_camera_target() -> void:
 	if is_instance_valid(SB.camera):
-		if is_instance_valid(SB.camera.cam_target):
-			display_camera_target.set_bbcode("[color=#71B4F6]Cam Target: %s" % SB.camera.cam_target.name)
+		if is_instance_valid(SB.camera.target):
+			display_camera_target.set_bbcode("[color=#71B4F6]Cam Target: %s" % SB.camera.target.name)
 	else:
 		display_camera_target.set_bbcode("[color=#71B4F6]Cam Target: ??")
 
-func set_display_controllable() -> void:
-	if is_instance_valid(SB.controllable):
-		display_controllable.set_bbcode("[color=#C289FF]Controlling: %s" % SB.controllable.name)
+func set_display_controlled() -> void:
+	if is_instance_valid(SB.controlled):
+		display_controlled.set_bbcode("[color=#C289FF]Controlling: %s" % SB.controlled.name)
 	else:
-		display_controllable.set_bbcode("[color=#C289FF]Controlling: ??")
+		display_controlled.set_bbcode("[color=#C289FF]Controlling: ??")
 
-func set_display_controllable_target() -> void:
-	if is_instance_valid(SB.controllable):
-		if SB.controllable is Entity:
-			display_controllable_target.set_bbcode("[color=#E7738C]Target: %s" % SB.controllable.target.name)
+func set_display_controlled_target() -> void:
+	if is_instance_valid(SB.controlled):
+		if SB.controlled is Entity:
+			display_controlled_target.set_bbcode("[color=#E7738C]Target: %s" % SB.controlled.target.name)
 	else:
-		display_controllable_target.set_bbcode("[color=#E7738C]Target: ??")
+		display_controlled_target.set_bbcode("[color=#E7738C]Target: ??")
+
+func set_display_prev_controlled() -> void:
+	if is_instance_valid(SB.prev_controlled):
+		display_prev_controlled.set_bbcode("[color=#F491FF]Last controlling: %s" % SB.prev_controlled.name)
+	else:
+		display_prev_controlled.set_bbcode("[color=#F491FF]Last controlling: ??")
 
 func set_display_chunk_coords() -> void:
-	if is_instance_valid(SB.controllable):
-		var coords_x = floor(SB.controllable.global_translation.x / SB.chunk_size)
-		var coords_z = floor(SB.controllable.global_translation.z / SB.chunk_size)
+	if is_instance_valid(SB.controlled):
+		var coords_x = floor(SB.controlled.global_translation.x / SB.chunk_size)
+		var coords_z = floor(SB.controlled.global_translation.z / SB.chunk_size)
 		display_chunk_coords.set_bbcode("[color=#C289FF]%s, [color=#62BC43]%s" % [coords_x, coords_z])
 	elif is_instance_valid(SB.camera):
 		var coords_x = floor(SB.camera.global_translation.x / SB.chunk_size)
@@ -79,9 +87,9 @@ func set_display_chunk_coords() -> void:
 		display_chunk_coords.set_bbcode("?, ?")
 
 func set_display_coordinates() -> void:
-	if is_instance_valid(SB.controllable):
-		if SB.controllable.has_method("get_coords"):
-			var coords = SB.controllable.get_coords()
+	if is_instance_valid(SB.controlled):
+		if SB.controlled.has_method("get_coords"):
+			var coords = SB.controlled.get_coords()
 			display_coordinate.set_bbcode("[color=#E7738C]X: %s\n[color=#A3DD5D]Y: %s\n[color=#71B4F6]Z: %s" % [coords[0], coords[1], coords[2]])
 	else:
 		display_coordinate.set_bbcode("[color=#E7738C]X: ?\n[color=#A3DD5D]Y: ?\n[color=#71B4F6]Z: ?")

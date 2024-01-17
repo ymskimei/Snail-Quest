@@ -1,23 +1,22 @@
 extends CameraStateMain
 
-export var follow_speed: int = 10
-export var rotation_speed: int = 5
-export var offset: Vector3 = Vector3(0, 0.8, 0)
+var offset: Vector3 = Vector3(0, 0.8, 0)
 
-export var fov: int = 60
-export var arm: int = 7
+var track_speed: int = 10
+var rotation_speed: int = 5
 
-export var boost_fov: int = 80
-export var boost_arm: int = 6
+var fov: int = 60
+var arm: int = 7
+
+var boost_fov: int = 80
+var boost_arm: int = 6
 
 var distance: int = 0
 
-var can_exit_mode: bool
-
 func enter() -> void:
 	print("Camera State: VEHICLE")
-	entity.cam_target.connect("boosted", self, "_on_vehicle_boost")
-	tween_cam_reset()
+	entity.target.connect("boosted", self, "_on_vehicle_boost")
+	_tween_cam_reset()
 	distance = 0
 
 func unhandled_input(event: InputEvent) -> int:
@@ -31,31 +30,31 @@ func unhandled_input(event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(delta: float) -> int:
-	cam_tracking(delta)
-	if !entity.cam_target is VehicleBody:
+	_cam_tracking(delta)
+	if !entity.target is VehicleBody:
 		return State.ORBI
 	return State.NULL
 
-func cam_tracking(delta: float) -> void:
+func _cam_tracking(delta: float) -> void:
 	rotation.x = (Input.get_action_strength("cam_left") - Input.get_action_strength("cam_right")) / 2
 	rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 5
 	velocity = velocity.linear_interpolate(rotation * sensitivity / 3, delta * rotation_speed)
 	entity.rotation.y += (deg2rad(velocity.x))
-	entity.translation = lerp(entity.translation, entity.cam_target.translation + offset, follow_speed * delta)
+	entity.translation = lerp(entity.translation, entity.target.translation + offset, track_speed * delta)
 	entity.spring_length = lerp(entity.spring_length, clamp(entity.spring_length + distance, 4, 30), 10 * delta)
 
 func _on_vehicle_boost(boosting: bool) -> void:
 	if boosting:
-		tween_cam_boost(boost_fov, boost_arm)
+		_tween_cam_boost(boost_fov, boost_arm)
 	else:
-		tween_cam_boost(fov, arm)
+		_tween_cam_boost(fov, arm)
 
-func tween_cam_boost(set_fov: int, set_arm :float) -> void:
+func _tween_cam_boost(set_fov: int, set_arm :float) -> void:
 	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, set_fov, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, set_arm, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	entity.anim_tween.start()
 
-func tween_cam_reset() -> void:
+func _tween_cam_reset() -> void:
 	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, fov, 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, arm, 0.4, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	entity.anim_tween.start()

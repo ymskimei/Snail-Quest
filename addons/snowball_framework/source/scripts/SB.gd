@@ -4,9 +4,12 @@ onready var utility: Node = $Utility
 
 var game: Node
 var camera: SpringArm
-var controllable: Spatial
-var prev_controllable: Spatial
+
+var controlled: Spatial
+var prev_controlled: Spatial
+
 var world: Node
+
 var play_time: Node
 var game_time: Node
 
@@ -33,11 +36,11 @@ func set_game(node: Node):
 func set_camera(node: SpringArm):
 	camera = node
 
-func set_controllable(node: Spatial):
-	controllable = node
+func set_controlled(node: Spatial):
+	controlled = node
 
-func set_prev_controllable(node: Spatial):
-	prev_controllable = node
+func set_prev_controlled(node: Spatial):
+	prev_controlled = node
 
 func set_world(node: Node):
 	world = node

@@ -78,14 +78,14 @@ func interact():
 	mount()
 
 func mount():
-	var driver = SB.controllable
+	var driver = SB.controlled
 	SB.register_vehicle(self)
 	SB.camera.update_target()
 	driver.can_move = false
 	mounted = true
 
 func unmount():
-	var driver = SB.controllable
+	var driver = SB.controlled
 	SB.deregister_vehicle()
 	SB.camera.update_target()
 	driver.can_move = false
@@ -93,6 +93,6 @@ func unmount():
 	engine_force = 0
 
 func is_controlled() -> bool:
-	if SB.controllable == self:
+	if SB.controlled == self:
 		return true
 	return false

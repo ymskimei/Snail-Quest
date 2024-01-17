@@ -16,12 +16,12 @@ signal room_loaded
 
 func _ready() -> void:
 	SB.game_time.set_time(480) #Temporary time set
-	SB.set_controllable($Player1) #Temporary player set
+	SB.set_controlled($Player1) #Temporary player set
 	SB.set_world(self)
 	_on_goto_room(load(resource.room_path), resource.coordinates, resource.direction, false, false)
 
 func _process(_delta: float) -> void:
-	if is_instance_valid(SB.controllable):
+	if is_instance_valid(SB.controlled):
 		load_chunks()
 
 func _on_goto_room(room: PackedScene, coords: Vector3, dir: String, pause: bool = true, fade_in: bool = true) -> void:
@@ -45,7 +45,7 @@ func load_room(room: PackedScene, coords: Vector3, dir: String, keep_rooms: bool
 				$Rooms.remove_child(r)
 		$Rooms.add_child(new_room)
 		register_chunks()
-		SB.controllable.set_coords(coords, dir)
+		SB.controlled.set_coords(coords, dir)
 		SB.camera.set_coords(coords, dir, true)
 		get_warps(new_room)
 		emit_signal("room_loaded")
@@ -78,7 +78,7 @@ func difference(arr1: Array, arr2: Array) -> Array:
 	return only_in_arr1
 
 func load_chunks() -> void:
-	var current_chunk = _get_controllable_chunk(SB.controllable.global_translation)
+	var current_chunk = _get_controlled_chunk(SB.controlled.global_translation)
 	var new_current = {} # Being a dictionary means we don't have duplicates
 	for x in range(render_radius):
 		for z in range(render_radius):
@@ -133,7 +133,7 @@ func get_warps(room: Spatial) -> void:
 				child.connect("goto_room", self, "_on_goto_room")
 
 #I did this part last night and I think it probably works or something
-func _get_controllable_chunk(pos: Vector3) -> Vector2:
+func _get_controlled_chunk(pos: Vector3) -> Vector2:
 	var coords_x = floor(pos.x / SB.chunk_size)
 	var coords_z = floor(pos.z / SB.chunk_size)
 	var chunk_coords = Vector2(coords_x, coords_z)

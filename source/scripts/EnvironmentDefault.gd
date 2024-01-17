@@ -109,7 +109,7 @@ func check_environment_variables() -> void:
 
 func set_orbit(delta: float) -> void:
 	var day_percentage = float(time) / full_cycle
-	var camera_pos = SB.camera.camera_lens.global_translation
+	var camera_pos = SB.camera.lens.global_translation
 	if camera_pos != null:
 		orbital.global_translation = camera_pos
 		sky.global_translation = lerp(sky.global_translation, Vector3(camera_pos.x, camera_pos.y + 15, camera_pos.z), 0.9)

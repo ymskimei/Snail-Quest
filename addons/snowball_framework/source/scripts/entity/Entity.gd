@@ -22,7 +22,6 @@ var input: Vector3
 
 var target = null
 
-var controllable: bool
 var can_interact: bool
 var interacting : bool
 var targeting: bool
@@ -146,13 +145,13 @@ func target_check() -> void:
 		target = SB.utility.find_target(self, "target")
 		targeting = false
 
-func target_interact(event) -> void:
+func target_interact(event: InputEvent) -> void:
 	var target_distance: float  = target.get_global_translation().distance_to(get_global_translation())
 	var relative_facing: float = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
 	var max_interactable_distance: float = 2.5
 #	if target.has_child("MeshInstance"):
 #		target_distance = target.get_aabb().distance_to(get_global_translation())
-	if (!target.is_controlled() and target.character) and target_distance < max_interactable_distance and relative_facing >= 0:
+	if is_controlled() and (!target.is_controlled() and target.character) and (target_distance < max_interactable_distance and relative_facing >= 0):
 		can_interact = true
 		set_interaction_text(target.get_interaction_text())
 		if event.is_action_pressed(SB.utility.input.i_action_main):

@@ -21,14 +21,14 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if collecting:
 		item.translation = Vector3.ZERO
-		var collection_offset =  Vector3(0, player.body.get_aabb().size.y + 0.2, 0)
+		var collection_offset = Vector3(0, player.body.get_aabb().size.y + 0.2, 0)
 		translation = player.translation + collection_offset
 		anim.play("ItemCollect")
 	if type.depletable:
 		idle_timer.start()
 
 func _on_Area_body_entered(body):
-	if body == SB.controllable and item.linear_velocity == Vector3.ZERO:
+	if body == SB.controlled and item.linear_velocity == Vector3.ZERO:
 		player = body
 		display_timer.start()
 		if type.destination:
