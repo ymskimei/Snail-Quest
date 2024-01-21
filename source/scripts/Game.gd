@@ -6,7 +6,7 @@ onready var interface: Node = $Interface
 var info: Dictionary = {
 	"title": "TITLE",
 	"version": "0.3.0-pre-alpha",
-	"author": "© 2023 Studio Kuwagata"
+	"author": "© 2024 In2itive"
 }
 
 var title_screen = preload("res://source/scenes/interface/screen_title.tscn").instance()

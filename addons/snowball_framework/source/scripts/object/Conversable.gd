@@ -1,7 +1,7 @@
-class_name Interactable
-extends InteractableParent
+class_name Conversable
+extends Interactable
 
-onready var anim: AnimationPlayer = $AnimationPlayer
+export var bubble_type: String
 
 func trigger_dialog() -> void:
 	if dialog != null:
@@ -15,7 +15,12 @@ func trigger_dialog() -> void:
 func show_dialog_balloon(title: String, local_resource: DialogueResource = null, extra_game_states: Array = []) -> void:
 	var dialog_line = yield(DialogueManager.get_next_dialogue_line(title, local_resource, extra_game_states), "completed")
 	if dialog_line != null:
-		var balloon = preload("res://source/scenes/interface/menu_dialog.tscn").instance()
+		var b
+		if bubble_type:
+			b = bubble_type
+		else:
+			b = "res://addons/dialogue_manager/example_balloon/example_balloon.tscn"
+		var balloon = load(b).instance()
 		balloon.dialogue_line = dialog_line
 		get_tree().current_scene.add_child(balloon)
 		show_dialog_balloon(yield(balloon, "actioned"), local_resource, extra_game_states)

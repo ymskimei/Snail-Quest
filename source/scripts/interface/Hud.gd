@@ -12,6 +12,9 @@ onready var shell: TextureRect = $MarginContainer/HBoxContainer/TextureRect/Shel
 onready var slime: TextureRect = $MarginContainer/HBoxContainer/TextureRect/Slime
 onready var shell_anim: AnimationPlayer = $MarginContainer/HBoxContainer/TextureRect/AnimationPlayer
 
+#move this later
+onready var cursor_target: Spatial = $CursorTarget
+
 onready var tool_slot = $"%ToolSlot"
 
 onready var item_slot_1 = $"%ItemSlot1"
@@ -39,8 +42,10 @@ var shell_stock_empty = preload("res://assets/texture/interface/hud/shell_stock_
 var pad_timer = Timer.new()
 var cam_timer = Timer.new()
 
-var pad_is_hidden : bool
-var cam_is_hidden : bool
+var pad_is_hidden: bool
+var cam_is_hidden: bool
+
+var target_cursor_exists: bool
 
 func _ready() -> void:
 	pad_is_hidden = true
@@ -62,6 +67,12 @@ func _process(_delta: float) -> void:
 #	if !equipment.items[0] == tools.items[3]:
 #		display_up.is_deselected_animation()
 	display_vehicle_boost()
+
+func _physics_process(delta: float) -> void:
+	if is_instance_valid(SB.controlled) and SB.controlled is Entity and SB.controlled.target_found:
+		cursor_target.show()
+	else:
+		cursor_target.hide()
 
 func _unhandled_input(_event: InputEvent) -> void:
 #	if Input.is_action_just_pressed("action_combat"):
@@ -124,8 +135,8 @@ func update_cam_display() -> void:
 			"Targ":
 				var bars_active = SB.camera.states.current_state.bars_active
 				if bars_active:
-					if is_instance_valid(SB.controllable):
-						var target_found = SB.controllable.target_found
+					if is_instance_valid(SB.controlled):
+						var target_found = SB.controlled.target_found
 						if target_found:
 							cam_icon.texture = cam_target
 						else:

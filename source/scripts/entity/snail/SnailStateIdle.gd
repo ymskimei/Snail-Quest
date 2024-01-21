@@ -5,8 +5,8 @@ func enter() -> void:
 	entity.anim.play("SnailIdle")
 
 func unhandled_input(event: InputEvent) -> int:
-	if !entity.can_interact and event.is_action_pressed("action_main"):
-		return State.JUMP
+#	if !entity.can_interact and event.is_action_pressed("action_main"):
+#		return State.JUMP
 	if event.is_action_pressed("action_defense"):
 		return State.HIDE
 	needle()

@@ -13,7 +13,6 @@ var cursor = preload("res://source/scenes/interface/cursor_aim.tscn")
 var in_shell: bool
 var is_tool_equipped: bool
 var cursor_activated: bool
-var attached_to_location: bool
 
 var cursor_pos: Vector3
 
@@ -56,19 +55,11 @@ func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 
 func _on_proximity_entered(body) -> void:
 	if body is Enemy:
-		enemy_detected = true
+		enemy_found = true
 
 func _on_proximity_exited(body) -> void:
 	if body is Enemy:
-		enemy_detected = false
-
-func _on_Area_area_entered(area) -> void:
-	if area.is_in_group("danger"):
-		set_entity_health(-(area.get_parent().strength))
-	if area.is_in_group("attachable"):
-		SB.set_prev_controlled(self)
-		SB.set_controlled(area.get_parent().get_parent().get_parent())
-		attached_to_location = true
+		enemy_found = false
 
 func update_appearance() -> void:
 	var shell = $"%Shell"
@@ -106,15 +97,14 @@ func update_appearance() -> void:
 		eyelid_left_mat.set_shader_param("albedo_color", identity.color_body_accent)
 		eyelid_right_mat.set_shader_param("albedo_color", identity.color_body_accent)
 
-func get_sound_slide(s: bool) -> void:
+func play_sound_slide(s: bool) -> void:
 	if s:
 		SB.utility.audio.play_pos_sfx(RegistryAudio.snail_slide_backward, global_translation, 1.0, -1.0)
 	else:
 		SB.utility.audio.play_pos_sfx(RegistryAudio.snail_slide_forward, global_translation, 1.25, -1.0)
 
-func get_sound_hide(s: bool) -> void:
+func play_sound_hide(s: bool) -> void:
 	if s:
 		SB.utility.audio.play_pos_sfx(RegistryAudio.snail_shell_in, global_translation, 1.0, 0.0)
 	else:
 		SB.utility.audio.play_pos_sfx(RegistryAudio.snail_shell_out, global_translation, 0.5, 0.0)
-	

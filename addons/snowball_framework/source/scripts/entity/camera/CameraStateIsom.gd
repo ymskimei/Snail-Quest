@@ -110,7 +110,7 @@ func tween_overhead(direction: int) -> void:
 
 func tween_cam_zoom(zoom: int, distance: float) -> void:
 	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, zoom, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance, 0.5, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, distance, 0.5, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
 func exit() -> void:

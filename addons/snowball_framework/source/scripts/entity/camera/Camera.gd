@@ -1,7 +1,8 @@
 class_name MainCamera
-extends SpringArm
+extends Spatial
 
 onready var lens: Camera = $CameraLens
+onready var collision: CollisionShape = $CameraLens/RigidBody/CollisionShape
 
 onready var anim_tween: Tween = $Animation/AnimationCam
 onready var anim_bars: AnimationPlayer = $Animation/AnimationBars
@@ -11,6 +12,8 @@ onready var states: Node = $StateController
 var target: Spatial
 var positioner: Position3D
 var override: Position3D
+
+var arm_length: int = 0
 
 var debug_cam: bool
 
@@ -27,6 +30,10 @@ func _physics_process(delta: float) -> void:
 	states.physics_process(delta)
 	_update_positioner()
 	_update_target()
+	_update_arm(delta)
+
+func _update_arm(delta: float):
+	lens.translation.z = lerp(lens.translation.z, arm_length, 20 * delta)
 
 func _update_target() -> void:
 	if is_instance_valid(override):

@@ -34,7 +34,7 @@ export var cloud: PackedScene
 export var rain_drop: PackedScene
 export var all_clouds: Array
 export var all_downpour: Array
-export var max_clouds: int = 64
+export var max_clouds: int = 16
 
 export var cloud_range_height: int = 1280
 export var cloud_range_width: int = 2560
@@ -158,7 +158,8 @@ func on_cloud_timer() -> void:
 	var r_size = rand_range(0.25, 2)
 	var r_width = rand_range(1, 2)
 	if all_clouds.size() > max_clouds:
-		all_clouds.pop_front().fade_away()
+		var c = all_clouds.pop_front()
+		c.fade_away()
 	all_clouds.append(new_cloud)
 	new_cloud.scale = Vector3(r_size + r_width, r_size, r_size + r_width)
 	new_cloud.translation = random_pos

@@ -38,11 +38,11 @@ func on_command_categories(_console, _args: Array) -> void:
 	command_console.send_message(message)
 
 func on_command_cam(_console, args: Array) -> void:
-	if SB.controllable != null:
-		SB.prev_controllable = SB.controllable
-		SB.controllable = null
+	if SB.controlled == null:
+		SB.controlled = SB.prev_controlled
 	else:
-		SB.controllable = SB.prev_controllable
+		SB.prev_controlled = SB.controlled
+		SB.controlled = null
 	#SB.interface.debug.command_console.close_command_console()
 
 func on_command_clear(_console, _args: Array) -> void:
@@ -93,8 +93,8 @@ func on_command_version(_console, _args: Array) -> void:
 
 func on_command_warp(_console, args: Array) -> void:
 	var directory = Directory.new();
-	var warp_path: String = SB.warps + args[0] + ".tres"
-	var all_worlds: Array = SB.math.get_file_paths(SB.worlds, "tscn")
+	var warp_path: String = SB.resource["warp"] + args[0] + ".tres"
+	var all_worlds: Array = SB.utility.get_files(SB.scene["world"], true)
 	var found_world: String = ""
 	if is_instance_valid(SB.world):
 		if all_worlds.size() > 0:

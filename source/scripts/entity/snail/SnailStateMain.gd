@@ -24,7 +24,8 @@ enum State {
 	HIDE,
 	ROLL,
 	DODG,
-	HANG
+	HANG,
+	PUSH
 }
 
 func enter() -> void:

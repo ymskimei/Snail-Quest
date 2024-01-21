@@ -17,8 +17,8 @@ func enter() -> void:
 	ledge_jump_timer.start()
 
 func unhandled_input(event: InputEvent) -> int:
-	if !entity.can_interact and event.is_action_pressed("action_main") and is_on_floor():
-		return State.JUMP
+#	if !entity.can_interact and event.is_action_pressed("action_main") and is_on_floor():
+#		return State.JUMP
 	#if event.is_action_pressed("action_defense") or roll(event):
 	#	return State.DODG
 	needle()
@@ -36,6 +36,8 @@ func physics_process(delta: float) -> int:
 		return State.JUMP
 	if !direction:
 		return State.IDLE
+	if entity.pushing:
+		return State.PUSH
 	return State.NULL
 
 func integrate_forces(state: PhysicsDirectBodyState) -> int:

@@ -1,4 +1,7 @@
-extends Interactable
+extends Conversable
+
+onready var anim: AnimationPlayer = $AnimationPlayer
+onready var mesh: MeshInstance = $MeshInstance
 
 func _ready() -> void:
 	character = true

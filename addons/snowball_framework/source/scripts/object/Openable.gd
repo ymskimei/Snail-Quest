@@ -1,4 +1,6 @@
-extends Interactable
+extends Conversable
+
+onready var anim: AnimationPlayer = $AnimationPlayer
 
 var is_opened: bool
 

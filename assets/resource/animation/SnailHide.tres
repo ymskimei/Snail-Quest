@@ -207,6 +207,6 @@ tracks/26/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ true ],
-"method": "get_sound_hide"
+"method": "play_sound_hide"
 } ]
 }

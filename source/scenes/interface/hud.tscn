@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://addons/snowball_framework/source/scenes/interface/container_equipment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scripts/interface/Hud.gd" type="Script" id=2]
@@ -27,7 +27,7 @@
 [ext_resource path="res://assets/texture/interface/hud/shell_stock_full.png" type="Texture" id=25]
 [ext_resource path="res://assets/texture/interface/hud/camera_pan.png" type="Texture" id=26]
 [ext_resource path="res://assets/texture/interface/hud/frame_tool.png" type="Texture" id=27]
-
+[ext_resource path="res://source/scenes/interface/cursor_target.tscn" type="PackedScene" id=28]
 
 [sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 20 )
@@ -348,8 +348,8 @@ show_behind_parent = true
 material = SubResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 1920.0
-margin_bottom = 1920.0
+margin_right = 2560.0
+margin_bottom = 2560.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 18 )
@@ -758,3 +758,5 @@ bbcode_enabled = true
 bbcode_text = "Press A to Interact"
 text = "Press A to Interact"
 scroll_active = false
+
+[node name="CursorTarget" parent="." instance=ExtResource( 28 )]

@@ -41,7 +41,7 @@ func _cam_tracking(delta: float) -> void:
 	velocity = velocity.linear_interpolate(rotation * sensitivity / 3, delta * rotation_speed)
 	entity.rotation.y += (deg2rad(velocity.x))
 	entity.translation = lerp(entity.translation, entity.target.translation + offset, track_speed * delta)
-	entity.spring_length = lerp(entity.spring_length, clamp(entity.spring_length + distance, 4, 30), 10 * delta)
+	entity.arm_length = lerp(entity.arm_length, clamp(entity.arm_length + distance, 4, 30), 10 * delta)
 
 func _on_vehicle_boost(boosting: bool) -> void:
 	if boosting:
@@ -51,10 +51,10 @@ func _on_vehicle_boost(boosting: bool) -> void:
 
 func _tween_cam_boost(set_fov: int, set_arm :float) -> void:
 	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, set_fov, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, set_arm, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, set_arm, 0.25, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	entity.anim_tween.start()
 
 func _tween_cam_reset() -> void:
 	entity.anim_tween.interpolate_property(entity.camera_lens, "fov", entity.camera_lens.fov, fov, 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, arm, 0.4, Tween.TRANS_EXPO, Tween.EASE_OUT)
+	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, arm, 0.4, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	entity.anim_tween.start()

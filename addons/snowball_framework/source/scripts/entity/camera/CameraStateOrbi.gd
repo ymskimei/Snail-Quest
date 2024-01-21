@@ -68,7 +68,7 @@ func _cam_tracking(delta: float) -> void:
 	rotation.x = Input.get_action_strength("cam_left") - Input.get_action_strength("cam_right")
 	rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 2
 	entity.translation = lerp(entity.translation, entity.target.translation + offset, track_speed * delta)
-	entity.spring_length = lerp(entity.spring_length, clamp(entity.spring_length + distance, 4, 30), 10 * delta)
+	entity.arm_length = lerp(entity.arm_length, clamp(entity.arm_length + distance, 4, 30), 10 * delta)
 	entity.rotation.y += (deg2rad(velocity.x))
 
 func _cam_panning(delta: float) -> void:
@@ -135,10 +135,10 @@ func _on_look_timer() -> void:
 		look_around = true
 
 func _tween_cam_zoom(dist: float) -> void:
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, entity.spring_length + dist, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, entity.arm_length + dist, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
 func _tween_cam_reset() -> void:
 	entity.anim_tween.interpolate_property(entity.lens, "fov", entity.lens.fov, fov, 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, arm, 0.4, Tween.TRANS_EXPO, Tween.EASE_OUT)
+	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, arm, 0.4, Tween.TRANS_EXPO, Tween.EASE_OUT)
 	entity.anim_tween.start()

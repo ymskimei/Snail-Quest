@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode async_visible, blend_mix, depth_draw_alpha_prepass, cull_disabled;
+render_mode async_visible, blend_mix, depth_draw_alpha_prepass, cull_back;
 
 uniform bool use_diffuse = false;
 uniform bool use_specular = false;

@@ -3,7 +3,7 @@ extends Node
 onready var utility: Node = $Utility
 
 var game: Node
-var camera: SpringArm
+var camera: Spatial
 
 var controlled: Spatial
 var prev_controlled: Spatial
@@ -33,7 +33,7 @@ signal entity_killed(b)
 func set_game(node: Node):
 	game = node
 
-func set_camera(node: SpringArm):
+func set_camera(node: Spatial):
 	camera = node
 
 func set_controlled(node: Spatial):

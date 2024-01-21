@@ -67,6 +67,10 @@ const sound_test: String = "sound_test"
 const switch_off: String = "switch_off"
 const switch_on: String = "switch_on"
 
+const block_push_0: String = "block_push_0"
+const block_push_1: String = "block_push_1"
+const block_stop: String = "block_stop"
+
 const swoosh_in: String = "swoosh_in"
 
 const tone_switch: String = "tone_switch"

@@ -37,21 +37,21 @@ func load_data(d) -> void:
 
 func _set_save_data() -> Dictionary:
 	var data: Dictionary = {
-		"position": SB.controllable.global_translation,
-		"rotation": SB.controllable.global_rotation,
-		"max_health": SB.controllable.health,
-		"health": SB.controllable.health,
-		"inventory": SB.controllable.equipped.items,
+		"position": SB.controlled.global_translation,
+		"rotation": SB.controlled.global_rotation,
+		"max_health": SB.controlled.health,
+		"health": SB.controlled.health,
+		"inventory": SB.controlled.equipped.items,
 		"play_time": SB.play_time.played_time,
 		"game_time": SB.game_time.game_time
 	}
 	return data
 
 func _set_load_data(data) -> void:
-		SB.controllable.global_translation = data["position"]
-		SB.controllable.global_rotation = data["rotation"]
-		SB.controllable.max_health = data["max_health"]
-		SB.controllable.health = data["health"]
-		SB.controllable.equipped.items = data["inventory"]
+		SB.controlled.global_translation = data["position"]
+		SB.controlled.global_rotation = data["rotation"]
+		SB.controlled.max_health = data["max_health"]
+		SB.controlled.health = data["health"]
+		SB.controlled.equipped.items = data["inventory"]
 		SB.play_time.played_time = data["play_time"]
 		SB.game_time.game_time = data["game_time"]

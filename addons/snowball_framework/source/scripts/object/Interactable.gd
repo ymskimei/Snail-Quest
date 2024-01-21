@@ -1,4 +1,4 @@
-class_name InteractableParent
+class_name Interactable
 extends RigidBody
 
 export(Resource) var dialog
@@ -13,8 +13,11 @@ signal interaction_ended
 func _ready() -> void:
 	target_proxy = get_node_or_null("CameraTarget")
 
+func interact():
+	pass
+
 func get_interaction_text() -> String:
-	return "interact"
+	return "Interact"
 
 func camera_override(toggle: bool = true) -> void:
 	if toggle:

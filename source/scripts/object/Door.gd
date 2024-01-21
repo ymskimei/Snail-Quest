@@ -1,5 +1,7 @@
 extends Interactable
 
+onready var anim: AnimationPlayer = $AnimationPlayer
+
 func _ready():
 	var switch = get_node_or_null("Switch")
 	if switch != null:

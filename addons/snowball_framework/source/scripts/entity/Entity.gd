@@ -1,5 +1,5 @@
 class_name Entity
-extends Interactable
+extends Conversable
 
 export var identity: Resource
 export var inventory: Resource
@@ -9,6 +9,7 @@ onready var skeleton: Skeleton = $Armature/Skeleton
 onready var body: MeshInstance = $"%Body"
 onready var attach_point: Spatial = $"%EyePoint"
 onready var proximity: Area = $Proximity
+onready var anim: AnimationPlayer = $AnimationPlayer
 
 var entity_name: String
 var health: int
@@ -23,12 +24,19 @@ var input: Vector3
 var target = null
 
 var can_interact: bool
-var interacting : bool
+var interacting: bool
+
+var can_target: bool
 var targeting: bool
+
 var target_found: bool
-var enemy_detected: bool
+var enemy_found: bool
+
 var jump_in_memory: bool
 var ledge_usable: bool
+var pushing: bool
+
+var attached_to_location: bool
 
 var jump_memory_timer: Timer = Timer.new()
 var ledge_timer: Timer = Timer.new()
@@ -56,6 +64,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			set_entity_health(1)
 		if event.is_action_pressed("debug_cam_fov_increase"):
 			set_entity_health(-1)
+		var b = SB.utility.input.i_trigger_left
+		if event.is_action_pressed(b):
+			if is_instance_valid(target):
+				can_target = true
+		elif event.is_action_released(b):
+			if is_instance_valid(target):
+				can_target = false
 
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(target):
@@ -135,9 +150,9 @@ func target_check() -> void:
 	var target_distance = target.get_global_translation().distance_to(get_global_translation())
 	var max_enemy_distance = 15
 	var max_interactable_distance = 2
-	if Input.is_action_pressed(SB.utility.input.i_trigger_left):
+	if can_target:
 		targeting = true
-		if enemy_detected or !target.is_controlled() and target_distance < max_interactable_distance:
+		if enemy_found or (!target.is_controlled() and target_distance < max_interactable_distance):
 			target_found = true
 		else:
 			target_found = false
@@ -151,16 +166,19 @@ func target_interact(event: InputEvent) -> void:
 	var max_interactable_distance: float = 2.5
 #	if target.has_child("MeshInstance"):
 #		target_distance = target.get_aabb().distance_to(get_global_translation())
-	if is_controlled() and (!target.is_controlled() and target.character) and (target_distance < max_interactable_distance and relative_facing >= 0):
+	if is_controlled() and (!target.is_controlled() and target is Interactable) and (target_distance < max_interactable_distance and relative_facing >= 0):
 		can_interact = true
 		set_interaction_text(target.get_interaction_text())
 		if event.is_action_pressed(SB.utility.input.i_action_main):
+			if target.is_in_group("pushable"):
+				pushing = true
 			interacting = true
 			target.interact()
 			set_interaction_text("")
 			yield(target, "interaction_ended")
 			interacting = false
 	else:
+		pushing = false
 		can_interact = false
 		set_interaction_text("")
 
@@ -178,6 +196,17 @@ func get_interaction_text():
 
 func interact():
 	trigger_dialog()
+
+func _on_Area_area_entered(area) -> void:
+	if area.is_in_group("danger"):
+		set_entity_health(-(area.get_parent().strength))
+	if area.is_in_group("attachable"):
+		_set_attached(area.get_parent().get_parent().get_parent())
+
+func _set_attached(node: Interactable) -> void:
+	SB.set_prev_controlled(self)
+	SB.set_controlled(node)
+	attached_to_location = true
 
 func jump_memory() -> void:
 	jump_in_memory = true

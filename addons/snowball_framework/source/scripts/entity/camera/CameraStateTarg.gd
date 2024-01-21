@@ -27,7 +27,7 @@ func enter() -> void:
 	rotation_complete = false
 
 func physics_process(delta: float) -> int:
-	if is_instance_valid(entity.cam_target.target):
+	if entity.target is Entity and is_instance_valid(entity.target.target):
 		if entity.target.target_found:
 			SB.utility.slerp_look_at(entity, entity.target.target.global_transform.origin, targeting_speed)
 			entity.rotation.x = lerp(entity.rotation.x, targeting_rotation, track_speed * delta)
@@ -50,8 +50,8 @@ func _add_bars_timer() -> void:
 	bars_timer.start()
 
 func on_bars_timer() -> void:
-	if entity.cam_target.targeting:
-		if entity.cam_target.target_found:
+	if entity.target.targeting:
+		if entity.target.target_found:
 			SB.utility.audio.play_sfx(RegistryAudio.cam_target_lock)
 		else:
 			SB.utility.audio.play_sfx(RegistryAudio.cam_no_target_lock)
@@ -62,12 +62,12 @@ func on_bars_timer() -> void:
 
 func _tween_cam_zoom() -> void:
 	entity.anim_tween.interpolate_property(entity.lens, "fov", entity.lens.fov, zoom_targeting, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, distance_targeting, 0.3, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, distance_targeting, 0.3, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
 func exit() -> void:
 	if bars_active:
-		if entity.cam_target.target_found:
+		if entity.target.target_found:
 			SB.utility.audio.play_sfx(RegistryAudio.cam_target_unlock)
 		else:
 			SB.utility.audio.play_sfx(RegistryAudio.cam_no_target_unlock)
