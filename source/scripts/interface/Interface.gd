@@ -24,7 +24,6 @@ func _unhandled_input(event: InputEvent):
 	else:
 		if event.is_action_pressed(SB.utility.input.i_debug_menu):
 			get_menu(null, debug)
-			print("yes")
 		if SB.controlled:
 			if event.is_action_pressed(SB.utility.input.i_main_0):
 				get_menu(blur, options)

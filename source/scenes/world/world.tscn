@@ -7,17 +7,17 @@
 [ext_resource path="res://addons/snowball_framework/source/scripts/utility/time/PlayTime.gd" type="Script" id=5]
 [ext_resource path="res://source/scenes/interface/effect_transition.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/resource/identity/sheldon.tres" type="Resource" id=7]
+[ext_resource path="res://assets/resource/warp/world_test.tres" type="Resource" id=8]
 [ext_resource path="res://assets/resource/identity/izabell.tres" type="Resource" id=9]
 [ext_resource path="res://source/scenes/entity/vehicle.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/resource/identity/fubward.tres" type="Resource" id=12]
 [ext_resource path="res://assets/resource/identity/sunshine.tres" type="Resource" id=13]
-[ext_resource path="res://assets/resource/warp/dungeon_test.tres" type="Resource" id=14]
 
-[node name="World" type="Node"]
+[node name="World" type="Spatial"]
 script = ExtResource( 3 )
-resource = ExtResource( 14 )
+resource = ExtResource( 8 )
 
-[node name="Rooms" type="Node" parent="."]
+[node name="Rooms" type="Spatial" parent="."]
 
 [node name="Camera" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2156.38, -11.7604, 5968 )
@@ -46,7 +46,7 @@ continuous_cd = true
 pause_mode = 2
 script = ExtResource( 7 )
 
-[node name="Audio" type="Spatial" parent="."]
+[node name="Audio2" type="Spatial" parent="."]
 pause_mode = 2
 script = ExtResource( 7 )
 

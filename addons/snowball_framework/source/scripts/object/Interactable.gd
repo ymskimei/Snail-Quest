@@ -12,6 +12,13 @@ signal interaction_ended
 
 func _ready() -> void:
 	target_proxy = get_node_or_null("CameraTarget")
+	_set_visibility_enabler()
+
+func _set_visibility_enabler() -> void:
+	var visibility = VisibilityEnabler.new()
+	visibility.pause_animations = true
+	visibility.freeze_bodies = false
+	add_child(visibility)
 
 func interact():
 	pass
@@ -39,10 +46,9 @@ func get_coords(raw: bool = false) -> Vector3:
 	var coords = [x, y, z]
 	return coords
 
-func set_coords(position: Vector3, angle: String = "Default") -> void:
+func set_coords(position: Vector3, angle: String = "NORTH") -> void:
 	set_global_translation(position)
-	if !angle == "Default":
-		set_global_rotation(Vector3(0, deg2rad(SB.utility.cardinal_to_degrees(angle)), 0))
+	set_global_rotation(Vector3(0, deg2rad(SB.utility.cardinal_to_degrees(angle)), 0))
 
 func is_controlled() -> bool:
 	if SB.controlled == self:

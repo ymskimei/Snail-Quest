@@ -52,7 +52,7 @@ func _ready() -> void:
 	cam_is_hidden = true
 	add_hud_timers()
 	SB.utility.item.connect("items_updated", self, "on_items_updated")
-	SB.connect("health_changed", self, "on_health_changed")
+	SB.connect("controlled_health_change", self, "_on_controlled_health_changed")
 	shell_stock_icons = get_tree().get_nodes_in_group("stock")
 
 func _process(_delta: float) -> void:
@@ -81,7 +81,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("cam_zoom") or Input.is_action_just_pressed("cam_lock"):
 		reveal_cam()
 
-func on_health_changed(health, max_health, b) -> void:
+func _on_controlled_health_changed(health, max_health, b) -> void:
 	var fract = 3
 	if health % fract == 0 and health != 0:
 		shell_anim.play("Disappear")

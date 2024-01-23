@@ -104,7 +104,7 @@ func on_jump_combo_timer() -> void:
 #			entity.cursor_activated = true
 
 func needle() -> void:
-	var needle = entity.attach_point.get_node_or_null("Needle")
+	var needle = entity.holding_point.get_node_or_null("Needle")
 	if is_instance_valid(needle):
 #		if Input.is_action_just_released("action_combat"):
 #			if previous_swing:
@@ -133,7 +133,7 @@ func needle() -> void:
 #			detatched_needle.throw(throw_dir)
 
 func mallet() -> void:
-	var mallet = entity.attach_point.get_node_or_null("Mallet")
+	var mallet = entity.holding_point.get_node_or_null("Mallet")
 	if is_instance_valid(mallet):
 		if Input.is_action_just_pressed("action_combat"):
 			input_timer.start()

@@ -1,6 +1,11 @@
 class_name Options
 extends Menu
 
+var debug_mode: bool = true
+var invert_horizontal: bool = false
+var invert_vertical: bool = false
+var immortal: bool = false
+
 var resolution_dict: Dictionary = {
 }
 

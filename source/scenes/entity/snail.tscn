@@ -517,7 +517,7 @@ bones/23/bound_children = [  ]
 transform = Transform( 1, 0, 0, 0, 0, 1, 0, -1, 0, 0.397249, 0.780981, -0.561497 )
 bone_name = "BoneEyeballRight"
 
-[node name="EyePoint" type="Spatial" parent="Armature/Skeleton/EyeAnchor"]
+[node name="HoldingPoint" type="Spatial" parent="Armature/Skeleton/EyeAnchor"]
 unique_name_in_owner = true
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
@@ -546,7 +546,7 @@ mesh = ExtResource( 10 )
 skin = SubResource( 36 )
 material/0 = ExtResource( 8 )
 
-[node name="Shell" type="MeshInstance" parent="Armature/Skeleton"]
+[node name="MeshInstance" type="MeshInstance" parent="Armature/Skeleton"]
 unique_name_in_owner = true
 mesh = ExtResource( 12 )
 skin = SubResource( 36 )

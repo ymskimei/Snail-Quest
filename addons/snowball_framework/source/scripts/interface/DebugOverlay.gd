@@ -63,7 +63,7 @@ func set_display_controlled() -> void:
 
 func set_display_controlled_target() -> void:
 	if is_instance_valid(SB.controlled):
-		if SB.controlled is Entity:
+		if SB.controlled is Entity and is_instance_valid(SB.controlled.target):
 			display_controlled_target.set_bbcode("[color=#E7738C]Target: %s" % SB.controlled.target.name)
 	else:
 		display_controlled_target.set_bbcode("[color=#E7738C]Target: ??")

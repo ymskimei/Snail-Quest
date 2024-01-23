@@ -5,6 +5,7 @@ var entity: Entity
 
 var climbing_normal: Vector3 = Vector3.ZERO
 var direction: Vector3 = Vector3.ZERO
+var input: Vector3 = Vector3.ZERO
 var facing_dir: float = 0
 
 func set_gravity(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
@@ -46,7 +47,6 @@ func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 	entity.global_transform = SB.utility.apply_surface_align(entity.global_transform, climbing_normal)
 
 func get_joy_input() -> Vector3:
-	var input = entity.input
 	input.x = Input.get_action_strength("joy_left") - Input.get_action_strength("joy_right")
 	input.z = Input.get_action_strength("joy_up") - Input.get_action_strength("joy_down")
 	var input_length = input.length()

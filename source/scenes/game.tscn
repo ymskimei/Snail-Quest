@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://source/scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/scripts/interface/Interface.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://source/scenes/interface/menu_options.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/scenes/interface/hud.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/snowball_framework/source/scenes/interface/menu_debug.tscn" type="PackedScene" id=7]
+[ext_resource path="res://source/scripts/Cache.gd" type="Script" id=8]
 
 [sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
@@ -94,3 +95,6 @@ anchor_bottom = 1.0
 playback_process_mode = 0
 anims/Effect = SubResource( 11 )
 anims/RESET = SubResource( 12 )
+
+[node name="Cache" type="Node" parent="."]
+script = ExtResource( 8 )

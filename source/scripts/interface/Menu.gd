@@ -2,7 +2,7 @@ class_name Menu
 extends MenuParent
 
 func _ready() -> void:
-	if is_instance_valid($AnimationPlayer):
+	if $AnimationPlayer:
 		anim = $AnimationPlayer
 
 func get_sound_switch():

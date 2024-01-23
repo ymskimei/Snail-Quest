@@ -21,7 +21,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if collecting:
 		item.translation = Vector3.ZERO
-		var collection_offset = Vector3(0, player.body.get_aabb().size.y + 0.2, 0)
+		var collection_offset = Vector3(0, player.mesh.get_aabb().size.y + 0.2, 0)
 		translation = player.translation + collection_offset
 		anim.play("ItemCollect")
 	if type.depletable:

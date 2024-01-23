@@ -1,5 +1,6 @@
 extends VehicleBody
 
+onready var mesh = $MeshInstance
 onready var engine = $AudioStreamPlayer3D
 onready var anim = $Tween
 

@@ -7,7 +7,7 @@ onready var ray_front_bottom: RayCast = $Armature/Skeleton/Rays/RayFrontBottom
 onready var ray_ledge_left: RayCast = $Armature/Skeleton/Rays/RayLedgeLeft
 onready var ray_ledge_right: RayCast = $Armature/Skeleton/Rays/RayLedgeRight
 onready var ray_bottom: RayCast = $Armature/Skeleton/Rays/RayBottom
-
+onready var holding_point: Spatial = $"%HoldingPoint"
 var cursor = preload("res://source/scenes/interface/cursor_aim.tscn")
 
 var in_shell: bool
@@ -33,8 +33,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if is_controlled():
 		states.unhandled_input(event)
 
+func _process(delta: float) -> void:
+	._process(delta)
+
 func _physics_process(delta: float) -> void:
-	._physics_process(delta)
 	if is_controlled():
 		states.physics_process(delta)
 	elif is_instance_valid(SB.controlled) and self == SB.prev_controlled:
@@ -45,10 +47,9 @@ func _physics_process(delta: float) -> void:
 			global_rotation.y = 0
 			global_rotation.z = SB.controlled.grab_point.global_rotation.z
 	if in_shell:
-		attach_point.visible = false
+		holding_point.visible = false
 	else:
-		attach_point.visible = true
-	update_appearance()
+		holding_point.visible = true
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	states.integrate_forces(state)
@@ -62,7 +63,7 @@ func _on_proximity_exited(body) -> void:
 		enemy_found = false
 
 func update_appearance() -> void:
-	var shell = $"%Shell"
+	var shell = $"%MeshInstance"
 	var body = $"%Body"
 	var eye_left = $"%EyeLeft"
 	var eye_right = $"%EyeRight"

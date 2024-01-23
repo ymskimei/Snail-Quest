@@ -4,12 +4,9 @@ onready var utility: Node = $Utility
 
 var game: Node
 var camera: Spatial
-
 var controlled: Spatial
 var prev_controlled: Spatial
-
 var world: Node
-
 var play_time: Node
 var game_time: Node
 
@@ -27,8 +24,7 @@ var resource: Dictionary = {
 var chunk_start: Vector3 = Vector3.ZERO
 var chunk_size: int = 64
 
-signal health_changed(health, max_health, b)
-signal entity_killed(b)
+signal controlled_health_change()
 
 func set_game(node: Node):
 	game = node
@@ -38,6 +34,8 @@ func set_camera(node: Spatial):
 
 func set_controlled(node: Spatial):
 	controlled = node
+	if node is Entity:
+		node.connect("health_changed", self, "_on_health_changed")
 
 func set_prev_controlled(node: Spatial):
 	prev_controlled = node
@@ -53,3 +51,6 @@ func set_play_time(node: Node):
 
 func set_game_time(node: Node):
 	game_time = node
+
+func _on_health_changed(health, max_health, is_controlled):
+	emit_signal("controlled_health_change", health, max_health, is_controlled)

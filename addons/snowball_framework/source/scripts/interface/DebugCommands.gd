@@ -50,7 +50,7 @@ func on_command_clear(_console, _args: Array) -> void:
 
 func on_command_debug(_console, _args: Array) -> void:
 	SB.game.interface.debug.show_debug_information()
-	#command_console.close_command_console()
+	command_console.close_command_console()
 
 func on_command_help(_console, _args: Array) -> void:
 	var message = "[color=#7F7F7F]————[/color] [color=#A8A8A8]?[/color] Help [color=#A8A8A8]?[/color] [color=#7F7F7F]————[/color]\n"
@@ -84,28 +84,26 @@ func on_command_time(_console, args: Array) -> void:
 	command_console.send_message("In-game time set to [color=#C3EF5D]%s[/color]\n" % args[0])
 
 func on_command_tp(_console, args: Array) -> void:
-	if is_instance_valid(SB.controllable):
-		SB.controllable.set_coords(Vector3(args[0], args[1], args[2]))
+	if is_instance_valid(SB.controlled):
+		SB.controlled.set_coords(Vector3(args[0], args[1], args[2]))
 	SB.camera.set_coords(Vector3(args[0], args[1], args[2]))
 
 func on_command_version(_console, _args: Array) -> void:
 	command_console.send_message("%s is on version [color=#C3EF5D]%s[/color]\n" % [SB.game.info["title"], SB.game.info["version"]])
 
 func on_command_warp(_console, args: Array) -> void:
-	var directory = Directory.new();
-	var warp_path: String = SB.resource["warp"] + args[0] + ".tres"
-	var all_worlds: Array = SB.utility.get_files(SB.scene["world"], true)
-	var found_world: String = ""
 	if is_instance_valid(SB.world):
-		if all_worlds.size() > 0:
-			for w in all_worlds:
-				if w.ends_with(args[0] + ".tscn"):
-					found_world = w
+		var directory = Directory.new();
+		var all_worlds: Array = SB.utility.get_files(SB.scene["world"], true)
+		var warp_path: String = SB.resource["warp"] + args[0] + ".tres"
 		if directory.file_exists(warp_path):
 			var warp = load(warp_path)
 			SB.world.load_room(load(warp.room_path), warp.coordinates, warp.direction)
-		elif found_world != "":
-			SB.world.load_room(load(found_world), Vector3.ZERO, "NORTH")
+		elif all_worlds.size() > 0:
+			print(all_worlds)
+			for w in all_worlds:
+				if w.ends_with(args[0] + ".tscn"):
+					SB.world.load_room(load(w), Vector3.ZERO, "NORTH")
 		else:
 			var message = "[color=#A8A8A8]This warp does not exist![/color]"
 			command_console.send_message(message)

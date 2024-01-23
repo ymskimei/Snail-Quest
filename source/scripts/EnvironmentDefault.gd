@@ -55,15 +55,15 @@ var cloudy: bool
 
 func _ready() -> void:
 	var cloud_timer = Timer.new()
-	cloud_timer.set_wait_time(3)
+	cloud_timer.set_wait_time(15)
 	cloud_timer.connect("timeout", self, "on_cloud_timer")
 	add_child(cloud_timer)
 	cloud_timer.start()
-	var rain_timer = Timer.new()
-	rain_timer.set_wait_time(0.5)
-	rain_timer.connect("timeout", self, "on_rain_timer")
-	add_child(rain_timer)
-	rain_timer.start()
+#	var rain_timer = Timer.new()
+#	rain_timer.set_wait_time(0.5)
+#	rain_timer.connect("timeout", self, "on_rain_timer")
+#	add_child(rain_timer)
+#	rain_timer.start()
 	var weather_timer = Timer.new()
 	weather_timer.set_wait_time(60)
 	weather_timer.connect("timeout", self, "on_weather_timer")
@@ -147,16 +147,15 @@ func set_environment(delta: float):
 	$Tween.start()
 
 func on_cloud_timer() -> void:
-	#print(environment_current)
 	randomize()
+	var r_size = rand_range(0.25, 2)
+	var r_width = rand_range(1, 2)
 	var x_range = Vector2(-cloud_range_width, cloud_range_width)
 	var y_range = Vector2(-cloud_range_width, cloud_range_width)
 	var random_x = randi() % int(x_range[1]- x_range[0]) + 1 + x_range[0]
 	var random_y =  randi() % int(y_range[1]-y_range[0]) + 1 + y_range[0]
 	var random_pos = Vector3(random_x, cloud_range_height + rand_range(0, 50), random_y)
 	var new_cloud = cloud.instance()
-	var r_size = rand_range(0.25, 2)
-	var r_width = rand_range(1, 2)
 	if all_clouds.size() > max_clouds:
 		var c = all_clouds.pop_front()
 		c.fade_away()

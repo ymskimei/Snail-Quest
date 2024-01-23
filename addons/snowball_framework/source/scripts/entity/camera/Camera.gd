@@ -61,7 +61,7 @@ func _update_positioner() -> void:
 		else:
 			positioner = null
 
-func set_coords(position: Vector3, angle: String, flipped: bool) -> void:
+func set_coords(position: Vector3, angle: String = "NORTH", flipped: bool = false) -> void:
 	var rot = deg2rad(SB.utility.cardinal_to_degrees(angle))
 	if flipped:
 		if !rot == 0:
