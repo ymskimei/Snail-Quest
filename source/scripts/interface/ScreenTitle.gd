@@ -12,9 +12,7 @@ onready var info: RichTextLabel = $MarginContainer/HBoxContainer/MarginContainer
 signal game_start
 
 func _ready() -> void:
-	set_title_splash()
-	version.set_bbcode("[color=#EFEFEF]" + TranslationServer.translate("TITLE") + " " + TranslationServer.translate("TITLE_VERSION") + " " + SB.game.info["version"])
-	info.set_bbcode("[right][color=#EFEFEF] " + SB.game.info["author"])
+	_set_strings()
 	default_selection.grab_focus()
 	anim_cam.play("CamTitleStart")
 	anim_daisy.play("DaisyBlossom")
@@ -24,9 +22,23 @@ func _ready() -> void:
 	anim_daisy.play("DaisyWiggle")
 	anim_logo.play("GuiLogoIdle")
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_menu"):
-		set_title_splash()
+func _set_strings() -> void:
+	version.set_bbcode("[color=#EFEFEF]" + TranslationServer.translate("TITLE") + " " + SB.game.info["version"])
+	info.set_bbcode("[right][color=#EFEFEF]© " + SB.game.info["author"])
+	var splashes: Array = [
+		"TITLE_SPLASH_0",
+		"TITLE_SPLASH_1",
+		"TITLE_SPLASH_2",
+		"TITLE_SPLASH_3",
+		"TITLE_SPLASH_4",
+		"TITLE_SPLASH_5",
+		"TITLE_SPLASH_6",
+		"TITLE_SPLASH_7",
+		"TITLE_SPLASH_8",
+		"TITLE_SPLASH_9"
+	]
+	randomize()
+	splash.set_bbcode("[tornado radius=3 freq=2][color=#FFF896]" + TranslationServer.translate(splashes[randi() % splashes.size()]))
 
 func _physics_process(_delta: float) -> void:
 	var cam = $World/SpringArm
@@ -47,19 +59,3 @@ func _on_StartButton_pressed() -> void:
 func _on_OptionsButton_pressed() -> void:
 	var interface = SB.game.interface
 	interface.get_menu(interface.blur, interface.options)
-
-func set_title_splash() -> void:
-	var splashes: Array = [
-		"TITLE_SPLASH_0",
-		"TITLE_SPLASH_1",
-		"TITLE_SPLASH_2",
-		"TITLE_SPLASH_3",
-		"TITLE_SPLASH_4",
-		"TITLE_SPLASH_5",
-		"TITLE_SPLASH_6",
-		"TITLE_SPLASH_7",
-		"TITLE_SPLASH_8",
-		"TITLE_SPLASH_9"
-	]
-	randomize()
-	splash.set_bbcode("[tornado radius=3 freq=2][color=#FFF896]" + TranslationServer.translate(splashes[randi() % splashes.size()]))

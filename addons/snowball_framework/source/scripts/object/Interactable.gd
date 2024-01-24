@@ -1,12 +1,12 @@
 class_name Interactable
 extends RigidBody
 
-export(Resource) var dialog
+export var dialog: Resource = null
 
 const fallback: DialogueResource = preload("res://addons/snowball_framework/assets/resource/error_fallback.tres")
 
 var target_proxy: Position3D = null
-var character: bool
+var character: bool = false
 
 signal interaction_ended
 

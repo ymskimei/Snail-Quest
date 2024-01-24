@@ -1,8 +1,8 @@
 class_name Entity
 extends Conversable
 
-export var identity: Resource
-export var inventory: Resource
+export var identity: Resource = null
+export var inventory: Resource = null
 
 onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
@@ -19,18 +19,19 @@ var jump: int
 var target = null
 
 var can_interact: bool = false
-var interacting: bool
-var can_target: bool
-var targeting: bool
-var target_found: bool
-var enemy_found: bool
-var jump_in_memory: bool
+var interacting: bool = false
+var can_target: bool = false
+var targeting: bool = false
+var target_found: bool = false
+var enemy_found: bool = false
+var jump_in_memory: bool = false
 var ledge_usable: bool = true
-var pushing: bool
+var pushing: bool = false
 var attached_to_location: bool
+var immortal: bool = false
 
-var max_enemy_distance = 15
-var max_interactable_distance = 3
+var max_enemy_distance: int = 15
+var max_interactable_distance: int = 3
 
 var jump_memory_timer: Timer = Timer.new()
 var ledge_timer: Timer = Timer.new()
@@ -92,7 +93,7 @@ func _get_timers():
 	add_child(ledge_timer)
 
 func set_entity_health(new_amount: int) -> void:
-	if !SB.game.interface.options.immortal:
+	if !immortal:
 		health += new_amount
 		if health > max_health:
 			health = max_health
@@ -116,7 +117,7 @@ func _set_display_health() -> void:
 		$DebugHealthBar.update_bar(mesh, health, max_health)
 
 func kill_entity() -> void:
-	SB.emit_signal("entity_killed", is_controlled())
+	emit_signal("entity_killed", is_controlled())
 	#do death stuff here
 
 func update_equipped(point) -> void:

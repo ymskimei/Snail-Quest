@@ -1,7 +1,7 @@
 extends Node
 
-var current_state: Node
-var et: Spatial
+var current_state: Node = null
+var et: Spatial = null
 
 func ready(entity: Spatial) -> void:
 	et = entity

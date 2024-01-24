@@ -12,9 +12,13 @@ onready var display_chunk_coords: RichTextLabel = $MarginContainer/HBoxContainer
 onready var display_coordinate: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayCoordinate
 onready var command_console: PanelContainer = $MarginContainer/HBoxContainer/ConsoleContainer/GuiConsole
 
+var default_color: String = RegistryColor.get_bbcode(RegistryColor.light_gray)
+var x_color: String = RegistryColor.get_bbcode(RegistryColor.red)
+var y_color: String = RegistryColor.get_bbcode(RegistryColor.lime)
+var z_color: String = RegistryColor.get_bbcode(RegistryColor.blue)
+
 func _ready() -> void:
-	default_focus = command_console.command_input
-	command_console.welcome_message()
+	default_focus = command_console.text_input
 
 func _process(_delta: float) -> void:
 	set_display_framerate()
@@ -28,71 +32,81 @@ func _process(_delta: float) -> void:
 	set_display_coordinates()
 
 func set_display_framerate() -> void:
-	var framerate = Engine.get_frames_per_second()
-	if framerate < 30:
-		display_framerate.set_bbcode("[color=#EA6A59]%s" % framerate)
-	elif framerate < 60:
-		display_framerate.set_bbcode("[color=#EDDB65]%s" % framerate)
+	var framerate: int = Engine.get_frames_per_second()
+	var color: String = ""
+	if framerate < Engine.target_fps / 2:
+		color = RegistryColor.red
+	elif framerate < Engine.target_fps:
+		color = RegistryColor.yellow
+	elif framerate > Engine.target_fps:
+		color = RegistryColor.green
 	else:
-		display_framerate.set_bbcode("[color=#C3EF5D]%s" % framerate)
+		color = RegistryColor.lime
+	display_framerate.set_bbcode(RegistryColor.get_bbcode(color) + "%s" % framerate)
 
 func set_display_world_time() -> void:
-	if is_instance_valid(SB.game_time):
-		display_game_time.set_bbcode("[color=#C3EF5D]%s" % SB.game_time.get_time(false))
+	if SB.game_time:
+		display_game_time.set_bbcode(default_color + "%s" % SB.game_time.get_time(false))
 	else:
-		display_game_time.set_bbcode("[color=#C3EF5D]??:??")
+		display_game_time.set_bbcode(default_color + "??:??")
 
 func set_display_play_time() -> void:
-	if is_instance_valid(SB.play_time):
-		display_play_time.set_bbcode("[color=#C3EF5D]%s" % SB.play_time.get_time())
+	if SB.play_time:
+		display_play_time.set_bbcode(default_color + "%s" % SB.play_time.get_time())
 	else:
-		display_play_time.set_bbcode("[color=#C3EF5D]??h, ??m, ??s")
+		display_play_time.set_bbcode(default_color + "??h, ??m, ??s")
 
 func set_display_camera_target() -> void:
-	if is_instance_valid(SB.camera):
-		if is_instance_valid(SB.camera.target):
-			display_camera_target.set_bbcode("[color=#71B4F6]Cam Target: %s" % SB.camera.target.name)
+	if SB.camera:
+		if SB.camera.target:
+			display_camera_target.set_bbcode(default_color + "Cam Target: %s" % SB.camera.target.name)
 	else:
-		display_camera_target.set_bbcode("[color=#71B4F6]Cam Target: ??")
+		display_camera_target.set_bbcode(default_color + "Cam Target: ??")
 
 func set_display_controlled() -> void:
-	if is_instance_valid(SB.controlled):
-		display_controlled.set_bbcode("[color=#C289FF]Controlling: %s" % SB.controlled.name)
+	if SB.controlled:
+		display_controlled.set_bbcode(default_color + "Controlling: %s" % SB.controlled.name)
 	else:
-		display_controlled.set_bbcode("[color=#C289FF]Controlling: ??")
+		display_controlled.set_bbcode(default_color + "Controlling: ??")
 
 func set_display_controlled_target() -> void:
 	if is_instance_valid(SB.controlled):
 		if SB.controlled is Entity and is_instance_valid(SB.controlled.target):
-			display_controlled_target.set_bbcode("[color=#E7738C]Target: %s" % SB.controlled.target.name)
+			display_controlled_target.set_bbcode(default_color + "Target: %s" % SB.controlled.target.name)
 	else:
-		display_controlled_target.set_bbcode("[color=#E7738C]Target: ??")
+		display_controlled_target.set_bbcode(default_color + "Target: ??")
 
 func set_display_prev_controlled() -> void:
-	if is_instance_valid(SB.prev_controlled):
-		display_prev_controlled.set_bbcode("[color=#F491FF]Last controlling: %s" % SB.prev_controlled.name)
+	if SB.prev_controlled:
+		display_prev_controlled.set_bbcode(default_color + "Last controlling: %s" % SB.prev_controlled.name)
 	else:
-		display_prev_controlled.set_bbcode("[color=#F491FF]Last controlling: ??")
+		display_prev_controlled.set_bbcode(default_color + "Last controlling: ??")
 
 func set_display_chunk_coords() -> void:
-	if is_instance_valid(SB.controlled):
-		var coords_x = floor(SB.controlled.global_translation.x / SB.chunk_size)
-		var coords_z = floor(SB.controlled.global_translation.z / SB.chunk_size)
-		display_chunk_coords.set_bbcode("[color=#C289FF]%s, [color=#62BC43]%s" % [coords_x, coords_z])
-	elif is_instance_valid(SB.camera):
-		var coords_x = floor(SB.camera.global_translation.x / SB.chunk_size)
-		var coords_z = floor(SB.camera.global_translation.z / SB.chunk_size)
-		display_chunk_coords.set_bbcode("[color=#C289FF]%s, [color=#62BC43]%s" % [coords_x, coords_z])
+	if SB.controlled or SB.camera:
+		var e: Spatial = null
+		if SB.controlled:
+			e = SB.controlled
+		elif SB.camera:
+			e = SB.camera
+		var coords_x = floor(e.global_translation.x / SB.chunk_size)
+		var coords_z = floor(e.global_translation.z / SB.chunk_size)
+		display_chunk_coords.set_bbcode(x_color + "%s, " % coords_x + x_color + "%s" % coords_z)
 	else:
-		display_chunk_coords.set_bbcode("?, ?")
+		display_chunk_coords.set_bbcode(x_color + "?, " + x_color + "?")
 
 func set_display_coordinates() -> void:
-	if is_instance_valid(SB.controlled):
-		if SB.controlled.has_method("get_coords"):
-			var coords = SB.controlled.get_coords()
-			display_coordinate.set_bbcode("[color=#E7738C]X: %s\n[color=#A3DD5D]Y: %s\n[color=#71B4F6]Z: %s" % [coords[0], coords[1], coords[2]])
+	if SB.controlled or SB.camera:
+		var coords: Array = []
+		var e: Spatial = null
+		if SB.controlled:
+			e = SB.controlled
+		elif SB.camera:
+			e = SB.camera
+		coords = e.get_coords()
+		display_coordinate.set_bbcode(x_color + "X: %s\n" % coords[0] + y_color + "Y: %s\n" % coords[1] + z_color + "Z: %s" % coords[2])
 	else:
-		display_coordinate.set_bbcode("[color=#E7738C]X: ?\n[color=#A3DD5D]Y: ?\n[color=#71B4F6]Z: ?")
+		display_coordinate.set_bbcode(x_color + "X: ?\n" + y_color + "Y: ?\n" + z_color + "Z: ?")
 
 func set_command_console(toggle: bool) -> void:
 	if toggle:

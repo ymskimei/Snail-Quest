@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/snowball_framework/source/scripts/interface/DebugOverlay.gd" type="Script" id=1]
-[ext_resource path="res://addons/snowball_framework/assets/interface/theme/debug.tres" type="Theme" id=2]
-[ext_resource path="res://addons/snowball_framework/source/scenes/interface/debug_console.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/snowball_framework/assets/interface/theme/debug.tres" type="Theme" id=1]
+[ext_resource path="res://addons/snowball_framework/source/scenes/interface/debug_console.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/snowball_framework/source/scripts/interface/DebugOverlay.gd" type="Script" id=3]
 
 [node name="GuiDebug" type="CanvasLayer"]
 pause_mode = 2
 layer = 16
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -35,7 +35,7 @@ custom_constants/margin_top = 32
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
 
-[node name="GuiConsole" parent="MarginContainer/HBoxContainer/ConsoleContainer" instance=ExtResource( 3 )]
+[node name="GuiConsole" parent="MarginContainer/HBoxContainer/ConsoleContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 32.0
@@ -48,7 +48,7 @@ margin_left = 1254.0
 margin_right = 1880.0
 margin_bottom = 1040.0
 size_flags_horizontal = 3
-theme = ExtResource( 2 )
+theme = ExtResource( 1 )
 alignment = 2
 
 [node name="DisplayFramerate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]

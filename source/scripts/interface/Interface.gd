@@ -10,7 +10,7 @@ onready var options: Menu = $Options
 onready var inventory: Menu = $Inventory
 
 func _process(_delta: float):
-	if !is_instance_valid(SB.controlled) or get_tree().paused == true:
+	if !SB.controlled or get_tree().paused == true:
 		hud.hide() 
 		cursor.show()
 	elif SB.controlled is Entity or VehicleBody:

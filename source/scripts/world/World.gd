@@ -1,8 +1,9 @@
 extends Node
 
-export(Resource) var resource
+export var resource: Resource = null
 
 onready var anim: AnimationPlayer = $GuiTransition/AnimationPlayer
+onready var rooms: Spatial = $Rooms
 
 export var render_radius: int = 1 #Temporary variables for testing
 
@@ -28,9 +29,9 @@ func load_room(room: PackedScene, coords: Vector3, dir: String, keep_rooms: bool
 	if is_instance_valid(room):
 		var new_room = room.instance()
 		if !keep_rooms:
-			for r in $Rooms.get_children():
-				$Rooms.remove_child(r)
-		$Rooms.add_child(new_room)
+			for r in rooms.get_children():
+				rooms.remove_child(r)
+		rooms.add_child(new_room)
 		_register_chunks()
 		SB.controlled.set_coords(coords, dir)
 		SB.camera.set_coords(coords, dir, true)

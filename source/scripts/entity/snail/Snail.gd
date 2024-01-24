@@ -10,16 +10,23 @@ onready var ray_bottom: RayCast = $Armature/Skeleton/Rays/RayBottom
 onready var holding_point: Spatial = $"%HoldingPoint"
 var cursor = preload("res://source/scenes/interface/cursor_aim.tscn")
 
-var in_shell: bool
-var is_tool_equipped: bool
-var cursor_activated: bool
+var in_shell: bool = false
+var is_tool_equipped: bool = false
+var cursor_activated: bool = false
+var colliding: bool = false
 
-var cursor_pos: Vector3
+var cursor_pos: Vector3 = Vector3.ZERO
+var mode_timer: Timer = null
 
 func _ready() -> void:
 	states.ready(self)
 	update_appearance()
 	set_interaction_text("")
+	mode_timer = Timer.new()
+	mode_timer.set_wait_time(0.1)
+	mode_timer.one_shot = true
+	mode_timer.connect("timeout", self, "_on_mode_timeout")
+	add_child(mode_timer)
 #	if character:
 #		char_target.visible = true
 #	elif !character:
@@ -39,7 +46,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if is_controlled():
 		states.physics_process(delta)
-	elif is_instance_valid(SB.controlled) and self == SB.prev_controlled:
+	elif SB.controlled and self == SB.prev_controlled:
 		if SB.controlled.get("grab_point"):
 			anim.play("SnailGrab")
 			global_translation = SB.controlled.grab_point.global_translation
@@ -75,7 +82,7 @@ func update_appearance() -> void:
 	var eye_right_mat = eye_right.get_surface_material(0).get_next_pass()
 	var eyelid_left_mat = eye_left.get_surface_material(0).get_next_pass().get_next_pass()
 	var eyelid_right_mat = eye_right.get_surface_material(0).get_next_pass().get_next_pass()
-	if is_instance_valid(identity):
+	if identity:
 		shell.set_mesh(identity.mesh_shell)
 		body.set_mesh(identity.mesh_body)
 		eye_left.set_mesh(identity.mesh_eye_left)
@@ -109,3 +116,23 @@ func play_sound_hide(s: bool) -> void:
 		SB.utility.audio.play_pos_sfx(RegistryAudio.snail_shell_in, global_translation, 1.0, 0.0)
 	else:
 		SB.utility.audio.play_pos_sfx(RegistryAudio.snail_shell_out, global_translation, 0.5, 0.0)
+
+func _on_Snail_body_entered(body) -> void:
+	if !body.get_collision_layer_bit(2):
+		colliding = true
+		mode_timer.start()
+
+func _on_Snail_body_exited(body) -> void:
+	if !body.get_collision_layer_bit(2):
+		colliding = false
+		mode_timer.start()
+
+func _on_mode_timeout() -> void:
+	if !is_controlled():
+		if !colliding:
+			mode = RigidBody.MODE_STATIC
+			print(entity_name)
+		else:
+			mode = RigidBody.MODE_RIGID
+	else:
+		mode = RigidBody.MODE_CHARACTER

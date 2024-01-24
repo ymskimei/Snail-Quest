@@ -113,6 +113,25 @@ func get_files(folder_path: String, path: bool = false, recursive: bool = true) 
 			file_name = dir.get_next()
 	return files
 
+func get_names_from_paths(folder_path: String) -> PoolStringArray:
+	var arr = SB.utility.get_files(folder_path, true, false)
+	var new_arr: PoolStringArray = []
+	for e in arr:
+		e.erase(0, folder_path.length())
+		e.erase(e.length() - 5, 5)
+		new_arr.append(e)
+	return new_arr
+
+func read_config(path: String, section: String, key: String):
+	var config = ConfigFile.new()
+	config.load(path)
+	if config.has_section(section) and config.has_section_key(section, key):
+		var value = config.get_value(section, key)
+		return value
+	else:
+		printerr("Config file section or key not found")
+		return null
+
 func pause(toggle: bool) -> void:
 	if toggle:
 		get_tree().set_deferred("paused", true)

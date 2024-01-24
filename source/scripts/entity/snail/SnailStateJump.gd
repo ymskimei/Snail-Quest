@@ -1,7 +1,7 @@
 extends SnailStateMain
 
-var can_jump: bool
-var jump_timer: Timer
+var can_jump: bool = false
+var jump_timer: Timer = null
 
 func enter() -> void:
 	print("Snail State: JUMP")

@@ -2,7 +2,7 @@ class_name InterfaceParent
 extends Node
 
 var game_focused: bool = true
-var current_focus: Control
+var current_focus: Control = null
 var previous_focus: Array = []
 var previous_menu: Array = []
 

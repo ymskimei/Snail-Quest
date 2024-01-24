@@ -26,7 +26,7 @@ func call_back_set(string):
 func call_back_get():
 	return call_back
 
-func parse_arguments(arguments : String):
+func parse_arguments(arguments: String):
 	var argument_array = []
 	var segmented = arguments.split(" ", false)
 	var group: PoolStringArray = []
@@ -46,18 +46,18 @@ func parse_arguments(arguments : String):
 		else:
 			argument_array.push_back(segment)
 	if group.size() != 0:
-		return "[color=#EA6A59]Invalid argument format (Incomplete: %)" % group.join(" ") + "[/color]"
+		return RegistryColor.get_bbcode(RegistryColor.red) + "Invalid argument format (Incomplete: %)" % group.join(" ") + "[/color]"
 	if argument_array.size() != argument_types.size():
-		return "[color=#EA6A59]Invalid amount of arguments (Required: %s, Recieved: %s)" % [String(argument_types.size()), String(argument_array.size())] + "[/color]"
+		return RegistryColor.get_bbcode(RegistryColor.red) + "Invalid amount of arguments (Required: %s, Recieved: %s)" % [String(argument_types.size()), String(argument_array.size())] + "[/color]"
 	for i in range(argument_types.size()):
 		match(argument_types[i]):
 			ArgumentType.INT: argument_array[i] = int(argument_array[i])
 			ArgumentType.FLOAT: argument_array[i] = float(argument_array[i])
 			ArgumentType.BOOL: argument_array[i] = bool(argument_array[i])
 	return argument_array
-	
+
 func get_usage():
-	var command_usage = "[color=#EDDB65]Correct usage: [/color]%s" % name
+	var command_usage = RegistryColor.get_bbcode(RegistryColor.red) + "Correct usage: [/color]%s" % name
 	for i in range(argument_types.size()):
 		var argument_type = ArgumentType.keys()[argument_types[i]]
 		var argument_name = argument_names[i]

@@ -1,8 +1,8 @@
 class_name Chunk
 extends Object
 
-var chunk_coord: Vector2
-var resource: Resource
+var chunk_coord: Vector2 = Vector2.ZERO
+var resource: Resource = null
 
 func _init(_chunk_coord: Vector2, _resource: Resource):
 	chunk_coord = _chunk_coord

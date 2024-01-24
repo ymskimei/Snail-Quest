@@ -1,7 +1,7 @@
 class_name StateMain
 extends Node
 
-var entity: Entity
+var entity: Entity = null
 
 var climbing_normal: Vector3 = Vector3.ZERO
 var direction: Vector3 = Vector3.ZERO

@@ -8,9 +8,9 @@ var input_right: int = 0
 
 var jump_combo: int = 0
 
-var shell_jumped: bool
-var previous_swing: bool
-var action_combat_held: bool
+var shell_jumped: bool = false
+var previous_swing: bool = false
+var action_combat_held: bool = false
 
 var input_timer: Timer = Timer.new()
 var jump_combo_timer: Timer = Timer.new()

@@ -1,7 +1,7 @@
 extends SnailStateMain
 
-var ledge_jump_timer: Timer
-var speed_boost_timer: Timer
+var ledge_jump_timer: Timer = null
+var speed_boost_timer: Timer = null
 
 export var can_ledge_jump: bool = false
 
@@ -17,8 +17,8 @@ func enter() -> void:
 	ledge_jump_timer.start()
 
 func unhandled_input(event: InputEvent) -> int:
-#	if !entity.can_interact and event.is_action_pressed("action_main") and is_on_floor():
-#		return State.JUMP
+	if !entity.can_interact and event.is_action_pressed("action_main") and is_on_floor():
+		return State.JUMP
 	#if event.is_action_pressed("action_defense") or roll(event):
 	#	return State.DODG
 	needle()

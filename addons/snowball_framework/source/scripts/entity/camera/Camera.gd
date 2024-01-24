@@ -1,21 +1,21 @@
 class_name MainCamera
-extends Spatial
+extends Interactable
 
 onready var lens: Camera = $CameraLens
-onready var collision: CollisionShape = $CameraLens/RigidBody/CollisionShape
+onready var collision: CollisionShape = $CollisionShape
 
 onready var anim_tween: Tween = $Animation/AnimationCam
 onready var anim_bars: AnimationPlayer = $Animation/AnimationBars
 onready var anim_wobble: AnimationPlayer = $Animation/AnimationWobble
 onready var states: Node = $StateController
 
-var target: Spatial
-var positioner: Position3D
-var override: Position3D
+var target: Spatial = null
+var positioner: Position3D = null
+var override: Position3D = null
 
 var arm_length: int = 0
 
-var debug_cam: bool
+var debug_cam: bool = false
 
 signal target_updated
 
@@ -36,12 +36,12 @@ func _update_arm(delta: float):
 	lens.translation.z = lerp(lens.translation.z, arm_length, 20 * delta)
 
 func _update_target() -> void:
-	if is_instance_valid(override):
+	if override:
 		target = override
-	elif is_instance_valid(positioner):
+	elif positioner:
 		target = positioner
-	elif is_instance_valid(SB.controlled):
-		if is_instance_valid(SB.controlled.target_proxy):
+	elif SB.controlled:
+		if SB.controlled.target_proxy:
 			target = SB.controlled.target_proxy
 		else:
 			target = SB.controlled
@@ -53,7 +53,7 @@ func _update_target() -> void:
 
 func _update_positioner() -> void:
 	var p = SB.utility.find_target(self, "positioner")
-	if is_instance_valid(SB.controlled) and p:
+	if SB.controlled and p:
 		var distance = p.get_global_translation().distance_to(SB.controlled.get_global_translation())
 		var max_distance = 17
 		if distance < max_distance:
