@@ -26,7 +26,7 @@ func set_gravity(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 			climbing_normal = norm_avg / rays_colliding
 	else:
 		climbing_normal = Vector3.UP
-	entity.global_transform = SB.utility.apply_surface_align(entity.global_transform, climbing_normal)
+	entity.global_transform = Utility.apply_surface_align(entity.global_transform, climbing_normal)
 	state.add_central_force(lerp(15, gravity, 0.1) * -climbing_normal)
 
 func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
@@ -44,7 +44,7 @@ func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 			climbing_normal = norm_avg / rays_colliding
 	else:
 		climbing_normal = Vector3.UP
-	entity.global_transform = SB.utility.apply_surface_align(entity.global_transform, climbing_normal)
+	entity.global_transform = Utility.apply_surface_align(entity.global_transform, climbing_normal)
 
 func get_joy_input() -> Vector3:
 	input.x = Input.get_action_strength("joy_left") - Input.get_action_strength("joy_right")

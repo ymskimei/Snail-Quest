@@ -48,7 +48,7 @@ func _physics_process(_delta: float) -> void:
 	#cam.translation.x = lerp(cam.translation.x, Input.get_action_strength("cam_left") * 0.2 - Input.get_action_strength("cam_right") * 0.2, 0.1)
 
 func _on_StartButton_pressed() -> void:
-	SB.utility.audio.play_sfx(RegistryAudio.tone_success)
+	Audio.play_sfx(RegistryAudio.tone_success)
 	var fade = $GuiTransition/AnimationPlayer
 	fade.play("GuiTransitionFade")
 	#anim.play("GuiLogoDisappear")

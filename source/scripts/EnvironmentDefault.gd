@@ -131,7 +131,7 @@ func set_environment(delta: float):
 	current_sky_color.set_color(1, lerp(current_sky_color.get_color(1), sky_color_2, 1 * delta))
 	current_sky_color.set_color(2, lerp(current_sky_color.get_color(2), sky_color_1, 1 * delta))
 	for c in all_clouds:
-		if is_instance_valid(c.sprite):
+		if is_instance_valid(c):
 			if c.sprite.modulate != cloud_color:
 				c.sprite.modulate = lerp(c.sprite.modulate, cloud_color, 1 * delta)
 	if stars_level == 2:

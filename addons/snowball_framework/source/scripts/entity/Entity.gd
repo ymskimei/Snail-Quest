@@ -49,7 +49,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_controlled():
-		var b = SB.utility.input.i_trigger_left
+		var b = Device.trigger_left
 		if event.is_action_pressed(b):
 			if is_instance_valid(target):
 				can_target = true
@@ -57,7 +57,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if is_instance_valid(target):
 				can_target = false
 		if is_instance_valid(target):
-			if event.is_action_pressed(SB.utility.input.i_action_main):
+			if event.is_action_pressed(Device.action_main):
 				target_interact()
 		if SB.game.interface.options.debug_mode:
 			if event.is_action_pressed("debug_cam_fov_decrease"):
@@ -70,10 +70,10 @@ func _process(delta: float) -> void:
 		if is_instance_valid(target):
 			target_check()
 		else:
-			target = SB.utility.find_target(self, "target")
+			target = Utility.find_target(self, "target")
 
 func _set_identity() -> void:
-	if is_instance_valid(identity):
+	if identity:
 		entity_name = identity.entity_name
 		character = identity.character
 		health = identity.health
@@ -139,7 +139,7 @@ func target_check() -> void:
 		else:
 			target_found = false
 	else:
-		target = SB.utility.find_target(self, "target")
+		target = Utility.find_target(self, "target")
 
 func target_interact() -> void:
 	var target_distance: float  = target.get_global_translation().distance_to(get_global_translation())
@@ -165,7 +165,7 @@ func set_interaction_text(text) -> void:
 		label.set_text("")
 		label.set_visible(false)
 	else:
-		var interaction_key = OS.get_scancode_string(InputMap.get_action_list(SB.utility.input.i_action_main)[0].scancode)
+		var interaction_key = OS.get_scancode_string(InputMap.get_action_list(Device.action_main)[0].scancode)
 		label.set_text("Press %s to %s" % [interaction_key, text])
 		label.set_visible(true)
 

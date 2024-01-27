@@ -48,7 +48,7 @@ func get_coords(raw: bool = false) -> Vector3:
 
 func set_coords(position: Vector3, angle: String = "NORTH") -> void:
 	set_global_translation(position)
-	set_global_rotation(Vector3(0, deg2rad(SB.utility.cardinal_to_degrees(angle)), 0))
+	set_global_rotation(Vector3(0, deg2rad(Utility.cardinal_to_degrees(angle)), 0))
 
 func is_controlled() -> bool:
 	if SB.controlled == self:

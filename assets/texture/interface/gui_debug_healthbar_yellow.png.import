@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://import/gui_debug_healthbar_yellow.png-029b1e33f03dd6eacbf58ab1653bb1cb.stex"
+path="res://import/gudebug_healthbar_yellow.png-029b1e33f03dd6eacbf58ab1653bb1cb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/gui/gui_debug_healthbar_yellow.png"
-dest_files=[ "res://import/gui_debug_healthbar_yellow.png-029b1e33f03dd6eacbf58ab1653bb1cb.stex" ]
+source_file="res://assets/texture/gui/gudebug_healthbar_yellow.png"
+dest_files=[ "res://import/gudebug_healthbar_yellow.png-029b1e33f03dd6eacbf58ab1653bb1cb.stex" ]
 
 [params]
 

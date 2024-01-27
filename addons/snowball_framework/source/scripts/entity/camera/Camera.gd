@@ -52,7 +52,7 @@ func _update_target() -> void:
 #	emit_signal("target_updated", cam_target)
 
 func _update_positioner() -> void:
-	var p = SB.utility.find_target(self, "positioner")
+	var p = Utility.find_target(self, "positioner")
 	if SB.controlled and p:
 		var distance = p.get_global_translation().distance_to(SB.controlled.get_global_translation())
 		var max_distance = 17
@@ -62,7 +62,7 @@ func _update_positioner() -> void:
 			positioner = null
 
 func set_coords(position: Vector3, angle: String = "NORTH", flipped: bool = false) -> void:
-	var rot = deg2rad(SB.utility.cardinal_to_degrees(angle))
+	var rot = deg2rad(Utility.cardinal_to_degrees(angle))
 	if flipped:
 		if !rot == 0:
 			rot /= 0.5

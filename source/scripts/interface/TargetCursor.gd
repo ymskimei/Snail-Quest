@@ -12,9 +12,9 @@ func _ready() -> void:
 func _physics_process(delta: float):
 	if is_instance_valid(SB.controlled) and SB.controlled is Entity: 
 		var p = SB.controlled
-		if is_instance_valid(SB.controlled.target):
+		if SB.controlled.target:
 			global_translation = p.target.global_translation
-			if is_instance_valid(p.target.mesh):
+			if p.target.mesh:
 				global_translation.y = p.target.mesh.get_aabb().size.y
 				circle.global_translation.y = 0.1
 		circle.rotation_degrees.z += 60 * delta

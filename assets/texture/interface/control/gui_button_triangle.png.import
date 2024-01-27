@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://import/gui_button_triangle.png-3359442871bda2f948881239ec1c1ab5.stex"
+path="res://import/gubutton_triangle.png-3359442871bda2f948881239ec1c1ab5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/gui/control/gui_button_triangle.png"
-dest_files=[ "res://import/gui_button_triangle.png-3359442871bda2f948881239ec1c1ab5.stex" ]
+source_file="res://assets/texture/gui/control/gubutton_triangle.png"
+dest_files=[ "res://import/gubutton_triangle.png-3359442871bda2f948881239ec1c1ab5.stex" ]
 
 [params]
 

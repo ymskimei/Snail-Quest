@@ -1,7 +1,7 @@
 class_name CameraStateMain
 extends Node
 
-var sensitivity: int = 15
+var sensitivity: float = 1
 
 var entity: MainCamera
 var rotation: Vector2
@@ -38,6 +38,12 @@ func target_controlled() -> bool:
 		return true
 	else:
 		return false
+
+func is_inverted(is_y: bool = false) -> bool:
+	if is_y:
+		return SB.game.interface.options.get_invert_vertical()
+	else:
+		return SB.game.interface.options.get_invert_horizontal()
 
 func tween_cam_pan(arm: float, lens: float) -> void:
 	entity.anim_tween.interpolate_property(entity, "rotation:x", entity.rotation.x, arm, 0.15, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

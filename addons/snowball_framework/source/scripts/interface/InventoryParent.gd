@@ -6,9 +6,9 @@ export(Resource) var items
 
 func _ready() -> void:
 	#yield(SB, "ready")
-	if is_instance_valid(SB.utility.item):
-		SB.utility.item.connect("items_updated", self, "on_items_updated")
-		SB.utility.item.duplicate_item_instances(items.items)
+	if is_instance_valid(Item):
+		Item.connect("items_updated", self, "on_items_updated")
+		Item.duplicate_item_instances(items.items)
 
 func update_item_slot_display(item_index: int) -> void:
 	var inventory_slot_display = container.get_child(item_index)

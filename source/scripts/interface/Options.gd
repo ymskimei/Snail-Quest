@@ -1,40 +1,25 @@
 extends Options
 
 onready var tabs: TabContainer = $"%Tabs"
-
 onready var video: TextureButton = $"%ButtonVideo"
+
 onready var fullscreen: CheckBox = $"%CheckBoxFullscreen"
-
-onready var filter: OptionButton = $"%ButtonFilter"
 onready var resolution: OptionButton = $"%ButtonResolution"
+onready var filter: OptionButton = $"%ButtonFilter"
 onready var framerate: OptionButton = $"%ButtonFps"
+onready var vsync: CheckBox = $"%CheckBoxVsync"
+
+onready var volume_master: HSlider = $"%BarVolumeMaster"
+onready var volume_music: HSlider = $"%BarVolumeMusic"
+onready var volume_sfx: HSlider = $"%BarVolumeSfx"
+onready var headphones: CheckBox = $"%CheckBoxHeadphones"
+onready var mono: CheckBox = $"%CheckBoxMono"
+
+onready var camera_invert_horizontal: CheckBox = $"%CheckBoxHorizontal"
+onready var camera_invert_vertical: CheckBox = $"%CheckBoxVertical"
+onready var camera_sensitivity: HSlider = $"%BarCameraSensitivity"
+
 onready var language: OptionButton = $"%ButtonLanguage"
-
-var resolutions: Dictionary = {
-	"OPTIONS_RESOLUTION_480": Vector2(640, 480),
-	"OPTIONS_RESOLUTION_600": Vector2(800, 600),
-	"OPTIONS_RESOLUTION_768": Vector2(1024, 768),
-	"OPTIONS_RESOLUTION_720": Vector2(1280, 720),
-	"OPTIONS_RESOLUTION_1080": Vector2(1920, 1080),
-	"OPTIONS_RESOLUTION_1440": Vector2(2560, 1440)
-}
-
-var filters: Dictionary = {
-	"OPTIONS_FILTER_CONTRASTED": 0,
-	"OPTIONS_FILTER_MONOCHROME": 1,
-	"OPTIONS_FILTER_PROTANOPIA": 2,
-	"OPTIONS_FILTER_DEUTERANOPIA": 3,
-	"OPTIONS_FILTER_TRITANOPIA": 4,
-	"OPTIONS_FILTER_ACHROMATOPSIA": 5
-}
-
-var languages: Dictionary = {
-	"OPTIONS_LANGUAGE_EN_GB": "en_GB",
-	"OPTIONS_LANGUAGE_ES_MX": "es_MX",
-	"OPTIONS_LANGUAGE_ES_AR": "es_AR",
-	"OPTIONS_LANGUAGE_JA_JP": "ja_JP",
-	"OPTIONS_LANGUAGE_PR": "pr"
-}
 
 var last_focus: Control
 var new_focus: Control
@@ -43,14 +28,28 @@ var can_remap: bool
 var remap_timer: Timer = Timer.new()
 
 func _ready() -> void:
-	resolution_dict.merge(resolutions)
-	filter_dict.merge(filters)
-	language_dict.merge(languages)
 	add_resolution(resolution)
 	add_framerate(framerate)
 	add_language(language)
 	default_focus = fullscreen
+	_set_buttons_from_config()
 
+func _set_buttons_from_config() -> void:
+	fullscreen.set_toggle_mode(get_fullscreen())
+	#resolution.select(resolution.get_meta(get_resolution()))
+	#filter.select(filter_dict[get_resolution()])
+	#framerate.select(framerate_dict[get_resolution()])
+	vsync.set_toggle_mode(get_fullscreen())
+	volume_master.set_value(get_volume_master()) 
+	volume_music.set_value(get_volume_music()) 
+	volume_sfx.set_value(get_volume_sfx()) 
+	headphones.set_toggle_mode(get_headphones_mode())
+	mono.set_toggle_mode(get_mono_mode())
+	camera_invert_horizontal.set_toggle_mode(get_invert_horizontal())
+	camera_invert_vertical.set_toggle_mode(get_invert_horizontal())
+	camera_sensitivity.set_value(get_camera_sensitivity()) 
+	#language.select(language_dict[get_language()])
+	
 func get_default_focus() -> void:
 	video.grab_focus()
 
@@ -84,22 +83,23 @@ func _on_ButtonMisc_pressed():
 
 ## Video Settings
 func _on_CheckBoxFullscreen_toggled(button_pressed: bool) -> void:
-	set_fullscreeen(button_pressed)
+	set_fullscreen(button_pressed)
+	print("fun")
 	if button_pressed:
 		get_sound_success()
 	else:
 		get_sound_exit()
 
 func _on_ButtonResolution_item_selected(index: int) -> void:
-	set_resolution(resolution, index)
+	set_resolution(resolution.get_item_metadata(index))
 	get_sound_success()
 
 func _on_ButtonFilter_item_selected(index: int) -> void:
-	set_filter(filter, index)
+	set_filter(filter.get_item_metadata(index))
 	get_sound_success()
 
 func _on_ButtonFps_item_selected(index: int) -> void:
-	set_framerate(framerate, index)
+	set_framerate(framerate_dict.get(framerate.get_item_text(index)))
 	get_sound_success()
 
 func _on_CheckBoxVsync_toggled(button_pressed: bool) -> void:
@@ -157,5 +157,12 @@ func _on_BarCameraSensitivity_value_changed(value):
 
 ## Misc Settings
 func _on_ButtonLanguage_item_selected(index: int) -> void:
-	set_language(language, index)
+	set_language(language.get_item_metadata(index))
 	get_sound_success()
+
+func _notification(what):
+	match what:
+		NOTIFICATION_WM_FOCUS_IN:
+			_set_buttons_from_config()
+		NOTIFICATION_WM_FOCUS_OUT:
+			pass

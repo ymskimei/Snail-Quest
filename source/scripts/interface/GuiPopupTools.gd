@@ -13,7 +13,7 @@ func _process(delta):
 		update_inventory_display()
 		$AnimationPlayer.play("Open")
 		get_tree().set_deferred("paused", true)
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Device.set_mouse_mode(Device.MOUSE_MODE_VISIBLE)
 		tools_open = true
 		$"%CenterContainer".button.grab_focus()
 	elif Input.is_action_just_released("gui_tools"):
@@ -24,7 +24,7 @@ func _process(delta):
 					print(child.equipment.items)
 		$AnimationPlayer.play("Exit")
 		get_tree().set_deferred("paused", false)
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		Device.set_mouse_mode(Device.MOUSE_MODE_CAPTURED)
 		tools_open = false
 	if tools_open:
 		if Input.is_action_just_pressed("ui_right"):

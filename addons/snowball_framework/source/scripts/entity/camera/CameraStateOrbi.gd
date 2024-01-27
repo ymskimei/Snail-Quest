@@ -37,7 +37,7 @@ func enter() -> void:
 	distance = 0
 
 func unhandled_input(event: InputEvent) -> int:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Device.MOUSE_MODE_CAPTURED:
 		rotation = event.relative
 		controller = false
 	elif event is InputEventJoypadMotion:
@@ -65,7 +65,9 @@ func physics_process(delta: float) -> int:
 	return State.NULL
 
 func _cam_tracking(delta: float) -> void:
-	rotation.x = Input.get_action_strength("cam_left") - Input.get_action_strength("cam_right")
+	rotation.x = Input.get_action_strength(Device.stick_alt_left) - Input.get_action_strength(Device.stick_alt_right)
+	if is_inverted():
+			rotation.x = -rotation.x
 	rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 2
 	entity.translation = lerp(entity.translation, entity.target.translation + offset, track_speed * delta)
 	entity.arm_length = lerp(entity.arm_length, clamp(entity.arm_length + distance, 4, 30), 10 * delta)
@@ -76,9 +78,9 @@ func _cam_panning(delta: float) -> void:
 	if distance_to_target <= 1.5:
 		tween_cam_pan(lock_low_arm, lock_low_lens)
 	elif distance_to_target >= 2:
-		if Input.is_action_just_pressed(SB.utility.input.i_button_right):
+		if Input.is_action_just_pressed(Device.button_right):
 			look_timer.start()
-		if Input.is_action_just_released(SB.utility.input.i_button_right):
+		if Input.is_action_just_released(Device.button_right):
 			zoom_mode = true
 		if !zoom_mode:
 			_cam_lifting(delta)
@@ -86,28 +88,30 @@ func _cam_panning(delta: float) -> void:
 			cam_zooming(delta)
 			
 func _cam_velocity(delta: float) -> void:
-	velocity = velocity.linear_interpolate(rotation * sensitivity / 5, delta * rotation_speed)
+	velocity = velocity.linear_interpolate(rotation * sensitivity * 3, delta * rotation_speed)
 
 func _cam_lifting(delta: float) -> void:
-	rotation.y = Input.get_action_strength(SB.utility.input.i_stick_alt_up) - Input.get_action_strength(SB.utility.input.i_stick_alt_down)
+	rotation.y = Input.get_action_strength(Device.stick_alt_up) - Input.get_action_strength(Device.stick_alt_down)
+	if is_inverted(true):
+			rotation.y = -rotation.y
 	entity.rotation.x += velocity.y * delta
 	entity.rotation.x = lerp(entity.rotation.x, clamp(entity.rotation.x, deg2rad(-60), deg2rad(-15)), 6 * delta)
 
 func cam_zooming(delta: float) -> void:
-	if Input.is_action_pressed(SB.utility.input.i_stick_alt_up):
+	if Input.is_action_pressed(Device.stick_alt_up):
 		distance -= 15 * delta
-	elif Input.is_action_pressed(SB.utility.input.i_stick_alt_down):
+	elif Input.is_action_pressed(Device.stick_alt_down):
 		distance += 15 * delta
 	else:
 		distance = 0
-	if Input.is_action_just_pressed(SB.utility.input.i_button_right):
+	if Input.is_action_just_pressed(Device.button_right):
 		can_exit_mode = true
-	if can_exit_mode and Input.is_action_just_released(SB.utility.input.i_button_right):
+	if can_exit_mode and Input.is_action_just_released(Device.button_right):
 		can_exit_mode = false
 		zoom_mode = false
 
 func _cam_reset() -> void:
-	if Input.is_action_just_pressed(SB.utility.input.i_stick_alt_left) or Input.is_action_just_pressed(SB.utility.input.i_stick_alt_right) or Input.is_action_just_pressed(SB.utility.input.i_stick_alt_up) or Input.is_action_just_pressed(SB.utility.input.i_stick_alt_down):
+	if Input.is_action_just_pressed(Device.stick_alt_left) or Input.is_action_just_pressed(Device.stick_alt_right) or Input.is_action_just_pressed(Device.stick_alt_up) or Input.is_action_just_pressed(Device.stick_alt_down):
 		input_spin += 1
 		spin_timer.start()
 		if input_spin >= 4:
@@ -131,7 +135,7 @@ func _on_spin_timer() -> void:
 	input_spin = 0
 
 func _on_look_timer() -> void:
-	if Input.is_action_pressed(SB.utility.input.i_button_right):
+	if Input.is_action_pressed(Device.button_right):
 		look_around = true
 
 func _tween_cam_zoom(dist: float) -> void:

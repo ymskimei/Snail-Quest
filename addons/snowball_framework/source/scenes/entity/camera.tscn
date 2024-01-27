@@ -128,7 +128,6 @@ near = 0.01
 far = 8192.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 4 )
 
 [node name="Animation" type="Node" parent="."]

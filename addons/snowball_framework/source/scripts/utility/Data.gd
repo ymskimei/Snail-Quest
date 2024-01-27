@@ -1,6 +1,7 @@
 extends Node
 
 const data_path: String = "user://data/"
+const image_path: String = "user://screenshots/"
 const file_type: String = "." + "sus"
 const encryption: String = "J051949"
 
@@ -10,10 +11,12 @@ var data_file_2: String = data_path + "data_2" + file_type
 var data_file_3: String = data_path + "data_3" + file_type
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_save"):
+	if event.is_action_pressed(SB.utility.input.i_debug_save):
 		save_data(data_file_0)
-	if event.is_action_pressed("debug_load"):
+	if event.is_action_pressed(SB.utility.input.i_debug_load):
 		load_data(data_file_0)
+	if event.is_action_pressed(SB.utility.input.i_screenshot):
+		save_screenshot()
 
 func save_data(d: String) -> void:
 	var data = _set_save_data()
@@ -55,3 +58,19 @@ func _set_load_data(data) -> void:
 		SB.controlled.equipped.items = data["inventory"]
 		SB.play_time.played_time = data["play_time"]
 		SB.game_time.game_time = data["game_time"]
+
+func save_screenshot() -> void:
+	var time: String = Time.get_date_string_from_system() + "_" + Time.get_time_string_from_system().replace(":", "_")
+	var count: int = 0
+	var extension: String = ".png"
+	var dir = Directory.new()
+	if !dir.dir_exists(image_path):
+		dir.make_dir(image_path)
+	var image = get_screenshot()
+	image.save_png(image_path + time + extension)
+
+func get_screenshot() -> Image:
+	var screen: Texture = get_viewport().get_texture()
+	var image: Image = screen.get_data()
+	image.flip_y()
+	return image

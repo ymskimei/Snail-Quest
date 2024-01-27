@@ -1,4 +1,4 @@
-class_name Item
+class_name ItemParent
 extends Spatial
 
 export var type: Resource
@@ -34,12 +34,12 @@ func _on_Area_body_entered(body):
 		if type.destination:
 			var resource = type.destination
 			if !type.depletable:
-				SB.utility.item.add_item(resource.items, type, 1)
+				Item.add_item(resource.items, type, 1)
 			else:
 				var slot = type.specific_slot
-				SB.utility.item.set_item(resource.items, slot, type)
+				Item.set_item(resource.items, slot, type)
 		if type.sound != "":
-			SB.utility.audio.play_sfx(type.sound)
+			Audio.play_sfx(type.sound)
 		collecting = true
 
 func _randomize_animation() -> void:

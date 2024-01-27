@@ -23,11 +23,11 @@ func _ready() -> void:
 	
 func _input(event: InputEvent):
 	if !history.size() == 0:
-		if event.is_action_pressed(SB.utility.input.i_debug_menu_nav_up):
+		if event.is_action_pressed(Device.debug_menu_nav_up):
 			_search_history(1)
-		elif event.is_action_pressed(SB.utility.input.i_debug_menu_nav_down):
+		elif event.is_action_pressed(Device.debug_menu_nav_down):
 			_search_history(-1)
-	if event.is_action_pressed(SB.utility.input.i_debug_menu_clear):
+	if event.is_action_pressed(Device.debug_menu_clear):
 		text_input.text = ""
 
 func _search_history(index: int) -> void:

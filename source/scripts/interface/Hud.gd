@@ -51,7 +51,7 @@ func _ready() -> void:
 	pad_is_hidden = true
 	cam_is_hidden = true
 	add_hud_timers()
-	SB.utility.item.connect("items_updated", self, "on_items_updated")
+	Item.connect("items_updated", self, "on_items_updated")
 	SB.connect("controlled_health_change", self, "_on_controlled_health_changed")
 	shell_stock_icons = get_tree().get_nodes_in_group("stock")
 
@@ -74,11 +74,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		cursor_target.hide()
 
-func _unhandled_input(_event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 #	if Input.is_action_just_pressed("action_combat"):
 #		Utility.item.set_item(display_up.destination.items, 0, display_up.contained_item)
 #		SnailQuest.controllable.update_equipped()
-	if Input.is_action_just_pressed("cam_zoom") or Input.is_action_just_pressed("cam_lock"):
+	if event.is_action_pressed("cam_zoom") or event.is_action_pressed("cam_lock"):
 		reveal_cam()
 
 func _on_controlled_health_changed(health, max_health, b) -> void:

@@ -13,17 +13,17 @@ func open(toggle: bool = false) -> void:
 	if toggle:
 		if anim:
 			anim.play("Appear")
+		get_sound_next()
 		show()
 		if recent_focus:
 			recent_focus.grab_focus()
 		if default_focus:
 			default_focus.grab_focus()
-		get_sound_next()
 	else:
-		get_sound_exit()
 		if anim:
 			anim.play("Disappear")
 			yield(anim, "animation_finished")
+		get_sound_exit()
 		hide()
 
 func _on_gui_focus_changed(node: Node):

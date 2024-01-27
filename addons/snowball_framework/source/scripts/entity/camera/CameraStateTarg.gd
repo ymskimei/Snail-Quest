@@ -29,7 +29,7 @@ func enter() -> void:
 func physics_process(delta: float) -> int:
 	if entity.target is Entity and is_instance_valid(entity.target.target):
 		if entity.target.target_found:
-			SB.utility.slerp_look_at(entity, entity.target.target.global_transform.origin, targeting_speed)
+			Utility.slerp_look_at(entity, entity.target.target.global_transform.origin, targeting_speed)
 			entity.rotation.x = lerp(entity.rotation.x, targeting_rotation, track_speed * delta)
 			if !entity.target.targeting:
 				return State.ORBI
@@ -52,13 +52,13 @@ func _add_bars_timer() -> void:
 func on_bars_timer() -> void:
 	if entity.target.targeting:
 		if entity.target.target_found:
-			SB.utility.audio.play_sfx(RegistryAudio.cam_target_lock)
+			Audio.play_sfx(RegistryAudio.cam_target_lock)
 		else:
-			SB.utility.audio.play_sfx(RegistryAudio.cam_no_target_lock)
+			Audio.play_sfx(RegistryAudio.cam_no_target_lock)
 		entity.anim_bars.play("BarsAppear")
 		bars_active = true
 	else:
-		SB.utility.audio.play_sfx(RegistryAudio.cam_target_reset)
+		Audio.play_sfx(RegistryAudio.cam_target_reset)
 
 func _tween_cam_zoom() -> void:
 	entity.anim_tween.interpolate_property(entity.lens, "fov", entity.lens.fov, zoom_targeting, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -68,9 +68,9 @@ func _tween_cam_zoom() -> void:
 func exit() -> void:
 	if bars_active:
 		if entity.target.target_found:
-			SB.utility.audio.play_sfx(RegistryAudio.cam_target_unlock)
+			Audio.play_sfx(RegistryAudio.cam_target_unlock)
 		else:
-			SB.utility.audio.play_sfx(RegistryAudio.cam_no_target_unlock)
+			Audio.play_sfx(RegistryAudio.cam_no_target_unlock)
 		entity.anim_bars.play("BarsDisappear")
 	_tween_cam_zoom()
 	rotation_complete = false

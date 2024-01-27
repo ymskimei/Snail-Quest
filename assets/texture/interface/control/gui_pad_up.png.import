@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://import/gui_pad_up.png-03aadf7989d4cb70532ca72b4a7facee.stex"
+path="res://import/gupad_up.png-03aadf7989d4cb70532ca72b4a7facee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/gui/control/gui_pad_up.png"
-dest_files=[ "res://import/gui_pad_up.png-03aadf7989d4cb70532ca72b4a7facee.stex" ]
+source_file="res://assets/texture/gui/control/gupad_up.png"
+dest_files=[ "res://import/gupad_up.png-03aadf7989d4cb70532ca72b4a7facee.stex" ]
 
 [params]
 

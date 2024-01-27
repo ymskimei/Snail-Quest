@@ -13,7 +13,7 @@ func on_command_cam(_console, args: Array) -> void:
 	else:
 		SB.prev_controlled = SB.controlled
 		SB.controlled = null
-	SB.game.interface.get_menu(null, SB.game.interface.debug)
+	#SB.game.interface.get_menu(null, SB.game.interface.debug)
 
 func on_command_clear(_console, _args: Array) -> void:
 	command_console.clear_console()
@@ -47,9 +47,9 @@ func on_command_immortal(_console, args: Array) -> void:
 	command_console.send_message(message)
 
 func on_command_list(_console, _args: Array) -> void:
-	var entities: PoolStringArray = SB.utility.get_names_from_paths(SB.scene["entity"])
-	var objects: PoolStringArray = SB.utility.get_names_from_paths(SB.scene["object"])
-	var items: PoolStringArray = SB.utility.get_names_from_paths(SB.scene["item"])
+	var entities: PoolStringArray = Utility.get_names_from_paths(SB.scene["entity"], ".tscn")
+	var objects: PoolStringArray = Utility.get_names_from_paths(SB.scene["object"], ".tscn")
+	var items: PoolStringArray = Utility.get_names_from_paths(SB.scene["item"], ".tscn")
 	var message = command_console.light_color + "——— ?[/color]" + command_console.default_color + " List " + command_console.light_color + "? ———[/color]\n"
 	message += "When summoning and entity, item, or object, listed entries represent the available options to pick from\n"
 	message += command_console.dark_color + "Entities:[/color]\n" + command_console.light_color + entities.join(", ") + "[/color]\n"
@@ -68,7 +68,7 @@ func on_command_quit(_console, _args: Array) -> void:
 	get_tree().quit()
 
 func on_command_restart(_console, _args: Array) -> void:
-	SB.utility.pause(false)
+	Utility.pause(false)
 	get_tree().reload_current_scene()
 	SB.game.interface.get_menu(null, SB.game.interface.debug)
 
@@ -101,7 +101,7 @@ func on_command_warp(_console, args: Array) -> void:
 	var message = command_console.error_color + "Nothing is controlled to allow warping![/color]"
 	if SB.controlled and SB.controlled is Entity and SB.world:
 		var directory = Directory.new();
-		var all_worlds: Array = SB.utility.get_files(SB.scene["world"], true)
+		var all_worlds: Array = Utility.get_files(SB.scene["world"], true)
 		var warp_path: String = SB.resource["warp"] + args[0] + ".tres"
 		if directory.file_exists(warp_path):
 			var warp = load(warp_path)
@@ -118,8 +118,9 @@ func on_command_warp(_console, args: Array) -> void:
 	command_console.send_message(message)
 
 func on_command_spawn(_console, args: Array) -> void:
+	var message = command_console.error_color + "No entity was found with that name![/color]"
 	var path: String = SB.scene["entity"] + args[0] + ".tscn"
-	var all: Array = SB.utility.get_files(SB.scene["entity"], true, true)
+	var all: Array = Utility.get_files(SB.scene["entity"], true, true)
 	if path in all:
 		var room = SB.controlled.get_node("../").get_child(0).get_child(0)
 		var new_pos: Vector3 = SB.camera.global_translation
@@ -132,3 +133,12 @@ func on_command_spawn(_console, args: Array) -> void:
 				new_rot = SB.controlled.global_rotation
 			entity.global_translation = new_pos
 			entity.global_rotation = Vector3(-new_rot.x, new_rot.y, -new_rot.z)
+		var entity_name = args[0]
+		var plural = "s"
+		if args[0].ends_with("s") or args[0].ends_with("i"):
+			plural = ""
+		elif args[0].ends_with("y"):
+			entity_name.erase(entity_name.length() - 1, 1)
+			plural = "ies"
+		message = "%s spawned " % SB.controlled.entity_name + command_console.success_color + "%s %s" % [args[1], entity_name] + plural + "[/color]"
+	command_console.send_message(message)

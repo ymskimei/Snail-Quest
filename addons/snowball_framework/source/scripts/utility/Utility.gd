@@ -113,12 +113,12 @@ func get_files(folder_path: String, path: bool = false, recursive: bool = true) 
 			file_name = dir.get_next()
 	return files
 
-func get_names_from_paths(folder_path: String) -> PoolStringArray:
+func get_names_from_paths(folder_path: String, extension: String) -> PoolStringArray:
 	var arr = SB.utility.get_files(folder_path, true, false)
 	var new_arr: PoolStringArray = []
 	for e in arr:
 		e.erase(0, folder_path.length())
-		e.erase(e.length() - 5, 5)
+		e.erase(e.length() - extension.length(), extension.length())
 		new_arr.append(e)
 	return new_arr
 

@@ -409,6 +409,7 @@ theme = ExtResource( 1 )
 text = "OPTIONS_VOLUME_MASTER"
 
 [node name="BarVolumeMaster" type="HSlider" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 328.0
 margin_right = 768.0
 margin_bottom = 344.0
@@ -429,6 +430,7 @@ theme = ExtResource( 1 )
 text = "OPTIONS_VOLUME_MUSIC"
 
 [node name="BarVolumeMusic" type="HSlider" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 460.0
 margin_right = 768.0
 margin_bottom = 476.0
@@ -448,6 +450,7 @@ theme = ExtResource( 1 )
 text = "OPTIONS_VOLUME_SFX"
 
 [node name="BarVolumeSfx" type="HSlider" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 592.0
 margin_right = 768.0
 margin_bottom = 608.0
@@ -487,6 +490,7 @@ theme = ExtResource( 1 )
 text = "OPTIONS_HORIZONTAL"
 
 [node name="CheckBoxHorizontal" type="CheckBox" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid"]
+unique_name_in_owner = true
 margin_left = 974.0
 margin_right = 1072.0
 margin_bottom = 98.0
@@ -501,6 +505,7 @@ theme = ExtResource( 1 )
 text = "OPTIONS_VERTICAL"
 
 [node name="CheckBoxVertical" type="CheckBox" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid"]
+unique_name_in_owner = true
 margin_left = 974.0
 margin_top = 138.0
 margin_right = 1072.0
@@ -522,6 +527,7 @@ theme = ExtResource( 1 )
 text = "OPTIONS_SENSITIVITY"
 
 [node name="BarCameraSensitivity" type="HSlider" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 396.0
 margin_right = 768.0
 margin_bottom = 412.0

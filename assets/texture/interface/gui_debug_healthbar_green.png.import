@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://import/gui_debug_healthbar_green.png-783cf3b8aff36f71404c3fe0eb3fed4f.s3tc.stex"
-path.etc="res://import/gui_debug_healthbar_green.png-783cf3b8aff36f71404c3fe0eb3fed4f.etc.stex"
+path.s3tc="res://import/gudebug_healthbar_green.png-783cf3b8aff36f71404c3fe0eb3fed4f.s3tc.stex"
+path.etc="res://import/gudebug_healthbar_green.png-783cf3b8aff36f71404c3fe0eb3fed4f.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/texture/gui/gui_debug_healthbar_green.png"
-dest_files=[ "res://import/gui_debug_healthbar_green.png-783cf3b8aff36f71404c3fe0eb3fed4f.s3tc.stex", "res://import/gui_debug_healthbar_green.png-783cf3b8aff36f71404c3fe0eb3fed4f.etc.stex" ]
+source_file="res://assets/texture/gui/gudebug_healthbar_green.png"
+dest_files=[ "res://import/gudebug_healthbar_green.png-783cf3b8aff36f71404c3fe0eb3fed4f.s3tc.stex", "res://import/gudebug_healthbar_green.png-783cf3b8aff36f71404c3fe0eb3fed4f.etc.stex" ]
 
 [params]
 

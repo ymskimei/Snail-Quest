@@ -20,7 +20,7 @@ func enter() -> void:
 	distance = 0
 
 func unhandled_input(event: InputEvent) -> int:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Device.MOUSE_MODE_CAPTURED:
 		rotation = event.relative
 		controller = false
 	elif event is InputEventJoypadMotion:
@@ -38,7 +38,7 @@ func physics_process(delta: float) -> int:
 func _cam_tracking(delta: float) -> void:
 	rotation.x = (Input.get_action_strength("cam_left") - Input.get_action_strength("cam_right")) / 2
 	rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 5
-	velocity = velocity.linear_interpolate(rotation * sensitivity / 3, delta * rotation_speed)
+	velocity = velocity.linear_interpolate(rotation * sensitivity * 5, delta * rotation_speed)
 	entity.rotation.y += (deg2rad(velocity.x))
 	entity.translation = lerp(entity.translation, entity.target.translation + offset, track_speed * delta)
 	entity.arm_length = lerp(entity.arm_length, clamp(entity.arm_length + distance, 4, 30), 10 * delta)

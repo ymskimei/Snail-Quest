@@ -19,15 +19,15 @@ func _process(_delta: float):
 
 func _unhandled_input(event: InputEvent):
 	if debug.visible:
-		if event.is_action_pressed(SB.utility.input.i_debug_menu):
+		if event.is_action_pressed(Device.debug_menu):
 			get_menu()
 	else:
-		if event.is_action_pressed(SB.utility.input.i_debug_menu):
+		if event.is_action_pressed(Device.debug_menu):
 			get_menu(null, debug)
 		if SB.controlled:
-			if event.is_action_pressed(SB.utility.input.i_main_0):
+			if event.is_action_pressed(Device.main_0):
 				get_menu(blur, options)
-			if event.is_action_pressed(SB.utility.input.i_main_1):
+			if event.is_action_pressed(Device.main_1):
 				get_menu(blur, inventory)
-		if event.is_action_pressed(SB.utility.input.i_action_alt):
+		if event.is_action_pressed(Device.action_alt):
 			get_menu(blur)

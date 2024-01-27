@@ -95,9 +95,9 @@ _global_script_classes=[ {
 "path": "res://addons/snowball_framework/source/scripts/interface/InventoryParent.gd"
 }, {
 "base": "Spatial",
-"class": "Item",
+"class": "ItemParent",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/item/Item.gd"
+"path": "res://addons/snowball_framework/source/scripts/item/ItemParent.gd"
 }, {
 "base": "Interactable",
 "class": "MainCamera",
@@ -142,7 +142,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "RegistryColor",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/RegistryColor.gd"
+"path": "res://source/scripts/RegistryColor.gd"
 }, {
 "base": "Resource",
 "class": "ResourceAudioPlayer",
@@ -282,7 +282,7 @@ _global_script_class_icons={
 "Interactable": "",
 "InterfaceParent": "",
 "InventoryParent": "",
-"Item": "",
+"ItemParent": "",
 "MainCamera": "",
 "Menu": "",
 "MenuParent": "",
@@ -347,7 +347,12 @@ default_bus_layout="res://assets/default_bus_layout.tres"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 EventFlags="*res://source/scripts/EventFlags.gd"
 WorldSave="*res://source/scripts/world/WorldSave.gd"
-SB="*res://addons/snowball_framework/source/scenes/sb.tscn"
+SB="*res://addons/snowball_framework/source/scenes/auto/sb.tscn"
+Utility="*res://addons/snowball_framework/source/scenes/auto/utility.tscn"
+Data="*res://addons/snowball_framework/source/scenes/auto/data.tscn"
+Device="*res://addons/snowball_framework/source/scenes/auto/device.tscn"
+Audio="*res://addons/snowball_framework/source/scenes/auto/audio.tscn"
+Item="*res://addons/snowball_framework/source/scenes/auto/item.tscn"
 
 [debug]
 
@@ -378,7 +383,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/multimesh_scatter/plugin.cfg", "res://addons/snowball_framework/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/circular_container/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/multimesh_scatter/plugin.cfg", "res://addons/snowball_framework/plugin.cfg" )
 
 [global]
 
@@ -590,6 +595,11 @@ gui_tools={
 swap={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+screenshot={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 debug_menu={

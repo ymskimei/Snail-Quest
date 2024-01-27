@@ -6,7 +6,7 @@ func enter() -> void:
 
 func unhandled_input(event: InputEvent) -> int:
 	if entity.holding_point and event.is_action_pressed("action_defense"):
-		if entity.input == Vector3.ZERO:
+		if input == Vector3.ZERO:
 			return State.HIDE
 		else:
 			return State.DODG

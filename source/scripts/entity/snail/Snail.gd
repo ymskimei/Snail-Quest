@@ -44,6 +44,7 @@ func _process(delta: float) -> void:
 	._process(delta)
 
 func _physics_process(delta: float) -> void:
+	update_appearance()
 	if is_controlled():
 		states.physics_process(delta)
 	elif SB.controlled and self == SB.prev_controlled:
@@ -107,15 +108,15 @@ func update_appearance() -> void:
 
 func play_sound_slide(s: bool) -> void:
 	if s:
-		SB.utility.audio.play_pos_sfx(RegistryAudio.snail_slide_backward, global_translation, 1.0, -1.0)
+		Audio.play_pos_sfx(RegistryAudio.snail_slide_backward, global_translation, 1.0, -1.0)
 	else:
-		SB.utility.audio.play_pos_sfx(RegistryAudio.snail_slide_forward, global_translation, 1.25, -1.0)
+		Audio.play_pos_sfx(RegistryAudio.snail_slide_forward, global_translation, 1.25, -1.0)
 
 func play_sound_hide(s: bool) -> void:
 	if s:
-		SB.utility.audio.play_pos_sfx(RegistryAudio.snail_shell_in, global_translation, 1.0, 0.0)
+		Audio.play_pos_sfx(RegistryAudio.snail_shell_in, global_translation, 1.0, 0.0)
 	else:
-		SB.utility.audio.play_pos_sfx(RegistryAudio.snail_shell_out, global_translation, 0.5, 0.0)
+		Audio.play_pos_sfx(RegistryAudio.snail_shell_out, global_translation, 0.5, 0.0)
 
 func _on_Snail_body_entered(body) -> void:
 	if !body.get_collision_layer_bit(2):

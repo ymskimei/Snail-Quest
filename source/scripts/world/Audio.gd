@@ -1,7 +1,7 @@
 extends Node
 
-onready var m_booth: MusicBooth = SB.utility.audio.music_booth
-onready var a_booth: MusicBooth = SB.utility.audio.ambie_booth
+onready var m_booth: MusicBooth = Audio.music_booth
+onready var a_booth: MusicBooth = Audio.ambie_booth
 
 var enemy_near: bool
 var enemy_pursuing: bool
@@ -10,7 +10,7 @@ func _ready():
 	overworld_ambience()
 
 func overworld_ambience():
-	#SB.utility.audio.init_ambience(RegistryAudio.wind)
+	#Audio.init_ambience(RegistryAudio.wind)
 	#a_booth.play_song("Overworld", 1.0)
 	pass
 

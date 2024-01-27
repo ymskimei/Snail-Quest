@@ -91,9 +91,9 @@ func set_display_chunk_coords() -> void:
 			e = SB.camera
 		var coords_x = floor(e.global_translation.x / SB.chunk_size)
 		var coords_z = floor(e.global_translation.z / SB.chunk_size)
-		display_chunk_coords.set_bbcode(x_color + "%s, " % coords_x + x_color + "%s" % coords_z)
+		display_chunk_coords.set_bbcode(x_color + "%s, " % coords_x + z_color + "%s" % coords_z)
 	else:
-		display_chunk_coords.set_bbcode(x_color + "?, " + x_color + "?")
+		display_chunk_coords.set_bbcode(x_color + "?, " + z_color + "?")
 
 func set_display_coordinates() -> void:
 	if SB.controlled or SB.camera:
@@ -113,13 +113,13 @@ func set_command_console(toggle: bool) -> void:
 		SB.interface.debug_open = true
 		command_console.visible = true
 		command_console.command_input.grab_focus()
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Device.set_mouse_mode(Device.MOUSE_MODE_VISIBLE)
 		if command_console.command_display.bbcode_text == "":
 			command_console.welcome_message()
 	else:
 		SB.interface.debug_open = false
 		command_console.visible = false
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		Device.set_mouse_mode(Device.MOUSE_MODE_CAPTURED)
 
 func show_debug_information() -> void:
 	if debug_information.visible == false:
