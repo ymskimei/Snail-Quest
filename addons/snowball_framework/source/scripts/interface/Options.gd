@@ -51,6 +51,14 @@ func add_to_dict(button: OptionButton, dict: Dictionary, current: String) -> voi
 		index += 1
 		print(button.get_meta_list())
 
+func get_dict_index(dict: Dictionary, key_name):
+	var index = 0
+	for key in dict.keys():
+		if key == key_name:
+			return index
+		index += 1
+	return -1
+
 func add_resolution(button: OptionButton) -> void:
 	var current_resolution = get_viewport().get_size()
 	add_to_dict(button, resolution_dict, str(current_resolution))
@@ -220,7 +228,9 @@ func get_camera_sensitivity() -> float:
 	return value
 
 func set_language(key: String) -> void:
-	TranslationServer.set_locale(language_dict.get(key))
+	print("chng")
+	TranslationServer.set_locale(language_dict[key])
+	Data.set_config("misc", "language", key)
 
 func get_language() -> String:
 	var value = Data.get_config("misc", "language", "OPTIONS_LANGUAGE_EN_US")

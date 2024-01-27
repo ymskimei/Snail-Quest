@@ -36,9 +36,9 @@ func _ready() -> void:
 
 func _set_buttons_from_config() -> void:
 	fullscreen.set_toggle_mode(get_fullscreen())
-	#resolution.select(resolution.get_meta(get_resolution()))
-	#filter.select(filter_dict[get_resolution()])
-	#framerate.select(framerate_dict[get_resolution()])
+	resolution.select(get_dict_index(resolution_dict, get_resolution()))
+	filter.select(get_dict_index(filter_dict, get_filter()))
+	framerate.select(get_dict_index(framerate_dict, get_framerate()))
 	vsync.set_toggle_mode(get_fullscreen())
 	volume_master.set_value(get_volume_master()) 
 	volume_music.set_value(get_volume_music()) 
@@ -48,7 +48,7 @@ func _set_buttons_from_config() -> void:
 	camera_invert_horizontal.set_toggle_mode(get_invert_horizontal())
 	camera_invert_vertical.set_toggle_mode(get_invert_horizontal())
 	camera_sensitivity.set_value(get_camera_sensitivity()) 
-	#language.select(language_dict[get_language()])
+	language.select(get_dict_index(language_dict, get_language()))
 	
 func get_default_focus() -> void:
 	video.grab_focus()
@@ -83,23 +83,23 @@ func _on_ButtonMisc_pressed():
 
 ## Video Settings
 func _on_CheckBoxFullscreen_toggled(button_pressed: bool) -> void:
+	print("actually works?")
 	set_fullscreen(button_pressed)
-	print("fun")
 	if button_pressed:
 		get_sound_success()
 	else:
 		get_sound_exit()
 
 func _on_ButtonResolution_item_selected(index: int) -> void:
-	set_resolution(resolution.get_item_metadata(index))
+	set_resolution(get_resolution())
 	get_sound_success()
 
 func _on_ButtonFilter_item_selected(index: int) -> void:
-	set_filter(filter.get_item_metadata(index))
+	set_filter(get_filter())
 	get_sound_success()
 
 func _on_ButtonFps_item_selected(index: int) -> void:
-	set_framerate(framerate_dict.get(framerate.get_item_text(index)))
+	set_framerate(get_framerate())
 	get_sound_success()
 
 func _on_CheckBoxVsync_toggled(button_pressed: bool) -> void:
@@ -157,7 +157,7 @@ func _on_BarCameraSensitivity_value_changed(value):
 
 ## Misc Settings
 func _on_ButtonLanguage_item_selected(index: int) -> void:
-	set_language(language.get_item_metadata(index))
+	set_language(get_language())
 	get_sound_success()
 
 func _notification(what):

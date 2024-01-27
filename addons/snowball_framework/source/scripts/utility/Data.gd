@@ -11,11 +11,11 @@ var data_file_2: String = data_path + "data_2" + file_type
 var data_file_3: String = data_path + "data_3" + file_type
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(SB.utility.input.i_debug_save):
+	if event.is_action_pressed(Device.debug_save):
 		save_data(data_file_0)
-	if event.is_action_pressed(SB.utility.input.i_debug_load):
+	if event.is_action_pressed(Device.debug_load):
 		load_data(data_file_0)
-	if event.is_action_pressed(SB.utility.input.i_screenshot):
+	if event.is_action_pressed(Device.screenshot):
 		save_screenshot()
 
 func save_data(d: String) -> void:

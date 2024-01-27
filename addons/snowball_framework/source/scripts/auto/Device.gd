@@ -70,7 +70,7 @@ func _input(event: InputEvent) -> void:
 		device = next_device
 		device_index = next_device_index
 		emit_signal("device_changed", device, device_index)
-		get_all_devices()
+		#_get_all_devices()
 
 func get_simplified_device_name(raw_name: String) -> String:
 	match raw_name:
@@ -191,5 +191,5 @@ func start_rumble_large(target_device: int = 0) -> void:
 func stop_rumble(target_device: int = 0) -> void:
 	Input.stop_joy_vibration(target_device)
 
-func get_all_devices() -> void:
+func _get_all_devices() -> void:
 	print("Device 0: " + guess_device_name(0) + "\nDevice 1: " + guess_device_name(1) + "\nDevice 2: " + guess_device_name(2) + "\nDevice 3: " + guess_device_name(3))

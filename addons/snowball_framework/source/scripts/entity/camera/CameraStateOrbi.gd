@@ -37,7 +37,7 @@ func enter() -> void:
 	distance = 0
 
 func unhandled_input(event: InputEvent) -> int:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Device.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and event.get_mouse_mode() == event.MOUSE_MODE_CAPTURED:
 		rotation = event.relative
 		controller = false
 	elif event is InputEventJoypadMotion:
