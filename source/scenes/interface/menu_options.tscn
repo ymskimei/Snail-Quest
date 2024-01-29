@@ -348,6 +348,7 @@ margin_top = 410.0
 margin_right = 792.0
 margin_bottom = 508.0
 size_flags_horizontal = 8
+keep_pressed_outside = true
 align = 2
 icon_align = 2
 
@@ -385,6 +386,7 @@ margin_left = 974.0
 margin_right = 1072.0
 margin_bottom = 98.0
 size_flags_horizontal = 10
+keep_pressed_outside = true
 align = 2
 
 [node name="LabelMono" type="Label" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer/Grid"]
@@ -401,6 +403,7 @@ margin_top = 114.0
 margin_right = 1072.0
 margin_bottom = 212.0
 size_flags_horizontal = 10
+keep_pressed_outside = true
 align = 2
 
 [node name="LabelVolumeMaster" type="Label" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Audio/VBoxContainer"]
@@ -497,6 +500,7 @@ margin_left = 974.0
 margin_right = 1072.0
 margin_bottom = 98.0
 size_flags_horizontal = 8
+keep_pressed_outside = true
 align = 2
 
 [node name="LabelVertical" type="Label" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid"]
@@ -513,6 +517,7 @@ margin_top = 138.0
 margin_right = 1072.0
 margin_bottom = 236.0
 size_flags_horizontal = 8
+keep_pressed_outside = true
 align = 2
 
 [node name="HSeparator" type="HSeparator" parent="ColorRect/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/Tabs/Controls/VBoxContainer/Grid"]

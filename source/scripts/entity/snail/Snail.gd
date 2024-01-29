@@ -20,7 +20,7 @@ var mode_timer: Timer = null
 
 func _ready() -> void:
 	states.ready(self)
-	update_appearance()
+	#update_appearance()
 	set_interaction_text("")
 	mode_timer = Timer.new()
 	mode_timer.set_wait_time(0.1)

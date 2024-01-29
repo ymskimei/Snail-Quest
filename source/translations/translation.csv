@@ -15,13 +15,8 @@ TITLE_SPLASH_8	(x^2 + 5x +6) = (x+3)(x+2) = math = Eddie wins against dragone	(x
 TITLE_SPLASH_9	I dont follow monkey lore	I dont follow monkey lore				I dont follow monkey tales
 OPTIONS_FULLSCREEN	Fullscreen Window	Fullscreen Window				Fullscreen Winder
 OPTIONS_RESOLUTION	Display Resolution	Display Resolution				Porthole Quality
-OPTIONS_RESOLUTION_480	640x480 (4:3)	640x480 (4:3)				
-OPTIONS_RESOLUTION_600	800x600 (4:3)	800x600 (4:3)				
-OPTIONS_RESOLUTION_768	1024x768 (4:3)	1024x768 (4:3)				
-OPTIONS_RESOLUTION_720	1280x720 (16:9)	1280x720 (16:9)				
-OPTIONS_RESOLUTION_1080	1920x1080 (16:9)	1920x1080 (16:9)				
-OPTIONS_RESOLUTION_1440	2560x1440 (16:9)	2560x1440 (16:9)				
 OPTIONS_FILTER	Screen Filter	Screen Filter				Eyepatch Type
+OPTIONS_FILTER_DEFAULT	Default	Default				Swabbie-standard
 OPTIONS_FILTER_CONTRASTED	Contrasted	Contrasted				High-focus
 OPTIONS_FILTER_MONOCHROME	Monochrome	Monochrome				Moving pictures
 OPTIONS_FILTER_PROTANOPIA	Protanopia (For Debug)	Protanopia (For Debug)				Anti-red Eyepatch
@@ -29,9 +24,6 @@ OPTIONS_FILTER_DEUTERANOPIA	Deuteranopia (For Debug)	Deuteranopia (For Debug)			
 OPTIONS_FILTER_TRITANOPIA	Tritanopia (For Debug)	Tritanopia (For Debug)				Yeller-blue Eyepatch
 OPTIONS_FILTER_ACHROMATOPSIA	Achromatopsia (For Debug)	Achromatopsia (For Debug)				Daylight Eyepatch
 OPTIONS_FPS	Framerate	Framerate				Framerrrrate
-OPTIONS_FPS_30	30	30				Seasick
-OPTIONS_FPS_60	60	60				Captain's Speed
-OPTIONS_FPS_120	120	120				Cannon Operator
 OPTIONS_VSYNC	Vertical Sync	Vertical Sync				Screen waves
 OPTIONS_VOLUME_MASTER	Master Volume	Master Volume				Captain's Volume
 OPTIONS_VOLUME_MUSIC	Music Volume	Music Volume				Bard's volume
@@ -46,7 +38,7 @@ OPTIONS_CONTROLS	Control Mapping	Control Mapping				Crew Mapping
 OPTIONS_BUTTON_ACTION	Action Button	Action Button				Attack Button
 OPTIONS_BUTTON_COMBAT	Combat Button	Combat Button				Dual Button
 OPTIONS_BUTTON_DEFENSE	Defense Button	Defence Button				Retreat Button
-OPTIONS_LANGUAGE	Language	Change Language				Switch Tongue
+OPTIONS_LANGUAGE	Language	Language				Switch Tongue
 OPTIONS_LANGUAGE_EN_US	English (United States)	English (United States)				English (The Colonies)
 OPTIONS_LANGUAGE_EN_GB	English (Great Britain)	English (Great Britain)				English (The Empire)
 OPTIONS_LANGUAGE_ES_MX	Español (Spanish)	Español (Spanish)				Español (Spanish)

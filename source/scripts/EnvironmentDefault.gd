@@ -55,7 +55,7 @@ var cloudy: bool = false
 
 func _ready() -> void:
 	var cloud_timer = Timer.new()
-	cloud_timer.set_wait_time(15)
+	cloud_timer.set_wait_time(30)
 	cloud_timer.connect("timeout", self, "on_cloud_timer")
 	add_child(cloud_timer)
 	cloud_timer.start()

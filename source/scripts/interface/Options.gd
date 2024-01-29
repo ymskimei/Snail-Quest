@@ -28,28 +28,43 @@ var can_remap: bool
 var remap_timer: Timer = Timer.new()
 
 func _ready() -> void:
-	add_resolution(resolution)
-	add_framerate(framerate)
-	add_language(language)
+	add_resolutions(resolution)
+	add_framerates(framerate)
+	add_filters(filter)
+	add_languages(language)
+	_set_from_config()
 	default_focus = fullscreen
-	_set_buttons_from_config()
 
-func _set_buttons_from_config() -> void:
-	fullscreen.set_toggle_mode(get_fullscreen())
-	resolution.select(get_dict_index(resolution_dict, get_resolution()))
-	filter.select(get_dict_index(filter_dict, get_filter()))
-	framerate.select(get_dict_index(framerate_dict, get_framerate()))
-	vsync.set_toggle_mode(get_fullscreen())
+func _set_from_config() -> void:
+	set_fullscreen(get_fullscreen())
+	set_resolution(get_resolution())
+	set_filter(get_filter())
+	set_framerate(get_framerate())
+	set_vsync(get_vsync())
+	set_volume_master(get_volume_master())
+	set_volume_music(get_volume_music())
+	set_volume_sfx(get_volume_sfx())
+	set_headphones_mode(get_headphones_mode())
+	set_mono_mode(get_mono_mode())
+	set_invert_horizontal(get_invert_horizontal())
+	set_invert_vertical(get_invert_vertical())
+	set_camera_sensitivity(get_camera_sensitivity())
+	set_language(get_language(), language)
+	fullscreen.set_pressed(get_fullscreen())
+	resolution.select(resolutions.find(get_resolution()))
+	filter.select(filters.find(get_filter()))
+	framerate.select(framerates.find(get_framerate()))
+	vsync.set_pressed(get_vsync())
 	volume_master.set_value(get_volume_master()) 
 	volume_music.set_value(get_volume_music()) 
 	volume_sfx.set_value(get_volume_sfx()) 
-	headphones.set_toggle_mode(get_headphones_mode())
-	mono.set_toggle_mode(get_mono_mode())
-	camera_invert_horizontal.set_toggle_mode(get_invert_horizontal())
-	camera_invert_vertical.set_toggle_mode(get_invert_horizontal())
+	headphones.set_pressed(get_headphones_mode())
+	mono.set_pressed(get_mono_mode())
+	camera_invert_horizontal.set_pressed(get_invert_horizontal())
+	camera_invert_vertical.set_pressed(get_invert_horizontal())
 	camera_sensitivity.set_value(get_camera_sensitivity()) 
-	language.select(get_dict_index(language_dict, get_language()))
-	
+	language.select(languages.find(get_language()))
+#
 func get_default_focus() -> void:
 	video.grab_focus()
 
@@ -83,7 +98,6 @@ func _on_ButtonMisc_pressed():
 
 ## Video Settings
 func _on_CheckBoxFullscreen_toggled(button_pressed: bool) -> void:
-	print("actually works?")
 	set_fullscreen(button_pressed)
 	if button_pressed:
 		get_sound_success()
@@ -91,15 +105,15 @@ func _on_CheckBoxFullscreen_toggled(button_pressed: bool) -> void:
 		get_sound_exit()
 
 func _on_ButtonResolution_item_selected(index: int) -> void:
-	set_resolution(get_resolution())
+	set_resolution(resolutions[index])
 	get_sound_success()
 
 func _on_ButtonFilter_item_selected(index: int) -> void:
-	set_filter(get_filter())
+	set_filter(index)
 	get_sound_success()
 
 func _on_ButtonFps_item_selected(index: int) -> void:
-	set_framerate(get_framerate())
+	set_framerate(framerates[index])
 	get_sound_success()
 
 func _on_CheckBoxVsync_toggled(button_pressed: bool) -> void:
@@ -157,12 +171,12 @@ func _on_BarCameraSensitivity_value_changed(value):
 
 ## Misc Settings
 func _on_ButtonLanguage_item_selected(index: int) -> void:
-	set_language(get_language())
+	set_language(languages[index], language)
 	get_sound_success()
 
 func _notification(what):
 	match what:
 		NOTIFICATION_WM_FOCUS_IN:
-			_set_buttons_from_config()
+			_set_from_config()
 		NOTIFICATION_WM_FOCUS_OUT:
 			pass
