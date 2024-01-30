@@ -5,8 +5,8 @@ func enter() -> void:
 	entity.anim.play("SnailFall")
 
 func unhandled_input(event: InputEvent) -> int:
-	if entity.attach_point and event.is_action_pressed("action_defense"):
-		if entity.input == Vector3.ZERO:
+	if entity.holding_point and event.is_action_pressed("action_defense"):
+		if input == Vector3.ZERO:
 			return State.HIDE
 		else:
 			return State.DODG
@@ -27,7 +27,7 @@ func physics_process(delta: float) -> int:
 #		entity.linear_velocity.x += entity.linear_velocity.x * delta
 #		entity.linear_velocity.z += entity.linear_velocity.z * delta
 	if is_on_floor() and entity.ray_bottom.is_colliding():
-		if entity.direction != Vector3.ZERO:
+		if direction != Vector3.ZERO:
 			return State.MOVE
 		else:
 			return State.IDLE

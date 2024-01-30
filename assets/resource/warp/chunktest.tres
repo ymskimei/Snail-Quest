@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourceLocation.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+room_path = "res://source/scenes/world/chunktest.tscn"
+coordinates = Vector3( 100, 10, 100 )
+direction = "NORTH"

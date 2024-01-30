@@ -99,7 +99,8 @@ void light() {
 		float NdotH = dot(NORMAL, half);
 		float specular_value = pow(NdotH * is_lit, specular_glossiness * specular_glossiness);
 		specular_value = smoothstep(specular_threshold - specular_softness, specular_threshold + specular_softness, specular_value);
-		diffuse += specular_color.rgba * specular_value * 0.75;
+		vec4 specular_contribution = specular_color.rgba * specular_value * is_lit * 1.0;
+		diffuse = mix(diffuse, specular_contribution, specular_value);
 	}
 	if (use_rim) {
 		float iVdotN = 1.0 - dot(VIEW, NORMAL);
@@ -107,7 +108,8 @@ void light() {
 		float inverted_rim_spread = 1.0 - rim_spread;
 		float rim_value = iVdotN * pow(NdotL, inverted_rim_spread);
 		rim_value = smoothstep(inverted_rim_threshold - rim_softness, inverted_rim_threshold + rim_softness, rim_value);
-		diffuse += rim_color.rgba * rim_value * is_lit * 0.75;
+		vec4 rim_contribution = rim_color.rgba * rim_value * is_lit * 1.0;
+		diffuse = mix(diffuse, rim_contribution, rim_value);
 	}
 	if (use_light) {
 		diffuse *= vec4(LIGHT_COLOR, 1.0);

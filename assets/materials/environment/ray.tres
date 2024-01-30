@@ -4,6 +4,7 @@
 
 [resource]
 resource_name = "Material.001"
+render_priority = 5
 flags_transparent = true
 vertex_color_use_as_albedo = true
 params_diffuse_mode = 4
@@ -11,6 +12,7 @@ params_specular_mode = 3
 params_blend_mode = 1
 params_cull_mode = 2
 params_depth_draw_mode = 1
+albedo_color = Color( 1, 1, 1, 0.505882 )
 albedo_texture = ExtResource( 1 )
 metallic = 0.5
 metallic_specular = 0.0

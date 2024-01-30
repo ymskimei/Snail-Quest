@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/sign_exit.ogg-e6e8243ad8478f308de95abb6cbf61af.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/sign_exit.ogg"
+dest_files=[ "res://import/sign_exit.ogg-e6e8243ad8478f308de95abb6cbf61af.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

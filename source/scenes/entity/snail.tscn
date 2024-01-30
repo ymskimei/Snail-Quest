@@ -1,7 +1,7 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=46 format=2]
 
-[ext_resource path="res://source/scenes/interface/debug_healthbar.tscn" type="PackedScene" id=1]
-[ext_resource path="res://source/scenes/entity/state_controller.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/snowball_framework/source/scenes/interface/debug_healthbar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/snowball_framework/source/scenes/entity/state_controller.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/resource/animation/SnailIdle.tres" type="Animation" id=3]
 [ext_resource path="res://assets/resource/animation/SnailMove.tres" type="Animation" id=4]
 [ext_resource path="res://assets/resource/animation/SnailHide.tres" type="Animation" id=5]
@@ -34,6 +34,10 @@
 [ext_resource path="res://assets/resource/animation/SnailSpin.tres" type="Animation" id=32]
 [ext_resource path="res://assets/resource/animation/SnailLedge.tres" type="Animation" id=33]
 [ext_resource path="res://assets/resource/animation/SnailGrab.tres" type="Animation" id=34]
+[ext_resource path="res://assets/resource/animation/SnailPush.tres" type="Animation" id=35]
+[ext_resource path="res://source/scripts/entity/snail/SnailStatePush.gd" type="Script" id=36]
+[ext_resource path="res://assets/resource/animation/SnailPress.tres" type="Animation" id=37]
+[ext_resource path="res://assets/resource/identity/snail.tres" type="Resource" id=38]
 
 [sub_resource type="PhysicsMaterial" id=32]
 
@@ -355,6 +359,7 @@ contacts_reported = 1
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 25 )
+identity = ExtResource( 38 )
 
 [node name="StateController" parent="." instance=ExtResource( 2 )]
 
@@ -381,6 +386,9 @@ script = ExtResource( 19 )
 
 [node name="Hang" type="Node" parent="StateController"]
 script = ExtResource( 28 )
+
+[node name="Push" type="Node" parent="StateController"]
+script = ExtResource( 36 )
 
 [node name="Armature" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0.05 )
@@ -511,7 +519,7 @@ bones/23/bound_children = [  ]
 transform = Transform( 1, 0, 0, 0, 0, 1, 0, -1, 0, 0.397249, 0.780981, -0.561497 )
 bone_name = "BoneEyeballRight"
 
-[node name="EyePoint" type="Spatial" parent="Armature/Skeleton/EyeAnchor"]
+[node name="HoldingPoint" type="Spatial" parent="Armature/Skeleton/EyeAnchor"]
 unique_name_in_owner = true
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
@@ -540,7 +548,7 @@ mesh = ExtResource( 10 )
 skin = SubResource( 36 )
 material/0 = ExtResource( 8 )
 
-[node name="Shell" type="MeshInstance" parent="Armature/Skeleton"]
+[node name="MeshInstance" type="MeshInstance" parent="Armature/Skeleton"]
 unique_name_in_owner = true
 mesh = ExtResource( 12 )
 skin = SubResource( 36 )
@@ -902,6 +910,8 @@ anims/SnailJump = ExtResource( 27 )
 anims/SnailLedge = ExtResource( 33 )
 anims/SnailLift = ExtResource( 31 )
 anims/SnailMove = ExtResource( 4 )
+anims/SnailPress = ExtResource( 37 )
+anims/SnailPush = ExtResource( 35 )
 anims/SnailRollBack = ExtResource( 17 )
 anims/SnailRollFront = ExtResource( 14 )
 anims/SnailShimmyLeft = ExtResource( 30 )
@@ -911,4 +921,6 @@ anims/SnailSpin = ExtResource( 32 )
 [node name="Tween" type="Tween" parent="."]
 playback_process_mode = 0
 
+[connection signal="body_entered" from="." to="." method="_on_Snail_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Snail_body_exited"]
 [connection signal="area_entered" from="AffectArea" to="." method="_on_Area_area_entered"]

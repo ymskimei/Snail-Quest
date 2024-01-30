@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://import/gui_button_temp_focused.png-23b093a722fd6d18590fa5fec9c0d13f.stex"
+path="res://import/gubutton_temp_focused.png-23b093a722fd6d18590fa5fec9c0d13f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/gui/control/gui_button_temp_focused.png"
-dest_files=[ "res://import/gui_button_temp_focused.png-23b093a722fd6d18590fa5fec9c0d13f.stex" ]
+source_file="res://assets/texture/gui/control/gubutton_temp_focused.png"
+dest_files=[ "res://import/gubutton_temp_focused.png-23b093a722fd6d18590fa5fec9c0d13f.stex" ]
 
 [params]
 

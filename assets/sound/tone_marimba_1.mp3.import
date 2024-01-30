@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://import/tone_marimba_1.mp3-e61513fe4ddbf121b566bed44a067cd3.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/tone_marimba_1.mp3"
+dest_files=[ "res://import/tone_marimba_1.mp3-e61513fe4ddbf121b566bed44a067cd3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

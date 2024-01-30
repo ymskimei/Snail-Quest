@@ -4,8 +4,8 @@ onready var anim: AnimationPlayer = $AnimationPlayer
 onready var sprite: Sprite3D = $Sprite3D
 
 func _physics_process(delta: float) -> void:
-	if is_instance_valid(SnailQuest.camera):
-		sprite.look_at(SnailQuest.camera.global_translation, Vector3.UP)
+	if SB.camera:
+		sprite.look_at(SB.camera.global_translation, Vector3.UP)
 
 func _integrate_forces(state: PhysicsDirectBodyState):
 	add_central_force(Vector3(-2, 0, 0))

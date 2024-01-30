@@ -46,6 +46,7 @@ surfaces/1 = {
 }
 
 [node name="mushroom" type="RigidBody"]
+mode = 1
 
 [node name="Cylinder" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

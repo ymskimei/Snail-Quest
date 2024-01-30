@@ -1,5 +1,6 @@
 extends VehicleBody
 
+onready var mesh = $MeshInstance
 onready var engine = $AudioStreamPlayer3D
 onready var anim = $Tween
 
@@ -78,21 +79,21 @@ func interact():
 	mount()
 
 func mount():
-	var driver = SnailQuest.controllable
-	SnailQuest.register_vehicle(self)
-	SnailQuest.camera.update_target()
+	var driver = SB.controlled
+	SB.register_vehicle(self)
+	SB.camera.update_target()
 	driver.can_move = false
 	mounted = true
 
 func unmount():
-	var driver = SnailQuest.controllable
-	SnailQuest.deregister_vehicle()
-	SnailQuest.camera.update_target()
+	var driver = SB.controlled
+	SB.deregister_vehicle()
+	SB.camera.update_target()
 	driver.can_move = false
 	mounted = false
 	engine_force = 0
 
 func is_controlled() -> bool:
-	if SnailQuest.controllable == self:
+	if SB.controlled == self:
 		return true
 	return false

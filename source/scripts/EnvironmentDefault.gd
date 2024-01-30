@@ -8,33 +8,33 @@ onready var clouds: Position3D = $Clouds
 onready var downpour: Position3D = $Downpour
 onready var star_particles: Node2D = $Viewport/Stars
 
-export(Resource) var environment_current
-export(Resource) var environment_clear
-export(Resource) var environment_storm
-export(Resource) var colors_dawn_clear
-export(Resource) var colors_dawn_storm
-export(Resource) var colors_day_clear
-export(Resource) var colors_day_storm
-export(Resource) var colors_twilight_clear
-export(Resource) var colors_twilight_storm
-export(Resource) var colors_night_clear
-export(Resource) var colors_night_storm
+export var environment_current: Resource = null
+export var environment_clear: Resource = null
+export var environment_storm: Resource = null
+export var colors_dawn_clear: Resource = null
+export var colors_dawn_storm: Resource = null
+export var colors_day_clear: Resource = null
+export var colors_day_storm: Resource = null
+export var colors_twilight_clear: Resource = null
+export var colors_twilight_storm: Resource = null
+export var colors_night_clear: Resource = null
+export var colors_night_storm: Resource = null
 
-var sky_color_1: Color
-var sky_color_2: Color
-var cloud_color: Color
-var ambient_color: Color
-var light_color: Color
-var fog_color: Color
-var fog_depth_begin: int
-var fog_depth_end: int
-var stars_level: int
+var sky_color_1: Color = Color("FFFFFF")
+var sky_color_2: Color = Color("FFFFFF")
+var cloud_color: Color = Color("FFFFFF")
+var ambient_color: Color = Color("FFFFFF")
+var light_color: Color = Color("FFFFFF")
+var fog_color: Color = Color("FFFFFF")
+var fog_depth_begin: int = 0
+var fog_depth_end: int = 0
+var stars_level: int = 0
 
-export var cloud: PackedScene
-export var rain_drop: PackedScene
-export var all_clouds: Array
-export var all_downpour: Array
-export var max_clouds: int = 64
+export var cloud: PackedScene = null
+export var rain_drop: PackedScene = null
+export var all_clouds: Array = []
+export var all_downpour: Array = []
+export var max_clouds: int = 16
 
 export var cloud_range_height: int = 1280
 export var cloud_range_width: int = 2560
@@ -51,19 +51,19 @@ export var transition_speed: int = 5
 export var storm_frequency: int = 10
 
 var time: int = 0
-var cloudy: bool
+var cloudy: bool = false
 
 func _ready() -> void:
 	var cloud_timer = Timer.new()
-	cloud_timer.set_wait_time(3)
+	cloud_timer.set_wait_time(30)
 	cloud_timer.connect("timeout", self, "on_cloud_timer")
 	add_child(cloud_timer)
 	cloud_timer.start()
-	var rain_timer = Timer.new()
-	rain_timer.set_wait_time(0.5)
-	rain_timer.connect("timeout", self, "on_rain_timer")
-	add_child(rain_timer)
-	rain_timer.start()
+#	var rain_timer = Timer.new()
+#	rain_timer.set_wait_time(0.5)
+#	rain_timer.connect("timeout", self, "on_rain_timer")
+#	add_child(rain_timer)
+#	rain_timer.start()
 	var weather_timer = Timer.new()
 	weather_timer.set_wait_time(60)
 	weather_timer.connect("timeout", self, "on_weather_timer")
@@ -71,8 +71,8 @@ func _ready() -> void:
 	weather_timer.start()
 
 func _physics_process(delta: float) -> void:
-	if is_instance_valid(SnailQuest.game_time):
-		time = SnailQuest.game_time.get_raw_time()
+	if is_instance_valid(SB.game_time):
+		time = SB.game_time.get_raw_time()
 		set_orbit(delta)
 		set_environment(delta)
 		set_environment_by_time()
@@ -109,7 +109,7 @@ func check_environment_variables() -> void:
 
 func set_orbit(delta: float) -> void:
 	var day_percentage = float(time) / full_cycle
-	var camera_pos = SnailQuest.camera.camera_lens.global_translation
+	var camera_pos = SB.camera.lens.global_translation
 	if camera_pos != null:
 		orbital.global_translation = camera_pos
 		sky.global_translation = lerp(sky.global_translation, Vector3(camera_pos.x, camera_pos.y + 15, camera_pos.z), 0.9)
@@ -131,8 +131,9 @@ func set_environment(delta: float):
 	current_sky_color.set_color(1, lerp(current_sky_color.get_color(1), sky_color_2, 1 * delta))
 	current_sky_color.set_color(2, lerp(current_sky_color.get_color(2), sky_color_1, 1 * delta))
 	for c in all_clouds:
-		if c.sprite.modulate != cloud_color:
-			c.sprite.modulate = lerp(c.sprite.modulate, cloud_color, 1 * delta)
+		if is_instance_valid(c):
+			if c.sprite.modulate != cloud_color:
+				c.sprite.modulate = lerp(c.sprite.modulate, cloud_color, 1 * delta)
 	if stars_level == 2:
 		star_particles.modulate = lerp(star_particles.modulate, Color("FFFFFF"), 1 * delta)
 	elif stars_level == 1:
@@ -147,18 +148,18 @@ func set_environment(delta: float):
 	$Tween.start()
 
 func on_cloud_timer() -> void:
-	#print(environment_current)
 	randomize()
+	var r_size = rand_range(0.25, 2)
+	var r_width = rand_range(1, 2)
 	var x_range = Vector2(-cloud_range_width, cloud_range_width)
 	var y_range = Vector2(-cloud_range_width, cloud_range_width)
 	var random_x = randi() % int(x_range[1]- x_range[0]) + 1 + x_range[0]
 	var random_y =  randi() % int(y_range[1]-y_range[0]) + 1 + y_range[0]
 	var random_pos = Vector3(random_x, cloud_range_height + rand_range(0, 50), random_y)
 	var new_cloud = cloud.instance()
-	var r_size = rand_range(0.25, 2)
-	var r_width = rand_range(1, 2)
 	if all_clouds.size() > max_clouds:
-		all_clouds.pop_front().fade_away()
+		var c = all_clouds.pop_front()
+		c.fade_away()
 	all_clouds.append(new_cloud)
 	new_cloud.scale = Vector3(r_size + r_width, r_size, r_size + r_width)
 	new_cloud.translation = random_pos

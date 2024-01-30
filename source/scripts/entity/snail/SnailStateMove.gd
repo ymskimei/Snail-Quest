@@ -1,7 +1,7 @@
 extends SnailStateMain
 
-var ledge_jump_timer: Timer
-var speed_boost_timer: Timer
+var ledge_jump_timer: Timer = null
+var speed_boost_timer: Timer = null
 
 export var can_ledge_jump: bool = false
 
@@ -36,6 +36,8 @@ func physics_process(delta: float) -> int:
 		return State.JUMP
 	if !direction:
 		return State.IDLE
+	if entity.pushing:
+		return State.PUSH
 	return State.NULL
 
 func integrate_forces(state: PhysicsDirectBodyState) -> int:

@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/texture/interface/menu/button_checkbox_on.png" type="Texture" id=4]
 [ext_resource path="res://assets/interface/theme/menu.tres" type="Theme" id=5]
 [ext_resource path="res://assets/shader/cel.shader" type="Shader" id=7]
-[ext_resource path="res://source/scripts/interface/GuiScreenTitle.gd" type="Script" id=8]
+[ext_resource path="res://source/scripts/interface/ScreenTitle.gd" type="Script" id=8]
 [ext_resource path="res://source/scenes/world/environment_default.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/sound/music/ost_layerstest_bass.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/materials/environment/daisy_petals.material" type="Material" id=12]
@@ -527,7 +527,7 @@ alignment = 1
 
 [node name="LabelVersion" type="RichTextLabel" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 margin_top = 334.0
-margin_right = 687.0
+margin_right = 734.0
 margin_bottom = 378.0
 rect_clip_content = false
 size_flags_horizontal = 3
@@ -538,30 +538,30 @@ text = "test"
 fit_content_height = true
 
 [node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
-margin_left = 719.0
-margin_right = 1136.0
+margin_left = 766.0
+margin_right = 1089.0
 margin_bottom = 378.0
 
 [node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer"]
 unique_name_in_owner = true
 margin_left = 21.0
 margin_top = 72.0
-margin_right = 395.0
+margin_right = 301.0
 margin_bottom = 115.0
 size_flags_horizontal = 4
 size_flags_vertical = 6
-text = "GUI_TITLE_START"
+text = "TITLE_START"
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer"]
 margin_top = 263.0
-margin_right = 417.0
+margin_right = 323.0
 margin_bottom = 306.0
 size_flags_horizontal = 4
 size_flags_vertical = 6
-text = "GUI_TITLE_OPTIONS"
+text = "TITLE_OPTIONS"
 
 [node name="LabelInfo" type="RichTextLabel" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
-margin_left = 1168.0
+margin_left = 1121.0
 margin_top = 334.0
 margin_right = 1856.0
 margin_bottom = 378.0

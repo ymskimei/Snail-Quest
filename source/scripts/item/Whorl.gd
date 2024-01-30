@@ -1,9 +1,6 @@
 extends Node
 
-#signal ended
-
 func _ready():
-	if is_instance_valid(SnailQuest.controllable):
-		if SnailQuest.controllable is Entity:
-			SnailQuest.controllable.set_entity_max_health(3)
-#			emit_signal("ended")
+	if is_instance_valid(SB.controlled):
+		if SB.controlled is Entity:
+			SB.controlled.set_entity_max_health(3)

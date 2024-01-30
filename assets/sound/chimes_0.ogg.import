@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/chimes_0.ogg-f359309c534966fba9e0154ae754c835.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/chimes_0.ogg"
+dest_files=[ "res://import/chimes_0.ogg-f359309c534966fba9e0154ae754c835.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

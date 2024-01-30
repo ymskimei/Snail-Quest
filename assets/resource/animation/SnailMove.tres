@@ -208,9 +208,9 @@ tracks/26/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [ false ],
-"method": "get_sound_slide"
+"method": "play_sound_slide"
 }, {
 "args": [ true ],
-"method": "get_sound_slide"
+"method": "play_sound_slide"
 } ]
 }

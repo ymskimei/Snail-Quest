@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://import/gui_button_share.png-e10f216b3e708dba620d1f0f009fced1.stex"
+path="res://import/gubutton_share.png-e10f216b3e708dba620d1f0f009fced1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/gui/control/gui_button_share.png"
-dest_files=[ "res://import/gui_button_share.png-e10f216b3e708dba620d1f0f009fced1.stex" ]
+source_file="res://assets/texture/gui/control/gubutton_share.png"
+dest_files=[ "res://import/gubutton_share.png-e10f216b3e708dba620d1f0f009fced1.stex" ]
 
 [params]
 

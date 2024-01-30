@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/cam_third_person.ogg-ae6c38477aaf9aeb8fd6299697de50ee.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/cam_third_person.ogg"
+dest_files=[ "res://import/cam_third_person.ogg-ae6c38477aaf9aeb8fd6299697de50ee.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource( 1 )
-resource_version = 22
+resource_version = 31
 syntax_version = 2
 raw_text = "~ opener
 if izabell_has_met == false
-	Izabell: Hi there, new friend!! I'm barely alive... But, I'm trying to be?
-	Izabell: Well, that was nice meeting you anyway! Yay!!
+	NAME_SIGN: DIALOG_TEST_B1_0
+	NAME_SIGN: DIALOG_TEST_B1_1
 	set izabell_has_met = true
 	=> END
 else:
@@ -72,23 +72,23 @@ lines = {
 "type": "goto"
 },
 "2": {
-"character": "Izabell",
+"character": "NAME_SIGN",
 "character_replacements": [  ],
 "next_id": "3",
 "parent_id": "1",
 "replacements": [  ],
-"text": "Hi there, new friend!! I'm barely alive... But, I'm trying to be?",
-"translation_key": "Hi there, new friend!! I'm barely alive... But, I'm trying to be?",
+"text": "DIALOG_TEST_B1_0",
+"translation_key": "DIALOG_TEST_B1_0",
 "type": "dialogue"
 },
 "3": {
-"character": "Izabell",
+"character": "NAME_SIGN",
 "character_replacements": [  ],
 "next_id": "4",
 "parent_id": "1",
 "replacements": [  ],
-"text": "Well, that was nice meeting you anyway! Yay!!",
-"translation_key": "Well, that was nice meeting you anyway! Yay!!",
+"text": "DIALOG_TEST_B1_1",
+"translation_key": "DIALOG_TEST_B1_1",
 "type": "dialogue"
 },
 "4": {

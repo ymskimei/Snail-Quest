@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://import/gui_stick_left_press.png-a5fb4418b84c9a01ce3498758481a3f7.stex"
+path="res://import/gustick_left_press.png-a5fb4418b84c9a01ce3498758481a3f7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/gui/control/gui_stick_left_press.png"
-dest_files=[ "res://import/gui_stick_left_press.png-a5fb4418b84c9a01ce3498758481a3f7.stex" ]
+source_file="res://assets/texture/gui/control/gustick_left_press.png"
+dest_files=[ "res://import/gustick_left_press.png-a5fb4418b84c9a01ce3498758481a3f7.stex" ]
 
 [params]
 

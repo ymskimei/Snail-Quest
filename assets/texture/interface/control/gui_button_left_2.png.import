@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://import/gui_button_left_2.png-ec0155ea66739becb1171443ca1fd4ec.stex"
+path="res://import/gubutton_left_2.png-ec0155ea66739becb1171443ca1fd4ec.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/gui/control/gui_button_left_2.png"
-dest_files=[ "res://import/gui_button_left_2.png-ec0155ea66739becb1171443ca1fd4ec.stex" ]
+source_file="res://assets/texture/gui/control/gubutton_left_2.png"
+dest_files=[ "res://import/gubutton_left_2.png-ec0155ea66739becb1171443ca1fd4ec.stex" ]
 
 [params]
 
