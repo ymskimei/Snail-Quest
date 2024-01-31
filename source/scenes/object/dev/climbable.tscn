@@ -2,18 +2,18 @@
 
 [ext_resource path="res://assets/materials/tile/moss.material" type="Material" id=1]
 
-[sub_resource type="CubeMesh" id=3]
+[sub_resource type="BoxMesh" id=3]
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape3D" id=2]
 
-[node name="TestClimbable" type="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0 )
+[node name="TestClimbable" type="StaticBody3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0 )
 collision_layer = 8
 collision_mask = 8
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource( 3 )
 material/0 = ExtResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource( 2 )

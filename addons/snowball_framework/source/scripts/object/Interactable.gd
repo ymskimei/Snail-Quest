@@ -1,11 +1,11 @@
 class_name Interactable
-extends RigidBody
+extends RigidBody3D
 
-export var dialog: Resource = null
+@export var dialog: Resource = null
 
 const fallback: DialogueResource = preload("res://addons/snowball_framework/assets/resource/error_fallback.tres")
 
-var target_proxy: Position3D = null
+var target_proxy: Marker3D = null
 var character: bool = false
 
 signal interaction_ended
@@ -15,7 +15,7 @@ func _ready() -> void:
 	_set_visibility_enabler()
 
 func _set_visibility_enabler() -> void:
-	var visibility = VisibilityEnabler.new()
+	var visibility = VisibleOnScreenEnabler3D.new()
 	visibility.pause_animations = true
 	visibility.freeze_bodies = false
 	add_child(visibility)
@@ -43,12 +43,12 @@ func get_coords(raw: bool = false) -> Vector3:
 		x = round(x)
 		y = round(y)
 		z = round(z)
-	var coords = [x, y, z]
+	var coords = Vector3(x, y, z)
 	return coords
 
 func set_coords(position: Vector3, angle: String = "NORTH") -> void:
-	set_global_translation(position)
-	set_global_rotation(Vector3(0, deg2rad(Utility.cardinal_to_degrees(angle)), 0))
+	set_global_position(position)
+	set_global_rotation(Vector3(0, deg_to_rad(Utility.cardinal_to_degrees(angle)), 0))
 
 func is_controlled() -> bool:
 	if SB.controlled == self:

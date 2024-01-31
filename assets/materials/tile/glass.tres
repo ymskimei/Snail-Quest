@@ -1,3 +1,33 @@
-[gd_resource type="ShaderMaterial" format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cbrr86w7hs53t"]
+
+[ext_resource type="Shader" path="res://assets/shader/cel.gdshader" id="1_g604r"]
 
 [resource]
+render_priority = 0
+shader = ExtResource("1_g604r")
+shader_parameter/use_diffuse = false
+shader_parameter/use_specular = false
+shader_parameter/use_rim = false
+shader_parameter/use_light = false
+shader_parameter/use_shadow = false
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/shade_color = Color(1, 1, 1, 1)
+shader_parameter/specular_color = Color(0.75, 0.75, 0.75, 0.75)
+shader_parameter/rim_color = Color(0.75, 0.75, 0.75, 0.75)
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/normal_scale = 0.1
+shader_parameter/shade_threshold = 0.0
+shader_parameter/shade_softness = 0.0
+shader_parameter/specular_glossiness = 15.0
+shader_parameter/specular_threshold = 0.5
+shader_parameter/specular_softness = 0.0
+shader_parameter/rim_threshold = 0.25
+shader_parameter/rim_softness = 0.0
+shader_parameter/rim_spread = 0.5
+shader_parameter/shadow_threshold = 0.7
+shader_parameter/shadow_softness = 0.0
+shader_parameter/emission_energy = 0.0
+shader_parameter/screen_scale = 10.0
+shader_parameter/uv_scale = Vector3(1, 1, 1)
+shader_parameter/uv_offset = Vector3(0, 0, 0)
+shader_parameter/use_triplanar = false

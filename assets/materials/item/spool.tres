@@ -1,13 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=2]
+[gd_resource type="ShaderMaterial" load_steps=5 format=3]
 
-[ext_resource path="res://assets/shader/cel_old.shader" type="Shader" id=1]
-[ext_resource path="res://assets/texture/tile/wood_test.png" type="Texture" id=2]
+[ext_resource type="Shader" path="res://assets/shader/cel.gdshader" id="1"]
+[ext_resource type="Texture2D" uid="uid://bnoa6xgv4bvn8" path="res://assets/texture/tile/wood_test.png" id="2"]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.0693069, 0.0737327 )
-colors = PoolColorArray( 0.208984, 0.208984, 0.208984, 1, 1, 1, 1, 1 )
+offsets = PackedFloat32Array( 0.0693069, 0.0737327 )
+colors = PackedColorArray( 0.208984, 0.208984, 0.208984, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=2]
+[sub_resource type="GradientTexture2D" id=2]
 gradient = SubResource( 1 )
 
 [resource]

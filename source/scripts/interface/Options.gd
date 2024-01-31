@@ -1,25 +1,25 @@
 extends Options
 
-onready var tabs: TabContainer = $"%Tabs"
-onready var video: TextureButton = $"%ButtonVideo"
+@onready var tabs: TabContainer = $"%TabBar"
+@onready var video: TextureButton = $"%ButtonVideo"
 
-onready var fullscreen: CheckBox = $"%CheckBoxFullscreen"
-onready var resolution: OptionButton = $"%ButtonResolution"
-onready var filter: OptionButton = $"%ButtonFilter"
-onready var framerate: OptionButton = $"%ButtonFps"
-onready var vsync: CheckBox = $"%CheckBoxVsync"
+@onready var fullscreen: CheckBox = $"%CheckBoxFullscreen"
+@onready var resolution: OptionButton = $"%ButtonResolution"
+@onready var filter: OptionButton = $"%ButtonFilter"
+@onready var framerate: OptionButton = $"%ButtonFps"
+@onready var vsync: CheckBox = $"%CheckBoxVsync"
 
-onready var volume_master: HSlider = $"%BarVolumeMaster"
-onready var volume_music: HSlider = $"%BarVolumeMusic"
-onready var volume_sfx: HSlider = $"%BarVolumeSfx"
-onready var headphones: CheckBox = $"%CheckBoxHeadphones"
-onready var mono: CheckBox = $"%CheckBoxMono"
+@onready var volume_master: HSlider = $"%BarVolumeMaster"
+@onready var volume_music: HSlider = $"%BarVolumeMusic"
+@onready var volume_sfx: HSlider = $"%BarVolumeSfx"
+@onready var headphones: CheckBox = $"%CheckBoxHeadphones"
+@onready var mono: CheckBox = $"%CheckBoxMono"
 
-onready var camera_invert_horizontal: CheckBox = $"%CheckBoxHorizontal"
-onready var camera_invert_vertical: CheckBox = $"%CheckBoxVertical"
-onready var camera_sensitivity: HSlider = $"%BarCameraSensitivity"
+@onready var camera_invert_horizontal: CheckBox = $"%CheckBoxHorizontal"
+@onready var camera_invert_vertical: CheckBox = $"%CheckBoxVertical"
+@onready var camera_sensitivity: HSlider = $"%BarCameraSensitivity"
 
-onready var language: OptionButton = $"%ButtonLanguage"
+@onready var language: OptionButton = $"%ButtonLanguage"
 
 var last_focus: Control
 var new_focus: Control
@@ -82,7 +82,7 @@ func _on_Tabs_tab_changed() -> void:
 			break
 
 func _on_button_focus_entered() -> void:
-	last_focus = tabs.get_focus_owner()
+	last_focus = tabs.get_viewport().gui_get_focus_owner()
 
 func _on_ButtonVideo_pressed():
 	tabs.current_tab = 0
@@ -176,7 +176,7 @@ func _on_ButtonLanguage_item_selected(index: int) -> void:
 
 func _notification(what):
 	match what:
-		NOTIFICATION_WM_FOCUS_IN:
+		NOTIFICATION_APPLICATION_FOCUS_IN:
 			_set_from_config()
-		NOTIFICATION_WM_FOCUS_OUT:
+		NOTIFICATION_APPLICATION_FOCUS_OUT:
 			pass

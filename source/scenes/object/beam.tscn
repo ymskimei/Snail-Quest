@@ -2,5 +2,5 @@
 
 [ext_resource path="res://assets/model/beam.mesh" type="ArrayMesh" id=1]
 
-[node name="MeshInstance2" type="MeshInstance"]
+[node name="MeshInstance2" type="MeshInstance3D"]
 mesh = ExtResource( 1 )

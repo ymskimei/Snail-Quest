@@ -5,69 +5,69 @@
 [ext_resource path="res://addons/snowball_framework/source/scripts/interface/DebugOverlay.gd" type="Script" id=3]
 
 [node name="GuiDebug" type="CanvasLayer"]
-pause_mode = 2
+process_mode = 3
 layer = 16
 script = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 20.0
-margin_right = -20.0
-margin_bottom = -20.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-margin_right = 1880.0
-margin_bottom = 1040.0
+offset_right = 1880.0
+offset_bottom = 1040.0
 alignment = 1
 
 [node name="ConsoleContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-margin_right = 1250.0
-margin_bottom = 1040.0
+offset_right = 1250.0
+offset_bottom = 1040.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
-custom_constants/margin_right = 32
-custom_constants/margin_top = 32
-custom_constants/margin_left = 32
-custom_constants/margin_bottom = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_bottom = 32
 
 [node name="GuiConsole" parent="MarginContainer/HBoxContainer/ConsoleContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 1218.0
-margin_bottom = 1008.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 1218.0
+offset_bottom = 1008.0
 
 [node name="DebugInformation" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-margin_left = 1254.0
-margin_right = 1880.0
-margin_bottom = 1040.0
+offset_left = 1254.0
+offset_right = 1880.0
+offset_bottom = 1040.0
 size_flags_horizontal = 3
 theme = ExtResource( 1 )
 alignment = 2
 
 [node name="DisplayFramerate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_right = 626.0
-margin_bottom = 68.0
-rect_clip_content = false
+offset_right = 626.0
+offset_bottom = 68.0
+clip_contents = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.15
 bbcode_enabled = true
-bbcode_text = "00"
+text = "00"
 tab_size = 5
 text = "00"
 
 [node name="DisplayGameTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 72.0
-margin_right = 626.0
-margin_bottom = 141.0
-rect_clip_content = false
+offset_top = 72.0
+offset_right = 626.0
+offset_bottom = 141.0
+clip_contents = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.15
@@ -76,91 +76,91 @@ tab_size = 5
 text = "00:00:00"
 
 [node name="DisplayPlayTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 145.0
-margin_right = 626.0
-margin_bottom = 214.0
-rect_clip_content = false
+offset_top = 145.0
+offset_right = 626.0
+offset_bottom = 214.0
+clip_contents = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.15
 bbcode_enabled = true
-bbcode_text = "00"
+text = "00"
 tab_size = 5
 text = "00"
 
 [node name="DisplayCameraTarget" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 218.0
-margin_right = 626.0
-margin_bottom = 286.0
-rect_clip_content = false
+offset_top = 218.0
+offset_right = 626.0
+offset_bottom = 286.0
+clip_contents = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.15
 bbcode_enabled = true
-bbcode_text = "00"
+text = "00"
 tab_size = 5
 text = "00"
 
 [node name="DisplayControlled" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 290.0
-margin_right = 626.0
-margin_bottom = 359.0
-rect_clip_content = false
+offset_top = 290.0
+offset_right = 626.0
+offset_bottom = 359.0
+clip_contents = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.15
 bbcode_enabled = true
-bbcode_text = "00"
+text = "00"
 tab_size = 5
 text = "00"
 
 [node name="DisplayControlledTarget" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 363.0
-margin_right = 626.0
-margin_bottom = 432.0
-rect_clip_content = false
+offset_top = 363.0
+offset_right = 626.0
+offset_bottom = 432.0
+clip_contents = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.15
 bbcode_enabled = true
-bbcode_text = "00"
+text = "00"
 tab_size = 5
 text = "00"
 
 [node name="DisplayPrevControlled" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 436.0
-margin_right = 626.0
-margin_bottom = 505.0
-rect_clip_content = false
+offset_top = 436.0
+offset_right = 626.0
+offset_bottom = 505.0
+clip_contents = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.15
 bbcode_enabled = true
-bbcode_text = "00"
+text = "00"
 tab_size = 5
 text = "00"
 
 [node name="DisplayChunkCoords" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 509.0
-margin_right = 626.0
-margin_bottom = 577.0
-rect_clip_content = false
+offset_top = 509.0
+offset_right = 626.0
+offset_bottom = 577.0
+clip_contents = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.15
 bbcode_enabled = true
-bbcode_text = "0, 0"
+text = "0, 0"
 tab_size = 5
 text = "0, 0"
 
 [node name="DisplayCoordinate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
-margin_top = 581.0
-margin_right = 626.0
-margin_bottom = 1040.0
-rect_clip_content = false
+offset_top = 581.0
+offset_right = 626.0
+offset_bottom = 1040.0
+clip_contents = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
-bbcode_text = "0, 0, 0"
+text = "0, 0, 0"
 tab_size = 5
 text = "0, 0, 0"

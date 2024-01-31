@@ -1,7 +1,7 @@
 class_name ResourceLootTable
 extends Resource
 
-export(Array, Resource) var loot_table: Array = []
+@export var loot_table: Array = [] # (Array, Resource)
 
 func _ready():
 	randomize()

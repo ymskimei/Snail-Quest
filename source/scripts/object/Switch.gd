@@ -1,8 +1,8 @@
 extends Interactable
 
-onready var rod: RigidBody = $Lever/Handle
-onready var grab_point: Position3D = $Lever/Handle/Position3D
-onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var rod: RigidBody3D = $Lever/Handle
+@onready var grab_point: Marker3D = $Lever/Handle/Marker3D
+@onready var anim: AnimationPlayer = $AnimationPlayer
 
 var active: bool = false
 
@@ -24,14 +24,14 @@ func _input(event: InputEvent) -> void:
 
 func _activate_switch() -> void:
 	anim.play_backwards("Switch")
-	Audio.play_pos_sfx(RegistryAudio.switch_on, global_translation)
-	yield(anim, "animation_finished")
+	Audio.play_pos_sfx(RegistryAudio.switch_on, global_position)
+	await anim.animation_finished
 	active = true
 	emit_signal("activated", active)
 
 func _deactivate_switch() -> void:
 	anim.play("Switch")
-	Audio.play_pos_sfx(RegistryAudio.switch_off, global_translation)
-	yield(anim, "animation_finished")
+	Audio.play_pos_sfx(RegistryAudio.switch_off, global_position)
+	await anim.animation_finished
 	active = false
 	emit_signal("activated", active)

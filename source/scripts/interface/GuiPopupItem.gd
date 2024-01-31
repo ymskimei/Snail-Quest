@@ -3,7 +3,7 @@ extends InventoryParent
 func _ready() -> void:
 	default_focus = $"%Item1"
 
-func _process(delta: float):
+func _process(_delta: float):
 	set_hud_items()
 
 func set_inventory(toggle: bool):
@@ -14,7 +14,7 @@ func set_inventory(toggle: bool):
 		$"%Item1".button.grab_focus()
 	else:
 		anim.play("Exit")
-		yield(anim, "animation_finished")
+		await anim.animation_finished
 		hide()
 
 func set_hud_items() -> void:

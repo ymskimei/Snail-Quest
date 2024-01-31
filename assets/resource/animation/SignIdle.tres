@@ -5,26 +5,26 @@ resource_name = "SignIdle"
 loop = true
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance:scale")
+tracks/0/path = NodePath("MeshInstance3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1 ),
-"transitions": PoolRealArray( -2, -2, -2, -2, -2 ),
+"times": PackedFloat32Array( 0, 0.25, 0.5, 0.75, 1 ),
+"transitions": PackedFloat32Array( -2, -2, -2, -2, -2 ),
 "update": 0,
 "values": [ Vector3( 1, 1.1, 1 ), Vector3( 1, 0.9, 1 ), Vector3( 1, 1.1, 1 ), Vector3( 1, 0.9, 1 ), Vector3( 1, 1.1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("MeshInstance:rotation_degrees")
+tracks/1/path = NodePath("MeshInstance3D:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( -3, -3, -3 ),
+"times": PackedFloat32Array( 0, 0.5, 1 ),
+"transitions": PackedFloat32Array( -3, -3, -3 ),
 "update": 0,
 "values": [ Vector3( 0, 0, -10 ), Vector3( 0, 0, 10 ), Vector3( 0, 0, -10 ) ]
 }

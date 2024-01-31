@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/cam_no_target_unlock.ogg-80d61fcc14d9ccc0453ca32afa9fd0cf.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dppc8y5m16cat"
+path="res://godot/imported/cam_no_target_unlock.ogg-80d61fcc14d9ccc0453ca32afa9fd0cf.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/cam_no_target_unlock.ogg"
-dest_files=[ "res://import/cam_no_target_unlock.ogg-80d61fcc14d9ccc0453ca32afa9fd0cf.oggstr" ]
+dest_files=["res://godot/imported/cam_no_target_unlock.ogg-80d61fcc14d9ccc0453ca32afa9fd0cf.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

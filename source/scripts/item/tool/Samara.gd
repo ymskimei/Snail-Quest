@@ -1,8 +1,8 @@
-extends KinematicBody
+extends CharacterBody3D
 
-export(Resource) var resource
+@export var resource: Resource
 
-export var speed = 20
+@export var speed = 20
 
 var player_loc : Vector3
 var returning : bool
@@ -12,23 +12,23 @@ func _ready():
 	var player_loc = get_direction()
 	var timer = Timer.new()
 	timer.set_wait_time(0.3)
-	timer.connect("timeout", self, "on_timeout")
+	timer.connect("timeout", Callable(self, "on_timeout"))
 	timer.one_shot = true
 	add_child(timer)
 	returning = false
 	timer.start()
 
 func _physics_process(delta):
-	$MeshInstance.rotation.y += 20 * delta
+	$MeshInstance3D.rotation.y += 20 * delta
 	if is_instance_valid(SnailQuest.controllable):
 		if returning:
-			global_translation = lerp(global_translation, SnailQuest.controllable.global_translation, speed * delta)
+			global_position = lerp(global_position, SnailQuest.controllable.global_position, speed * delta)
 		else:
 			var direction = SnailQuest.controllable.global_transform.basis.z.normalized()
-			global_translation = lerp(global_translation, direction * speed, delta)
+			global_position = lerp(global_position, direction * speed, delta)
 	
 func get_direction() -> Vector3:
-	var direction = SnailQuest.controllable.transform.basis.xform(Vector3(0, 0, -1))
+	var direction = SnailQuest.controllable.transform.basis * (Vector3(0, 0, -1))
 	return direction.normalized()
 
 func _on_Area_body_entered(body):

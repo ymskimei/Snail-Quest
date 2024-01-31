@@ -4,7 +4,7 @@ func enter() -> void:
 	print("Snail State: FALL")
 	entity.anim.play("SnailFall")
 
-func unhandled_input(event: InputEvent) -> int:
+func states_unhandled_input(event: InputEvent) -> int:
 	if entity.holding_point and event.is_action_pressed("action_defense"):
 		if input == Vector3.ZERO:
 			return State.HIDE
@@ -16,8 +16,8 @@ func unhandled_input(event: InputEvent) -> int:
 	mallet()
 	return State.NULL
 
-func physics_process(delta: float) -> int:
-	.physics_process(delta)
+func states_physics_process(delta: float) -> int:
+	super.states_physics_process(delta)
 	if entity.ledge_usable and !entity.ray_front_top.is_colliding() and entity.ray_front_bottom.is_colliding():
 		return State.HANG
 #	if entity.input == Vector3.ZERO:
@@ -33,8 +33,8 @@ func physics_process(delta: float) -> int:
 			return State.IDLE
 	return State.NULL
 
-func integrate_forces(state: PhysicsDirectBodyState) -> int:
-	.integrate_forces(state)
+func states_integrate_forces(state: PhysicsDirectBodyState3D) -> int:
+	super.states_integrate_forces(state)
 	if entity.is_controlled():
 		apply_movement(state, 0.25)
 	return State.NULL

@@ -26,15 +26,15 @@ var stop_track_on_bar_queue := []
 
 var current_song : Node = null
 
-onready var songs := {}
+@onready var songs := {}
 
 func _ready() -> void:
 	reload_songs()
 
 func reload_songs() -> void:
 	for song in get_children():
-		song.connect("beat", self, "_on_beat")
-		song.connect("bar", self, "_on_bar")
+		song.connect("beat", Callable(self, "_on_beat"))
+		song.connect("bar", Callable(self, "_on_bar"))
 		songs[song.name] = song
 
 func play_song(song_name: String, fade_time := 0.0) -> void:

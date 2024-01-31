@@ -1,7 +1,7 @@
 extends Node
 
-onready var m_booth: MusicBooth = Audio.music_booth
-onready var a_booth: MusicBooth = Audio.ambie_booth
+@onready var m_booth: MusicBooth = Audio.music_booth
+@onready var a_booth: MusicBooth = Audio.ambie_booth
 
 var enemy_near: bool
 var enemy_pursuing: bool
@@ -17,7 +17,7 @@ func overworld_ambience():
 func set_ambience_eq():
 	var y_max = 256
 	var y_min = -128
-	var audio_listener = SB.camera.lens.get_global_translation().y
+	var audio_listener = SB.camera.lens.get_global_position().y
 	var amount = clamp((audio_listener - y_min) / (y_max - y_min), 0, 1)
 	var hz_32 = lerp(-1.0, -16.0, amount)
 	var hz_100 = lerp(2.0, -4.0, amount)
@@ -25,13 +25,13 @@ func set_ambience_eq():
 	var hz_1000 = lerp(-16.0, 0.0, amount)
 	var hz_3200 = lerp(-2.0, -4.5, amount)
 	var hz_10000 = lerp(-28.0, 5.0, amount)
-	var effect: AudioEffectEQ = AudioServer.get_bus_effect(AudioServer.get_bus_index("Ambience"), 0)
-	effect.set_band_gain_db(0, hz_32)
-	effect.set_band_gain_db(1, hz_100)
-	effect.set_band_gain_db(2, hz_320)
-	effect.set_band_gain_db(3, hz_1000)
-	effect.set_band_gain_db(4, hz_3200)
-	effect.set_band_gain_db(5, hz_10000)
+	#var effect: AudioEffectEQ = AudioServer.get_bus_effect(AudioServer.get_bus_index("Ambience"), 0)
+	#effect.set_band_gain_db(0, hz_32)
+	#effect.set_band_gain_db(1, hz_100)
+	#effect.set_band_gain_db(2, hz_320)
+	#effect.set_band_gain_db(3, hz_1000)
+	#effect.set_band_gain_db(4, hz_3200)
+	#effect.set_band_gain_db(5, hz_10000)
 
 	#Outside
 #	effect.set_band_gain_db(0, 20.0)

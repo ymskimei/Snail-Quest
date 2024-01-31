@@ -4,14 +4,14 @@
 resource_name = "PawnJump"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("MeshInstance:scale")
+tracks/0/path = NodePath("MeshInstance3D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 0.5, 2, 0.5 ),
+"times": PackedFloat32Array( 0, 0.1, 0.3 ),
+"transitions": PackedFloat32Array( 0.5, 2, 0.5 ),
 "update": 0,
 "values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1.2, 1 ), Vector3( 1, 1, 1 ) ]
 }

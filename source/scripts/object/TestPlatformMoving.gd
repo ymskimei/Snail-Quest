@@ -1,6 +1,6 @@
-extends Path
+extends Path3D
 
-onready var anim = $AnimationPlayer
+@onready var anim = $AnimationPlayer
 
 var to_timer = Timer.new()
 var from_timer = Timer.new()

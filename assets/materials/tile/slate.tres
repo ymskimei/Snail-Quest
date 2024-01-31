@@ -1,9 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=2]
+[gd_resource type="ShaderMaterial" load_steps=5 format=3]
 
-[ext_resource path="res://assets/shader/cel_old.shader" type="Shader" id=1]
-[ext_resource path="res://assets/shader/diffuse_gradient_1.tres" type="Texture" id=2]
-[ext_resource path="res://assets/texture/tile/temporary/slate.png" type="Texture" id=3]
-[ext_resource path="res://assets/texture/tile/temporary/slate_normal.png" type="Texture" id=4]
+[ext_resource type="Shader" path="res://assets/shader/cel.gdshader" id="1"]
+[ext_resource type="Texture2D" uid="uid://on02h4pln5x3" path="res://assets/shader/diffuse_gradient_1.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://dmbmnf2xhy7o7" path="res://assets/texture/tile/temporary/slate.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bffx4e16rw8fx" path="res://assets/texture/tile/temporary/slate_normal.png" id="4"]
 
 [resource]
 shader = ExtResource( 1 )

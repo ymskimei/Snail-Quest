@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://assets/texture/item/slash.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/item/slash.png" type="Texture2D" id=1]
 [ext_resource path="res://assets/model/needle.mesh" type="ArrayMesh" id=2]
 [ext_resource path="res://source/scripts/item/tool/Mallet.gd" type="Script" id=3]
 [ext_resource path="res://assets/resource/animation/MalletStill.tres" type="Animation" id=4]
@@ -50,8 +50,8 @@ render_mode unshaded, blend_add, world_vertex_coords, cull_disabled;
 uniform sampler2D tex;
 
 void vertex(){
-	vec3 a = mix(WORLD_MATRIX[3].xyz,WORLD_MATRIX[2].xyz,UV.y);
-	vec3 b = mix(WORLD_MATRIX[0].xyz,WORLD_MATRIX[1].xyz,UV.y);
+	vec3 a = mix(MODEL_MATRIX[3].xyz,MODEL_MATRIX[2].xyz,UV.y);
+	vec3 b = mix(MODEL_MATRIX[0].xyz,MODEL_MATRIX[1].xyz,UV.y);
 	VERTEX = mix(a, b, UV.x);
 	UV.x = (INSTANCE_CUSTOM.w-1.0 - UV.x) / INSTANCE_CUSTOM.z;
 }
@@ -69,9 +69,9 @@ shader_param/tex = ExtResource( 1 )
 [sub_resource type="QuadMesh" id=5]
 material = SubResource( 4 )
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape3D" id=1]
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape3D" id=2]
 
 [sub_resource type="Animation" id=11]
 resource_name = "MalletSlam"
@@ -84,8 +84,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.21, 0.5 ),
-"transitions": PoolRealArray( 5.09824, 0.659754, 0.5 ),
+"times": PackedFloat32Array( 0, 0.21, 0.5 ),
+"transitions": PackedFloat32Array( 5.09824, 0.659754, 0.5 ),
 "update": 0,
 "values": [ Vector3( 25, 0, 0 ), Vector3( -180, 0, 0 ), Vector3( 0, 0, 0 ) ]
 }
@@ -96,8 +96,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.14, 0.21, 0.26, 0.32 ),
-"transitions": PoolRealArray( 2.5, 0.5, 2.7, 0.4 ),
+"times": PackedFloat32Array( 0.14, 0.21, 0.26, 0.32 ),
+"transitions": PackedFloat32Array( 2.5, 0.5, 2.7, 0.4 ),
 "update": 0,
 "values": [ Vector3( 1, 1, 0.6 ), Vector3( 1, 1, 1 ), Vector3( 2, 2, 0.5 ), Vector3( 1, 1, 1 ) ]
 }
@@ -108,8 +108,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.21 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.21 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "on_slam"
@@ -127,8 +127,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.5 ),
-"transitions": PoolRealArray( 5.09824, 0.659754, 0.5 ),
+"times": PackedFloat32Array( 0, 0.15, 0.5 ),
+"transitions": PackedFloat32Array( 5.09824, 0.659754, 0.5 ),
 "update": 0,
 "values": [ Vector3( 25, 0, 0 ), Vector3( -115, 0, 0 ), Vector3( 0, 0, 0 ) ]
 }
@@ -139,8 +139,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.08, 0.15, 0.2, 0.26 ),
-"transitions": PoolRealArray( 2.5, 0.5, 2.7, 0.4 ),
+"times": PackedFloat32Array( 0.08, 0.15, 0.2, 0.26 ),
+"transitions": PackedFloat32Array( 2.5, 0.5, 2.7, 0.4 ),
 "update": 0,
 "values": [ Vector3( 1, 1, 0.6 ), Vector3( 1, 1, 1 ), Vector3( 1.7, 1.7, 0.7 ), Vector3( 1, 1, 1 ) ]
 }
@@ -151,8 +151,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.15 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.15 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "on_slam"
@@ -170,13 +170,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 
-[node name="KinematicBody" type="RigidBody"]
+[node name="CharacterBody3D" type="RigidBody3D"]
 collision_layer = 0
 collision_mask = 12
 mode = 3
@@ -184,21 +184,21 @@ mass = 0.00102041
 sleeping = true
 script = ExtResource( 3 )
 
-[node name="Mallet" type="Spatial" parent="."]
+[node name="Mallet" type="Node3D" parent="."]
 
-[node name="MeshInstance" type="MeshInstance" parent="Mallet"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0 )
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mallet"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0 )
 mesh = ExtResource( 2 )
 skeleton = NodePath("../../..")
 
-[node name="MeshInstance2" type="MeshInstance" parent="Mallet"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0 )
+[node name="MeshInstance2" type="MeshInstance3D" parent="Mallet"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0 )
 mesh = ExtResource( 5 )
 skeleton = NodePath("../../..")
 
 [node name="Particles" type="Particles" parent="Mallet/MeshInstance2"]
 unique_name_in_owner = true
-transform = Transform( 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, -4.47035e-08, 1, 4.37114e-08, -1, -4.47035e-08, 0, 0.33, 0 )
+transform = Transform3D( 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, -4.47035e-08, 1, 4.37114e-08, -1, -4.47035e-08, 0, 0.33, 0 )
 lifetime = 8.0
 speed_scale = 64.0
 fixed_fps = 64
@@ -206,16 +206,16 @@ local_coords = false
 process_material = SubResource( 7 )
 draw_pass_1 = SubResource( 5 )
 
-[node name="AttackArea" type="Area" parent="Mallet" groups=["attack"]]
+[node name="AttackArea" type="Area3D" parent="Mallet" groups=["attack"]]
 unique_name_in_owner = true
 monitorable = false
 
-[node name="CollisionShape" type="CollisionShape" parent="Mallet/AttackArea"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 2.10202, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mallet/AttackArea"]
+transform = Transform3D( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 2.10202, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 1, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 1, 0 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

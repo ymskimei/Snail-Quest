@@ -18,7 +18,7 @@ func _ready():
 	bars = resource.bars
 	sec_per_beat = 60.0 / bpm
 	song_length = (60 * measures * bars) / bpm
-	timer.connect("timeout", self,"_on_timeout")
+	timer.connect("timeout", Callable(self, "_on_timeout"))
 	timer.wait_time = bpm / 60
 	timer.one_shot = true
 	add_child(timer)

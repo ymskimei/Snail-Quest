@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/cam_iso_down.ogg-c99ba979b919d390c526c19b2e48ce67.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c704y0p7tn4yr"
+path="res://godot/imported/cam_iso_down.ogg-c99ba979b919d390c526c19b2e48ce67.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/cam_iso_down.ogg"
-dest_files=[ "res://import/cam_iso_down.ogg-c99ba979b919d390c526c19b2e48ce67.oggstr" ]
+dest_files=["res://godot/imported/cam_iso_down.ogg-c99ba979b919d390c526c19b2e48ce67.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

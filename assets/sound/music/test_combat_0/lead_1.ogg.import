@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/lead_1.ogg-4ef275cce2cd76ec7e1fb775e7fa1eaf.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dqkofr10ubsiv"
+path="res://godot/imported/lead_1.ogg-4ef275cce2cd76ec7e1fb775e7fa1eaf.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/music/test_combat_0/lead_1.ogg"
-dest_files=[ "res://import/lead_1.ogg-4ef275cce2cd76ec7e1fb775e7fa1eaf.oggstr" ]
+dest_files=["res://godot/imported/lead_1.ogg-4ef275cce2cd76ec7e1fb775e7fa1eaf.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

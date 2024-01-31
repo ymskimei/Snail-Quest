@@ -6,7 +6,7 @@ var track_speed: int = 18
 var rotation_speed: int = 10
 
 func enter() -> void:
-	print("Camera State: LOOK")
+	print("Camera3D State: LOOK")
 	target_rot = entity.target.skeleton.rotation.y
 	tween_cam_rotate(Tween.EASE_OUT)
 	Audio.play_sfx(RegistryAudio.cam_first_person)
@@ -14,7 +14,7 @@ func enter() -> void:
 	entity.anim_tween.start()
 	entity.anim_wobble.play("Wobble")
 
-func physics_process(delta: float) -> int:
+func states_physics_process(delta: float) -> int:
 	if !target_controlled():
 		return State.LOCK
 	if rotation_complete:
@@ -31,11 +31,11 @@ func _cam_movement(delta: float) -> void:
 	rotation.y = (Input.get_action_strength("cam_up") - Input.get_action_strength("cam_down")) / 1.5
 	if is_inverted(true):
 		rotation.y = -rotation.y
-	velocity = velocity.linear_interpolate(rotation * sensitivity * 5, delta * rotation_speed)
-	entity.rotation.y += (deg2rad(velocity.x))
-	entity.rotation.x += (deg2rad(velocity.y))
-	entity.rotation.x = lerp(entity.rotation.x, clamp(entity.rotation.x, deg2rad(0), deg2rad(45)), track_speed * delta)
-	entity.translation = lerp(entity.translation, entity.target.translation + offset, track_speed * delta)
+	velocity = velocity.lerp(rotation * sensitivity * 5, delta * rotation_speed)
+	entity.rotation.y += (deg_to_rad(velocity.x))
+	entity.rotation.x += (deg_to_rad(velocity.y))
+	entity.rotation.x = lerp(entity.rotation.x, clamp(entity.rotation.x, deg_to_rad(0), deg_to_rad(45)), track_speed * delta)
+	entity.position = lerp(entity.position, entity.target.position + offset, track_speed * delta)
 
 func exit() -> void:
 	entity.anim_wobble.stop()

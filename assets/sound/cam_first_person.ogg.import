@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/cam_first_person.ogg-9a70076ebc12b44baf8cd54767088a17.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cuvcmnpox6jbr"
+path="res://godot/imported/cam_first_person.ogg-9a70076ebc12b44baf8cd54767088a17.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/cam_first_person.ogg"
-dest_files=[ "res://import/cam_first_person.ogg-9a70076ebc12b44baf8cd54767088a17.oggstr" ]
+dest_files=["res://godot/imported/cam_first_person.ogg-9a70076ebc12b44baf8cd54767088a17.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

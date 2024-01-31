@@ -1,19 +1,14 @@
-[gd_resource type="ParticlesMaterial" load_steps=3 format=2]
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://qvgkspd40lfa"]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.935252, 0.971223 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.0725807 )
+[sub_resource type="Gradient" id="1"]
+offsets = PackedFloat32Array(0.935252, 0.971223)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.0725807)
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture2D" id="2"]
+gradient = SubResource("1")
 
 [resource]
-flag_disable_z = true
-gravity = Vector3( 0, -512, 0 )
-angular_velocity = 90.0
-angular_velocity_random = 0.2
-orbit_velocity = 2.0
-orbit_velocity_random = 1.0
-scale = 0.25
-scale_random = 0.5
-color_ramp = SubResource( 2 )
+gravity = Vector3(0, -512, 0)
+scale_min = 0.0
+scale_max = 0.0
+color_ramp = SubResource("2")

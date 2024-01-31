@@ -8,13 +8,13 @@ var direction: Vector3 = Vector3.ZERO
 var input: Vector3 = Vector3.ZERO
 var facing_dir: float = 0
 
-func set_gravity(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
+func set_gravity(state: PhysicsDirectBodyState3D, gravity: int = 50) -> void:
 	var can_climb: bool = false
 	if is_instance_valid(entity.climbing_rays):
 		var norm_avg = Vector3.ZERO
 		var rays_colliding := 0
 		for ray in entity.climbing_rays.get_children():
-			var r : RayCast = ray
+			var r : RayCast3D = ray
 			if r.is_colliding():
 				if r.get_collider().is_in_group("climbable"):
 					can_climb = true
@@ -27,14 +27,14 @@ func set_gravity(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 	else:
 		climbing_normal = Vector3.UP
 	entity.global_transform = Utility.apply_surface_align(entity.global_transform, climbing_normal)
-	state.add_central_force(lerp(15, gravity, 0.1) * -climbing_normal)
+	state.apply_central_force(lerp(15, gravity, 0.1) * -climbing_normal)
 
-func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
+func set_hang_align(state: PhysicsDirectBodyState3D, gravity: int = 50) -> void:
 	if is_instance_valid(entity.climbing_rays):
 		var norm_avg = Vector3.ZERO
 		var rays_colliding := 0
 		for ray in entity.climbing_rays.get_children():
-			var r : RayCast = ray
+			var r : RayCast3D = ray
 			if r.is_colliding():
 				rays_colliding += 1
 				norm_avg += r.get_collision_normal()
@@ -54,24 +54,24 @@ func get_joy_input() -> Vector3:
 		input /= input_length
 	return input
 
-func apply_movement(state: PhysicsDirectBodyState, multiplier: float, roll: bool = false) -> void:
+func apply_movement(state: PhysicsDirectBodyState3D, multiplier: float, roll: bool = false) -> void:
 	if entity.is_controlled() and !entity.attached_to_location and !entity.interacting:
 		direction = -get_joy_input().rotated(Vector3.UP, SB.camera.rotation.y)
 		direction = direction.rotated(Vector3.LEFT, -entity.rotation.x).rotated(Vector3.RIGHT, -entity.rotation.y)
 		if direction != Vector3.ZERO:
 			if roll:
-				state.add_force((entity.speed * multiplier) * direction, -direction)
+				state.apply_force(-direction, (entity.speed * multiplier) * direction)
 			else:
-				state.add_central_force((entity.speed * multiplier) * direction)
+				state.apply_central_force((entity.speed * multiplier) * direction)
 				#entity.anim_tween.interpolate_property(entity.skeleton, "rotation:y", entity.skeleton.rotation.y, atan2(-direction.x, -direction.z), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				#entity.anim_tween.start()
 #		else:
 #			state.linear_velocity = Vector3.ZERO
 
-func apply_shimmy(state: PhysicsDirectBodyState, multiplier: float) -> void:
+func apply_shimmy(state: PhysicsDirectBodyState3D, multiplier: float) -> void:
 	direction = Vector3(-get_joy_input().x, 0, 0).rotated(Vector3.UP, entity.skeleton. rotation.y)
 	if direction != Vector3.ZERO:
-		state.add_central_force((entity.speed * multiplier) * direction)
+		state.apply_central_force((entity.speed * multiplier) * direction)
 
 func apply_rotation():
 	if direction != Vector3.ZERO:
@@ -81,7 +81,7 @@ func apply_rotation():
 func is_on_floor() -> bool:
 	if is_instance_valid(entity.climbing_rays):
 		for ray in entity.climbing_rays.get_children():
-			var r : RayCast = ray
+			var r : RayCast3D = ray
 			if r.is_colliding():
 				return true
 	elif is_instance_valid(entity.floor_checker):

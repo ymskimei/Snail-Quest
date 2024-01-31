@@ -1,13 +1,13 @@
 class_name Entity
 extends Conversable
 
-export var identity: Resource = null
-export var inventory: Resource = null
+@export var identity: Resource = null
+@export var inventory: Resource = null
 
-onready var states: Node = $StateController
-onready var skeleton: Skeleton = $Armature/Skeleton
-onready var mesh: MeshInstance = $"%MeshInstance"
-onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var states: Node = $StateController
+@onready var skeleton: Skeleton3D = $Armature/Skeleton3D
+@onready var mesh: MeshInstance3D = $"%MeshInstance3D"
+@onready var anim: AnimationPlayer = $AnimationPlayer
 
 var entity_name: String
 var health: int
@@ -44,7 +44,7 @@ func _ready() -> void:
 	_set_display_health()
 	_get_timers()
 	#temp until can be updated from outside
-	SB.camera.connect("target_updated", self, "_on_cam_target_updated")
+	SB.camera.connect("target_updated", Callable(self, "_on_cam_target_updated"))
 	emit_signal("health_changed", health, max_health, is_controlled())
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -85,11 +85,11 @@ func _set_identity() -> void:
 func _get_timers():
 	jump_memory_timer.set_wait_time(0.075)
 	jump_memory_timer.one_shot = true
-	jump_memory_timer.connect("timeout", self, "on_jump_memory_timeout")
+	jump_memory_timer.connect("timeout", Callable(self, "on_jump_memory_timeout"))
 	add_child(jump_memory_timer)
 	ledge_timer.set_wait_time(1)
 	ledge_timer.one_shot = true
-	ledge_timer.connect("timeout", self, "on_ledge_timeout")
+	ledge_timer.connect("timeout", Callable(self, "on_ledge_timeout"))
 	add_child(ledge_timer)
 
 func set_entity_health(new_amount: int) -> void:
@@ -127,12 +127,12 @@ func update_equipped(point) -> void:
 	if inventory.items[0] != null:
 		var tool_item = inventory.items[0]
 		if tool_item.item_path != "":
-			var equipped_tool = load(tool_item.item_path).instance()
+			var equipped_tool = load(tool_item.item_path).instantiate()
 			equipped_tool.set_name(tool_item.item_name)
 			point.add_child(equipped_tool)
 
 func target_check() -> void:
-	var target_distance = target.get_global_translation().distance_to(get_global_translation())
+	var target_distance = target.get_global_position().distance_to(get_global_position())
 	if can_target:
 		if enemy_found or (!target.is_controlled() and target_distance < max_interactable_distance):
 			target_found = true
@@ -142,7 +142,7 @@ func target_check() -> void:
 		target = Utility.find_target(self, "target")
 
 func target_interact() -> void:
-	var target_distance: float  = target.get_global_translation().distance_to(get_global_translation())
+	var target_distance: float  = target.get_global_position().distance_to(get_global_position())
 	var relative_facing: float = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
 	if (!target.is_controlled() and target is Interactable) and (target_distance < max_interactable_distance and relative_facing >= 0):
 		can_interact = true
@@ -152,7 +152,7 @@ func target_interact() -> void:
 		interacting = true
 		target.interact()
 		set_interaction_text("")
-		yield(target, "interaction_ended")
+		await target.interaction_ended
 		interacting = false
 	else:
 		pushing = false
@@ -165,7 +165,7 @@ func set_interaction_text(text) -> void:
 		label.set_text("")
 		label.set_visible(false)
 	else:
-		var interaction_key = OS.get_scancode_string(InputMap.get_action_list(Device.action_main)[0].scancode)
+		var interaction_key = OS.get_keycode_string(InputMap.action_get_events(Device.action_main)[0].keycode)
 		label.set_text("Press %s to %s" % [interaction_key, text])
 		label.set_visible(true)
 

@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 const sb: String = "res://addons/snowball_framework/source/scenes/auto/sb.tscn"

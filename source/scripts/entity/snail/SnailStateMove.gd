@@ -3,7 +3,7 @@ extends SnailStateMain
 var ledge_jump_timer: Timer = null
 var speed_boost_timer: Timer = null
 
-export var can_ledge_jump: bool = false
+@export var can_ledge_jump: bool = false
 
 func enter() -> void:
 	print("Snail State: MOVE")
@@ -12,11 +12,11 @@ func enter() -> void:
 	ledge_jump_timer = Timer.new()
 	ledge_jump_timer.set_wait_time(2)
 	ledge_jump_timer.one_shot = true
-	ledge_jump_timer.connect("timeout", self, "on_ledge_jump_timeout")
+	ledge_jump_timer.connect("timeout", Callable(self, "on_ledge_jump_timeout"))
 	add_child(ledge_jump_timer)
 	ledge_jump_timer.start()
 
-func unhandled_input(event: InputEvent) -> int:
+func states_unhandled_input(event: InputEvent) -> int:
 	if !entity.can_interact and event.is_action_pressed("action_main") and is_on_floor():
 		return State.JUMP
 	#if event.is_action_pressed("action_defense") or roll(event):
@@ -25,8 +25,8 @@ func unhandled_input(event: InputEvent) -> int:
 	mallet()
 	return State.NULL
 
-func physics_process(delta: float) -> int:
-	.physics_process(delta)
+func states_physics_process(delta: float) -> int:
+	super.states_physics_process(delta)
 	var anim_speed = clamp((abs(entity.linear_velocity.x) + abs(entity.linear_velocity.y) + abs(entity.linear_velocity.z)), 0, 2) * 0.75
 	entity.anim.set_speed_scale(anim_speed)
 	if entity.ray_front_bottom.is_colliding():
@@ -40,8 +40,8 @@ func physics_process(delta: float) -> int:
 		return State.PUSH
 	return State.NULL
 
-func integrate_forces(state: PhysicsDirectBodyState) -> int:
-	.integrate_forces(state)
+func states_integrate_forces(state: PhysicsDirectBodyState3D) -> int:
+	super.states_integrate_forces(state)
 	apply_movement(state, 8)
 	if !is_on_floor() and !entity.jump_in_memory and can_ledge_jump:
 		entity.apply_central_impulse(3 * entity.global_transform.basis.y)

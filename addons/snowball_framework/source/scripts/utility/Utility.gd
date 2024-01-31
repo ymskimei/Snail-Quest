@@ -1,20 +1,20 @@
 extends Node
 
-onready var input: Node = $Input
-onready var item: Node = $Item
-onready var audio: Node = $Audio
+@onready var input: Node = $Input
+@onready var item: Node = $Item
+@onready var audio: Node = $Audio
 
 #func get_modifications(mesh: MeshInstance) -> void:
 #	pass
 
-func rigid_look_at(state: PhysicsDirectBodyState, position: Transform, target: Vector3) -> void:
+func rigid_look_at(state: PhysicsDirectBodyState3D, position: Transform3D, target: Vector3) -> void:
 	var up_dir = Vector3(0, 1, 0)
-	var cur_dir = position.basis.xform(Vector3(0, 0, 1))
+	var cur_dir = position.basis * (Vector3(0, 0, 1))
 	var target_dir = (target - position.origin).normalized()
 	var rotation_angle = acos(cur_dir.x) - acos(target_dir.x)
 	state.set_angular_velocity(up_dir * (rotation_angle / state.get_step()))
 
-func safe_look_at(spatial: Spatial, target: Vector3) -> void:
+func safe_look_at(spatial: Node3D, target: Vector3) -> void:
 	var origin : Vector3 = spatial.global_transform.origin
 	var v_z := (origin - target).normalized()
 	if origin == target:
@@ -28,19 +28,19 @@ func safe_look_at(spatial: Spatial, target: Vector3) -> void:
 	if up != Vector3.ZERO:
 		spatial.look_at(target, up)
 
-func slerp_look_at(spatial: Spatial, target: Vector3, speed: float) -> void:
+func slerp_look_at(spatial: Node3D, target: Vector3, speed: float) -> void:
 		var global_pos = spatial.global_transform
 		var dest_transform = global_pos
 		if global_pos.origin != target:
 			dest_transform = global_pos.looking_at(target, Vector3.UP)
-		var dest_rotation = Quat(global_pos.basis).slerp(Quat(dest_transform.basis).normalized(), speed)
-		spatial.global_transform = Transform(Basis(dest_rotation), global_pos.origin)
+		var dest_rotation = Quaternion(global_pos.basis).slerp(Quaternion(dest_transform.basis).normalized(), speed)
+		spatial.global_transform = Transform3D(Basis(dest_rotation), global_pos.origin)
 
-func find_target(node: Spatial, group_name: String, get_closest: = true) -> Spatial:
+func find_target(node: Node3D, group_name: String, get_closest: = true) -> Node3D:
 	var targets: Array = get_tree().get_nodes_in_group(group_name)
-	if !targets.empty():
+	if !targets.is_empty():
 		var distance_away: float = node.global_transform.origin.distance_to(targets[0].global_transform.origin)
-		var return_target: Spatial = targets[0]
+		var return_target: Node3D = targets[0]
 		for i in targets.size():
 			var distance: float = node.global_transform.origin.distance_to(targets[i].global_transform.origin)
 			if get_closest == true and distance < distance_away:
@@ -52,7 +52,7 @@ func find_target(node: Spatial, group_name: String, get_closest: = true) -> Spat
 		return return_target
 	return null
 
-func apply_surface_align(tform: Transform, new_up: Vector3) -> Transform:
+func apply_surface_align(tform: Transform3D, new_up: Vector3) -> Transform3D:
 	tform.basis.y = new_up
 	tform.basis.x = -tform.basis.z.cross(new_up)
 	tform.basis = tform.basis.orthonormalized()
@@ -85,11 +85,11 @@ static func cardinal_to_degrees(direction: String) -> int:
 	return result
 
 func get_files(folder_path: String, path: bool = false, recursive: bool = true) -> Array:
-	var dir := Directory.new()
+	var dir := DirAccess.new()
 	if dir.open(folder_path) != OK:
 		printerr("Could not open directory: ", folder_path)
 		return []
-	if dir.list_dir_begin(true, true) != OK:
+	if dir.list_dir_begin()  != OK:# TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		printerr("Could not list contents of: ", folder_path)
 		return []
 	var files := []
@@ -113,9 +113,9 @@ func get_files(folder_path: String, path: bool = false, recursive: bool = true) 
 			file_name = dir.get_next()
 	return files
 
-func get_names_from_paths(folder_path: String, extension: String) -> PoolStringArray:
+func get_names_from_paths(folder_path: String, extension: String) -> PackedStringArray:
 	var arr = SB.utility.get_files(folder_path, true, false)
-	var new_arr: PoolStringArray = []
+	var new_arr: PackedStringArray = []
 	for e in arr:
 		e.erase(0, folder_path.length())
 		e.erase(e.length() - extension.length(), extension.length())

@@ -23,7 +23,7 @@ func add_track_instance(track):
 	channel.stream = track
 	add_child(channel)
 	channel.play()
-	yield(channel, "finished")
+	await channel.finished
 	channel.queue_free()
 
 func add_track_timers():
@@ -31,13 +31,13 @@ func add_track_timers():
 	var bar_timer = Timer.new()
 	var loop_timer = Timer.new()
 	beat_timer.set_wait_time((bpm / 60) / sig)
-	beat_timer.connect("timeout", self, "on_beat_timeout")
+	beat_timer.connect("timeout", Callable(self, "on_beat_timeout"))
 	add_child(beat_timer)
 	bar_timer.set_wait_time(bpm / 60)
-	bar_timer.connect("timeout", self, "on_bar_timeout")
+	bar_timer.connect("timeout", Callable(self, "on_bar_timeout"))
 	add_child(bar_timer)
 	loop_timer.set_wait_time((bpm / 60) * length)
-	loop_timer.connect("timeout", self, "on_end_timeout")
+	loop_timer.connect("timeout", Callable(self, "on_end_timeout"))
 	add_child(loop_timer)
 	return_bar()
 	return_beat()

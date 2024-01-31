@@ -1,49 +1,50 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" script_class="ResourceItem" load_steps=6 format=3 uid="uid://ddmkh41hplgxt"]
 
-[ext_resource path="res://addons/snowball_framework/source/scripts/resource/ResourceItem.gd" type="Script" id=1]
-[ext_resource path="res://assets/texture/interface/item/item_test_deletable.png" type="Texture" id=2]
-[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=3]
+[ext_resource type="Script" path="res://addons/snowball_framework/source/scripts/resource/ResourceItem.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cpqrtx1joh6la" path="res://assets/texture/interface/item/item_test_deletable.png" id="2"]
+[ext_resource type="Shader" path="res://assets/shader/cel.gdshader" id="3"]
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 3 )
-shader_param/use_diffuse = false
-shader_param/use_specular = false
-shader_param/use_rim = false
-shader_param/use_light = true
-shader_param/use_shadow = true
-shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 0.607843, 0.658824, 0.694118, 1 )
-shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/normal_scale = 0.0
-shader_param/shade_threshold = 0.0
-shader_param/shade_softness = 0.01
-shader_param/specular_glossiness = 15.0
-shader_param/specular_threshold = 0.5
-shader_param/specular_softness = 0.1
-shader_param/rim_threshold = 0.25
-shader_param/rim_softness = 0.05
-shader_param/rim_spread = 0.5
-shader_param/shadow_threshold = 0.7
-shader_param/shadow_softness = 0.1
-shader_param/emission_energy = 1.0
-shader_param/screen_scale = 10.0
-shader_param/uv_scale = Vector3( 16, 16, 16 )
-shader_param/uv_offset = Vector3( 0, 0, 0 )
-shader_param/use_triplanar = false
+[sub_resource type="ShaderMaterial" id="2"]
+render_priority = 0
+shader = ExtResource("3")
+shader_parameter/use_diffuse = false
+shader_parameter/use_specular = false
+shader_parameter/use_rim = false
+shader_parameter/use_light = true
+shader_parameter/use_shadow = true
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/shade_color = Color(0.607843, 0.658824, 0.694118, 1)
+shader_parameter/specular_color = Color(0.75, 0.75, 0.75, 0.75)
+shader_parameter/rim_color = Color(0.75, 0.75, 0.75, 0.75)
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/normal_scale = 0.0
+shader_parameter/shade_threshold = 0.0
+shader_parameter/shade_softness = 0.01
+shader_parameter/specular_glossiness = 15.0
+shader_parameter/specular_threshold = 0.5
+shader_parameter/specular_softness = 0.1
+shader_parameter/rim_threshold = 0.25
+shader_parameter/rim_softness = 0.05
+shader_parameter/rim_spread = 0.5
+shader_parameter/shadow_threshold = 0.7
+shader_parameter/shadow_softness = 0.1
+shader_parameter/emission_energy = 1.0
+shader_parameter/screen_scale = 10.0
+shader_parameter/uv_scale = Vector3(16, 16, 16)
+shader_parameter/uv_offset = Vector3(0, 0, 0)
+shader_parameter/use_triplanar = false
 
-[sub_resource type="CubeMesh" id=1]
-material = SubResource( 2 )
+[sub_resource type="BoxMesh" id="1"]
+material = SubResource("2")
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource("1")
 item_name = "Dummy Item 3"
 description = "This item is not stackable and can be depleted on use."
 proxy_path = "res://source/scripts/item/Whorl.gd"
 sound = "pickup_health"
-mesh = SubResource( 1 )
-sprite = ExtResource( 2 )
+mesh = SubResource("1")
+sprite = ExtResource("2")
 amount = 1
 max_amount = 0
 specific_slot = 0

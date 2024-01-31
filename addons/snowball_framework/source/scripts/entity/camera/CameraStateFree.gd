@@ -11,16 +11,16 @@ var min_fov: int = 15
 var max_fov: int = 125
 
 func enter() -> void:
-	print("Camera State: FREE")
+	print("Camera3D State: FREE")
 	tween_cam_reset()
 
 func physics_process(delta: float) -> int:
 	_cam_fov()
 	_cam_speed()
 	_cam_movement(delta)
-	entity.lens.fov = lerp(entity.lens.fov, _cam_fov(), 0.25)
+	entity.lens.fov = lerp(entity.lens.fov, float(_cam_fov()), 0.25)
 	if is_instance_valid(entity.target):
-		if entity.target is VehicleBody:
+		if entity.target is VehicleBody3D:
 			return State.VEHI
 		else:
 			return State.ORBI
@@ -41,12 +41,12 @@ func _cam_speed() -> int:
 	return speed
 
 func _cam_movement(delta: float) -> void:
-	entity.global_translation += -get_joy_input().rotated(Vector3.UP, entity.lens.rotation.y) * speed * delta
+	entity.global_position += -get_joy_input().rotated(Vector3.UP, entity.lens.rotation.y) * speed * delta
 	rotation.x = Input.get_action_strength("cam_left") - Input.get_action_strength("cam_right")
 	rotation.y = Input.get_action_strength("cam_up") - Input.get_action_strength("cam_down")
 	velocity = lerp(velocity, (rotation / 50) * fov * (sensitivity / 3), 0.3)
-	entity.lens.rotation.y += deg2rad(velocity.x)
-	entity.lens.rotation.x += clamp(deg2rad(velocity.y), -90, 90)
+	entity.lens.rotation.y += deg_to_rad(velocity.x)
+	entity.lens.rotation.x += clamp(deg_to_rad(velocity.y), -90, 90)
 
 func get_joy_input() -> Vector3:
 	var input: Vector3 = Vector3.ZERO
@@ -59,9 +59,11 @@ func get_joy_input() -> Vector3:
 	return input
 
 func tween_cam_reset() -> void:
-	entity.anim_tween.interpolate_property(entity, "rotation", entity.rotation, Vector3.ZERO, 0.15, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	entity.anim_tween.interpolate_property(entity.lens, "fov", entity.lens.fov, fov, 0.15, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	entity.anim_tween.start()
+	entity.anim_tween.interpolate_value(entity.rotation, "x", 0, 0.15, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	entity.anim_tween.interpolate_value(entity.rotation, "y", 0, 0.15, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	entity.anim_tween.interpolate_value(entity.rotation, "z", 0, 0.15, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	entity.anim_tween.interpolate_value(entity.lens, "fov", fov, 0.15, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	entity.anim_tween.play()
 
 func exit() -> void:
 	entity.lens.rotation = Vector3.ZERO

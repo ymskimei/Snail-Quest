@@ -2,13 +2,14 @@
 
 importer="csv_translation"
 type="Translation"
+uid="uid://cs21pe55rlayh"
 
 [deps]
 
-files=[ "res://source/translations/translation.en_US.translation", "res://source/translations/translation.en_GB.translation", "res://source/translations/translation.es_MX.translation", "res://source/translations/translation.es_AR.translation", "res://source/translations/translation.ja_JP.translation", "res://source/translations/translation.pr.translation" ]
+files=["res://source/translations/translation.en_US.translation", "res://source/translations/translation.en_GB.translation", "res://source/translations/translation.es_MX.translation", "res://source/translations/translation.es_AR.translation", "res://source/translations/translation.ja_JP.translation", "res://source/translations/translation.pr.translation"]
 
 source_file="res://source/translations/translation.csv"
-dest_files=[ "res://source/translations/translation.en_US.translation", "res://source/translations/translation.en_GB.translation", "res://source/translations/translation.es_MX.translation", "res://source/translations/translation.es_AR.translation", "res://source/translations/translation.ja_JP.translation", "res://source/translations/translation.pr.translation" ]
+dest_files=["res://source/translations/translation.en_US.translation", "res://source/translations/translation.en_GB.translation", "res://source/translations/translation.es_MX.translation", "res://source/translations/translation.es_AR.translation", "res://source/translations/translation.ja_JP.translation", "res://source/translations/translation.pr.translation"]
 
 [params]
 

@@ -1,13 +1,13 @@
 class_name InventoryParent
 extends Menu
 
-onready var container = $"%Container"
-export(Resource) var items
+@onready var container = $"%Container"
+@export var items: Resource
 
 func _ready() -> void:
 	#yield(SB, "ready")
 	if is_instance_valid(Item):
-		Item.connect("items_updated", self, "on_items_updated")
+		Item.connect("items_updated", Callable(self, "on_items_updated"))
 		Item.duplicate_item_instances(items.items)
 
 func update_item_slot_display(item_index: int) -> void:

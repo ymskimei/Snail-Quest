@@ -1,7 +1,7 @@
 class_name DebugConsoleCommand
 extends Node
 
-var call_back: String setget call_back_set, call_back_get
+var call_back: String: get = call_back_get, set = call_back_set
 
 enum ArgumentType {
 	INT,
@@ -10,10 +10,10 @@ enum ArgumentType {
 	STRING
 }
 
-export(Array, String) var argument_names = []
-export(Array, ArgumentType) var argument_types = []
+@export var argument_names = [] # (Array, String)
+@export var argument_types = [] # (Array, ArgumentType)
 
-export var help: String = ""
+@export var help: String = ""
 
 func _ready():
 	assert(argument_types.size() == argument_names.size())
@@ -29,7 +29,7 @@ func call_back_get():
 func parse_arguments(arguments: String):
 	var argument_array = []
 	var segmented = arguments.split(" ", false)
-	var group: PoolStringArray = []
+	var group: PackedStringArray = []
 	var quote = false
 	for segment in segmented:
 		if segment.begins_with("\""):
@@ -39,16 +39,16 @@ func parse_arguments(arguments: String):
 			quote = false
 			segment.erase(segment.length() - 1, 1)
 			group.push_back(segment)
-			segment = group.join(" ")
+			segment = " ".join(group)
 			group = []
 		if quote:
 			group.push_back(segment)
 		else:
 			argument_array.push_back(segment)
 	if group.size() != 0:
-		return RegistryColor.get_bbcode(RegistryColor.red) + "Invalid argument format (Incomplete: %)" % group.join(" ") + "[/color]"
+		return RegistryColor.get_text_color(RegistryColor.red) + "Invalid argument format (Incomplete: %)" % " ".join(group) + "[/color]"
 	if argument_array.size() != argument_types.size():
-		return RegistryColor.get_bbcode(RegistryColor.red) + "Invalid amount of arguments (Required: %s, Recieved: %s)" % [String(argument_types.size()), String(argument_array.size())] + "[/color]"
+		return RegistryColor.get_text_color(RegistryColor.red) + "Invalid amount of arguments (Required: %s, Recieved: %s)" % [str(argument_types.size()), str(argument_array.size())] + "[/color]"
 	for i in range(argument_types.size()):
 		match(argument_types[i]):
 			ArgumentType.INT: argument_array[i] = int(argument_array[i])
@@ -57,7 +57,7 @@ func parse_arguments(arguments: String):
 	return argument_array
 
 func get_usage():
-	var command_usage = RegistryColor.get_bbcode(RegistryColor.red) + "Correct usage: [/color]%s" % name
+	var command_usage = RegistryColor.get_text_color(RegistryColor.red) + "Correct usage: [/color]%s" % name
 	for i in range(argument_types.size()):
 		var argument_type = ArgumentType.keys()[argument_types[i]]
 		var argument_name = argument_names[i]
@@ -67,7 +67,7 @@ func get_usage():
 	return command_usage
 
 func get_name_space_to(target: Node):
-	var name_space : PoolStringArray = []
+	var name_space : PackedStringArray = []
 	var node = self
 	while node != target:
 		name_space.insert(0, node.name)

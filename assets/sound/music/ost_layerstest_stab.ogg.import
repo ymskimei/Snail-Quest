@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/ost_layerstest_stab.ogg-0ffda4f15308f921a73982f42b6f8b9e.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://y2x6lexdcwa5"
+path="res://godot/imported/ost_layerstest_stab.ogg-0ffda4f15308f921a73982f42b6f8b9e.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/music/ost_layerstest_stab.ogg"
-dest_files=[ "res://import/ost_layerstest_stab.ogg-0ffda4f15308f921a73982f42b6f8b9e.oggstr" ]
+dest_files=["res://godot/imported/ost_layerstest_stab.ogg-0ffda4f15308f921a73982f42b6f8b9e.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

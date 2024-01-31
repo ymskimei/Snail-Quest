@@ -1,28 +1,22 @@
-[gd_resource type="Theme" load_steps=5 format=2]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://f6om4i73jxo3"]
 
-[ext_resource path="res://addons/snowball_framework/assets/interface/font/cpmono_30.tres" type="DynamicFont" id=1]
-[ext_resource path="res://addons/snowball_framework/assets/texture/interface/npatch_debug.png" type="Texture" id=2]
+[ext_resource type="FontFile" path="res://addons/snowball_framework/assets/interface/font/cpmono_30.tres" id="1"]
 
-[sub_resource type="StyleBoxEmpty" id=13]
+[sub_resource type="StyleBoxEmpty" id="13"]
 
-[sub_resource type="StyleBoxTexture" id=12]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 128, 128 )
-margin_left = 32.0
-margin_right = 32.0
-margin_top = 32.0
-margin_bottom = 32.0
+[sub_resource type="StyleBoxTexture" id="12"]
+region_rect = Rect2(0, 0, 128, 128)
 
 [resource]
-default_font = ExtResource( 1 )
-LineEdit/colors/cursor_color = Color( 1, 1, 1, 1 )
-LineEdit/colors/font_color = Color( 1, 1, 1, 1 )
-LineEdit/colors/font_color_selected = Color( 1, 0.996078, 0.764706, 0.72549 )
-LineEdit/colors/selection_color = Color( 1, 0.87451, 0.439216, 0.627451 )
-LineEdit/styles/focus = SubResource( 13 )
-LineEdit/styles/normal = SubResource( 13 )
-LineEdit/styles/read_only = SubResource( 13 )
-PanelContainer/styles/panel = SubResource( 12 )
-RichTextLabel/colors/default_color = Color( 1, 1, 1, 1 )
-RichTextLabel/colors/font_color_selected = Color( 1, 0.996078, 0.764706, 0.72549 )
-RichTextLabel/colors/selection_color = Color( 1, 0.87451, 0.439216, 0.627451 )
+default_font = ExtResource("1")
+LineEdit/colors/cursor_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_color_selected = Color(1, 0.996078, 0.764706, 0.72549)
+LineEdit/colors/selection_color = Color(1, 0.87451, 0.439216, 0.627451)
+LineEdit/styles/focus = SubResource("13")
+LineEdit/styles/normal = SubResource("13")
+LineEdit/styles/read_only = SubResource("13")
+PanelContainer/styles/panel = SubResource("12")
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLabel/colors/font_color_selected = Color(1, 0.996078, 0.764706, 0.72549)
+RichTextLabel/colors/selection_color = Color(1, 0.87451, 0.439216, 0.627451)

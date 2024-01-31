@@ -13,7 +13,7 @@ var particles: Array = [
 
 func _ready():
 	for particle in particles:
-		var p = Particles.new()
+		var p = GPUParticles3D.new()
 		p.set_process_material(particle)
 		p.set_one_shot(true)
 		p.set_emitting(true)

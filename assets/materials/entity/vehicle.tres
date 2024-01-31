@@ -1,10 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cdeadotx73n0r"]
 
-[ext_resource path="res://assets/texture/entity/vehicle_em.png" type="Texture" id=3]
-
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id="1"]
 code = "shader_type spatial;
-render_mode async_visible, blend_mix, depth_draw_alpha_prepass;
+render_mode blend_mix, depth_prepass_alpha;
 
 uniform bool use_diffuse = false;
 uniform bool use_specular = false;
@@ -13,11 +11,11 @@ uniform bool use_light = false;
 uniform bool use_shadow = false;
 uniform bool use_triplanar = false;
 
-uniform vec4 albedo_color: hint_color = vec4(1.0);
-uniform vec4 shade_color: hint_color = vec4(1.0);
-uniform vec4 specular_color: hint_color = vec4(0.75);
-uniform vec4 rim_color: hint_color = vec4(0.75);
-uniform vec4 emission: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 albedo_color: source_color = vec4(1.0);
+uniform vec4 shade_color: source_color = vec4(1.0);
+uniform vec4 specular_color: source_color = vec4(0.75);
+uniform vec4 rim_color: source_color = vec4(0.75);
+uniform vec4 emission: source_color = vec4(0.0, 0.0, 0.0, 1.0);
 
 uniform float normal_scale: hint_range(-16, 16);
 uniform float shade_threshold : hint_range(-1.0, 1.0, 0.001) = 0.0;
@@ -32,9 +30,9 @@ uniform float shadow_threshold : hint_range(0.00, 1.0, 0.001) = 0.7;
 uniform float shadow_softness : hint_range(0.0, 1.0, 0.001) = 0.1;
 uniform float emission_energy = 1.0;
 
-uniform sampler2D texture_albedo: hint_albedo;
+uniform sampler2D texture_albedo: source_color;
 uniform sampler2D texture_normal : hint_normal;
-uniform sampler2D texture_emission : hint_black_albedo;
+uniform sampler2D texture_emission : hint_default_black;
 
 uniform vec3 uv_scale = vec3(1.0, 1.0, 1.0);
 uniform vec3 uv_offset = vec3(1.0, 0.0, 0.0);
@@ -71,10 +69,10 @@ vec4 triplanar_texture(sampler2D p_sampler, vec2 uv) {
 
 void fragment() {
 	ALBEDO = albedo_color.rgb * triplanar_texture(texture_albedo, UV).rgb;
-	NORMALMAP = triplanar_texture(texture_normal, UV).rgb;
+	NORMAL_MAP = triplanar_texture(texture_normal, UV).rgb;
 	EMISSION = (emission.rgb + triplanar_texture(texture_emission, UV).rgb) * emission_energy;
 	ALPHA = albedo_color.a * triplanar_texture(texture_albedo, UV).a;  
-	NORMALMAP_DEPTH = normal_scale;
+	NORMAL_MAP_DEPTH = normal_scale;
 }
 
 void light() {
@@ -87,7 +85,7 @@ void light() {
 		float shade_value = smoothstep(shade_threshold - shade_softness , shade_threshold + shade_softness, n_dot_l);
 		diffuse = mix(shade, base, shade_value);
 		if (use_shadow) {
-			float shadow_value = smoothstep(shadow_threshold - shadow_softness ,shadow_threshold + shadow_softness, ATTENUATION.r);
+			float shadow_value = smoothstep(shadow_threshold - shadow_softness ,shadow_threshold + shadow_softness, ATTENUATION);
 			shade_value = min(shade_value, shadow_value);
 			diffuse = mix(shade, base, shade_value);
 			is_lit = step(shadow_threshold, shade_value);
@@ -116,30 +114,30 @@ void light() {
 }"
 
 [resource]
-shader = SubResource( 1 )
-shader_param/use_diffuse = false
-shader_param/use_specular = false
-shader_param/use_rim = false
-shader_param/use_light = false
-shader_param/use_shadow = false
-shader_param/use_triplanar = false
-shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 1, 1, 1, 1 )
-shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/normal_scale = 0.0
-shader_param/shade_threshold = 0.0
-shader_param/shade_softness = 0.01
-shader_param/specular_glossiness = 15.0
-shader_param/specular_threshold = 0.5
-shader_param/specular_softness = 0.1
-shader_param/rim_threshold = 0.25
-shader_param/rim_softness = 0.05
-shader_param/rim_spread = 0.5
-shader_param/shadow_threshold = 0.7
-shader_param/shadow_softness = 0.1
-shader_param/emission_energy = 1.0
-shader_param/uv_scale = Vector3( 1, 1, 1 )
-shader_param/uv_offset = Vector3( 0, 0, 0 )
-shader_param/texture_emission = ExtResource( 3 )
+render_priority = 0
+shader = SubResource("1")
+shader_parameter/use_diffuse = false
+shader_parameter/use_specular = false
+shader_parameter/use_rim = false
+shader_parameter/use_light = false
+shader_parameter/use_shadow = false
+shader_parameter/use_triplanar = false
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/shade_color = Color(1, 1, 1, 1)
+shader_parameter/specular_color = Color(0.75, 0.75, 0.75, 0.75)
+shader_parameter/rim_color = Color(0.75, 0.75, 0.75, 0.75)
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/normal_scale = null
+shader_parameter/shade_threshold = 0.0
+shader_parameter/shade_softness = 0.01
+shader_parameter/specular_glossiness = 15.0
+shader_parameter/specular_threshold = 0.5
+shader_parameter/specular_softness = 0.1
+shader_parameter/rim_threshold = 0.25
+shader_parameter/rim_softness = 0.05
+shader_parameter/rim_spread = 0.5
+shader_parameter/shadow_threshold = 0.7
+shader_parameter/shadow_softness = 0.1
+shader_parameter/emission_energy = 1.0
+shader_parameter/uv_scale = Vector3(1, 1, 1)
+shader_parameter/uv_offset = Vector3(1, 0, 0)

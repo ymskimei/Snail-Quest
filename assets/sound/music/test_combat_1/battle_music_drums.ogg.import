@@ -1,6 +1,6 @@
 [remap]
 
-importer="ogg_vorbis"
+importer="oggvorbisstr"
 type="AudioStreamOGGVorbis"
 path="res://import/battle_music_drums.ogg-31a3cd3197c8641973a35ce2b4028bbb.oggstr"
 

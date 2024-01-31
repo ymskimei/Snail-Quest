@@ -20,7 +20,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func save_data(d: String) -> void:
 	var data = _set_save_data()
-	var dir = Directory.new()
+	var dir = DirAccess.new()
 	if !dir.dir_exists(data_path):
 		dir.make_dir(data_path)
 	var file = File.new()
@@ -40,7 +40,7 @@ func load_data(d) -> void:
 
 func _set_save_data() -> Dictionary:
 	var data: Dictionary = {
-		"position": SB.controlled.global_translation,
+		"position": SB.controlled.global_position,
 		"rotation": SB.controlled.global_rotation,
 		"max_health": SB.controlled.health,
 		"health": SB.controlled.health,
@@ -51,7 +51,7 @@ func _set_save_data() -> Dictionary:
 	return data
 
 func _set_load_data(data) -> void:
-		SB.controlled.global_translation = data["position"]
+		SB.controlled.global_position = data["position"]
 		SB.controlled.global_rotation = data["rotation"]
 		SB.controlled.max_health = data["max_health"]
 		SB.controlled.health = data["health"]
@@ -63,14 +63,14 @@ func save_screenshot() -> void:
 	var time: String = Time.get_date_string_from_system() + "_" + Time.get_time_string_from_system().replace(":", "_")
 	var count: int = 0
 	var extension: String = ".png"
-	var dir = Directory.new()
+	var dir = DirAccess.new()
 	if !dir.dir_exists(image_path):
 		dir.make_dir(image_path)
 	var image = get_screenshot()
 	image.save_png(image_path + time + extension)
 
 func get_screenshot() -> Image:
-	var screen: Texture = get_viewport().get_texture()
+	var screen: Texture2D = get_viewport().get_texture()
 	var image: Image = screen.get_data()
 	image.flip_y()
 	return image

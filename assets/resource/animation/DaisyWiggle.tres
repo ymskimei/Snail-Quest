@@ -11,8 +11,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.5, 5 ),
-"transitions": PoolRealArray( -2.5, -2.5, -2.5 ),
+"times": PackedFloat32Array( 0, 2.5, 5 ),
+"transitions": PackedFloat32Array( -2.5, -2.5, -2.5 ),
 "update": 0,
 "values": [ 0.0, 1.0, 0.0 ]
 }

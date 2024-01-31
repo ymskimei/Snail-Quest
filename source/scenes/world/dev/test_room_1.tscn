@@ -11,93 +11,93 @@
 [ext_resource path="res://source/scenes/object/seed_1.tscn" type="PackedScene" id=11]
 
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="BoxMesh" id=1]
 
-[node name="Game" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0405769, 0.11068, 0.0265026 )
+[node name="Game" type="Node3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0405769, 0.11068, 0.0265026 )
 
 [node name="EnvironmentDefault" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2172.86, 0, 6202.38 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2172.86, 0, 6202.38 )
 
-[node name="Objects" type="Spatial" parent="."]
+[node name="Objects" type="Node3D" parent="."]
 
 [node name="Seed" parent="Objects" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2938, -5.19825, -15.5278 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2938, -5.19825, -15.5278 )
 
 [node name="TestBlock1" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3501, -7.89237, -16.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3501, -7.89237, -16.0043 )
 collision_layer = 3
 collision_mask = 3
 
 [node name="TestBlock2" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3501, -7.89237, -18.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3501, -7.89237, -18.0043 )
 
 [node name="TestBlock3" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3422, -5.89239, -18.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3422, -5.89239, -18.0043 )
 
 [node name="TestBlock4" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3501, -7.89237, -20.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3501, -7.89237, -20.0043 )
 
 [node name="TestBlock5" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3422, -5.89239, -20.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3422, -5.89239, -20.0043 )
 
 [node name="TestBlock6" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3343, -3.8924, -20.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -22.3343, -3.8924, -20.0043 )
 
 [node name="TestBlock7" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3501, -7.90029, -18.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3501, -7.90029, -18.0043 )
 
 [node name="TestBlock8" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3501, -7.90029, -20.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3501, -7.90029, -20.0043 )
 
 [node name="TestBlock9" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3422, -5.90031, -20.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3422, -5.90031, -20.0043 )
 
 [node name="TestBlock10" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -18.3501, -7.90822, -20.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -18.3501, -7.90822, -20.0043 )
 
 [node name="TestBlockSmall1" parent="Objects" instance=ExtResource( 7 )]
-transform = Transform( 0.499996, 0.00198095, 0, -0.00198095, 0.499996, 0, 0, 0, 0.5, -17.8501, -7.9102, -18.5043 )
+transform = Transform3D( 0.499996, 0.00198095, 0, -0.00198095, 0.499996, 0, 0, 0, 0.5, -17.8501, -7.9102, -18.5043 )
 
 [node name="TestBlockSmall2" parent="Objects" instance=ExtResource( 7 )]
-transform = Transform( 0.499996, 0.00198095, 0, -0.00198095, 0.499996, 0, 0, 0, 0.5, -17.8501, -7.9102, -17.5043 )
+transform = Transform3D( 0.499996, 0.00198095, 0, -0.00198095, 0.499996, 0, 0, 0, 0.5, -17.8501, -7.9102, -17.5043 )
 
 [node name="TestRamp1" parent="Objects" instance=ExtResource( 5 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3501, -7.90029, -16.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3501, -7.90029, -16.0043 )
 
 [node name="TestRamp2" parent="Objects" instance=ExtResource( 5 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3422, -5.90031, -18.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3422, -5.90031, -18.0043 )
 
 [node name="TestRamp3" parent="Objects" instance=ExtResource( 5 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3343, -3.90033, -20.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -20.3343, -3.90033, -20.0043 )
 
 [node name="TestRampSmall1" parent="Objects" instance=ExtResource( 6 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -18.3501, -7.90822, -16.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -18.3501, -7.90822, -16.0043 )
 
 [node name="TestRampSmall2" parent="Objects" instance=ExtResource( 6 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -18.3462, -6.90823, -18.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -18.3462, -6.90823, -18.0043 )
 
 [node name="TestRampSmall3" parent="Objects" instance=ExtResource( 6 )]
-transform = Transform( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -18.3422, -5.90823, -20.0043 )
+transform = Transform3D( 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0, 0, 0, 1, -18.3422, -5.90823, -20.0043 )
 
 [node name="TestPlatform1" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 2.9057, 0, 0, 0, 1, 0, 0, 0, 4.61966, -23.1714, -3.07139, -28.0694 )
+transform = Transform3D( 2.9057, 0, 0, 0, 1, 0, 0, 0, 4.61966, -23.1714, -3.07139, -28.0694 )
 
 [node name="TestPlatform2" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 2.52138, 0, 0, 0, 1, 0, 0, 0, 6.7287, -26.4229, -1.56919, -41.3556 )
+transform = Transform3D( 2.52138, 0, 0, 0, 1, 0, 0, 0, 6.7287, -26.4229, -1.56919, -41.3556 )
 
 [node name="TestPlatform3" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 2.1975, -0.637538, 0, 1.43433, 0.976751, 0, 0, 0, 5.80018, -20.7632, 0.480868, -55.5003 )
+transform = Transform3D( 2.1975, -0.637538, 0, 1.43433, 0.976751, 0, 0, 0, 5.80018, -20.7632, 0.480868, -55.5003 )
 
 [node name="TestPlatform4" parent="Objects" instance=ExtResource( 3 )]
-transform = Transform( 2.1975, -0.637538, 0, 1.29909, 0.884652, -2.45869, 0.608013, 0.414044, 5.25328, -20.7632, 4.62517, -69.7622 )
+transform = Transform3D( 2.1975, -0.637538, 0, 1.29909, 0.884652, -2.45869, 0.608013, 0.414044, 5.25328, -20.7632, 4.62517, -69.7622 )
 
-[node name="World" type="Spatial" parent="."]
+[node name="World" type="Node3D" parent="."]
 
 [node name="TestMap" parent="World" instance=ExtResource( 2 )]
 
-[node name="TestGrass" type="MeshInstance" parent="World"]
-transform = Transform( 0.658531, 0, 0, 0, 1.88686, 0, 0, 0, 0.7945, 3.1008, -5.63923, -13.6651 )
+[node name="TestGrass" type="MeshInstance3D" parent="World"]
+transform = Transform3D( 0.658531, 0, 0, 0, 1.88686, 0, 0, 0, 0.7945, 3.1008, -5.63923, -13.6651 )
 mesh = SubResource( 1 )
 skeleton = NodePath("")
 material/0 = ExtResource( 9 )

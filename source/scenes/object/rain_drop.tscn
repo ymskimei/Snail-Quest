@@ -1,21 +1,21 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://assets/texture/environment/rain.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/environment/rain.png" type="Texture2D" id=1]
 [ext_resource path="res://source/scripts/object/RainDrop.gd" type="Script" id=2]
-[ext_resource path="res://assets/texture/environment/rain_drop.png" type="Texture" id=3]
-[ext_resource path="res://assets/texture/environment/rain_ripple.png" type="Texture" id=4]
+[ext_resource path="res://assets/texture/environment/rain_drop.png" type="Texture2D" id=3]
+[ext_resource path="res://assets/texture/environment/rain_ripple.png" type="Texture2D" id=4]
 [ext_resource path="res://assets/materials/particle/rain_ripple.tres" type="Material" id=5]
 [ext_resource path="res://assets/materials/particle/rain_drop.tres" type="Material" id=6]
 
-[sub_resource type="SphereShape" id=1]
+[sub_resource type="SphereShape3D" id=1]
 
 [sub_resource type="ViewportTexture" id=2]
-viewport_path = NodePath("Viewport")
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("Viewport2")
 
-[node name="RainDrop" type="RigidBody"]
+[node name="RainDrop" type="RigidBody3D"]
 custom_integrator = true
 script = ExtResource( 2 )
 
@@ -23,15 +23,15 @@ script = ExtResource( 2 )
 shaded = true
 texture = ExtResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="Viewport" type="Viewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2( 128, 128 )
 transparent_bg = true
 
-[node name="Particles2D" type="Particles2D" parent="Viewport"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="SubViewport"]
 position = Vector2( 64, 64 )
 emitting = false
 amount = 2
@@ -41,15 +41,15 @@ process_material = ExtResource( 5 )
 texture = ExtResource( 4 )
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 texture = SubResource( 2 )
 
-[node name="Viewport2" type="Viewport" parent="."]
+[node name="Viewport2" type="SubViewport" parent="."]
 size = Vector2( 256, 256 )
 transparent_bg = true
 render_target_v_flip = true
 
-[node name="Particles2D" type="Particles2D" parent="Viewport2"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Viewport2"]
 position = Vector2( 128, 128 )
 emitting = false
 amount = 3
@@ -58,7 +58,7 @@ speed_scale = 1.5
 process_material = ExtResource( 6 )
 texture = ExtResource( 3 )
 
-[node name="Particles2D2" type="Particles2D" parent="Viewport2"]
+[node name="Particles2D2" type="GPUParticles2D" parent="Viewport2"]
 position = Vector2( 128, 128 )
 scale = Vector2( -1, 1 )
 emitting = false
@@ -72,8 +72,8 @@ texture = ExtResource( 3 )
 billboard = 1
 texture = SubResource( 3 )
 
-[node name="RayCast" type="RayCast" parent="."]
+[node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = true
-cast_to = Vector3( 0, -0.35, 0 )
+target_position = Vector3( 0, -0.35, 0 )
 collision_mask = 13
 debug_shape_custom_color = Color( 0.12549, 0.686275, 0.835294, 1 )

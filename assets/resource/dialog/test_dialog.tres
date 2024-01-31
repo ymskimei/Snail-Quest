@@ -134,7 +134,7 @@ lines = {
 "next_id_after": "12",
 "parent_id": "6",
 "replacements": [  ],
-"responses": PoolStringArray( "8", "10" ),
+"responses": PackedStringArray( "8", "10" ),
 "text": "I know, but you're cool!",
 "translation_key": "I know, but you're cool!",
 "type": "response"

@@ -1,28 +1,28 @@
 class_name Enemy
 extends Entity
 
-var idle_speed: int = int(rand_range(speed / 2, speed * 3))
+var idle_speed: int = int(randf_range(speed / 2, speed * 3))
 var move_or_not = [true, false]
 var start_move = move_or_not[randi() % move_or_not.size()]
 
-onready var attack_area: Area = $"%AttackArea"
+@onready var attack_area: Area3D = $"%AttackArea"
 
-onready var navi_agent: NavigationAgent = $NavigationAgent
+@onready var navi_agent: NavigationAgent3D = $NavigationAgent3D
 
-onready var follow_timer: Timer = $FollowTimer
+@onready var follow_timer: Timer = $FollowTimer
 
 var target_seen: bool
 var is_pushed: bool
 
 func _ready() -> void:
 	attack_area.monitorable = false
-	states.ready(self)
+	states.states_ready(self)
 	target = SB.player
 #func _physics_process(delta):
 #	if states != null:
 #		states.physics_process(delta)
 
-func _on_Area_area_entered(area: Area) -> void:
+func _on_Area_area_entered(area: Area3D) -> void:
 	if area.is_in_group("attack"):
 		var damage = area.get_parent().get_parent().strength
 		#if damage >= 0.15 * max_health:

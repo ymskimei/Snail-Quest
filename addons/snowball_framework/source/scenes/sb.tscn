@@ -10,11 +10,11 @@
 [ext_resource path="res://addons/audio_booth/source/sfx/SoundBooth.gd" type="Script" id=8]
 
 [node name="SB" type="Node"]
-pause_mode = 2
+process_mode = 3
 script = ExtResource( 6 )
 
 [node name="Utility" type="Node" parent="."]
-pause_mode = 2
+process_mode = 3
 script = ExtResource( 4 )
 
 [node name="Input" type="Node" parent="Utility"]

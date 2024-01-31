@@ -1,8 +1,8 @@
 extends AudioStreamPlayer3D
 class_name Sound3D
 
-export var singleton := false
-export(Array, AudioStream) var streams := []
+@export var singleton := false
+@export var streams := [] # (Array, AudioStream)
 
 var _sound: AudioStreamPlayer3D = null
 var _is_initialized := false
@@ -28,7 +28,7 @@ func play_at(_translation: Vector3, from_position := 0.0) -> void:
 
 func _get_sound(_translation: Vector3) -> Sound3D:
 	var sound = self.duplicate()
-	sound.connect("finished", self, "_on_finished", [ sound ])
+	sound.connect("finished", Callable(self, "_on_finished").bind(sound))
 	get_tree().current_scene.add_child(sound)
 	sound.transform.origin = _translation
 	return sound

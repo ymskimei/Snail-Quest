@@ -1,8 +1,8 @@
 class_name AimCursor
-extends Spatial
+extends Node3D
 
 func _ready():
-	global_translation = SB.player.global_translation
+	global_position = SB.player.global_position
 	SB.register_aim_cursor(self)
 
 func _physics_process(delta):
@@ -11,11 +11,11 @@ func _physics_process(delta):
 	var player = SB.player
 	var new_pos = Vector3.ZERO
 	if player.cursor_activated:
-		new_pos = player.global_translation + cursor_movement().rotated(Vector3.UP, SB.camera.rotation.y)
+		new_pos = player.global_position + cursor_movement().rotated(Vector3.UP, SB.camera.rotation.y)
 	elif player.targeting:
 		if is_instance_valid(player.target):
-			new_pos = player.target.global_translation
-	global_translation = lerp(global_translation, new_pos * 3, 0.3)
+			new_pos = player.target.global_position
+	global_position = lerp(global_position, new_pos * 3, 0.3)
 
 func cursor_movement():
 	var cursor_pos = Vector3.ZERO
@@ -24,10 +24,10 @@ func cursor_movement():
 	return cursor_pos
 
 func level_cursor():
-	if $RayCast.is_colliding():
-		var normal = $RayCast.get_collision_normal()
+	if $RayCast3D.is_colliding():
+		var normal = $RayCast3D.get_collision_normal()
 		var tform = SB.math.apply_surface_align(global_transform, normal)
 		global_transform = global_transform.interpolate_with(tform, 0.3)
-		var floor_height = $RayCast.get_collider().translation.y
+		var floor_height = $RayCast3D.get_collider().position.y
 		#print(floor_height)
-		translation.y = floor_height + 1
+		position.y = floor_height + 1

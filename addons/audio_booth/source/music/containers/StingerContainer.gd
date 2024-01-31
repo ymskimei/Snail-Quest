@@ -4,11 +4,11 @@ class_name StingerContainer
 var type := "stinger"
 var counter := 0
 
-export(String, "beat", "bar") var tick_type := "bar"
-export var wait_ticks := 4
-export(float, 0.0, 1.0) var probability := 0.0
+@export var tick_type := "bar" # (String, "beat", "bar")
+@export var wait_ticks := 4
+@export var probability := 0.0 # (float, 0.0, 1.0)
 
-onready var stingers := get_children()
+@onready var stingers := get_children()
 
 func has_stinger() -> bool:
 	return stingers.size() > 0

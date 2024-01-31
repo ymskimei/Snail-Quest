@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=2]
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="BoxMesh" id=1]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type spatial;
 
 render_mode cull_back, diffuse_burley, specular_toon;
 
-uniform sampler2D nTexture : hint_black;
+uniform sampler2D nTexture : hint_default_black;
 
 varying vec2 vertPos;
 void vertex() {
@@ -17,7 +17,7 @@ void vertex() {
 }
 
 void fragment() {
-	mediump vec3 ns = texture(nTexture, UV).rgb; //noise_texture(from Viewport)
+	mediump vec3 ns = texture(nTexture, UV).rgb; //noise_texture(from SubViewport)
 	mediump vec3 fFac = smoothstep(vec3(0.8), vec3(0.4), ns); //foam_factor
 	mediump float fresnel = sqrt(1.0 - dot(NORMAL, VIEW));
 	mediump vec3 col_1 = vec3(0.0, 0.1, 0.3);
@@ -31,21 +31,21 @@ void fragment() {
 	ALBEDO = min(fCol + (0.1 * fresnel), 1.0);
 	SPECULAR = 0.2 * fresnel;
 	ROUGHNESS = mix(0.9, 0.7, fFac.z) * (1.0 - fresnel*0.2);
-	TRANSMISSION = vec3(0.2, 0.7, 0.3);
+	BACKLIGHT = vec3(0.2, 0.7, 0.3);
 }"
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape3D" id=2]
 
-[node name="Spatial" type="Spatial"]
+[node name="Node3D" type="Node3D"]
 
-[node name="Water" type="StaticBody" parent="."]
+[node name="Water" type="StaticBody3D" parent="."]
 
-[node name="MeshInstance" type="MeshInstance" parent="Water"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Water"]
 mesh = SubResource( 1 )
 material/0 = SubResource( 4 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Water"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water"]
 shape = SubResource( 2 )

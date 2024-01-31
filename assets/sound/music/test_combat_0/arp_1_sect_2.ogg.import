@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/arp_1_sect_2.ogg-65aed39fb207013ec21c59d7dec58528.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bqrb5i088c6ul"
+path="res://godot/imported/arp_1_sect_2.ogg-65aed39fb207013ec21c59d7dec58528.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/music/test_combat_0/arp_1_sect_2.ogg"
-dest_files=[ "res://import/arp_1_sect_2.ogg-65aed39fb207013ec21c59d7dec58528.oggstr" ]
+dest_files=["res://godot/imported/arp_1_sect_2.ogg-65aed39fb207013ec21c59d7dec58528.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

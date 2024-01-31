@@ -1,8 +1,8 @@
-extends Spatial
+extends Node3D
 
 signal goto_room(room)
 signal goto_main
 
-func _on_Area_body_entered(body : PhysicsBody, room_path : String, new_coords : Vector3):
+func _on_Area_body_entered(body : PhysicsBody3D, room_path : String, new_coords : Vector3):
 	if body is Entity:
 		emit_signal("goto_room", load(room_path))

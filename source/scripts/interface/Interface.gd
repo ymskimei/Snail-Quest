@@ -1,19 +1,19 @@
 extends InterfaceParent
 
-onready var debug: Menu = $Debug
+@onready var debug: Menu = $Debug
 
-onready var blur: AnimationPlayer = $Blur/AnimationPlayer
+@onready var blur: AnimationPlayer = $Blur/AnimationPlayer
 
-onready var cursor: CanvasLayer = $Cursor
-onready var hud: CanvasLayer = $HUD
-onready var options: Menu = $Options
-onready var inventory: Menu = $Inventory
+@onready var cursor: CanvasLayer = $Cursor
+@onready var hud: CanvasLayer = $HUD
+@onready var options: Menu = $Options
+@onready var inventory: Menu = $Inventory
 
 func _process(_delta: float):
 	if !SB.controlled or get_tree().paused == true:
 		hud.hide() 
 		cursor.show()
-	elif SB.controlled is Entity or VehicleBody:
+	elif SB.controlled is Entity or VehicleBody3D:
 		hud.show()
 		cursor.hide()
 

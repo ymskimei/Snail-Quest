@@ -10,12 +10,12 @@ func enter() -> void:
 	jump_timer = Timer.new()
 	jump_timer.set_wait_time(0.2)
 	jump_timer.one_shot = true
-	jump_timer.connect("timeout", self, "on_timeout")
+	jump_timer.connect("timeout", Callable(self, "on_timeout"))
 	add_child(jump_timer)
 	jump_timer.start()
 	combo_check()
 
-func unhandled_input(event: InputEvent) -> int:
+func states_unhandled_input(event: InputEvent) -> int:
 	if event.is_action_pressed("action_defense"):
 		if input == Vector3.ZERO:
 			return State.HIDE
@@ -29,8 +29,8 @@ func unhandled_input(event: InputEvent) -> int:
 			jump_timer.start()
 	return State.NULL
 
-func physics_process(delta: float) -> int:
-	.physics_process(delta)
+func states_physics_process(delta: float) -> int:
+	super.states_physics_process(delta)
 	if entity.ledge_usable and !entity.ray_front_top.is_colliding() and entity.ray_front_bottom.is_colliding():
 		if is_instance_valid(entity.ray_front_top.get_collider()):
 			if !entity.ray_front_top.get_collider().is_in_group.attachable:
@@ -39,10 +39,10 @@ func physics_process(delta: float) -> int:
 		return State.FALL
 	return State.NULL
 
-func integrate_forces(state: PhysicsDirectBodyState) -> int:
-	.integrate_forces(state)
+func states_integrate_forces(state: PhysicsDirectBodyState3D) -> int:
+	super.states_integrate_forces(state)
 	apply_movement(state, 0.5)
-	state.add_central_force(lerp(65, 10, 0.6) * entity.global_transform.basis.y)
+	state.apply_central_force(lerp(65, 10, 0.6) * entity.global_transform.basis.y)
 	return State.NULL
 
 func combo_check():

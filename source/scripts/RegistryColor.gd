@@ -40,5 +40,5 @@ const dark_purple: String = "9842D4"
 const dark_magenta: String = "DE58E8"
 const dark_pink: String = "EA62AF"
 
-static func get_bbcode(color: String) -> String:
+static func get_text_color(color: String) -> String:
 	return "[color=#" + color + "]"

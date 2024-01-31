@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/test_combat_1_layer_1.ogg-139320f0e7465b7b5727d91997db0775.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cwkcrt2tg6j8s"
+path="res://godot/imported/test_combat_1_layer_1.ogg-139320f0e7465b7b5727d91997db0775.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/music/test_combat_1/test_combat_1_layer_1.ogg"
-dest_files=[ "res://import/test_combat_1_layer_1.ogg-139320f0e7465b7b5727d91997db0775.oggstr" ]
+dest_files=["res://godot/imported/test_combat_1_layer_1.ogg-139320f0e7465b7b5727d91997db0775.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

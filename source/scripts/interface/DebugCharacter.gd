@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-export(Resource) var model
+@export var model: Resource
 
-onready var shape_slider = $"%ShapeSlider"
+@onready var shape_slider = $"%ShapeSlider"
 
 var is_open : bool
 var shell_value: int

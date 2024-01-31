@@ -1,13 +1,13 @@
 extends Node
 
 var game_time: int = 0
-export var second_speed = 1
+@export var second_speed = 1
 
 func _ready() -> void:
 	var second_timer = Timer.new()
-	second_timer.set_timer_process_mode(1)
+	second_timer.set_timer_process_callback(1)
 	second_timer.set_wait_time(second_speed)
-	second_timer.connect("timeout", self, "on_unpaused_second")
+	second_timer.connect("timeout", Callable(self, "on_unpaused_second"))
 	add_child(second_timer)
 	second_timer.start()
 	SB.set_game_time(self)

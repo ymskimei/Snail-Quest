@@ -1,13 +1,13 @@
 extends Control
 
-onready var default_selection: Control = $"%StartButton"
-onready var anim_cam: AnimationPlayer = $World/SpringArm/AnimationPlayer
-onready var anim_daisy: AnimationPlayer = $World/Daisy/AnimationPlayer
-onready var anim_logo: AnimationPlayer = $World/MeshInstance/AnimationPlayer
+@onready var default_selection: Control = $"%StartButton"
+@onready var anim_cam: AnimationPlayer = $World/SpringArm3D/AnimationPlayer
+@onready var anim_daisy: AnimationPlayer = $World/Daisy/AnimationPlayer
+@onready var anim_logo: AnimationPlayer = $World/MeshInstance3D/AnimationPlayer
 
-onready var splash: RichTextLabel = $MarginContainer/HBoxContainer/LabelSplash
-onready var version: RichTextLabel = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/LabelVersion
-onready var info: RichTextLabel = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/LabelInfo
+@onready var splash: RichTextLabel = $MarginContainer/HBoxContainer/LabelSplash
+@onready var version: RichTextLabel = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/LabelVersion
+@onready var info: RichTextLabel = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/LabelInfo
 
 signal game_start
 
@@ -17,14 +17,14 @@ func _ready() -> void:
 	anim_cam.play("CamTitleStart")
 	anim_daisy.play("DaisyBlossom")
 	anim_logo.play("GuiLogoAppear")
-	yield(anim_daisy, "animation_finished")
+	await anim_daisy.animation_finished
 	anim_cam.play("CamWobble")
 	anim_daisy.play("DaisyWiggle")
 	anim_logo.play("GuiLogoIdle")
 
 func _set_strings() -> void:
-	version.set_bbcode("[color=#EFEFEF]" + TranslationServer.translate("TITLE") + " " + SB.game.info["version"])
-	info.set_bbcode("[right][color=#EFEFEF]© " + SB.game.info["author"])
+	version.set_text("[color=#EFEFEF]" + TranslationServer.translate("TITLE") + " " + SB.game.info["version"])
+	info.set_text("[right][color=#EFEFEF]© " + SB.game.info["author"])
 	var splashes: Array = [
 		"TITLE_SPLASH_0",
 		"TITLE_SPLASH_1",
@@ -38,10 +38,10 @@ func _set_strings() -> void:
 		"TITLE_SPLASH_9"
 	]
 	randomize()
-	splash.set_bbcode("[tornado radius=3 freq=2][color=#FFF896]" + TranslationServer.translate(splashes[randi() % splashes.size()]))
+	splash.set_text("[tornado radius=3 freq=2][color=#FFF896]" + TranslationServer.translate(splashes[randi() % splashes.size()]))
 
 func _physics_process(_delta: float) -> void:
-	var cam = $World/SpringArm
+	var cam = $World/SpringArm3D
 	#cam.rotation.x = lerp(cam.rotation.x, Input.get_action_strength("cam_up") / 3 - Input.get_action_strength("cam_down") / 3, 0.1)
 	#.rotation.y = lerp(cam.rotation.y, Input.get_action_strength("cam_left") / 3 - Input.get_action_strength("cam_right") / 3, 0.1)
 	#cam.translation.y = lerp(cam.translation.y, Input.get_action_strength("cam_up") * 0.1  - Input.get_action_strength("cam_down") * 0.1, 0.1)
@@ -52,7 +52,7 @@ func _on_StartButton_pressed() -> void:
 	var fade = $GuiTransition/AnimationPlayer
 	fade.play("GuiTransitionFade")
 	#anim.play("GuiLogoDisappear")
-	yield(fade, "animation_finished")
+	await fade.animation_finished
 	emit_signal("game_start")
 	queue_free()
 

@@ -7,13 +7,13 @@ func enter() -> void:
 	entity.anim.play("PawnIdle")
 	state_done = false
 	timer.one_shot = true
-	timer.connect("timeout", self, "end_wait")
+	timer.connect("timeout", Callable(self, "end_wait"))
 	add_child(timer)
 	timer.set_wait_time(0.5)
 	timer.start()
 
-func physics_process(delta: float) -> int:
-	.physics_process(delta)
+func states_physics_process(delta: float) -> int:
+	super.states_physics_process(delta)
 	if !state_done:
 		entity.velocity = Vector3.ZERO
 	else:

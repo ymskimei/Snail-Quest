@@ -28,7 +28,7 @@ var spin_timer: Timer = Timer.new()
 var look_timer: Timer = Timer.new()
 
 func enter() -> void:
-	print("Camera State: ORBIT")
+	print("Camera3D State: ORBIT")
 	tween_cam_pan(lock_default_arm, lock_default_lens)
 	_tween_cam_reset()
 	_add_control_timers()
@@ -36,7 +36,7 @@ func enter() -> void:
 	look_around = false
 	distance = 0
 
-func unhandled_input(event: InputEvent) -> int:
+func states_unhandled_input(event: InputEvent) -> int:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotation = event.relative
 		controller = false
@@ -46,10 +46,10 @@ func unhandled_input(event: InputEvent) -> int:
 		rotation = Vector2.ZERO
 	return State.NULL
 
-func physics_process(delta: float) -> int:
+func states_physics_process(delta: float) -> int:
 	if !target_controlled():
 		return State.LOCK
-	if entity.target is VehicleBody:
+	if entity.target is VehicleBody3D:
 		return State.VEHI
 	if entity.target is Entity and entity.target.targeting:
 		return State.TARG
@@ -69,9 +69,9 @@ func _cam_tracking(delta: float) -> void:
 	if is_inverted():
 			rotation.x = -rotation.x
 	rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 2
-	entity.translation = lerp(entity.translation, entity.target.translation + offset, track_speed * delta)
+	entity.position = lerp(entity.position, entity.target.position + offset, track_speed * delta)
 	entity.arm_length = lerp(entity.arm_length, clamp(entity.arm_length + distance, 4, 30), 10 * delta)
-	entity.rotation.y += (deg2rad(velocity.x))
+	entity.rotation.y += (deg_to_rad(velocity.x))
 
 func _cam_panning(delta: float) -> void:
 	var distance_to_target = entity.lens.get_global_translation().distance_to(entity.target.get_global_translation())
@@ -88,14 +88,14 @@ func _cam_panning(delta: float) -> void:
 			cam_zooming(delta)
 			
 func _cam_velocity(delta: float) -> void:
-	velocity = velocity.linear_interpolate(rotation * sensitivity * 3, delta * rotation_speed)
+	velocity = velocity.lerp(rotation * sensitivity * 3, delta * rotation_speed)
 
 func _cam_lifting(delta: float) -> void:
 	rotation.y = Input.get_action_strength(Device.stick_alt_up) - Input.get_action_strength(Device.stick_alt_down)
 	if is_inverted(true):
 			rotation.y = -rotation.y
 	entity.rotation.x += velocity.y * delta
-	entity.rotation.x = lerp(entity.rotation.x, clamp(entity.rotation.x, deg2rad(-60), deg2rad(-15)), 6 * delta)
+	entity.rotation.x = lerp(entity.rotation.x, clamp(entity.rotation.x, deg_to_rad(-60), deg_to_rad(-15)), 6 * delta)
 
 func cam_zooming(delta: float) -> void:
 	if Input.is_action_pressed(Device.stick_alt_up):
@@ -121,13 +121,13 @@ func _add_control_timers() -> void:
 	if !is_instance_valid(get_node_or_null("SpinTimer")):
 		spin_timer.set_one_shot(true)
 		spin_timer.set_wait_time(0.5)
-		spin_timer.connect("timeout", self, "_on_spin_timer")
+		spin_timer.connect("timeout", Callable(self, "_on_spin_timer"))
 		spin_timer.set_name("SpinTimer")
 		add_child(spin_timer)
 	if !is_instance_valid(get_node_or_null("LookTimer")):
 		look_timer.set_one_shot(true)
 		look_timer.set_wait_time(0.25)
-		look_timer.connect("timeout", self, "_on_look_timer")
+		look_timer.connect("timeout", Callable(self, "_on_look_timer"))
 		look_timer.set_name("LookTimer")
 		add_child(look_timer)
 
@@ -139,10 +139,10 @@ func _on_look_timer() -> void:
 		look_around = true
 
 func _tween_cam_zoom(dist: float) -> void:
-	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, entity.arm_length + dist, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
-	entity.anim_tween.start()
+	entity.anim_tween.interpolate_value(entity, "arm_length", entity.arm_length + dist, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+	entity.anim_tween.play()
 
 func _tween_cam_reset() -> void:
-	entity.anim_tween.interpolate_property(entity.lens, "fov", entity.lens.fov, fov, 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, arm, 0.4, Tween.TRANS_EXPO, Tween.EASE_OUT)
-	entity.anim_tween.start()
+	entity.anim_tween.interpolate_value(entity.lens, "fov", fov, 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	entity.anim_tween.interpolate_value(entity, "arm_length", arm, 0.4, Tween.TRANS_EXPO, Tween.EASE_OUT)
+	entity.anim_tween.play()

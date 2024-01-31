@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/ost_snailytown_overlayaccomp_day.ogg-f16e37ceac67b1d6fe9eb8c9a3684d18.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://wpebpciwe21p"
+path="res://godot/imported/ost_snailytown_overlayaccomp_day.ogg-f16e37ceac67b1d6fe9eb8c9a3684d18.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/music/snaily_town/ost_snailytown_overlayaccomp_day.ogg"
-dest_files=[ "res://import/ost_snailytown_overlayaccomp_day.ogg-f16e37ceac67b1d6fe9eb8c9a3684d18.oggstr" ]
+dest_files=["res://godot/imported/ost_snailytown_overlayaccomp_day.ogg-f16e37ceac67b1d6fe9eb8c9a3684d18.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

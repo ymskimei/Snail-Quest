@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/vehicle_engine.ogg-760512a90e71a55536a74327f364a899.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ccdsd8hh3kytv"
+path="res://godot/imported/vehicle_engine.ogg-760512a90e71a55536a74327f364a899.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/vehicle_engine.ogg"
-dest_files=[ "res://import/vehicle_engine.ogg-760512a90e71a55536a74327f364a899.oggstr" ]
+dest_files=["res://godot/imported/vehicle_engine.ogg-760512a90e71a55536a74327f364a899.oggvorbisstr"]
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://import/tone_marimba_1.mp3-e61513fe4ddbf121b566bed44a067cd3.mp3str"
+uid="uid://c32oyofnrppgn"
+path="res://godot/imported/tone_marimba_1.mp3-e61513fe4ddbf121b566bed44a067cd3.mp3str"
 
 [deps]
 
 source_file="res://assets/sound/tone_marimba_1.mp3"
-dest_files=[ "res://import/tone_marimba_1.mp3-e61513fe4ddbf121b566bed44a067cd3.mp3str" ]
+dest_files=["res://godot/imported/tone_marimba_1.mp3-e61513fe4ddbf121b566bed44a067cd3.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

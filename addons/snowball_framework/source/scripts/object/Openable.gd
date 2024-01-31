@@ -1,6 +1,6 @@
 extends Conversable
 
-onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var anim: AnimationPlayer = $AnimationPlayer
 
 var is_opened: bool
 
@@ -13,12 +13,12 @@ func get_interaction_text() -> String:
 func interact() -> void: 
 	if is_opened:
 		anim.play("Close")
-		yield(anim, "animation_finished")
+		await anim.animation_finished
 		is_opened = false
 		emit_signal("interaction_ended")
 	else:
 		anim.play("Open")
-		yield(anim, "animation_finished")
+		await anim.animation_finished
 		is_opened = true
 		emit_signal("interaction_ended")
 	#trigger_dialog()

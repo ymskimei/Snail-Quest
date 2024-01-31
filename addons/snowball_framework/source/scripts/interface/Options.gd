@@ -80,9 +80,9 @@ func add_languages(button: OptionButton) -> void:
 
 func set_fullscreen(state: bool) -> void:
 	if state:
-		OS.window_fullscreen = true
+		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (true) else Window.MODE_WINDOWED
 	else:
-		OS.window_fullscreen = false
+		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (false) else Window.MODE_WINDOWED
 	Data.set_config("video", "screen/fullscreen", state)
 
 func get_fullscreen() -> bool:
@@ -90,12 +90,12 @@ func get_fullscreen() -> bool:
 	return value
 
 func set_resolution(vec2: Vector2) -> void:
-	OS.set_window_size(vec2)
-	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_EXPAND, vec2)
+	get_window().set_size(vec2)
+	#get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_EXPAND, vec2)
 	Data.set_config("video", "screen/resolution", vec2)
 
 func get_resolution() -> Vector2:
-	var value = Data.get_config("video", "screen/resolution", OS.get_screen_size())
+	var value = Data.get_config("video", "screen/resolution", DisplayServer.screen_get_size())
 	return value
 
 func set_filter(i: int) -> void:
@@ -108,7 +108,7 @@ func get_filter() -> int:
 	return value
 
 func set_framerate(i: int) -> void:
-	Engine.set_target_fps(i)
+	Engine.set_max_fps(i)
 	Data.set_config("video", "screen/framerate", i)
 
 func get_framerate() -> int:
@@ -117,9 +117,9 @@ func get_framerate() -> int:
 
 func set_vsync(state: bool) -> void:
 	if state:
-		OS.vsync_enabled = true
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if (true) else DisplayServer.VSYNC_DISABLED)
 	else:
-		OS.vsync_enabled = false
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if (false) else DisplayServer.VSYNC_DISABLED)
 	Data.set_config("video", "screen/vsync", state)
 
 func get_vsync() -> bool:
@@ -128,7 +128,7 @@ func get_vsync() -> bool:
 
 func set_volume_master(f: float) -> void:
 	var index = AudioServer.get_bus_index("Master")
-	AudioServer.set_bus_volume_db(index, linear2db(f))
+	AudioServer.set_bus_volume_db(index, linear_to_db(f))
 	Data.set_config("audio", "volume/master", f)
 
 func get_volume_master() -> float:
@@ -137,7 +137,7 @@ func get_volume_master() -> float:
 
 func set_volume_music(f: float) -> void:
 	var index = AudioServer.get_bus_index("Music")
-	AudioServer.set_bus_volume_db(index, linear2db(f))
+	AudioServer.set_bus_volume_db(index, linear_to_db(f))
 	Data.set_config("audio", "volume/music", f)
 
 func get_volume_music() -> float:
@@ -146,7 +146,7 @@ func get_volume_music() -> float:
 
 func set_volume_sfx(f: float) -> void:
 	var index = AudioServer.get_bus_index("SFX")
-	AudioServer.set_bus_volume_db(index, linear2db(f))
+	AudioServer.set_bus_volume_db(index, linear_to_db(f))
 	Data.set_config("audio", "volume/sfx", f)
 
 func get_volume_sfx() -> float:
@@ -207,7 +207,7 @@ func get_invert_vertical() -> bool:
 	var value = Data.get_config("controls", "camera/invert_vertical", false)
 	return value
 
-func set_camera_sensitivity(i: int):
+func set_camera_sensitivity(i: float):
 	Data.set_config("controls", "camera/sensitivity", i)
 
 func get_camera_sensitivity() -> float:

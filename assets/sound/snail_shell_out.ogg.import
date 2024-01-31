@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/snail_shell_out.ogg-aa56d935da656faacbb84ba17aa8d0eb.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bu7rekrgt4xdc"
+path="res://godot/imported/snail_shell_out.ogg-aa56d935da656faacbb84ba17aa8d0eb.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/snail_shell_out.ogg"
-dest_files=[ "res://import/snail_shell_out.ogg-aa56d935da656faacbb84ba17aa8d0eb.oggstr" ]
+dest_files=["res://godot/imported/snail_shell_out.ogg-aa56d935da656faacbb84ba17aa8d0eb.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -15,7 +15,7 @@ var bars_active: bool
 var bars_timer: Timer = Timer.new()
 
 func enter() -> void:
-	print("Camera State: TARGET")
+	print("Camera3D State: TARGET")
 	if entity.target is Entity:
 		target_rot = entity.target.skeleton.rotation.y
 	else:
@@ -26,7 +26,7 @@ func enter() -> void:
 	bars_active = false
 	rotation_complete = false
 
-func physics_process(delta: float) -> int:
+func states_physics_process(delta: float) -> int:
 	if entity.target is Entity and is_instance_valid(entity.target.target):
 		if entity.target.target_found:
 			Utility.slerp_look_at(entity, entity.target.target.global_transform.origin, targeting_speed)
@@ -37,14 +37,14 @@ func physics_process(delta: float) -> int:
 			entity.rotation.x = lerp(entity.rotation.x, -0.15, track_speed * delta)
 			if !entity.target.targeting and rotation_complete:
 				return State.ORBI
-	entity.translation = lerp(entity.translation, entity.target.translation + offset, 5 * delta)
+	entity.position = lerp(entity.position, entity.target.position + offset, 5 * delta)
 	return State.NULL
 
 func _add_bars_timer() -> void:
 	if !is_instance_valid(get_node_or_null("BarsTimer")):
 		bars_timer.set_one_shot(true)
 		bars_timer.set_wait_time(0.2)
-		bars_timer.connect("timeout", self, "on_bars_timer")
+		bars_timer.connect("timeout", Callable(self, "on_bars_timer"))
 		bars_timer.set_name("BarsTimer")
 		add_child(bars_timer)
 	bars_timer.start()
@@ -61,9 +61,9 @@ func on_bars_timer() -> void:
 		Audio.play_sfx(RegistryAudio.cam_target_reset)
 
 func _tween_cam_zoom() -> void:
-	entity.anim_tween.interpolate_property(entity.lens, "fov", entity.lens.fov, zoom_targeting, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, distance_targeting, 0.3, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
-	entity.anim_tween.start()
+	entity.anim_tween.interpolate_value(entity.lens, "fov", zoom_targeting, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_value(entity, "arm_length", distance_targeting, 0.3, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+	entity.anim_tween.play()
 
 func exit() -> void:
 	if bars_active:

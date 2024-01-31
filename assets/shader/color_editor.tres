@@ -1,4 +1,4 @@
-[gd_resource type="Shader" format=2]
+[gd_resource type="Shader" format=3 uid="uid://b8c5hhjktky46"]
 
 [resource]
 code = "shader_type canvas_item;
@@ -14,7 +14,7 @@ uniform float redVal : hint_range(0, 1) = 1.0;
 uniform float greenVal : hint_range(0, 1) = 1.0;
 uniform float blueVal : hint_range(0, 1) = 1.0;
 
-uniform vec4 tint_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 tint_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform float tint_effect_factor : hint_range(0, 1) = 0.0;
 //---------------------------------------------
 //CONTRAST

@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/lightning_3.ogg-9210fc9ad3fc11f7150d547a523d6cd8.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b0gccraiqftli"
+path="res://godot/imported/lightning_3.ogg-9210fc9ad3fc11f7150d547a523d6cd8.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/lightning_3.ogg"
-dest_files=[ "res://import/lightning_3.ogg-9210fc9ad3fc11f7150d547a523d6cd8.oggstr" ]
+dest_files=["res://godot/imported/lightning_3.ogg-9210fc9ad3fc11f7150d547a523d6cd8.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/leaves.ogg-46802670cd4497b79d0375eb4ff33251.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://mvuqbdl0aj3u"
+path="res://godot/imported/leaves.ogg-46802670cd4497b79d0375eb4ff33251.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/ambience/leaves.ogg"
-dest_files=[ "res://import/leaves.ogg-46802670cd4497b79d0375eb4ff33251.oggstr" ]
+dest_files=["res://godot/imported/leaves.ogg-46802670cd4497b79d0375eb4ff33251.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

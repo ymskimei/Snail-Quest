@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/snail_slide.ogg-07f2ea3899ca2ba67242e713e642274c.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b2matvhhtd3kg"
+path="res://godot/imported/snail_slide.ogg-07f2ea3899ca2ba67242e713e642274c.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/snail_slide.ogg"
-dest_files=[ "res://import/snail_slide.ogg-07f2ea3899ca2ba67242e713e642274c.oggstr" ]
+dest_files=["res://godot/imported/snail_slide.ogg-07f2ea3899ca2ba67242e713e642274c.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

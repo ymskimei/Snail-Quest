@@ -26,326 +26,326 @@
 
 [sub_resource type="Curve3D" id=11]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 3 ),
-"tilts": PoolRealArray( 0, 0 )
+"points": PackedVector3Array( 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 3 ),
+"tilts": PackedFloat32Array( 0, 0 )
 }
 
-[sub_resource type="CubeMesh" id=9]
+[sub_resource type="BoxMesh" id=9]
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape3D" id=10]
 
 [sub_resource type="Animation" id=12]
 resource_name = "Movement"
 length = 5.0
 loop = true
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("PathFollow:unit_offset")
+tracks/0/path = NodePath("PathFollow3D:progress_ratio")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1, 2.5, 3.5 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 1, 2.5, 3.5 )
 }
 
-[node name="Room" type="Spatial"]
+[node name="Room" type="Node3D"]
 
-[node name="CSGCombiner" type="CSGCombiner" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 use_collision = true
 collision_layer = 4
 collision_mask = 5
 
-[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0 )
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0 )
 width = 64.0
 height = 8.0
 depth = 64.0
 material = ExtResource( 3 )
 
-[node name="CSGBox3" type="CSGBox" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+[node name="CSGBox3" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 width = 64.0
 height = 0.001
 depth = 64.0
 material = ExtResource( 2 )
 
-[node name="CSGBox2" type="CSGBox" parent="CSGCombiner/CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2, 16 )
+[node name="CSGBox2" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2, 16 )
 operation = 2
 width = 16.0
 height = 4.0
 depth = 16.0
 material = ExtResource( 3 )
 
-[node name="GrayBox4" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2, -26 )
+[node name="GrayBox4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2, -26 )
 width = 4.0
 depth = 4.0
 material = ExtResource( 3 )
 
-[node name="GreenTop" type="CSGBox" parent="CSGCombiner/GrayBox4"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+[node name="GreenTop" type="CSGBox3D" parent="CSGCombiner3D/GrayBox4"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
 
-[node name="GrayBox3" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -26 )
+[node name="GrayBox3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -26 )
 width = 4.0
 height = 8.0
 depth = 4.0
 material = ExtResource( 3 )
 
-[node name="GreenTop" type="CSGBox" parent="CSGCombiner/GrayBox3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+[node name="GreenTop" type="CSGBox3D" parent="CSGCombiner3D/GrayBox3"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
 
-[node name="GrayBox5" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -18 )
+[node name="GrayBox5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -18 )
 width = 4.0
 height = 8.0
 depth = 4.0
 material = ExtResource( 3 )
 
-[node name="GreenTop" type="CSGBox" parent="CSGCombiner/GrayBox5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+[node name="GreenTop" type="CSGBox3D" parent="CSGCombiner3D/GrayBox5"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
 
-[node name="GrayBox6" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -4 )
+[node name="GrayBox6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, -4 )
 width = 4.0
 height = 8.0
 depth = 4.0
 material = ExtResource( 3 )
 
-[node name="GreenTop" type="CSGBox" parent="CSGCombiner/GrayBox6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+[node name="GreenTop" type="CSGBox3D" parent="CSGCombiner3D/GrayBox6"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
 
-[node name="GrayBox2" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, -26 )
+[node name="GrayBox2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, -26 )
 width = 4.0
 height = 6.0
 depth = 4.0
 material = ExtResource( 3 )
 
-[node name="GreenTop" type="CSGBox" parent="CSGCombiner/GrayBox2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+[node name="GreenTop" type="CSGBox3D" parent="CSGCombiner3D/GrayBox2"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
 
-[node name="GrayBox" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 3, -26 )
+[node name="GrayBox" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 3, -26 )
 width = 4.0
 height = 4.0
 depth = 4.0
 material = ExtResource( 3 )
 
-[node name="GreenTop" type="CSGBox" parent="CSGCombiner/GrayBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+[node name="GreenTop" type="CSGBox3D" parent="CSGCombiner3D/GrayBox"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
 
-[node name="GrayBox7" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 26, 0, -11 )
+[node name="GrayBox7" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 26, 0, -11 )
 width = 4.0
 height = 4.0
 depth = 4.0
 material = ExtResource( 3 )
 
-[node name="GreenTop" type="CSGBox" parent="CSGCombiner/GrayBox7"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+[node name="GreenTop" type="CSGBox3D" parent="CSGCombiner3D/GrayBox7"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 operation = 2
 width = 4.0
 height = 0.001
 depth = 4.0
 
 [node name="SignpostModel" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0 )
 
-[node name="Objects" type="Spatial" parent="."]
+[node name="Objects" type="Node3D" parent="."]
 
 [node name="TestBreakable" parent="Objects" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -3, 12 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -3, 12 )
 collision_mask = 5
 
 [node name="TestBreakable2" parent="Objects" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -3, 12 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -3, 12 )
 collision_mask = 5
 
 [node name="TestBreakable3" parent="Objects" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -3, 17 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -3, 17 )
 collision_mask = 5
 
 [node name="Item" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -14 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -14 )
 item = ExtResource( 10 )
 
 [node name="Item24" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -10 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -10 )
 item = ExtResource( 13 )
 
 [node name="Item25" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -6.86862 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -6.86862 )
 item = ExtResource( 23 )
 
 [node name="Item26" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.598672, 0, -8.54714 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.598672, 0, -8.54714 )
 item = ExtResource( 24 )
 
 [node name="Item2" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -14 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -14 )
 item = ExtResource( 10 )
 
 [node name="Item3" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -13 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -13 )
 item = ExtResource( 10 )
 
 [node name="Item4" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10 )
 item = ExtResource( 10 )
 
 [node name="Item13" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -10 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -10 )
 item = ExtResource( 10 )
 
 [node name="Item15" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -5 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -5 )
 item = ExtResource( 10 )
 
 [node name="Item16" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -8 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -8 )
 item = ExtResource( 10 )
 
 [node name="Item18" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -10 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -10 )
 item = ExtResource( 10 )
 
 [node name="Item19" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -15 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -15 )
 item = ExtResource( 10 )
 
 [node name="Item20" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -15 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -15 )
 item = ExtResource( 10 )
 
 [node name="Item21" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -15 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -15 )
 item = ExtResource( 10 )
 
 [node name="Item22" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -10 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -10 )
 item = ExtResource( 10 )
 
 [node name="Item23" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -6 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -6 )
 item = ExtResource( 10 )
 
 [node name="Item14" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9 )
 item = ExtResource( 10 )
 
 [node name="Item17" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -3 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -3 )
 item = ExtResource( 10 )
 
 [node name="Item5" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -12 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -12 )
 item = ExtResource( 10 )
 
 [node name="Item6" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -8 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -8 )
 item = ExtResource( 11 )
 
 [node name="Item7" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -11 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -11 )
 item = ExtResource( 11 )
 
 [node name="Item10" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -8 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -8 )
 item = ExtResource( 11 )
 
 [node name="Item11" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -11 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -11 )
 item = ExtResource( 11 )
 
 [node name="Item12" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -13 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -13 )
 item = ExtResource( 11 )
 
 [node name="Item8" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -5 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -5 )
 item = ExtResource( 12 )
 
 [node name="Item9" parent="Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -3 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -3 )
 item = ExtResource( 12 )
 
-[node name="Seed" type="MeshInstance" parent="Objects"]
-transform = Transform( -1, -4.37114e-08, -9.2484e-09, 4.37114e-08, -3.57628e-07, -0.211579, 4.37114e-08, -1, 7.56665e-08, -4, 0, 11 )
+[node name="Seed" type="MeshInstance3D" parent="Objects"]
+transform = Transform3D( -1, -4.37114e-08, -9.2484e-09, 4.37114e-08, -3.57628e-07, -0.211579, 4.37114e-08, -1, 7.56665e-08, -4, 0, 11 )
 mesh = ExtResource( 17 )
 material/0 = ExtResource( 15 )
 material/1 = ExtResource( 16 )
 
 [node name="TestSlide" parent="Objects" instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0272, 2.63063, -31.7507 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0272, 2.63063, -31.7507 )
 
 [node name="TestRamp" parent="Objects" instance=ExtResource( 22 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1.19209e-06, 3 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1.19209e-06, 3 )
 
 [node name="TestRamp2" parent="Objects" instance=ExtResource( 22 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 18, 9.53674e-07, 1 )
+transform = Transform3D( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 18, 9.53674e-07, 1 )
 
 [node name="TestRamp3" parent="Objects" instance=ExtResource( 22 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 21, 1.7053e-13, 5 )
+transform = Transform3D( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 21, 1.7053e-13, 5 )
 
 [node name="TestBlock" parent="Objects" instance=ExtResource( 21 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 21, 3.97904e-13, 11 )
+transform = Transform3D( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 21, 3.97904e-13, 11 )
 
 [node name="TestRamp4" parent="Objects" instance=ExtResource( 22 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 21, 5.68434e-14, 9 )
+transform = Transform3D( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 21, 5.68434e-14, 9 )
 
-[node name="Path" type="Path" parent="."]
-transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2, 26, 8, -14 )
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D( 2, 0, 0, 0, 0.5, 0, 0, 0, 2, 26, 8, -14 )
 curve = SubResource( 11 )
 script = ExtResource( 8 )
 
-[node name="PathFollow" type="PathFollow" parent="Path"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
-[node name="StaticBody" type="KinematicBody" parent="Path/PathFollow"]
+[node name="StaticBody3D" type="CharacterBody3D" parent="Path3D/PathFollow3D"]
 collision_layer = 8
 
-[node name="MeshInstance" type="MeshInstance" parent="Path/PathFollow/StaticBody"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D/StaticBody3D"]
 mesh = SubResource( 9 )
 material/0 = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Path/PathFollow/StaticBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/StaticBody3D"]
 shape = SubResource( 10 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Path"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path3D"]
 anims/Movement = SubResource( 12 )
 
 [node name="EnvironmentDefault" parent="." instance=ExtResource( 1 )]
 
-[node name="Warps" type="Spatial" parent="."]
+[node name="Warps" type="Node3D" parent="."]
 
-[node name="Area" parent="Warps" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 9 )
+[node name="Area3D" parent="Warps" instance=ExtResource( 6 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 9 )
 resource = ExtResource( 7 )

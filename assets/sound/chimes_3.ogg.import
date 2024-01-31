@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/chimes_3.ogg-d379fe9fa1ec51cb34cfa89654686dc4.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cbi4qo7w6nwhc"
+path="res://godot/imported/chimes_3.ogg-d379fe9fa1ec51cb34cfa89654686dc4.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/chimes_3.ogg"
-dest_files=[ "res://import/chimes_3.ogg-d379fe9fa1ec51cb34cfa89654686dc4.oggstr" ]
+dest_files=["res://godot/imported/chimes_3.ogg-d379fe9fa1ec51cb34cfa89654686dc4.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

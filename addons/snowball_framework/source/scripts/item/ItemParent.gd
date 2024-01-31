@@ -1,14 +1,14 @@
 class_name ItemParent
-extends Spatial
+extends Node3D
 
-export var type: Resource
+@export var type: Resource
 
-onready var item: RigidBody = $RigidBody
-onready var mesh: MeshInstance = $RigidBody/MeshInstance
-onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var item: RigidBody3D = $RigidBody3D
+@onready var mesh: MeshInstance3D = $RigidBody3D/MeshInstance3D
+@onready var anim: AnimationPlayer = $AnimationPlayer
 
 var collecting: bool
-var player: Spatial
+var player: Node3D
 
 var display_timer: Timer = Timer.new()
 var idle_timer: Timer = Timer.new()
@@ -20,9 +20,9 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if collecting:
-		item.translation = Vector3.ZERO
+		item.position = Vector3.ZERO
 		var collection_offset = Vector3(0, player.mesh.get_aabb().size.y + 0.2, 0)
-		translation = player.translation + collection_offset
+		position = player.position + collection_offset
 		anim.play("ItemCollect")
 	if type.depletable:
 		idle_timer.start()
@@ -49,17 +49,17 @@ func _randomize_animation() -> void:
 #	anim.seek(rand_pos)
 
 func randomize_velocity():
-	item.rotation_degrees = Vector3(0, rand_range(-180, 180), 0)
-	item.set_linear_velocity(Vector3(rand_range(-15, 15), rand_range(5, 15), rand_range(-15, 15)))
+	item.rotation_degrees = Vector3(0, randf_range(-180, 180), 0)
+	item.set_linear_velocity(Vector3(randf_range(-15, 15), randf_range(5, 15), randf_range(-15, 15)))
 
 func _init_timers():
 	display_timer.set_wait_time(1)
 	display_timer.one_shot = true
-	display_timer.connect("timeout", self, "_on_display_timeout")
+	display_timer.connect("timeout", Callable(self, "_on_display_timeout"))
 	add_child(display_timer)
 	idle_timer.set_wait_time(5)
 	idle_timer.one_shot = true
-	idle_timer.connect("timeout", self, "_on_idle_timeout")
+	idle_timer.connect("timeout", Callable(self, "_on_idle_timeout"))
 	add_child(idle_timer)
 
 func _on_display_timeout():

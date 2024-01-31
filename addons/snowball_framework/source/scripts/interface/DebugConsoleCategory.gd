@@ -1,8 +1,8 @@
 class_name DebugConsoleCategory
 extends Node
 
-export var command_handler_target: String = ".."
-export var module_description: String = ""
+@export var command_handler_target: String = ".."
+@export var module_description: String = ""
 
 var command_references: Dictionary
 var command_handler = null
@@ -31,9 +31,9 @@ func has_command(command: String):
 func _build_command_dictionary(target: Node):
 	for child in target.get_children():
 		if child is DebugConsoleCommand:
-			var namespace = child.get_name_space_to(self)
-			child.call_back = namespace.join("_")
-			command_references[namespace.join(".")] = child
+			var name_space = child.get_name_space_to(self)
+			child.call_back = "_".join(name_space)
+			command_references[".".join(name_space)] = child
 		else:
 			_build_command_dictionary(child)
 

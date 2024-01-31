@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/ost_snailytown_bassaccomp_day.ogg-3606e0f45e171ab528bfa91b70feb533.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://06fd456kktot"
+path="res://godot/imported/ost_snailytown_bassaccomp_day.ogg-3606e0f45e171ab528bfa91b70feb533.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/music/snaily_town/ost_snailytown_bassaccomp_day.ogg"
-dest_files=[ "res://import/ost_snailytown_bassaccomp_day.ogg-3606e0f45e171ab528bfa91b70feb533.oggstr" ]
+dest_files=["res://godot/imported/ost_snailytown_bassaccomp_day.ogg-3606e0f45e171ab528bfa91b70feb533.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

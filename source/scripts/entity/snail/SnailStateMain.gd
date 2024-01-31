@@ -34,24 +34,24 @@ func enter() -> void:
 func _ready():
 	input_timer.set_one_shot(true)
 	input_timer.set_wait_time(0.5)
-	input_timer.connect("timeout", self, "on_input_timer")
+	input_timer.connect("timeout", Callable(self, "on_input_timer"))
 	jump_combo_timer.set_one_shot(true)
 	jump_combo_timer.set_wait_time(0.5)
-	jump_combo_timer.connect("timeout", self, "on_jump_combo_timer")
+	jump_combo_timer.connect("timeout", Callable(self, "on_jump_combo_timer"))
 	add_child(input_timer)
 	add_child(jump_combo_timer)
 	return State.NULL
 
-func unhandled_input(_event: InputEvent) -> int:
+func states_unhandled_input(_event: InputEvent) -> int:
 	return State.NULL
 
-func physics_process(_delta: float) -> int:
+func states_physics_process(_delta: float) -> int:
 #	apply_aim_cursor()
 	if is_on_floor():
 		shell_jumped = false
 	return State.NULL
 
-func integrate_forces(state: PhysicsDirectBodyState) -> int:
+func states_integrate_forces(state: PhysicsDirectBodyState3D) -> int:
 	set_gravity(state)
 	apply_rotation()
 	return State.NULL
@@ -137,7 +137,7 @@ func mallet() -> void:
 	if is_instance_valid(mallet):
 		if Input.is_action_just_pressed("action_combat"):
 			input_timer.start()
-			yield(input_timer, "timeout")
+			await input_timer.timeout
 			if action_combat_held == true:
 				#entity.can_move = false
 				entity.animator.play("PlayerSlamDefault")
@@ -152,12 +152,12 @@ func mallet() -> void:
 				if previous_swing:
 					entity.animator.play_backwards("PlayerSwingDefault")
 					mallet.swing_left()
-					yield(entity.animator, "animation_finished")
+					await entity.animator.animation_finished
 					previous_swing = false
 				else:
 					entity.animator.play("PlayerSwingDefault")
 					mallet.swing_right()
-					yield(entity.animator, "animation_finished")
+					await entity.animator.animation_finished
 					previous_swing = true
 
 func exit() -> void:

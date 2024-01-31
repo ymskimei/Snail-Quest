@@ -1,13 +1,13 @@
 class_name MenuParent
 extends CanvasLayer
 
-onready var anim: AnimationPlayer = null
+@onready var anim: AnimationPlayer = null
 
 var default_focus: Control = null
 var recent_focus: Control = null
 
 func _ready() -> void:
-	get_viewport().connect("gui_focus_changed", self, "_on_gui_focus_changed")
+	get_viewport().connect("gui_focus_changed", Callable(self, "_on_gui_focus_changed"))
 
 func open(toggle: bool = false) -> void:
 	if toggle:
@@ -22,7 +22,7 @@ func open(toggle: bool = false) -> void:
 	else:
 		if anim:
 			anim.play("Disappear")
-			yield(anim, "animation_finished")
+			await anim.animation_finished
 		get_sound_exit()
 		hide()
 

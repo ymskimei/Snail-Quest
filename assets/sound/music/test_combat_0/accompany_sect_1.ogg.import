@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/accompany_sect_1.ogg-4495febaf4c751e9ec789895d019859d.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://das5edvq1dep4"
+path="res://godot/imported/accompany_sect_1.ogg-4495febaf4c751e9ec789895d019859d.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/music/test_combat_0/accompany_sect_1.ogg"
-dest_files=[ "res://import/accompany_sect_1.ogg-4495febaf4c751e9ec789895d019859d.oggstr" ]
+dest_files=["res://godot/imported/accompany_sect_1.ogg-4495febaf4c751e9ec789895d019859d.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

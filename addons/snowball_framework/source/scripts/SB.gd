@@ -1,11 +1,11 @@
 extends Node
 
-onready var utility: Node = $Utility
+@onready var utility: Node = $Utility
 
 var game: Node = null
-var camera: Spatial = null
-var controlled: Spatial = null
-var prev_controlled: Spatial = null
+var camera: Node3D = null
+var controlled: Node3D = null
+var prev_controlled: Node3D = null
 var world: Node = null
 var play_time: Node = null
 var game_time: Node = null
@@ -54,15 +54,15 @@ func _set_strings() -> void:
 func set_game(node: Node):
 	game = node
 
-func set_camera(node: Spatial):
+func set_camera(node: Node3D):
 	camera = node
 
-func set_controlled(node: Spatial):
+func set_controlled(node: Node3D):
 	controlled = node
 	if node is Entity:
-		node.connect("health_changed", self, "_on_health_changed")
+		node.connect("health_changed", Callable(self, "_on_health_changed"))
 
-func set_prev_controlled(node: Spatial):
+func set_prev_controlled(node: Node3D):
 	prev_controlled = node
 
 func set_world(node: Node):

@@ -1,6 +1,6 @@
 [remap]
 
-importer="ogg_vorbis"
+importer="oggvorbisstr"
 type="AudioStreamOGGVorbis"
 path="res://import/sfx_cam_zoom_close.ogg-98ffe3c3c29a1b94e4f31b39528aa314.oggstr"
 

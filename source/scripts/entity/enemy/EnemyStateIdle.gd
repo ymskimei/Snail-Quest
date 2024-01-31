@@ -9,13 +9,13 @@ func enter() -> void:
 	entity.velocity = Vector3.ZERO
 	state_done = false
 	timer.one_shot = true
-	timer.connect("timeout", self, "end_wait")
+	timer.connect("timeout", Callable(self, "end_wait"))
 	add_child(timer)
 	timer.set_wait_time(randi() % 5 + 1)
 	timer.start()
 
-func physics_process(delta: float) -> int:
-	.physics_process(delta)
+func states_physics_process(delta: float) -> int:
+	super.states_physics_process(delta)
 	apply_gravity(delta)
 	entity.rotation.y = lerp(entity.rotation.y, look_dir, 0.05)
 	if state_done:

@@ -1,8 +1,8 @@
-extends VehicleBody
+extends VehicleBody3D
 
-onready var mesh = $MeshInstance
-onready var engine = $AudioStreamPlayer3D
-onready var anim = $Tween
+@onready var mesh = $MeshInstance3D
+@onready var engine = $AudioStreamPlayer3D
+@onready var anim = $Tween
 
 var mounted: bool = false
 var max_speed: int = 500
@@ -21,8 +21,8 @@ var boost_replenish: Timer = Timer.new()
 signal boosted
 
 func _ready():
-	boost_timer.connect("timeout", self, "on_boost_timeout")
-	boost_replenish.connect("timeout", self, "on_replenish_timeout")
+	boost_timer.connect("timeout", Callable(self, "on_boost_timeout"))
+	boost_replenish.connect("timeout", Callable(self, "on_replenish_timeout"))
 	boost_timer.set_wait_time(1)
 	boost_replenish.set_wait_time(5)
 	boost_replenish.one_shot = true

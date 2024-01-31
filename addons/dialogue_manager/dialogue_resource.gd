@@ -1,34 +1,39 @@
-extends Resource
-class_name DialogueResource
+@icon("./assets/icon.svg")
+
+## A collection of dialogue lines for use with [code]DialogueManager[/code].
+class_name DialogueResource extends Resource
 
 
-const DialogueConstants := preload("res://addons/dialogue_manager/constants.gd")
+const _DialogueManager = preload("./dialogue_manager.gd")
 
 
-export(int) var resource_version
-export(int) var syntax_version
-export(String) var raw_text
-export(Array, Dictionary) var errors
-export(Dictionary) var titles
-export(Dictionary) var lines
+## A list of state shortcuts
+@export var using_states: PackedStringArray = []
+
+## A map of titles and the lines they point to.
+@export var titles: Dictionary = {}
+
+## A list of character names.
+@export var character_names: PackedStringArray = []
+
+## The first title in the file.
+@export var first_title: String = ""
+
+## A map of the encoded lines of dialogue.
+@export var lines: Dictionary = {}
 
 
-func _init():
-	resource_version = 1
-	syntax_version = DialogueConstants.SYNTAX_VERSION
-	raw_text = "~ this_is_a_node_title\n\nNathan: This is some dialogue.\nNathan: Here are some choices.\n- First one\n\tNathan: You picked the first one.\n- Second one\n\tNathan: You picked the second one.\n- Start again => this_is_a_node_title\n- End the conversation => END\nNathan: For more information about conditional dialogue, mutations, and all the fun stuff, see the online documentation."
-	errors = []
-	titles = {}
-	lines = {}
+## Get the next printable line of dialogue, starting from a referenced line ([code]title[/code] can
+## be a title string or a stringified line number). Runs any mutations along the way and then returns
+## the first dialogue line encountered.
+func get_next_dialogue_line(title: String, extra_game_states: Array = [], mutation_behaviour: _DialogueManager.MutationBehaviour = _DialogueManager.MutationBehaviour.Wait) -> DialogueLine:
+	return await Engine.get_singleton("DialogueManager").get_next_dialogue_line(self, title, extra_game_states, mutation_behaviour)
 
 
-func get_next_dialogue_line(title: String, extra_game_states: Array = []) -> Dictionary:
-	# NOTE: For some reason get_singleton doesn't work here so we have to get creative
-	var tree: SceneTree = Engine.get_main_loop()
-	if tree:
-		var dialogue_manager = tree.current_scene.get_node_or_null("/root/DialogueManager")
-		if dialogue_manager != null:
-			return yield(dialogue_manager.get_next_dialogue_line(title, self, extra_game_states), "completed")
+## Get the list of any titles found in the file.
+func get_titles() -> PackedStringArray:
+	return titles.keys()
 
-	assert(false, "The \"DialogueManager\" autoload does not appear to be loaded.")
-	return {}
+
+func _to_string() -> String:
+	return "<DialogueResource titles=\"%s\">" % [",".join(titles.keys())]

@@ -1,28 +1,28 @@
 extends CanvasLayer
 
-export(Resource) var equipment
-export(Resource) var tools
+@export var equipment: Resource
+@export var tools: Resource
 
-onready var anim_cam: AnimationPlayer = $AnimationCam
-onready var display_boost: RichTextLabel  = $DisplayBoost
-onready var interaction_label: RichTextLabel = $InteractionLabel
+@onready var anim_cam: AnimationPlayer = $AnimationCam
+@onready var display_boost: RichTextLabel  = $DisplayBoost
+@onready var interaction_label: RichTextLabel = $InteractionLabel
 
-onready var shell_stock: VBoxContainer = $MarginContainer/HBoxContainer/MarginContainer/ShellStock
-onready var shell: TextureRect = $MarginContainer/HBoxContainer/TextureRect/Shell
-onready var slime: TextureRect = $MarginContainer/HBoxContainer/TextureRect/Slime
-onready var shell_anim: AnimationPlayer = $MarginContainer/HBoxContainer/TextureRect/AnimationPlayer
+@onready var shell_stock: VBoxContainer = $MarginContainer/HBoxContainer/MarginContainer/ShellStock
+@onready var shell: TextureRect = $MarginContainer/HBoxContainer/TextureRect/Shell
+@onready var slime: TextureRect = $MarginContainer/HBoxContainer/TextureRect/Slime
+@onready var shell_anim: AnimationPlayer = $MarginContainer/HBoxContainer/TextureRect/AnimationPlayer
 
 #move this later
-onready var cursor_target: Spatial = $CursorTarget
+@onready var cursor_target: Node3D = $CursorTarget
 
-onready var tool_slot = $"%ToolSlot"
+@onready var tool_slot = $"%ToolSlot"
 
-onready var item_slot_1 = $"%ItemSlot1"
-onready var item_slot_2 = $"%ItemSlot2"
-onready var item_slot_3 = $"%ItemSlot3"
-onready var item_slot_4 = $"%ItemSlot4"
+@onready var item_slot_1 = $"%ItemSlot1"
+@onready var item_slot_2 = $"%ItemSlot2"
+@onready var item_slot_3 = $"%ItemSlot3"
+@onready var item_slot_4 = $"%ItemSlot4"
 
-onready var cam_icon = $"%CamIcon"
+@onready var cam_icon = $"%CamIcon"
 
 var shell_stock_icons: Array = []
 
@@ -51,8 +51,8 @@ func _ready() -> void:
 	pad_is_hidden = true
 	cam_is_hidden = true
 	add_hud_timers()
-	Item.connect("items_updated", self, "on_items_updated")
-	SB.connect("controlled_health_change", self, "_on_controlled_health_changed")
+	Item.connect("items_updated", Callable(self, "on_items_updated"))
+	SB.connect("controlled_health_change", Callable(self, "_on_controlled_health_changed"))
 	shell_stock_icons = get_tree().get_nodes_in_group("stock")
 
 func _process(_delta: float) -> void:
@@ -68,7 +68,7 @@ func _process(_delta: float) -> void:
 #		display_up.is_deselected_animation()
 	display_vehicle_boost()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if is_instance_valid(SB.controlled) and SB.controlled is Entity and SB.controlled.target_found:
 		cursor_target.show()
 	else:
@@ -86,7 +86,7 @@ func _on_controlled_health_changed(health, max_health, b) -> void:
 	if health % fract == 0 and health != 0:
 		shell_anim.play("Disappear")
 		if shell_anim.is_playing():
-			yield(shell_anim, "animation_finished")
+			await shell_anim.animation_finished
 			shell_anim.play("Appear")
 		shell.texture = shell_3
 	elif health % fract == 2:
@@ -95,7 +95,7 @@ func _on_controlled_health_changed(health, max_health, b) -> void:
 		shell.texture = shell_1
 	else:
 		shell_anim.play("Disappear")
-		yield(shell_anim, "animation_finished")
+		await shell_anim.animation_finished
 		shell.texture = null
 	for i in range(shell_stock_icons.size()):
 		if (i * fract) >= max_health - (fract + 1):
@@ -149,11 +149,11 @@ func update_cam_display() -> void:
 func add_hud_timers() -> void:
 	pad_timer.set_wait_time(8)
 	pad_timer.one_shot = true
-	pad_timer.connect("timeout", self, "on_pad_timeout")
+	pad_timer.connect("timeout", Callable(self, "on_pad_timeout"))
 	add_child(pad_timer)
 	cam_timer.set_wait_time(8)
 	cam_timer.one_shot = true
-	cam_timer.connect("timeout", self, "on_cam_timeout")
+	cam_timer.connect("timeout", Callable(self, "on_cam_timeout"))
 	add_child(cam_timer)
 
 func reveal_cam() -> void:
@@ -168,8 +168,8 @@ func on_cam_timeout() -> void:
 
 func display_vehicle_boost() -> void:
 	if is_instance_valid(SB.controlled):
-		if SB.controlled is VehicleBody:
+		if SB.controlled is VehicleBody3D:
 			var remaining = SB.controlled.boost_remaining
-			display_boost.set_bbcode("[color=#C3EF5D]%s" % remaining)
+			display_boost.set_text("[color=#C3EF5D]%s" % remaining)
 		else:
-			display_boost.set_bbcode("")
+			display_boost.set_text("")

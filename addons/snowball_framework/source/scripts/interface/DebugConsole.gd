@@ -1,21 +1,21 @@
 extends Node
 
-onready var text_input = $"%CommandInput"
-onready var display = $"%CommandDisplay"
+@onready var text_input = $"%CommandInput"
+@onready var display = $"%CommandDisplay"
 
 var buffer_limit = 128
 var history_limit: int = 256
 var history_index: int = -1
 
 var history: Array = []
-var buffer: PoolStringArray = []
+var buffer: PackedStringArray = []
 var command_modules: Array = []
 
-var error_color = RegistryColor.get_bbcode(RegistryColor.red)
-var default_color = RegistryColor.get_bbcode(RegistryColor.white)
-var light_color = RegistryColor.get_bbcode(RegistryColor.light_gray)
-var dark_color = RegistryColor.get_bbcode(RegistryColor.dark_gray)
-var success_color = RegistryColor.get_bbcode(RegistryColor.lime)
+var error_color = RegistryColor.get_text_color(RegistryColor.red)
+var default_color = RegistryColor.get_text_color(RegistryColor.white)
+var light_color = RegistryColor.get_text_color(RegistryColor.light_gray)
+var dark_color = RegistryColor.get_text_color(RegistryColor.dark_gray)
+var success_color = RegistryColor.get_text_color(RegistryColor.lime)
 
 func _ready() -> void:
 	_welcome_message()
@@ -33,7 +33,7 @@ func _input(event: InputEvent):
 func _search_history(index: int) -> void:
 	history_index = clamp(history_index + index, 0, history.size() - 1)
 	text_input.text = history[history_index]
-	text_input.caret_position = text_input.text.length()
+	text_input.caret_column = text_input.text.length()
 
 func _welcome_message() -> void:
 	var message = light_color + "——— ?[/color]" + default_color + " Welcome " + light_color + "? ———[/color]\n"
@@ -47,12 +47,12 @@ func add_command_module(module: DebugConsoleCategory):
 func send_message(message: String):
 	buffer.push_back(message)
 	if buffer.size() > buffer_limit:
-		buffer.remove(0)
-	display.bbcode_text = buffer.join("\n")
+		buffer.remove_at(0)
+	display.text = "\n".join(buffer)
 
 func clear_console():
 	buffer = []
-	display.bbcode_text = ""
+	display.text = ""
 
 func _parse_input(input: String):
 	if input.begins_with("/"):
@@ -87,5 +87,5 @@ func _on_CommandInput_text_entered(input: String):
 		history.push_front(input)
 		_parse_input(input)
 		if history.size() >= history_limit:
-			history.remove(history_limit - 1)
+			history.remove_at(history_limit - 1)
 		text_input.clear()

@@ -3,24 +3,24 @@ extends SnailStateMain
 func enter() -> void:
 	print("Snail State: ROLL")
 	entity.animator.play("SnailHide")
-	yield(entity.animator, "animation_finished")
+	await entity.animator.animation_finished
 	entity.animator.play("SnailHidden")
 	SB.audio.play_sfx(SB.audio.sfx_snail_shell_in)
 
-func unhandled_input(_event: InputEvent) -> int:
+func states_unhandled_input(_event: InputEvent) -> int:
 	if Input.is_action_just_released("action_defense"):
 		return State.IDLE
 	return State.NULL
 
-func physics_process(delta: float) -> int:
-	.physics_process(delta)
+func states_physics_process(delta: float) -> int:
+	super.states_physics_process(delta)
 	if entity.controllable and Input.is_action_just_pressed("action_main") and !shell_jumped:
 		shell_jumped = true
 		return State.JUMP
 	return State.NULL
 
-func integrate_forces(state: PhysicsDirectBodyState) -> int:
-	.integrate_forces(state)
+func states_integrate_forces(state: PhysicsDirectBodyState3D) -> int:
+	super.states_integrate_forces(state)
 	apply_movement(state, 1.5, true)
 	return State.NULL
 
@@ -38,6 +38,6 @@ func integrate_forces(state: PhysicsDirectBodyState) -> int:
 #		entity.animator.set_speed_scale(anim_speed)
 
 func exit() -> void:
-	entity.skeleton.translation = Vector3(0, -0.45, 0.05)
+	entity.skeleton.position = Vector3(0, -0.45, 0.05)
 	entity.skeleton.rotation = Vector3.ZERO
 	SB.audio.play_sfx(SB.audio.sfx_snail_shell_out)

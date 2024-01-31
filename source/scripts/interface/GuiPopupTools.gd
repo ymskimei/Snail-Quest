@@ -1,11 +1,11 @@
 extends CanvasLayer
 
-onready var container = $"%CircularContainer"
+@onready var container = $"%CircularContainer"
 var tools = preload ("res://resource/gui_tools.tres")
 var tools_open : bool
 
 func _ready():
-	tools.connect("items_updated", self, "on_items_updated")
+	tools.connect("items_updated", Callable(self, "on_items_updated"))
 	tools.duplicate_item_instances()
 
 func _process(delta):

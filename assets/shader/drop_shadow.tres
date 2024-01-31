@@ -1,4 +1,4 @@
-[gd_resource type="Shader" format=2]
+[gd_resource type="Shader" format=3 uid="uid://pfcxqw4hl87b"]
 
 [resource]
 code = "/**
@@ -11,7 +11,7 @@ render_mode blend_mix;
 
 uniform vec2 deform = vec2(2.0, 2.0);
 uniform vec2 offset = vec2(0.0, 0.0);
-uniform vec4 modulate : hint_color;
+uniform vec4 modulate : source_color;
 
 //uniform vec2 texture_size; //uncomment for GLES2
 

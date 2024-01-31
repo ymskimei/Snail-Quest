@@ -1,14 +1,14 @@
 extends MarginContainer
 
-export(Resource) var tools
+@export var tools: Resource
 
-onready var tool_display_left = $"%ToolDisplayLeft"
-onready var tool_display_down = $"%ToolDisplayBottom"
-onready var tool_display_right = $"%ToolDisplayRight"
-onready var tool_display_up = $"%ToolDisplayTop"
+@onready var tool_display_left = $"%ToolDisplayLeft"
+@onready var tool_display_down = $"%ToolDisplayBottom"
+@onready var tool_display_right = $"%ToolDisplayRight"
+@onready var tool_display_up = $"%ToolDisplayTop"
 
 func _ready():
-	tools.connect("items_updated", self, "on_items_updated")
+	tools.connect("items_updated", Callable(self, "on_items_updated"))
 
 func _process(_delta):
 	update_inventory_display()

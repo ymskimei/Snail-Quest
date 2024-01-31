@@ -1,6 +1,6 @@
 extends Node
 
-onready var interface: Node = $Interface
+@onready var interface: Node = $Interface
 
 var cfg: String = "res://export_presets.cfg"
 
@@ -13,13 +13,13 @@ var info: Dictionary = {
 
 #var dev_stage: String = "pre-alpha"
 
-var title_screen = preload("res://source/scenes/interface/screen_title.tscn").instance()
-var world = preload("res://source/scenes/world/world.tscn").instance()
+var title_screen = preload("res://source/scenes/interface/screen_title.tscn").instantiate()
+var world = preload("res://source/scenes/world/world.tscn").instantiate()
 
 func _ready():
 	SB.set_game(self)
 	add_child(title_screen)
-	title_screen.connect("game_start", self, "on_start_game")
+	title_screen.connect("game_start", Callable(self, "on_start_game"))
 	_set_strings()
 
 func _set_strings() -> void:
@@ -30,5 +30,5 @@ func _set_strings() -> void:
 	#info["author"] = Utility.read_config(cfg, "preset.0.options", "application/copyright")
 
 func on_start_game():
-	yield(title_screen, "tree_exited")
+	await title_screen.tree_exited
 	add_child(world)

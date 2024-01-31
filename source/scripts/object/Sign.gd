@@ -1,7 +1,7 @@
 extends Conversable
 
-onready var anim: AnimationPlayer = $AnimationPlayer
-onready var mesh: MeshInstance = $MeshInstance
+@onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var mesh: MeshInstance3D = $MeshInstance3D
 
 func _ready() -> void:
 	character = true

@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/mallet_full_slam.ogg-b4002a482f60c75ab73c22154a2d4cb3.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://br00k20h078mt"
+path="res://godot/imported/mallet_full_slam.ogg-b4002a482f60c75ab73c22154a2d4cb3.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/mallet_full_slam.ogg"
-dest_files=[ "res://import/mallet_full_slam.ogg-b4002a482f60c75ab73c22154a2d4cb3.oggstr" ]
+dest_files=["res://godot/imported/mallet_full_slam.ogg-b4002a482f60c75ab73c22154a2d4cb3.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

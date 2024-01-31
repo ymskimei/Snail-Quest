@@ -15,34 +15,34 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 1888.0
-margin_bottom = 1048.0
-custom_constants/margin_right = 6
-custom_constants/margin_top = 16
-custom_constants/margin_left = 16
-custom_constants/margin_bottom = 16
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 1888.0
+offset_bottom = 1048.0
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 1850.0
-margin_bottom = 1000.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 1850.0
+offset_bottom = 1000.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
-margin_right = 1834.0
-margin_bottom = 943.0
-rect_clip_content = false
+offset_right = 1834.0
+offset_bottom = 943.0
+clip_contents = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CommandDisplay" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
-rect_clip_content = false
+clip_contents = false
 focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -55,13 +55,13 @@ deselect_on_focus_loss_enabled = false
 
 [node name="CommandInput" type="LineEdit" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 947.0
-margin_right = 1834.0
-margin_bottom = 984.0
+offset_top = 947.0
+offset_right = 1834.0
+offset_bottom = 984.0
 deselect_on_focus_loss_enabled = false
 placeholder_alpha = 0.5
 caret_blink = true
-caret_blink_speed = 0.5
+caret_blink_interval = 0.5
 
 [node name="ConsoleCommandList" type="Node" parent="MarginContainer/VBoxContainer"]
 script = ExtResource( 5 )
@@ -138,4 +138,4 @@ argument_names = [ "text" ]
 argument_types = [ 3 ]
 help = "Print text to the screen"
 
-[connection signal="text_entered" from="MarginContainer/VBoxContainer/CommandInput" to="." method="_on_CommandInput_text_entered"]
+[connection signal="text_submitted" from="MarginContainer/VBoxContainer/CommandInput" to="." method="_on_CommandInput_text_entered"]

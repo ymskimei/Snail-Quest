@@ -40,7 +40,7 @@ func physics_process(_delta: float) -> int:
 #	entity.move_and_collide(velocity)
 
 func rotate() -> void:
-	look_dir = entity.rotation.y + deg2rad((randi() % 270) - 135)
+	look_dir = entity.rotation.y + deg_to_rad((randi() % 270) - 135)
 
 func check_target_loc() -> void:
 	target_distance = entity.target.get_global_translation().distance_to(entity.get_global_translation())

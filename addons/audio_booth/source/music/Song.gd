@@ -4,8 +4,8 @@ class_name Song
 signal bar()
 signal beat()
 
-var pitch_scale := 1.0 setget _set_pitch_scale
-var volume_db := 1.0 setget _set_volume_db
+var pitch_scale := 1.0: set = _set_pitch_scale
+var volume_db := 1.0: set = _set_volume_db
 
 var time := 0.0
 var beats_per_second := 0.0
@@ -13,24 +13,24 @@ var current_beat := 0
 var last_beat := -1
 var current_bar := 0
 
-export var tempo := 0.0
-export var beats := 0
+@export var tempo := 0.0
+@export var beats := 0
 
-onready var track_container := _get_track_container()
-onready var stinger_containers := _get_stinger_containers()
+@onready var track_container := _get_track_container()
+@onready var stinger_containers := _get_stinger_containers()
 
-onready var tracks : Array = track_container.get_tracks()
-onready var core : AudioStreamPlayer = track_container.get_core()
+@onready var tracks : Array = track_container.get_tracks()
+@onready var core : AudioStreamPlayer = track_container.get_core()
 
-onready var tween := Tween.new()
+@onready var tween := Tween.new()
 
 func _ready() -> void:
 	set_process(false)
 	beats_per_second = 60.0 / tempo
 	for container in stinger_containers:
-		connect(container.tick_type, container, "tick")
+		connect(container.tick_type, Callable(container, "tick"))
 	tween.name = "Tween"
-	tween.connect("tween_completed", self, "_on_Tween_tween_completed")
+	tween.connect("tween_completed", Callable(self, "_on_Tween_tween_completed"))
 	add_child(tween)
 
 func _process(delta: float) -> void:

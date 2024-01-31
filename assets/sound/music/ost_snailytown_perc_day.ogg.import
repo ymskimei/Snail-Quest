@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/ost_snailytown_perc_day.ogg-2e0136ed67e829ef03b266483c6c0da3.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cv5j8h7b0wn1u"
+path="res://godot/imported/ost_snailytown_perc_day.ogg-2e0136ed67e829ef03b266483c6c0da3.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/music/ost_snailytown_perc_day.ogg"
-dest_files=[ "res://import/ost_snailytown_perc_day.ogg-2e0136ed67e829ef03b266483c6c0da3.oggstr" ]
+dest_files=["res://godot/imported/ost_snailytown_perc_day.ogg-2e0136ed67e829ef03b266483c6c0da3.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

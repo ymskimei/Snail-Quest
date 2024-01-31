@@ -1,11 +1,11 @@
 extends CenterContainer
 
-export(Resource) var items
-export(Resource) var destination
+@export var items: Resource
+@export var destination: Resource
 
-onready var button = $Button
-onready var sprite = $Button/ItemSprite
-onready var label = $Button/ItemLabel
+@onready var button = $Button
+@onready var sprite = $Button/ItemSprite
+@onready var label = $Button/ItemLabel
 
 var contained_item
 

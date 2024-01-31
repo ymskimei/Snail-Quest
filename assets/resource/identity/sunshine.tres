@@ -5,10 +5,10 @@
 [ext_resource path="res://assets/model/snail_eye_left.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://assets/model/snail_body.mesh" type="ArrayMesh" id=4]
 [ext_resource path="res://assets/model/snail_shell.mesh" type="ArrayMesh" id=5]
-[ext_resource path="res://assets/texture/trans.png" type="Texture" id=6]
-[ext_resource path="res://assets/texture/entity/snail_shell_accent_0.png" type="Texture" id=7]
-[ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=8]
-[ext_resource path="res://assets/texture/entity/snail_eyelids_top_half.png" type="Texture" id=9]
+[ext_resource path="res://assets/texture/trans.png" type="Texture2D" id=6]
+[ext_resource path="res://assets/texture/entity/snail_shell_accent_0.png" type="Texture2D" id=7]
+[ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture2D" id=8]
+[ext_resource path="res://assets/texture/entity/snail_eyelids_top_half.png" type="Texture2D" id=9]
 
 [resource]
 script = ExtResource( 1 )

@@ -1,16 +1,16 @@
 class_name Pushable
 extends Interactable
 
-onready var anim_tween: Tween = $Tween
+@onready var anim_tween: Tween = $Tween
 
-onready var rays_positive_x: Spatial = $Rays/RaysPX
-onready var rays_negative_x: Spatial = $Rays/RaysNX
-onready var rays_positive_z: Spatial = $Rays/RaysPZ
-onready var rays_negative_z: Spatial = $Rays/RaysNZ
+@onready var rays_positive_x: Node3D = $Rays/RaysPX
+@onready var rays_negative_x: Node3D = $Rays/RaysNX
+@onready var rays_positive_z: Node3D = $Rays/RaysPZ
+@onready var rays_negative_z: Node3D = $Rays/RaysNZ
 
 var dir: Vector2
 
-var collider: PhysicsBody
+var collider: PhysicsBody3D
 var can_push: bool = true
 var pushing: bool = false
 
@@ -41,7 +41,7 @@ func is_pressed() -> bool:
 		return true
 	return false
 
-func _get_direction(b: PhysicsBody):
+func _get_direction(b: PhysicsBody3D):
 	var x = b.linear_velocity.x
 	var y = b.linear_velocity.z
 	if abs(x) < abs(y):
@@ -60,24 +60,24 @@ func _get_direction(b: PhysicsBody):
 	y = clamp(round(y), -1, 1)
 	return Vector2(x, y)
 
-func blocked(rays: Spatial) -> bool:
+func blocked(rays: Node3D) -> bool:
 	for r in rays.get_children():
 		if r.is_colliding():
 			return true
 	return false
 
 func _push() -> void:
-	var t = global_translation
+	var t = global_position
 	if !pushing and (dir.x != 0 or dir.y != 0):
 		pushing = true
 		play_sound_pushed()
-		anim_tween.interpolate_property(self, "global_translation:x", t.x, t.x + dir.x, 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
-		anim_tween.interpolate_property(self, "global_translation:z", t.z, t.z + dir.y, 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+		anim_tween.interpolate_property(self, "global_position:x", t.x, t.x + dir.x, 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+		anim_tween.interpolate_property(self, "global_position:z", t.z, t.z + dir.y, 1.0, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 		anim_tween.start()
 #		yield(get_tree().create_timer(0.4), "timeout")
 #		if !collider:
 #			play_sound_stop()
-	yield(anim_tween, "tween_completed")
+	await anim_tween.tween_completed
 	pushing = false
 
 func play_sound_pushed() -> void:

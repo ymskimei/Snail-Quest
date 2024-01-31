@@ -1,44 +1,24 @@
-[gd_resource type="Environment" load_steps=3 format=2]
+[gd_resource type="Environment" load_steps=2 format=3 uid="uid://dv672e33ippjw"]
 
-[sub_resource type="AtlasTexture" id=9]
-
-[sub_resource type="PanoramaSky" id=8]
-panorama = SubResource( 9 )
+[sub_resource type="Sky" id="8"]
 
 [resource]
-background_mode = 1
-background_sky = SubResource( 8 )
-background_color = Color( 0.439216, 0.74902, 1, 1 )
+background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 0.0
+sky = SubResource("8")
 ambient_light_sky_contribution = 0.0
-fog_enabled = true
-fog_color = Color( 0.623529, 0.670588, 0.545098, 1 )
-fog_depth_begin = 256.0
-fog_depth_end = 1025.0
-fog_depth_curve = 0.25
-fog_transmit_enabled = true
-fog_height_min = 1.0
-fog_height_max = 500.0
-fog_height_curve = 0.25
-tonemap_exposure = 0.9
-auto_exposure_scale = 0.5
-auto_exposure_speed = 1.0
-ss_reflections_enabled = true
-dof_blur_far_enabled = true
-dof_blur_far_distance = 16.0
-dof_blur_far_transition = 1024.0
-dof_blur_far_amount = 0.07
-dof_blur_far_quality = 2
-dof_blur_near_enabled = true
-dof_blur_near_distance = 3.0
-dof_blur_near_transition = 3.0
-dof_blur_near_amount = 0.15
-dof_blur_near_quality = 2
+tonemap_mode = 1
+tonemap_exposure = 0.6
+tonemap_white = 5.0
 glow_intensity = 0.1
 glow_strength = 0.8
 glow_bloom = 0.15
 glow_blend_mode = 0
-glow_hdr_luminance_cap = 0.1
 glow_hdr_scale = 0.5
-glow_bicubic_upscale = true
+glow_hdr_luminance_cap = 0.1
+fog_enabled = true
+fog_light_color = Color(0.613141, 0.763545, 0.914517, 1)
+volumetric_fog_enabled = true
 adjustment_enabled = true
-adjustment_saturation = 0.95
+adjustment_brightness = 2.0
+adjustment_contrast = 0.6

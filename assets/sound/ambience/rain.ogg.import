@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/rain.ogg-7994510851606d2e69d8e04f16b4fc9c.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dax8eo1fpqeii"
+path="res://godot/imported/rain.ogg-7994510851606d2e69d8e04f16b4fc9c.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/ambience/rain.ogg"
-dest_files=[ "res://import/rain.ogg-7994510851606d2e69d8e04f16b4fc9c.oggstr" ]
+dest_files=["res://godot/imported/rain.ogg-7994510851606d2e69d8e04f16b4fc9c.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

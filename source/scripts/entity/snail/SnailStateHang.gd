@@ -5,7 +5,7 @@ func enter() -> void:
 	entity.linear_velocity = Vector3.ZERO
 	entity.anim.play("SnailLedge")
 	
-func input(event: InputEvent) -> int:
+func states_input(event: InputEvent) -> int:
 	if event.is_action_pressed("action_main"):
 		entity.ledge()
 		return State.JUMP
@@ -14,11 +14,11 @@ func input(event: InputEvent) -> int:
 		return State.FALL
 	return State.NULL
 
-func physics_process(delta: float) -> int:
-	.physics_process(delta)
+func states_physics_process(delta: float) -> int:
+	super.states_physics_process(delta)
 	return State.NULL
 
-func integrate_forces(state: PhysicsDirectBodyState) -> int:
+func states_integrate_forces(state: PhysicsDirectBodyState3D) -> int:
 	set_hang_align(state)
 	apply_shimmy(state, 0.2)
 	if Input.is_action_pressed("joy_right"):

@@ -1,14 +1,11 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dsls5s4fjpkid"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Resource
 
 signal items_updated(index)
 
-export(Array, Resource) var items = [
-	null, null, null, null,
-	null, null, null, null
-]
+@export var items: Array[Resource]
 
 func set_item(item_index, item):
 	var previous_item = items[item_index]
@@ -63,5 +60,5 @@ func duplicate_item_instances():
 "
 
 [resource]
-script = SubResource( 1 )
-items = [ null, null, null, null ]
+script = SubResource("1")
+items = Array[Resource]([null, null, null, null])

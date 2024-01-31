@@ -1,9 +1,9 @@
 extends Node
 class_name SoundBooth
 
-onready var sfx := {}
-onready var sfx2D := {}
-onready var sfx3D := {}
+@onready var sfx := {}
+@onready var sfx2D := {}
+@onready var sfx3D := {}
 
 func _ready() -> void:
 	for child in _get_children_recursive(self, []):
@@ -26,11 +26,11 @@ func play2D(sfx_name: String, position := Vector2.ZERO) -> void:
 		return
 	sfx2D[sfx_name].play_at(position)
 
-func play3D(sfx_name: String, translation := Vector3.ZERO) -> void:
+func play3D(sfx_name: String, position := Vector3.ZERO) -> void:
 	if not sfx3D.has(sfx_name):
 		print("Could not find Sound3D: %s" % sfx_name)
 		return
-	sfx3D[sfx_name].play_at(translation)
+	sfx3D[sfx_name].play_at(position)
 
 func _get_children_recursive(node: Node, children: Array) -> Array:
 	for child in node.get_children():

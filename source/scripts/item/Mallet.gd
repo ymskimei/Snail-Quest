@@ -1,12 +1,12 @@
-extends RigidBody
+extends RigidBody3D
 
-onready var attack_area = $"%AttackArea"
-onready var particles = $"%Particles"
-onready var anim = $AnimationPlayer
+@onready var attack_area = $"%AttackArea"
+@onready var particles = $"%Particles"
+@onready var anim = $AnimationPlayer
 
-export var strength_charge_0 = 10
-export var strength_charge_1 = 20
-export var strength_full_charge = 40
+@export var strength_charge_0 = 10
+@export var strength_charge_1 = 20
+@export var strength_full_charge = 40
 
 var strength = 0
 
@@ -23,7 +23,7 @@ func swing_left():
 	attack_area.monitorable = true
 	particles.emitting = true
 	anim.play("MalletSwingLeft")
-	yield(anim, "animation_finished")
+	await anim.animation_finished
 	attack_area.monitorable = false
 	strength = 0
 
@@ -32,7 +32,7 @@ func swing_right():
 	attack_area.monitorable = true
 	particles.emitting = true
 	anim.play("MalletSwingRight")
-	yield(anim, "animation_finished")
+	await anim.animation_finished
 	attack_area.monitorable = false
 	strength = 0
 

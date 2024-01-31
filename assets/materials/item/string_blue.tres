@@ -1,13 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=2]
+[gd_resource type="ShaderMaterial" load_steps=5 format=3]
 
-[ext_resource path="res://assets/shader/cel_old.shader" type="Shader" id=1]
-[ext_resource path="res://assets/texture/item/needle_string.png" type="Texture" id=2]
+[ext_resource type="Shader" path="res://assets/shader/cel.gdshader" id="1"]
+[ext_resource type="Texture2D" uid="uid://cvwuctnrleeh3" path="res://assets/texture/item/needle_string.png" id="2"]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.039604, 0.0445545 )
-colors = PoolColorArray( 0.208984, 0.208984, 0.208984, 1, 1, 1, 1, 1 )
+offsets = PackedFloat32Array( 0.039604, 0.0445545 )
+colors = PackedColorArray( 0.208984, 0.208984, 0.208984, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=2]
+[sub_resource type="GradientTexture2D" id=2]
 gradient = SubResource( 1 )
 
 [resource]

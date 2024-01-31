@@ -1,4 +1,4 @@
-[gd_resource type="Shader" format=2]
+[gd_resource type="Shader" format=3 uid="uid://byjh3pn1ofgvk"]
 
 [resource]
 code = "// Hey this is Hei! This shader \"fakes\" a 3D-camera perspective on CanvasItems.
@@ -19,8 +19,6 @@ uniform float inset : hint_range(-2, 2) = 0.0;
 
 varying flat vec2 o;
 varying vec3 p;
-
-const float PI = 3.14159;
 
 // Creates rotation matrix
 void vertex(){

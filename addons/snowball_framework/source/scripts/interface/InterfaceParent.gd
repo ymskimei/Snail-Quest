@@ -7,7 +7,7 @@ var previous_focus: Array = []
 var previous_menu: Array = []
 
 func _ready() -> void:
-	get_viewport().connect("gui_focus_changed", self, "_on_gui_focus_changed")
+	get_viewport().connect("gui_focus_changed", Callable(self, "_on_gui_focus_changed"))
 
 func get_menu(effect: AnimationPlayer = null, new_menu: CanvasLayer = null) -> void:
 	if new_menu and !new_menu.visible:
@@ -30,9 +30,9 @@ func _on_gui_focus_changed(node: Node):
 
 func _notification(what):
 	match what:
-		NOTIFICATION_WM_FOCUS_IN:
+		NOTIFICATION_APPLICATION_FOCUS_IN:
 			game_focused = true
 			if is_instance_valid(current_focus):
 				current_focus.grab_focus()
-		NOTIFICATION_WM_FOCUS_OUT:
+		NOTIFICATION_APPLICATION_FOCUS_OUT:
 			game_focused = false

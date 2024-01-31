@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://import/cam_iso_rotate_0.ogg-d2a2fc4a329a178936d5530a6f35bdbb.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d3kxecv0xqilj"
+path="res://godot/imported/cam_iso_rotate_0.ogg-d2a2fc4a329a178936d5530a6f35bdbb.oggvorbisstr"
 
 [deps]
 
 source_file="res://assets/sound/cam_iso_rotate_0.ogg"
-dest_files=[ "res://import/cam_iso_rotate_0.ogg-d2a2fc4a329a178936d5530a6f35bdbb.oggstr" ]
+dest_files=["res://godot/imported/cam_iso_rotate_0.ogg-d2a2fc4a329a178936d5530a6f35bdbb.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

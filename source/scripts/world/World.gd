@@ -1,11 +1,11 @@
 extends Node
 
-export var resource: Resource = null
+@export var resource: Resource = null
 
-onready var anim: AnimationPlayer = $GuiTransition/AnimationPlayer
-onready var rooms: Spatial = $Rooms
+@onready var anim: AnimationPlayer = $GuiTransition/AnimationPlayer
+@onready var rooms: Node3D = $Rooms
 
-export var render_radius: int = 1 #Temporary variables for testing
+@export var render_radius: int = 1 #Temporary variables for testing
 
 var all_chunks: Dictionary = {} # Dictionary of all chunks { Vector2 : Chunk }
 var current_instances: Dictionary = {} # Dictionary of instances { Vector2 : Instance }
@@ -27,7 +27,7 @@ func _process(_delta: float) -> void:
 
 func load_room(room: PackedScene, coords: Vector3, dir: String, keep_rooms: bool = false) -> void:
 	if is_instance_valid(room):
-		var new_room = room.instance()
+		var new_room = room.instantiate()
 		if !keep_rooms:
 			for r in rooms.get_children():
 				rooms.remove_child(r)
@@ -47,19 +47,19 @@ func _on_goto_room(room: PackedScene, coords: Vector3, dir: String, pause: bool 
 		get_tree().set_deferred("paused", true)
 	if fade_in:
 		anim.play("GuiTransitionFade")
-		yield(anim, "animation_finished")
+		await anim.animation_finished
 	load_room(room, coords, dir)
-	yield(self, "room_loaded")
+	await self.room_loaded
 	anim.play_backwards("GuiTransitionFade")
-	yield(anim, "animation_finished")
+	await anim.animation_finished
 	if get_tree().paused:
 		get_tree().set_deferred("paused", false)
 
-func _get_warps(room: Spatial) -> void:
-	if is_instance_valid(room.find_node("Warps")):
-		for child in room.find_node("Warps").get_children():
+func _get_warps(room: Node3D) -> void:
+	if is_instance_valid(room.find_child("Warps")):
+		for child in room.find_child("Warps").get_children():
 			if child is Warp:
-				child.connect("goto_room", self, "_on_goto_room")
+				child.connect("goto_room", Callable(self, "_on_goto_room"))
 
 #The chunk stuff initiates here
 func _register_chunks() -> void:
@@ -72,8 +72,8 @@ func _register_chunks() -> void:
 
 # TODO: Eventually add in 2nd parameter to update data (like entities locations)
 func _add_chunk(chunk: Chunk) -> void:
-	var instance = chunk.resource.instance()
-	instance.translation = chunk.real_pos()
+	var instance = chunk.resource.instantiate()
+	instance.position = chunk.real_pos()
 	current_instances[chunk.chunk_coord] = instance
 	add_child(instance)
 
@@ -85,7 +85,7 @@ func _difference(arr1: Array, arr2: Array) -> Array:
 	return only_in_arr1
 
 func _load_chunks() -> void:
-	var current_chunk = _get_controlled_chunk(SB.controlled.global_translation)
+	var current_chunk = _get_controlled_chunk(SB.controlled.global_position)
 	var new_current = {} # Being a dictionary means we don't have duplicates
 	for x in range(render_radius):
 		for z in range(render_radius):
@@ -109,17 +109,15 @@ func _load_chunks() -> void:
 #Self explanatory
 func _get_chunk_rows(path: String) -> Array:
 	var rows_array = []
-	var directory = Directory.new()
-	directory.open(path)
-	directory.list_dir_begin()
+	var directory = DirAccess.open(path)
+	directory.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	var row_name = directory.get_next()
 	while row_name != "":
 		var row_path = path + "/" + row_name
 		if directory.current_is_dir() and !row_name.begins_with("."):
 			var row_segments = []
-			var row = Directory.new()
-			row.open(row_path)
-			row.list_dir_begin()
+			var row = DirAccess.open(row_path)
+			row.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 			var file_name = row.get_next()
 			while file_name != "":
 				var file_path = row_path + "/" + file_name
