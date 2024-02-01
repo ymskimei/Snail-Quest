@@ -7,7 +7,7 @@ var cfg: String = "res://export_presets.cfg"
 var info: Dictionary = {
 	"title": "",
 	"description": "",
-	"version": "0.3.1-pre-alpha",
+	"version": "0.5.0-pre-alpha",
 	"author": "Studio Kuwagata"
 }
 

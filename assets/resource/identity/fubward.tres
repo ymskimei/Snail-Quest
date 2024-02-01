@@ -12,6 +12,7 @@
 [resource]
 script = ExtResource( 8 )
 entity_name = "Fubward"
+entity_scale = 0.0
 character = false
 health = 3
 max_health = 3
@@ -33,5 +34,4 @@ color_body_specular = Color( 0.568627, 0.8, 0.439216, 1 )
 color_body = Color( 0.431373, 0.694118, 0.427451, 1 )
 color_body_shade = Color( 0.360784, 0.580392, 0.423529, 1 )
 color_body_accent = Color( 0, 0, 0, 1 )
-color_eye_left = Color( 0.356863, 0.2, 0.184314, 1 )
-color_eye_right = Color( 0.356863, 0.2, 0.184314, 1 )
+color_eyes = Color( 0.27451, 0.27451, 0.27451, 1 )

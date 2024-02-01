@@ -1,9 +1,5 @@
 extends Node
 
-onready var input: Node = $Input
-onready var item: Node = $Item
-onready var audio: Node = $Audio
-
 #func get_modifications(mesh: MeshInstance) -> void:
 #	pass
 
@@ -121,6 +117,21 @@ func get_names_from_paths(folder_path: String, extension: String) -> PoolStringA
 		e.erase(e.length() - extension.length(), extension.length())
 		new_arr.append(e)
 	return new_arr
+
+func get_loaded_files(load_path, type: String, extension: String) -> Array:
+	var arr: Array = []
+	for m in get_files(load_path, true, true):
+		if m.begins_with(load_path + type) and m.ends_with(extension):
+			arr.append(load(m))
+	return arr
+
+func array_cycle(current, arr: Array, next: bool) -> int:
+	var index = arr.find(current)
+	if next:
+		index = (index + 1) % arr.size()
+	else:
+		index = (index - 1 + arr.size()) % arr.size()
+	return index
 
 func read_config(path: String, section: String, key: String):
 	var config = ConfigFile.new()

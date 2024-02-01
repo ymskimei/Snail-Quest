@@ -2,7 +2,7 @@
 
 [ext_resource path="res://source/scripts/resource/ResourceIdentitySnail.gd" type="Script" id=1]
 [ext_resource path="res://assets/texture/trans.png" type="Texture" id=2]
-[ext_resource path="res://assets/model/snail_body_thin.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/model/snail_body_small.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=4]
 [ext_resource path="res://assets/model/snail_shell.mesh" type="ArrayMesh" id=5]
 [ext_resource path="res://assets/texture/entity/snail_shell_accent_2.png" type="Texture" id=6]
@@ -12,6 +12,7 @@
 [resource]
 script = ExtResource( 1 )
 entity_name = "Snail"
+entity_scale = 0.0
 character = false
 health = 30
 max_health = 30
@@ -33,5 +34,4 @@ color_body_specular = Color( 0.858824, 0.870588, 0.784314, 1 )
 color_body = Color( 0.760784, 0.772549, 0.705882, 1 )
 color_body_shade = Color( 0.627451, 0.658824, 0.560784, 1 )
 color_body_accent = Color( 0.627451, 0.658824, 0.560784, 1 )
-color_eye_left = Color( 0, 0, 0, 1 )
-color_eye_right = Color( 0, 0, 0, 1 )
+color_eyes = Color( 0.443137, 0.443137, 0.443137, 1 )

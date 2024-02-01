@@ -20,5 +20,4 @@ export var color_body: Color = Color("FFFFFF")
 export var color_body_shade: Color = Color("FFFFFF")
 export var color_body_accent: Color = Color("FFFFFF")
 
-export var color_eye_left: Color = Color("FFFFFF")
-export var color_eye_right: Color = Color("FFFFFF")
+export var color_eyes: Color = Color("FFFFFF")

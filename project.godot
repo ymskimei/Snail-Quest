@@ -14,16 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/interface/CursorAim.gd"
 }, {
-"base": "AudioStreamPlayer",
-"class": "AudioStreamPlayerADSR",
-"language": "GDScript",
-"path": "res://addons/addons/midi/ADSR.gd"
-}, {
-"base": "Reference",
-"class": "Bank",
-"language": "GDScript",
-"path": "res://addons/addons/midi/Bank.gd"
-}, {
 "base": "CameraStateMain",
 "class": "CameraStateIsom",
 "language": "GDScript",
@@ -115,11 +105,6 @@ _global_script_classes=[ {
 "path": "res://addons/snowball_framework/source/scripts/interface/MenuParent.gd"
 }, {
 "base": "Node",
-"class": "MidiPlayer",
-"language": "GDScript",
-"path": "res://addons/addons/midi/MidiPlayer.gd"
-}, {
-"base": "Node",
 "class": "MusicBooth",
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/MusicBooth.gd"
@@ -199,11 +184,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourcePushableBlock.gd"
 }, {
-"base": "Reference",
-"class": "SMF",
-"language": "GDScript",
-"path": "res://addons/addons/midi/SMF.gd"
-}, {
 "base": "Entity",
 "class": "Snail",
 "language": "GDScript",
@@ -239,11 +219,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/sfx/SoundBooth.gd"
 }, {
-"base": "Reference",
-"class": "SoundFont",
-"language": "GDScript",
-"path": "res://addons/addons/midi/SoundFont.gd"
-}, {
 "base": "Node",
 "class": "StateMain",
 "language": "GDScript",
@@ -266,8 +241,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AimCursor": "",
-"AudioStreamPlayerADSR": "",
-"Bank": "",
 "CameraStateIsom": "",
 "CameraStateLock": "",
 "CameraStateMain": "",
@@ -286,7 +259,6 @@ _global_script_class_icons={
 "MainCamera": "",
 "Menu": "",
 "MenuParent": "",
-"MidiPlayer": "res://addons/addons/midi/icon.png",
 "MusicBooth": "",
 "Options": "",
 "Pushable": "",
@@ -303,7 +275,6 @@ _global_script_class_icons={
 "ResourceLootTable": "",
 "ResourceMusic": "",
 "ResourcePushableBlock": "",
-"SMF": "",
 "Snail": "",
 "SnailStateMain": "",
 "Song": "",
@@ -311,7 +282,6 @@ _global_script_class_icons={
 "Sound2D": "",
 "Sound3D": "",
 "SoundBooth": "",
-"SoundFont": "",
 "StateMain": "",
 "StingerContainer": "",
 "TrackContainer": "",
@@ -383,7 +353,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/circular_container/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/multimesh_scatter/plugin.cfg", "res://addons/snowball_framework/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/addons/midi/plugin.cfg", "res://addons/audio_booth/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/gamelevels_blueprint/plugin.cfg", "res://addons/multimesh_scatter/plugin.cfg", "res://addons/snowball_framework/plugin.cfg" )
 
 [global]
 
