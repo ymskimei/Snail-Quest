@@ -12,7 +12,7 @@
 [resource]
 script = ExtResource( 1 )
 entity_name = "Sheldon"
-entity_scale = 0.0
+entity_scale = 1.0
 character = false
 health = 3
 max_health = 3
@@ -31,7 +31,7 @@ color_shell_base = Color( 0.8, 0.54902, 0.32549, 1 )
 color_shell_base_shade = Color( 0.717647, 0.431373, 0.298039, 1 )
 color_shell_accent = Color( 0.615686, 0.372549, 0.254902, 1 )
 color_body_specular = Color( 0.764706, 0.941176, 1, 1 )
-color_body = Color( 0.572549, 0.854902, 0.992157, 1 )
+color_body_base = Color( 1, 1, 1, 1 )
 color_body_shade = Color( 0.454902, 0.760784, 0.996078, 1 )
 color_body_accent = Color( 0, 0, 0, 1 )
 color_eyes = Color( 0.756863, 0.180392, 0.545098, 1 )

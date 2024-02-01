@@ -2,7 +2,7 @@ class_name ResourceIdentity
 extends Resource
 
 export var entity_name: String = "???"
-export var entity_scale: float
+export var entity_scale: float = 1.0
 
 export var character: bool = false
 

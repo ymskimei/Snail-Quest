@@ -13,7 +13,7 @@
 [resource]
 script = ExtResource( 1 )
 entity_name = "Sunshine"
-entity_scale = 0.0
+entity_scale = 1.0
 character = false
 health = 3
 max_health = 3
@@ -32,7 +32,7 @@ color_shell_base = Color( 0.482353, 0.321569, 0.717647, 1 )
 color_shell_base_shade = Color( 0.356863, 0.262745, 0.556863, 1 )
 color_shell_accent = Color( 0.694118, 0.215686, 0.596078, 1 )
 color_body_specular = Color( 1, 0.898039, 0.882353, 1 )
-color_body = Color( 0.905882, 0.760784, 0.682353, 1 )
+color_body_base = Color( 1, 1, 1, 1 )
 color_body_shade = Color( 0.85098, 0.643137, 0.517647, 1 )
 color_body_accent = Color( 0.85098, 0.662745, 0.662745, 1 )
 color_eyes = Color( 0.341176, 0.266667, 0.215686, 1 )

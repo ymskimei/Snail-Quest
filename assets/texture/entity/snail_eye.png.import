@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://import/snail_eyes.png-92ded26fa9b87847c71dadf3b9cfb723.s3tc.stex"
-path.etc="res://import/snail_eyes.png-92ded26fa9b87847c71dadf3b9cfb723.etc.stex"
+path.s3tc="res://import/snail_eye.png-aae4bbe3fb5c34acc31bca93a564b72c.s3tc.stex"
+path.etc="res://import/snail_eye.png-aae4bbe3fb5c34acc31bca93a564b72c.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/texture/entity/snail_eyes.png"
-dest_files=[ "res://import/snail_eyes.png-92ded26fa9b87847c71dadf3b9cfb723.s3tc.stex", "res://import/snail_eyes.png-92ded26fa9b87847c71dadf3b9cfb723.etc.stex" ]
+source_file="res://assets/texture/entity/snail_eye.png"
+dest_files=[ "res://import/snail_eye.png-aae4bbe3fb5c34acc31bca93a564b72c.s3tc.stex", "res://import/snail_eye.png-aae4bbe3fb5c34acc31bca93a564b72c.etc.stex" ]
 
 [params]
 

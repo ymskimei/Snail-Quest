@@ -16,7 +16,7 @@ export var color_shell_base_shade: Color = Color("FFFFFF")
 export var color_shell_accent: Color = Color("FFFFFF")
 
 export var color_body_specular: Color = Color("FFFFFF")
-export var color_body: Color = Color("FFFFFF")
+export var color_body_base: Color = Color("FFFFFF")
 export var color_body_shade: Color = Color("FFFFFF")
 export var color_body_accent: Color = Color("FFFFFF")
 
