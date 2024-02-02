@@ -5,9 +5,11 @@ onready var camera: Camera = $Camera
 onready var shine: Sprite3D = $Camera/Sprite3D
 
 onready var name_box: LineEdit = $Control/Background/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/LineEdit
+onready var size_slider: HSlider = $Control/Background/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/SliderSize
 onready var color_panel: NinePatchRect = $Control/ColorPicker
 onready var color_picker: ColorPicker = $Control/ColorPicker/MarginContainer/Background2/MarginContainer/VBoxContainer/ColorPicker
-onready var size_slider: HSlider = $Control/Background/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer2/SliderSize
+onready var resource_loader: NinePatchRect = $Control/ResourceLoader
+onready var file_container: VBoxContainer = $Control/ResourceLoader/MarginContainer/Background2/MarginContainer/VBoxContainer/ScrollContainer/FileContainer
 
 onready var color_display_shell: TextureRect = $Control/Background/MarginContainer/VBoxContainer/VBoxContainer2/VBoxContainer/ButtonColorShell/TextureColorShell
 onready var color_display_shell_accent: TextureRect = $Control/Background/MarginContainer/VBoxContainer/VBoxContainer2/VBoxContainer/ButtonColorShellAccent/TextureColorShellAccent
@@ -15,11 +17,13 @@ onready var color_display_body: TextureRect = $Control/Background/MarginContaine
 onready var color_display_body_accent: TextureRect = $Control/Background/MarginContainer/VBoxContainer/VBoxContainer2/VBoxContainer/ButtonColorBodyAccent/TextureColorBodyAccent
 onready var color_display_eyes: TextureRect = $Control/Background/MarginContainer/VBoxContainer/VBoxContainer2/VBoxContainer/ButtonColorEyes/TextureColorEyes
 
+var resource_path: String = "res://assets/resource/identity/snail/"
+
 var memorized_color: Color = Color("FFFFFF")
 var color_to_set: int = 0
 
 func _ready() -> void:
-	name_box.text = snail.identity.entity_name
+	_update_from_identity()
 
 func _physics_process(delta: float) -> void:
 	snail.global_rotation.y += 1 * delta
@@ -96,10 +100,44 @@ func _on_ButtonUndo_button_down() -> void:
 func _on_ButtonBack_button_down() -> void:
 	_open_color_picker(memorized_color)
 
-func _on_ButtonRandom_button_down():
+func _on_ButtonRandom_button_down() -> void:
 	snail.run_randomizer()
-	name_box.text = snail.identity.entity_name
-	size_slider.value = snail.identity.entity_scale * 50
+	_update_from_identity()
+
+func _on_ButtonSave_button_down() -> void:
+	snail.save_resource(resource_path + "generated/")
+
+func _on_ButtonLoad_button_down() -> void:
+	open_file_container(resource_path, true)
+
+func _on_ButtonLoadBack_button_down() -> void:
+	open_file_container(resource_path)
+
+func open_file_container(path: String, toggle: bool = false) -> void:
+	if toggle:
+		populate_file_container(resource_path)
+		resource_loader.show()
+	else:
+		resource_loader.hide()
+		populate_file_container(resource_path, false)
+		_update_from_identity()
+
+func populate_file_container(path: String, toggle: bool = true) -> void:
+	var resources = Utility.get_files(path, true, true)
+	if toggle:
+		for i in resources:
+			var button = Button.new()
+			var file_name = i.get_file()
+			button.text = file_name
+			file_container.add_child(button)
+			button.connect("pressed", self, "_on_File_selected", [i])
+	else:
+		for m in file_container.get_children():
+			m.queue_free()
+
+func _on_File_selected(path) -> void:
+	snail.load_resource(path)
+	open_file_container(resource_path)
 
 func _open_color_picker(to_set: Color, selection: int = 0, toggle: bool = false) -> void:
 	if toggle:
@@ -109,6 +147,10 @@ func _open_color_picker(to_set: Color, selection: int = 0, toggle: bool = false)
 		match_to_color()
 	else:
 		color_panel.hide()
+
+func _update_from_identity() -> void:
+	name_box.text = snail.identity.entity_name
+	size_slider.value = snail.identity.entity_scale * 50
 
 func _update_displays() -> void:
 	color_display_shell.modulate = snail.identity.color_shell_base

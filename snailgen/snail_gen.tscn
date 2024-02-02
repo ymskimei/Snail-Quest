@@ -28,7 +28,7 @@
 [ext_resource path="res://assets/resource/environment/environment_default.tres" type="Environment" id=26]
 [ext_resource path="res://assets/interface/theme/menu.tres" type="Theme" id=27]
 [ext_resource path="res://snailgen/SnailGenMenu.gd" type="Script" id=28]
-[ext_resource path="res://assets/resource/identity/snail.tres" type="Resource" id=29]
+[ext_resource path="res://assets/resource/identity/snail/snail.tres" type="Resource" id=29]
 [ext_resource path="res://addons/snowball_framework/assets/texture/interface/npatch_debug.png" type="Texture" id=30]
 [ext_resource path="res://snailgen/color_body.png" type="Texture" id=31]
 [ext_resource path="res://snailgen/color_eyes.png" type="Texture" id=32]
@@ -1345,10 +1345,10 @@ margin_right = 685.0
 margin_bottom = 760.0
 
 [node name="ColorPicker" type="ColorPicker" parent="Control/ColorPicker/MarginContainer/Background2/MarginContainer/VBoxContainer"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 625.0
-margin_bottom = 557.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 633.0
+margin_bottom = 565.0
 color = Color( 0.760784, 0.490196, 0.490196, 1 )
 edit_alpha = false
 
@@ -1368,6 +1368,80 @@ icon = ExtResource( 47 )
 [node name="ButtonBack" type="Button" parent="Control/ColorPicker/MarginContainer/Background2/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 342.0
 margin_right = 598.0
+margin_bottom = 128.0
+icon = ExtResource( 46 )
+
+[node name="ResourceLoader" type="NinePatchRect" parent="Control"]
+visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -540.0
+margin_right = 1157.0
+margin_bottom = 540.0
+theme = ExtResource( 27 )
+texture = ExtResource( 35 )
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_bottom = 64
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ResourceLoader"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 264
+custom_constants/margin_top = 128
+custom_constants/margin_left = 156
+custom_constants/margin_bottom = 128
+
+[node name="Background2" type="NinePatchRect" parent="Control/ResourceLoader/MarginContainer"]
+margin_left = 156.0
+margin_top = 128.0
+margin_right = 893.0
+margin_bottom = 952.0
+theme = ExtResource( 27 )
+texture = ExtResource( 30 )
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ResourceLoader/MarginContainer/Background2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 12.0
+custom_constants/margin_right = 64
+custom_constants/margin_top = 64
+custom_constants/margin_left = 64
+custom_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ResourceLoader/MarginContainer/Background2/MarginContainer"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 685.0
+margin_bottom = 760.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/ResourceLoader/MarginContainer/Background2/MarginContainer/VBoxContainer"]
+margin_right = 621.0
+margin_bottom = 564.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FileContainer" type="VBoxContainer" parent="Control/ResourceLoader/MarginContainer/Background2/MarginContainer/VBoxContainer/ScrollContainer"]
+margin_right = 621.0
+margin_bottom = 564.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ResourceLoader/MarginContainer/Background2/MarginContainer/VBoxContainer"]
+margin_top = 568.0
+margin_right = 621.0
+margin_bottom = 696.0
+custom_constants/separation = 64
+alignment = 1
+
+[node name="ButtonLoadBack" type="Button" parent="Control/ResourceLoader/MarginContainer/Background2/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 182.0
+margin_right = 438.0
 margin_bottom = 128.0
 icon = ExtResource( 46 )
 
@@ -1413,6 +1487,9 @@ directional_shadow_max_distance = 256.0
 [connection signal="button_down" from="Control/Background/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer6/HBoxContainer2/ButtonEyelidLeft" to="." method="_on_ButtonEyelidLeft_button_down"]
 [connection signal="button_down" from="Control/Background/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer6/HBoxContainer2/ButtonEyelidRight" to="." method="_on_ButtonEyelidRight_button_down"]
 [connection signal="button_down" from="Control/Background/MarginContainer/VBoxContainer/VBoxContainer3/HBoxContainer2/ButtonRandom" to="." method="_on_ButtonRandom_button_down"]
+[connection signal="button_down" from="Control/Background/MarginContainer/VBoxContainer/VBoxContainer3/HBoxContainer2/ButtonSave" to="." method="_on_ButtonSave_button_down"]
+[connection signal="button_down" from="Control/Background/MarginContainer/VBoxContainer/VBoxContainer3/HBoxContainer2/ButtonLoad" to="." method="_on_ButtonLoad_button_down"]
 [connection signal="color_changed" from="Control/ColorPicker/MarginContainer/Background2/MarginContainer/VBoxContainer/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
 [connection signal="button_down" from="Control/ColorPicker/MarginContainer/Background2/MarginContainer/VBoxContainer/HBoxContainer/ButtonUndo" to="." method="_on_ButtonUndo_button_down"]
 [connection signal="button_down" from="Control/ColorPicker/MarginContainer/Background2/MarginContainer/VBoxContainer/HBoxContainer/ButtonBack" to="." method="_on_ButtonBack_button_down"]
+[connection signal="button_down" from="Control/ResourceLoader/MarginContainer/Background2/MarginContainer/VBoxContainer/HBoxContainer/ButtonLoadBack" to="." method="_on_ButtonLoadBack_button_down"]
