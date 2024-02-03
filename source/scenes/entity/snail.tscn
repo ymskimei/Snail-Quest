@@ -9,10 +9,10 @@
 [ext_resource path="res://assets/materials/entity/snail_eyes.tres" type="Material" id=7]
 [ext_resource path="res://assets/materials/entity/snail_body.tres" type="Material" id=8]
 [ext_resource path="res://assets/resource/animation/ShellUnhide.tres" type="Animation" id=9]
-[ext_resource path="res://assets/model/snail_body.mesh" type="ArrayMesh" id=10]
-[ext_resource path="res://assets/model/snail_eye_left.mesh" type="ArrayMesh" id=11]
-[ext_resource path="res://assets/model/snail_shell.mesh" type="ArrayMesh" id=12]
-[ext_resource path="res://assets/model/snail_eye_right.mesh" type="ArrayMesh" id=13]
+[ext_resource path="res://assets/model/entity/snail_body.mesh" type="ArrayMesh" id=10]
+[ext_resource path="res://assets/model/entity/snail_eye_left.mesh" type="ArrayMesh" id=11]
+[ext_resource path="res://assets/model/entity/snail_shell_1.mesh" type="ArrayMesh" id=12]
+[ext_resource path="res://assets/model/entity/snail_eye_right.mesh" type="ArrayMesh" id=13]
 [ext_resource path="res://assets/resource/animation/SnailRollFront.tres" type="Animation" id=14]
 [ext_resource path="res://assets/resource/animation/SnailHidden.tres" type="Animation" id=15]
 [ext_resource path="res://assets/resource/animation/SnailFlip.tres" type="Animation" id=16]
@@ -37,7 +37,7 @@
 [ext_resource path="res://assets/resource/animation/SnailPush.tres" type="Animation" id=35]
 [ext_resource path="res://source/scripts/entity/snail/SnailStatePush.gd" type="Script" id=36]
 [ext_resource path="res://assets/resource/animation/SnailPress.tres" type="Animation" id=37]
-[ext_resource path="res://assets/resource/identity/snail.tres" type="Resource" id=38]
+[ext_resource path="res://assets/resource/identity/snail/snail.tres" type="Resource" id=38]
 
 [sub_resource type="PhysicsMaterial" id=32]
 

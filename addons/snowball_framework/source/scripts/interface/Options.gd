@@ -207,7 +207,7 @@ func get_invert_vertical() -> bool:
 	var value = Data.get_config("controls", "camera/invert_vertical", false)
 	return value
 
-func set_camera_sensitivity(i: int):
+func set_camera_sensitivity(i: float):
 	Data.set_config("controls", "camera/sensitivity", i)
 
 func get_camera_sensitivity() -> float:

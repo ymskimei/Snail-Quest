@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/sound/ambience/amb_rain.ogg" type="AudioStream" id=1]
+[ext_resource path="res://assets/sound/ambience/rain.ogg" type="AudioStream" id=1]
 [ext_resource path="res://assets/sound/ambience/wind.ogg" type="AudioStream" id=2]
 [ext_resource path="res://addons/audio_booth/source/music/Song.gd" type="Script" id=3]
 [ext_resource path="res://addons/audio_booth/source/music/containers/TrackContainer.gd" type="Script" id=4]
-[ext_resource path="res://assets/sound/ambience/amb_thunder.ogg" type="AudioStream" id=5]
-[ext_resource path="res://assets/sound/ambience/amb_water.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/sound/ambience/thunder.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/sound/ambience/water.ogg" type="AudioStream" id=6]
 [ext_resource path="res://assets/sound/ambience/leaves.ogg" type="AudioStream" id=7]
 
 

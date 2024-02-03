@@ -178,5 +178,3 @@ func _notification(what):
 	match what:
 		NOTIFICATION_WM_FOCUS_IN:
 			_set_from_config()
-		NOTIFICATION_WM_FOCUS_OUT:
-			pass

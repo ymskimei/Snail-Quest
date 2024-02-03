@@ -2,7 +2,8 @@
 
 [ext_resource path="res://source/scripts/interface/DebugCharacter.gd" type="Script" id=1]
 [ext_resource path="res://assets/interface/theme/menu.tres" type="Theme" id=2]
-[ext_resource path="res://assets/resource/identity/sheldon.tres" type="Resource" id=3]
+[ext_resource path="res://assets/resource/identity/snail/sheldon.tres" type="Resource" id=3]
+
 
 
 

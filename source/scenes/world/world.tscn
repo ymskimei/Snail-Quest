@@ -6,12 +6,13 @@
 [ext_resource path="res://addons/snowball_framework/source/scripts/auto/time/GameTime.gd" type="Script" id=4]
 [ext_resource path="res://addons/snowball_framework/source/scripts/auto/time/PlayTime.gd" type="Script" id=5]
 [ext_resource path="res://source/scenes/interface/effect_transition.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/resource/identity/sheldon.tres" type="Resource" id=7]
+[ext_resource path="res://assets/resource/identity/snail/sheldon.tres" type="Resource" id=7]
 [ext_resource path="res://assets/resource/warp/world_test.tres" type="Resource" id=8]
-[ext_resource path="res://assets/resource/identity/izabell.tres" type="Resource" id=9]
+[ext_resource path="res://assets/resource/identity/snail/izabell.tres" type="Resource" id=9]
 [ext_resource path="res://source/scenes/entity/vehicle.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/resource/identity/fubward.tres" type="Resource" id=12]
-[ext_resource path="res://assets/resource/identity/sunshine.tres" type="Resource" id=13]
+[ext_resource path="res://assets/resource/identity/snail/fubward.tres" type="Resource" id=12]
+[ext_resource path="res://assets/resource/identity/snail/sunshine.tres" type="Resource" id=13]
+
 
 [node name="World" type="Spatial"]
 script = ExtResource( 3 )
