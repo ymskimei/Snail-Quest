@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourceDialogSets.gd" type="Script" id=1]
+[ext_resource path="res://assets/resource/dialog/sets/silly.tres" type="Resource" id=2]
+[ext_resource path="res://assets/resource/dialog/sets/shy.tres" type="Resource" id=3]
+[ext_resource path="res://assets/resource/dialog/sets/smug.tres" type="Resource" id=4]
+[ext_resource path="res://assets/resource/dialog/sets/chill.tres" type="Resource" id=5]
+[ext_resource path="res://assets/resource/dialog/sets/rude.tres" type="Resource" id=6]
+[ext_resource path="res://assets/resource/dialog/sets/crazy.tres" type="Resource" id=7]
+
+[resource]
+script = ExtResource( 1 )
+silly = ExtResource( 2 )
+rude = ExtResource( 6 )
+chill = ExtResource( 5 )
+shy = ExtResource( 3 )
+smug = ExtResource( 4 )
+crazy = ExtResource( 7 )

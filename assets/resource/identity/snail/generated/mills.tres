@@ -1,0 +1,49 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://assets/model/object/hat_0.mesh" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/model/entity/snail_shell_1.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=3]
+[ext_resource path="res://assets/texture/entity/snail_shell_accent_2.png" type="Texture" id=4]
+[ext_resource path="res://assets/texture/object/hat_0.png" type="Texture" id=5]
+[ext_resource path="res://assets/texture/object/sticker_0.png" type="Texture" id=6]
+[ext_resource path="res://assets/model/entity/snail_body_small.mesh" type="ArrayMesh" id=7]
+[ext_resource path="res://source/scripts/resource/ResourceIdentitySnail.gd" type="Script" id=8]
+[ext_resource path="res://assets/model/entity/snail_eye_right.mesh" type="ArrayMesh" id=9]
+[ext_resource path="res://assets/model/entity/snail_eye_left.mesh" type="ArrayMesh" id=10]
+[ext_resource path="res://assets/texture/trans.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 8 )
+entity_name = "Mills"
+entity_scale = 1.0
+character = false
+catchphrase = "dude"
+personality = 0
+sleepy = false
+bored = false
+afraid = false
+friendliness = 2
+health = 30
+max_health = 30
+strength = 5
+speed = 10
+jump = 65
+mesh_shell = ExtResource( 2 )
+mesh_body = ExtResource( 7 )
+mesh_eye_left = ExtResource( 10 )
+mesh_eye_right = ExtResource( 9 )
+pattern_shell = ExtResource( 4 )
+pattern_body = ExtResource( 11 )
+pattern_eyes = ExtResource( 3 )
+pattern_eyelids = ExtResource( 11 )
+color_shell_base = Color( 0.866667, 0.980392, 1, 1 )
+color_shell_base_shade = Color( 0.670588, 0.854902, 0.92549, 1 )
+color_shell_accent = Color( 0.590869, 0.767435, 0.881559, 1 )
+color_body_specular = Color( 0.588235, 0.760784, 1, 1 )
+color_body_base = Color( 0.353844, 0.600425, 0.941158, 1 )
+color_body_shade = Color( 0.384314, 0.501961, 0.890196, 1 )
+color_body_accent = Color( 1, 1, 1, 1 )
+color_eyes = Color( 0.22645, 0.638906, 0.310056, 1 )
+mesh_hat = ExtResource( 1 )
+pattern_hat = ExtResource( 5 )
+pattern_sticker = ExtResource( 6 )

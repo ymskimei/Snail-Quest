@@ -140,6 +140,16 @@ _global_script_classes=[ {
 "path": "res://source/scripts/resource/ResourceDialog.gd"
 }, {
 "base": "Resource",
+"class": "ResourceDialogModes",
+"language": "GDScript",
+"path": "res://source/scripts/resource/ResourceDialogModes.gd"
+}, {
+"base": "Resource",
+"class": "ResourceDialogSets",
+"language": "GDScript",
+"path": "res://source/scripts/resource/ResourceDialogSets.gd"
+}, {
+"base": "Resource",
 "class": "ResourceEnvironment",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceEnvironment.gd"
@@ -266,6 +276,8 @@ _global_script_class_icons={
 "RegistryColor": "",
 "ResourceAudioPlayer": "",
 "ResourceDialog": "",
+"ResourceDialogModes": "",
+"ResourceDialogSets": "",
 "ResourceEnvironment": "",
 "ResourceIdentity": "",
 "ResourceIdentitySnail": "",

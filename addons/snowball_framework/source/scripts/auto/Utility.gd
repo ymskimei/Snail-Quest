@@ -128,9 +128,9 @@ func get_loaded_files(load_path, type: String, extension: String) -> Array:
 func array_cycle(current, arr: Array, next: bool) -> int:
 	var index = arr.find(current)
 	if next:
-		index = (index + 1) % arr.size()
+		index = (index - 1) % arr.size()
 	else:
-		index = (index - 1 + arr.size()) % arr.size()
+		index = (index + 1 + arr.size()) % arr.size()
 	return index
 
 func read_config(path: String, section: String, key: String):

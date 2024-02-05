@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://addons/snowball_framework/source/scenes/interface/debug_healthbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/snowball_framework/source/scenes/entity/state_controller.tscn" type="PackedScene" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://source/scripts/entity/snail/SnailStatePush.gd" type="Script" id=36]
 [ext_resource path="res://assets/resource/animation/SnailPress.tres" type="Animation" id=37]
 [ext_resource path="res://assets/resource/identity/snail/snail.tres" type="Resource" id=38]
+[ext_resource path="res://source/scenes/particle/poof.tscn" type="PackedScene" id=39]
 
 [sub_resource type="PhysicsMaterial" id=32]
 
@@ -920,6 +921,8 @@ anims/SnailSpin = ExtResource( 32 )
 
 [node name="Tween" type="Tween" parent="."]
 playback_process_mode = 0
+
+[node name="Spatial" parent="." instance=ExtResource( 39 )]
 
 [connection signal="body_entered" from="." to="." method="_on_Snail_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Snail_body_exited"]
