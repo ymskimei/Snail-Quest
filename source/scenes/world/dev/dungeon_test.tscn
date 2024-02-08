@@ -7,7 +7,7 @@
 [ext_resource path="res://source/scenes/object/sign.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/scenes/object/door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://source/scenes/object/ring_box.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/resource/dialog/test_dialog.tres" type="Resource" id=8]
+[ext_resource path="res://assets/resource/dialog/old/test_dialog.tres" type="Resource" id=8]
 [ext_resource path="res://source/scenes/entity/snail.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/resource/identity/snail/izabell.tres" type="Resource" id=10]
 [ext_resource path="res://assets/resource/identity/snail/sunshine.tres" type="Resource" id=11]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/resource/item/tool_samara.tres" type="Resource" id=17]
 [ext_resource path="res://assets/resource/item/item_test_2.tres" type="Resource" id=18]
 [ext_resource path="res://source/scenes/object/pushable_block.tscn" type="PackedScene" id=19]
+
 
 
 [sub_resource type="ShaderMaterial" id=1]

@@ -1,6 +1,7 @@
 extends Node
 
 onready var interface: Node = $Interface
+onready var dialog_randomizer: Node = $Resource/DialogRandomizer
 
 var cfg: String = "res://export_presets.cfg"
 

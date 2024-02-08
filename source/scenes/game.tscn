@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://source/scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/scripts/interface/Interface.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://source/scenes/interface/hud.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/snowball_framework/source/scenes/interface/debug_overlay.tscn" type="PackedScene" id=7]
 [ext_resource path="res://source/scripts/Cache.gd" type="Script" id=8]
+[ext_resource path="res://tools/textgen/DialogRandomizer.gd" type="Script" id=9]
 
 [sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
@@ -96,5 +97,10 @@ playback_process_mode = 0
 anims/Effect = SubResource( 11 )
 anims/RESET = SubResource( 12 )
 
-[node name="Cache" type="Node" parent="."]
+[node name="Resource" type="Node" parent="."]
+
+[node name="MaterialCache" type="Node" parent="Resource"]
 script = ExtResource( 8 )
+
+[node name="DialogRandomizer" type="Node" parent="Resource"]
+script = ExtResource( 9 )

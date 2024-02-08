@@ -1,7 +1,8 @@
 extends Node
 
 var game_time: int = 0
-export var second_speed = 1
+var game_day: Vector2 = Vector2(1, 1)
+var second_speed = 1
 
 func _ready() -> void:
 	var second_timer = Timer.new()

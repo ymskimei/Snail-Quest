@@ -3,6 +3,8 @@ extends Node
 #func get_modifications(mesh: MeshInstance) -> void:
 #	pass
 
+var text_transitions: Dictionary = {}
+
 func rigid_look_at(state: PhysicsDirectBodyState, position: Transform, target: Vector3) -> void:
 	var up_dir = Vector3(0, 1, 0)
 	var cur_dir = position.basis.xform(Vector3(0, 0, 1))
@@ -148,3 +150,33 @@ func pause(toggle: bool) -> void:
 		get_tree().set_deferred("paused", true)
 	else:
 		get_tree().set_deferred("paused", false)
+
+func register_text_transition(rich_text_transition):
+	text_transitions[rich_text_transition.id] = rich_text_transition
+
+func unregister_text_transition(rich_text_transition):
+	text_transitions.erase(rich_text_transition.id)
+
+func tween_in(id: String, rt: RichTextLabel, time: float = 1.0, time_per_character :bool = false, fade_distance: float = 8.0, all_together: bool = false):
+	var d = text_transitions[id]
+	d.total_characters = len(rt.text)
+	d.backwards = false
+	d.fade_distance = fade_distance
+	d.all_together = all_together
+	var t = time if not time_per_character else time * len(rt.text)
+	var tw = rt.get_node("Tween")
+	tw.stop_all()
+	tw.interpolate_property(d, "time", 0.0, 1.0, t)
+	tw.start()
+
+func tween_out(id: String, rt: RichTextLabel, time: float = 1.0, time_per_character: bool = false, fade_distance: float = 8.0, all_together: bool = false):
+	var d = text_transitions[id]
+	d.total_characters = len(rt.text)
+	d.backwards = true
+	d.fade_distance = fade_distance
+	d.all_together = all_together
+	var t = time if not time_per_character else time * len(rt.text)
+	var tw = rt.get_node("Tween")
+	tw.stop_all()
+	tw.interpolate_property(d, "time", 1.0, 0.0, t)
+	tw.start()

@@ -1,12 +1,21 @@
 class_name ResourceIdentity
 extends Resource
 
-export var entity_name: String = "???"
+export var entity_name: String = "NAMELESS"
 
 export var entity_scale: float = 1.0
 
 export var character: bool = false
-export var catchphrase: String = "dude"
+export var has_met: bool = false
+export var has_celebrated: bool = true
+export var alone: bool = true
+export var time_aged: bool = true
+
+export var birthday: Vector2 = Vector2(0, 0)
+export var phrase: String = "PHRASE"
+export var food: String = "FOOD"
+export var animal: String = "ANIMAL"
+export var fear: String = "FEAR"
 
 export var personality: int = 0
 export var state: int = 0

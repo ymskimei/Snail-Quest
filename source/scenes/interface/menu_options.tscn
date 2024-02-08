@@ -15,9 +15,7 @@
 [ext_resource path="res://assets/texture/interface/menu/button_tab_video.png" type="Texture" id=13]
 [ext_resource path="res://assets/texture/interface/menu/button.png" type="Texture" id=14]
 [ext_resource path="res://assets/texture/interface/menu/npatch_popup.png" type="Texture" id=15]
-
-[sub_resource type="CanvasItemMaterial" id=5]
-blend_mode = 3
+[ext_resource path="res://assets/materials/paper_overlay.tres" type="Material" id=16]
 
 [sub_resource type="Animation" id=6]
 resource_name = "Appear"
@@ -732,7 +730,7 @@ texture_hover = ExtResource( 5 )
 texture_focused = ExtResource( 6 )
 
 [node name="Overlay" type="TextureRect" parent="ColorRect/MarginContainer"]
-material = SubResource( 5 )
+material = ExtResource( 16 )
 margin_left = 144.0
 margin_top = 64.0
 margin_right = 1776.0
