@@ -7,6 +7,7 @@ const data: String = "res://addons/snowball_framework/source/scenes/auto/data.ts
 const device: String = "res://addons/snowball_framework/source/scenes/auto/device.tscn"
 const audio: String = "res://addons/snowball_framework/source/scenes/auto/audio.tscn"
 const item: String = "res://addons/snowball_framework/source/scenes/auto/item.tscn"
+const event: String = "res://addons/snowball_framework/source/scenes/auto/event.tscn"
 
 func _enter_tree() -> void:
 	add_autoload_singleton("SB", sb)
@@ -15,6 +16,7 @@ func _enter_tree() -> void:
 	add_autoload_singleton("Device", device)
 	add_autoload_singleton("Audio", audio)
 	add_autoload_singleton("Item", item)
+	add_autoload_singleton("Event", event)
 
 func _exit_tree() -> void:
 	remove_autoload_singleton("SB")
@@ -23,3 +25,4 @@ func _exit_tree() -> void:
 	remove_autoload_singleton("Device")
 	remove_autoload_singleton("Audio")
 	remove_autoload_singleton("Item")
+	remove_autoload_singleton("Event")

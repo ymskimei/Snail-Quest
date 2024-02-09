@@ -1,4 +1,4 @@
-extends Label
+extends Node
 
 export var dialog_sets: Resource
 

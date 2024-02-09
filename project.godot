@@ -34,11 +34,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/world/Chunk.gd"
 }, {
-"base": "Interactable",
-"class": "Conversable",
-"language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/object/Conversable.gd"
-}, {
 "base": "Node",
 "class": "DebugConsoleCategory",
 "language": "GDScript",
@@ -64,7 +59,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/enemy/EnemyStateMain.gd"
 }, {
-"base": "Conversable",
+"base": "Interactable",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://addons/snowball_framework/source/scripts/entity/Entity.gd"
@@ -260,7 +255,6 @@ _global_script_class_icons={
 "CameraStateLock": "",
 "CameraStateMain": "",
 "Chunk": "",
-"Conversable": "",
 "DebugConsoleCategory": "",
 "DebugConsoleCommand": "",
 "DialogueResource": "",
@@ -341,6 +335,7 @@ Data="*res://addons/snowball_framework/source/scenes/auto/data.tscn"
 Device="*res://addons/snowball_framework/source/scenes/auto/device.tscn"
 Audio="*res://addons/snowball_framework/source/scenes/auto/audio.tscn"
 Item="*res://addons/snowball_framework/source/scenes/auto/item.tscn"
+Event="*res://addons/snowball_framework/source/scenes/auto/event.tscn"
 
 [debug]
 

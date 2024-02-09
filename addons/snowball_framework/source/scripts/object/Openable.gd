@@ -1,4 +1,4 @@
-extends Conversable
+extends Interactable
 
 onready var anim: AnimationPlayer = $AnimationPlayer
 

@@ -1,8 +1,11 @@
 class_name Entity
-extends Conversable
+extends Interactable
 
 export var identity: Resource = null
 export var inventory: Resource = null
+
+export var dialog_skin: Resource = null
+export var dialog_array: Resource = null
 
 onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
@@ -173,7 +176,7 @@ func get_interaction_text():
 	return "chat"
 
 func interact():
-	trigger_dialog()
+	Event.initiate_dialog(dialog_skin, dialog_array)
 
 func _on_Area_area_entered(area) -> void:
 	if area.is_in_group("danger"):

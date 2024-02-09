@@ -1,4 +1,7 @@
-extends Conversable
+extends Interactable
+
+export var dialog_skin: Resource = null
+export var dialog_array: Resource = null
 
 onready var anim: AnimationPlayer = $AnimationPlayer
 onready var mesh: MeshInstance = $MeshInstance
@@ -12,7 +15,7 @@ func get_interaction_text():
 
 func interact():
 	camera_override()
-	trigger_dialog()
+	Event.initiate_dialog(dialog_skin, dialog_array)
 
 func dialog_end() -> void:
 	camera_override(false)
