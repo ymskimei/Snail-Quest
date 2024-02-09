@@ -9,11 +9,9 @@ export var all_at_once: bool = false
 
 func _ready() -> void:
 	Utility.register_text_transition(self)
-	$AnimationPlayer.connect("animation_finished", self, "on_animation_finish")
 
 func _exit_tree() -> void:
 	Utility.unregister_text_transition(self)
-	$AnimationPlayer.disconnect("animation_finished", self, "on_animation_finish")
 
 # Mostly needed for editor testing.
 func _process(delta):
@@ -24,12 +22,6 @@ func on_animation_finish(anim_name: String) -> void:
 	match anim_name:
 		"fade_in": prints("Faded in.", self.name)
 		"fade_out": prints("Faded out.", self.name)
-
-func fade_in() -> void:
-	$AnimationPlayer.play("fade_in", -1, animation_time)
-
-func fade_out():
-	$AnimationPlayer.play("fade_out", -1, animation_time)
 
 func get_t(char_index:int, allow_all_together:bool = true) -> float:
 	if all_at_once and allow_all_together:

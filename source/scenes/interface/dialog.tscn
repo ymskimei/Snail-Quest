@@ -1,6 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://assets/interface/theme/menu.tres" type="Theme" id=1]
+[ext_resource path="res://assets/shader/canvas_perspective.tres" type="Shader" id=1]
 [ext_resource path="res://assets/texture/interface/menu/npatch_chat_dialog.png" type="Texture" id=2]
 [ext_resource path="res://assets/texture/interface/menu/npatch_chat_name.png" type="Texture" id=3]
 [ext_resource path="res://source/scripts/interface/Dialog.gd" type="Script" id=4]
@@ -12,80 +12,49 @@
 [ext_resource path="res://addons/snowball_framework/assets/resource/richtext/console.tres" type="RichTextEffect" id=10]
 [ext_resource path="res://addons/snowball_framework/assets/resource/richtext/binary.tres" type="RichTextEffect" id=11]
 [ext_resource path="res://addons/snowball_framework/assets/resource/richtext/appear.tres" type="RichTextEffect" id=12]
+[ext_resource path="res://assets/texture/interface/menu/dialog_indicator.png" type="Texture" id=13]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 1 )
+shader_param/fov = 179.0
+shader_param/cull_back = true
+shader_param/y_rot = 0.0
+shader_param/x_rot = 0.0
+shader_param/inset = 0.0
 
-[sub_resource type="Animation" id=3]
-resource_name = "fade_in"
+[sub_resource type="ViewportTexture" id=5]
+flags = 4
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="Animation" id=6]
+resource_name = "Cursor"
+loop = true
+step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:time")
+tracks/0/path = NodePath(".:rect_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 0.3, 0.3, 1 ),
 "update": 0,
-"values": [ 0.0, 1.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:reverse")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "fade_out"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:time")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:reverse")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.2 ), Vector2( 1, 1 ) ]
 }
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource( 4 )
 dialog_skin = ExtResource( 5 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 6 )
 expand = true
 
-[node name="Control" type="Control" parent="."]
-material = SubResource( 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 1 )
-
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 4 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -94,29 +63,51 @@ margin_left = -960.0
 margin_top = -540.0
 margin_right = 960.0
 margin_bottom = 540.0
-custom_constants/margin_right = 312
+texture = SubResource( 5 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1920, 1080 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Viewport"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -540.0
+margin_right = 960.0
+margin_bottom = 540.0
+custom_constants/margin_right = 368
 custom_constants/margin_top = 662
-custom_constants/margin_left = 312
+custom_constants/margin_left = 368
 custom_constants/margin_bottom = 64
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
-margin_left = 312.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Viewport/MarginContainer"]
+margin_left = 368.0
 margin_top = 662.0
-margin_right = 1608.0
+margin_right = 1552.0
 margin_bottom = 1016.0
 custom_constants/separation = -64
 
-[node name="NameBubble" type="NinePatchRect" parent="Control/MarginContainer/VBoxContainer"]
-margin_right = 256.0
+[node name="MarginContainer" type="MarginContainer" parent="Viewport/MarginContainer/VBoxContainer"]
+margin_right = 1184.0
+margin_bottom = 78.0
+custom_constants/margin_right = 812
+custom_constants/margin_left = 98
+
+[node name="NameBubble" type="NinePatchRect" parent="Viewport/MarginContainer/VBoxContainer/MarginContainer"]
+margin_left = 98.0
+margin_right = 372.0
 margin_bottom = 78.0
 rect_min_size = Vector2( 0, 78 )
-size_flags_horizontal = 0
 texture = ExtResource( 3 )
-patch_margin_left = 128
-patch_margin_right = 128
+patch_margin_left = 32
+patch_margin_right = 32
 axis_stretch_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/NameBubble"]
+[node name="MarginContainer" type="MarginContainer" parent="Viewport/MarginContainer/VBoxContainer/MarginContainer/NameBubble"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 16
@@ -124,40 +115,41 @@ custom_constants/margin_top = 16
 custom_constants/margin_left = 16
 custom_constants/margin_bottom = 16
 
-[node name="Name" type="RichTextLabel" parent="Control/MarginContainer/VBoxContainer/NameBubble/MarginContainer"]
+[node name="Name" type="RichTextLabel" parent="Viewport/MarginContainer/VBoxContainer/MarginContainer/NameBubble/MarginContainer"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 240.0
+margin_right = 258.0
 margin_bottom = 62.0
 rect_clip_content = false
 size_flags_horizontal = 5
+custom_fonts/normal_font = ExtResource( 8 )
 text = "UNNAMED"
 scroll_active = false
 
-[node name="DialogBubble" type="NinePatchRect" parent="Control/MarginContainer/VBoxContainer"]
+[node name="DialogBubble" type="NinePatchRect" parent="Viewport/MarginContainer/VBoxContainer"]
 show_behind_parent = true
 margin_top = 14.0
-margin_right = 1296.0
+margin_right = 1184.0
 margin_bottom = 354.0
 size_flags_horizontal = 5
 size_flags_vertical = 7
 texture = ExtResource( 2 )
-patch_margin_left = 200
-patch_margin_right = 200
+patch_margin_left = 256
+patch_margin_right = 256
 axis_stretch_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/DialogBubble"]
+[node name="MarginContainer" type="MarginContainer" parent="Viewport/MarginContainer/VBoxContainer/DialogBubble"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 96
-custom_constants/margin_top = 80
-custom_constants/margin_left = 96
+custom_constants/margin_right = 116
+custom_constants/margin_top = 68
+custom_constants/margin_left = 116
 custom_constants/margin_bottom = 80
 
-[node name="Dialog" type="RichTextLabel" parent="Control/MarginContainer/VBoxContainer/DialogBubble/MarginContainer"]
-margin_left = 96.0
-margin_top = 80.0
-margin_right = 1200.0
+[node name="Dialog" type="RichTextLabel" parent="Viewport/MarginContainer/VBoxContainer/DialogBubble/MarginContainer"]
+margin_left = 116.0
+margin_top = 68.0
+margin_right = 1068.0
 margin_bottom = 260.0
 rect_clip_content = false
 custom_colors/default_color = Color( 0, 0, 0, 1 )
@@ -166,10 +158,23 @@ bbcode_enabled = true
 scroll_active = false
 custom_effects = [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 7 ) ]
 script = ExtResource( 9 )
+__meta__ = {
+"_editor_description_": ""
+}
 id = "appear"
 time = 1.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/MarginContainer/VBoxContainer/DialogBubble/MarginContainer/Dialog"]
-root_node = NodePath("../../../../../../..")
-anims/fade_in = SubResource( 3 )
-anims/fade_out = SubResource( 2 )
+[node name="TextureRect" type="TextureRect" parent="Viewport/MarginContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 928.0
+margin_top = 952.0
+margin_right = 992.0
+margin_bottom = 1016.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource( 13 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Viewport/MarginContainer/TextureRect"]
+anims/Cursor = SubResource( 6 )
+
+[node name="Tween" type="Tween" parent="."]
