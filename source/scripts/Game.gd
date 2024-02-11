@@ -14,14 +14,20 @@ var info: Dictionary = {
 
 #var dev_stage: String = "pre-alpha"
 
-var title_screen = preload("res://source/scenes/interface/screen_title.tscn").instance()
-var world = preload("res://source/scenes/world/world.tscn").instance()
+export var title_screen: PackedScene
+export var world: PackedScene
+export var cache: PackedScene
+
+var first_scene = null
 
 func _ready():
+	randomize()
 	SB.set_game(self)
-	add_child(title_screen)
-	title_screen.connect("game_start", self, "on_start_game")
+	first_scene = title_screen.instance()
+	add_child(first_scene)
+	first_scene.connect("game_start", self, "on_start_game")
 	_set_strings()
+	add_child(cache.instance())
 
 func _set_strings() -> void:
 	info["title"] = ProjectSettings.get_setting("application/config/name")
@@ -31,5 +37,5 @@ func _set_strings() -> void:
 	#info["author"] = Utility.read_config(cfg, "preset.0.options", "application/copyright")
 
 func on_start_game():
-	yield(title_screen, "tree_exited")
-	add_child(world)
+	yield(first_scene, "tree_exited")
+	add_child(world.instance())

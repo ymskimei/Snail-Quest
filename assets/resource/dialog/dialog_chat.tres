@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
-[ext_resource path="res://source/scripts/resource/ResourceDialog.gd" type="Script" id=1]
+[ext_resource path="res://source/scripts/resource/ResourceDialogSkin.gd" type="Script" id=1]
 [ext_resource path="res://assets/texture/interface/menu/npatch_chat_dialog.png" type="Texture" id=2]
 [ext_resource path="res://assets/texture/interface/menu/npatch_chat_name.png" type="Texture" id=3]
 

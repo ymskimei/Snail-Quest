@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://source/scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/scripts/interface/Interface.gd" type="Script" id=2]
@@ -7,8 +7,10 @@
 [ext_resource path="res://source/scenes/interface/menu_options.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/scenes/interface/hud.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/snowball_framework/source/scenes/interface/debug_overlay.tscn" type="PackedScene" id=7]
-[ext_resource path="res://source/scripts/Cache.gd" type="Script" id=8]
-[ext_resource path="res://tools/textgen/DialogRandomizer.gd" type="Script" id=9]
+[ext_resource path="res://source/scenes/interface/screen_title.tscn" type="PackedScene" id=8]
+[ext_resource path="res://source/scripts/DialogRandomizer.gd" type="Script" id=9]
+[ext_resource path="res://source/scenes/world/world.tscn" type="PackedScene" id=10]
+[ext_resource path="res://source/scenes/cache.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
@@ -60,6 +62,9 @@ tracks/0/keys = {
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
+title_screen = ExtResource( 8 )
+world = ExtResource( 10 )
+cache = ExtResource( 11 )
 
 [node name="Interface" type="Node" parent="."]
 pause_mode = 2
@@ -98,9 +103,6 @@ anims/Effect = SubResource( 11 )
 anims/RESET = SubResource( 12 )
 
 [node name="Resource" type="Node" parent="."]
-
-[node name="MaterialCache" type="Node" parent="Resource"]
-script = ExtResource( 8 )
 
 [node name="DialogRandomizer" type="Node" parent="Resource"]
 script = ExtResource( 9 )

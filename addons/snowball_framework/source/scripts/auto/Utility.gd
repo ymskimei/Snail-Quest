@@ -82,7 +82,10 @@ static func cardinal_to_degrees(direction: String) -> int:
 			result = 315
 	return result
 
-func get_files(folder_path: String, path: bool = false, recursive: bool = true) -> Array:
+func roundf(num, digit):
+	return round(num * pow(10.0, digit)) / pow(10.0, digit)
+
+func get_files(folder_path: String, path: bool = false, recursive: bool = true, extension: String = "") -> Array:
 	var dir := Directory.new()
 	if dir.open(folder_path) != OK:
 		printerr("Could not open directory: ", folder_path)
