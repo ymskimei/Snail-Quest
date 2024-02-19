@@ -60,7 +60,7 @@ func on_bars_timer() -> void:
 	if entity.target.targeting:
 		offset = Vector3(0, 1, 0)
 		_tween_cam_zoom()
-		if entity.target.target_found:
+		if entity.target.target:
 			Audio.play_sfx(RegistryAudio.cam_target_lock)
 		else:
 			Audio.play_sfx(RegistryAudio.cam_no_target_lock)
@@ -76,7 +76,7 @@ func _tween_cam_zoom() -> void:
 
 func exit() -> void:
 	if bars_active:
-		if entity.target.target_found:
+		if entity.target.target:
 			Audio.play_sfx(RegistryAudio.cam_target_unlock)
 		else:
 			Audio.play_sfx(RegistryAudio.cam_no_target_unlock)

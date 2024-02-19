@@ -62,6 +62,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			targeting = false
 			target = null
 
+		if targeting and target:
+			var input = Vector2.ZERO
+			input.x = event.get_action_strength(Device.stick_alt_left) - event.get_action_strength(Device.stick_alt_right)
+			input.y = event.get_action_strength(Device.stick_alt_up) - event.get_action_strength(Device.stick_alt_down)
+			if input != Vector2.ZERO:
+				var next_target = _get_viewport_target(input.normalized())
+				if next_target:
+					target = next_target
+
 		if target:
 			if event.is_action_pressed(Device.action_main):
 				target_interact()
@@ -72,11 +81,24 @@ func _unhandled_input(event: InputEvent) -> void:
 			if event.is_action_pressed(Device.debug_fov_increase):
 				set_entity_health(-1)
 
+func _get_viewport_target(direction):
+	var nearest_target = null
+	var nearest_distance = INF
+	for t in all_targets:
+		if t != target and global_transform.origin.distance_to(t.global_transform.origin) < 12:
+			var vec3_target_direction = (t.global_transform.origin - target.global_transform.origin).rotated(Vector3.UP, SB.camera.rotation.y)
+			var target_direction = Vector2(vec3_target_direction.x, vec3_target_direction.y)
+			#var target_direction = (SB.camera.lens.unproject_position(t.global_transform.origin) - SB.camera.lens.unproject_position(target.global_transform.origin))
+			var dot_result = direction.normalized().dot(target_direction.normalized())
+			if target_direction.length() < nearest_distance and dot_result:
+				nearest_target = t
+	return nearest_target
+
 func _physics_process(delta: float) -> void:
 	if is_controlled():
 		all_targets = Utility.get_group_by_nearest(self, "target")
 		if targeting and target:
-			if !global_transform.origin.distance_to(target.global_transform.origin) < 7:
+			if !global_transform.origin.distance_to(target.global_transform.origin) < 12:
 				target = null
 
 func _set_identity() -> void:
