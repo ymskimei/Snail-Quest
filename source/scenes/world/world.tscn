@@ -7,12 +7,11 @@
 [ext_resource path="res://addons/snowball_framework/source/scripts/auto/time/PlayTime.gd" type="Script" id=5]
 [ext_resource path="res://source/scenes/interface/effect_transition.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/resource/identity/snail/sheldon.tres" type="Resource" id=7]
-[ext_resource path="res://assets/resource/warp/world_test.tres" type="Resource" id=8]
+[ext_resource path="res://assets/resource/warp/dungeon_test_1.tres" type="Resource" id=8]
 [ext_resource path="res://assets/resource/identity/snail/izabell.tres" type="Resource" id=9]
-[ext_resource path="res://source/scenes/entity/vehicle.tscn" type="PackedScene" id=11]
+[ext_resource path="res://source/scenes/world/dev/dungeon_test_1.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/resource/identity/snail/fubward.tres" type="Resource" id=12]
 [ext_resource path="res://assets/resource/identity/snail/sunshine.tres" type="Resource" id=13]
-
 
 [node name="World" type="Spatial"]
 script = ExtResource( 3 )
@@ -39,10 +38,6 @@ identity = ExtResource( 13 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2159.85, -21.5491, 5970 )
 identity = ExtResource( 9 )
 
-[node name="VehicleBody" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2148.17, -19.6951, 5970.03 )
-continuous_cd = true
-
 [node name="Audio" type="Spatial" parent="."]
 pause_mode = 2
 script = ExtResource( 7 )
@@ -61,3 +56,5 @@ script = ExtResource( 5 )
 [node name="GuiTransition" parent="." instance=ExtResource( 6 )]
 pause_mode = 2
 layer = 0
+
+[node name="dungeon" parent="." instance=ExtResource( 10 )]

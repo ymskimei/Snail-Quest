@@ -5,9 +5,9 @@ export var track_speed: int = 10
 
 func enter() -> void:
 	print("Camera State: LOCKED")
-	entity.collision.disabled = true
+#	entity.collision.disabled = true
 	entity.anim_tween.interpolate_property(entity.lens, "fov", entity.lens.fov, 35, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, 0, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, 0, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 
 func physics_process(delta: float) -> int:
@@ -20,5 +20,5 @@ func physics_process(delta: float) -> int:
 	entity.translation = lerp(entity.translation, entity.target.global_translation, track_speed * delta)
 	return State.NULL
 
-func exit() -> void:
-	entity.collision.disabled = false
+#func exit() -> void:
+#	entity.collision.disabled = false

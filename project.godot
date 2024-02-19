@@ -89,7 +89,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/snowball_framework/source/scripts/item/ItemParent.gd"
 }, {
-"base": "Interactable",
+"base": "SpringArm",
 "class": "MainCamera",
 "language": "GDScript",
 "path": "res://addons/snowball_framework/source/scripts/entity/camera/Camera.gd"
@@ -199,6 +199,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/Song.gd"
 }, {
+"base": "Reference",
+"class": "Sorter",
+"language": "GDScript",
+"path": "res://addons/snowball_framework/source/scripts/utility/Sorter.gd"
+}, {
 "base": "AudioStreamPlayer",
 "class": "Sound",
 "language": "GDScript",
@@ -278,6 +283,7 @@ _global_script_class_icons={
 "Snail": "",
 "SnailStateMain": "",
 "Song": "",
+"Sorter": "",
 "Sound": "",
 "Sound2D": "",
 "Sound3D": "",
@@ -353,7 +359,11 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/snowball_framework/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/blender_importer/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/snowball_framework/plugin.cfg" )
+
+[filesystem]
+
+import/blend/blender_path="D:/Archive Library/Software/Blender 3.6.3/blender.exe"
 
 [global]
 
@@ -679,3 +689,4 @@ quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 0.823529, 0.823529, 0.823529, 1 )
 quality/filters/use_fxaa=true
 quality/filters/use_debanding=true
+environment/default_environment="res://assets/resource/environment/environment_default.tres"

@@ -134,6 +134,7 @@ texture = ExtResource( 3 )
 
 [node name="AnimationCursor" type="AnimationPlayer" parent="."]
 root_node = NodePath("../SpriteCursor")
+playback_process_mode = 0
 anims/RESET = SubResource( 14 )
 anims/TargetCursorAppear = SubResource( 15 )
 anims/TargetCursorBounce = SubResource( 13 )

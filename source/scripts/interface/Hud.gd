@@ -69,7 +69,7 @@ func _process(_delta: float) -> void:
 	display_vehicle_boost()
 
 func _physics_process(delta: float) -> void:
-	if is_instance_valid(SB.controlled) and SB.controlled is Entity and SB.controlled.target_found:
+	if is_instance_valid(SB.controlled) and SB.controlled.all_targets.size() > 0:
 		cursor_target.show()
 	else:
 		cursor_target.hide()

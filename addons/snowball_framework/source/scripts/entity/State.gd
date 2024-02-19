@@ -77,7 +77,7 @@ func apply_rotation():
 	if direction != Vector3.ZERO:
 		facing_dir = atan2(-direction.x, -direction.z)
 		entity.skeleton.rotation.y = lerp_angle(entity.skeleton.rotation.y, facing_dir, 0.2)
-
+		entity.collision.rotation.y = lerp_angle(entity.collision.rotation.y, facing_dir, 0.2)
 func is_on_floor() -> bool:
 	if is_instance_valid(entity.climbing_rays):
 		for ray in entity.climbing_rays.get_children():

@@ -6,6 +6,7 @@ export var inventory: Resource = null
 
 onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
+onready var collision: CollisionShape = $CollisionShape
 onready var mesh: MeshInstance = $"%MeshInstance"
 onready var anim: AnimationPlayer = $AnimationPlayer
 
@@ -17,6 +18,7 @@ var speed: int
 var jump: int
 
 var target = null
+var all_targets = []
 
 var can_interact: bool = false
 var interacting: bool = false
@@ -39,38 +41,43 @@ var ledge_timer: Timer = Timer.new()
 signal health_changed(health, max_health, b)
 signal entity_killed(b)
 
+signal target_updated()
+
 func _ready() -> void:
 	_set_identity()
 	_set_display_health()
 	_get_timers()
 	#temp until can be updated from outside
+
 	SB.camera.connect("target_updated", self, "_on_cam_target_updated")
 	emit_signal("health_changed", health, max_health, is_controlled())
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_controlled():
-		var b = Device.trigger_left
-		if event.is_action_pressed(b):
-			if is_instance_valid(target):
-				can_target = true
-		elif event.is_action_released(b):
-			if is_instance_valid(target):
-				can_target = false
-		if is_instance_valid(target):
+		if event.is_action_pressed(Device.trigger_left):
+			targeting = true
+			if all_targets.size() > 0:
+				target = all_targets[0]
+		elif event.is_action_released(Device.trigger_left):
+			targeting = false
+			target = null
+
+		if target:
 			if event.is_action_pressed(Device.action_main):
 				target_interact()
+
 		if SB.game.interface.options.debug_mode:
-			if event.is_action_pressed("debug_cam_fov_decrease"):
+			if event.is_action_pressed(Device.debug_fov_decrease):
 				set_entity_health(1)
-			if event.is_action_pressed("debug_cam_fov_increase"):
+			if event.is_action_pressed(Device.debug_fov_increase):
 				set_entity_health(-1)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if is_controlled():
-		if is_instance_valid(target):
-			target_check()
-		else:
-			target = Utility.find_target(self, "target")
+		all_targets = Utility.get_group_by_nearest(self, "target")
+		if targeting and target:
+			if !global_transform.origin.distance_to(target.global_transform.origin) < 7:
+				target = null
 
 func _set_identity() -> void:
 	if identity:
@@ -95,22 +102,23 @@ func _get_timers():
 func set_entity_health(new_amount: int) -> void:
 	if !immortal:
 		health += new_amount
+	
 		if health > max_health:
 			health = max_health
 		elif health <= 0:
 			health = 0
 			kill_entity()
 			print(str(self.name) +" Died")
+
 		emit_signal("health_changed", health, max_health, is_controlled())
 		_set_display_health()
-		#print(str(self.name) +" Health: " + str(health))
 
 func set_entity_max_health(new_amount: int) -> void:
 	max_health += new_amount
 	health = max_health
+
 	emit_signal("health_changed", health, max_health, is_controlled())
 	_set_display_health()
-	#print(str(self.name) +" Health: " + str(health))
 
 func _set_display_health() -> void:
 	if is_instance_valid($DebugHealthBar):
@@ -124,26 +132,19 @@ func update_equipped(point) -> void:
 	for child in point.get_children():
 		point.remove_child(child)
 		child.queue_free()
+
 	if inventory.items[0] != null:
 		var tool_item = inventory.items[0]
+
 		if tool_item.item_path != "":
 			var equipped_tool = load(tool_item.item_path).instance()
 			equipped_tool.set_name(tool_item.item_name)
 			point.add_child(equipped_tool)
 
-func target_check() -> void:
-	var target_distance = target.get_global_translation().distance_to(get_global_translation())
-	if can_target:
-		if enemy_found or (!target.is_controlled() and target_distance < max_interactable_distance):
-			target_found = true
-		else:
-			target_found = false
-	else:
-		target = Utility.find_target(self, "target")
-
 func target_interact() -> void:
 	var target_distance: float  = target.get_global_translation().distance_to(get_global_translation())
 	var relative_facing: float = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
+	
 	if (!target.is_controlled() and target is Interactable) and (target_distance < max_interactable_distance and relative_facing >= 0):
 		can_interact = true
 		set_interaction_text(target.get_interaction_text())
@@ -178,6 +179,7 @@ func interact():
 func _on_Area_area_entered(area) -> void:
 	if area.is_in_group("danger"):
 		set_entity_health(-(area.get_parent().strength))
+
 	if area.is_in_group("attachable"):
 		_set_attached(area.get_parent().get_parent().get_parent())
 

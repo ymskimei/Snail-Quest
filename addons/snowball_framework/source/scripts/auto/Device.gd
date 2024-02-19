@@ -47,8 +47,8 @@ const debug_cam_higher: String = "debug_cam_higher"
 const debug_cam_lower: String = "debug_cam_lower"
 const debug_speed_up: String = "debug_cam_speed_up"
 const debug_speed_down: String = "debug_cam_speed_down"
-const debug_fov_increase: String = "debug_fov_increase"
-const debug_fov_decrease: String = "debug_fov_decrease"
+const debug_fov_increase: String = "debug_cam_fov_increase"
+const debug_fov_decrease: String = "debug_cam_fov_decrease"
 
 signal device_changed(device, device_index)
 signal action_key_changed(action_name, key)

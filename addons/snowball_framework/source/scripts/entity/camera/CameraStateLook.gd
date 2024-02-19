@@ -10,7 +10,7 @@ func enter() -> void:
 	target_rot = entity.target.skeleton.rotation.y
 	tween_cam_rotate(Tween.EASE_OUT)
 	Audio.play_sfx(RegistryAudio.cam_first_person)
-	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, -1.5, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, -1.5, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 	entity.anim_wobble.play("Wobble")
 
