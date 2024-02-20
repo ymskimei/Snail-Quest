@@ -321,7 +321,7 @@ script = ExtResource( 8 )
 [node name="World" type="Spatial" parent="."]
 
 [node name="MeshInstance" type="MeshInstance" parent="World"]
-transform = Transform( -0.0187209, -0.235246, -1.94351, 0.0770884, 0.968693, -0.47198, 0.996848, -0.0793291, -8.49536e-08, -1.38939, 19, -0.140768 )
+transform = Transform( 0, 0, 0, 0, 0, 0, 0, 0, 0, -1.389, 16, -0.141 )
 visible = false
 mesh = ExtResource( 20 )
 skeleton = NodePath("../..")
@@ -346,6 +346,7 @@ fov = 25.0
 far = 512.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/SpringArm"]
+playback_process_mode = 0
 anims/CamTitleStart = ExtResource( 28 )
 anims/CamWobble = ExtResource( 24 )
 
@@ -357,17 +358,19 @@ mesh = SubResource( 14 )
 material/0 = SubResource( 16 )
 
 [node name="AnimationBubble" type="AnimationPlayer" parent="World/MeshInstance2"]
+playback_process_mode = 0
 anims/BubbleWobble = SubResource( 17 )
 
 [node name="Daisy" type="MeshInstance" parent="World"]
-transform = Transform( -2.53441e-08, 0, -0.579805, 0, 0.579805, 0, 0.579805, 0, -2.53441e-08, 0, 0, 0 )
+transform = Transform( 0.2, 0, 0, 0, 0.1, 0, 0, 0, 0.2, 0, 0, 0 )
 mesh = SubResource( 25 )
-blend_shapes/Blossom = 0.0
-blend_shapes/Wiggle = 0.0
+blend_shapes/Blossom = 1.0
+blend_shapes/Wiggle = 1.0
 material/0 = ExtResource( 14 )
 material/1 = ExtResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/Daisy"]
+playback_process_mode = 0
 anims/DaisyBlossom = ExtResource( 25 )
 anims/DaisyWiggle = ExtResource( 26 )
 anims/RESET = SubResource( 19 )

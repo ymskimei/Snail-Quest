@@ -56,7 +56,7 @@ func _ready() -> void:
 	shell_stock_icons = get_tree().get_nodes_in_group("stock")
 
 func _process(_delta: float) -> void:
-	update_cam_display()
+	#update_cam_display()
 	update_inventory_display()
 #	if !equipment.items[0] == tools.items[0]:
 #		display_right.is_deselected_animation()
@@ -121,30 +121,30 @@ func update_inventory_display() -> void:
 func on_items_updated(index) -> void:
 	for item_index in index:
 		update_item_slot_display()
-
-func update_cam_display() -> void:
-	if is_instance_valid(SB.camera):
-		var state = str(SB.camera.states.current_state.get_name())
-		match state:
-			"Orbi": 
-				var zoom_mode = SB.camera.states.current_state.zoom_mode
-				if zoom_mode:
-					cam_icon.texture = cam_zoom
-				else:
-					cam_icon.texture = cam_pan
-			"Targ":
-				var bars_active = SB.camera.states.current_state.bars_active
-				if bars_active:
-					if is_instance_valid(SB.controlled):
-						var target_found = SB.controlled.target_found
-						if target_found:
-							cam_icon.texture = cam_target
-						else:
-							cam_icon.texture = cam_no_target
-			"Isom":
-				cam_icon.texture = cam_iso
-			"Look":
-				cam_icon.texture = cam_look
+#
+#func update_cam_display() -> void:
+#	if is_instance_valid(SB.camera):
+#		var state = str(SB.camera.states.current_state.get_name())
+#		match state:
+#			"Orbi": 
+#				var zoom_mode = SB.camera.states.current_state.zoom_mode
+#				if zoom_mode:
+#					cam_icon.texture = cam_zoom
+#				else:
+#					cam_icon.texture = cam_pan
+#			"Targ":
+#				var bars_active = SB.camera.states.current_state.bars_active
+#				if bars_active:
+#					if is_instance_valid(SB.controlled):
+#						var target_found = SB.controlled.target
+#						if target_found:
+#							cam_icon.texture = cam_target
+#						else:
+#							cam_icon.texture = cam_no_target
+#			"Isom":
+#				cam_icon.texture = cam_iso
+#			"Look":
+#				cam_icon.texture = cam_look
 
 func add_hud_timers() -> void:
 	pad_timer.set_wait_time(8)

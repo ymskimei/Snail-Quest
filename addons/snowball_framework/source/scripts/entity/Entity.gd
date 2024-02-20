@@ -18,14 +18,13 @@ var speed: int
 var jump: int
 
 var target = null
+var can_swap_target: bool = true
 var all_targets = []
+var enemy_found: bool = false
 
 var can_interact: bool = false
 var interacting: bool = false
-var can_target: bool = false
 var targeting: bool = false
-var target_found: bool = false
-var enemy_found: bool = false
 var jump_in_memory: bool = false
 var ledge_usable: bool = true
 var pushing: bool = false
@@ -54,22 +53,27 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_controlled():
-		if event.is_action_pressed(Device.trigger_left):
-			targeting = true
-			if all_targets.size() > 0:
-				target = all_targets[0]
-		elif event.is_action_released(Device.trigger_left):
-			targeting = false
-			target = null
+		if !SB.camera.looking:
+			if event.is_action_pressed(Device.trigger_left):
+				targeting = true
+				if all_targets.size() > 0:
+					target = all_targets[0]
+			elif event.is_action_released(Device.trigger_left):
+				targeting = false
+				target = null
 
-		if targeting and target:
+		if targeting and target and can_swap_target:
 			var input = Vector2.ZERO
 			input.x = event.get_action_strength(Device.stick_alt_left) - event.get_action_strength(Device.stick_alt_right)
 			input.y = event.get_action_strength(Device.stick_alt_up) - event.get_action_strength(Device.stick_alt_down)
-			if input != Vector2.ZERO:
+
+			if event.is_action_pressed(Device.stick_alt_left) or event.is_action_pressed(Device.stick_alt_right)or event.is_action_pressed(Device.stick_alt_up) or event.is_action_pressed(Device.stick_alt_down):
 				var next_target = _get_viewport_target(input.normalized())
 				if next_target:
+					can_swap_target = false
 					target = next_target
+					yield(get_tree().create_timer(0.3), "timeout")
+					can_swap_target = true
 
 		if target:
 			if event.is_action_pressed(Device.action_main):
@@ -85,8 +89,8 @@ func _get_viewport_target(direction):
 	var nearest_target = null
 	var nearest_distance = INF
 	for t in all_targets:
-		if t != target and global_transform.origin.distance_to(t.global_transform.origin) < 12:
-			var vec3_target_direction = (t.global_transform.origin - target.global_transform.origin).rotated(Vector3.UP, SB.camera.rotation.y)
+		if t != target and global_transform.origin.distance_to(t.global_transform.origin) < 10:
+			var vec3_target_direction = (t.global_transform.origin - global_transform.origin).rotated(Vector3.UP, SB.camera.rotation.y)
 			var target_direction = Vector2(vec3_target_direction.x, vec3_target_direction.y)
 			#var target_direction = (SB.camera.lens.unproject_position(t.global_transform.origin) - SB.camera.lens.unproject_position(target.global_transform.origin))
 			var dot_result = direction.normalized().dot(target_direction.normalized())
@@ -98,7 +102,7 @@ func _physics_process(delta: float) -> void:
 	if is_controlled():
 		all_targets = Utility.get_group_by_nearest(self, "target")
 		if targeting and target:
-			if !global_transform.origin.distance_to(target.global_transform.origin) < 12:
+			if !global_transform.origin.distance_to(target.global_transform.origin) < 10:
 				target = null
 
 func _set_identity() -> void:

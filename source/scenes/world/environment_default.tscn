@@ -114,6 +114,7 @@ material/0 = SubResource( 15 )
 [node name="Downpour" type="Position3D" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
+playback_process_mode = 0
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 5120, 5120 )

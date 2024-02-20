@@ -20,7 +20,7 @@ var mode_timer: Timer = null
 
 func _ready() -> void:
 	states.ready(self)
-	#update_appearance()
+	update_appearance()
 	set_interaction_text("")
 	mode_timer = Timer.new()
 	mode_timer.set_wait_time(0.1)
@@ -41,7 +41,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		states.unhandled_input(event)
 
 func _physics_process(delta: float) -> void:
-	update_appearance()
+	#update_appearance()
 	if is_controlled():
 		states.physics_process(delta)
 	elif SB.controlled and self == SB.prev_controlled:

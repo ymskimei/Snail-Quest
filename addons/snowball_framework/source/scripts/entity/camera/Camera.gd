@@ -14,6 +14,8 @@ var override: Position3D = null
 
 var debug_cam: bool = false
 
+var looking: bool = false
+
 signal target_updated
 
 func _ready() -> void:
