@@ -51,8 +51,8 @@ func _ready() -> void:
 	pad_is_hidden = true
 	cam_is_hidden = true
 	add_hud_timers()
-	Item.connect("items_updated", self, "on_items_updated")
-	SB.connect("controlled_health_change", self, "_on_controlled_health_changed")
+	Auto.item.connect("items_updated", self, "on_items_updated")
+	Auto.connect("controlled_health_change", self, "_on_controlled_health_changed")
 	shell_stock_icons = get_tree().get_nodes_in_group("stock")
 
 func _process(_delta: float) -> void:
@@ -69,14 +69,14 @@ func _process(_delta: float) -> void:
 	display_vehicle_boost()
 
 func _physics_process(delta: float) -> void:
-	if is_instance_valid(SB.controlled) and SB.controlled.all_targets.size() > 0:
+	if is_instance_valid(Auto.controlled) and Auto.controlled.all_targets.size() > 0:
 		cursor_target.show()
 	else:
 		cursor_target.hide()
 
 func _unhandled_input(event: InputEvent) -> void:
 #	if Input.is_action_just_pressed("action_combat"):
-#		Utility.item.set_item(display_up.destination.items, 0, display_up.contained_item)
+#		Auto.utility.item.set_item(display_up.destination.items, 0, display_up.contained_item)
 #		SnailQuest.controllable.update_equipped()
 	if event.is_action_pressed("cam_zoom") or event.is_action_pressed("cam_lock"):
 		reveal_cam()
@@ -123,20 +123,20 @@ func on_items_updated(index) -> void:
 		update_item_slot_display()
 #
 #func update_cam_display() -> void:
-#	if is_instance_valid(SB.camera):
-#		var state = str(SB.camera.states.current_state.get_name())
+#	if is_instance_valid(Auto.camera):
+#		var state = str(Auto.camera.states.current_state.get_name())
 #		match state:
 #			"Orbi": 
-#				var zoom_mode = SB.camera.states.current_state.zoom_mode
+#				var zoom_mode = Auto.camera.states.current_state.zoom_mode
 #				if zoom_mode:
 #					cam_icon.texture = cam_zoom
 #				else:
 #					cam_icon.texture = cam_pan
 #			"Targ":
-#				var bars_active = SB.camera.states.current_state.bars_active
+#				var bars_active = Auto.camera.states.current_state.bars_active
 #				if bars_active:
-#					if is_instance_valid(SB.controlled):
-#						var target_found = SB.controlled.target
+#					if is_instance_valid(Auto.controlled):
+#						var target_found = Auto.controlled.target
 #						if target_found:
 #							cam_icon.texture = cam_target
 #						else:
@@ -167,9 +167,9 @@ func on_cam_timeout() -> void:
 	anim_cam.play_backwards("SlideCam")
 
 func display_vehicle_boost() -> void:
-	if is_instance_valid(SB.controlled):
-		if SB.controlled is VehicleBody:
-			var remaining = SB.controlled.boost_remaining
+	if is_instance_valid(Auto.controlled):
+		if Auto.controlled is VehicleBody:
+			var remaining = Auto.controlled.boost_remaining
 			display_boost.set_bbcode("[color=#C3EF5D]%s" % remaining)
 		else:
 			display_boost.set_bbcode("")

@@ -6,16 +6,16 @@ func _ready() -> void:
 		anim = $AnimationPlayer
 
 func get_sound_switch():
-	Audio.play_sfx(RegistryAudio.tone_switch)
+	Auto.audio.play_sfx(RegistryAudio.tone_switch)
 
 func get_sound_success():
-	Audio.play_sfx(RegistryAudio.tone_success)
+	Auto.audio.play_sfx(RegistryAudio.tone_success)
 
 func get_sound_next():
-	Audio.play_sfx(RegistryAudio.tone_next)
+	Auto.audio.play_sfx(RegistryAudio.tone_next)
 	
 func get_sound_exit():
-	Audio.play_sfx(RegistryAudio.tone_exit)
+	Auto.audio.play_sfx(RegistryAudio.tone_exit)
 
 func get_sound_error():
-	Audio.play_sfx(RegistryAudio.tone_error)
+	Auto.audio.play_sfx(RegistryAudio.tone_error)

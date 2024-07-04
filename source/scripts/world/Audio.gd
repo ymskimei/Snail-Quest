@@ -1,7 +1,7 @@
 extends Node
 
-onready var m_booth: MusicBooth = Audio.music_booth
-onready var a_booth: MusicBooth = Audio.ambie_booth
+onready var m_booth: MusicBooth = Utility.audio.music_booth
+onready var a_booth: MusicBooth = Utility.audio.ambie_booth
 
 var enemy_near: bool
 var enemy_pursuing: bool
@@ -10,14 +10,14 @@ func _ready():
 	overworld_ambience()
 
 func overworld_ambience():
-	#Audio.init_ambience(RegistryAudio.wind)
+	#Utility.audio.init_ambience(RegistryAudio.wind)
 	#a_booth.play_song("Overworld", 1.0)
 	pass
 
 func set_ambience_eq():
 	var y_max = 256
 	var y_min = -128
-	var audio_listener = SB.camera.lens.get_global_translation().y
+	var audio_listener = Auto.camera.lens.get_global_translation().y
 	var amount = clamp((audio_listener - y_min) / (y_max - y_min), 0, 1)
 	var hz_32 = lerp(-1.0, -16.0, amount)
 	var hz_100 = lerp(2.0, -4.0, amount)
@@ -51,7 +51,7 @@ func _physics_process(delta):
 
 func _on_SnailyTown_body_entered(body):
 	if body is Snail:
-		SB.audio.init_song(SB.audio.ost_layerstest)
+		Auto.audio.init_song(Auto.audio.ost_layerstest)
 		m_booth.play_song("LayersTest", 5.0)
 		m_booth.play_track(1, 5.0)
 		#silence_combat_tracks()

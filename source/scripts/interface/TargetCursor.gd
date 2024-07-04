@@ -9,10 +9,10 @@ func _ready() -> void:
 	anim_cursor.play("TargetCursorBounce")
 
 func _physics_process(delta: float):
-	if is_instance_valid(SB.controlled) and SB.controlled.all_targets.size() > 0: 
-		var targ = SB.controlled.all_targets[0]
-		if SB.controlled.targeting:
-			targ = SB.controlled.target
+	if is_instance_valid(Auto.controlled) and Auto.controlled.all_targets.size() > 0: 
+		var targ = Auto.controlled.all_targets[0]
+		if Auto.controlled.targeting:
+			targ = Auto.controlled.target
 
 		if is_instance_valid(targ):
 			global_transform.origin = targ.global_transform.origin
@@ -20,7 +20,7 @@ func _physics_process(delta: float):
 				global_transform.origin.y += targ.mesh.get_aabb().size.y
 			rotation_degrees = targ.rotation_degrees
 
-		if SB.controlled.target:
+		if Auto.controlled.target:
 			cursor.modulate = lerp(cursor.modulate, Color("FF4646"), 12 * delta)
 			cursor.opacity = lerp(cursor.opacity, 1.0, 10 * delta)
 		else:

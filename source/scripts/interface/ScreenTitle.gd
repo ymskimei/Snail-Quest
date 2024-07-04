@@ -23,8 +23,8 @@ func _ready() -> void:
 	anim_logo.play("GuiLogoIdle")
 
 func _set_strings() -> void:
-	version.set_bbcode("[color=#EFEFEF]" + TranslationServer.translate("TITLE") + " " + SB.game.info["version"])
-	info.set_bbcode("[right][color=#EFEFEF]© " + SB.game.info["author"])
+	version.set_bbcode("[color=#EFEFEF]" + TranslationServer.translate("TITLE") + " " + Auto.game.info["version"])
+	info.set_bbcode("[right][color=#EFEFEF]© " + Auto.game.info["author"])
 	var splashes: Array = [
 		"TITLE_SPLASH_0",
 		"TITLE_SPLASH_1",
@@ -48,7 +48,7 @@ func _physics_process(_delta: float) -> void:
 	#cam.translation.x = lerp(cam.translation.x, Input.get_action_strength("cam_left") * 0.2 - Input.get_action_strength("cam_right") * 0.2, 0.1)
 
 func _on_StartButton_pressed() -> void:
-	Audio.play_sfx(RegistryAudio.tone_success)
+	Auto.audio.play_sfx(RegistryAudio.tone_success)
 	var fade = $GuiTransition/AnimationPlayer
 	fade.play("GuiTransitionFade")
 	#anim.play("GuiLogoDisappear")
@@ -57,5 +57,5 @@ func _on_StartButton_pressed() -> void:
 	queue_free()
 
 func _on_OptionsButton_pressed() -> void:
-	var interface = SB.game.interface
+	var interface = Auto.game.interface
 	interface.get_menu(interface.blur, interface.options)

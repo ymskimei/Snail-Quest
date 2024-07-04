@@ -17,17 +17,17 @@ _global_script_classes=[ {
 "base": "CameraStateMain",
 "class": "CameraStateIsom",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/camera/CameraStateIsom.gd"
+"path": "res://source/scripts/entity/camera/CameraStateIsom.gd"
 }, {
 "base": "CameraStateMain",
 "class": "CameraStateLock",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/camera/CameraStateLock.gd"
+"path": "res://source/scripts/entity/camera/CameraStateLock.gd"
 }, {
 "base": "Node",
 "class": "CameraStateMain",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/camera/CameraStateMain.gd"
+"path": "res://source/scripts/entity/camera/CameraStateMain.gd"
 }, {
 "base": "Object",
 "class": "Chunk",
@@ -37,17 +37,17 @@ _global_script_classes=[ {
 "base": "Interactable",
 "class": "Conversable",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/object/Conversable.gd"
+"path": "res://source/scripts/object/Conversable.gd"
 }, {
 "base": "Node",
 "class": "DebugConsoleCategory",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/DebugConsoleCategory.gd"
+"path": "res://source/scripts/interface/DebugConsoleCategory.gd"
 }, {
 "base": "Node",
 "class": "DebugConsoleCommand",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/DebugConsoleCommand.gd"
+"path": "res://source/scripts/interface/DebugConsoleCommand.gd"
 }, {
 "base": "Resource",
 "class": "DialogueResource",
@@ -67,32 +67,32 @@ _global_script_classes=[ {
 "base": "Conversable",
 "class": "Entity",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/Entity.gd"
+"path": "res://source/scripts/entity/Entity.gd"
 }, {
 "base": "RigidBody",
 "class": "Interactable",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/object/Interactable.gd"
+"path": "res://source/scripts/object/Interactable.gd"
 }, {
 "base": "Node",
 "class": "InterfaceParent",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/InterfaceParent.gd"
+"path": "res://source/scripts/interface/InterfaceParent.gd"
 }, {
 "base": "Menu",
 "class": "InventoryParent",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/InventoryParent.gd"
+"path": "res://source/scripts/interface/InventoryParent.gd"
 }, {
 "base": "Spatial",
 "class": "ItemParent",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/item/ItemParent.gd"
+"path": "res://source/scripts/item/ItemParent.gd"
 }, {
 "base": "SpringArm",
 "class": "MainCamera",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/camera/Camera.gd"
+"path": "res://source/scripts/entity/camera/Camera.gd"
 }, {
 "base": "MenuParent",
 "class": "Menu",
@@ -102,7 +102,7 @@ _global_script_classes=[ {
 "base": "CanvasLayer",
 "class": "MenuParent",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/MenuParent.gd"
+"path": "res://source/scripts/interface/MenuParent.gd"
 }, {
 "base": "Node",
 "class": "MusicBooth",
@@ -112,12 +112,12 @@ _global_script_classes=[ {
 "base": "Menu",
 "class": "Options",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/Options.gd"
+"path": "res://source/scripts/interface/Options.gd"
 }, {
 "base": "Interactable",
 "class": "Pushable",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/object/Pushable.gd"
+"path": "res://source/scripts/object/Pushable.gd"
 }, {
 "base": "Node",
 "class": "RegistryAudio",
@@ -162,7 +162,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "ResourceItem",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/resource/ResourceItem.gd"
+"path": "res://source/scripts/resource/ResourceItem.gd"
 }, {
 "base": "Resource",
 "class": "ResourceLocation",
@@ -202,7 +202,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Sorter",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/utility/Sorter.gd"
+"path": "res://source/scripts/utility/Sorter.gd"
 }, {
 "base": "AudioStreamPlayer",
 "class": "Sound",
@@ -227,7 +227,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "StateMain",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/State.gd"
+"path": "res://source/scripts/entity/State.gd"
 }, {
 "base": "Node",
 "class": "StingerContainer",
@@ -242,7 +242,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "Warp",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/object/Warp.gd"
+"path": "res://source/scripts/object/Warp.gd"
 } ]
 _global_script_class_icons={
 "AimCursor": "",
@@ -324,12 +324,7 @@ default_bus_layout="res://assets/default_bus_layout.tres"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 EventFlags="*res://source/scripts/EventFlags.gd"
 WorldSave="*res://source/scripts/world/WorldSave.gd"
-SB="*res://addons/snowball_framework/source/scenes/auto/sb.tscn"
-Utility="*res://addons/snowball_framework/source/scenes/auto/utility.tscn"
-Data="*res://addons/snowball_framework/source/scenes/auto/data.tscn"
-Device="*res://addons/snowball_framework/source/scenes/auto/device.tscn"
-Audio="*res://addons/snowball_framework/source/scenes/auto/audio.tscn"
-Item="*res://addons/snowball_framework/source/scenes/auto/item.tscn"
+Auto="*res://source/scenes/auto.tscn"
 
 [debug]
 

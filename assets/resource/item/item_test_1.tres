@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=9 format=2]
 
-[ext_resource path="res://addons/snowball_framework/source/scripts/resource/ResourceItem.gd" type="Script" id=1]
+[ext_resource path="res://source/scripts/resource/ResourceItem.gd" type="Script" id=1]
 [ext_resource path="res://assets/texture/interface/item/item_test_stackable.png" type="Texture" id=2]
 [ext_resource path="res://assets/texture/tile/dev/tile_deg_45.png" type="Texture" id=3]
 [ext_resource path="res://assets/shader/diffuse_gradient_1.tres" type="Texture" id=4]
