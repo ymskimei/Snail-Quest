@@ -27,7 +27,13 @@ enum State {
 func enter() -> void:
 	pass
 
-func unhandled_input(_event: InputEvent) -> int:
+func unhandled_input(event: InputEvent) -> int:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		rotation = event.relative
+		controller = false
+
+	elif event is InputEventJoypadMotion:
+		controller = true
 	return State.NULL
 
 func physics_process(_delta: float) -> int:

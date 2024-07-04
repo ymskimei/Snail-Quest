@@ -11,6 +11,7 @@
 [ext_resource path="res://addons/snowball_framework/source/scripts/entity/camera/CameraStateLock.gd" type="Script" id=9]
 
 [sub_resource type="SphereShape" id=4]
+radius = 0.5
 
 [sub_resource type="Animation" id=1]
 resource_name = "BarsAppear"
@@ -93,9 +94,9 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 1.7, 3.6, 5.5, 7.5 )
 }
 
-[node name="Camera" type="RigidBody"]
-collision_layer = 2
-collision_mask = 12
+[node name="Camera" type="SpringArm"]
+collision_mask = 8
+shape = SubResource( 4 )
 script = ExtResource( 6 )
 
 [node name="StateController" parent="." instance=ExtResource( 1 )]
@@ -126,9 +127,6 @@ transform = Transform( 0.999994, 0, 0.00349065, 0, 1, 0, -0.00349065, 0, 0.99999
 fov = 60.0
 near = 0.01
 far = 8192.0
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 4 )
 
 [node name="Animation" type="Node" parent="."]
 

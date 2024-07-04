@@ -28,9 +28,9 @@ func _ready():
 	boost_replenish.one_shot = true
 	add_child(boost_timer)
 	add_child(boost_replenish)
-	if engine.pitch_scale != 0:
-		engine.set_pitch_scale(0)
-	engine.play()
+#	if engine.pitch_scale != 0:
+#		engine.set_pitch_scale(0)
+#	engine.play()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("action_main"):

@@ -44,7 +44,7 @@ func _cam_movement(delta: float) -> void:
 	entity.global_translation += -get_joy_input().rotated(Vector3.UP, entity.lens.rotation.y) * speed * delta
 	rotation.x = Input.get_action_strength("cam_left") - Input.get_action_strength("cam_right")
 	rotation.y = Input.get_action_strength("cam_up") - Input.get_action_strength("cam_down")
-	velocity = lerp(velocity, (rotation / 50) * fov * (sensitivity / 3), 0.3)
+	velocity = lerp(velocity, (rotation / 10) * fov * (sensitivity / 3), 0.3)
 	entity.lens.rotation.y += deg2rad(velocity.x)
 	entity.lens.rotation.x += clamp(deg2rad(velocity.y), -90, 90)
 

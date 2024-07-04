@@ -47,8 +47,8 @@ func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 	entity.global_transform = Utility.apply_surface_align(entity.global_transform, climbing_normal)
 
 func get_joy_input() -> Vector3:
-	input.x = Input.get_action_strength("joy_left") - Input.get_action_strength("joy_right")
-	input.z = Input.get_action_strength("joy_up") - Input.get_action_strength("joy_down")
+	input.x = Input.get_action_strength(Device.stick_main_left) - Input.get_action_strength(Device.stick_main_right)
+	input.z = Input.get_action_strength(Device.stick_main_up) - Input.get_action_strength(Device.stick_main_down)
 	var input_length = input.length()
 	if input_length > 1:
 		input /= input_length
@@ -74,9 +74,13 @@ func apply_shimmy(state: PhysicsDirectBodyState, multiplier: float) -> void:
 		state.add_central_force((entity.speed * multiplier) * direction)
 
 func apply_rotation():
-	if direction != Vector3.ZERO:
+	if SB.camera.looking:
+		var cam_facing: Vector3 = SB.camera.rotation_degrees
+		facing_dir = atan2(cam_facing.x, cam_facing.z)
+	elif direction != Vector3.ZERO:
 		facing_dir = atan2(-direction.x, -direction.z)
 		entity.skeleton.rotation.y = lerp_angle(entity.skeleton.rotation.y, facing_dir, 0.2)
+		entity.collision.rotation.y = lerp_angle(entity.collision.rotation.y, facing_dir, 0.2)
 
 func is_on_floor() -> bool:
 	if is_instance_valid(entity.climbing_rays):

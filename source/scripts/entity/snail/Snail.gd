@@ -20,7 +20,7 @@ var mode_timer: Timer = null
 
 func _ready() -> void:
 	states.ready(self)
-	#update_appearance()
+	update_appearance()
 	set_interaction_text("")
 	mode_timer = Timer.new()
 	mode_timer.set_wait_time(0.1)
@@ -40,11 +40,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if is_controlled():
 		states.unhandled_input(event)
 
-func _process(delta: float) -> void:
-	._process(delta)
-
 func _physics_process(delta: float) -> void:
-	update_appearance()
+	#update_appearance()
 	if is_controlled():
 		states.physics_process(delta)
 	elif SB.controlled and self == SB.prev_controlled:
@@ -96,7 +93,7 @@ func update_appearance() -> void:
 		shell_accent_mat.set_shader_param("albedo_color", identity.color_shell_accent)
 		body_mat.set_shader_param("specular_color", identity.color_body_specular)
 		body_mat.set_shader_param("rim_color", identity.color_body_specular)
-		body_mat.set_shader_param("albedo_color", identity.color_body)
+		body_mat.set_shader_param("albedo_color", identity.color_body_base)
 		body_mat.set_shader_param("shade_color", identity.color_body_shade)
 		body_accent_mat.set_shader_param("texture_albedo", identity.pattern_body)
 		body_accent_mat.set_shader_param("albedo_color", identity.color_body_accent)

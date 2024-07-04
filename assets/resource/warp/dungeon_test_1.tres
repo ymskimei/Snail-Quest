@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource( 1 )
-room_path = "res://source/scenes/world/dev/dungeon_test.tscn"
-coordinates = Vector3( 0, 0, 0 )
+room_path = "res://source/scenes/world/dev/dungeon_test_1.tscn"
+coordinates = Vector3( 0, 1, 0 )
 direction = "NORTH"

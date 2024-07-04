@@ -89,7 +89,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/snowball_framework/source/scripts/item/ItemParent.gd"
 }, {
-"base": "Interactable",
+"base": "SpringArm",
 "class": "MainCamera",
 "language": "GDScript",
 "path": "res://addons/snowball_framework/source/scripts/entity/camera/Camera.gd"
@@ -199,6 +199,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/Song.gd"
 }, {
+"base": "Reference",
+"class": "Sorter",
+"language": "GDScript",
+"path": "res://addons/snowball_framework/source/scripts/utility/Sorter.gd"
+}, {
 "base": "AudioStreamPlayer",
 "class": "Sound",
 "language": "GDScript",
@@ -278,6 +283,7 @@ _global_script_class_icons={
 "Snail": "",
 "SnailStateMain": "",
 "Song": "",
+"Sorter": "",
 "Sound": "",
 "Sound2D": "",
 "Sound3D": "",
@@ -304,6 +310,7 @@ config/description="A small snail on an adventure to save his homeland! "
 run/main_scene="res://source/scenes/game.tscn"
 config/use_hidden_project_data_directory=false
 config/use_custom_user_dir=true
+run/delta_sync_after_draw=true
 boot_splash/image="res://assets/texture/interface/application/splash.png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://assets/texture/interface/application/icon.png"
@@ -342,6 +349,7 @@ window/size/height=1080
 window/size/test_width=1280
 window/size/test_height=720
 window/dpi/allow_hidpi=true
+window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 window/use_filter=false
@@ -353,7 +361,11 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/snowball_framework/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/blender_importer/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/snowball_framework/plugin.cfg" )
+
+[filesystem]
+
+import/blend/blender_path="D:/Archive Library/Software/Blender 3.6.3/blender.exe"
 
 [global]
 
@@ -652,6 +664,7 @@ common/enable_pause_aware_picking=true
 3d/physics_engine="Bullet"
 3d/godot_physics/use_bvh=false
 3d/godot_physics/bvh_collision_margin=1.0
+2d/thread_model=2
 3d/default_gravity=50.0
 3d/default_linear_damp=2.0
 3d/default_angular_damp=2.0
@@ -660,6 +673,7 @@ common/physics_interpolation=true
 [rendering]
 
 quality/driver/fallback_to_gles2=true
+threads/thread_model=2
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 quality/shadow_atlas/size=6400
@@ -679,3 +693,4 @@ quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 0.823529, 0.823529, 0.823529, 1 )
 quality/filters/use_fxaa=true
 quality/filters/use_debanding=true
+environment/default_environment="res://assets/resource/environment/environment_default.tres"

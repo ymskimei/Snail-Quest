@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://source/scripts/interface/TargetCursor.gd" type="Script" id=1]
 [ext_resource path="res://assets/texture/interface/hud/target_cursor.png" type="Texture" id=2]
-[ext_resource path="res://assets/texture/interface/hud/target_circle.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=14]
 resource_name = "RESET"
@@ -122,18 +121,13 @@ script = ExtResource( 1 )
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 pixel_size = 0.1
 billboard = 1
+no_depth_test = true
 render_priority = 5
 texture = ExtResource( 2 )
 
-[node name="SpriteCircle" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
-pixel_size = 0.03
-no_depth_test = true
-render_priority = 5
-texture = ExtResource( 3 )
-
 [node name="AnimationCursor" type="AnimationPlayer" parent="."]
 root_node = NodePath("../SpriteCursor")
+playback_process_mode = 0
 anims/RESET = SubResource( 14 )
 anims/TargetCursorAppear = SubResource( 15 )
 anims/TargetCursorBounce = SubResource( 13 )

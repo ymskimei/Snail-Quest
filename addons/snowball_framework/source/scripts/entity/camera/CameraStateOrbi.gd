@@ -1,148 +1,104 @@
 extends CameraStateMain
 
-var offset = Vector3(0, 0.5, 0)
-	
-var track_speed: float = 3.5
-var rotation_speed: int = 10
+var offset: Vector3 = Vector3(0, -0.3, 0)
 
-var lock_high_arm: float = 0.0
-var lock_high_lens: float = 0.3
+var track_speed: float = 8
+var rotation_speed: int = 16
 
-var lock_low_arm: float = -0.85
-var lock_low_lens: float = -0.025
-
-var lock_default_arm: float = -0.2
-var lock_default_lens: float = 0.075
-
-var fov: int = 40
-var arm: float = 6
-
-var distance: float = 0
 var input_spin: int = 0
 
-var look_around: bool
-var zoom_mode: bool
-var can_exit_mode: bool
+var mode: int = 2
 
 var spin_timer: Timer = Timer.new()
 var look_timer: Timer = Timer.new()
 
 func enter() -> void:
 	print("Camera State: ORBIT")
-	tween_cam_pan(lock_default_arm, lock_default_lens)
-	_tween_cam_reset()
-	_add_control_timers()
-	zoom_mode = false
-	look_around = false
-	distance = 0
 
-func unhandled_input(event: InputEvent) -> int:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		rotation = event.relative
-		controller = false
-	elif event is InputEventJoypadMotion:
-		controller = true
-	else:
-		rotation = Vector2.ZERO
-	return State.NULL
-
-func physics_process(delta: float) -> int:
-	if !target_controlled():
-		return State.LOCK
-	if entity.target is VehicleBody:
-		return State.VEHI
-	if entity.target is Entity and entity.target.targeting:
-		return State.TARG
-	if look_around:
-		return State.LOOK
-	if is_instance_valid(entity.target):
-		_cam_tracking(delta)
-		_cam_panning(delta)
-		_cam_velocity(delta)
-		_cam_reset()
-	else:
-		return State.FREE
-	return State.NULL
-
-func _cam_tracking(delta: float) -> void:
-	rotation.x = Input.get_action_strength(Device.stick_alt_left) - Input.get_action_strength(Device.stick_alt_right)
-	if is_inverted():
-			rotation.x = -rotation.x
-	rotation.x += (-Input.get_action_strength("joy_right") + Input.get_action_strength("joy_left")) / 2
-	entity.translation = lerp(entity.translation, entity.target.translation + offset, track_speed * delta)
-	entity.arm_length = lerp(entity.arm_length, clamp(entity.arm_length + distance, 4, 30), 10 * delta)
-	entity.rotation.y += (deg2rad(velocity.x))
-
-func _cam_panning(delta: float) -> void:
-	var distance_to_target = entity.lens.get_global_translation().distance_to(entity.target.get_global_translation())
-	if distance_to_target <= 1.5:
-		tween_cam_pan(lock_low_arm, lock_low_lens)
-	elif distance_to_target >= 2:
-		if Input.is_action_just_pressed(Device.button_right):
-			look_timer.start()
-		if Input.is_action_just_released(Device.button_right):
-			zoom_mode = true
-		if !zoom_mode:
-			_cam_lifting(delta)
-		else:
-			cam_zooming(delta)
-			
-func _cam_velocity(delta: float) -> void:
-	velocity = velocity.linear_interpolate(rotation * sensitivity * 3, delta * rotation_speed)
-
-func _cam_lifting(delta: float) -> void:
-	rotation.y = Input.get_action_strength(Device.stick_alt_up) - Input.get_action_strength(Device.stick_alt_down)
-	if is_inverted(true):
-			rotation.y = -rotation.y
-	entity.rotation.x += velocity.y * delta
-	entity.rotation.x = lerp(entity.rotation.x, clamp(entity.rotation.x, deg2rad(-60), deg2rad(-15)), 6 * delta)
-
-func cam_zooming(delta: float) -> void:
-	if Input.is_action_pressed(Device.stick_alt_up):
-		distance -= 15 * delta
-	elif Input.is_action_pressed(Device.stick_alt_down):
-		distance += 15 * delta
-	else:
-		distance = 0
-	if Input.is_action_just_pressed(Device.button_right):
-		can_exit_mode = true
-	if can_exit_mode and Input.is_action_just_released(Device.button_right):
-		can_exit_mode = false
-		zoom_mode = false
-
-func _cam_reset() -> void:
-	if Input.is_action_just_pressed(Device.stick_alt_left) or Input.is_action_just_pressed(Device.stick_alt_right) or Input.is_action_just_pressed(Device.stick_alt_up) or Input.is_action_just_pressed(Device.stick_alt_down):
-		input_spin += 1
-		spin_timer.start()
-		if input_spin >= 4:
-			_tween_cam_reset()
-
-func _add_control_timers() -> void:
+	mode = 2
+	_set_mode()
+	
 	if !is_instance_valid(get_node_or_null("SpinTimer")):
 		spin_timer.set_one_shot(true)
 		spin_timer.set_wait_time(0.5)
 		spin_timer.connect("timeout", self, "_on_spin_timer")
 		spin_timer.set_name("SpinTimer")
 		add_child(spin_timer)
-	if !is_instance_valid(get_node_or_null("LookTimer")):
-		look_timer.set_one_shot(true)
-		look_timer.set_wait_time(0.25)
-		look_timer.connect("timeout", self, "_on_look_timer")
-		look_timer.set_name("LookTimer")
-		add_child(look_timer)
+
+func unhandled_input(event: InputEvent) -> int:
+	.unhandled_input(event)
+	return State.NULL
+
+func physics_process(delta: float) -> int:
+	if !target_controlled():
+		return State.LOCK
+
+	if entity.target is VehicleBody:
+		return State.VEHI
+
+	if is_instance_valid(entity.target) and entity.target.targeting:
+		return State.TARG
+
+	if is_instance_valid(entity.target):
+		entity.translation = lerp(entity.translation, entity.target.translation + Vector3(0, -0.3, 0), track_speed * delta)
+		
+		rotation.y = (Input.get_action_strength(Device.stick_alt_left) - Input.get_action_strength(Device.stick_alt_right)) * 3
+		if is_inverted(true):
+			rotation.y = -rotation.y
+
+		if mode == 2:
+			rotation.y += (Input.get_action_strength(Device.stick_main_left) - Input.get_action_strength(Device.stick_main_right)) * 1.5
+
+		velocity = velocity.linear_interpolate(rotation * sensitivity, rotation_speed * delta)
+		entity.rotation.y += (deg2rad(velocity.y))
+		
+		if rotation.y == 0:
+			if Input.is_action_just_pressed(Device.stick_alt_up) and mode <= 3:
+				mode += 1
+				_set_mode()
+			elif Input.is_action_just_pressed(Device.stick_alt_down) and mode >= 1:
+				mode -= 1
+				_set_mode()
+
+		if Input.is_action_just_pressed(Device.stick_alt_left) or Input.is_action_just_pressed(Device.stick_alt_right):
+			input_spin += 1
+			spin_timer.start()
+			if input_spin >= 3:
+				return State.LOOK
+
+	else:
+		return State.FREE
+
+	if entity.target is VehicleBody:
+		return State.VEHI
+
+	return State.NULL
+
+func _set_mode() -> void:
+	print(mode)
+	match mode:
+		1:
+			#Low view
+			_tween_cam_mode(-5, 5, 30, 5)
+		2:
+			#Normal view
+			_tween_cam_mode()
+		3:
+			#High view
+			_tween_cam_mode(-25, 5, 50, 8)
+		4:
+			#Bird view
+			_tween_cam_mode(-80, 0, 36, 16)
+		_:
+			#Worm view
+			_tween_cam_mode(0, 28, 60, 5)
 
 func _on_spin_timer() -> void:
 	input_spin = 0
 
-func _on_look_timer() -> void:
-	if Input.is_action_pressed(Device.button_right):
-		look_around = true
-
-func _tween_cam_zoom(dist: float) -> void:
-	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, entity.arm_length + dist, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
-	entity.anim_tween.start()
-
-func _tween_cam_reset() -> void:
+func _tween_cam_mode(arm_rot: float = -15, lens_rot: float = 5, fov: int = 45, length: float = 6) -> void:
+	entity.anim_tween.interpolate_property(entity, "rotation_degrees:x", entity.rotation_degrees.x, arm_rot, 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	entity.anim_tween.interpolate_property(entity.lens, "rotation_degrees:x", entity.lens.rotation_degrees.x, lens_rot, 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	entity.anim_tween.interpolate_property(entity.lens, "fov", entity.lens.fov, fov, 0.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	entity.anim_tween.interpolate_property(entity, "arm_length", entity.arm_length, arm, 0.4, Tween.TRANS_EXPO, Tween.EASE_OUT)
+	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, length, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
