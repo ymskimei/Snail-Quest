@@ -45,10 +45,6 @@ func _ready() -> void:
 	_set_strings()
 
 func _set_strings() -> void:
-	info["title"] = Auto.utility.read_config(cfg, "plugin", "name")
-	info["description"] = Auto.utility.read_config(cfg, "plugin", "description")
-	info["author"] = Auto.utility.read_config(cfg, "plugin", "author")
-	info["version"] = Auto.utility.read_config(cfg, "plugin", "version")
 	#Move this later
 	if OS.has_environment("USERNAME"):
 		user_id = OS.get_environment("USERNAME")

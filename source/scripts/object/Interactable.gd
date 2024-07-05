@@ -3,8 +3,6 @@ extends RigidBody
 
 export var dialog: Resource = null
 
-const fallback: DialogueResource = preload("res://assets/resource/error_fallback.tres")
-
 var target_proxy: Position3D = null
 var character: bool = false
 

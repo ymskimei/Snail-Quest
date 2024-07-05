@@ -31,7 +31,7 @@ func _input(event: InputEvent):
 		text_input.text = ""
 
 func _search_history(index: int) -> void:
-	history_index = clamp(history_index + index, 0, history.size() - 1)
+	history_index = int(clamp(history_index + index, 0, history.size() - 1))
 	text_input.text = history[history_index]
 	text_input.caret_position = text_input.text.length()
 

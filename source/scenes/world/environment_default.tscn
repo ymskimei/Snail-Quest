@@ -75,6 +75,20 @@ directional_shadow_normal_bias = 0.1
 directional_shadow_bias_split_scale = 0.1
 directional_shadow_max_distance = 256.0
 
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 5120, 5120 )
+transparent_bg = true
+msaa = 1
+hdr = false
+usage = 1
+render_target_v_flip = true
+
+[node name="Stars" type="Node2D" parent="Viewport"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 2560, 2560 )
+
+[node name="StarParticle" parent="Viewport/Stars" instance=ExtResource( 17 )]
+
 [node name="Orbital" type="Spatial" parent="."]
 
 [node name="Sun" type="Sprite3D" parent="Orbital"]
@@ -115,17 +129,3 @@ material/0 = SubResource( 15 )
 
 [node name="Tween" type="Tween" parent="."]
 playback_process_mode = 0
-
-[node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 5120, 5120 )
-transparent_bg = true
-msaa = 1
-hdr = false
-usage = 1
-render_target_v_flip = true
-
-[node name="Stars" type="Node2D" parent="Viewport"]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 2560, 2560 )
-
-[node name="StarParticle" parent="Viewport/Stars" instance=ExtResource( 17 )]

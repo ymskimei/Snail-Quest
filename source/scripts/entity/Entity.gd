@@ -200,7 +200,8 @@ func get_interaction_text():
 	return "chat"
 
 func interact():
-	trigger_dialog()
+	#trigger_dialog()
+	pass
 
 func _on_Area_area_entered(area) -> void:
 	if area.is_in_group("danger"):

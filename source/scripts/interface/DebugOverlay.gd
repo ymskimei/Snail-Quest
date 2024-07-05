@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 	set_display_coordinates()
 
 func set_display_framerate() -> void:
-	var framerate: int = Engine.get_frames_per_second()
+	var framerate: int = int(Engine.get_frames_per_second())
 	var color: String = ""
 	if framerate < Engine.target_fps / 2:
 		color = RegistryColor.red

@@ -49,11 +49,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/interface/DebugConsoleCommand.gd"
 }, {
-"base": "Resource",
-"class": "DialogueResource",
-"language": "GDScript",
-"path": "res://addons/dialogue_manager/dialogue_resource.gd"
-}, {
 "base": "Entity",
 "class": "Enemy",
 "language": "GDScript",
@@ -253,7 +248,6 @@ _global_script_class_icons={
 "Conversable": "",
 "DebugConsoleCategory": "",
 "DebugConsoleCommand": "",
-"DialogueResource": "",
 "Enemy": "",
 "EnemyStateMain": "",
 "Entity": "",
@@ -321,7 +315,6 @@ default_bus_layout="res://assets/default_bus_layout.tres"
 
 [autoload]
 
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 EventFlags="*res://source/scripts/EventFlags.gd"
 WorldSave="*res://source/scripts/world/WorldSave.gd"
 Auto="*res://source/scenes/auto.tscn"
@@ -356,7 +349,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/blender_importer/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/snowball_framework/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/blender_importer/plugin.cfg", "res://addons/circular_container/plugin.cfg" )
 
 [filesystem]
 

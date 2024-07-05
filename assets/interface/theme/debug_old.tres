@@ -3,7 +3,6 @@
 [ext_resource path="res://assets/interface/font/mochi_pop_p_one_32.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/texture/interface/npatch_debug.png" type="Texture" id=2]
 
-
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]

@@ -12,7 +12,7 @@ func get_interaction_text():
 
 func interact():
 	camera_override()
-	trigger_dialog()
+	#trigger_dialog()
 
 func dialog_end() -> void:
 	camera_override(false)
