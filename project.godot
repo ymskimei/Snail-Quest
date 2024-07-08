@@ -150,11 +150,6 @@ _global_script_classes=[ {
 "path": "res://source/scripts/resource/ResourceIdentitySnail.gd"
 }, {
 "base": "Resource",
-"class": "ResourceInventory",
-"language": "GDScript",
-"path": "res://source/scripts/resource/ResourceInventory.gd"
-}, {
-"base": "Resource",
 "class": "ResourceItem",
 "language": "GDScript",
 "path": "res://source/scripts/resource/ResourceItem.gd"
@@ -268,7 +263,6 @@ _global_script_class_icons={
 "ResourceEnvironment": "",
 "ResourceIdentity": "",
 "ResourceIdentitySnail": "",
-"ResourceInventory": "",
 "ResourceItem": "",
 "ResourceLocation": "",
 "ResourceLootTable": "",

@@ -1,28 +1,26 @@
 extends Control
 
 onready var default_selection: Control = $"%StartButton"
-onready var anim_cam: AnimationPlayer = $World/SpringArm/AnimationPlayer
-onready var anim_daisy: AnimationPlayer = $World/Daisy/AnimationPlayer
-onready var anim_logo: AnimationPlayer = $World/MeshInstance/AnimationPlayer
 
-onready var splash: RichTextLabel = $MarginContainer/HBoxContainer/LabelSplash
-onready var version: RichTextLabel = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/LabelVersion
-onready var info: RichTextLabel = $MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/LabelInfo
+onready var splash: RichTextLabel = $CanvasMain/MarginContainer/HBoxContainer/LabelSplash
+onready var version: RichTextLabel = $CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/LabelVersion
+onready var info: RichTextLabel = $CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/LabelInfo
+
+onready var main: CanvasLayer = $CanvasMain
+onready var data: Popup = $CanvasData/Popup
+onready var data_files: GridContainer = $CanvasData/Popup/MarginContainer/GridContainer
 
 signal game_start
 
 func _ready() -> void:
-	_set_strings()
+	_set_title_strings()
 	default_selection.grab_focus()
-	anim_cam.play("CamTitleStart")
-	anim_daisy.play("DaisyBlossom")
-	anim_logo.play("GuiLogoAppear")
-	yield(anim_daisy, "animation_finished")
-	anim_cam.play("CamWobble")
-	anim_daisy.play("DaisyWiggle")
-	anim_logo.play("GuiLogoIdle")
 
-func _set_strings() -> void:
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(Auto.input.action_alt) and data.is_visible():
+		data.popup()
+
+func _set_title_strings() -> void:
 	version.set_bbcode("[color=#EFEFEF]" + TranslationServer.translate("TITLE") + " " + Auto.game.info["version"])
 	info.set_bbcode("[right][color=#EFEFEF]© " + Auto.game.info["author"])
 	var splashes: Array = [
@@ -40,22 +38,31 @@ func _set_strings() -> void:
 	randomize()
 	splash.set_bbcode("[tornado radius=3 freq=2][color=#FFF896]" + TranslationServer.translate(splashes[randi() % splashes.size()]))
 
-func _physics_process(_delta: float) -> void:
-	var cam = $World/SpringArm
-	#cam.rotation.x = lerp(cam.rotation.x, Input.get_action_strength("cam_up") / 3 - Input.get_action_strength("cam_down") / 3, 0.1)
-	#.rotation.y = lerp(cam.rotation.y, Input.get_action_strength("cam_left") / 3 - Input.get_action_strength("cam_right") / 3, 0.1)
-	#cam.translation.y = lerp(cam.translation.y, Input.get_action_strength("cam_up") * 0.1  - Input.get_action_strength("cam_down") * 0.1, 0.1)
-	#cam.translation.x = lerp(cam.translation.x, Input.get_action_strength("cam_left") * 0.2 - Input.get_action_strength("cam_right") * 0.2, 0.1)
-
 func _on_StartButton_pressed() -> void:
 	Auto.audio.play_sfx(RegistryAudio.tone_success)
-	var fade = $GuiTransition/AnimationPlayer
-	fade.play("GuiTransitionFade")
-	#anim.play("GuiLogoDisappear")
-	yield(fade, "animation_finished")
-	emit_signal("game_start")
-	queue_free()
+	data.popup()
+	data_files.get_child(0).get_child(1).grab_focus()
 
 func _on_OptionsButton_pressed() -> void:
 	var interface = Auto.game.interface
 	interface.get_menu(interface.blur, interface.options)
+
+func _on_DataFile0_button_down() -> void:
+	_start_game(0)
+
+func _on_DataFile1_button_down() -> void:
+	_start_game(1)
+
+func _on_DataFile2_button_down() -> void:
+	_start_game(2)
+
+func _on_DataFile3_button_down() -> void:
+	_start_game(3)
+
+func _start_game(file: int) -> void:
+	Auto.audio.play_sfx(RegistryAudio.tone_success)
+	var fade = $GuiTransition/AnimationPlayer
+	fade.play("GuiTransitionFade")
+	yield(fade, "animation_finished")
+	emit_signal("game_start")
+	queue_free()

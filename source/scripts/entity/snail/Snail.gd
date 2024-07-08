@@ -89,7 +89,7 @@ func update_appearance() -> void:
 		eye_left_mat.set_shader_param("texture_albedo", identity.pattern_eyes)
 		eye_right_mat.set_shader_param("texture_albedo", identity.pattern_eyes)
 		shell_mat.set_shader_param("albedo_color", identity.color_shell_base)
-		shell_mat.set_shader_param("shade_color", identity.color_shell_base_shade)
+		shell_mat.set_shader_param("shade_color", identity.color_shell_shade)
 		shell_accent_mat.set_shader_param("albedo_color", identity.color_shell_accent)
 		body_mat.set_shader_param("specular_color", identity.color_body_specular)
 		body_mat.set_shader_param("rim_color", identity.color_body_specular)

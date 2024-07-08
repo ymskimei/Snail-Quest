@@ -1,10 +1,10 @@
 extends Node
 
 var current_state: Node = null
-var et: Spatial = null
+var ent: Spatial = null
 
 func ready(entity: Spatial) -> void:
-	et = entity
+	ent = entity
 	for child in get_children():
 		child.entity = entity
 	change_state(1)

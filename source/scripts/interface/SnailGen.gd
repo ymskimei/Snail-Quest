@@ -59,7 +59,7 @@ func _ready() -> void:
 	anim.play("SnailIdle")
 
 func _physics_process(delta: float) -> void:
-	_update_appearance()
+	update_appearance()
 
 func set_entity_name(new_text: String) -> void:
 	identity.entity_name = new_text
@@ -322,9 +322,10 @@ func _reposition_outfit() -> void:
 	sticker.translation.y = sticker_pos_y
 	sticker.rotation_degrees.x = sticker_rot
 	hat.translation.x = hat_pos_x
-	hat.translation.y = hat_pos_y
+	hat.set_global_translation.y = hat_pos_y
 	hat.rotation_degrees.x = hat_rot_x
 	hat.rotation_degrees.z = hat_rot_z
+	
 
 func _update_appearance_arrays() -> void:
 	var meshes: String = "res://assets/model/"
@@ -341,7 +342,7 @@ func _update_appearance_arrays() -> void:
 	hats.append_array(Auto.utility.get_loaded_files(meshes, "object/hat", ".mesh"))
 	hat_patterns.append_array(Auto.utility.get_loaded_files(textures, "object/hat", ".png"))
 
-func _update_appearance() -> void:
+func update_appearance() -> void:
 	armature.scale = Vector3(identity.entity_scale, identity.entity_scale, identity.entity_scale)
 	collision.shape.radius = identity.entity_scale
 	shell.set_mesh(identity.mesh_shell)

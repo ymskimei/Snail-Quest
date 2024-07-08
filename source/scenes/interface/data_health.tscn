@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/shader/color_editor.tres" type="Shader" id=1]
+[ext_resource path="res://assets/texture/interface/title_shell.png" type="Texture" id=2]
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 1 )
+shader_param/brightness = 0.0
+shader_param/contrast = 2.0
+shader_param/saturation = 7.0
+shader_param/hue = 0.0
+shader_param/redVal = 1.0
+shader_param/greenVal = 1.0
+shader_param/blueVal = 1.0
+shader_param/tint_color = Color( 1, 0.447059, 0.756863, 1 )
+shader_param/tint_effect_factor = 0.1
+
+[node name="TextureRect" type="TextureRect"]
+material = SubResource( 8 )
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_vertical = 4
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5

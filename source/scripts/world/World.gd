@@ -15,11 +15,11 @@ signal game_end
 signal room_loaded
 
 func _ready() -> void:
-	Auto.game_time.set_time(480) #Temporary time set
 	Auto.set_controlled($Player1) #Temporary player set
 	Auto.set_world(self)
 	_on_goto_room(load(resource.room_path), resource.coordinates, resource.direction, false, false)
 	_register_chunks()
+	Auto.data.load_data(Auto.data.get_data(Auto.data.get_current_data_file()))
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(Auto.controlled):

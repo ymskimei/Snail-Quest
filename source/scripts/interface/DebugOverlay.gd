@@ -46,13 +46,13 @@ func set_display_framerate() -> void:
 
 func set_display_world_time() -> void:
 	if Auto.game_time:
-		display_game_time.set_bbcode(default_color + "%s" % Auto.game_time.get_time(false))
+		display_game_time.set_bbcode(default_color + "%s" % Auto.utility.get_time_as_clock(Auto.game_time.get_raw_time(), false))
 	else:
 		display_game_time.set_bbcode(default_color + "??:??")
 
 func set_display_play_time() -> void:
 	if Auto.play_time:
-		display_play_time.set_bbcode(default_color + "%s" % Auto.play_time.get_time())
+		display_play_time.set_bbcode(default_color + "%s" % Auto.utility.get_time_as_count(Auto.play_time.get_raw_time()))
 	else:
 		display_play_time.set_bbcode(default_color + "??h, ??m, ??s")
 

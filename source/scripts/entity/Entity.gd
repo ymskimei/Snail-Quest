@@ -1,8 +1,7 @@
 class_name Entity
 extends Conversable
 
-export var identity: Resource = null
-export var inventory: Resource = null
+export var identity: Resource
 
 onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
@@ -108,7 +107,6 @@ func _physics_process(delta: float) -> void:
 func _set_identity() -> void:
 	if identity:
 		entity_name = identity.entity_name
-		character = identity.character
 		health = identity.health
 		max_health = identity.max_health
 		strength = identity.strength
@@ -159,8 +157,8 @@ func update_equipped(point) -> void:
 		point.remove_child(child)
 		child.queue_free()
 
-	if inventory.items[0] != null:
-		var tool_item = inventory.items[0]
+	if identity.items[0] != null:
+		var tool_item = identity.items[0]
 
 		if tool_item.item_path != "":
 			var equipped_tool = load(tool_item.item_path).instance()

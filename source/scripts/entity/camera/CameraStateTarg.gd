@@ -61,13 +61,13 @@ func on_bars_timer() -> void:
 		offset = Vector3(0, 1, 0)
 		_tween_cam_zoom()
 		if entity.target.target:
-			Auto.input.play_sfx(RegistryAudio.cam_target_lock)
+			Auto.audio.play_sfx(RegistryAudio.cam_target_lock)
 		else:
-			Auto.input.play_sfx(RegistryAudio.cam_no_target_lock)
+			Auto.audio.play_sfx(RegistryAudio.cam_no_target_lock)
 		entity.anim_bars.play("BarsAppear")
 		bars_active = true
 	else:
-		Auto.input.play_sfx(RegistryAudio.cam_target_reset)
+		Auto.audio.play_sfx(RegistryAudio.cam_target_reset)
 
 func _tween_cam_zoom() -> void:
 	entity.anim_tween.interpolate_property(entity.lens, "fov", entity.lens.fov, zoom_targeting, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -77,9 +77,9 @@ func _tween_cam_zoom() -> void:
 func exit() -> void:
 	if bars_active:
 		if entity.target.target:
-			Auto.input.play_sfx(RegistryAudio.cam_target_unlock)
+			Auto.audio.play_sfx(RegistryAudio.cam_target_unlock)
 		else:
-			Auto.input.play_sfx(RegistryAudio.cam_no_target_unlock)
+			Auto.audio.play_sfx(RegistryAudio.cam_no_target_unlock)
 		entity.anim_bars.play("BarsDisappear")
 	_tween_cam_zoom()
 	rotation_complete = false

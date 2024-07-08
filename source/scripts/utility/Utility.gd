@@ -75,6 +75,36 @@ static func cardinal_to_degrees(direction: String) -> int:
 			result = 315
 	return result
 
+func get_time_as_clock(raw_time: int, hour_24: bool = true) -> String:
+	var time: Array = raw_time_to_array(raw_time, hour_24)
+	if hour_24:
+		return "%02d:%02d" % [time[0], time[1]]
+	else:
+		return "%02d:%02d%s" % [time[0], time[1], time[3]]
+
+func get_time_as_count(raw_time: int) -> String:
+	var time: Array = raw_time_to_array(raw_time, true, true)
+	return "%02dh, %02dm, %02ds" % [time[0], time[1], time[2]]
+
+func raw_time_to_array(raw_time: int = 0, hour_24: bool = true, real_time: bool = false) -> Array:
+	var second: int = 0
+	var minute: int = raw_time % 60
+	var hour: int = int(raw_time / 60)
+	if real_time:
+		second = raw_time / 1000 % 60
+		minute = (raw_time / 1000 / 60) % 60
+		hour = (raw_time / 1000 / 60) / 60
+	if hour_24:
+		return [hour, minute, second, ""]
+	else:
+		var period = "AM"
+		if hour >= 12:
+			hour = hour % 12
+			period = "PM"
+		if hour == 0: 
+			hour = 12
+		return [hour, minute, second, period]
+
 func get_files(folder_path: String, path: bool = false, recursive: bool = true) -> Array:
 	var dir := Directory.new()
 	if dir.open(folder_path) != OK:

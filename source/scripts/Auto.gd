@@ -14,8 +14,6 @@ var world: Node = null
 var play_time: Node = null
 var game_time: Node = null
 
-var user_id: String
-
 var cfg: String = "res://addons/snowball_framework/plugin.cfg"
 
 var info: Dictionary = {
@@ -40,16 +38,6 @@ var chunk_start: Vector3 = Vector3.ZERO
 var chunk_size: int = 64
 
 signal controlled_health_change()
-
-func _ready() -> void:
-	_set_strings()
-
-func _set_strings() -> void:
-	#Move this later
-	if OS.has_environment("USERNAME"):
-		user_id = OS.get_environment("USERNAME")
-	else:
-		user_id = ""
 
 func set_game(node: Node):
 	game = node

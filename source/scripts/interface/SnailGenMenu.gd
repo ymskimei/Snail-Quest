@@ -263,13 +263,13 @@ func _on_ColorPicker_color_changed(color) -> void:
 			snail.set_color_eyes(color)
 
 func _play_sound_select() -> void:
-	Utility.audio.play_sfx(RegistryAudio.tone_switch)
+	Auto.audio.play_sfx(RegistryAudio.tone_switch)
 
 func _play_sound_success() -> void:
-	Utility.audio.play_sfx(RegistryAudio.tone_success)
-	
+	Auto.audio.play_sfx(RegistryAudio.tone_success)
+
 func _play_sound_exit() -> void:
-	Utility.audio.play_sfx(RegistryAudio.tone_exit)
+	Auto.audio.play_sfx(RegistryAudio.tone_exit)
 
 
 

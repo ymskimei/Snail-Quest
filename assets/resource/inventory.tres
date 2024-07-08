@@ -1,9 +1,17 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://source/scripts/resource/ResourceInventory.gd" type="Script" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "class_name ResourceInventory
+extends Resource
+
+export var kons: int = 0
+export var keys: int = 0
+export var boss_key: bool = false
+
+export(Array, Resource) var items: Array = [null, null]"
 
 [resource]
-script = ExtResource( 1 )
+script = SubResource( 1 )
 kons = 0
 keys = 0
 boss_key = false

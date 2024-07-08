@@ -8,10 +8,8 @@ var info: Dictionary = {
 	"title": "",
 	"description": "",
 	"version": "0.5.0-pre-alpha",
-	"author": "Studio Kuwagata"
+	"author": "Kaboodle"
 }
-
-#var dev_stage: String = "pre-alpha"
 
 var title_screen = preload("res://source/scenes/interface/screen_title.tscn").instance()
 var world = preload("res://source/scenes/world/world.tscn").instance()

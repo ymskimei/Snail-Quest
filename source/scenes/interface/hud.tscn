@@ -29,7 +29,6 @@
 [ext_resource path="res://assets/texture/interface/hud/frame_tool.png" type="Texture" id=27]
 [ext_resource path="res://source/scenes/interface/cursor_target.tscn" type="PackedScene" id=28]
 
-
 [sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 20 )
 shader_param/brightness = 0.0
@@ -349,8 +348,8 @@ show_behind_parent = true
 material = SubResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 4800.0
-margin_bottom = 4800.0
+margin_right = 5120.0
+margin_bottom = 5120.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 18 )
