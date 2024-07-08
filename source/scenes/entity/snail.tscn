@@ -39,6 +39,7 @@
 [ext_resource path="res://assets/resource/animation/SnailPress.tres" type="Animation" id=37]
 [ext_resource path="res://assets/resource/identity/snail/snail.tres" type="Resource" id=38]
 
+
 [sub_resource type="PhysicsMaterial" id=32]
 
 [sub_resource type="Skin" id=36]

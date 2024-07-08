@@ -17,17 +17,15 @@ func _ready() -> void:
 	var file = File.new()
 	if file.file_exists("user://data/data_" + str(applied_data_file) + ".sus"):
 		var data: Dictionary = Auto.data.get_data(Auto.data.get_data_file(applied_data_file))
-
-		file_name.set_bbcode(data["entity_name"])
+		imitation_snail.get_child(0).identity = instance_from_id(data["identity"].get_object_id())
+		file_name.set_bbcode(imitation_snail.get_child(0).identity.get_entity_name())
 		time_and_location.set_bbcode(RegistryColor.get_bbcode(RegistryColor.light_gray) + Auto.utility.get_time_as_clock(data["game_time"], false) + " in " + data["location"])
 
-		var current_health: int = data["health"]
-		var max_health: int = data["max_health"]
+		var current_health: int = imitation_snail.get_child(0).identity.get_health()
+		var max_health: int = imitation_snail.get_child(0).identity.get_max_health()
 		for n in max_health:
 			health.add_child(health_icon.instance())
-		currency.get_child(0).set_bbcode(str(data["currency"]))
-
-		_set_imitation_snail_identity(data)
+		currency.get_child(0).set_bbcode(str(imitation_snail.get_child(0).identity.get_currency()))
 
 		play_time.set_bbcode("Total time " + Auto.utility.get_time_as_count(data["play_time"]))
 		last_played.set_bbcode(RegistryColor.get_bbcode(RegistryColor.light_gray) + "Last saved " + data["last_played"])
@@ -48,33 +46,3 @@ func _physics_process(delta: float) -> void:
 		imitation_snail.rotation_degrees.y += 35 * delta
 	else:
 		imitation_snail.rotation_degrees.y = 0
-
-func _set_imitation_snail_identity(data) -> void:
-	var snail = imitation_snail.get_child(0)
-	snail.identity.set_entity_name(data["entity_name"])
-	snail.identity.set_max_health(data["max_health"])
-	snail.identity.set_health(data["health"])
-	snail.identity.set_currency(data["currency"])
-	snail.identity.set_keys(data["keys"])
-	snail.identity.set_boss_key(data["boss_key"])
-	snail.identity.set_items(data["items"])
-	snail.identity.set_mesh_shell(data["mesh_shell"])
-	snail.identity.set_mesh_body(data["mesh_body"])
-	snail.identity.set_mesh_eye_left(data["mesh_eye_left"])
-	snail.identity.set_mesh_eye_right(data["mesh_eye_right"])
-	snail.identity.set_pattern_shell(data["pattern_shell"])
-	snail.identity.set_pattern_body(data["pattern_body"])
-	snail.identity.set_pattern_eyes(data["pattern_eyes"])
-	snail.identity.set_pattern_eyelids(data["pattern_eyelids"])
-	snail.identity.set_color_shell_base(data["color_shell_base"])
-	snail.identity.set_color_shell_shade(data["color_shell_shade"])
-	snail.identity.set_color_shell_accent(data["color_shell_accent"])
-	snail.identity.set_color_body_specular(data["color_body_specular"])
-	snail.identity.set_color_body_base(data["color_body_base"])
-	snail.identity.set_color_body_shade(data["color_body_shade"])
-	snail.identity.set_color_body_accent(data["color_body_accent"])
-	snail.identity.set_color_eyes(data["color_eyes"])
-	snail.identity.set_mesh_hat(data["mesh_hat"])
-	snail.identity.set_pattern_hat(data["pattern_hat"])
-	snail.identity.set_pattern_sticker(data["pattern_sticker"])
-	snail.update_appearance()

@@ -30,6 +30,7 @@
 [ext_resource path="res://assets/shader/decal.shader" type="Shader" id=28]
 [ext_resource path="res://assets/texture/object/sticker_1.png" type="Texture" id=30]
 
+
 [sub_resource type="PhysicsMaterial" id=32]
 
 [sub_resource type="Skin" id=36]

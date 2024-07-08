@@ -74,35 +74,20 @@ func write_data(new_file_path: String, data: Dictionary) -> void:
 		file.store_var(data)
 		file.close()
 
+func _get_identity_as_string() -> String:
+	var snail: Resource = ResourceLoader.load("res://assets/resource/identity/snail/snail.tres")
+	if Auto.controlled.identity:
+		snail = Auto.controlled.identity
+	var string = var2str(ResourceSaver.load(snail))
+	return string
+
+func _get_resource_from_string(resource_as_string: String) -> Resource:
+	var resource = ResourceSaver.load(str2var(resource_as_string))
+	return resource
+
 func get_current_data() -> Dictionary:
-	var snail: Resource = Auto.controlled.identity
 	var data: Dictionary = {
-		"entity_name": snail.get_entity_name(),
-		"max_health": snail.get_max_health(),
-		"health": snail.get_health(),
-		"currency": snail.get_currency(),
-		"keys": snail.get_keys(),
-		"boss_key": snail.get_boss_key(),
-		"items": snail.get_items(),
-		"mesh_shell": snail.get_mesh_shell(),
-		"mesh_body": snail.get_mesh_body(),
-		"mesh_eye_left": snail.get_mesh_eye_left(),
-		"mesh_eye_right": snail.get_mesh_eye_right(),
-		"pattern_shell": snail.get_pattern_shell(),
-		"pattern_body": snail.get_pattern_body(),
-		"pattern_eyes": snail.get_pattern_eyes(),
-		"pattern_eyelids": snail.get_pattern_eyelids(),
-		"color_shell_base": snail.get_color_shell_base(),
-		"color_shell_shade": snail.get_color_shell_shade(),
-		"color_shell_accent": snail.get_color_shell_accent(),
-		"color_body_specular": snail.get_color_body_specular(),
-		"color_body_base": snail.get_color_body_base(),
-		"color_body_shade": snail.get_color_body_shade(),
-		"color_body_accent": snail.get_color_body_accent(),
-		"color_eyes": snail.get_color_eyes(),
-		"mesh_hat": snail.get_mesh_hat(),
-		"pattern_hat": snail.get_pattern_hat(),
-		"pattern_sticker": snail.get_pattern_sticker(),
+		"identity": Auto.controlled.identity,
 		"translation": Auto.controlled.get_global_translation(),
 		"rotation": Auto.controlled.get_global_rotation(),
 		"game_time": Auto.game_time.get_raw_time(),
@@ -115,34 +100,8 @@ func get_current_data() -> Dictionary:
 	return data
 
 func create_new_data() -> Dictionary:
-	var default_snail: Resource = ResourceLoader.load("res://assets/resource/identity/snail/snail.tres")
 	var data: Dictionary = {
-		"entity_name": default_snail.get_entity_name(),
-		"max_health": default_snail.get_max_health(),
-		"health": default_snail.get_health(),
-		"currency": default_snail.get_currency(),
-		"keys": default_snail.get_keys(),
-		"boss_key": default_snail.get_boss_key(),
-		"items": default_snail.get_items(),
-		"mesh_shell": default_snail.get_mesh_shell(),
-		"mesh_body": default_snail.get_mesh_body(),
-		"mesh_eye_left": default_snail.get_mesh_eye_left(),
-		"mesh_eye_right": default_snail.get_mesh_eye_right(),
-		"pattern_shell": default_snail.get_pattern_shell(),
-		"pattern_body": default_snail.get_pattern_body(),
-		"pattern_eyes": default_snail.get_pattern_eyes(),
-		"pattern_eyelids": default_snail.get_pattern_eyelids(),
-		"color_shell_base": default_snail.get_color_shell_base(),
-		"color_shell_shade": default_snail.get_color_shell_shade(),
-		"color_shell_accent": default_snail.get_color_shell_accent(),
-		"color_body_specular": default_snail.get_color_body_specular(),
-		"color_body_base": default_snail.get_color_body_base(),
-		"color_body_shade": default_snail.get_color_body_shade(),
-		"color_body_accent": default_snail.get_color_body_accent(),
-		"color_eyes": default_snail.get_color_eyes(),
-		"mesh_hat": default_snail.get_mesh_hat(),
-		"pattern_hat": default_snail.get_pattern_hat(),
-		"pattern_sticker": default_snail.get_pattern_sticker(),
+		"identity": ResourceLoader.load("res://assets/resource/identity/snail/snail.tres"),
 		"translation": Auto.controlled.get_global_translation(),
 		"rotation": Auto.controlled.get_global_rotation(),
 		"game_time": 480,
@@ -156,33 +115,7 @@ func create_new_data() -> Dictionary:
 
 func load_data(data: Dictionary) -> void:
 	var snail = Auto.controlled
-	snail.identity.set_entity_name(data["entity_name"])
-	snail.identity.set_max_health(data["max_health"])
-	snail.identity.set_health(data["health"])
-	snail.identity.set_currency(data["currency"])
-	snail.identity.set_keys(data["keys"])
-	snail.identity.set_boss_key(data["boss_key"])
-	snail.identity.set_items(data["items"])
-	snail.identity.set_mesh_shell(data["mesh_shell"])
-	snail.identity.set_mesh_body(data["mesh_body"])
-	snail.identity.set_mesh_eye_left(data["mesh_eye_left"])
-	snail.identity.set_mesh_eye_right(data["mesh_eye_right"])
-	snail.identity.set_pattern_shell(data["pattern_shell"])
-	snail.identity.set_pattern_body(data["pattern_body"])
-	snail.identity.set_pattern_eyes(data["pattern_eyes"])
-	snail.identity.set_pattern_eyelids(data["pattern_eyelids"])
-	snail.identity.set_color_shell_base(data["color_shell_base"])
-	snail.identity.set_color_shell_shade(data["color_shell_shade"])
-	snail.identity.set_color_shell_accent(data["color_shell_accent"])
-	snail.identity.set_color_body_specular(data["color_body_specular"])
-	snail.identity.set_color_body_base(data["color_body_base"])
-	snail.identity.set_color_body_shade(data["color_body_shade"])
-	snail.identity.set_color_body_accent(data["color_body_accent"])
-	snail.identity.set_color_eyes(data["color_eyes"])
-	snail.identity.set_mesh_hat(data["mesh_hat"])
-	snail.identity.set_pattern_hat(data["pattern_hat"])
-	snail.identity.set_pattern_sticker(data["pattern_sticker"])
-	snail.update_appearance()
+	snail.identity = data["identity"]
 	snail.set_global_translation(data["translation"])
 	snail.set_global_rotation(data["rotation"])
 	Auto.game_time.set_raw_time(data["game_time"])
@@ -190,6 +123,7 @@ func load_data(data: Dictionary) -> void:
 	#needs event flag setting
 	#needs set entity locations
 	Auto.play_time.set_raw_time(data["play_time"])
+	snail.update_appearance()
 
 func save_screenshot() -> void:
 	var time: String = Time.get_date_string_from_system() + "_" + Time.get_time_string_from_system().replace(":", ".")
