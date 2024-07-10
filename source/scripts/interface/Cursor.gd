@@ -16,7 +16,7 @@ func get_modifier_by_node(n) -> Vector2:
 	var mod = n.rect_size * 0.75
 	if n is Button and n.text != "":
 		if !n is OptionButton:
-			mod = Vector2(n.rect_size.x * 1.1, n.rect_size.y * 0.55)
+			mod = Vector2(n.rect_size.x * 0.5, n.rect_size.y * 0.5)
 	elif n is LineEdit:
 		mod = Vector2(n.rect_size.x, n.rect_size.y * 0.55)
 	return mod

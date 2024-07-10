@@ -17,12 +17,13 @@ func _ready() -> void:
 	Auto.data.connect("data_writing", self, "_on_data_writing")
 
 func _process(_delta: float):
-	if !Auto.controlled or get_tree().paused == true:
-		hud.hide() 
-		cursor.show()
-	elif Auto.controlled is Entity or VehicleBody:
-		hud.show()
-		cursor.hide()
+	if !Auto.input.get_block_input():
+		if !Auto.controlled or get_tree().paused == true:
+			hud.hide() 
+			cursor.show()
+		elif Auto.controlled is Entity or VehicleBody:
+			hud.show()
+			cursor.hide()
 
 func _unhandled_input(event: InputEvent):
 	if debug.visible:

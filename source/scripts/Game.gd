@@ -1,10 +1,11 @@
 extends Node
 
 onready var interface: Node = $Interface
+onready var screen: Node = $Screen
 
-var title_screen = preload("res://source/scenes/interface/screen_title.tscn").instance()
-var data_screen = preload("res://source/scenes/interface/screen_data.tscn").instance()
-var world = preload("res://source/scenes/world/world.tscn").instance()
+var title = preload("res://source/scenes/interface/screen_title.tscn")
+var data = preload("res://source/scenes/interface/screen_data.tscn")
+var world = preload("res://source/scenes/world/world.tscn")
 
 var cfg: String = "res://export_presets.cfg"
 
@@ -18,14 +19,14 @@ var info: Dictionary = {
 func _ready():
 	Auto.set_game(self)
 	OS.set_window_title("Snail Quest " + info["version"] + " (DEBUG)")
-	add_child(title_screen)
-	title_screen.connect("goto_data", self, "on_goto_data")
-	data_screen.connect("game_start", self, "on_start_game")
+	screen.add_child(title.instance())
 
-func on_goto_data():
-	yield(title_screen, "tree_exited")
-	add_child(data_screen)
-
-func on_start_game():
-	yield(data_screen, "tree_exited")
-	add_child(world)
+func change_screen(new_scene: PackedScene):
+	Auto.input.set_block_input(true)
+	interface.transition.play("GuiTransitionFade")
+	yield(interface.transition, "animation_finished")
+	screen.get_child(0).queue_free()
+	yield(screen.get_child(0), "tree_exited")
+	screen.add_child(new_scene.instance())
+	Auto.input.set_block_input(false)
+	interface.transition.play_backwards("GuiTransitionFade")

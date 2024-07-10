@@ -54,6 +54,8 @@ signal device_changed(device, device_index)
 signal action_key_changed(action_name, key)
 signal action_button_changed(action_name, button)
 
+var block_input: bool = false
+
 func _input(event: InputEvent) -> void:
 	var next_device: String = device
 	var next_device_index: int = device_index
@@ -71,6 +73,12 @@ func _input(event: InputEvent) -> void:
 		device_index = next_device_index
 		emit_signal("device_changed", device, device_index)
 		#_get_all_devices()
+
+func set_block_input(toggle: bool = true) -> void:
+	block_input = toggle
+
+func get_block_input() -> bool:
+	return block_input
 
 func get_simplified_device_name(raw_name: String) -> String:
 	match raw_name:

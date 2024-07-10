@@ -31,13 +31,6 @@ func _set_title_strings() -> void:
 	splash.set_bbcode("[tornado radius=3 freq=2][color=#FFF896]" + TranslationServer.translate(splashes[randi() % splashes.size()]))
 
 func _on_StartButton_pressed() -> void:
-	Auto.audio.play_sfx(RegistryAudio.tone_success)
-	var interface = Auto.game.interface
-	interface.transition.play("GuiTransitionFade")
-	yield(interface.transition, "animation_finished")
-	emit_signal("goto_data")
-	queue_free()
-
-func _on_OptionsButton_pressed() -> void:
-	var interface = Auto.game.interface
-	interface.get_menu(interface.blur, interface.options)
+	if !Auto.input.get_block_input():
+		Auto.audio.play_sfx(RegistryAudio.tone_success)
+		Auto.game.change_screen(Auto.game.data)

@@ -2,7 +2,6 @@ extends Node
 
 export var resource: Resource = null
 
-onready var anim: AnimationPlayer = $GuiTransition/AnimationPlayer
 onready var rooms: Spatial = $Rooms
 
 export var render_radius: int = 1 #Temporary variables for testing
@@ -20,9 +19,6 @@ func _ready() -> void:
 	_on_goto_room(load(resource.room_path), resource.coordinates, resource.direction, false, false)
 	_register_chunks()
 	Auto.data.load_data(Auto.data.get_data(Auto.data.get_current_data_folder()))
-	var interface = Auto.game.interface
-	interface.transition.play_backwards("GuiTransitionFade")
-	yield(interface.transition, "animation_finished")
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(Auto.controlled):

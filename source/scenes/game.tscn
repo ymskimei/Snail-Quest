@@ -200,3 +200,5 @@ stretch_mode = 5
 
 [node name="Cache" type="Node" parent="."]
 script = ExtResource( 8 )
+
+[node name="Screen" type="Node" parent="."]
