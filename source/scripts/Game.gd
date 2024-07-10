@@ -2,31 +2,23 @@ extends Node
 
 onready var interface: Node = $Interface
 
+var title_screen = preload("res://source/scenes/interface/screen_title.tscn").instance()
+var world = preload("res://source/scenes/world/world.tscn").instance()
+
 var cfg: String = "res://export_presets.cfg"
 
 var info: Dictionary = {
-	"title": "",
-	"description": "",
+	"title": ProjectSettings.get_setting("application/config/name"),
+	"description": ProjectSettings.get_setting("application/config/description"),
 	"version": "0.5.0-pre-alpha",
 	"author": "Kaboodle"
 }
 
-var title_screen = preload("res://source/scenes/interface/screen_title.tscn").instance()
-var world = preload("res://source/scenes/world/world.tscn").instance()
-
 func _ready():
 	Auto.set_game(self)
+	OS.set_window_title("Snail Quest " + info["version"] + " (DEBUG)")
 	add_child(title_screen)
 	title_screen.connect("game_start", self, "on_start_game")
-	_set_strings()
-	OS.set_window_title("Snail Quest " + info["version"] + " (DEBUG)")
-
-func _set_strings() -> void:
-	info["title"] = ProjectSettings.get_setting("application/config/name")
-	info["description"] = ProjectSettings.get_setting("application/config/description")
-	#info["version"] = Auto.utility.read_config(cfg, "preset.0.options", "application/file_version")
-	#info["version"].erase(info["version"].length() -2, 2) + "-" + dev_stage
-	#info["author"] = Auto.utility.read_config(cfg, "preset.0.options", "application/copyright")
 
 func on_start_game():
 	yield(title_screen, "tree_exited")

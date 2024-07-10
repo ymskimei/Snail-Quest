@@ -115,7 +115,7 @@ func add_languages(button: OptionButton) -> void:
 
 func _set_from_config() -> void:
 	set_fullscreen(get_fullscreen())
-	set_resolution(get_resolution())
+	#set_resolution(get_resolution())
 	set_filter(get_filter())
 	set_framerate(get_framerate())
 	set_vsync(get_vsync())

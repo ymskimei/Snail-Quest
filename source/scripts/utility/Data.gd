@@ -7,8 +7,6 @@ const data_file_type: String = ".sus" #super-ultra-save
 const appearance_file_type: String = ".tres" #super-ultra-save
 const encryption: String = "J051949" #january 5th, 1949
 
-onready var saving_indicator: TextureRect = $MarginContainer/TextureRect
-
 var current_data_folder: String = ""
 
 var data_folder_0: String = data_path + "data 0/"
@@ -146,6 +144,8 @@ func load_data(data: Array) -> void:
 	snail.items = data[0]["items"]
 	snail.set_global_translation(data[0]["translation"])
 	snail.set_global_rotation(data[0]["rotation"])
+	Auto.camera.set_global_translation(data[0]["translation"])
+	Auto.camera.set_global_rotation(data[0]["rotation"])
 	Auto.game_time.set_raw_time(data[0]["game_time"])
 	#needs location setting
 	#needs event flag setting

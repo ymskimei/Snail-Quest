@@ -8,7 +8,7 @@
 [ext_resource path="res://addons/dialogue_manager/dialogue_label.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFontData" id=35]
-font_path = "res://assets/gui/font/data/font_nishiki_teki.ttf"
+font_path = "res://assets/interface/font/data/nishiki_teki_40.ttf"
 
 [sub_resource type="DynamicFont" id=36]
 size = 40
