@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://source/scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/scripts/interface/Interface.gd" type="Script" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://source/scenes/interface/hud.tscn" type="PackedScene" id=6]
 [ext_resource path="res://source/scenes/interface/debug_overlay.tscn" type="PackedScene" id=7]
 [ext_resource path="res://source/scripts/Cache.gd" type="Script" id=8]
+[ext_resource path="res://assets/texture/interface/saving_3.png" type="Texture" id=9]
+[ext_resource path="res://assets/texture/interface/saving_0.png" type="Texture" id=10]
+[ext_resource path="res://assets/texture/interface/saving_2.png" type="Texture" id=11]
+[ext_resource path="res://assets/texture/interface/saving_1.png" type="Texture" id=12]
 
 [sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
@@ -57,6 +61,18 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="AnimatedTexture" id=13]
+flags = 4
+frames = 4
+fps = 8.0
+frame_0/texture = ExtResource( 10 )
+frame_1/texture = ExtResource( 12 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 11 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 9 )
+frame_3/delay_sec = 0.0
+
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
 
@@ -95,6 +111,28 @@ anchor_bottom = 1.0
 playback_process_mode = 0
 anims/Effect = SubResource( 11 )
 anims/RESET = SubResource( 12 )
+
+[node name="Indicator" type="CanvasLayer" parent="Interface"]
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface/Indicator"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+
+[node name="TextureRect" type="TextureRect" parent="Interface/Indicator/MarginContainer"]
+margin_left = 32.0
+margin_top = 920.0
+margin_right = 160.0
+margin_bottom = 1048.0
+rect_min_size = Vector2( 128, 128 )
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = SubResource( 13 )
+expand = true
+stretch_mode = 5
 
 [node name="Cache" type="Node" parent="."]
 script = ExtResource( 8 )

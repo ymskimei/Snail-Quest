@@ -24,7 +24,7 @@ onready var color_display_eyes: TextureRect = $Control/HBoxContainer/Background/
 var button_play: Texture = load("res://snailgen/play.png")
 var button_pause: Texture = load("res://snailgen/pause.png")
 
-var resource_path: String = "res://assets/resource/identity/snail/"
+var resource_path: String = "user://generated/"
 
 var memorized_color: Color = Color("FFFFFF")
 var color_to_set: int = 0

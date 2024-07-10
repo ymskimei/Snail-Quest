@@ -2,30 +2,37 @@ extends Node
 
 const config_path: String = "user://settings.cfg"
 const data_path: String = "user://data/"
-const image_path: String = "user://screenshots/"
 
-const file_type: String = ".sus" #super-ultra-save
+const data_file_type: String = ".sus" #super-ultra-save
+const appearance_file_type: String = ".tres" #super-ultra-save
 const encryption: String = "J051949" #january 5th, 1949
 
-var current_data_file: String = ""
+onready var saving_indicator: TextureRect = $MarginContainer/TextureRect
 
-var data_file_0: String = data_path + "data_0" + file_type
-var data_file_1: String = data_path + "data_1" + file_type
-var data_file_2: String = data_path + "data_2" + file_type
-var data_file_3: String = data_path + "data_3" + file_type
+var current_data_folder: String = ""
+
+var data_folder_0: String = data_path + "data 0/"
+var data_folder_1: String = data_path + "data 1/"
+var data_folder_2: String = data_path + "data 2/"
+var data_folder_3: String = data_path + "data 3/"
 
 var config = ConfigFile.new()
 
+signal data_writing
+
 func _ready() -> void:
-	set_current_data_file(get_data_file(0))
+	var dir: Directory = Directory.new()
+	if !dir.dir_exists(data_path):
+		dir.make_dir(data_path)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(Auto.input.debug_save):
-		write_data(get_current_data_file(), get_current_data())
-	if event.is_action_pressed(Auto.input.debug_load):
-		load_data(get_data(get_current_data_file()))
-	if event.is_action_pressed(Auto.input.screenshot):
-		save_screenshot()
+	if is_instance_valid(Auto.controlled):
+		if event.is_action_pressed(Auto.input.debug_save):
+			write_data(get_current_data_folder(), get_current_data())
+		if event.is_action_pressed(Auto.input.debug_load):
+			load_data(get_data(get_current_data_folder()))
+		if event.is_action_pressed(Auto.input.screenshot):
+			save_screenshot()
 
 func set_config(section: String, key: String, value) -> void:
 	config.set_value(section, key, value)
@@ -35,61 +42,71 @@ func get_config(section: String, key: String, value):
 	config.load(config_path)
 	return config.get_value(section, key, value)
 
-func set_current_data_file(data: String) -> void:
-	current_data_file = data
+func set_current_data_folder(data: String) -> void:
+	current_data_folder = data
 
-func get_current_data_file() -> String:
-	return current_data_file
+func get_current_data_folder() -> String:
+	return current_data_folder
 
-func get_data_file(selection: int = 0) -> String:
+func get_data_folder(selection: int = 0) -> String:
 	match selection:
 		1:
-			return data_file_1
+			return data_folder_1
 		2:
-			return data_file_2
+			return data_folder_2
 		3:
-			return data_file_3
+			return data_folder_3
 		_:
-			return data_file_0
+			return data_folder_0
 
-func get_data(file_path: String) -> Dictionary:
+func get_data(folder_path: String) -> Array:
+	var data_file_path: String = folder_path + "save" + data_file_type
 	var file: File = File.new()
 	var data: Dictionary 
-	if file.file_exists(file_path):
-		var open_file = file.open_encrypted_with_pass(file_path, File.READ, encryption)
+	var appearance: Resource = ResourceLoader.load(folder_path + "identity" + appearance_file_type)
+	if file.file_exists(data_file_path):
+		var open_file = file.open_encrypted_with_pass(data_file_path, File.READ, encryption)
 		if open_file == OK:
 			data = file.get_var()
 			file.close()
-		return data
 	else:
-		return create_new_data()
+		appearance = ResourceLoader.load("res://assets/resource/identity/snail/sheldon.tres")
+		data = _get_new_data()
+	return [data, appearance]
 
-func write_data(new_file_path: String, data: Dictionary) -> void:
-	var dir = Directory.new()
-	if !dir.dir_exists(data_path):
-		dir.make_dir(data_path)
-	var file = File.new()
-	var open_file = file.open_encrypted_with_pass(new_file_path, File.WRITE, encryption)
+func get_auto_data(folder_path: String) -> Array:
+	var all_auto_data: Array = Auto.utility.get_files(folder_path + "auto/", true, true)
+	return all_auto_data
+
+func write_data(folder_path: String, data: Dictionary, automatic: bool = false) -> void:
+	emit_signal("data_writing", true)
+	var dir: Directory = Directory.new()
+	if !dir.dir_exists(folder_path):
+		dir.make_dir(folder_path)
+	var data_file_path: String = folder_path + "save" + data_file_type
+	var appearance_file_path: String = folder_path + "identity" + appearance_file_type
+	if automatic:
+		data_file_path = folder_path + "auto/" + _get_time_as_string() + data_file_type
+		appearance_file_path = folder_path + "auto/" + _get_time_as_string() + appearance_file_type
+	var file: File = File.new()
+	var open_file = file.open_encrypted_with_pass(data_file_path, File.WRITE, encryption)
 	if open_file == OK:
 		file.store_var(data)
 		file.close()
-
-func _get_identity_as_string() -> String:
-	var snail: Resource = ResourceLoader.load("res://assets/resource/identity/snail/snail.tres")
-	if Auto.controlled.identity:
-		snail = Auto.controlled.identity
-	var string = var2str(ResourceSaver.load(snail))
-	return string
-
-func _get_resource_from_string(resource_as_string: String) -> Resource:
-	var resource = ResourceSaver.load(str2var(resource_as_string))
-	return resource
+	ResourceSaver.save(appearance_file_path, Auto.controlled.identity)
+	emit_signal("data_writing", false)
 
 func get_current_data() -> Dictionary:
+	var snail: Spatial = Auto.controlled
 	var data: Dictionary = {
-		"identity": Auto.controlled.identity,
-		"translation": Auto.controlled.get_global_translation(),
-		"rotation": Auto.controlled.get_global_rotation(),
+		"max_health":snail.get_max_health(),
+		"health": snail.get_health(),
+		"currency": snail.get_currency(),
+		"keys": snail.get_keys(),
+		"boss_key": snail.get_boss_key(),
+		"items": snail.get_items(),
+		"translation": snail.get_global_translation(),
+		"rotation": snail.get_global_rotation(),
 		"game_time": Auto.game_time.get_raw_time(),
 		"location": "Nowhere",
 		"event_flags": ["placeholder"],
@@ -99,9 +116,14 @@ func get_current_data() -> Dictionary:
 	}
 	return data
 
-func create_new_data() -> Dictionary:
+func _get_new_data() -> Dictionary:
 	var data: Dictionary = {
-		"identity": ResourceLoader.load("res://assets/resource/identity/snail/snail.tres"),
+		"max_health": 3,
+		"health": 3,
+		"currency": 0,
+		"keys": 0,
+		"boss_key": 0,
+		"items": [],
 		"translation": Auto.controlled.get_global_translation(),
 		"rotation": Auto.controlled.get_global_rotation(),
 		"game_time": 480,
@@ -113,30 +135,41 @@ func create_new_data() -> Dictionary:
 	}
 	return data
 
-func load_data(data: Dictionary) -> void:
+func load_data(data: Array) -> void:
 	var snail = Auto.controlled
-	snail.identity = data["identity"]
-	snail.set_global_translation(data["translation"])
-	snail.set_global_rotation(data["rotation"])
-	Auto.game_time.set_raw_time(data["game_time"])
+	snail.identity = data[1]
+	snail.max_health = data[0]["max_health"]
+	snail.health = data[0]["health"]
+	snail.currency = data[0]["currency"]
+	snail.keys = data[0]["keys"]
+	snail.boss_key = data[0]["boss_key"]
+	snail.items = data[0]["items"]
+	snail.set_global_translation(data[0]["translation"])
+	snail.set_global_rotation(data[0]["rotation"])
+	Auto.game_time.set_raw_time(data[0]["game_time"])
 	#needs location setting
 	#needs event flag setting
 	#needs set entity locations
-	Auto.play_time.set_raw_time(data["play_time"])
+	Auto.play_time.set_raw_time(data[0]["play_time"])
 	snail.update_appearance()
 
 func save_screenshot() -> void:
-	var time: String = Time.get_date_string_from_system() + "_" + Time.get_time_string_from_system().replace(":", ".")
-	var count: int = 0
 	var extension: String = ".png"
 	var dir = Directory.new()
-	if !dir.dir_exists(image_path):
-		dir.make_dir(image_path)
-	var image = get_screenshot()
-	image.save_png(image_path + time + extension)
+	if current_data_folder != "":
+		if !dir.dir_exists(current_data_folder + "screenshots/"):
+			dir.make_dir(current_data_folder + "screenshots/")
+		var image = get_screenshot()
+		image.save_png(current_data_folder + "screenshots/" + _get_time_as_string() + extension)
+	else:
+		printerr("No current data folder to save images to! Use another screen capturer")
 
 func get_screenshot() -> Image:
 	var screen: Texture = get_viewport().get_texture()
 	var image: Image = screen.get_data()
 	image.flip_y()
 	return image
+
+func _get_time_as_string() -> String:
+	var time: String =  Time.get_date_string_from_system() + "_" + Time.get_time_string_from_system().replace(":", ".")
+	return time

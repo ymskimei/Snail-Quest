@@ -808,10 +808,10 @@ margin_right = 685.0
 margin_bottom = 760.0
 
 [node name="ColorPicker" type="ColorPicker" parent="Control/ColorPicker/MarginContainer/Background2/MarginContainer/VBoxContainer"]
-margin_left = 52.0
-margin_top = 52.0
-margin_right = 673.0
-margin_bottom = 605.0
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 689.0
+margin_bottom = 621.0
 color = Color( 0.760784, 0.490196, 0.490196, 1 )
 edit_alpha = false
 

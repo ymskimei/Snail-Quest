@@ -37,8 +37,7 @@
 [ext_resource path="res://assets/resource/animation/SnailPush.tres" type="Animation" id=35]
 [ext_resource path="res://source/scripts/entity/snail/SnailStatePush.gd" type="Script" id=36]
 [ext_resource path="res://assets/resource/animation/SnailPress.tres" type="Animation" id=37]
-[ext_resource path="res://assets/resource/identity/snail/snail.tres" type="Resource" id=38]
-
+[ext_resource path="res://assets/resource/identity/snail/sheldon.tres" type="Resource" id=39]
 
 [sub_resource type="PhysicsMaterial" id=32]
 
@@ -360,7 +359,7 @@ contacts_reported = 1
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 25 )
-identity = ExtResource( 38 )
+identity = ExtResource( 39 )
 
 [node name="StateController" parent="." instance=ExtResource( 2 )]
 

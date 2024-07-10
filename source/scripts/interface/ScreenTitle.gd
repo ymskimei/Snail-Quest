@@ -59,7 +59,8 @@ func _on_DataFile2_button_down() -> void:
 func _on_DataFile3_button_down() -> void:
 	_start_game(3)
 
-func _start_game(file: int) -> void:
+func _start_game(folder: int) -> void:
+	Auto.data.set_current_data_folder(Auto.data.get_data_folder(folder))
 	Auto.audio.play_sfx(RegistryAudio.tone_success)
 	var fade = $GuiTransition/AnimationPlayer
 	fade.play("GuiTransitionFade")

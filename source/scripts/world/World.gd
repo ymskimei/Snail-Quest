@@ -19,7 +19,7 @@ func _ready() -> void:
 	Auto.set_world(self)
 	_on_goto_room(load(resource.room_path), resource.coordinates, resource.direction, false, false)
 	_register_chunks()
-	Auto.data.load_data(Auto.data.get_data(Auto.data.get_current_data_file()))
+	Auto.data.load_data(Auto.data.get_data(Auto.data.get_current_data_folder()))
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(Auto.controlled):

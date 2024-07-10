@@ -9,12 +9,15 @@ onready var collision: CollisionShape = $CollisionShape
 onready var mesh: MeshInstance = $"%MeshInstance"
 onready var anim: AnimationPlayer = $AnimationPlayer
 
-var entity_name: String
-var health: int
-var max_health: int
-var strength: int
-var speed: int
-var jump: int
+export var health: int = 10
+export var max_health: int = 10
+export var currency: int = 0
+export var keys: int = 0
+export var boss_key: bool = false
+export var items: Array = []
+export var strength: int = 1
+export var speed: int = 10
+export var jump: int = 65
 
 var target = null
 var can_swap_target: bool = true
@@ -42,7 +45,6 @@ signal entity_killed(b)
 signal target_updated()
 
 func _ready() -> void:
-	_set_identity()
 	_set_display_health()
 	_get_timers()
 	#temp until can be updated from outside
@@ -103,15 +105,6 @@ func _physics_process(delta: float) -> void:
 		if targeting and target:
 			if !global_transform.origin.distance_to(target.global_transform.origin) < 10:
 				target = null
-
-func _set_identity() -> void:
-	if identity:
-		entity_name = identity.entity_name
-		health = identity.health
-		max_health = identity.max_health
-		strength = identity.strength
-		speed = identity.speed
-		jump = identity.jump
 
 func _get_timers():
 	jump_memory_timer.set_wait_time(0.075)
@@ -226,3 +219,57 @@ func ledge() -> void:
 
 func on_ledge_timeout() -> void:
 	ledge_usable = true
+
+func set_max_health(amount: int) -> void:
+	max_health = amount
+
+func get_max_health() -> int:
+	return max_health
+
+func set_health(amount: int) -> void:
+	health = amount
+
+func get_health() -> int:
+	return health
+
+func set_currency(amount: int) -> void:
+	currency = amount
+
+func get_currency() -> int:
+	return currency
+
+func set_keys(amount: int) -> void:
+	keys = amount
+
+func get_keys() -> int:
+	return keys
+
+func set_boss_key(has: bool) -> void:
+	boss_key = has
+
+func get_boss_key() -> bool:
+	return boss_key
+
+func set_items(inventory: Array) -> void:
+	items = inventory
+
+func get_items() -> Array:
+	return items
+
+func set_strength(power: int) -> void:
+	strength = power
+
+func get_strength() -> int:
+	return strength
+
+func set_speed(power: int) -> void:
+	speed = power
+
+func get_speed() -> int:
+	return speed
+
+func set_jump(power: int) -> void:
+	jump = power
+
+func get_jump() -> int:
+	return jump

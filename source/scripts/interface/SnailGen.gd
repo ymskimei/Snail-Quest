@@ -62,55 +62,55 @@ func _physics_process(delta: float) -> void:
 	update_appearance()
 
 func set_entity_name(new_text: String) -> void:
-	identity.entity_name = new_text
+	identity.set_entity_name(new_text)
 
 func set_entity_scale(value: float) -> void:
-	identity.entity_scale = value / 50
+	identity.set_entity_scale(value / 50)
 
 func set_entity_shell(next: bool = true):
-	identity.mesh_shell = shells[Auto.utility.array_cycle(shell.get_mesh(), shells, next)]
+	identity.set_mesh_shell(shells[Auto.utility.array_cycle(shell.get_mesh(), shells, next)])
 	_reposition_outfit()
 
 func set_entity_body(next: bool = true):
-	identity.mesh_body = bodies[Auto.utility.array_cycle(body.get_mesh(), bodies, next)]
+	identity.set_mesh_body(bodies[Auto.utility.array_cycle(body.get_mesh(), bodies, next)])
 
 func set_entity_eyes(next: bool = true):
-	identity.mesh_eye_left = eyes_left[Auto.utility.array_cycle(eye_left.get_mesh(), eyes_left, next)]
-	identity.mesh_eye_right = eyes_right[Auto.utility.array_cycle(eye_right.get_mesh(), eyes_right, next)]
+	identity.set_mesh_eye_left(eyes_left[Auto.utility.array_cycle(eye_left.get_mesh(), eyes_left, next)])
+	identity.set_mesh_eye_right(eyes_right[Auto.utility.array_cycle(eye_right.get_mesh(), eyes_right, next)])
 	
 func set_entity_hat(next: bool = true):
-	identity.mesh_hat = hats[Auto.utility.array_cycle(hat.get_mesh(), hats, next)]
-	identity.pattern_hat = hat_patterns[Auto.utility.array_cycle(hat_mat.get_shader_param("texture_albedo"), hat_patterns, next)]
+	identity.set_mesh_hat([Auto.utility.array_cycle(hat.get_mesh(), hats, next)])
+	identity.set_pattern_hat(hat_patterns[Auto.utility.array_cycle(hat_mat.get_shader_param("texture_albedo"), hat_patterns, next)])
 
 func set_color_shell(c: Color) -> void:
-	identity.color_shell_base = c
+	identity.set_color_shell_base(c)
 
 func set_color_shell_accent(c: Color) -> void:
-	identity.color_shell_accent = c
+	identity.set_color_shell_accent(c)
 
 func set_color_body(c: Color) -> void:
-	identity.color_body_base = c
+	identity.set_color_body_base(c)
 
 func set_color_body_accent(c: Color) -> void:
-	identity.color_body_accent = c
+	identity.set_color_body_accent(c)
 
 func set_color_eyes(c: Color) -> void:
-	identity.color_eyes = c
+	identity.set_color_eyes(c)
 
 func set_entity_pupils(next: bool = true):
-	identity.pattern_eyes = eye_patterns[Auto.utility.array_cycle(eye_right_mat.get_shader_param("texture_albedo"), eye_patterns, next)]
+	identity.set_pattern_eyes(eye_patterns[Auto.utility.array_cycle(eye_right_mat.get_shader_param("texture_albedo"), eye_patterns, next)])
 
 func set_entity_eyelids(next: bool = true):
-	identity.pattern_eyelids = eyelid_patterns[ Auto.utility.array_cycle(eyelid_right_mat.get_shader_param("texture_albedo"), eyelid_patterns, next)]
+	identity.set_pattern_eyelids(eyelid_patterns[ Auto.utility.array_cycle(eyelid_right_mat.get_shader_param("texture_albedo"), eyelid_patterns, next)])
 
 func set_entity_pattern(next: bool = true):
-	identity.pattern_body = body_patterns[Auto.utility.array_cycle(body_accent_mat.get_shader_param("texture_albedo"), body_patterns, next)]
+	identity.set_pattern_body(body_patterns[Auto.utility.array_cycle(body_accent_mat.get_shader_param("texture_albedo"), body_patterns, next)])
 
 func set_entity_swirl(next: bool = true):
-	identity.pattern_shell = shell_patterns[Auto.utility.array_cycle(shell_accent_mat.get_shader_param("texture_albedo"), shell_patterns, next)]
+	identity.set_pattern_shell(shell_patterns[Auto.utility.array_cycle(shell_accent_mat.get_shader_param("texture_albedo"), shell_patterns, next)])
 
 func set_entity_sticker(next: bool = true):
-	identity.pattern_sticker = stickers[Auto.utility.array_cycle(sticker_mat.get_shader_param("texture_albedo"), stickers, next)]
+	identity.set_pattern_sticker(stickers[Auto.utility.array_cycle(sticker_mat.get_shader_param("texture_albedo"), stickers, next)])
 
 func run_randomizer() -> void:
 	randomize()
@@ -120,15 +120,15 @@ func run_randomizer() -> void:
 		for i in _get_random_amount():
 			set_entity_eyes()
 	else:
-		identity.mesh_eye_left = eyes_left[0]
-		identity.mesh_eye_right = eyes_right[0]
+		identity.set_mesh_eye_left(eyes_left[0])
+		identity.set_mesh_eye_right(eyes_right[0])
 	for i in _get_random_amount():
 		set_entity_pupils()
 	if randi() % 5 == 1:
 		for i in _get_random_amount():
 			set_entity_eyelids()
 	else:
-		identity.pattern_eyelids = eyelid_patterns[0]
+		identity.set_pattern_eyelids(eyelid_patterns[0])
 	for i in _get_random_amount():
 		set_entity_body()
 	for i in _get_random_amount():
@@ -141,13 +141,13 @@ func run_randomizer() -> void:
 		for i in _get_random_amount():
 			set_entity_sticker()
 	else:
-		identity.pattern_sticker = stickers[0]
+		identity.set_pattern_sticker(stickers[0])
 	if randi() % 10 == 1:
 		for i in _get_random_amount():
 			set_entity_hat()
 	else:
-		identity.mesh_hat = hats[0]
-		identity.pattern_hat = hat_patterns[0]
+		identity.set_mesh_hat(hats[0])
+		identity.set_pattern_hat(hat_patterns[0])
 	var body_color = _get_random_color()
 	var shell_color = _get_random_color()
 	var shell_color_accent = _get_random_color()
@@ -172,7 +172,7 @@ func run_randomizer() -> void:
 	set_color_eyes(_get_random_color())
 
 func save_resource(path) -> void:
-	var full_path = path + identity.entity_name.to_lower() + ".tres"
+	var full_path = path + identity.get_entity_name().to_lower() + ".tres"
 	ResourceSaver.save(full_path, identity)
 
 func load_resource(path) -> void:
@@ -253,7 +253,7 @@ func _reposition_outfit() -> void:
 	var hat_pos_y: float = 0
 	var hat_rot_x: float = 0
 	var hat_rot_z: float = 0
-	match shells.find(identity.mesh_shell):
+	match shells.find(identity.get_mesh_shell()):
 		0:
 			sticker_pos_x -= 0
 			sticker_pos_y += -0.1
@@ -322,10 +322,9 @@ func _reposition_outfit() -> void:
 	sticker.translation.y = sticker_pos_y
 	sticker.rotation_degrees.x = sticker_rot
 	hat.translation.x = hat_pos_x
-	hat.set_global_translation.y = hat_pos_y
+	hat.translation.y = hat_pos_y
 	hat.rotation_degrees.x = hat_rot_x
 	hat.rotation_degrees.z = hat_rot_z
-	
 
 func _update_appearance_arrays() -> void:
 	var meshes: String = "res://assets/model/"
@@ -343,35 +342,35 @@ func _update_appearance_arrays() -> void:
 	hat_patterns.append_array(Auto.utility.get_loaded_files(textures, "object/hat", ".png"))
 
 func update_appearance() -> void:
-	armature.scale = Vector3(identity.entity_scale, identity.entity_scale, identity.entity_scale)
-	collision.shape.radius = identity.entity_scale
-	shell.set_mesh(identity.mesh_shell)
-	body.set_mesh(identity.mesh_body)
-	eye_left.set_mesh(identity.mesh_eye_left)
-	eye_right.set_mesh(identity.mesh_eye_right)
-	shell_accent_mat.set_shader_param("texture_albedo", identity.pattern_shell)
-	eye_left_mat.set_shader_param("texture_albedo", identity.pattern_eyes)
-	eye_right_mat.set_shader_param("texture_albedo", identity.pattern_eyes)
-	shell_mat.set_shader_param("albedo_color", identity.color_shell_base)
-	shell_mat.set_shader_param("shade_color", identity.color_shell_base.blend(darkener))
-	shell_accent_mat.set_shader_param("albedo_color", identity.color_shell_accent)
-	shell_body_mat.set_shader_param("albedo_color", identity.color_body_base)
-	shell_body_mat.set_shader_param("shade_color", identity.color_body_base.blend(darkener))
-	body_mat.set_shader_param("specular_color", identity.color_body_base.blend(lightener))
-	body_mat.set_shader_param("rim_color", identity.color_body_base.blend(lightener))
-	body_mat.set_shader_param("albedo_color", identity.color_body_base)
-	body_mat.set_shader_param("shade_color", identity.color_body_base.blend(darkener))
-	body_accent_mat.set_shader_param("texture_albedo", identity.pattern_body)
-	body_accent_mat.set_shader_param("albedo_color", identity.color_body_accent)
-	eye_left_mat.set_shader_param("albedo_color", identity.color_eyes)
-	eye_right_mat.set_shader_param("albedo_color", identity.color_eyes)
-	eyelid_left_mat.set_shader_param("texture_albedo", identity.pattern_eyelids)
-	eyelid_right_mat.set_shader_param("texture_albedo", identity.pattern_eyelids)
-	eyelid_left_mat.set_shader_param("albedo_color", identity.color_body_base.blend(darkener))
-	eyelid_right_mat.set_shader_param("albedo_color", identity.color_body_base.blend(darkener))
-	hat.set_mesh(identity.mesh_hat)
-	hat_mat.set_shader_param("texture_albedo", identity.pattern_hat)
-	sticker_mat.set_shader_param("texture_albedo", identity.pattern_sticker)
+	armature.scale = Vector3(identity.get_entity_scale(), identity.get_entity_scale(), identity.get_entity_scale())
+	collision.shape.radius = identity.get_entity_scale()
+	shell.set_mesh(identity.get_mesh_shell())
+	body.set_mesh(identity.get_mesh_body())
+	eye_left.set_mesh(identity.get_mesh_eye_left())
+	eye_right.set_mesh(identity.get_mesh_eye_right())
+	shell_accent_mat.set_shader_param("texture_albedo", identity.get_pattern_shell())
+	eye_left_mat.set_shader_param("texture_albedo", identity.get_pattern_eyes())
+	eye_right_mat.set_shader_param("texture_albedo", identity.get_pattern_eyes())
+	shell_mat.set_shader_param("albedo_color", identity.get_color_shell_base())
+	shell_mat.set_shader_param("shade_color", identity.get_color_shell_base().blend(darkener))
+	shell_accent_mat.set_shader_param("albedo_color", identity.get_color_shell_accent())
+	shell_body_mat.set_shader_param("albedo_color", identity.get_color_body_base())
+	shell_body_mat.set_shader_param("shade_color", identity.get_color_body_base().blend(darkener))
+	body_mat.set_shader_param("specular_color", identity.get_color_body_base().blend(lightener))
+	body_mat.set_shader_param("rim_color", identity.get_color_body_base().blend(lightener))
+	body_mat.set_shader_param("albedo_color", identity.get_color_body_base())
+	body_mat.set_shader_param("shade_color", identity.get_color_body_base().blend(darkener))
+	body_accent_mat.set_shader_param("texture_albedo", identity.get_pattern_body())
+	body_accent_mat.set_shader_param("albedo_color", identity.get_color_body_accent())
+	eye_left_mat.set_shader_param("albedo_color", identity.get_color_eyes())
+	eye_right_mat.set_shader_param("albedo_color", identity.get_color_eyes())
+	eyelid_left_mat.set_shader_param("texture_albedo", identity.get_pattern_eyelids())
+	eyelid_right_mat.set_shader_param("texture_albedo", identity.get_pattern_eyelids())
+	eyelid_left_mat.set_shader_param("albedo_color", identity.get_color_body_base().blend(darkener))
+	eyelid_right_mat.set_shader_param("albedo_color", identity.get_color_body_base().blend(darkener))
+	hat.set_mesh(identity.get_mesh_hat())
+	hat_mat.set_shader_param("texture_albedo", identity.get_pattern_hat())
+	sticker_mat.set_shader_param("texture_albedo", identity.get_pattern_sticker())
 
 func _notification(what):
 	match what:

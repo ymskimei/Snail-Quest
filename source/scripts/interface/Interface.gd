@@ -9,6 +9,12 @@ onready var hud: CanvasLayer = $HUD
 onready var options: Menu = $Options
 onready var inventory: Menu = $Inventory
 
+onready var indicator: TextureRect = $Indicator/MarginContainer/TextureRect
+
+func _ready() -> void:
+	_on_data_writing(false)
+	Auto.data.connect("data_writing", self, "_on_data_writing")
+
 func _process(_delta: float):
 	if !Auto.controlled or get_tree().paused == true:
 		hud.hide() 
@@ -31,3 +37,11 @@ func _unhandled_input(event: InputEvent):
 				get_menu(blur, inventory)
 		if event.is_action_pressed(Auto.input.action_alt):
 			get_menu(blur)
+
+func _on_data_writing(active) -> void:
+	if active:
+		indicator.texture.pause = false
+		indicator.set_visible(true)
+	else:
+		indicator.texture.pause = true
+		indicator.set_visible(false)

@@ -280,7 +280,7 @@ margin_left = 736.0
 margin_top = 444.0
 margin_right = 1408.0
 margin_bottom = 824.0
-applied_data_file = 4
+applied_data_file = 3
 
 [node name="GuiTransition" parent="." instance=ExtResource( 1 )]
 layer = 10

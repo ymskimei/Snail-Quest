@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://source/scripts/resource/ResourceStatistics.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+max_health = 3
+health = 3
+currency = 0
+keys = 0
+boss_key = false
+items = [ null, null ]
+strength = 5
+speed = 10
+jump = 65

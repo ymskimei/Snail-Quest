@@ -19,6 +19,7 @@ func _ready():
 	add_child(title_screen)
 	title_screen.connect("game_start", self, "on_start_game")
 	_set_strings()
+	OS.set_window_title("Snail Quest " + info["version"] + " (DEBUG)")
 
 func _set_strings() -> void:
 	info["title"] = ProjectSettings.get_setting("application/config/name")

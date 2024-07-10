@@ -130,7 +130,7 @@ func _on_mode_timeout() -> void:
 	if !is_controlled():
 		if !colliding:
 			mode = RigidBody.MODE_STATIC
-			print(entity_name)
+			print(identity.entity_name)
 		else:
 			mode = RigidBody.MODE_RIGID
 	else:

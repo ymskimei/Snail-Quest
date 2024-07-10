@@ -4,18 +4,30 @@ extends Resource
 export var entity_name: String = "???"
 export var entity_scale: float = 1.0
 
-export var max_health: int = 3
-export var health: int = 3
+export var mesh_shell: Mesh = null
+export var mesh_body: Mesh = null
+export var mesh_eye_left: Mesh = null
+export var mesh_eye_right: Mesh = null
 
-export var currency: int = 0
-export var keys: int = 0
-export var boss_key: bool = false
+export var pattern_shell: Texture = null
+export var pattern_body: Texture = null
+export var pattern_eyes: Texture = null
+export var pattern_eyelids: Texture = null
 
-export var items: Array = [null, null]
+export var color_shell_base: Color = Color("FFFFFF")
+export var color_shell_shade: Color = Color("FFFFFF")
+export var color_shell_accent: Color = Color("FFFFFF")
 
-export var strength: int = 5
-export var speed: int = 10
-export var jump: int = 65
+export var color_body_specular: Color = Color("FFFFFF")
+export var color_body_base: Color = Color("FFFFFF")
+export var color_body_shade: Color = Color("FFFFFF")
+export var color_body_accent: Color = Color("FFFFFF")
+
+export var color_eyes: Color = Color("FFFFFF")
+
+export var mesh_hat: Mesh = null
+export var pattern_hat: Texture = null
+export var pattern_sticker: Texture = null
 
 func set_entity_name(name: String) -> void:
 	entity_name = name
@@ -29,56 +41,116 @@ func set_entity_scale(size: float) -> void:
 func get_entity_scale() -> float:
 	return entity_scale
 
-func set_max_health(amount: int) -> void:
-	max_health = amount
+func set_mesh_shell(mesh: Mesh) -> void:
+	mesh_shell = mesh
 
-func get_max_health() -> int:
-	return max_health
+func get_mesh_shell() -> Mesh:
+	return mesh_shell
 
-func set_health(amount: int) -> void:
-	health = amount
+func set_mesh_body(mesh: Mesh) -> void:
+	mesh_body = mesh
 
-func get_health() -> int:
-	return health
+func get_mesh_body() -> Mesh:
+	return mesh_body
 
-func set_currency(amount: int) -> void:
-	currency = amount
+func set_mesh_eye_left(mesh: Mesh) -> void:
+	mesh_eye_left = mesh
 
-func get_currency() -> int:
-	return currency
+func get_mesh_eye_left() -> Mesh:
+	return mesh_eye_left
 
-func set_keys(amount: int) -> void:
-	keys = amount
+func set_mesh_eye_right(mesh: Mesh) -> void:
+	mesh_eye_right = mesh
 
-func get_keys() -> int:
-	return keys
+func get_mesh_eye_right() -> Mesh:
+	return mesh_eye_right
 
-func set_boss_key(has: bool) -> void:
-	boss_key = has
+func set_pattern_shell(sprite: Texture) -> void:
+	pattern_shell = sprite
 
-func get_boss_key() -> bool:
-	return boss_key
+func get_pattern_shell() -> Texture:
+	return pattern_shell
 
-func set_items(inventory: Array) -> void:
-	items = inventory
+func set_pattern_body(sprite: Texture) -> void:
+	pattern_body = sprite
 
-func get_items() -> Array:
-	return items
+func get_pattern_body() -> Texture:
+	return pattern_body
+	
+func set_pattern_eyes(sprite: Texture) -> void:
+	pattern_eyes = sprite
 
-func set_strength(inventory: int) -> void:
-	strength = inventory
+func get_pattern_eyes() -> Texture:
+	return pattern_eyes
 
-func get_strength() -> int:
-	return strength
+func set_pattern_eyelids(sprite: Texture) -> void:
+	pattern_eyelids = sprite
 
-func set_speed(inventory: int) -> void:
-	speed = inventory
+func get_pattern_eyelids() -> Texture:
+	return pattern_eyelids
 
-func get_speed() -> int:
-	return speed
+func set_color_shell_base(shade: Color) -> void:
+	color_shell_base = shade
 
-func set_jump(inventory: int) -> void:
-	jump = inventory
+func get_color_shell_base() -> Color:
+	return color_shell_base
 
-func get_jump() -> int:
-	return jump
+func set_color_shell_shade(shade: Color) -> void:
+	color_shell_shade = shade
+
+func get_color_shell_shade() -> Color:
+	return color_shell_shade
+
+func set_color_shell_accent(shade: Color) -> void:
+	color_shell_accent = shade
+
+func get_color_shell_accent() -> Color:
+	return color_shell_accent
+
+func set_color_body_specular(shade: Color) -> void:
+	color_body_specular = shade
+
+func get_color_body_specular() -> Color:
+	return color_body_specular
+
+func set_color_body_base(shade: Color) -> void:
+	color_body_base = shade
+
+func get_color_body_base() -> Color:
+	return color_body_base
+
+func set_color_body_shade(shade: Color) -> void:
+	color_body_shade = shade
+
+func get_color_body_shade() -> Color:
+	return color_body_shade
+
+func set_color_body_accent(accent: Color) -> void:
+	color_body_accent = accent
+
+func get_color_body_accent() -> Color:
+	return color_body_accent
+
+func set_color_eyes(shade: Color) -> void:
+	color_eyes = shade
+
+func get_color_eyes() -> Color:
+	return color_eyes
+	
+func set_mesh_hat(mesh: Mesh) -> void:
+	mesh_hat = mesh
+
+func get_mesh_hat() -> Mesh:
+	return mesh_hat
+
+func set_pattern_hat(sprite: Texture) -> void:
+	pattern_hat = sprite
+
+func get_pattern_hat() -> Texture:
+	return pattern_hat
+
+func set_pattern_sticker(sprite: Texture) -> void:
+	pattern_sticker = sprite
+
+func get_pattern_sticker() -> Texture:
+	return pattern_sticker
