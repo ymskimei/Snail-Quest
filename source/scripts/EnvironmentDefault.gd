@@ -74,8 +74,10 @@ func _physics_process(delta: float) -> void:
 	if is_instance_valid(Auto.game_time):
 		time = Auto.game_time.get_raw_time()
 		set_orbit(delta)
-		set_environment(delta)
-		set_environment_by_time()
+	else:
+		time = 2000
+	set_environment(delta)
+	set_environment_by_time()
 
 func set_environment_by_time() -> void:
 	if time in range(time_dawn, time_day):

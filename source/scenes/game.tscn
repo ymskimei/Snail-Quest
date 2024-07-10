@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://source/scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://source/scripts/interface/Interface.gd" type="Script" id=2]
@@ -61,6 +61,56 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="Animation" id=14]
+resource_name = "GuiTransitionBlank"
+length = 0.1
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.02 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "GuiTransitionFade"
+length = 0.4
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.188235, 0.188235, 0.188235, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.188235, 0.188235, 0.188235, 0 ) ]
+}
+
 [sub_resource type="AnimatedTexture" id=13]
 flags = 4
 frames = 4
@@ -112,6 +162,19 @@ anchor_bottom = 1.0
 playback_process_mode = 0
 anims/Effect = SubResource( 11 )
 anims/RESET = SubResource( 12 )
+
+[node name="Transition" type="CanvasLayer" parent="Interface"]
+layer = 10
+
+[node name="TransitionRect" type="ColorRect" parent="Interface/Transition"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.188235, 0.188235, 0.188235, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interface/Transition"]
+anims/GuiTransitionBlank = SubResource( 14 )
+anims/GuiTransitionFade = SubResource( 15 )
+anims/RESET = SubResource( 16 )
 
 [node name="Indicator" type="CanvasLayer" parent="Interface"]
 

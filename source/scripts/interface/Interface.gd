@@ -3,6 +3,7 @@ extends InterfaceParent
 onready var debug: Menu = $Debug
 
 onready var blur: AnimationPlayer = $Blur/AnimationPlayer
+onready var transition: AnimationPlayer =  $Transition/AnimationPlayer
 
 onready var cursor: CanvasLayer = $Cursor
 onready var hud: CanvasLayer = $HUD

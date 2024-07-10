@@ -20,6 +20,9 @@ func _ready() -> void:
 	_on_goto_room(load(resource.room_path), resource.coordinates, resource.direction, false, false)
 	_register_chunks()
 	Auto.data.load_data(Auto.data.get_data(Auto.data.get_current_data_folder()))
+	var interface = Auto.game.interface
+	interface.transition.play_backwards("GuiTransitionFade")
+	yield(interface.transition, "animation_finished")
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(Auto.controlled):
@@ -43,15 +46,16 @@ func _on_goto_main() -> void:
 	emit_signal("game_end")
 
 func _on_goto_room(room: PackedScene, coords: Vector3, dir: String, pause: bool = true, fade_in: bool = true) -> void:
+	var interface = Auto.game.interface
 	if pause:
 		get_tree().set_deferred("paused", true)
 	if fade_in:
-		anim.play("GuiTransitionFade")
-		yield(anim, "animation_finished")
+		interface.transition.play_backwards("GuiTransitionFade")
+		yield(interface.transition, "animation_finished")
 	load_room(room, coords, dir)
 	yield(self, "room_loaded")
-	anim.play_backwards("GuiTransitionFade")
-	yield(anim, "animation_finished")
+	interface.transition.play("GuiTransitionFade")
+	yield(interface.transition, "animation_finished")
 	if get_tree().paused:
 		get_tree().set_deferred("paused", false)
 
