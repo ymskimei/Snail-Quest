@@ -74,8 +74,9 @@ func _parse_input(input: String):
 		command_module.command_entered(command, arguments)
 	else:
 		var n
-		if SnailQuest.controlled.identity.get_entity_name() != "":
-			n = success_color + SnailQuest.controlled.identity.get_entity_name() + ": [/color]"
+		if is_instance_valid(SnailQuest.controlled.identity):
+			if SnailQuest.controlled.identity.get_entity_name() != "":
+				n = success_color + SnailQuest.controlled.identity.get_entity_name() + ": [/color]"
 		else:
 			n = error_color + "Undefined: [/color]"
 		send_message(n + input)

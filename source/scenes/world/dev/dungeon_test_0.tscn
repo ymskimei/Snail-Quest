@@ -20,8 +20,6 @@
 [ext_resource path="res://assets/resource/item/item_test_2.tres" type="Resource" id=18]
 [ext_resource path="res://source/scenes/object/pushable_block.tscn" type="PackedScene" id=19]
 
-
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/use_diffuse = true

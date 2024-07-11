@@ -19,7 +19,7 @@ func on_command_clear(_console, _args: Array) -> void:
 	command_console.clear_console()
 
 func on_command_debug(_console, _args: Array) -> void:
-	SnailQuest.interface.debug.show_debug_information()
+	Interface.debug.show_debug_information()
 
 func on_command_health(_console, args: Array) -> void:
 	var message = command_console.error_color + "Nothing is controlled to have it's health changed![/color]"
@@ -61,7 +61,7 @@ func on_command_lives(_console, args: Array) -> void:
 	var message = command_console.error_color + "Nothing is controlled to have it's lives increased![/color]"
 	if SnailQuest.controlled and SnailQuest.controlled is Entity:
 		SnailQuest.controlled.set_entity_max_health(args[0])
-		message = "%s's lives increased to " % SnailQuest.controlled.entity_name + command_console.success_color + "%s[/color]" % SnailQuest.controlled.max_health
+		message = "%s's lives increased to " % SnailQuest.controlled.identity.get_entity_name() + command_console.success_color + "%s[/color]" % SnailQuest.controlled.max_health
 	command_console.send_message(message)
 
 func on_command_quit(_console, _args: Array) -> void:
@@ -70,7 +70,7 @@ func on_command_quit(_console, _args: Array) -> void:
 func on_command_restart(_console, _args: Array) -> void:
 	Utility.pause(false)
 	get_tree().reload_current_scene()
-	SnailQuest.interface.get_menu(null, SnailQuest.interface.debug)
+	Interface.get_menu(null, Interface.debug)
 
 func on_command_say(_console, args: Array) -> void:
 	command_console.send_message(args[0])
@@ -90,7 +90,7 @@ func on_command_tp(_console, args: Array) -> void:
 	var c = "Camera"
 	if SnailQuest.controlled and SnailQuest.controlled is Entity:
 		SnailQuest.controlled.set_coords(Vector3(args[0], args[1], args[2]))
-		c = SnailQuest.controlled.entity_name
+		c = SnailQuest.controlled.identity.get_entity_name()
 	SnailQuest.camera.set_coords(Vector3(args[0], args[1], args[2]))
 	command_console.send_message("%s teleported to " % c + command_console.success_color + "%s, %s, %s[/color]" % [args[0], args[1], args[2]])
 
@@ -106,13 +106,13 @@ func on_command_warp(_console, args: Array) -> void:
 		if directory.file_exists(warp_path):
 			var warp = load(warp_path)
 			SnailQuest.world.load_room(load(warp.room_path), warp.coordinates, warp.direction)
-			message = "%s warped to " % SnailQuest.controlled.entity_name + command_console.success_color + "%s[/color]" % args[0]
+			message = "%s warped to " % SnailQuest.controlled.identity.get_entity_name() + command_console.success_color + "%s[/color]" % args[0]
 		elif all_worlds.size() > 0:
 			print(all_worlds)
 			for w in all_worlds:
 				if w.ends_with(args[0] + ".tscn"):
 					SnailQuest.world.load_room(load(w), Vector3.ZERO, "NORTH")
-			message = "%s warped to " % SnailQuest.controlled.entity_name + command_console.success_color + "%s[/color]" % args[0]
+			message = "%s warped to " % SnailQuest.controlled.identity.get_entity_name() + command_console.success_color + "%s[/color]" % args[0]
 		else:
 			message = command_console.error_color + "This warp does not exist![/color]"
 	command_console.send_message(message)
@@ -140,5 +140,5 @@ func on_command_spawn(_console, args: Array) -> void:
 		elif args[0].ends_with("y"):
 			entity_name.erase(entity_name.length() - 1, 1)
 			plural = "ies"
-		message = "%s spawned " % SnailQuest.controlled.entity_name + command_console.success_color + "%s %s" % [args[1], entity_name] + plural + "[/color]"
+		message = "%s spawned " % SnailQuest.controlled.identity.get_entity_name() + command_console.success_color + "%s %s" % [args[1], entity_name] + plural + "[/color]"
 	command_console.send_message(message)

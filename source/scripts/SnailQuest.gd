@@ -38,31 +38,55 @@ signal controlled_health_change()
 func _ready():
 	OS.set_window_title("Snail Quest " + info["version"] + " (DEBUG)")
 
-func set_game(node: Node):
+func set_game(node: Node) -> void:
 	game = node
 
-func set_camera(node: Spatial):
+func get_game() -> Node:
+	return game
+
+func set_camera(node: Spatial) -> void:
 	camera = node
 
-func set_controlled(node: Spatial):
+func get_camera() -> Spatial:
+	return camera
+
+func set_controlled(node: Spatial) -> void:
 	controlled = node
 	if node is Entity:
 		node.connect("health_changed", self, "_on_health_changed")
 
-func set_prev_controlled(node: Spatial):
+func get_controlled() -> Spatial:
+	return controlled
+
+func set_prev_controlled(node: Spatial) -> void:
 	prev_controlled = node
 
-func set_world(node: Node):
+func get_prev_controlled() -> Spatial:
+	return prev_controlled
+
+func set_world(node: Node) -> void:
 	world = node
 
-func set_chunk_start(vec: Vector3):
+func get_world() -> Node:
+	return world
+
+func set_chunk_start(vec: Vector3) -> void:
 	chunk_start = vec
 
-func set_play_time(node: Node):
+func get_chunk_start() -> Vector3:
+	return chunk_start
+
+func set_play_time(node: Node) -> void:
 	play_time = node
 
-func set_game_time(node: Node):
+func get_play_time() -> Node:
+	return play_time
+
+func set_game_time(node: Node) -> void:
 	game_time = node
 
-func _on_health_changed(health, max_health, is_controlled):
+func get_game_time() -> Node:
+	return game_time
+
+func _on_health_changed(health, max_health, is_controlled) -> void:
 	emit_signal("controlled_health_change", health, max_health, is_controlled)

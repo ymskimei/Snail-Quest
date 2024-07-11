@@ -49,10 +49,10 @@ func apply_surface_align(tform: Transform, new_up: Vector3) -> Transform:
 	tform.basis = tform.basis.orthonormalized()
 	return tform
 
-#func degrees_to_cardinal(angle):
-#	var directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
-#	var i = int(round(angle / (360 / len(directions))))
-#	return directions[i % 8]
+static func degrees_to_cardinal(angle: float) -> String:
+	var directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+	var i = int(round(angle / (360 / len(directions))))
+	return directions[i % 8]
 
 static func cardinal_to_degrees(direction: String) -> int:
 	var result

@@ -116,6 +116,12 @@ func _get_timers():
 	ledge_timer.connect("timeout", self, "on_ledge_timeout")
 	add_child(ledge_timer)
 
+func set_entity_identity(appearance: Resource) -> void:
+	identity = appearance
+
+func get_entity_identity() -> Resource:
+	return identity
+
 func set_entity_health(new_amount: int) -> void:
 	if !immortal:
 		health += new_amount

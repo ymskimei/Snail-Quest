@@ -61,6 +61,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	update_appearance()
 
+func set_entity_identity(appearance: Resource) -> void:
+	identity = appearance
+
+func get_entity_identity() -> Resource:
+	return identity
+
 func set_entity_name(new_text: String) -> void:
 	identity.set_entity_name(new_text)
 

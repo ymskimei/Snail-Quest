@@ -14,11 +14,17 @@ signal game_end
 signal room_loaded
 
 func _ready() -> void:
-	SnailQuest.set_controlled($Player1) #Temporary player set
 	SnailQuest.set_world(self)
-	_on_goto_room(load(resource.room_path), resource.coordinates, resource.direction, false, false)
-	_register_chunks()
+	SnailQuest.set_controlled($Player1) #Temporary player set
 	Data.load_data(Data.get_data(Data.get_current_data_folder()))
+	_register_chunks()
+	if Data.get_data(Data.get_current_data_folder())[0]["location"] == "":
+		_on_goto_room(load(resource.room_path), resource.coordinates, resource.direction, false, false)
+	else:
+		var room_path: String = Data.get_data(Data.get_current_data_folder())[0]["location"]
+		var translation: Vector3 = Data.get_data(Data.get_current_data_folder())[0]["translation"]
+		var rotation: Vector3 = Data.get_data(Data.get_current_data_folder())[0]["rotation"]
+		_on_goto_room(load(room_path), translation, resource.direction, false, false)
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(SnailQuest.controlled):
@@ -138,3 +144,6 @@ func _get_controlled_chunk(pos: Vector3) -> Vector2:
 	var coords_z = floor(pos.z / SnailQuest.chunk_size)
 	var chunk_coords = Vector2(coords_x, coords_z)
 	return chunk_coords
+
+func get_rooms() -> Spatial:
+	return rooms

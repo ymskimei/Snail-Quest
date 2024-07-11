@@ -191,7 +191,6 @@ margin_right = 1068.0
 margin_bottom = 378.0
 
 [node name="StartButton" type="Button" parent="CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer"]
-unique_name_in_owner = true
 margin_top = 167.0
 margin_right = 280.0
 margin_bottom = 210.0

@@ -127,4 +127,5 @@ text = "TITLE_OPTIONS"
 [connection signal="button_down" from="MarginContainer/GridContainer/DataFile0" to="." method="_on_DataFile0_button_down"]
 [connection signal="button_down" from="MarginContainer/GridContainer/DataFile1" to="." method="_on_DataFile1_button_down"]
 [connection signal="button_down" from="MarginContainer/GridContainer/DataFile2" to="." method="_on_DataFile2_button_down"]
+[connection signal="button_down" from="MarginContainer/GridContainer/DataFile3" to="." method="_on_DataFile3_button_down"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]

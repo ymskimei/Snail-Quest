@@ -1,12 +1,10 @@
 extends Control
 
-onready var default_selection: Control = $"%StartButton"
+onready var default_selection: Control = $CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer/StartButton
 
 onready var splash: RichTextLabel = $CanvasMain/MarginContainer/HBoxContainer/LabelSplash
 onready var version: RichTextLabel = $CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/LabelVersion
 onready var info: RichTextLabel = $CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/LabelInfo
-
-signal goto_data
 
 func _ready() -> void:
 	_set_title_strings()
@@ -36,6 +34,6 @@ func _set_title_strings() -> void:
 
 func _on_StartButton_pressed() -> void:
 	if !Device.get_block_input():
-		Audio.music_booth.stop_song(0.0)
 		Audio.play_sfx(RegistryAudio.tone_success)
+		Audio.music_booth.stop_song(0.0)
 		get_parent().change_screen(SnailQuest.data)

@@ -13,16 +13,19 @@ export var health_empty: Texture
 
 export var applied_data_file: int = 0
 
-var is_active: bool = false
-
 func _ready() -> void:
 	var file = File.new()
 	if file.file_exists("user://data/data " + str(applied_data_file) + "/save.sus"):
-		is_active = true
 		var data: Array = Data.get_data(Data.get_data_folder(applied_data_file))
-		imitation_snail.identity = data[1]
-		file_name.set_bbcode(imitation_snail.identity.get_entity_name())
-		time_and_location.set_bbcode(RegistryColor.get_bbcode(RegistryColor.light_gray) + Utility.get_time_as_clock(data[0]["game_time"], false) + " in " + data[0]["location"])
+		imitation_snail.set_entity_identity(data[1])
+		file_name.set_bbcode(imitation_snail.get_entity_identity().get_entity_name())
+
+		var current_time: String = Utility.get_time_as_clock(data[0]["game_time"], false)
+		var location_split: Array = data[0]["location"].split("/")
+		var location_name: String = location_split.pop_back()
+		location_name.erase(location_name.length() - 5, 5)
+		location_name.capitalize()
+		time_and_location.set_bbcode(RegistryColor.get_bbcode(RegistryColor.light_gray) + current_time + " in " + location_name)
 
 		var current_health: int = data[0]["health"]
 		var max_health: int = data[0]["max_health"]
@@ -33,7 +36,6 @@ func _ready() -> void:
 		play_time.set_bbcode("Total time " + Utility.get_time_as_count(data[0]["play_time"]))
 		last_played.set_bbcode(RegistryColor.get_bbcode(RegistryColor.light_gray) + "Last saved " + data[0]["last_played"])
 	else:
-		is_active = false
 		file_name.set_bbcode("")
 		time_and_location.set_bbcode("NO FILE")
 
