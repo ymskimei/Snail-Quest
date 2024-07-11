@@ -42,25 +42,25 @@ func physics_process(delta: float) -> int:
 	if is_instance_valid(entity.target):
 		entity.translation = lerp(entity.translation, entity.target.translation + Vector3(0, -0.3, 0), track_speed * delta)
 		
-		rotation.y = (Input.get_action_strength(Auto.input.stick_alt_left) - Input.get_action_strength(Auto.input.stick_alt_right)) * 3
+		rotation.y = (Input.get_action_strength(Device.stick_alt_left) - Input.get_action_strength(Device.stick_alt_right)) * 3
 		if is_inverted(true):
 			rotation.y = -rotation.y
 
 		if mode == 2:
-			rotation.y += (Input.get_action_strength(Auto.input.stick_main_left) - Input.get_action_strength(Auto.input.stick_main_right)) * 1.5
+			rotation.y += (Input.get_action_strength(Device.stick_main_left) - Input.get_action_strength(Device.stick_main_right)) * 1.5
 
 		velocity = velocity.linear_interpolate(rotation * sensitivity, rotation_speed * delta)
 		entity.rotation.y += (deg2rad(velocity.y))
 		
 		if rotation.y == 0:
-			if Input.is_action_just_pressed(Auto.input.stick_alt_up) and mode <= 3:
+			if Input.is_action_just_pressed(Device.stick_alt_up) and mode <= 3:
 				mode += 1
 				_set_mode()
-			elif Input.is_action_just_pressed(Auto.input.stick_alt_down) and mode >= 1:
+			elif Input.is_action_just_pressed(Device.stick_alt_down) and mode >= 1:
 				mode -= 1
 				_set_mode()
 
-		if Input.is_action_just_pressed(Auto.input.stick_alt_left) or Input.is_action_just_pressed(Auto.input.stick_alt_right):
+		if Input.is_action_just_pressed(Device.stick_alt_left) or Input.is_action_just_pressed(Device.stick_alt_right):
 			input_spin += 1
 			spin_timer.start()
 			if input_spin >= 3:

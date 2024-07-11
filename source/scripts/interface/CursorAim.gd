@@ -2,16 +2,16 @@ class_name AimCursor
 extends Spatial
 
 func _ready():
-	global_translation = Auto.player.global_translation
-	Auto.register_aim_cursor(self)
+	global_translation = SnailQuest.player.global_translation
+	SnailQuest.register_aim_cursor(self)
 
 func _physics_process(delta):
 	level_cursor()
 	$Mesh.rotation.y += 5 * delta
-	var player = Auto.player
+	var player = SnailQuest.player
 	var new_pos = Vector3.ZERO
 	if player.cursor_activated:
-		new_pos = player.global_translation + cursor_movement().rotated(Vector3.UP, Auto.camera.rotation.y)
+		new_pos = player.global_translation + cursor_movement().rotated(Vector3.UP, SnailQuest.camera.rotation.y)
 	elif player.targeting:
 		if is_instance_valid(player.target):
 			new_pos = player.target.global_translation
@@ -26,7 +26,7 @@ func cursor_movement():
 func level_cursor():
 	if $RayCast.is_colliding():
 		var normal = $RayCast.get_collision_normal()
-		var tform = Auto.utility.apply_surface_align(global_transform, normal)
+		var tform = Utility.apply_surface_align(global_transform, normal)
 		global_transform = global_transform.interpolate_with(tform, 0.3)
 		var floor_height = $RayCast.get_collider().translation.y
 		#print(floor_height)

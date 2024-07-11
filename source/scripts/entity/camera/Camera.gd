@@ -20,7 +20,7 @@ signal target_updated
 
 func _ready() -> void:
 	states.ready(self)
-	Auto.set_camera(self)
+	SnailQuest.set_camera(self)
 
 func _unhandled_input(event: InputEvent) -> void:
 	states.unhandled_input(event)
@@ -35,20 +35,20 @@ func _update_target() -> void:
 		target = override
 	elif positioner:
 		target = positioner
-	elif Auto.controlled:
-		if Auto.controlled.target_proxy:
-			target = Auto.controlled.target_proxy
+	elif SnailQuest.controlled:
+		if SnailQuest.controlled.target_proxy:
+			target = SnailQuest.controlled.target_proxy
 		else:
-			target = Auto.controlled
+			target = SnailQuest.controlled
 	else:
 		target = null
 
 func _update_positioner() -> void:
-	var positioners = Auto.utility.get_group_by_nearest(self, "positioner")
+	var positioners = Utility.get_group_by_nearest(self, "positioner")
 	if positioners.size() > 0:
 		var p = positioners[0]
-		if Auto.controlled and p:
-			var distance = p.get_global_translation().distance_to(Auto.controlled.get_global_translation())
+		if SnailQuest.controlled and p:
+			var distance = p.get_global_translation().distance_to(SnailQuest.controlled.get_global_translation())
 			var max_distance = 17
 			if distance < max_distance:
 				positioner = p
@@ -67,7 +67,7 @@ func get_coords(raw: bool = false) -> Vector3:
 	return coords
 
 func set_coords(position: Vector3, angle: String = "NORTH", flipped: bool = false) -> void:
-	var rot = deg2rad(Auto.utility.cardinal_to_degrees(angle))
+	var rot = deg2rad(Utility.cardinal_to_degrees(angle))
 	if flipped:
 		if !rot == 0:
 			rot /= 0.5

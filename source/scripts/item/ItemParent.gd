@@ -28,7 +28,7 @@ func _physics_process(_delta: float) -> void:
 		idle_timer.start()
 
 func _on_Area_body_entered(body):
-	if body == Auto.controlled and item.linear_velocity == Vector3.ZERO:
+	if body == SnailQuest.controlled and item.linear_velocity == Vector3.ZERO:
 		player = body
 		display_timer.start()
 		if type.destination:

@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/sound/music/ost_layerstest_perc.ogg" type="AudioStream" id=1]
-[ext_resource path="res://assets/sound/music/ost_layerstest_bass.ogg" type="AudioStream" id=2]
-[ext_resource path="res://assets/sound/music/ost_layerstest_melody.ogg" type="AudioStream" id=3]
-[ext_resource path="res://assets/sound/music/ost_layerstest_shake.ogg" type="AudioStream" id=4]
-[ext_resource path="res://assets/sound/music/ost_layerstest_stab.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/sound/music/layers_test/ost_layerstest_perc.ogg" type="AudioStream" id=1]
+[ext_resource path="res://assets/sound/music/layers_test/ost_layerstest_bass.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/sound/music/layers_test/ost_layerstest_melody.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/sound/music/layers_test/ost_layerstest_shake.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/sound/music/layers_test/ost_layerstest_stab.ogg" type="AudioStream" id=5]
 [ext_resource path="res://addons/audio_booth/source/music/Song.gd" type="Script" id=6]
 [ext_resource path="res://addons/audio_booth/source/music/containers/TrackContainer.gd" type="Script" id=7]
 

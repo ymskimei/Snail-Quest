@@ -25,7 +25,7 @@ func enter() -> void:
 	tween_cam_pan(lock_iso_arm, lock_iso_lens)
 	tween_cam_zoom(fov_iso_normal, arm_iso_normal)
 	add_rotation_timers()
-	Auto.audio.play_sfx(Auto.audio.sfx_cam_perspective)
+	Audio.play_sfx(Audio.sfx_cam_perspective)
 	entity.anim_tween.interpolate_property(entity, "rotation:y", entity.rotation.y, stepify(entity.rotation.y, deg2rad(45)), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
 	entity.anim_wobble.play("Wobble")
@@ -54,12 +54,12 @@ func cam_movement(delta: float) -> void:
 		rotation_sound()
 	if Input.is_action_just_pressed("cam_up"):
 		if !cam_overhead:
-			Auto.audio.play_sfx(Auto.audio.sfx_cam_iso_up)
+			Audio.play_sfx(Audio.sfx_cam_iso_up)
 			tween_overhead(-90)
 			cam_overhead = true
 	if Input.is_action_just_pressed("cam_down"):
 		if cam_overhead:
-			Auto.audio.play_sfx(Auto.audio.sfx_cam_iso_down)
+			Audio.play_sfx(Audio.sfx_cam_iso_down)
 			tween_cam_pan(lock_iso_arm, entity.camera_lens.rotation.x)
 			cam_overhead = false
 
@@ -81,22 +81,22 @@ func on_timeout_left() -> void:
 
 func rotation_sound() -> void:
 	if previous_sound:
-		Auto.audio.play_sfx(Auto.audio.sfx_cam_iso_rotate_0)
+		Audio.play_sfx(Audio.sfx_cam_iso_rotate_0)
 		previous_sound = false
 	else:
-		Auto.audio.play_sfx(Auto.audio.sfx_cam_iso_rotate_1)
+		Audio.play_sfx(Audio.sfx_cam_iso_rotate_1)
 		previous_sound = true
 
 func apply_cam_zoom() -> void:
 	if Input.is_action_just_pressed("cam_zoom"):
 		if zoomed_out:
 			tween_cam_zoom(fov_iso_normal, arm_iso_normal)
-			Auto.audio.play_sfx(Auto.audio.sfx_cam_zoom_normal)
+			Audio.play_sfx(Audio.sfx_cam_zoom_normal)
 			print("Camera view altered: Normal")
 			zoomed_out = false
 		else:
 			tween_cam_zoom(fov_iso_far, arm_iso_far)
-			Auto.audio.play_sfx(Auto.audio.sfx_cam_zoom_far)
+			Audio.play_sfx(Audio.sfx_cam_zoom_far)
 			print("Camera view altered: Far")
 			zoomed_out = true
 

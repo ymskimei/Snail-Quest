@@ -79,21 +79,21 @@ func interact():
 	mount()
 
 func mount():
-	var driver = Auto.controlled
-	Auto.register_vehicle(self)
-	Auto.camera.update_target()
+	var driver = SnailQuest.controlled
+	SnailQuest.register_vehicle(self)
+	SnailQuest.camera.update_target()
 	driver.can_move = false
 	mounted = true
 
 func unmount():
-	var driver = Auto.controlled
-	Auto.deregister_vehicle()
-	Auto.camera.update_target()
+	var driver = SnailQuest.controlled
+	SnailQuest.deregister_vehicle()
+	SnailQuest.camera.update_target()
 	driver.can_move = false
 	mounted = false
 	engine_force = 0
 
 func is_controlled() -> bool:
-	if Auto.controlled == self:
+	if SnailQuest.controlled == self:
 		return true
 	return false

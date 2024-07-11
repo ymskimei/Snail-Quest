@@ -17,7 +17,7 @@ var is_pushed: bool
 func _ready() -> void:
 	attack_area.monitorable = false
 	states.ready(self)
-	target = Auto.player
+	target = SnailQuest.player
 #func _physics_process(delta):
 #	if states != null:
 #		states.physics_process(delta)

@@ -37,7 +37,7 @@ func physics_process(delta: float) -> int:
 		else:
 			return State.IDLE
 	#if entity.is_colliding():
-		#Utility.input.start_joy_vibration(0, 1, 1, 0.5)
+		#Device.start_joy_vibration(0, 1, 1, 0.5)
 		#on_dodge_timer()
 	return State.NULL
 

@@ -23,11 +23,11 @@ func _ready() -> void:
 	
 func _input(event: InputEvent):
 	if !history.size() == 0:
-		if event.is_action_pressed(Auto.input.debug_menu_nav_up):
+		if event.is_action_pressed(Device.debug_menu_nav_up):
 			_search_history(1)
-		elif event.is_action_pressed(Auto.input.debug_menu_nav_down):
+		elif event.is_action_pressed(Device.debug_menu_nav_down):
 			_search_history(-1)
-	if event.is_action_pressed(Auto.input.debug_menu_clear):
+	if event.is_action_pressed(Device.debug_menu_clear):
 		text_input.text = ""
 
 func _search_history(index: int) -> void:
@@ -74,8 +74,8 @@ func _parse_input(input: String):
 		command_module.command_entered(command, arguments)
 	else:
 		var n
-		if Auto.user_id != "":
-			n = success_color + Auto.user_id + ": [/color]"
+		if SnailQuest.controlled.identity.get_entity_name() != "":
+			n = success_color + SnailQuest.controlled.identity.get_entity_name() + ": [/color]"
 		else:
 			n = error_color + "Undefined: [/color]"
 		send_message(n + input)

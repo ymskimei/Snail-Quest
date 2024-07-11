@@ -23,7 +23,7 @@ func enter() -> void:
 		spin_timer.set_name("SpinTimer")
 		add_child(spin_timer)
 
-	Auto.audio.play_sfx(RegistryAudio.cam_first_person)
+	Audio.play_sfx(RegistryAudio.cam_first_person)
 
 	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, -1.5, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	entity.anim_tween.start()
@@ -41,8 +41,8 @@ func physics_process(delta: float) -> int:
 		return State.LOCK
 
 	if rotation_complete:
-		rotation.y = (Input.get_action_strength(Auto.input.stick_alt_left) - Input.get_action_strength(Auto.input.stick_alt_right)) / 2
-		rotation.x = (Input.get_action_strength(Auto.input.stick_alt_up) - Input.get_action_strength(Auto.input.stick_alt_down)) / 1.5
+		rotation.y = (Input.get_action_strength(Device.stick_alt_left) - Input.get_action_strength(Device.stick_alt_right)) / 2
+		rotation.x = (Input.get_action_strength(Device.stick_alt_up) - Input.get_action_strength(Device.stick_alt_down)) / 1.5
 		if is_inverted():
 			rotation.x = -rotation.x
 		if is_inverted(true):
@@ -55,16 +55,16 @@ func physics_process(delta: float) -> int:
 		entity.rotation.x = lerp(entity.rotation.x, clamp(entity.rotation.x, deg2rad(0), deg2rad(45)), track_speed * delta)
 		entity.translation = lerp(entity.translation, entity.target.translation + offset, track_speed * delta)
 
-		if Input.is_action_just_pressed(Auto.input.stick_alt_left) or Input.is_action_just_pressed(Auto.input.stick_alt_right):
+		if Input.is_action_just_pressed(Device.stick_alt_left) or Input.is_action_just_pressed(Device.stick_alt_right):
 			input_spin += 1
 			spin_timer.start()
 			if input_spin >= 3:
-				Auto.audio.play_sfx(RegistryAudio.cam_third_person)
+				Audio.play_sfx(RegistryAudio.cam_third_person)
 				return State.ORBI
 
-		if Input.is_action_pressed(Auto.input.trigger_left):
+		if Input.is_action_pressed(Device.trigger_left):
 			zoom = 30
-		elif Input.is_action_just_released(Auto.input.trigger_left):
+		elif Input.is_action_just_released(Device.trigger_left):
 			zoom = 0
 		entity.lens.fov = lerp(entity.lens.fov, 45 - zoom, 5 * delta)
 

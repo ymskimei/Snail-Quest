@@ -1,32 +1,36 @@
 extends Node
 
-onready var interface: Node = $Interface
-onready var screen: Node = $Screen
+var particles: Array = [
+	preload("res://assets/materials/particle/cloud.tres"),
+	preload("res://assets/materials/particle/comet.tres"),
+	preload("res://assets/materials/particle/constellation.tres"),
+	preload("res://assets/materials/particle/rain.tres"),
+	preload("res://assets/materials/particle/rain_drop.tres"),
+	preload("res://assets/materials/particle/rain_ripple.tres"),
+	preload("res://assets/materials/particle/star.tres"),
+	preload("res://assets/materials/particle/star_color.tres")
+]
 
-var title = preload("res://source/scenes/interface/screen_title.tscn")
-var data = preload("res://source/scenes/interface/screen_data.tscn")
-var world = preload("res://source/scenes/world/world.tscn")
+func _ready() -> void:
+	_cache_particles()
+	add_child(SnailQuest.title.instance())
 
-var cfg: String = "res://export_presets.cfg"
-
-var info: Dictionary = {
-	"title": ProjectSettings.get_setting("application/config/name"),
-	"description": ProjectSettings.get_setting("application/config/description"),
-	"version": "0.5.0-pre-alpha",
-	"author": "Kaboodle"
-}
-
-func _ready():
-	Auto.set_game(self)
-	OS.set_window_title("Snail Quest " + info["version"] + " (DEBUG)")
-	screen.add_child(title.instance())
+func _cache_particles() -> void:
+	for particle in particles:
+		var p = Particles.new()
+		p.set_process_material(particle)
+		p.set_one_shot(true)
+		p.set_emitting(true)
+		p.hide()
+		add_child(p)
+		p.queue_free()
 
 func change_screen(new_scene: PackedScene):
-	Auto.input.set_block_input(true)
-	interface.transition.play("GuiTransitionFade")
-	yield(interface.transition, "animation_finished")
-	screen.get_child(0).queue_free()
-	yield(screen.get_child(0), "tree_exited")
-	screen.add_child(new_scene.instance())
-	Auto.input.set_block_input(false)
-	interface.transition.play_backwards("GuiTransitionFade")
+	Device.set_block_input(true)
+	Interface.transition.play("GuiTransitionFade")
+	yield(Interface.transition, "animation_finished")
+	get_child(0).queue_free()
+	yield(get_child(0), "tree_exited")
+	add_child(new_scene.instance())
+	Device.set_block_input(false)
+	Interface.transition.play_backwards("GuiTransitionFade")

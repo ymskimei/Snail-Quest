@@ -45,64 +45,64 @@ func set_display_framerate() -> void:
 	display_framerate.set_bbcode(RegistryColor.get_bbcode(color) + "%s" % framerate)
 
 func set_display_world_time() -> void:
-	if Auto.game_time:
-		display_game_time.set_bbcode(default_color + "%s" % Auto.utility.get_time_as_clock(Auto.game_time.get_raw_time(), false))
+	if SnailQuest.game_time:
+		display_game_time.set_bbcode(default_color + "%s" % Utility.get_time_as_clock(SnailQuest.game_time.get_raw_time(), false))
 	else:
 		display_game_time.set_bbcode(default_color + "??:??")
 
 func set_display_play_time() -> void:
-	if Auto.play_time:
-		display_play_time.set_bbcode(default_color + "%s" % Auto.utility.get_time_as_count(Auto.play_time.get_raw_time()))
+	if SnailQuest.play_time:
+		display_play_time.set_bbcode(default_color + "%s" % Utility.get_time_as_count(SnailQuest.play_time.get_total_time()))
 	else:
 		display_play_time.set_bbcode(default_color + "??h, ??m, ??s")
 
 func set_display_camera_target() -> void:
-	if Auto.camera:
-		if Auto.camera.target:
-			display_camera_target.set_bbcode(default_color + "Cam Target: %s" % Auto.camera.target.name)
+	if SnailQuest.camera:
+		if SnailQuest.camera.target:
+			display_camera_target.set_bbcode(default_color + "Cam Target: %s" % SnailQuest.camera.target.name)
 	else:
 		display_camera_target.set_bbcode(default_color + "Cam Target: ??")
 
 func set_display_controlled() -> void:
-	if Auto.controlled:
-		display_controlled.set_bbcode(default_color + "Controlling: %s" % Auto.controlled.name)
+	if SnailQuest.controlled:
+		display_controlled.set_bbcode(default_color + "Controlling: %s" % SnailQuest.controlled.name)
 	else:
 		display_controlled.set_bbcode(default_color + "Controlling: ??")
 
 func set_display_controlled_target() -> void:
-	if is_instance_valid(Auto.controlled):
-		if Auto.controlled is Entity and is_instance_valid(Auto.controlled.target):
-			display_controlled_target.set_bbcode(default_color + "Target: %s" % Auto.controlled.target.name)
+	if is_instance_valid(SnailQuest.controlled):
+		if SnailQuest.controlled is Entity and is_instance_valid(SnailQuest.controlled.target):
+			display_controlled_target.set_bbcode(default_color + "Target: %s" % SnailQuest.controlled.target.name)
 	else:
 		display_controlled_target.set_bbcode(default_color + "Target: ??")
 
 func set_display_prev_controlled() -> void:
-	if Auto.prev_controlled:
-		display_prev_controlled.set_bbcode(default_color + "Last controlling: %s" % Auto.prev_controlled.name)
+	if SnailQuest.prev_controlled:
+		display_prev_controlled.set_bbcode(default_color + "Last controlling: %s" % SnailQuest.prev_controlled.name)
 	else:
 		display_prev_controlled.set_bbcode(default_color + "Last controlling: ??")
 
 func set_display_chunk_coords() -> void:
-	if Auto.controlled or Auto.camera:
+	if SnailQuest.controlled or SnailQuest.camera:
 		var e: Spatial = null
-		if Auto.controlled:
-			e = Auto.controlled
-		elif Auto.camera:
-			e = Auto.camera
-		var coords_x = floor(e.global_translation.x / Auto.chunk_size)
-		var coords_z = floor(e.global_translation.z / Auto.chunk_size)
+		if SnailQuest.controlled:
+			e = SnailQuest.controlled
+		elif SnailQuest.camera:
+			e = SnailQuest.camera
+		var coords_x = floor(e.global_translation.x / SnailQuest.chunk_size)
+		var coords_z = floor(e.global_translation.z / SnailQuest.chunk_size)
 		display_chunk_coords.set_bbcode(x_color + "%s, " % coords_x + z_color + "%s" % coords_z)
 	else:
 		display_chunk_coords.set_bbcode(x_color + "?, " + z_color + "?")
 
 func set_display_coordinates() -> void:
-	if Auto.controlled or Auto.camera:
+	if SnailQuest.controlled or SnailQuest.camera:
 		var coords: Array = []
 		var e: Spatial = null
-		if Auto.controlled:
-			e = Auto.controlled
-		elif Auto.camera:
-			e = Auto.camera
+		if SnailQuest.controlled:
+			e = SnailQuest.controlled
+		elif SnailQuest.camera:
+			e = SnailQuest.camera
 		coords = e.get_coords()
 		display_coordinate.set_bbcode(x_color + "X: %s\n" % coords[0] + y_color + "Y: %s\n" % coords[1] + z_color + "Z: %s" % coords[2])
 	else:
@@ -110,16 +110,16 @@ func set_display_coordinates() -> void:
 
 func set_command_console(toggle: bool) -> void:
 	if toggle:
-		Auto.interface.debug_open = true
+		SnailQuest.interface.debug_open = true
 		command_console.visible = true
 		command_console.command_input.grab_focus()
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Device.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		if command_console.command_display.bbcode_text == "":
 			command_console.welcome_message()
 	else:
-		Auto.interface.debug_open = false
+		SnailQuest.interface.debug_open = false
 		command_console.visible = false
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		Device.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func show_debug_information() -> void:
 	if debug_information.visible == false:

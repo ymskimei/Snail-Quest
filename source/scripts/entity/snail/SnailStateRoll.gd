@@ -5,7 +5,7 @@ func enter() -> void:
 	entity.animator.play("SnailHide")
 	yield(entity.animator, "animation_finished")
 	entity.animator.play("SnailHidden")
-	Auto.audio.play_sfx(Auto.audio.sfx_snail_shell_in)
+	Audio.play_sfx(Audio.sfx_snail_shell_in)
 
 func unhandled_input(_event: InputEvent) -> int:
 	if Input.is_action_just_released("action_defense"):
@@ -40,4 +40,4 @@ func integrate_forces(state: PhysicsDirectBodyState) -> int:
 func exit() -> void:
 	entity.skeleton.translation = Vector3(0, -0.45, 0.05)
 	entity.skeleton.rotation = Vector3.ZERO
-	Auto.audio.play_sfx(Auto.audio.sfx_snail_shell_out)
+	Audio.play_sfx(Audio.sfx_snail_shell_out)

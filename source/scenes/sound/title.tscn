@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/audio_booth/source/music/Song.gd" type="Script" id=1]
+[ext_resource path="res://assets/sound/music/title/track_2.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/sound/music/title/track_0.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/sound/music/title/track_1.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/sound/music/title/track_3.ogg" type="AudioStream" id=5]
+[ext_resource path="res://addons/audio_booth/source/music/containers/TrackContainer.gd" type="Script" id=10]
+
+[node name="Title" type="Node"]
+script = ExtResource( 1 )
+tempo = 100.0
+beats = 4
+
+[node name="TrackContainer" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="Track0" type="AudioStreamPlayer" parent="TrackContainer"]
+stream = ExtResource( 3 )
+bus = "Music"
+
+[node name="Track1" type="AudioStreamPlayer" parent="TrackContainer"]
+stream = ExtResource( 4 )
+bus = "Music"
+
+[node name="Track2" type="AudioStreamPlayer" parent="TrackContainer"]
+stream = ExtResource( 2 )
+bus = "Music"
+
+[node name="Track3" type="AudioStreamPlayer" parent="TrackContainer"]
+stream = ExtResource( 5 )
+bus = "Music"

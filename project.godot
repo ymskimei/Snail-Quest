@@ -189,11 +189,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/Song.gd"
 }, {
-"base": "Reference",
-"class": "Sorter",
-"language": "GDScript",
-"path": "res://source/scripts/utility/Sorter.gd"
-}, {
 "base": "AudioStreamPlayer",
 "class": "Sound",
 "language": "GDScript",
@@ -271,7 +266,6 @@ _global_script_class_icons={
 "Snail": "",
 "SnailStateMain": "",
 "Song": "",
-"Sorter": "",
 "Sound": "",
 "Sound2D": "",
 "Sound3D": "",
@@ -299,7 +293,7 @@ run/main_scene="res://source/scenes/game.tscn"
 config/use_hidden_project_data_directory=false
 config/use_custom_user_dir=true
 run/delta_sync_after_draw=true
-boot_splash/image="res://assets/texture/interface/application/splash.png"
+boot_splash/show_image=false
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://assets/texture/interface/application/icon.png"
 
@@ -309,9 +303,15 @@ default_bus_layout="res://assets/default_bus_layout.tres"
 
 [autoload]
 
+Utility="*res://source/scripts/Utility.gd"
+Device="*res://source/scripts/Device.gd"
+Data="*res://source/scripts/Data.gd"
+Items="*res://source/scripts/Items.gd"
 EventFlags="*res://source/scripts/EventFlags.gd"
 WorldSave="*res://source/scripts/world/WorldSave.gd"
-Auto="*res://source/scenes/auto.tscn"
+Audio="*res://source/scenes/audio.tscn"
+SnailQuest="*res://source/scenes/snailquest.tscn"
+Interface="*res://source/scenes/interface/interface.tscn"
 
 [debug]
 

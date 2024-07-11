@@ -27,11 +27,11 @@ func get_interaction_text() -> String:
 func camera_override(toggle: bool = true) -> void:
 	if toggle:
 		if target_proxy:
-			Auto.camera.override = target_proxy
+			SnailQuest.camera.override = target_proxy
 		else:
-			Auto.camera.override = self
+			SnailQuest.camera.override = self
 	else:
-		Auto.camera.override = false
+		SnailQuest.camera.override = false
 
 func get_coords(raw: bool = false) -> Vector3:
 	var x = global_transform.origin.x
@@ -46,9 +46,9 @@ func get_coords(raw: bool = false) -> Vector3:
 
 func set_coords(position: Vector3, angle: String = "NORTH") -> void:
 	set_global_translation(position)
-	set_global_rotation(Vector3(0, deg2rad(Auto.utility.cardinal_to_degrees(angle)), 0))
+	set_global_rotation(Vector3(0, deg2rad(Utility.cardinal_to_degrees(angle)), 0))
 
 func is_controlled() -> bool:
-	if Auto.controlled == self:
+	if SnailQuest.controlled == self:
 		return true
 	return false

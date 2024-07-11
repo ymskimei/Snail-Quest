@@ -53,10 +53,10 @@ func on_slam():
 	attack_area.monitorable = true
 	if strength == strength_full_charge:
 		AudioPlayer.play_sfx(AudioPlayer.sfx_mallet_full_slam)
-		Utility.input.start_joy_vibration(0, 1, 1, 0.25)
+		Device.start_joy_vibration(0, 1, 1, 0.25)
 	else:
 		AudioPlayer.play_sfx(AudioPlayer.sfx_mallet_slam)
-		Utility.input.start_joy_vibration(0, 1, 1, 0.2)
+		Device.start_joy_vibration(0, 1, 1, 0.2)
 
 func end_slam():
 	if strength >= strength_full_charge:

@@ -49,26 +49,26 @@ func _ready() -> void:
 	_get_timers()
 	#temp until can be updated from outside
 
-	Auto.camera.connect("target_updated", self, "_on_cam_target_updated")
+	SnailQuest.camera.connect("target_updated", self, "_on_cam_target_updated")
 	emit_signal("health_changed", health, max_health, is_controlled())
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_controlled():
-		if !Auto.camera.looking:
-			if event.is_action_pressed(Auto.input.trigger_left):
+		if !SnailQuest.camera.looking:
+			if event.is_action_pressed(Device.trigger_left):
 				targeting = true
 				if all_targets.size() > 0:
 					target = all_targets[0]
-			elif event.is_action_released(Auto.input.trigger_left):
+			elif event.is_action_released(Device.trigger_left):
 				targeting = false
 				target = null
 
 		if targeting and target and can_swap_target:
 			var input = Vector2.ZERO
-			input.x = event.get_action_strength(Auto.input.stick_alt_left) - event.get_action_strength(Auto.input.stick_alt_right)
-			input.y = event.get_action_strength(Auto.input.stick_alt_up) - event.get_action_strength(Auto.input.stick_alt_down)
+			input.x = event.get_action_strength(Device.stick_alt_left) - event.get_action_strength(Device.stick_alt_right)
+			input.y = event.get_action_strength(Device.stick_alt_up) - event.get_action_strength(Device.stick_alt_down)
 
-			if event.is_action_pressed(Auto.input.stick_alt_left) or event.is_action_pressed(Auto.input.stick_alt_right)or event.is_action_pressed(Auto.input.stick_alt_up) or event.is_action_pressed(Auto.input.stick_alt_down):
+			if event.is_action_pressed(Device.stick_alt_left) or event.is_action_pressed(Device.stick_alt_right)or event.is_action_pressed(Device.stick_alt_up) or event.is_action_pressed(Device.stick_alt_down):
 				var next_target = _get_viewport_target(input.normalized())
 				if next_target:
 					can_swap_target = false
@@ -77,13 +77,13 @@ func _unhandled_input(event: InputEvent) -> void:
 					can_swap_target = true
 
 		if target:
-			if event.is_action_pressed(Auto.input.action_main):
+			if event.is_action_pressed(Device.action_main):
 				target_interact()
 
-		if Auto.game.interface.options.debug_mode:
-			if event.is_action_pressed(Auto.input.debug_fov_decrease):
+		if Interface.options.debug_mode:
+			if event.is_action_pressed(Device.debug_fov_decrease):
 				set_entity_health(1)
-			if event.is_action_pressed(Auto.input.debug_fov_increase):
+			if event.is_action_pressed(Device.debug_fov_increase):
 				set_entity_health(-1)
 
 func _get_viewport_target(direction):
@@ -91,9 +91,9 @@ func _get_viewport_target(direction):
 	var nearest_distance = INF
 	for t in all_targets:
 		if t != target and global_transform.origin.distance_to(t.global_transform.origin) < 10:
-			var vec3_target_direction = (t.global_transform.origin - global_transform.origin).rotated(Vector3.UP, Auto.camera.rotation.y)
+			var vec3_target_direction = (t.global_transform.origin - global_transform.origin).rotated(Vector3.UP, SnailQuest.camera.rotation.y)
 			var target_direction = Vector2(vec3_target_direction.x, vec3_target_direction.y)
-			#var target_direction = (Auto.camera.lens.unproject_position(t.global_transform.origin) - Auto.camera.lens.unproject_position(target.global_transform.origin))
+			#var target_direction = (SnailQuest.camera.lens.unproject_position(t.global_transform.origin) - SnailQuest.camera.lens.unproject_position(target.global_transform.origin))
 			var dot_result = direction.normalized().dot(target_direction.normalized())
 			if target_direction.length() < nearest_distance and dot_result:
 				nearest_target = t
@@ -101,7 +101,7 @@ func _get_viewport_target(direction):
 
 func _physics_process(delta: float) -> void:
 	if is_controlled():
-		all_targets = Auto.utility.get_group_by_nearest(self, "target")
+		all_targets = Utility.get_group_by_nearest(self, "target")
 		if targeting and target:
 			if !global_transform.origin.distance_to(target.global_transform.origin) < 10:
 				target = null
@@ -178,12 +178,12 @@ func target_interact() -> void:
 		set_interaction_text("")
 
 func set_interaction_text(text) -> void:
-	var label = Auto.game.interface.hud.interaction_label
+	var label = Interface.hud.interaction_label
 	if !text:
 		label.set_text("")
 		label.set_visible(false)
 	else:
-		var interaction_key = OS.get_scancode_string(InputMap.get_action_list(Auto.input.action_main)[0].scancode)
+		var interaction_key = OS.get_scancode_string(InputMap.get_action_list(Device.action_main)[0].scancode)
 		label.set_text("Press %s to %s" % [interaction_key, text])
 		label.set_visible(true)
 
@@ -202,8 +202,8 @@ func _on_Area_area_entered(area) -> void:
 		_set_attached(area.get_parent().get_parent().get_parent())
 
 func _set_attached(node: Interactable) -> void:
-	Auto.set_prev_controlled(self)
-	Auto.set_controlled(node)
+	SnailQuest.set_prev_controlled(self)
+	SnailQuest.set_controlled(node)
 	attached_to_location = true
 
 func jump_memory() -> void:

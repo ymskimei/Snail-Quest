@@ -197,7 +197,7 @@ func open_file_container(path: String, toggle: bool = false) -> void:
 		_update_from_identity()
 
 func populate_file_container(path: String, toggle: bool = true) -> void:
-	var resources = Auto.utility.get_files(path, true, true)
+	var resources = Utility.get_files(path, true, true)
 	if toggle:
 		for i in resources:
 			var button = Button.new()
@@ -263,13 +263,13 @@ func _on_ColorPicker_color_changed(color) -> void:
 			snail.set_color_eyes(color)
 
 func _play_sound_select() -> void:
-	Auto.audio.play_sfx(RegistryAudio.tone_switch)
+	Audio.play_sfx(RegistryAudio.tone_switch)
 
 func _play_sound_success() -> void:
-	Auto.audio.play_sfx(RegistryAudio.tone_success)
+	Audio.play_sfx(RegistryAudio.tone_success)
 
 func _play_sound_exit() -> void:
-	Auto.audio.play_sfx(RegistryAudio.tone_exit)
+	Audio.play_sfx(RegistryAudio.tone_exit)
 
 
 

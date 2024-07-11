@@ -7,8 +7,8 @@ func _ready() -> void:
 	anim.play("CursorPulse")
 
 func _process(delta: float) -> void:
-	if is_instance_valid(Auto.game.interface.current_focus):
-		var node = Auto.game.interface.current_focus
+	if is_instance_valid(Interface.current_focus):
+		var node = Interface.current_focus
 		var modifier = get_modifier_by_node(node)
 		cursor.rect_position = lerp(cursor.rect_position, node.rect_global_position + modifier, 32.0 * delta) 
 

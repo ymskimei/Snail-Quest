@@ -68,19 +68,19 @@ func set_entity_scale(value: float) -> void:
 	identity.set_entity_scale(value / 50)
 
 func set_entity_shell(next: bool = true):
-	identity.set_mesh_shell(shells[Auto.utility.array_cycle(shell.get_mesh(), shells, next)])
+	identity.set_mesh_shell(shells[Utility.array_cycle(shell.get_mesh(), shells, next)])
 	_reposition_outfit()
 
 func set_entity_body(next: bool = true):
-	identity.set_mesh_body(bodies[Auto.utility.array_cycle(body.get_mesh(), bodies, next)])
+	identity.set_mesh_body(bodies[Utility.array_cycle(body.get_mesh(), bodies, next)])
 
 func set_entity_eyes(next: bool = true):
-	identity.set_mesh_eye_left(eyes_left[Auto.utility.array_cycle(eye_left.get_mesh(), eyes_left, next)])
-	identity.set_mesh_eye_right(eyes_right[Auto.utility.array_cycle(eye_right.get_mesh(), eyes_right, next)])
+	identity.set_mesh_eye_left(eyes_left[Utility.array_cycle(eye_left.get_mesh(), eyes_left, next)])
+	identity.set_mesh_eye_right(eyes_right[Utility.array_cycle(eye_right.get_mesh(), eyes_right, next)])
 	
 func set_entity_hat(next: bool = true):
-	identity.set_mesh_hat([Auto.utility.array_cycle(hat.get_mesh(), hats, next)])
-	identity.set_pattern_hat(hat_patterns[Auto.utility.array_cycle(hat_mat.get_shader_param("texture_albedo"), hat_patterns, next)])
+	identity.set_mesh_hat([Utility.array_cycle(hat.get_mesh(), hats, next)])
+	identity.set_pattern_hat(hat_patterns[Utility.array_cycle(hat_mat.get_shader_param("texture_albedo"), hat_patterns, next)])
 
 func set_color_shell(c: Color) -> void:
 	identity.set_color_shell_base(c)
@@ -98,19 +98,19 @@ func set_color_eyes(c: Color) -> void:
 	identity.set_color_eyes(c)
 
 func set_entity_pupils(next: bool = true):
-	identity.set_pattern_eyes(eye_patterns[Auto.utility.array_cycle(eye_right_mat.get_shader_param("texture_albedo"), eye_patterns, next)])
+	identity.set_pattern_eyes(eye_patterns[Utility.array_cycle(eye_right_mat.get_shader_param("texture_albedo"), eye_patterns, next)])
 
 func set_entity_eyelids(next: bool = true):
-	identity.set_pattern_eyelids(eyelid_patterns[ Auto.utility.array_cycle(eyelid_right_mat.get_shader_param("texture_albedo"), eyelid_patterns, next)])
+	identity.set_pattern_eyelids(eyelid_patterns[ Utility.array_cycle(eyelid_right_mat.get_shader_param("texture_albedo"), eyelid_patterns, next)])
 
 func set_entity_pattern(next: bool = true):
-	identity.set_pattern_body(body_patterns[Auto.utility.array_cycle(body_accent_mat.get_shader_param("texture_albedo"), body_patterns, next)])
+	identity.set_pattern_body(body_patterns[Utility.array_cycle(body_accent_mat.get_shader_param("texture_albedo"), body_patterns, next)])
 
 func set_entity_swirl(next: bool = true):
-	identity.set_pattern_shell(shell_patterns[Auto.utility.array_cycle(shell_accent_mat.get_shader_param("texture_albedo"), shell_patterns, next)])
+	identity.set_pattern_shell(shell_patterns[Utility.array_cycle(shell_accent_mat.get_shader_param("texture_albedo"), shell_patterns, next)])
 
 func set_entity_sticker(next: bool = true):
-	identity.set_pattern_sticker(stickers[Auto.utility.array_cycle(sticker_mat.get_shader_param("texture_albedo"), stickers, next)])
+	identity.set_pattern_sticker(stickers[Utility.array_cycle(sticker_mat.get_shader_param("texture_albedo"), stickers, next)])
 
 func run_randomizer() -> void:
 	randomize()
@@ -329,17 +329,17 @@ func _reposition_outfit() -> void:
 func _update_appearance_arrays() -> void:
 	var meshes: String = "res://assets/model/"
 	var textures: String = "res://assets/texture/"
-	eyes_left.append_array(Auto.utility.get_loaded_files(meshes, "entity/snail_eye_left", ".mesh"))
-	eyes_right.append_array(Auto.utility.get_loaded_files(meshes, "entity/snail_eye_right", ".mesh"))
-	eye_patterns.append_array(Auto.utility.get_loaded_files(textures, "entity/snail_eyes", ".png"))
-	eyelid_patterns.append_array(Auto.utility.get_loaded_files(textures, "entity/snail_eyelids", ".png"))
-	bodies.append_array(Auto.utility.get_loaded_files(meshes, "entity/snail_body", ".mesh"))
-	body_patterns.append_array(Auto.utility.get_loaded_files(textures, "entity/snail_body_accent", ".png"))
-	shells.append_array(Auto.utility.get_loaded_files(meshes, "entity/snail_shell", ".mesh"))
-	shell_patterns.append_array(Auto.utility.get_loaded_files(textures, "entity/snail_shell_accent", ".png"))
-	stickers.append_array(Auto.utility.get_loaded_files(textures, "object/sticker", ".png"))
-	hats.append_array(Auto.utility.get_loaded_files(meshes, "object/hat", ".mesh"))
-	hat_patterns.append_array(Auto.utility.get_loaded_files(textures, "object/hat", ".png"))
+	eyes_left.append_array(Utility.get_loaded_files(meshes, "entity/snail_eye_left", ".mesh"))
+	eyes_right.append_array(Utility.get_loaded_files(meshes, "entity/snail_eye_right", ".mesh"))
+	eye_patterns.append_array(Utility.get_loaded_files(textures, "entity/snail_eyes", ".png"))
+	eyelid_patterns.append_array(Utility.get_loaded_files(textures, "entity/snail_eyelids", ".png"))
+	bodies.append_array(Utility.get_loaded_files(meshes, "entity/snail_body", ".mesh"))
+	body_patterns.append_array(Utility.get_loaded_files(textures, "entity/snail_body_accent", ".png"))
+	shells.append_array(Utility.get_loaded_files(meshes, "entity/snail_shell", ".mesh"))
+	shell_patterns.append_array(Utility.get_loaded_files(textures, "entity/snail_shell_accent", ".png"))
+	stickers.append_array(Utility.get_loaded_files(textures, "object/sticker", ".png"))
+	hats.append_array(Utility.get_loaded_files(meshes, "object/hat", ".mesh"))
+	hat_patterns.append_array(Utility.get_loaded_files(textures, "object/hat", ".png"))
 
 func update_appearance() -> void:
 	armature.scale = Vector3(identity.get_entity_scale(), identity.get_entity_scale(), identity.get_entity_scale())

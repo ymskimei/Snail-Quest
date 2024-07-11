@@ -40,16 +40,16 @@ func physics_process(_delta: float) -> int:
 	return State.NULL
 
 func target_controlled() -> bool:
-	if entity.target == Auto.controlled:
+	if entity.target == SnailQuest.controlled:
 		return true
 	else:
 		return false
 
 func is_inverted(is_y: bool = false) -> bool:
 	if is_y:
-		return Auto.game.interface.options.get_invert_vertical()
+		return Interface.options.get_invert_vertical()
 	else:
-		return Auto.game.interface.options.get_invert_horizontal()
+		return Interface.options.get_invert_horizontal()
 
 func tween_cam_pan(arm: float, lens: float) -> void:
 	entity.anim_tween.interpolate_property(entity, "rotation:x", entity.rotation.x, arm, 0.15, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

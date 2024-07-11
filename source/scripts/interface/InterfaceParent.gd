@@ -16,14 +16,14 @@ func get_menu(effect: AnimationPlayer = null, new_menu: CanvasLayer = null) -> v
 		new_menu.open(true)
 		if effect:
 			effect.play("Effect")
-		Auto.utility.pause(true)
+		Utility.pause(true)
 	elif previous_menu.size() > 0:
 		previous_menu.pop_front().open()
 		if previous_focus.size() > 0 and is_instance_valid(previous_focus[0]):
 			previous_focus.pop_front().grab_focus()
 		if effect:
 			effect.play_backwards("Effect")
-		Auto.utility.pause(false)
+		Utility.pause(false)
 
 func _on_gui_focus_changed(node: Node):
 	current_focus = node

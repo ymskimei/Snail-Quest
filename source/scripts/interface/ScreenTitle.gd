@@ -11,10 +11,14 @@ signal goto_data
 func _ready() -> void:
 	_set_title_strings()
 	default_selection.grab_focus()
+	Audio.music_booth.play_song("Title")
+	Audio.music_booth.play_track(1)
+	Audio.music_booth.play_track(2)
+	Audio.music_booth.play_track(3)
 
 func _set_title_strings() -> void:
-	version.set_bbcode("[color=#EFEFEF]" + TranslationServer.translate("TITLE") + " " + Auto.game.info["version"])
-	info.set_bbcode("[right][color=#EFEFEF]© " + Auto.game.info["author"])
+	version.set_bbcode("[color=#EFEFEF]" + TranslationServer.translate("TITLE") + " " + SnailQuest.info["version"])
+	info.set_bbcode("[right][color=#EFEFEF]© " + SnailQuest.info["author"])
 	var splashes: Array = [
 		"TITLE_SPLASH_0",
 		"TITLE_SPLASH_1",
@@ -31,6 +35,7 @@ func _set_title_strings() -> void:
 	splash.set_bbcode("[tornado radius=3 freq=2][color=#FFF896]" + TranslationServer.translate(splashes[randi() % splashes.size()]))
 
 func _on_StartButton_pressed() -> void:
-	if !Auto.input.get_block_input():
-		Auto.audio.play_sfx(RegistryAudio.tone_success)
-		Auto.game.change_screen(Auto.game.data)
+	if !Device.get_block_input():
+		Audio.music_booth.stop_song(0.0)
+		Audio.play_sfx(RegistryAudio.tone_success)
+		get_parent().change_screen(SnailQuest.data)

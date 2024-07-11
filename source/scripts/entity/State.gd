@@ -26,7 +26,7 @@ func set_gravity(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 			climbing_normal = norm_avg / rays_colliding
 	else:
 		climbing_normal = Vector3.UP
-	entity.global_transform = Auto.utility.apply_surface_align(entity.global_transform, climbing_normal)
+	entity.global_transform = Utility.apply_surface_align(entity.global_transform, climbing_normal)
 	state.add_central_force(lerp(15, gravity, 0.1) * -climbing_normal)
 
 func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
@@ -44,11 +44,11 @@ func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
 			climbing_normal = norm_avg / rays_colliding
 	else:
 		climbing_normal = Vector3.UP
-	entity.global_transform = Auto.utility.apply_surface_align(entity.global_transform, climbing_normal)
+	entity.global_transform = Utility.apply_surface_align(entity.global_transform, climbing_normal)
 
 func get_joy_input() -> Vector3:
-	input.x = Input.get_action_strength(Auto.input.stick_main_left) - Input.get_action_strength(Auto.input.stick_main_right)
-	input.z = Input.get_action_strength(Auto.input.stick_main_up) - Input.get_action_strength(Auto.input.stick_main_down)
+	input.x = Input.get_action_strength(Device.stick_main_left) - Input.get_action_strength(Device.stick_main_right)
+	input.z = Input.get_action_strength(Device.stick_main_up) - Input.get_action_strength(Device.stick_main_down)
 	var input_length = input.length()
 	if input_length > 1:
 		input /= input_length
@@ -56,7 +56,7 @@ func get_joy_input() -> Vector3:
 
 func apply_movement(state: PhysicsDirectBodyState, multiplier: float, roll: bool = false) -> void:
 	if entity.is_controlled() and !entity.attached_to_location and !entity.interacting:
-		direction = -get_joy_input().rotated(Vector3.UP, Auto.camera.rotation.y)
+		direction = -get_joy_input().rotated(Vector3.UP, SnailQuest.camera.rotation.y)
 		direction = direction.rotated(Vector3.LEFT, -entity.rotation.x).rotated(Vector3.RIGHT, -entity.rotation.y)
 		if direction != Vector3.ZERO:
 			if roll:
@@ -74,8 +74,8 @@ func apply_shimmy(state: PhysicsDirectBodyState, multiplier: float) -> void:
 		state.add_central_force((entity.speed * multiplier) * direction)
 
 func apply_rotation():
-	if Auto.camera.looking:
-		var cam_facing: Vector3 = Auto.camera.rotation_degrees
+	if SnailQuest.camera.looking:
+		var cam_facing: Vector3 = SnailQuest.camera.rotation_degrees
 		facing_dir = atan2(cam_facing.x, cam_facing.z)
 	elif direction != Vector3.ZERO:
 		facing_dir = atan2(-direction.x, -direction.z)

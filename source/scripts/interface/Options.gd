@@ -148,36 +148,36 @@ func set_fullscreen(state: bool) -> void:
 		OS.window_fullscreen = true
 	else:
 		OS.window_fullscreen = false
-	Auto.data.set_config("video", "screen/fullscreen", state)
+	Data.set_config("video", "screen/fullscreen", state)
 
 func get_fullscreen() -> bool:
-	var value = Auto.data.get_config("video", "screen/fullscreen", false)
+	var value = Data.get_config("video", "screen/fullscreen", false)
 	return value
 
 func set_resolution(vec2: Vector2) -> void:
 	OS.set_window_size(vec2)
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_EXPAND, vec2)
-	Auto.data.set_config("video", "screen/resolution", vec2)
+	Data.set_config("video", "screen/resolution", vec2)
 
 func get_resolution() -> Vector2:
-	var value = Auto.data.get_config("video", "screen/resolution", OS.get_screen_size())
+	var value = Data.get_config("video", "screen/resolution", OS.get_screen_size())
 	return value
 
 func set_filter(i: int) -> void:
-	#Auto.screen.set_type(i)
+	#SnailQuest.screen.set_type(i)
 	#filter_dict.get(filter.get_item_text(index))
-	Auto.data.set_config("video", "screen/filter", filters.find(i))
+	Data.set_config("video", "screen/filter", filters.find(i))
 
 func get_filter() -> int:
-	var value = Auto.data.get_config("video", "screen/filter", 0)
+	var value = Data.get_config("video", "screen/filter", 0)
 	return value
 
 func set_framerate(i: int) -> void:
 	Engine.set_target_fps(i)
-	Auto.data.set_config("video", "screen/framerate", i)
+	Data.set_config("video", "screen/framerate", i)
 
 func get_framerate() -> int:
-	var value = Auto.data.get_config("video", "screen/framerate", 60)
+	var value = Data.get_config("video", "screen/framerate", 60)
 	return value
 
 func set_vsync(state: bool) -> void:
@@ -185,37 +185,37 @@ func set_vsync(state: bool) -> void:
 		OS.vsync_enabled = true
 	else:
 		OS.vsync_enabled = false
-	Auto.data.set_config("video", "screen/vsync", state)
+	Data.set_config("video", "screen/vsync", state)
 
 func get_vsync() -> bool:
-	var value = Auto.data.get_config("video", "screen/vsync", false)
+	var value = Data.get_config("video", "screen/vsync", false)
 	return value
 
 func set_volume_master(f: float) -> void:
 	var index = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_volume_db(index, linear2db(f))
-	Auto.data.set_config("audio", "volume/master", f)
+	Data.set_config("audio", "volume/master", f)
 
 func get_volume_master() -> float:
-	var value = Auto.data.get_config("audio", "volume/master", 1.0)
+	var value = Data.get_config("audio", "volume/master", 1.0)
 	return value
 
 func set_volume_music(f: float) -> void:
 	var index = AudioServer.get_bus_index("Music")
 	AudioServer.set_bus_volume_db(index, linear2db(f))
-	Auto.data.set_config("audio", "volume/music", f)
+	Data.set_config("audio", "volume/music", f)
 
 func get_volume_music() -> float:
-	var value = Auto.data.get_config("audio", "volume/music", 1.0)
+	var value = Data.get_config("audio", "volume/music", 1.0)
 	return value
 
 func set_volume_sfx(f: float) -> void:
 	var index = AudioServer.get_bus_index("SFX")
 	AudioServer.set_bus_volume_db(index, linear2db(f))
-	Auto.data.set_config("audio", "volume/sfx", f)
+	Data.set_config("audio", "volume/sfx", f)
 
 func get_volume_sfx() -> float:
-	var value = Auto.data.get_config("audio", "volume/sfx", 1.0)
+	var value = Data.get_config("audio", "volume/sfx", 1.0)
 	return value
 
 func set_headphones_mode(state: bool) -> void:
@@ -223,10 +223,10 @@ func set_headphones_mode(state: bool) -> void:
 		pass
 	else:
 		pass
-	Auto.data.set_config("audio", "mode/headphones", state)
+	Data.set_config("audio", "mode/headphones", state)
 
 func get_headphones_mode() -> bool:
-	var value = Auto.data.get_config("audio", "mode/headphones", false)
+	var value = Data.get_config("audio", "mode/headphones", false)
 	return value
 
 func set_mono_mode(state: bool) -> void:
@@ -244,10 +244,10 @@ func set_mono_mode(state: bool) -> void:
 #		mode.pan = 0
 #		mast.pan = 0
 #		mono_audio = false
-	Auto.data.set_config("audio", "mode/mono", state)
+	Data.set_config("audio", "mode/mono", state)
 
 func get_mono_mode() -> bool:
-	var value = Auto.data.get_config("audio", "mode/mono", false)
+	var value = Data.get_config("audio", "mode/mono", false)
 	return value
 
 func set_invert_horizontal(state: bool):
@@ -255,10 +255,10 @@ func set_invert_horizontal(state: bool):
 		invert_horizontal = true
 	else:
 		invert_horizontal = false
-	Auto.data.set_config("controls", "camera/invert_horizontal", state)
+	Data.set_config("controls", "camera/invert_horizontal", state)
 
 func get_invert_horizontal() -> bool:
-	var value = Auto.data.get_config("controls", "camera/invert_horizontal", false)
+	var value = Data.get_config("controls", "camera/invert_horizontal", false)
 	return value
 
 func set_invert_vertical(state: bool):
@@ -266,17 +266,17 @@ func set_invert_vertical(state: bool):
 		invert_vertical = true
 	else:
 		invert_vertical = false
-	Auto.data.set_config("controls", "camera/invert_vertical", state)
+	Data.set_config("controls", "camera/invert_vertical", state)
 
 func get_invert_vertical() -> bool:
-	var value = Auto.data.get_config("controls", "camera/invert_vertical", false)
+	var value = Data.get_config("controls", "camera/invert_vertical", false)
 	return value
 
 func set_camera_sensitivity(i: float):
-	Auto.data.set_config("controls", "camera/sensitivity", i)
+	Data.set_config("controls", "camera/sensitivity", i)
 
 func get_camera_sensitivity() -> float:
-	var value = Auto.data.get_config("controls", "camera/sensitivity", 1.0)
+	var value = Data.get_config("controls", "camera/sensitivity", 1.0)
 	return value
 
 func set_language(lang: String, button: OptionButton = null) -> void:
@@ -286,10 +286,10 @@ func set_language(lang: String, button: OptionButton = null) -> void:
 			button.set_item_text(i, "OPTIONS_LANGUAGE_" + str(languages[i]).to_upper())
 			#replace this with translated local name for 4.0
 			#button.set_item_text(i, TranslationServer.get_locale_name(languages[i]))
-	Auto.data.set_config("misc", "language", lang)
+	Data.set_config("misc", "language", lang)
 
 func get_language() -> String:
-	var value = Auto.data.get_config("misc", "language", OS.get_locale())
+	var value = Data.get_config("misc", "language", OS.get_locale())
 	return value
 
 func get_default_focus() -> void:

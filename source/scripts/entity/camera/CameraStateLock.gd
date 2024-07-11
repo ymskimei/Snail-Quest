@@ -13,8 +13,8 @@ func enter() -> void:
 func physics_process(delta: float) -> int:
 	if is_instance_valid(entity.override):
 		entity.rotation = lerp(entity.rotation, entity.target.global_rotation, track_speed * delta)
-	elif is_instance_valid(entity.positioner) and is_instance_valid(Auto.prev_controlled):
-		entity.rotation = lerp(entity.rotation, Auto.prev_controlled.global_rotation, track_speed * delta)
+	elif is_instance_valid(entity.positioner) and is_instance_valid(SnailQuest.prev_controlled):
+		entity.rotation = lerp(entity.rotation, SnailQuest.prev_controlled.global_rotation, track_speed * delta)
 	else:
 		return State.ORBI
 	entity.translation = lerp(entity.translation, entity.target.global_translation, track_speed * delta)
