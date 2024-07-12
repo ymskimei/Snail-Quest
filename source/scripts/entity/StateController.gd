@@ -43,10 +43,3 @@ func physics_process(delta: float) -> void:
 			var new_state = current_state.physics_process(delta)
 			if new_state != 0:
 				change_state(new_state)
-
-func integrate_forces(state: PhysicsDirectBodyState) -> void:
-	if is_instance_valid(current_state):
-		if current_state.has_method("integrate_forces"):
-			var new_state = current_state.integrate_forces(state)
-			if new_state != 0:
-				change_state(new_state)

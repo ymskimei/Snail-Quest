@@ -1,4 +1,4 @@
-extends RigidBody
+extends KinematicBody
 
 export var identity: Resource = null
 

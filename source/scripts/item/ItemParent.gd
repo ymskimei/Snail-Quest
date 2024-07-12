@@ -34,10 +34,10 @@ func _on_Area_body_entered(body):
 		if type.destination:
 			var resource = type.destination
 			if !type.depletable:
-				Item.add_item(resource.items, type, 1)
+				Items.add_item(resource.items, type, 1)
 			else:
 				var slot = type.specific_slot
-				Item.set_item(resource.items, slot, type)
+				Items.set_item(resource.items, slot, type)
 		if type.sound != "":
 			Utility.audio.play_sfx(type.sound)
 		collecting = true

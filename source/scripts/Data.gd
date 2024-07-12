@@ -30,6 +30,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed(Device.debug_load):
 			load_data(get_data(get_current_data_folder()))
 		if event.is_action_pressed(Device.screenshot):
+			Audio.play_sfx(RegistryAudio.cam_snap, 1.0, 0.2)
 			save_screenshot()
 
 func set_config(section: String, key: String, value) -> void:

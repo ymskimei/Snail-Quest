@@ -24,14 +24,14 @@ func _input(event: InputEvent) -> void:
 
 func _activate_switch() -> void:
 	anim.play_backwards("Switch")
-	Utility.audio.play_pos_sfx(RegistryAudio.switch_on, global_translation)
+	Audio.play_pos_sfx(RegistryAudio.switch_on, global_translation)
 	yield(anim, "animation_finished")
 	active = true
 	emit_signal("activated", active)
 
 func _deactivate_switch() -> void:
 	anim.play("Switch")
-	Utility.audio.play_pos_sfx(RegistryAudio.switch_off, global_translation)
+	Audio.play_pos_sfx(RegistryAudio.switch_off, global_translation)
 	yield(anim, "animation_finished")
 	active = false
 	emit_signal("activated", active)

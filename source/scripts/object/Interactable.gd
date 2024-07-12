@@ -1,5 +1,5 @@
 class_name Interactable
-extends RigidBody
+extends KinematicBody
 
 export var dialog: Resource = null
 

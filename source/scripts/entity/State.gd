@@ -3,92 +3,64 @@ extends Node
 
 var entity: Entity = null
 
-var climbing_normal: Vector3 = Vector3.ZERO
-var direction: Vector3 = Vector3.ZERO
-var input: Vector3 = Vector3.ZERO
-var facing_dir: float = 0
-
-func set_gravity(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
-	var can_climb: bool = false
-	if is_instance_valid(entity.climbing_rays):
-		var norm_avg = Vector3.ZERO
-		var rays_colliding := 0
-		for ray in entity.climbing_rays.get_children():
-			var r : RayCast = ray
-			if r.is_colliding():
-				if r.get_collider().is_in_group("climbable"):
-					can_climb = true
+func get_surface_normal(raw: bool = false) -> Vector3:
+	var surface_normal = Vector3.ZERO
+	var norm_avg = Vector3.ZERO
+	var rays_colliding := 0
+	for ray in entity.surface_rays.get_children():
+		var r : RayCast = ray
+		if r.is_colliding():
+			if !raw:
+				if r.get_collision_normal().y == -180 or r.get_collider().is_in_group("sticky"):
 					rays_colliding += 1
 					norm_avg += r.get_collision_normal()
-		if !norm_avg or !can_climb:
-			climbing_normal = Vector3.UP
-		else:
-			climbing_normal = norm_avg / rays_colliding
-	else:
-		climbing_normal = Vector3.UP
-	entity.global_transform = Utility.apply_surface_align(entity.global_transform, climbing_normal)
-	state.add_central_force(lerp(15, gravity, 0.1) * -climbing_normal)
-
-func set_hang_align(state: PhysicsDirectBodyState, gravity: int = 50) -> void:
-	if is_instance_valid(entity.climbing_rays):
-		var norm_avg = Vector3.ZERO
-		var rays_colliding := 0
-		for ray in entity.climbing_rays.get_children():
-			var r : RayCast = ray
-			if r.is_colliding():
+			else:
 				rays_colliding += 1
 				norm_avg += r.get_collision_normal()
-		if !norm_avg:
-			climbing_normal = Vector3.UP
-		else:
-			climbing_normal = norm_avg / rays_colliding
+	if norm_avg:
+		surface_normal = norm_avg / rays_colliding
 	else:
-		climbing_normal = Vector3.UP
-	entity.global_transform = Utility.apply_surface_align(entity.global_transform, climbing_normal)
+		surface_normal = Vector3.UP
+	return surface_normal
 
-func get_joy_input() -> Vector3:
-	input.x = Input.get_action_strength(Device.stick_main_left) - Input.get_action_strength(Device.stick_main_right)
-	input.z = Input.get_action_strength(Device.stick_main_up) - Input.get_action_strength(Device.stick_main_down)
-	var input_length = input.length()
-	if input_length > 1:
-		input /= input_length
-	return input
+func set_gravity(delta: float) -> void:
+	var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+	entity.move_and_slide_with_snap((gravity / 3 + entity.fall_momentum) * -get_surface_normal() * delta, Vector3.DOWN, Vector3.UP, true)
+	entity.global_transform.basis.y = get_surface_normal()
+	entity.global_transform.basis.x = -entity.global_transform.basis.z.cross(get_surface_normal())
+	entity.global_transform.basis = entity.global_transform.basis.orthonormalized()
 
-func apply_movement(state: PhysicsDirectBodyState, multiplier: float, roll: bool = false) -> void:
-	if entity.is_controlled() and !entity.attached_to_location and !entity.interacting:
-		direction = -get_joy_input().rotated(Vector3.UP, SnailQuest.camera.rotation.y)
-		direction = direction.rotated(Vector3.LEFT, -entity.rotation.x).rotated(Vector3.RIGHT, -entity.rotation.y)
-		if direction != Vector3.ZERO:
-			if roll:
-				state.add_force((entity.speed * multiplier) * direction, -direction)
-			else:
-				state.add_central_force((entity.speed * multiplier) * direction)
-				#entity.anim_tween.interpolate_property(entity.skeleton, "rotation:y", entity.skeleton.rotation.y, atan2(-direction.x, -direction.z), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-				#entity.anim_tween.start()
-#		else:
-#			state.linear_velocity = Vector3.ZERO
+func get_input(raw: bool = false) -> Vector3:
+	var direction: Vector3 = Vector3.ZERO
+	direction.x = Input.get_axis(Device.stick_main_left, Device.stick_main_right)
+	direction.z = Input.get_axis(Device.stick_main_up, Device.stick_main_down)
+	if !raw:
+		direction = direction * 2
+	direction = direction.rotated(Vector3.UP, SnailQuest.get_camera().rotation.y)
+	return direction
 
-func apply_shimmy(state: PhysicsDirectBodyState, multiplier: float) -> void:
-	direction = Vector3(-get_joy_input().x, 0, 0).rotated(Vector3.UP, entity.skeleton. rotation.y)
-	if direction != Vector3.ZERO:
-		state.add_central_force((entity.speed * multiplier) * direction)
+func set_movement(delta: float, modifier: float = 1.0, control: bool = true, reverse: bool = false) -> void:
+	if control:
+		entity.direction = get_input()
+	if entity.direction != Vector3.ZERO:
+		var movement: Vector3 = (3.75 * modifier * entity.direction * delta)
+		if reverse:
+			movement = -movement
+		entity.move_and_slide(movement * 50 * modifier, Vector3.UP, false, 4, deg2rad(75))
 
-func apply_rotation():
-	if SnailQuest.camera.looking:
-		var cam_facing: Vector3 = SnailQuest.camera.rotation_degrees
-		facing_dir = atan2(cam_facing.x, cam_facing.z)
-	elif direction != Vector3.ZERO:
-		facing_dir = atan2(-direction.x, -direction.z)
-		entity.skeleton.rotation.y = lerp_angle(entity.skeleton.rotation.y, facing_dir, 0.2)
-		entity.collision.rotation.y = lerp_angle(entity.collision.rotation.y, facing_dir, 0.2)
+func set_rotation(delta: float, modifier: float = 1.0) -> void:
+	if entity.direction != Vector3.ZERO:
+		entity.facing = atan2(-entity.direction.x, -entity.direction.z)
+	entity.rotation.y = lerp_angle(entity.rotation.y, entity.facing, 12 * modifier * delta)
 
-func is_on_floor() -> bool:
-	if is_instance_valid(entity.climbing_rays):
-		for ray in entity.climbing_rays.get_children():
-			var r : RayCast = ray
-			if r.is_colliding():
-				return true
-	elif is_instance_valid(entity.floor_checker):
-		if entity.floor_checker.is_colliding():
-			return true
+func is_on_surface(down_only: bool = false) -> bool:
+	if entity.surface_rays:
+		for ray in entity.surface_rays.get_children():
+			var r: RayCast = ray
+			if down_only:
+				if r.is_colliding() and r.get_collision_normal().y == 1.0 or entity.is_on_floor():
+					return true
+			elif r.is_colliding():
+					return true
 	return false
+

@@ -45,8 +45,7 @@ surfaces/1 = {
 "vertex_count": 186
 }
 
-[node name="mushroom" type="RigidBody"]
-mode = 1
+[node name="mushroom" type="KinematicBody"]
 
 [node name="Cylinder" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

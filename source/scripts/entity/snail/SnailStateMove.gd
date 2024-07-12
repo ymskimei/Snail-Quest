@@ -1,57 +1,88 @@
 extends SnailStateMain
 
-var ledge_jump_timer: Timer = null
-var speed_boost_timer: Timer = null
+var boost_timer: Timer = Timer.new()
+#var exhaust_timer: Timer = Timer.new()
 
-export var can_ledge_jump: bool = false
+var slide_timer: Timer = Timer.new()
+
+var prev_dir: Vector3 = Vector3.ZERO
+var can_slide: bool = false
 
 func enter() -> void:
 	print("Snail State: MOVE")
 	entity.anim.play("SnailMove")
-	entity.linear_damp = 50
-	ledge_jump_timer = Timer.new()
-	ledge_jump_timer.set_wait_time(2)
-	ledge_jump_timer.one_shot = true
-	ledge_jump_timer.connect("timeout", self, "on_ledge_jump_timeout")
-	add_child(ledge_jump_timer)
-	ledge_jump_timer.start()
+	boost_timer = Timer.new()
+	boost_timer.set_wait_time(5.5)
+	boost_timer.one_shot = true
+	boost_timer.connect("timeout", self, "_on_boost_timeout")
+	add_child(boost_timer)
+	boost_timer.start()
+
+#	if entity.temporary_exhaustion:
+#		exhaust_timer = Timer.new()
+#		exhaust_timer.set_wait_time(2)
+#		exhaust_timer.one_shot = true
+#		exhaust_timer.connect("timeout", self, "_on_exhaust_timeout")
+#		add_child(exhaust_timer)
+#		exhaust_timer.start()
+
+	slide_timer = Timer.new()
+	slide_timer.set_wait_time(0.05)
+	slide_timer.one_shot = true
+	slide_timer.connect("timeout", self, "_on_slide_timeout")
+	add_child(slide_timer)
 
 func unhandled_input(event: InputEvent) -> int:
-	if !entity.can_interact and event.is_action_pressed("action_main") and is_on_floor():
+	if event.is_action_pressed(Device.action_main) and is_on_surface():
 		return State.JUMP
-	#if event.is_action_pressed("action_defense") or roll(event):
-	#	return State.DODG
-	needle()
-	mallet()
+
 	return State.NULL
 
 func physics_process(delta: float) -> int:
-	.physics_process(delta)
-	var anim_speed = clamp((abs(entity.linear_velocity.x) + abs(entity.linear_velocity.y) + abs(entity.linear_velocity.z)), 0, 2) * 0.75
-	entity.anim.set_speed_scale(anim_speed)
-	if entity.ray_front_bottom.is_colliding():
-		if entity.ray_front_top.is_colliding() and !entity.ray_bottom.is_colliding():
-			return State.FALL
-	if entity.jump_in_memory and !entity.can_interact:
-		return State.JUMP
-	if !direction:
-		return State.IDLE
-	if entity.pushing:
-		return State.PUSH
-	return State.NULL
+	set_gravity(delta)
+	set_rotation(delta)
 
-func integrate_forces(state: PhysicsDirectBodyState) -> int:
-	.integrate_forces(state)
-	apply_movement(state, 8)
-	if !is_on_floor() and !entity.jump_in_memory and can_ledge_jump:
-		entity.apply_central_impulse(3 * entity.global_transform.basis.y)
+	if entity.boosting and entity.direction.length() >= 1.8:
+		if entity.move_momentum < entity.max_momentum:
+			entity.move_momentum += 0.35 * delta
+
+	if entity.jump_in_memory:
+		return State.JUMP
+
+#		if abs(entity.direction.length()) <= 1.8:
+#			prev_dir = entity.direction
+#			slide_timer.start()
+
+#	else:
+#		if entity.move_momentum > 1.0:
+#			entity.move_momentum -= 7 * delta
+
+#	if entity.temporary_exhaustion:
+#		set_movement(delta * 0.75)
+#	else:
+	set_movement(delta * (1.0 + entity.move_momentum))
+
+	if entity.direction == Vector3.ZERO:
+		return State.IDLE
+
+#	if can_slide:
+#		return State.SLID
+
+	if !is_on_surface(true):
+		entity.can_late_jump = true
 		return State.FALL
 	return State.NULL
 
-func on_ledge_jump_timeout():
-	can_ledge_jump = true
+#func _on_exhaust_timeout() -> void:
+#	entity.temporary_exhaustion = false
+
+func _on_boost_timeout() -> void:
+	entity.boosting = true
+
+func _on_slide_timeout() -> void:
+	if abs(prev_dir.length() - entity.direction.length()) >= 0.4:
+		can_slide = true
 
 func exit() -> void:
-	entity.anim.set_speed_scale(1)
-	ledge_jump_timer.queue_free()
-	entity.linear_damp = -1
+	boost_timer.stop()
+	can_slide = false

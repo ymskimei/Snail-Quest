@@ -30,33 +30,31 @@ func get_current_track(song_name: String) -> AudioStreamPlayer:
 			return player
 	return null
 
-func play_sfx(file_name: String, pitch: float = 1.0, volume: float = 0.0) -> void:
+func play_sfx(file_name: String, pitch: float = 1.0, volume: float = 1.0) -> void:
 	var sfx = AudioStreamPlayer.new()
 	var sound_effect = get_sound(file_name)
 	if sound_effect:
-		sfx.stream = sound_effect
-		sfx.set_volume_db(-8.0)
+		sfx.set_stream(sound_effect)
 		sfx.set_bus("SFX")
 		sound_booth.add_child(sfx)
 		sfx.set_pitch_scale(pitch)
-		sfx.set_volume_db(volume)
+		sfx.set_volume_db(linear2db(volume))
 		sfx.play()
 		yield(sfx, "finished")
 		sfx.queue_free()
 
-func play_pos_sfx(file_name: String, spatial: Vector3 = Vector3.ZERO, pitch: float = 1.0, volume: float = 0.0) -> void:
+func play_pos_sfx(file_name: String, position: Vector3 = Vector3.ZERO, pitch: float = 1.0, volume: float = 1.0) -> void:
 	var sfx = AudioStreamPlayer3D.new()
 	var sound_effect = get_sound(file_name)
 	if sound_effect:
-		sfx.stream = sound_effect
-		sfx.set_unit_db(8.0)
+		sfx.set_stream(sound_effect)
+		sfx.set_unit_db(linear2db(volume))
 		sfx.set_attenuation_filter_db(-16.0)
 		sfx.set_attenuation_filter_cutoff_hz(16000.0)
 		sfx.set_bus("SFX")
 		sound_booth.add_child(sfx)
-		sfx.global_translation = spatial
-		sfx.pitch_scale = pitch
-		sfx.unit_db = volume
+		sfx.set_pitch_scale(pitch)
+		sfx.set_global_translation(position)
 		sfx.play()
 		yield(sfx, "finished")
 		sfx.queue_free()

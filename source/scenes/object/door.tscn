@@ -40,17 +40,15 @@ tracks/0/keys = {
 
 [sub_resource type="BoxShape" id=8]
 
-[node name="Doorway" type="RigidBody"]
+[node name="Doorway" type="KinematicBody"]
 collision_layer = 4
 collision_mask = 13
-mode = 1
 script = ExtResource( 2 )
 
-[node name="Door" type="RigidBody" parent="."]
+[node name="Door" type="KinematicBody" parent="."]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 0, 0 )
 collision_layer = 8
 collision_mask = 13
-mode = 1
 
 [node name="MeshInstance" type="MeshInstance" parent="Door"]
 mesh = SubResource( 4 )

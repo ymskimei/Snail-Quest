@@ -1,0 +1,37 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=1]
+[ext_resource path="res://assets/texture/object/radio.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/object/radio_normal.png" type="Texture" id=3]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/use_diffuse = true
+shader_param/use_specular = true
+shader_param/use_rim = true
+shader_param/use_light = true
+shader_param/use_shadow = true
+shader_param/albedo_color = Color( 1, 1, 1, 1 )
+shader_param/shade_color = Color( 0.658824, 0.698039, 0.772549, 0.717647 )
+shader_param/specular_color = Color( 1, 1, 1, 1 )
+shader_param/rim_color = Color( 0.517647, 0.560784, 0.596078, 1 )
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/normal_scale = -2.0
+shader_param/shade_threshold = 0.0
+shader_param/shade_softness = 0.05
+shader_param/specular_glossiness = 15.0
+shader_param/specular_threshold = 1.0
+shader_param/specular_softness = 0.0
+shader_param/rim_threshold = 0.0
+shader_param/rim_softness = 0.2
+shader_param/rim_spread = 0.5
+shader_param/shadow_threshold = 0.5
+shader_param/shadow_softness = 0.05
+shader_param/emission_energy = 0.0
+shader_param/screen_scale = 10.0
+shader_param/uv_scale = Vector3( 1, 1, 1 )
+shader_param/uv_offset = Vector3( 0, 0, 0 )
+shader_param/use_triplanar = false
+shader_param/texture_albedo = ExtResource( 2 )
+shader_param/texture_normal = ExtResource( 3 )

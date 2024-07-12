@@ -64,7 +64,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/Entity.gd"
 }, {
-"base": "RigidBody",
+"base": "KinematicBody",
 "class": "Interactable",
 "language": "GDScript",
 "path": "res://source/scripts/object/Interactable.gd"
@@ -424,13 +424,13 @@ ui_page_down={
  ]
 }
 cam_lock={
-"deadzone": 0.5,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 action_defense={
-"deadzone": 0.5,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777237,"unicode":0,"echo":false,"script":null)
  ]
@@ -442,25 +442,25 @@ cam_zoom={
  ]
 }
 joy_left={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 joy_right={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 joy_up={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 joy_down={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
@@ -515,25 +515,25 @@ pad_down={
  ]
 }
 cam_left={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":-1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 cam_right={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 cam_up={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":-1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777232,"unicode":0,"echo":false,"script":null)
  ]
 }
 cam_down={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777234,"unicode":0,"echo":false,"script":null)
  ]
@@ -651,7 +651,7 @@ common/enable_pause_aware_picking=true
 3d/godot_physics/use_bvh=false
 3d/godot_physics/bvh_collision_margin=1.0
 2d/thread_model=2
-3d/default_gravity=50.0
+3d/default_gravity=98.0
 3d/default_linear_damp=2.0
 3d/default_angular_damp=2.0
 common/physics_interpolation=true
@@ -677,6 +677,6 @@ quality/filters/anisotropic_filter_level=2
 quality/lightmapping/use_bicubic_sampling=false
 quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 0.823529, 0.823529, 0.823529, 1 )
-quality/filters/use_fxaa=true
+quality/filters/msaa=2
 quality/filters/use_debanding=true
 environment/default_environment="res://assets/resource/environment/environment_default.tres"

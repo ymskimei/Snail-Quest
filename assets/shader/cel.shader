@@ -15,7 +15,7 @@ uniform vec4 emission: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 
 uniform float normal_scale: hint_range(-16, 16) = 0.1;
 uniform float shade_threshold : hint_range(-1.0, 1.0) = 0.0;
-uniform float shade_softness : hint_range(0.0, 1.0) = 0.0;
+uniform float shade_softness : hint_range(0.0, 1.0) = 0.05;
 uniform float specular_glossiness : hint_range(1.0, 100.0) = 15.0;
 uniform float specular_threshold : hint_range(0.0, 1.0) = 0.5;
 uniform float specular_softness : hint_range(0.0, 1.0) = 0.0;
@@ -23,7 +23,7 @@ uniform float rim_threshold : hint_range(0.0, 1.0) = 0.25;
 uniform float rim_softness : hint_range(0.0, 1.0) = 0.0;
 uniform float rim_spread : hint_range(0.0, 1.0) = 0.5;
 uniform float shadow_threshold : hint_range(0.0, 1.0) = 0.7;
-uniform float shadow_softness : hint_range(0.0, 1.0) = 0.0;
+uniform float shadow_softness : hint_range(0.0, 1.0) = 0.05;
 uniform float emission_energy = 0.0;
 
 uniform sampler2D texture_albedo: hint_albedo;

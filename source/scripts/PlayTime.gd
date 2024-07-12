@@ -21,8 +21,5 @@ func reset_time_to(new_time: int) -> void:
 	previous_time = new_time
 	played_time = 0
 
-func set_previous_time(new_time: int) -> void:
-	previous_time = new_time
-
 func get_total_time() -> int:
 	return played_time

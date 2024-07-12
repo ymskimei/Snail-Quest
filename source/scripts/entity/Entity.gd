@@ -8,6 +8,7 @@ onready var skeleton: Skeleton = $Armature/Skeleton
 onready var collision: CollisionShape = $CollisionShape
 onready var mesh: MeshInstance = $"%MeshInstance"
 onready var anim: AnimationPlayer = $AnimationPlayer
+onready var surface_rays: Spatial = $SurfaceRays
 
 export var health: int = 10
 export var max_health: int = 10
@@ -19,6 +20,14 @@ export var strength: int = 1
 export var speed: int = 10
 export var jump: int = 65
 
+var direction: Vector3 = Vector3.ZERO
+
+var fall_momentum: float = 0.0
+var move_momentum: float = 0.0
+var max_momentum: float = 0.5
+
+var facing: float = 0.0
+
 var target = null
 var can_swap_target: bool = true
 var all_targets = []
@@ -28,6 +37,7 @@ var can_interact: bool = false
 var interacting: bool = false
 var targeting: bool = false
 var jump_in_memory: bool = false
+var can_late_jump: bool = false
 var ledge_usable: bool = true
 var pushing: bool = false
 var attached_to_location: bool
@@ -86,7 +96,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if event.is_action_pressed(Device.debug_fov_increase):
 				set_entity_health(-1)
 
-func _get_viewport_target(direction):
+func _get_viewport_target(dir):
 	var nearest_target = null
 	var nearest_distance = INF
 	for t in all_targets:
@@ -94,7 +104,7 @@ func _get_viewport_target(direction):
 			var vec3_target_direction = (t.global_transform.origin - global_transform.origin).rotated(Vector3.UP, SnailQuest.camera.rotation.y)
 			var target_direction = Vector2(vec3_target_direction.x, vec3_target_direction.y)
 			#var target_direction = (SnailQuest.camera.lens.unproject_position(t.global_transform.origin) - SnailQuest.camera.lens.unproject_position(target.global_transform.origin))
-			var dot_result = direction.normalized().dot(target_direction.normalized())
+			var dot_result = dir.normalized().dot(target_direction.normalized())
 			if target_direction.length() < nearest_distance and dot_result:
 				nearest_target = t
 	return nearest_target
