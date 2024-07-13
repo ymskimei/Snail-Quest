@@ -47,9 +47,9 @@ func unhandled_input(event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	set_rotation(delta)
 	if entity.can_turn:
-		set_movement(delta, 1.25 + (entity.move_momentum * 0.5))
+		set_movement(delta, 1.25 + (entity.move_momentum * 0.5), true, false, 0.775)
 
-	entity.move_and_collide(Vector3.DOWN * 0.7 * entity.fall_momentum)
+	entity.move_and_collide(Vector3.DOWN * 0.45 * entity.fall_momentum)
 
 	if entity.fall_momentum <= 10:
 		if entity.boosting:

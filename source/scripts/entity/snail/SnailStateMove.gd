@@ -61,6 +61,7 @@ func physics_process(delta: float) -> int:
 #		set_movement(delta * 0.75)
 #	else:
 	set_movement(delta * (1.0 + entity.move_momentum))
+	entity.anim.set_speed_scale(entity.direction.length())
 
 	if entity.direction == Vector3.ZERO:
 		return State.IDLE
@@ -84,5 +85,6 @@ func _on_slide_timeout() -> void:
 		can_slide = true
 
 func exit() -> void:
+	entity.anim.set_speed_scale(1.0)
 	boost_timer.stop()
 	can_slide = false

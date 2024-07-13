@@ -2,12 +2,11 @@
 
 [ext_resource path="res://source/scripts/object/Warp.gd" type="Script" id=1]
 
-
 [sub_resource type="CylinderMesh" id=13]
 
 [sub_resource type="CylinderShape" id=14]
 
-[node name="Area" type="Area"]
+[node name="Warp" type="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0 )
 script = ExtResource( 1 )
 

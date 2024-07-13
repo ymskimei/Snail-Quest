@@ -40,7 +40,9 @@ func physics_process(delta: float) -> int:
 		return State.TARG
 
 	if is_instance_valid(entity.target):
-		entity.translation = lerp(entity.translation, entity.target.translation + Vector3(0, -0.3, 0), track_speed * delta)
+		entity.translation.x = lerp(entity.translation.x, entity.target.translation.x, track_speed * delta)
+		entity.translation.y = lerp(entity.translation.y, entity.target.translation.y - 0.3, track_speed * 0.45 * delta)
+		entity.translation.z = lerp(entity.translation.z, entity.target.translation.z, track_speed * delta)
 		
 		rotation.y = (Input.get_action_strength(Device.stick_alt_left) - Input.get_action_strength(Device.stick_alt_right)) * 3
 		if is_inverted(true):

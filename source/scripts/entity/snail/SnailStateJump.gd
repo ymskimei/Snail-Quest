@@ -28,7 +28,7 @@ func unhandled_input(event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 
-	set_movement(delta, 1.15 + (entity.move_momentum * 0.5))
+	set_movement(delta, 1.15 + (entity.move_momentum * 0.5), true, false, 0.825)
 	set_rotation(delta * 0.5)
 
 	entity.move_and_collide((Vector3.UP * 0.2) * entity.fall_momentum)

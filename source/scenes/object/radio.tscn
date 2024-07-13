@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/materials/object/radio.tres" type="Material" id=1]
-[ext_resource path="res://assets/model/radio.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/model/object/radio.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://source/scripts/object/Radio.gd" type="Script" id=5]
 [ext_resource path="res://assets/sound/music/radio/track_plastic.ogg" type="AudioStream" id=6]
 

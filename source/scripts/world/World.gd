@@ -51,11 +51,11 @@ func _on_goto_room(room: PackedScene, coords: Vector3, dir: String, pause: bool 
 	if pause:
 		get_tree().set_deferred("paused", true)
 	if fade_in:
-		Interface.transition.play_backwards("GuiTransitionFade")
+		Interface.transition.play("GuiTransitionFade")
 		yield(Interface.transition, "animation_finished")
 	load_room(room, coords, dir)
 	yield(self, "room_loaded")
-	Interface.transition.play("GuiTransitionFade")
+	Interface.transition.play_backwards("GuiTransitionFade")
 	yield(Interface.transition, "animation_finished")
 	if get_tree().paused:
 		get_tree().set_deferred("paused", false)

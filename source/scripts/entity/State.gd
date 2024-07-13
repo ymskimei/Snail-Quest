@@ -30,18 +30,18 @@ func set_gravity(delta: float) -> void:
 	entity.global_transform.basis.x = -entity.global_transform.basis.z.cross(get_surface_normal())
 	entity.global_transform.basis = entity.global_transform.basis.orthonormalized()
 
-func get_input(raw: bool = false) -> Vector3:
+func get_input(turn_modifier: float = 1.0, raw: bool = false) -> Vector3:
 	var direction: Vector3 = Vector3.ZERO
-	direction.x = Input.get_axis(Device.stick_main_left, Device.stick_main_right)
+	direction.x = Input.get_axis(Device.stick_main_left, Device.stick_main_right) * turn_modifier
 	direction.z = Input.get_axis(Device.stick_main_up, Device.stick_main_down)
 	if !raw:
-		direction = direction * 2
+		direction = direction * 1.8
 	direction = direction.rotated(Vector3.UP, SnailQuest.get_camera().rotation.y)
 	return direction
 
-func set_movement(delta: float, modifier: float = 1.0, control: bool = true, reverse: bool = false) -> void:
+func set_movement(delta: float, modifier: float = 1.0, control: bool = true, reverse: bool = false, turn_modifier: float = 1.0) -> void:
 	if control:
-		entity.direction = get_input()
+		entity.direction = get_input(turn_modifier)
 	if entity.direction != Vector3.ZERO:
 		var movement: Vector3 = (3.75 * modifier * entity.direction * delta)
 		if reverse:
