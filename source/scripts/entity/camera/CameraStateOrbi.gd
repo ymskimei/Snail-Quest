@@ -7,17 +7,12 @@ var rotation_speed: int = 16
 
 var input_spin: int = 0
 
-var mode: int = 2
-
 var spin_timer: Timer = Timer.new()
 var look_timer: Timer = Timer.new()
 
 func enter() -> void:
 	print("Camera State: ORBIT")
 
-	mode = 2
-	_set_mode()
-	
 	if !is_instance_valid(get_node_or_null("SpinTimer")):
 		spin_timer.set_one_shot(true)
 		spin_timer.set_wait_time(0.5)
@@ -41,26 +36,19 @@ func physics_process(delta: float) -> int:
 
 	if is_instance_valid(entity.target):
 		entity.translation.x = lerp(entity.translation.x, entity.target.translation.x, track_speed * delta)
-		entity.translation.y = lerp(entity.translation.y, entity.target.translation.y - 0.3, track_speed * 0.45 * delta)
+		entity.translation.y = lerp(entity.translation.y, entity.target.translation.y + 0.25, track_speed * 0.45 * delta)
 		entity.translation.z = lerp(entity.translation.z, entity.target.translation.z, track_speed * delta)
 		
 		rotation.y = (Input.get_action_strength(Device.stick_alt_left) - Input.get_action_strength(Device.stick_alt_right)) * 3
 		if is_inverted(true):
 			rotation.y = -rotation.y
+		rotation.y += (Input.get_action_strength(Device.stick_main_left) - Input.get_action_strength(Device.stick_main_right)) * 1.5
 
-		if mode == 2:
-			rotation.y += (Input.get_action_strength(Device.stick_main_left) - Input.get_action_strength(Device.stick_main_right)) * 1.5
+		rotation.x = (Input.get_action_strength(Device.stick_alt_up) - Input.get_action_strength(Device.stick_alt_down)) * 3
 
 		velocity = velocity.linear_interpolate(rotation * sensitivity, rotation_speed * delta)
 		entity.rotation.y += (deg2rad(velocity.y))
-		
-		if rotation.y == 0:
-			if Input.is_action_just_pressed(Device.stick_alt_up) and mode <= 3:
-				mode += 1
-				_set_mode()
-			elif Input.is_action_just_pressed(Device.stick_alt_down) and mode >= 1:
-				mode -= 1
-				_set_mode()
+		entity.rotation.x += (deg2rad(velocity.x))
 
 		if Input.is_action_just_pressed(Device.stick_alt_left) or Input.is_action_just_pressed(Device.stick_alt_right):
 			input_spin += 1
@@ -75,25 +63,6 @@ func physics_process(delta: float) -> int:
 		return State.VEHI
 
 	return State.NULL
-
-func _set_mode() -> void:
-	print(mode)
-	match mode:
-		1:
-			#Low view
-			_tween_cam_mode(-5, 5, 30, 5)
-		2:
-			#Normal view
-			_tween_cam_mode()
-		3:
-			#High view
-			_tween_cam_mode(-25, 5, 50, 8)
-		4:
-			#Bird view
-			_tween_cam_mode(-80, 0, 36, 16)
-		_:
-			#Worm view
-			_tween_cam_mode(0, 28, 60, 5)
 
 func _on_spin_timer() -> void:
 	input_spin = 0

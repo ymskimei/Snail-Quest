@@ -41,9 +41,11 @@ func get_input(turn_modifier: float = 1.0, raw: bool = false) -> Vector3:
 
 	return direction
 
-func set_movement(delta: float, modifier: float = 1.0, control: bool = true, reverse: bool = false, turn_modifier: float = 1.0) -> void:
+func set_movement(delta: float, modifier: float = 1.0, control: bool = true, reverse: bool = false, turn_modifier: float = 1.0, slide_speed: int = 20) -> void:
 	if control:
-		entity.direction = get_input(turn_modifier)
+		var temp_input: Vector3 = get_input(turn_modifier)
+		entity.direction = lerp(entity.direction, temp_input, slide_speed * delta)
+
 	if entity.direction != Vector3.ZERO:
 		var movement: Vector3 = (3.75 * modifier * entity.direction * delta)
 		if reverse:

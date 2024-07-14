@@ -1,6 +1,6 @@
 extends Spatial
 
-onready var snail: RigidBody = $Snail
+onready var snail: PhysicsBody = $Snail
 onready var camera: Camera = $Camera
 onready var shine: Sprite3D = $Camera/Sprite3D
 

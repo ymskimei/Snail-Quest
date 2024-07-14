@@ -279,7 +279,7 @@ states/SnailHidden/position = Vector2( 829, -73 )
 states/SnailHide/node = SubResource( 50 )
 states/SnailHide/position = Vector2( 631, -12 )
 states/SnailIdle/node = SubResource( 51 )
-states/SnailIdle/position = Vector2( 228, -73 )
+states/SnailIdle/position = Vector2( 227, -73 )
 states/SnailJump/node = SubResource( 52 )
 states/SnailJump/position = Vector2( 424, 184 )
 states/SnailMove/node = SubResource( 53 )
@@ -292,7 +292,7 @@ states/SnailRoll/node = SubResource( 56 )
 states/SnailRoll/position = Vector2( 631, 79 )
 transitions = [ "SnailIdle", "SnailMove", SubResource( 57 ), "SnailMove", "SnailIdle", SubResource( 58 ), "SnailIdle", "SnailJump", SubResource( 59 ), "SnailMove", "SnailJump", SubResource( 60 ), "SnailJump", "SnailFall", SubResource( 61 ), "SnailFall", "SnailIdle", SubResource( 62 ), "SnailFall", "SnailMove", SubResource( 63 ), "SnailRoll", "ShellUnhide", SubResource( 64 ), "ShellUnhide", "SnailJump", SubResource( 65 ), "ShellUnhide", "SnailMove", SubResource( 66 ), "ShellUnhide", "SnailIdle", SubResource( 67 ), "SnailMove", "SnailHide", SubResource( 68 ), "SnailHide", "SnailRoll", SubResource( 69 ), "SnailHide", "SnailHidden", SubResource( 70 ), "SnailHidden", "ShellUnhide", SubResource( 71 ), "SnailHide", "SnailMove", SubResource( 72 ), "SnailHide", "SnailIdle", SubResource( 73 ), "SnailIdle", "SnailHide", SubResource( 74 ), "SnailFall", "SnailGrab", SubResource( 75 ), "SnailJump", "SnailGrab", SubResource( 76 ), "SnailMove", "SnailPress", SubResource( 77 ), "SnailIdle", "SnailPress", SubResource( 78 ), "SnailPress", "SnailPush", SubResource( 79 ), "SnailPush", "SnailIdle", SubResource( 80 ), "SnailPush", "SnailMove", SubResource( 81 ) ]
 start_node = "SnailIdle"
-graph_offset = Vector2( -111, -237 )
+graph_offset = Vector2( -325, -137 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=83]
 
@@ -985,7 +985,7 @@ bones/7/name = "EyeCenter.L"
 bones/7/parent = 6
 bones/7/rest = Transform( 0.98911, -0.00749677, 0.146989, -0.146993, 2.38419e-07, 0.989137, -0.00741538, -0.999972, -0.00110173, 0.00569856, 0.134216, 0.0029342 )
 bones/7/enabled = true
-bones/7/bound_children = [ NodePath("BoneAttachment") ]
+bones/7/bound_children = [  ]
 bones/8/name = "Stalk4.R"
 bones/8/parent = 1
 bones/8/rest = Transform( 0.984805, 0.173026, 0.0148803, -2.78354e-05, 0.0858412, -0.996309, -0.173665, 0.981169, 0.0845417, 0.0776723, 0.157739, 0.2027 )
@@ -1015,7 +1015,7 @@ bones/13/name = "EyeCenter.R"
 bones/13/parent = 12
 bones/13/rest = Transform( 0.98911, 0.00749677, -0.146989, 0.146993, 2.38419e-07, 0.989137, 0.00741538, -0.999972, -0.00110173, -0.00303061, 0.134613, 0.00295423 )
 bones/13/enabled = true
-bones/13/bound_children = [ NodePath("BoneAttachment2") ]
+bones/13/bound_children = [  ]
 bones/14/name = "EyeMainController"
 bones/14/parent = 1
 bones/14/rest = Transform( 1, -1.56945e-43, 5.85619e-37, -1.56945e-43, 1, 5.34499e-07, -5.85619e-37, -5.34499e-07, 1, 0.0216394, 0.502939, 0.734361 )
@@ -1075,7 +1075,7 @@ bone_name = "BoneEyeballRight"
 unique_name_in_owner = true
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999817, -0.00878939, -0.0169672, 0.0174195, 0.0541768, 0.998378, -0.00785598, -0.998493, 0.0543203, -0.159268, 0.747765, -0.564681 )
+transform = Transform( 0.999473, -0.0298819, -0.012655, 0.0181246, 0.190536, 0.981511, -0.0269183, -0.981225, 0.190978, -0.156201, 0.729455, -0.563508 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -1085,7 +1085,7 @@ mesh = ExtResource( 13 )
 material/0 = ExtResource( 7 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.99996, 0.00867222, 0.0019472, -0.00239561, 0.0519523, 0.998645, 0.00855937, -0.998612, 0.0519713, 0.159432, 0.748928, -0.564551 )
+transform = Transform( 0.999575, 0.0275647, -0.00942077, 0.00416942, 0.184677, 0.982789, 0.0288302, -0.982413, 0.184484, 0.1569, 0.731151, -0.563496 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]

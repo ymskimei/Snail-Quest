@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/resource/environment/environment_interior.tres" type="Environment" id=1]
 [ext_resource path="res://source/scenes/object/warp.tscn" type="PackedScene" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://assets/texture/tile/plank_floor.png" type="Texture" id=9]
 [ext_resource path="res://assets/texture/tile/mushroom_wall.png" type="Texture" id=10]
 [ext_resource path="res://source/scenes/object/radio.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/sound/music/radio/croctest.ogg" type="AudioStream" id=12]
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 5 )
@@ -232,5 +231,4 @@ material/0 = SubResource( 13 )
 
 [node name="Radio" parent="." instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0 )
-song = ExtResource( 12 )
-bpm = 120.0
+bpm = 155.0

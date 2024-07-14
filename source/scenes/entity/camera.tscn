@@ -147,7 +147,6 @@ anims/Wobble = SubResource( 3 )
 anchor_right = 1.0
 margin_bottom = 96.0
 grow_horizontal = 2
-rect_scale = Vector2( 1, 1e-05 )
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": true
@@ -160,7 +159,6 @@ anchor_bottom = 1.0
 margin_top = -86.0
 margin_bottom = 10.0
 grow_horizontal = 2
-rect_scale = Vector2( 1, 1e-05 )
 rect_pivot_offset = Vector2( 0, 96 )
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
