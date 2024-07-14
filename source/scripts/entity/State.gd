@@ -11,7 +11,7 @@ func get_surface_normal(raw: bool = false) -> Vector3:
 		var r : RayCast = ray
 		if r.is_colliding():
 			if !raw:
-				if r.get_collision_normal().y == -180 or r.get_collider().is_in_group("sticky"):
+				if r.get_collision_normal().y == -180 or !r.get_collider().is_in_group("slippery"):
 					rays_colliding += 1
 					norm_avg += r.get_collision_normal()
 			else:
@@ -37,6 +37,8 @@ func get_input(turn_modifier: float = 1.0, raw: bool = false) -> Vector3:
 	if !raw:
 		direction = direction * 1.8
 	direction = direction.rotated(Vector3.UP, SnailQuest.get_camera().rotation.y)
+	#direction = entity.global_transform.basis.xform(direction).normalized()
+
 	return direction
 
 func set_movement(delta: float, modifier: float = 1.0, control: bool = true, reverse: bool = false, turn_modifier: float = 1.0) -> void:
@@ -63,4 +65,3 @@ func is_on_surface(down_only: bool = false) -> bool:
 			elif r.is_colliding():
 					return true
 	return false
-

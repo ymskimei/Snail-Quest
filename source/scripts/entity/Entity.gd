@@ -7,7 +7,6 @@ onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
 onready var collision: CollisionShape = $CollisionShape
 onready var mesh: MeshInstance = $"%MeshInstance"
-onready var anim: AnimationPlayer = $AnimationPlayer
 onready var surface_rays: Spatial = $SurfaceRays
 
 export var health: int = 10

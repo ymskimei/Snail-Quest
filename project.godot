@@ -679,4 +679,4 @@ quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 0.823529, 0.823529, 0.823529, 1 )
 quality/filters/msaa=2
 quality/filters/use_debanding=true
-environment/default_environment="res://assets/resource/environment/environment_default.tres"
+environment/default_environment="res://assets/resource/environment/environment_interior.tres"

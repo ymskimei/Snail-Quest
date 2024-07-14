@@ -5,7 +5,7 @@ var jump_timer: Timer = Timer.new()
 
 func enter() -> void:
 	print("Snail State: JUMP")
-	entity.anim.play("SnailJump")
+	entity.anim_states.travel("SnailJump")
 	entity.jump_in_memory = false
 	entity.fall_momentum = 1
 
@@ -28,7 +28,7 @@ func unhandled_input(event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 
-	set_movement(delta, 1.15 + (entity.move_momentum * 0.5), true, false, 0.825)
+	set_movement(delta, 1.2 + (entity.move_momentum * 0.5), true, false, 0.6)
 	set_rotation(delta * 0.5)
 
 	entity.move_and_collide((Vector3.UP * 0.2) * entity.fall_momentum)

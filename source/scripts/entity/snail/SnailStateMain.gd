@@ -16,7 +16,6 @@ enum State {
 	IDLE,
 	MOVE,
 	JUMP,
-	WJMP,
 	GPND,
 	SLID,
 	ROLL

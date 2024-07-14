@@ -10,13 +10,13 @@ var can_slide: bool = false
 
 func enter() -> void:
 	print("Snail State: MOVE")
-	entity.anim.play("SnailMove")
 	boost_timer = Timer.new()
 	boost_timer.set_wait_time(5.5)
 	boost_timer.one_shot = true
 	boost_timer.connect("timeout", self, "_on_boost_timeout")
 	add_child(boost_timer)
 	boost_timer.start()
+	entity.anim_states.travel("SnailMove")
 
 #	if entity.temporary_exhaustion:
 #		exhaust_timer = Timer.new()
@@ -33,9 +33,11 @@ func enter() -> void:
 	add_child(slide_timer)
 
 func unhandled_input(event: InputEvent) -> int:
-	if event.is_action_pressed(Device.action_main) and is_on_surface():
-		return State.JUMP
-
+	if is_on_surface():
+		if event.is_action_pressed(Device.action_main):
+			return State.JUMP
+		if event.is_action_pressed(Device.trigger_right):
+			return State.ROLL
 	return State.NULL
 
 func physics_process(delta: float) -> int:
@@ -61,8 +63,7 @@ func physics_process(delta: float) -> int:
 #		set_movement(delta * 0.75)
 #	else:
 	set_movement(delta * (1.0 + entity.move_momentum))
-	entity.anim.set_speed_scale(entity.direction.length())
-
+	entity.anim_tree.set("parameters/SnailMove/TimeScale/scale", entity.direction.length())
 	if entity.direction == Vector3.ZERO:
 		return State.IDLE
 

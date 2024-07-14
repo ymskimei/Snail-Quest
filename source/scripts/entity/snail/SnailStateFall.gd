@@ -8,7 +8,7 @@ var dive_timer: Timer = Timer.new()
 
 func enter() -> void:
 	print("Snail State: FALL")
-	entity.anim.play("SnailFall")
+	entity.anim_states.travel("SnailFall")
 	can_dive = false
 	entity.fall_momentum = 0
 
@@ -47,7 +47,7 @@ func unhandled_input(event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	set_rotation(delta)
 	if entity.can_turn:
-		set_movement(delta, 1.25 + (entity.move_momentum * 0.5), true, false, 0.775)
+		set_movement(delta, 1.3 + (entity.move_momentum * 0.5), true, false, 0.5)
 
 	entity.move_and_collide(Vector3.DOWN * 0.45 * entity.fall_momentum)
 
@@ -58,7 +58,7 @@ func physics_process(delta: float) -> int:
 			entity.fall_momentum += 3 * delta
 
 	# Checks if entity is on the ground
-	if is_on_surface(true):
+	if is_on_surface(false):
 		if entity.direction != Vector3.ZERO:
 #			if entity.move_momentum >= entity.max_momentum:
 #				entity.temporary_exhaustion = true

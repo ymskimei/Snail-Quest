@@ -1,6 +1,11 @@
 class_name Snail
 extends Entity
 
+onready var anim_tree: AnimationTree = $AnimationTree
+onready var anim: AnimationPlayer = $AnimationPlayer
+
+onready var anim_states: AnimationNodeStateMachinePlayback = anim_tree.get("parameters/playback")
+
 var boosting: bool = false
 #var temporary_exhaustion: bool = false
 
@@ -12,6 +17,7 @@ func _ready() -> void:
 	states.ready(self)
 	update_appearance()
 	set_interaction_text("")
+	#anim_states.start("SnailIdle")
 #	if character:
 #		char_target.visible = true
 #	elif !character:
