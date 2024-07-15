@@ -1,5 +1,7 @@
 extends SnailStateMain
 
+var fall_sound: AudioStreamPlayer3D 
+
 var can_dive: bool = false
 
 var late_jump_timer: Timer = Timer.new()
@@ -31,6 +33,11 @@ func enter() -> void:
 	dive_timer.connect("timeout", self, "_on_dive_timeout")
 	add_child(dive_timer)
 	dive_timer.start()
+
+	fall_sound = AudioStreamPlayer3D.new()
+	fall_sound.set_stream(load("res://assets/sound/snail_whistle.ogg"))
+#	add_child(fall_sound)
+#	fall_sound.play()
 
 func unhandled_input(event: InputEvent) -> int:
 	if event.is_action_pressed(Device.action_main):
@@ -65,7 +72,7 @@ func physics_process(delta: float) -> int:
 			return State.MOVE
 		else:
 			return State.IDLE
-	
+
 	return State.NULL
 
 func _late_jump_timeout() -> void:
@@ -78,10 +85,14 @@ func _on_dive_timeout() -> void:
 	can_dive = true
 
 func exit() -> void:
+	fall_sound.stop()
+	fall_sound.queue_free()
 	can_dive = false
 	entity.fall_momentum = 0.0
 	entity.move_momentum = entity.move_momentum * 0.333
 	entity.can_turn = true
 	entity.can_late_jump = false
+	late_jump_timer.queue_free()
+	stored_jump_timer.queue_free()
 	dive_timer.queue_free()
 

@@ -11,7 +11,7 @@ func unhandled_input(event: InputEvent) -> int:
 		if event.is_action_pressed(Device.action_main):
 			return State.JUMP
 		if event.is_action_pressed(Device.trigger_right):
-			return State.ROLL
+			return State.HIDE
 	return State.NULL
 
 func physics_process(delta: float) -> int:

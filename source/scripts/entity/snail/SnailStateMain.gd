@@ -18,26 +18,27 @@ enum State {
 	JUMP,
 	GPND,
 	SLID,
+	HIDE,
 	ROLL
 }
 
 func roll(event) -> bool:
-	if event.is_action_pressed("joy_up"):
+	if event.is_action_pressed(Device.stick_main_up):
 		input_up += 1
 		input_timer.start()
 		if input_up >= 2:
 			return true
-	elif event.is_action_pressed("joy_down"):
+	elif event.is_action_pressed(Device.stick_main_down):
 		input_down += 1
 		input_timer.start()
 		if input_down >= 2:
 			return true
-	elif event.is_action_pressed("joy_left"):
+	elif event.is_action_pressed(Device.stick_main_left):
 		input_left += 1
 		input_timer.start()
 		if input_left >= 2:
 			return true
-	elif event.is_action_pressed("joy_right"):
+	elif event.is_action_pressed(Device.stick_main_right):
 		input_right += 1
 		input_timer.start()
 		if input_right >= 2:
@@ -49,7 +50,7 @@ func on_input_timer() -> void:
 	input_down = 0
 	input_left = 0
 	input_right = 0
-	if Input.is_action_pressed("action_combat"):
-		action_combat_held = true
-	else:
-		action_combat_held = false
+#	if Input.is_action_pressed(Device.action_alt):
+#		action_combat_held = true
+#	else:
+#		action_combat_held = false

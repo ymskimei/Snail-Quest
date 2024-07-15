@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/snail_slam.ogg-2e76044d0ecd14ca8c5bd1067f7046ae.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/snail_slam.ogg"
+dest_files=[ "res://import/snail_slam.ogg-2e76044d0ecd14ca8c5bd1067f7046ae.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

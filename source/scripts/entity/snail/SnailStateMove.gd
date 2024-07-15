@@ -87,5 +87,6 @@ func _on_slide_timeout() -> void:
 
 func exit() -> void:
 	entity.anim.set_speed_scale(1.0)
-	boost_timer.stop()
+	boost_timer.queue_free()
+	slide_timer.queue_free()
 	can_slide = false

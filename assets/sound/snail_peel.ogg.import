@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/snail_peel.ogg-b850fa933f71dd5511aee415450f5340.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/snail_peel.ogg"
+dest_files=[ "res://import/snail_peel.ogg-b850fa933f71dd5511aee415450f5340.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

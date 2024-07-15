@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://source/scripts/entity/camera/CameraStateTarg.gd" type="Script" id=1]
 [ext_resource path="res://source/scripts/entity/camera/CameraStateFree.gd" type="Script" id=2]
@@ -57,6 +57,29 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.3 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "RESET"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("CanvasCamera/BarTop:rect_scale:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("CanvasCamera/BarBottom:rect_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=3]
@@ -136,6 +159,7 @@ playback_process_mode = 0
 [node name="AnimationBars" type="AnimationPlayer" parent="Animation"]
 anims/BarsAppear = SubResource( 1 )
 anims/BarsDisappear = SubResource( 2 )
+anims/RESET = SubResource( 5 )
 
 [node name="AnimationWobble" type="AnimationPlayer" parent="Animation"]
 playback_process_mode = 0
@@ -147,6 +171,7 @@ anims/Wobble = SubResource( 3 )
 anchor_right = 1.0
 margin_bottom = 96.0
 grow_horizontal = 2
+rect_scale = Vector2( 1, 1e-05 )
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": true
@@ -159,6 +184,7 @@ anchor_bottom = 1.0
 margin_top = -86.0
 margin_bottom = 10.0
 grow_horizontal = 2
+rect_scale = Vector2( 1, 1e-05 )
 rect_pivot_offset = Vector2( 0, 96 )
 color = Color( 0, 0, 0, 1 )
 __meta__ = {

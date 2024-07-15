@@ -65,6 +65,10 @@ const snail_slide_forward: String = "snail_slide_forward"
 const snail_shell_in: String = "snail_shell_in"
 const snail_shell_out: String = "snail_shell_out"
 
+const snail_slam: String = "snail_slam"
+const snail_peeling: String = "snail_peeling"
+const snail_peel: String = "snail_peel"
+
 const sound_test: String = "sound_test"
 
 const switch_off: String = "switch_off"

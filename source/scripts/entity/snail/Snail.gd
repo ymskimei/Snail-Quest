@@ -6,12 +6,16 @@ onready var anim: AnimationPlayer = $AnimationPlayer
 
 onready var anim_states: AnimationNodeStateMachinePlayback = anim_tree.get("parameters/playback")
 
+onready var check_bottom: RayCast = $RayCast
+
 var boosting: bool = false
 #var temporary_exhaustion: bool = false
 
 var can_jump: bool = false
 var can_turn: bool = true
 var can_roll: bool = true
+
+var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	states.ready(self)
@@ -81,14 +85,23 @@ func update_appearance() -> void:
 		eyelid_left_mat.set_shader_param("albedo_color", identity.color_body_accent)
 		eyelid_right_mat.set_shader_param("albedo_color", identity.color_body_accent)
 
-func play_sound_slide(s: bool) -> void:
+func play_sound_slide(s: bool = false) -> void:
 	if s:
 		Audio.play_pos_sfx(RegistryAudio.snail_slide_backward, get_global_translation(), 1.0, 1.0)
 	else:
 		Audio.play_pos_sfx(RegistryAudio.snail_slide_forward, get_global_translation(), 1.25, 1.0)
 
-func play_sound_hide(s: bool) -> void:
+func play_sound_hide(s: bool = false) -> void:
 	if s:
 		Audio.play_pos_sfx(RegistryAudio.snail_shell_in, get_global_translation(), 1.0, 1.0)
 	else:
 		Audio.play_pos_sfx(RegistryAudio.snail_shell_out, get_global_translation(), 0.5, 1.0)
+
+func play_sound_peel(s: bool = false) -> void:
+	if s:
+		Audio.play_pos_sfx(RegistryAudio.snail_peel, get_global_translation(), 1.0, 1.0)
+	else:
+		Audio.play_pos_sfx(RegistryAudio.snail_peeling, get_global_translation(), rng.randf_range(0.8, 1.2), 0.5)
+
+func play_sound_slam() -> void:
+	Audio.play_pos_sfx(RegistryAudio.snail_slam, get_global_translation(), 1.0, 1.0)
