@@ -1,4 +1,4 @@
-class_name SnailStateMain
+class_name SnailState
 extends StateMain
 
 var input_up: int = 0
@@ -13,13 +13,17 @@ var input_timer: Timer = Timer.new()
 enum State {
 	NULL,
 	FALL,
+
 	IDLE,
 	MOVE,
 	JUMP,
-	GPND,
-	SLID,
+
 	HIDE,
 	ROLL,
+	JRLL,
+
+	GPND,
+	SLID,
 	SPIN
 }
 

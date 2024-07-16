@@ -1,4 +1,4 @@
-extends SnailStateMain
+extends SnailState
 
 var fall_sound: AudioStreamPlayer3D 
 

@@ -1,4 +1,4 @@
-extends SnailStateMain
+extends SnailState
 
 func enter() -> void:
 	print("Snail State: IDLE")
@@ -19,6 +19,7 @@ func physics_process(delta: float) -> int:
 	set_gravity(delta)
 	set_movement(delta)
 	set_rotation(delta)
+	boost_momentum()
 
 	if entity.direction.length() >= 0.1:
 		return State.MOVE

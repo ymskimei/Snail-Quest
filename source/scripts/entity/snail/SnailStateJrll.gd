@@ -4,8 +4,8 @@ var jumping: bool = true
 var jump_timer: Timer = Timer.new()
 
 func enter() -> void:
-	print("Snail State: JUMP")
-	entity.anim_states.travel("SnailJump")
+	print("Snail State: JUMP ROLL")
+	entity.anim_states.travel("SnailRoll")
 	entity.jump_in_memory = false
 	entity.fall_momentum = 1
 	entity.play_sound_bounce()

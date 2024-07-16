@@ -11,7 +11,6 @@ var prev_controlled: Spatial = null
 var play_time: Node = null
 var game_time: Node = null
 
-
 var info: Dictionary = {
 	"title": ProjectSettings.get_setting("application/config/name"),
 	"description": ProjectSettings.get_setting("application/config/description"),

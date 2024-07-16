@@ -12,6 +12,8 @@ var look_timer: Timer = Timer.new()
 
 func enter() -> void:
 	print("Camera State: ORBIT")
+	entity.anim_tween.interpolate_property(entity.lens, "fov", entity.lens.fov, 45, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	entity.anim_tween.interpolate_property(entity, "spring_length", entity.spring_length, 6, 0.5, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 
 	if !is_instance_valid(get_node_or_null("SpinTimer")):
 		spin_timer.set_one_shot(true)

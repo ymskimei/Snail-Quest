@@ -1,4 +1,4 @@
-extends SnailStateMain
+extends SnailState
 
 var sliding_timer: Timer = Timer.new()
 var sliding_end: bool = false

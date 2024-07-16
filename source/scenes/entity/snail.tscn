@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=2]
+[gd_scene load_steps=124 format=2]
 
 [ext_resource path="res://source/scenes/interface/debug_healthbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scenes/entity/state_controller.tscn" type="PackedScene" id=2]
@@ -39,6 +39,7 @@
 [ext_resource path="res://assets/resource/animation/SnailPress.tres" type="Animation" id=37]
 [ext_resource path="res://source/scripts/entity/snail/SnailStateSpin.gd" type="Script" id=38]
 [ext_resource path="res://assets/resource/identity/snail/sheldon.tres" type="Resource" id=39]
+[ext_resource path="res://source/scripts/entity/snail/SnailStateJrll.gd" type="Script" id=40]
 
 [sub_resource type="Skin" id=36]
 resource_name = "Skin"
@@ -1406,17 +1407,20 @@ script = ExtResource( 21 )
 [node name="Jump" type="Node" parent="StateController"]
 script = ExtResource( 18 )
 
-[node name="Gpnd" type="Node" parent="StateController"]
-script = ExtResource( 20 )
-
-[node name="Slid" type="Node" parent="StateController"]
-script = ExtResource( 19 )
-
 [node name="Hide" type="Node" parent="StateController"]
 script = ExtResource( 36 )
 
 [node name="Roll" type="Node" parent="StateController"]
 script = ExtResource( 23 )
+
+[node name="Jrll" type="Node" parent="StateController"]
+script = ExtResource( 40 )
+
+[node name="Gpnd" type="Node" parent="StateController"]
+script = ExtResource( 20 )
+
+[node name="Slid" type="Node" parent="StateController"]
+script = ExtResource( 19 )
 
 [node name="Spin" type="Node" parent="StateController"]
 script = ExtResource( 38 )
@@ -1554,7 +1558,7 @@ bone_name = "BoneEyeballRight"
 unique_name_in_owner = true
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999656, -0.021193, -0.0154446, 0.0181432, 0.133678, 0.990857, -0.0189347, -0.990798, 0.134017, -0.158592, 0.743673, -0.564439 )
+transform = Transform( 0.999462, -0.0304617, -0.0121519, 0.0178033, 0.192737, 0.981087, -0.0275436, -0.980778, 0.193176, -0.155439, 0.724561, -0.563293 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -1564,7 +1568,7 @@ mesh = ExtResource( 13 )
 material/0 = ExtResource( 7 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999789, 0.0205204, -0.000984595, -0.00167373, 0.129105, 0.991628, 0.0204759, -0.991419, 0.129113, 0.15896, 0.744946, -0.564358 )
+transform = Transform( 0.999546, 0.0276477, -0.0119453, 0.00656391, 0.187095, 0.982318, 0.0293938, -0.981953, 0.186828, 0.156223, 0.72641, -0.563164 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]

@@ -1,4 +1,4 @@
-extends SnailStateMain
+extends SnailState
 
 var boost_timer: Timer = Timer.new()
 #var exhaust_timer: Timer = Timer.new()

@@ -180,9 +180,9 @@ _global_script_classes=[ {
 "path": "res://source/scripts/entity/snail/Snail.gd"
 }, {
 "base": "StateMain",
-"class": "SnailStateMain",
+"class": "SnailState",
 "language": "GDScript",
-"path": "res://source/scripts/entity/snail/SnailStateMain.gd"
+"path": "res://source/scripts/entity/snail/SnailState.gd"
 }, {
 "base": "Node",
 "class": "Song",
@@ -264,7 +264,7 @@ _global_script_class_icons={
 "ResourcePushableBlock": "",
 "ResourceStatistics": "",
 "Snail": "",
-"SnailStateMain": "",
+"SnailState": "",
 "Song": "",
 "Sound": "",
 "Sound2D": "",

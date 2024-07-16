@@ -1,5 +1,7 @@
 extends Node
 
+var rng = RandomNumberGenerator.new()
+
 #func get_modifications(mesh: MeshInstance) -> void:
 #	pass
 

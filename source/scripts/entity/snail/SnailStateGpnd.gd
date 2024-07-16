@@ -1,4 +1,4 @@
-extends SnailStateMain
+extends SnailState
 
 var can_pound: bool = false
 var wait_timer: Timer = Timer.new()

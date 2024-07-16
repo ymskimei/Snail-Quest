@@ -1,4 +1,4 @@
-extends SnailStateMain
+extends SnailState
 
 var roll_sound: AudioStreamPlayer3D 
 var slide_timer: Timer

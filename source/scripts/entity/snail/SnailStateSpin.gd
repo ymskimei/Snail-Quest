@@ -1,4 +1,4 @@
-extends SnailStateMain
+extends SnailState
 
 var can_spin: bool = true
 var wait_timer: Timer = Timer.new()

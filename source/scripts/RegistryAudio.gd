@@ -61,6 +61,7 @@ const sign_view: String = "sign_view"
 const snail_slide: String = "snail_slide"
 const snail_slide_backward: String = "snail_slide_backward"
 const snail_slide_forward: String = "snail_slide_forward"
+const snail_jump: String = "snail_jump"
 const snail_bounce: String = "snail_bounce"
 
 const snail_shell_in: String = "snail_shell_in"

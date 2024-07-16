@@ -1,4 +1,4 @@
-extends SnailStateMain
+extends SnailState
 
 var roll_sound: AudioStreamPlayer3D 
 
@@ -15,13 +15,14 @@ func unhandled_input(event: InputEvent) -> int:
 	if is_on_surface():
 		if event.is_action_pressed(Device.action_main):
 			return State.JUMP
-		if event.is_action_released(Device.trigger_right):
-			return State.MOVE
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	set_gravity(delta)
 	set_rotation(delta)
+
+	if !Input.is_action_pressed(Device.trigger_right):
+		return State.MOVE
 
 	if entity.direction.length() >= 1.1:
 		if entity.move_momentum < entity.max_momentum:
