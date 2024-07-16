@@ -45,7 +45,10 @@ func physics_process(delta: float) -> int:
 		if input_spin >= 5:
 			entity.play_sound_peel(true)
 			return State.ROLL
-			
+
+	if entity.boost_momentum != Vector3.ZERO:
+		return State.JUMP
+
 	if !is_on_surface(true):
 		entity.can_late_jump = true
 		return State.FALL

@@ -29,10 +29,10 @@ func physics_process(delta: float) -> int:
 	else:
 		entity.move_momentum = 0.0
 
-	if entity.jump_in_memory:
+	if entity.jump_in_memory or entity.boost_momentum != Vector3.ZERO:
 		return State.JUMP
 
-	set_movement(delta, 1.25 + entity.move_momentum, true, false, 0.9, 1)
+	set_movement(delta, 1.2 + entity.move_momentum, true, false, 0.9, 1)
 	entity.anim_tree.set("parameters/SnailRoll/TimeScale/scale", entity.direction.length() * 1.75)
 
 	if entity.direction.length() >= 0.1:

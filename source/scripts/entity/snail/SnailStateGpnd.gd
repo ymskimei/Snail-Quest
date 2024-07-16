@@ -6,6 +6,7 @@ var wait_timer: Timer = Timer.new()
 func enter() -> void:
 	print("gno")
 	entity.anim_states.travel("SnailHide")
+	#entity.play_sound_swipe(0)
 	can_pound = false
 	entity.fall_momentum = 0
 	wait_timer = Timer.new()
@@ -21,7 +22,7 @@ func physics_process(delta: float) -> int:
 		if entity.fall_momentum <= 10:
 			entity.fall_momentum += 6 * delta
 
-	entity.move_and_collide(Vector3.DOWN * entity.fall_momentum)
+	entity.move_and_collide(Vector3.DOWN * entity.fall_momentum, false)
 
 	# Checks if entity is on the ground
 	if is_on_surface(true):

@@ -54,6 +54,9 @@ func set_controlled(node: Spatial) -> void:
 	controlled = node
 	if node is Entity:
 		node.connect("health_changed", self, "_on_health_changed")
+		node.listener.make_current()
+	elif is_instance_valid(node.listener):
+		prev_controlled.clear_current()
 
 func get_controlled() -> Spatial:
 	return controlled

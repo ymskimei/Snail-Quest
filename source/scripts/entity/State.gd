@@ -25,7 +25,7 @@ func get_surface_normal(raw: bool = false) -> Vector3:
 
 func set_gravity(delta: float) -> void:
 	var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-	entity.move_and_slide_with_snap((gravity / 3 + entity.fall_momentum) * -get_surface_normal() * delta, Vector3.DOWN, Vector3.UP, true)
+	entity.move_and_slide_with_snap((gravity / 3 + entity.fall_momentum) * -get_surface_normal() * delta, Vector3.DOWN, Vector3.UP, true, 4, 0.785398, false)
 	entity.global_transform.basis.y = get_surface_normal()
 	entity.global_transform.basis.x = -entity.global_transform.basis.z.cross(get_surface_normal())
 	entity.global_transform.basis = entity.global_transform.basis.orthonormalized()
@@ -50,7 +50,26 @@ func set_movement(delta: float, modifier: float = 1.0, control: bool = true, rev
 		var movement: Vector3 = (3.75 * modifier * entity.direction * delta)
 		if reverse:
 			movement = -movement
-		entity.move_and_slide(movement * 50 * modifier, Vector3.UP, false, 4, deg2rad(75))
+		entity.move_and_slide(movement * 45 * modifier, Vector3.UP, false, 4, deg2rad(75), false)
+
+	for i in entity.get_slide_count():
+		var c = entity.get_slide_collision(i)
+		if c.collider is RigidBody:
+			c.collider.apply_central_impulse(-c.normal * 2)
+
+func boost_momentum() -> void:
+	if entity.surface_rays:
+		for ray in entity.surface_rays.get_children():
+			var r: RayCast = ray
+			if r.is_colliding():
+				var c = r.get_collider()
+				var direction: Vector3 = Vector3.ZERO
+				if c.is_in_group("Spring"):
+					entity.boost_momentum = r.get_collision_normal() * c.get_parent().spring_power
+				elif c.is_in_group("Booster"):
+					entity.boost_momentum = entity.direction.normalized()
+				elif entity.boost_momentum != Vector3.ZERO:
+					entity.boost_momentum = Vector3.ZERO
 
 func set_rotation(delta: float, modifier: float = 1.0) -> void:
 	if entity.direction != Vector3.ZERO:

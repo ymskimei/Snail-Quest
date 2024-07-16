@@ -19,7 +19,8 @@ enum State {
 	GPND,
 	SLID,
 	HIDE,
-	ROLL
+	ROLL,
+	SPIN
 }
 
 func roll(event) -> bool:

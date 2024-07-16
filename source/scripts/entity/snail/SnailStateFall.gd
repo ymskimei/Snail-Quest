@@ -48,6 +48,8 @@ func unhandled_input(event: InputEvent) -> int:
 			stored_jump_timer.start()
 	if event.is_action_pressed(Device.trigger_right):
 			return State.GPND
+	if event.is_action_pressed(Device.action_alt):
+		return State.SPIN
 
 	return State.NULL
 
@@ -56,7 +58,7 @@ func physics_process(delta: float) -> int:
 	if entity.can_turn:
 		set_movement(delta, 1.3 + (entity.move_momentum * 0.5), true, false, 0.5)
 
-	entity.move_and_collide(Vector3.DOWN * 0.45 * entity.fall_momentum)
+	entity.move_and_collide(Vector3.DOWN * 0.45 * entity.fall_momentum, false)
 
 	if entity.fall_momentum <= 10:
 		if entity.boosting:
@@ -66,7 +68,7 @@ func physics_process(delta: float) -> int:
 
 	# Checks if entity is on the ground
 	if is_on_surface(false):
-		if entity.direction != Vector3.ZERO:
+		if entity.direction.length() >= 0.1:
 #			if entity.move_momentum >= entity.max_momentum:
 #				entity.temporary_exhaustion = true
 			return State.MOVE

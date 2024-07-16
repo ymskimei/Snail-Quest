@@ -6,8 +6,6 @@ onready var anim: AnimationPlayer = $AnimationPlayer
 
 onready var anim_states: AnimationNodeStateMachinePlayback = anim_tree.get("parameters/playback")
 
-onready var check_bottom: RayCast = $RayCast
-
 var boosting: bool = false
 #var temporary_exhaustion: bool = false
 
@@ -87,21 +85,33 @@ func update_appearance() -> void:
 
 func play_sound_slide(s: bool = false) -> void:
 	if s:
-		Audio.play_pos_sfx(RegistryAudio.snail_slide_backward, get_global_translation(), 1.0, 1.0)
+		Audio.play_pos_sfx(RegistryAudio.snail_slide_backward, get_global_translation(), rng.randf_range(1.0, 1.2), 0.4)
 	else:
-		Audio.play_pos_sfx(RegistryAudio.snail_slide_forward, get_global_translation(), 1.25, 1.0)
+		Audio.play_pos_sfx(RegistryAudio.snail_slide_forward, get_global_translation(), rng.randf_range(1.2, 1.3), 0.4)
+
+func play_sound_bounce() -> void:
+	Audio.play_pos_sfx(RegistryAudio.snail_bounce, get_global_translation(), rng.randf_range(0.8, 1.2), 0.3)
 
 func play_sound_hide(s: bool = false) -> void:
 	if s:
-		Audio.play_pos_sfx(RegistryAudio.snail_shell_in, get_global_translation(), 1.0, 1.0)
+		Audio.play_pos_sfx(RegistryAudio.snail_shell_in, get_global_translation(), rng.randf_range(0.9, 1.1), 0.7)
 	else:
-		Audio.play_pos_sfx(RegistryAudio.snail_shell_out, get_global_translation(), 0.5, 1.0)
+		Audio.play_pos_sfx(RegistryAudio.snail_shell_out, get_global_translation(), rng.randf_range(0.9, 1.1), 0.7)
 
 func play_sound_peel(s: bool = false) -> void:
 	if s:
-		Audio.play_pos_sfx(RegistryAudio.snail_peel, get_global_translation(), 1.0, 1.0)
+		Audio.play_pos_sfx(RegistryAudio.snail_peel, get_global_translation(), 1.0, 0.6)
 	else:
 		Audio.play_pos_sfx(RegistryAudio.snail_peeling, get_global_translation(), rng.randf_range(0.8, 1.2), 0.5)
 
 func play_sound_slam() -> void:
-	Audio.play_pos_sfx(RegistryAudio.snail_slam, get_global_translation(), 1.0, 1.0)
+	Audio.play_pos_sfx(RegistryAudio.snail_slam, get_global_translation(), rng.randf_range(0.9, 1.1), 0.9)
+
+func play_sound_swipe(index: int = 0) -> void:
+	match index:
+		1:
+			Audio.play_pos_sfx(RegistryAudio.needle_swipe_1, get_global_translation(), 1.0, 1.7)
+		2:
+			Audio.play_pos_sfx(RegistryAudio.needle_swipe_2, get_global_translation(), 1.0, 1.7)
+		_:
+			Audio.play_pos_sfx(RegistryAudio.needle_swipe_0, get_global_translation(), 1.0, 1.7)

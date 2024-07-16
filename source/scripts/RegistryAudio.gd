@@ -61,6 +61,7 @@ const sign_view: String = "sign_view"
 const snail_slide: String = "snail_slide"
 const snail_slide_backward: String = "snail_slide_backward"
 const snail_slide_forward: String = "snail_slide_forward"
+const snail_bounce: String = "snail_bounce"
 
 const snail_shell_in: String = "snail_shell_in"
 const snail_shell_out: String = "snail_shell_out"
@@ -73,6 +74,8 @@ const sound_test: String = "sound_test"
 
 const switch_off: String = "switch_off"
 const switch_on: String = "switch_on"
+
+const spring_0: String = "spring_0"
 
 const block_push_0: String = "block_push_0"
 const block_push_1: String = "block_push_1"

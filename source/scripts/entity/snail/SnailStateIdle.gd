@@ -7,11 +7,12 @@ func enter() -> void:
 	entity.boosting = false
 
 func unhandled_input(event: InputEvent) -> int:
-	if is_on_surface():
-		if event.is_action_pressed(Device.action_main):
-			return State.JUMP
-		if event.is_action_pressed(Device.trigger_right):
-			return State.HIDE
+	if event.is_action_pressed(Device.action_main):
+		return State.JUMP
+	if event.is_action_pressed(Device.action_alt):
+		return State.SPIN
+	if event.is_action_pressed(Device.trigger_right):
+		return State.HIDE
 	return State.NULL
 
 func physics_process(delta: float) -> int:
@@ -22,7 +23,7 @@ func physics_process(delta: float) -> int:
 	if entity.direction.length() >= 0.1:
 		return State.MOVE
 
-	if entity.jump_in_memory:
+	if entity.jump_in_memory or entity.boost_momentum != Vector3.ZERO:
 		return State.JUMP
 
 	if !is_on_surface():

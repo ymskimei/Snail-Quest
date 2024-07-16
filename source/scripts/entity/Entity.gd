@@ -8,6 +8,7 @@ onready var skeleton: Skeleton = $Armature/Skeleton
 onready var collision: CollisionShape = $CollisionShape
 onready var mesh: MeshInstance = $"%MeshInstance"
 onready var surface_rays: Spatial = $SurfaceRays
+onready var listener: Listener = $Listener
 
 export var health: int = 10
 export var max_health: int = 10
@@ -24,6 +25,7 @@ var direction: Vector3 = Vector3.ZERO
 var fall_momentum: float = 0.0
 var move_momentum: float = 0.0
 var max_momentum: float = 0.5
+var boost_momentum: Vector3 = Vector3.ZERO
 
 var facing: float = 0.0
 
