@@ -37,3 +37,9 @@ func _on_StartButton_pressed() -> void:
 		Audio.play_sfx(RegistryAudio.tone_success)
 		Audio.music_booth.stop_song(0.0)
 		get_parent().change_screen(SnailQuest.data)
+
+func _on_LobbyButton_pressed():
+	if !Device.get_block_input():
+		Audio.play_sfx(RegistryAudio.tone_success)
+		Audio.music_booth.stop_song(0.0)
+		get_parent().change_screen(SnailQuest.lobby)

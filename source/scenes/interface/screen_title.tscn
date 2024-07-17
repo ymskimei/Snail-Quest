@@ -189,14 +189,24 @@ fit_content_height = true
 margin_left = 788.0
 margin_right = 1068.0
 margin_bottom = 378.0
+custom_constants/separation = -128
 
 [node name="StartButton" type="Button" parent="CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer"]
-margin_top = 167.0
+margin_top = 105.0
 margin_right = 280.0
-margin_bottom = 210.0
+margin_bottom = 148.0
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "TITLE_START"
+
+[node name="LobbyButton" type="Button" parent="CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer"]
+margin_left = 1.0
+margin_top = 230.0
+margin_right = 279.0
+margin_bottom = 273.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "TITLE_LOBBY"
 
 [node name="LabelInfo" type="RichTextLabel" parent="CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 margin_left = 1100.0
@@ -225,3 +235,4 @@ anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0 )
 
 [connection signal="pressed" from="CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer/LobbyButton" to="." method="_on_LobbyButton_pressed"]

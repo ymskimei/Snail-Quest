@@ -2,6 +2,7 @@ extends Node
 
 var title = preload("res://source/scenes/interface/screen_title.tscn")
 var data = preload("res://source/scenes/interface/screen_data.tscn")
+var lobby = preload("res://source/scenes/interface/screen_lobby.tscn")
 var world = preload("res://source/scenes/world/world.tscn")
 
 var game: Node = null

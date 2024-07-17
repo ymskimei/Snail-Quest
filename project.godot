@@ -312,6 +312,7 @@ WorldSave="*res://source/scripts/world/WorldSave.gd"
 Audio="*res://source/scenes/audio.tscn"
 SnailQuest="*res://source/scenes/snailquest.tscn"
 Interface="*res://source/scenes/interface/interface.tscn"
+Server="*res://source/scripts/Server.gd"
 
 [debug]
 
@@ -323,6 +324,11 @@ gdscript/warnings/void_assignment=false
 gdscript/warnings/function_may_yield=false
 gdscript/warnings/unused_signal=false
 gdscript/warnings/integer_division=false
+multirun/number_of_windows=2
+multirun/window_distance=1270
+multirun/add_custom_args=true
+multirun/first_window_args="listen"
+multirun/other_window_args="join"
 
 [display]
 
@@ -343,7 +349,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/blender_importer/plugin.cfg", "res://addons/circular_container/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/blender_importer/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/multirun/plugin.cfg" )
 
 [filesystem]
 
