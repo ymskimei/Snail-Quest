@@ -312,7 +312,7 @@ WorldSave="*res://source/scripts/world/WorldSave.gd"
 Audio="*res://source/scenes/audio.tscn"
 SnailQuest="*res://source/scenes/snailquest.tscn"
 Interface="*res://source/scenes/interface/interface.tscn"
-Server="*res://source/scripts/Server.gd"
+Network="*res://source/scripts/Network.gd"
 
 [debug]
 
