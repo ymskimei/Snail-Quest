@@ -33,20 +33,20 @@ func enter() -> void:
 	add_child(slide_timer)
 
 func unhandled_input(event: InputEvent) -> int:
-	if is_on_surface():
-		if event.is_action_pressed(Device.action_main):
-			return State.JUMP
-		if event.is_action_pressed(Device.trigger_right):
-			return State.ROLL
-	if event.is_action_pressed(Device.action_alt):
-		return State.SPIN
+	if entity.can_be_controlled():
+		if is_on_surface():
+			if event.is_action_pressed(Device.action_main):
+				return State.JUMP
+			if event.is_action_pressed(Device.trigger_right):
+				return State.ROLL
+		if event.is_action_pressed(Device.action_alt):
+			return State.SPIN
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	set_gravity(delta)
 	set_rotation(delta)
 	boost_momentum()
-
 	if entity.boosting and entity.direction.length() >= 1.8:
 		if entity.move_momentum < entity.max_momentum:
 			entity.move_momentum += 0.35 * delta

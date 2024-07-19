@@ -61,10 +61,10 @@ func _ready() -> void:
 	#temp until can be updated from outside
 
 	SnailQuest.camera.connect("target_updated", self, "_on_cam_target_updated")
-	emit_signal("health_changed", health, max_health, is_controlled())
+	emit_signal("health_changed", health, max_health, can_be_controlled())
 
 func _unhandled_input(event: InputEvent) -> void:
-	if is_controlled():
+	if can_be_controlled():
 		if !SnailQuest.camera.looking:
 			if event.is_action_pressed(Device.trigger_left):
 				targeting = true
@@ -111,11 +111,19 @@ func _get_viewport_target(dir):
 	return nearest_target
 
 func _physics_process(delta: float) -> void:
-	if is_controlled():
+	if can_be_controlled():
 		all_targets = Utility.get_group_by_nearest(self, "target")
 		if targeting and target:
 			if !global_transform.origin.distance_to(target.global_transform.origin) < 10:
 				target = null
+
+func can_be_controlled() -> bool:
+	if SnailQuest.get_is_network_active():
+		if is_network_master():
+			return true
+	elif is_controlled():
+		return true
+	return false
 
 func _get_timers():
 	jump_memory_timer.set_wait_time(0.075)
@@ -290,3 +298,7 @@ func set_jump(power: int) -> void:
 
 func get_jump() -> int:
 	return jump
+
+func _on_Network_tick_rate_timeout() -> void:
+	if is_network_master():
+		pass

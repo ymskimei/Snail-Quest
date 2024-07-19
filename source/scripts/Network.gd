@@ -9,10 +9,12 @@ var client
 var ip: String
 var username: String
 
-var local_client_id: int = 0
+var client_local_id: int = 0
 
 sync var clients: Dictionary = {}
 sync var client_data: Dictionary = {}
+
+var controlled_instances: Array = []
 
 func _ready() -> void:
 	match OS.get_name():
@@ -42,7 +44,7 @@ func create_server() -> void:
 func _on_connected_to_server() -> void:
 	print("Connection successful")
 	register_client_data()
-	rpc_id(1, "send_client_data", local_client_id, client_data)
+	rpc_id(1, "send_client_data", client_local_id, client_data)
 
 func _on_server_disconnected() -> void:
 	print("Connection ended")
@@ -53,17 +55,17 @@ func join_server() -> void:
 	get_tree().set_network_peer(client)
 
 func register_client_data() -> void:
-	local_client_id = get_tree().get_network_unique_id()
+	client_local_id = get_tree().get_network_unique_id()
 	client_data = {
 		"username": username
 	}
-	clients[local_client_id] = client_data
+	clients[client_local_id] = client_data
 
 sync func update_clients_list() -> void:
 	get_tree().call_group("Lobby", "update_clients_list", clients)
 
-remote func send_client_data(client_id, client_data) -> void:
-	clients[client_id] = client_data
+remote func send_client_data(id, data) -> void:
+	clients[id] = data
 	rset("clients", clients)
 	rpc("update_clients_list")
 

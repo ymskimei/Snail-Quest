@@ -23,18 +23,12 @@ func _ready() -> void:
 #	elif !character:
 #		char_target.visible = false
 
-func _input(event: InputEvent) -> void:
-	if is_controlled():
-		states.input(event)
-
 func _unhandled_input(event: InputEvent) -> void:
-	if is_controlled():
-		states.unhandled_input(event)
+	states.unhandled_input(event)
 
 func _physics_process(delta: float) -> void:
 	#update_appearance()
-	if is_controlled():
-		states.physics_process(delta)
+	states.physics_process(delta)
 
 func _on_proximity_entered(body) -> void:
 	if body is Enemy:

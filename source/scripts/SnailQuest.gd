@@ -4,6 +4,7 @@ var title = preload("res://source/scenes/interface/screen_title.tscn")
 var data = preload("res://source/scenes/interface/screen_data.tscn")
 var lobby = preload("res://source/scenes/interface/screen_lobby.tscn")
 var world = preload("res://source/scenes/world/world.tscn")
+var multi_world = preload("res://source/scenes/world/multi_world.tscn")
 
 var game: Node = null
 var camera: Spatial = null
@@ -11,6 +12,8 @@ var controlled: Spatial = null
 var prev_controlled: Spatial = null
 var play_time: Node = null
 var game_time: Node = null
+
+var is_network_active: bool = false
 
 var info: Dictionary = {
 	"title": ProjectSettings.get_setting("application/config/name"),
@@ -90,6 +93,12 @@ func set_game_time(node: Node) -> void:
 
 func get_game_time() -> Node:
 	return game_time
+
+func set_is_network_active(toggle: bool) -> void:
+	is_network_active = toggle
+
+func get_is_network_active() -> bool:
+	return is_network_active
 
 func _on_health_changed(health, max_health, is_controlled) -> void:
 	emit_signal("controlled_health_change", health, max_health, is_controlled)

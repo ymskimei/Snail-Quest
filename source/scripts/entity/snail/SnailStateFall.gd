@@ -40,16 +40,17 @@ func enter() -> void:
 #	fall_sound.play()
 
 func unhandled_input(event: InputEvent) -> int:
-	if event.is_action_pressed(Device.action_main):
-		if is_on_surface(true) or entity.can_late_jump:
-			return State.JUMP
-		else:
-			entity.jump_in_memory = true
-			stored_jump_timer.start()
-	if event.is_action_pressed(Device.trigger_right):
-			return State.GPND
-	if event.is_action_pressed(Device.action_alt):
-		return State.SPIN
+	if entity.can_be_controlled():
+		if event.is_action_pressed(Device.action_main):
+			if is_on_surface(true) or entity.can_late_jump:
+				return State.JUMP
+			else:
+				entity.jump_in_memory = true
+				stored_jump_timer.start()
+		if event.is_action_pressed(Device.trigger_right):
+				return State.GPND
+		if event.is_action_pressed(Device.action_alt):
+			return State.SPIN
 
 	return State.NULL
 

@@ -19,17 +19,17 @@ func enter() -> void:
 	jump_timer.start()
 
 func unhandled_input(event: InputEvent) -> int:
-	if event.is_action_released(Device.action_main):
-		jumping = false
-	if event.is_action_pressed(Device.trigger_right):
-			return State.GPND
-	if event.is_action_pressed(Device.action_alt):
-		return State.SPIN
+	if entity.can_be_controlled():
+		if event.is_action_released(Device.action_main):
+			jumping = false
+		if event.is_action_pressed(Device.trigger_right):
+				return State.GPND
+		if event.is_action_pressed(Device.action_alt):
+			return State.SPIN
 
 	return State.NULL
 
 func physics_process(delta: float) -> int:
-
 	set_movement(delta, 1.2 + (entity.move_momentum * 0.5), true, false, 0.6)
 	set_rotation(delta * 0.5)
 	boost_momentum()

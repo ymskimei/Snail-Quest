@@ -28,26 +28,27 @@ enum State {
 }
 
 func roll(event) -> bool:
-	if event.is_action_pressed(Device.stick_main_up):
-		input_up += 1
-		input_timer.start()
-		if input_up >= 2:
-			return true
-	elif event.is_action_pressed(Device.stick_main_down):
-		input_down += 1
-		input_timer.start()
-		if input_down >= 2:
-			return true
-	elif event.is_action_pressed(Device.stick_main_left):
-		input_left += 1
-		input_timer.start()
-		if input_left >= 2:
-			return true
-	elif event.is_action_pressed(Device.stick_main_right):
-		input_right += 1
-		input_timer.start()
-		if input_right >= 2:
-			return true
+	if entity.can_be_controlled():
+		if event.is_action_pressed(Device.stick_main_up):
+			input_up += 1
+			input_timer.start()
+			if input_up >= 2:
+				return true
+		elif event.is_action_pressed(Device.stick_main_down):
+			input_down += 1
+			input_timer.start()
+			if input_down >= 2:
+				return true
+		elif event.is_action_pressed(Device.stick_main_left):
+			input_left += 1
+			input_timer.start()
+			if input_left >= 2:
+				return true
+		elif event.is_action_pressed(Device.stick_main_right):
+			input_right += 1
+			input_timer.start()
+			if input_right >= 2:
+				return true
 	return false
 
 func on_input_timer() -> void:

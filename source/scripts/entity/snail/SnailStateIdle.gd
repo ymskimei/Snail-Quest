@@ -7,12 +7,13 @@ func enter() -> void:
 	entity.boosting = false
 
 func unhandled_input(event: InputEvent) -> int:
-	if event.is_action_pressed(Device.action_main):
-		return State.JUMP
-	if event.is_action_pressed(Device.action_alt):
-		return State.SPIN
-	if event.is_action_pressed(Device.trigger_right):
-		return State.HIDE
+	if entity.can_be_controlled():
+		if event.is_action_pressed(Device.action_main):
+			return State.JUMP
+		if event.is_action_pressed(Device.action_alt):
+			return State.SPIN
+		if event.is_action_pressed(Device.trigger_right):
+			return State.HIDE
 	return State.NULL
 
 func physics_process(delta: float) -> int:

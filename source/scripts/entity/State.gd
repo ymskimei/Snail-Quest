@@ -31,15 +31,16 @@ func set_gravity(delta: float) -> void:
 	entity.global_transform.basis = entity.global_transform.basis.orthonormalized()
 
 func get_input(turn_modifier: float = 1.0, raw: bool = false) -> Vector3:
-	var direction: Vector3 = Vector3.ZERO
-	direction.x = Input.get_axis(Device.stick_main_left, Device.stick_main_right) * turn_modifier
-	direction.z = Input.get_axis(Device.stick_main_up, Device.stick_main_down)
-	if !raw:
-		direction = direction * 1.8
-	direction = direction.rotated(Vector3.UP, SnailQuest.get_camera().rotation.y)
-	#direction = entity.global_transform.basis.xform(direction).normalized()
-
-	return direction
+	if entity.can_be_controlled():
+		var direction: Vector3 = Vector3.ZERO
+		direction.x = Input.get_axis(Device.stick_main_left, Device.stick_main_right) * turn_modifier
+		direction.z = Input.get_axis(Device.stick_main_up, Device.stick_main_down)
+		if !raw:
+			direction = direction * 1.8
+		direction = direction.rotated(Vector3.UP, SnailQuest.get_camera().rotation.y)
+		#direction = entity.global_transform.basis.xform(direction).normalized()
+		return direction
+	return Vector3.ZERO
 
 func set_movement(delta: float, modifier: float = 1.0, control: bool = true, reverse: bool = false, turn_modifier: float = 1.0, slide_speed: int = 20) -> void:
 	if control:

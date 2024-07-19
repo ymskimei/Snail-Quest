@@ -23,28 +23,29 @@ func enter() -> void:
 	entity.anim_states.travel("SnailHidden")
 
 func unhandled_input(event: InputEvent) -> int:
-	if is_on_surface():
-		if event.is_action_pressed(Device.action_main):
-			return State.JUMP
-		if event.is_action_released(Device.trigger_right):
-			return State.IDLE
+	if entity.can_be_controlled():
+		if is_on_surface():
+			if event.is_action_pressed(Device.action_main):
+				return State.JUMP
+			if event.is_action_released(Device.trigger_right):
+				return State.IDLE
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	set_gravity(delta)
 	set_rotation(delta)
-
-	if Input.is_action_just_pressed(Device.stick_main_left) or Input.is_action_just_pressed(Device.stick_main_right) or Input.is_action_just_pressed(Device.stick_main_up) or Input.is_action_just_pressed(Device.stick_main_down):
-		entity.play_sound_peel(false)
-		if Input.is_action_just_pressed(Device.stick_main_left) or Input.is_action_just_pressed(Device.stick_main_right):
-			entity.anim_states.travel("SnailPeelingHorizontal")
-		elif Input.is_action_just_pressed(Device.stick_main_up) or Input.is_action_just_pressed(Device.stick_main_down):
-			entity.anim_states.travel("SnailPeelingVertical")
-		input_spin += 1
-		spin_timer.start()
-		if input_spin >= 5:
-			entity.play_sound_peel(true)
-			return State.ROLL
+	if entity.can_be_controlled():
+		if Input.is_action_just_pressed(Device.stick_main_left) or Input.is_action_just_pressed(Device.stick_main_right) or Input.is_action_just_pressed(Device.stick_main_up) or Input.is_action_just_pressed(Device.stick_main_down):
+			entity.play_sound_peel(false)
+			if Input.is_action_just_pressed(Device.stick_main_left) or Input.is_action_just_pressed(Device.stick_main_right):
+				entity.anim_states.travel("SnailPeelingHorizontal")
+			elif Input.is_action_just_pressed(Device.stick_main_up) or Input.is_action_just_pressed(Device.stick_main_down):
+				entity.anim_states.travel("SnailPeelingVertical")
+			input_spin += 1
+			spin_timer.start()
+			if input_spin >= 5:
+				entity.play_sound_peel(true)
+				return State.ROLL
 
 	if entity.boost_momentum != Vector3.ZERO:
 		return State.JUMP
