@@ -13,7 +13,6 @@ func enter() -> void:
 	sliding_timer.start()
 
 func physics_process(delta: float) -> int:
-	set_gravity(delta)
 	set_movement(delta, 1.0, false, true)
 
 	entity.move_momentum -= 5 * delta

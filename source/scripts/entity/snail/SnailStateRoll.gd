@@ -18,7 +18,6 @@ func unhandled_input(event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(delta: float) -> int:
-	set_gravity(delta)
 	set_rotation(delta)
 
 	if !Input.is_action_pressed(Device.trigger_right):
@@ -33,7 +32,11 @@ func physics_process(delta: float) -> int:
 	if entity.jump_in_memory or entity.boost_momentum != Vector3.ZERO:
 		return State.JUMP
 
-	set_movement(delta, 1.2 + entity.move_momentum, true, false, 0.9, 1)
+	if entity.is_submerged():
+		set_movement(delta, 1.2 + entity.move_momentum, true, false, 0.9, 0.8)
+	else:
+		set_movement(delta, 1.2 + entity.move_momentum, true, false, 0.9, 1.0)
+
 	entity.anim_tree.set("parameters/SnailRoll/TimeScale/scale", entity.direction.length() * 1.75)
 
 	if entity.direction.length() >= 0.1:

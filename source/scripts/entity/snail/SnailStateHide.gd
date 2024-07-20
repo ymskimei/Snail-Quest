@@ -31,7 +31,6 @@ func unhandled_input(event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(delta: float) -> int:
-	set_gravity(delta)
 	set_rotation(delta)
 
 	if Input.is_action_just_pressed(Device.stick_main_left) or Input.is_action_just_pressed(Device.stick_main_right) or Input.is_action_just_pressed(Device.stick_main_up) or Input.is_action_just_pressed(Device.stick_main_down):

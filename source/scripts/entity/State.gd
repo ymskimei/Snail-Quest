@@ -23,12 +23,14 @@ func get_surface_normal(raw: bool = false) -> Vector3:
 		surface_normal = Vector3.UP
 	return surface_normal
 
-func set_gravity(delta: float) -> void:
-	var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-	entity.move_and_slide_with_snap((gravity / 3 + entity.fall_momentum) * -get_surface_normal() * delta, Vector3.DOWN, Vector3.UP, true, 4, 0.785398, false)
-	entity.global_transform.basis.y = get_surface_normal()
-	entity.global_transform.basis.x = -entity.global_transform.basis.z.cross(get_surface_normal())
-	entity.global_transform.basis = entity.global_transform.basis.orthonormalized()
+func get_gravity() -> float:
+		var internal_gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+		var gravity: float = 0
+		if entity.is_submerged():
+			gravity = internal_gravity * 0.2
+		else:
+			gravity = internal_gravity
+		return gravity * 0.1
 
 func get_input(turn_modifier: float = 1.0, raw: bool = false) -> Vector3:
 	var direction: Vector3 = Vector3.ZERO
@@ -41,7 +43,7 @@ func get_input(turn_modifier: float = 1.0, raw: bool = false) -> Vector3:
 
 	return direction
 
-func set_movement(delta: float, modifier: float = 1.0, control: bool = true, reverse: bool = false, turn_modifier: float = 1.0, slide_speed: int = 20) -> void:
+func set_movement(delta: float, modifier: float = 1.0, control: bool = true, reverse: bool = false, turn_modifier: float = 1.0, slide_speed: float = 20) -> void:
 	if control:
 		var temp_input: Vector3 = get_input(turn_modifier)
 		entity.direction = lerp(entity.direction, temp_input, slide_speed * delta)
@@ -80,9 +82,11 @@ func is_on_surface(down_only: bool = false) -> bool:
 	if entity.surface_rays:
 		for ray in entity.surface_rays.get_children():
 			var r: RayCast = ray
-			if down_only:
-				if r.is_colliding() and r.get_collision_normal().y == 1.0 or entity.is_on_floor():
-					return true
-			elif r.is_colliding():
+			if r.is_colliding():
+				var c = r.get_collider()
+				if down_only:
+					if !c.is_in_group("liquid") and r.get_collision_normal().y == 1.0 or entity.is_on_floor():
+						return true
+				elif !c.is_in_group("liquid"):
 					return true
 	return false

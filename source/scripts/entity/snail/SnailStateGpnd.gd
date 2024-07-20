@@ -18,11 +18,10 @@ func enter() -> void:
 
 func physics_process(delta: float) -> int:
 	if can_pound:
-		set_gravity(delta)
 		if entity.fall_momentum <= 10:
 			entity.fall_momentum += 6 * delta
 
-	entity.move_and_collide(Vector3.DOWN * entity.fall_momentum, false)
+	entity.move_and_collide((Vector3.DOWN * entity.fall_momentum), false)
 
 	# Checks if entity is on the ground
 	if is_on_surface(true):

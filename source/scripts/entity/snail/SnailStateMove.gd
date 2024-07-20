@@ -43,7 +43,6 @@ func unhandled_input(event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(delta: float) -> int:
-	set_gravity(delta)
 	set_rotation(delta)
 	boost_momentum()
 
@@ -65,7 +64,10 @@ func physics_process(delta: float) -> int:
 #	if entity.temporary_exhaustion:
 #		set_movement(delta * 0.75)
 #	else:
-	set_movement(delta * (1.0 + entity.move_momentum))
+	if entity.is_submerged():
+		set_movement(delta, 1.1 + entity.move_momentum, true, false, 1.0, 5.0)
+	else:
+		set_movement(delta, 1.0 + entity.move_momentum)
 	entity.anim_tree.set("parameters/SnailMove/TimeScale/scale", entity.direction.length())
 	if entity.direction.length() <= 0.1:
 		return State.IDLE

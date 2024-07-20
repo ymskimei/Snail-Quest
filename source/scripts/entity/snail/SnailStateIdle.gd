@@ -16,7 +16,6 @@ func unhandled_input(event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(delta: float) -> int:
-	set_gravity(delta)
 	set_movement(delta)
 	set_rotation(delta)
 	boost_momentum()

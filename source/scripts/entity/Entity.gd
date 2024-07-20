@@ -33,6 +33,7 @@ var target = null
 var can_swap_target: bool = true
 var all_targets = []
 var enemy_found: bool = false
+var submerged: bool = false
 
 var can_interact: bool = false
 var interacting: bool = false
@@ -264,7 +265,7 @@ func get_keys() -> int:
 func set_boss_key(has: bool) -> void:
 	boss_key = has
 
-func get_boss_key() -> bool:
+func has_boss_key() -> bool:
 	return boss_key
 
 func set_items(inventory: Array) -> void:
@@ -290,3 +291,6 @@ func set_jump(power: int) -> void:
 
 func get_jump() -> int:
 	return jump
+
+func is_submerged() -> bool:
+	return submerged

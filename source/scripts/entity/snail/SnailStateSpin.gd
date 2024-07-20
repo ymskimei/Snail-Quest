@@ -17,7 +17,6 @@ func enter() -> void:
 	entity.play_sound_swipe(2)
 
 func physics_process(delta: float) -> int:
-	set_gravity(delta)
 
 	# Checks if entity is on the ground
 	if !can_spin:

@@ -1,6 +1,8 @@
 class_name Snail
 extends Entity
 
+onready var affect_area: Area = $AffectArea
+
 onready var anim_tree: AnimationTree = $AnimationTree
 onready var anim: AnimationPlayer = $AnimationPlayer
 
@@ -113,3 +115,13 @@ func play_sound_swipe(index: int = 0) -> void:
 			Audio.play_pos_sfx(RegistryAudio.needle_swipe_2, get_global_translation(), 1.0, 1.7)
 		_:
 			Audio.play_pos_sfx(RegistryAudio.needle_swipe_0, get_global_translation(), 1.0, 1.7)
+
+func _on_AffectArea_area_entered(area):
+	if area.is_in_group("liquid"):
+		submerged = true
+		#$MeshInstance.set_visible(true)
+
+func _on_AffectArea_area_exited(area):
+	if area.is_in_group("liquid"):
+		submerged = false
+		#$MeshInstance.set_visible(false)

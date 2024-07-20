@@ -8,6 +8,8 @@ onready var anim_bars: AnimationPlayer = $Animation/AnimationBars
 onready var anim_wobble: AnimationPlayer = $Animation/AnimationWobble
 onready var states: Node = $StateController
 
+onready var overlay_water: CanvasLayer = $OverlayWater
+
 var target: Spatial = null
 var positioner: Position3D = null
 var override: Position3D = null
@@ -20,6 +22,7 @@ signal target_updated
 
 func _ready() -> void:
 	states.ready(self)
+	overlay_water.set_visible(false)
 	SnailQuest.set_camera(self)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -75,3 +78,12 @@ func set_coords(position: Vector3, angle: String = "NORTH", flipped: bool = fals
 			rot = PI
 	set_global_translation(position)
 	set_global_rotation(Vector3(0, rot, 0))
+
+
+func _on_Area_area_entered(area):
+	if area.is_in_group("liquid"):
+		overlay_water.set_visible(true)
+
+func _on_Area_area_exited(area):
+	if area.is_in_group("liquid"):
+		overlay_water.set_visible(false)

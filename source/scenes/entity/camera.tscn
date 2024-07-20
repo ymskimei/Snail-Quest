@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://source/scripts/entity/camera/CameraStateTarg.gd" type="Script" id=1]
 [ext_resource path="res://source/scripts/entity/camera/CameraStateFree.gd" type="Script" id=2]
@@ -12,6 +12,37 @@
 
 [sub_resource type="SphereShape" id=4]
 radius = 0.5
+
+[sub_resource type="SphereShape" id=8]
+radius = 0.5
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+
+uniform float wave_speed = 3.0; // wave loop speed
+uniform float wave_freq = 10.0; // wave vertical frequency
+uniform float wave_width = 1.0; // wave width
+uniform vec4 tint_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0); // tint color
+
+void fragment() {
+    vec2 scale_UV = SCREEN_UV;
+    vec2 wave_uv_offset;
+    wave_uv_offset.x = cos((TIME * wave_speed) + UV.x + UV.y * wave_freq * 2.0) * wave_width * 0.01;
+    vec4 screen_tex = texture(SCREEN_TEXTURE, scale_UV + wave_uv_offset);
+
+    // Blend the screen texture with the tint color
+    vec4 tinted_color = mix(screen_tex, tint_color, tint_color.a);
+
+    COLOR = tinted_color;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/wave_speed = 10.0
+shader_param/wave_freq = 30.0
+shader_param/wave_width = 0.075
+shader_param/tint_color = Color( 0, 0.27451, 1, 0.254902 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "BarsAppear"
@@ -118,7 +149,7 @@ tracks/2/keys = {
 }
 
 [node name="Camera" type="SpringArm"]
-collision_mask = 8
+collision_mask = 12
 shape = SubResource( 4 )
 script = ExtResource( 8 )
 
@@ -150,6 +181,22 @@ transform = Transform( 0.999994, 0, 0.00349065, 0, 1, 0, -0.00349065, 0, 0.99999
 fov = 60.0
 near = 0.01
 far = 8192.0
+
+[node name="Area" type="Area" parent="."]
+collision_layer = 2
+collision_mask = 13
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 8 )
+
+[node name="OverlayWater" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="ColorRect" type="ColorRect" parent="OverlayWater"]
+material = SubResource( 7 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0.835294, 1, 1 )
 
 [node name="Animation" type="Node" parent="."]
 
@@ -190,3 +237,6 @@ color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]
+[connection signal="area_exited" from="Area" to="." method="_on_Area_area_exited"]
