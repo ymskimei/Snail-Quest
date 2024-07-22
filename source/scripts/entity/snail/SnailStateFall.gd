@@ -55,7 +55,7 @@ func unhandled_input(event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	set_rotation(delta)
 	if entity.can_turn:
-		set_movement(delta, 1.3 + (entity.move_momentum * 0.5), true, false, 0.5)
+		set_movement(delta, 1.3 + (entity.move_momentum * 0.5) * get_gravity(), true, false, 0.5)
 
 	entity.move_and_collide((Vector3.DOWN * 0.45 * entity.fall_momentum) * get_gravity(), false)
 

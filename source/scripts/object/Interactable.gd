@@ -3,6 +3,8 @@ extends KinematicBody
 
 export var dialog: Resource = null
 
+onready var mesh: MeshInstance = $MeshInstance
+
 var target_proxy: Position3D = null
 var character: bool = false
 
@@ -11,6 +13,10 @@ signal interaction_ended
 func _ready() -> void:
 	target_proxy = get_node_or_null("CameraTarget")
 	_set_visibility_enabler()
+
+func _physics_process(delta: float) -> void:
+	if is_instance_valid(mesh):
+		EnvironmentMaster.track_light_source(self.get_global_translation(), mesh.get_surface_material(0))
 
 func _set_visibility_enabler() -> void:
 	var visibility = VisibilityEnabler.new()

@@ -37,6 +37,7 @@ func load_room(room: PackedScene, coords: Vector3, dir: String, keep_rooms: bool
 			for r in rooms.get_children():
 				rooms.remove_child(r)
 		rooms.add_child(new_room)
+		EnvironmentMaster.reload_light_sources(new_room)
 		_register_chunks()
 		SnailQuest.controlled.set_coords(coords, dir)
 		SnailQuest.camera.set_coords(coords, dir, true)

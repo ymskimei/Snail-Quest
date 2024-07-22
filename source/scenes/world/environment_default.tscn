@@ -70,10 +70,9 @@ light_bake_mode = 0
 shadow_enabled = true
 shadow_color = Color( 0.643137, 0.643137, 0.643137, 1 )
 shadow_bias = 0.5
-directional_shadow_split_1 = 0.05
-directional_shadow_normal_bias = 0.1
+directional_shadow_normal_bias = 0.0
 directional_shadow_bias_split_scale = 0.1
-directional_shadow_max_distance = 256.0
+directional_shadow_max_distance = 8192.0
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 5120, 5120 )

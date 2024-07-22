@@ -312,6 +312,7 @@ WorldSave="*res://source/scripts/world/WorldSave.gd"
 Audio="*res://source/scenes/audio.tscn"
 SnailQuest="*res://source/scenes/snailquest.tscn"
 Interface="*res://source/scenes/interface/interface.tscn"
+EnvironmentMaster="*res://source/scripts/EnvironmentMaster.gd"
 
 [debug]
 
@@ -651,7 +652,6 @@ common/enable_pause_aware_picking=true
 3d/godot_physics/use_bvh=false
 3d/godot_physics/bvh_collision_margin=1.0
 2d/thread_model=2
-3d/default_gravity=9.8
 3d/default_linear_damp=2.0
 3d/default_angular_damp=2.0
 common/physics_interpolation=true
