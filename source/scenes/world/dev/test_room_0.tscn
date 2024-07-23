@@ -450,5 +450,9 @@ material/0 = ExtResource( 16 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.26531, 4.76837e-07, 9.75519 )
 
 [node name="MeshInstance" type="MeshInstance" parent="." groups=["light"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.91351, 3.05701, -0.697347 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.04343, 2.5303, 5.3735 )
+mesh = SubResource( 21 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="." groups=["light"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.201628, 2.5303, 4.39627 )
 mesh = SubResource( 21 )

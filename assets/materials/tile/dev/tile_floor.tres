@@ -5,11 +5,12 @@
 
 [resource]
 shader = ExtResource( 2 )
-shader_param/light_direction = null
+shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
 shader_param/albedo_color = Color( 0.596078, 1, 0.733333, 1 )
 shader_param/shadow_color = Color( 0.5, 0.5, 0.5, 1.5 )
-shader_param/shading_hardness = 0.05
+shader_param/shadow_threshold = 0.05
 shader_param/use_triplanar = true
 shader_param/uv_scale = Vector3( 0.5, 0.5, 0.5 )
 shader_param/uv_offset = Vector3( 1, 0, 0 )
+shader_param/shadow_view_projection_matrix = null
 shader_param/texture_albedo = ExtResource( 1 )
