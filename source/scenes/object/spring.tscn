@@ -1,9 +1,10 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://source/scripts/object/Spring.gd" type="Script" id=1]
-[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=2]
+[ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=2]
 [ext_resource path="res://assets/texture/tile/temporary/metal.png" type="Texture" id=3]
 [ext_resource path="res://assets/materials/tile/mushroom_wood.tres" type="Material" id=4]
+
 
 [sub_resource type="CylinderMesh" id=10]
 

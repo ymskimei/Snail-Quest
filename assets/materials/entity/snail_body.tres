@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=1]
+[ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=1]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -8,12 +8,11 @@ render_priority = 1
 shader = ExtResource( 1 )
 shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shadow_color = Color( 0.5, 0.5, 0.5, 1.5 )
-shader_param/shadow_threshold = 0.05
+shader_param/shade_color = Color( 0.5, 0.5, 0.5, 1 )
+shader_param/shade_threshold = 0.01
 shader_param/use_triplanar = false
 shader_param/uv_scale = Vector3( 1, 1, 1 )
 shader_param/uv_offset = Vector3( 0, 0, 0 )
-shader_param/shadow_view_projection_matrix = null
 
 [resource]
 resource_local_to_scene = true
@@ -21,9 +20,8 @@ next_pass = SubResource( 1 )
 shader = ExtResource( 1 )
 shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shadow_color = Color( 0.5, 0.5, 0.5, 1.5 )
-shader_param/shadow_threshold = 0.05
+shader_param/shade_color = Color( 0.5, 0.5, 0.5, 1 )
+shader_param/shade_threshold = 0.01
 shader_param/use_triplanar = false
 shader_param/uv_scale = Vector3( 1, 1, 1 )
 shader_param/uv_offset = Vector3( 0, 0, 0 )
-shader_param/shadow_view_projection_matrix = null

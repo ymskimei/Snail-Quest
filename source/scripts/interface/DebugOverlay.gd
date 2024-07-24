@@ -46,13 +46,13 @@ func set_display_framerate() -> void:
 
 func set_display_world_time() -> void:
 	if SnailQuest.game_time:
-		display_game_time.set_bbcode(default_color + "%s" % Utility.get_time_as_clock(SnailQuest.game_time.get_raw_time(), false))
+		display_game_time.set_bbcode(default_color + "%s" % Utility.get_time_as_clock(SnailQuest.get_game_time().get_raw_time(), false))
 	else:
 		display_game_time.set_bbcode(default_color + "??:??")
 
 func set_display_play_time() -> void:
 	if SnailQuest.play_time:
-		display_play_time.set_bbcode(default_color + "%s" % Utility.get_time_as_count(SnailQuest.play_time.get_total_time()))
+		display_play_time.set_bbcode(default_color + "%s" % Utility.get_time_as_count(SnailQuest.get_play_time().get_total_time()))
 	else:
 		display_play_time.set_bbcode(default_color + "??h, ??m, ??s")
 

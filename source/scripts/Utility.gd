@@ -2,8 +2,9 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 
-#func get_modifications(mesh: MeshInstance) -> void:
-#	pass
+
+func normalize_range(value: float, min_value: float, max_value: float) -> float:
+	return (value - min_value) / (max_value - min_value)
 
 func rigid_look_at(state: PhysicsDirectBodyState, position: Transform, target: Vector3) -> void:
 	var up_dir = Vector3(0, 1, 0)

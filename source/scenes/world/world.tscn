@@ -19,7 +19,7 @@ resource = ExtResource( 6 )
 [node name="Camera" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2156.38, -11.7604, 5968 )
 
-[node name="Player1" parent="." instance=ExtResource( 2 )]
+[node name="Player1" parent="." groups=["shadow_casters"] instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2156.38, -21.5491, 5970 )
 
 [node name="Player2" parent="." instance=ExtResource( 2 )]

@@ -4,13 +4,14 @@
 [ext_resource path="res://source/scenes/object/warp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/model/interior_mushroom_stem.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://source/scenes/object/lock_target.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=5]
+[ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=5]
 [ext_resource path="res://source/scenes/object/mushroom_window.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/resource/warp/exterior_house_player.tres" type="Resource" id=7]
 [ext_resource path="res://source/scenes/object/beam.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/texture/tile/plank_floor.png" type="Texture" id=9]
 [ext_resource path="res://assets/texture/tile/mushroom_wall.png" type="Texture" id=10]
 [ext_resource path="res://source/scenes/object/radio.tscn" type="PackedScene" id=11]
+
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 5 )

@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://source/scripts/EnvironmentDefault.gd" type="Script" id=1]
+[ext_resource path="res://source/scripts/world/EnvironmentDefault.gd" type="Script" id=1]
 [ext_resource path="res://assets/materials/environment/sun.tres" type="Material" id=2]
 [ext_resource path="res://assets/texture/environment/sun.png" type="Texture" id=3]
 [ext_resource path="res://assets/texture/environment/moon.png" type="Texture" id=4]
