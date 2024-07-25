@@ -1,6 +1,8 @@
 shader_type spatial;
 render_mode cull_disabled, depth_draw_alpha_prepass;
 
+uniform bool light_affected = true;
+
 uniform bool use_specular = false;
 uniform bool use_rim = false;
 
@@ -13,8 +15,8 @@ uniform vec4 emission: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 
 uniform float normal_scale: hint_range(-16, 16) = 0.01;
 
-uniform float shade_threshold : hint_range(-1.0, 1.0) = 0.01;
-uniform float shade_softness : hint_range(0.0, 1.0) = 0.01;
+uniform float shade_threshold : hint_range(-1.0, 1.0) = 0.025;
+uniform float shade_softness : hint_range(0.0, 1.0) = 0.025;
 
 uniform float specular_glossiness : hint_range(1.0, 100.0) = 15.0;
 uniform float specular_threshold : hint_range(0.0, 1.0) = 0.5;
@@ -80,6 +82,8 @@ void fragment() {
 	NORMALMAP = triplanar_texture(texture_normal, UV).rgb;
 	NORMALMAP_DEPTH = normal_scale;
 
+	//AO_LIGHT_AFFECT = ao_light_affect;
+
 	EMISSION = (emission.rgb + triplanar_texture(texture_emission, UV).rgb) * emission_energy;
 }
 
@@ -130,7 +134,10 @@ void light() {
 	}
 
 	diffuse *= vec4(1.0, 1.0, 1.0, 1.0);
-
+	
+	if (light_affected) {
+		diffuse *= vec4(LIGHT_COLOR, 1.0);
+	}
 	DIFFUSE_LIGHT = diffuse.rgb;
 	ALPHA = diffuse.a;
 }

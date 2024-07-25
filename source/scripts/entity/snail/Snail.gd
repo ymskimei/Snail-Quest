@@ -39,15 +39,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		states.unhandled_input(event)
 
 func _physics_process(delta: float) -> void:
-#	shell.get_surface_material(0).set_shader_param("albedo_color", EnvironmentMaster.get_material_color(identity.get_color_shell_base())[1])
-#	shell.get_surface_material(0).set_shader_param("shade_color", EnvironmentMaster.get_material_color(identity.get_color_shell_base())[2])
-#	shell.get_surface_material(0).get_next_pass().set_shader_param("albedo_color", EnvironmentMaster.get_material_color(identity.get_color_shell_accent())[1].darkened(0.2))
-#	shell.get_surface_material(0).get_next_pass().set_shader_param("shade_color", EnvironmentMaster.get_material_color(identity.get_color_shell_accent())[2])
-#	body.get_surface_material(0).set_shader_param("albedo_color", EnvironmentMaster.get_material_color(identity.get_color_body_base())[1])
-#	body.get_surface_material(0).set_shader_param("shade_color", EnvironmentMaster.get_material_color(identity.get_color_body_base())[2])
-#	body.get_surface_material(0).get_next_pass().set_shader_param("albedo_color", EnvironmentMaster.get_material_color(identity.get_color_body_accent())[1])
-#	body.get_surface_material(0).get_next_pass().set_shader_param("albedo_color", EnvironmentMaster.get_material_color(identity.get_color_body_accent())[2])
-
 	#update_appearance()
 	if is_controlled():
 		states.physics_process(delta)

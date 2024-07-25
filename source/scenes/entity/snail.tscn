@@ -1556,7 +1556,7 @@ bone_name = "BoneEyeballRight"
 unique_name_in_owner = true
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999291, -0.0361998, -0.010352, 0.0184247, 0.230371, 0.972927, -0.0328351, -0.97243, 0.230874, -0.154458, 0.718677, -0.562924 )
+transform = Transform( 0.999324, -0.0351896, -0.0106632, 0.0182686, 0.223477, 0.974536, -0.0319107, -0.974074, 0.223969, -0.154577, 0.719341, -0.56298 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -1567,7 +1567,7 @@ material/0 = ExtResource( 7 )
 script = ExtResource( 41 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999352, 0.0322771, -0.0158943, 0.00826992, 0.223854, 0.974586, 0.035015, -0.974088, 0.223442, 0.155404, 0.720687, -0.562818 )
+transform = Transform( 0.999387, 0.0314378, -0.0153656, 0.00817627, 0.217151, 0.976102, 0.0340233, -0.975632, 0.216761, 0.1555, 0.721335, -0.562852 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]

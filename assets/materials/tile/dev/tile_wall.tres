@@ -5,10 +5,11 @@
 
 [resource]
 shader = ExtResource( 1 )
+shader_param/light_affected = true
 shader_param/use_specular = false
 shader_param/use_rim = false
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 1, 1, 1, 1 )
+shader_param/shade_color = Color( 0.615686, 0.733333, 0.8, 1 )
 shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/normal_scale = 0.1

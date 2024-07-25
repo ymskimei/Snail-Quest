@@ -50,7 +50,7 @@ export var time_night: int = 1080
 export var transition_speed: int = 5
 export var storm_frequency: int = 10
 
-var time: int = 0
+var time: float = 0
 var cloudy: bool = false
 
 func _ready() -> void:

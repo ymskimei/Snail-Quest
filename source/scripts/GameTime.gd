@@ -1,14 +1,14 @@
 extends Node
 
+onready var second_timer = Timer.new()
 var game_time: int = 0
 
 signal on_second()
 
 func _ready() -> void:
 	SnailQuest.set_game_time(self)
-	var second_timer = Timer.new()
 	second_timer.set_timer_process_mode(1)
-	second_timer.set_wait_time(0.01)
+	second_timer.set_wait_time(0.1)
 	second_timer.connect("timeout", self, "on_unpaused_second")
 	add_child(second_timer)
 	second_timer.start()
@@ -25,3 +25,5 @@ func set_raw_time(new_time: int) -> void:
 func get_raw_time() -> int:
 	return game_time
 
+func modify_time_speed(modifier: float = 1.0) -> void:
+	second_timer.set_wait_time(modifier)

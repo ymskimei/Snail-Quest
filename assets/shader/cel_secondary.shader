@@ -1,5 +1,7 @@
 shader_type spatial;
-render_mode unshaded, cull_disabled, depth_draw_alpha_prepass;
+render_mode cull_disabled, depth_draw_alpha_prepass;
+
+uniform bool light_affected = true;
 
 uniform sampler2D texture_albedo;
 uniform vec3 light_direction = vec3(0.5, 0.5, 0.5);
@@ -7,7 +9,7 @@ uniform vec3 light_direction = vec3(0.5, 0.5, 0.5);
 uniform vec4 albedo_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform vec4 shade_color : hint_color = vec4(0.75, 0.75, 0.75, 1.0);
 
-uniform float shade_threshold : hint_range(0.0, 1.0) = 0.01;
+uniform float shade_threshold : hint_range(0.0, 1.0) = 0.025;
 
 uniform bool use_triplanar = false;
 uniform vec3 uv_scale = vec3(1.0, 1.0, 1.0);
@@ -51,4 +53,14 @@ void fragment() {
 
 	ALBEDO = diffuse * shade_effect;
 	ALPHA = texture_color.a;
+}
+
+void light() {
+	vec3 lit_diffuse = ALBEDO;
+
+	if (light_affected) {
+		lit_diffuse *= LIGHT_COLOR;
+	}
+
+	DIFFUSE_LIGHT = lit_diffuse;
 }
