@@ -14,13 +14,6 @@ func _ready() -> void:
 	target_proxy = get_node_or_null("CameraTarget")
 	_set_visibility_enabler()
 
-	if is_instance_valid(mesh):
-		mesh.set_surface_material(0, EnvironmentMaster.make_material_unique(mesh.get_surface_material(0)))
-
-func _physics_process(delta: float) -> void:
-	if is_instance_valid(mesh):
-		EnvironmentMaster.track_light_source(delta, self.get_global_translation(), mesh.get_surface_material(0))
-
 func _set_visibility_enabler() -> void:
 	var visibility = VisibilityEnabler.new()
 	visibility.pause_animations = true

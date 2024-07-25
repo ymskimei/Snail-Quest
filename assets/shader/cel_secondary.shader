@@ -5,7 +5,7 @@ uniform sampler2D texture_albedo;
 uniform vec3 light_direction = vec3(0.5, 0.5, 0.5);
 
 uniform vec4 albedo_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform vec4 shade_color : hint_color = vec4(0.5, 0.5, 0.5, 1.0);
+uniform vec4 shade_color : hint_color = vec4(0.75, 0.75, 0.75, 1.0);
 
 uniform float shade_threshold : hint_range(0.0, 1.0) = 0.01;
 

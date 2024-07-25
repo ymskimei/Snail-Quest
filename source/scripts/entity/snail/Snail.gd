@@ -1,6 +1,11 @@
 class_name Snail
 extends Entity
 
+onready var shell = $"%MeshInstance"
+onready var body = $"%Body"
+onready var eye_left = $"%EyeLeft"
+onready var eye_right = $"%EyeRight"
+
 onready var affect_area: Area = $AffectArea
 
 onready var anim_tree: AnimationTree = $AnimationTree
@@ -34,23 +39,28 @@ func _unhandled_input(event: InputEvent) -> void:
 		states.unhandled_input(event)
 
 func _physics_process(delta: float) -> void:
+#	shell.get_surface_material(0).set_shader_param("albedo_color", EnvironmentMaster.get_material_color(identity.get_color_shell_base())[1])
+#	shell.get_surface_material(0).set_shader_param("shade_color", EnvironmentMaster.get_material_color(identity.get_color_shell_base())[2])
+#	shell.get_surface_material(0).get_next_pass().set_shader_param("albedo_color", EnvironmentMaster.get_material_color(identity.get_color_shell_accent())[1].darkened(0.2))
+#	shell.get_surface_material(0).get_next_pass().set_shader_param("shade_color", EnvironmentMaster.get_material_color(identity.get_color_shell_accent())[2])
+#	body.get_surface_material(0).set_shader_param("albedo_color", EnvironmentMaster.get_material_color(identity.get_color_body_base())[1])
+#	body.get_surface_material(0).set_shader_param("shade_color", EnvironmentMaster.get_material_color(identity.get_color_body_base())[2])
+#	body.get_surface_material(0).get_next_pass().set_shader_param("albedo_color", EnvironmentMaster.get_material_color(identity.get_color_body_accent())[1])
+#	body.get_surface_material(0).get_next_pass().set_shader_param("albedo_color", EnvironmentMaster.get_material_color(identity.get_color_body_accent())[2])
+
 	#update_appearance()
 	if is_controlled():
 		states.physics_process(delta)
 
-func _on_proximity_entered(body) -> void:
-	if body is Enemy:
+func _on_proximity_entered(b) -> void:
+	if b is Enemy:
 		enemy_found = true
 
-func _on_proximity_exited(body) -> void:
-	if body is Enemy:
+func _on_proximity_exited(b) -> void:
+	if b is Enemy:
 		enemy_found = false
 
 func update_appearance() -> void:
-	var shell = $"%MeshInstance"
-	var body = $"%Body"
-	var eye_left = $"%EyeLeft"
-	var eye_right = $"%EyeRight"
 	var shell_mat = shell.get_surface_material(0)
 	var shell_accent_mat = shell.get_surface_material(0).get_next_pass()
 	var body_mat = body.get_surface_material(0)

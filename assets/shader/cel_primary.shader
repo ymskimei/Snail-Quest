@@ -7,8 +7,7 @@ uniform bool use_rim = false;
 uniform vec4 albedo_color: hint_color = vec4(1.0);
 uniform vec4 shade_color: hint_color = vec4(1.0);
 
-uniform vec4 specular_color: hint_color = vec4(0.75);
-uniform vec4 rim_color: hint_color = vec4(0.75);
+uniform vec4 highlight_color: hint_color = vec4(0.75);
 
 uniform vec4 emission: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 
@@ -113,7 +112,7 @@ void light() {
 		float specular_value = pow(NdotH * is_lit, specular_glossiness * specular_glossiness);
 		specular_value = smoothstep(specular_threshold - specular_softness, specular_threshold + specular_softness, specular_value);
 		
-		vec4 specular_contribution = specular_color.rgba * specular_value * is_lit * 1.0;
+		vec4 specular_contribution = highlight_color.rgba * specular_value * is_lit * 1.0;
 		diffuse = mix(diffuse, specular_contribution, specular_value);
 	}
 
@@ -126,7 +125,7 @@ void light() {
 		float rim_value = iVdotN * pow(NdotL, inverted_rim_spread);
 		rim_value = smoothstep(inverted_rim_threshold - rim_softness, inverted_rim_threshold + rim_softness, rim_value);
 		
-		vec4 rim_contribution = rim_color.rgba * rim_value * is_lit * 1.0;
+		vec4 rim_contribution = highlight_color.rgba * rim_value * is_lit * 1.0;
 		diffuse = mix(diffuse, rim_contribution, rim_value);
 	}
 

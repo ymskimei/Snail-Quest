@@ -7,7 +7,7 @@
 shader = ExtResource( 1 )
 shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 0.5, 0.5, 0.5, 1 )
+shader_param/shade_color = Color( 0.75, 0.75, 0.75, 1 )
 shader_param/shade_threshold = 0.01
 shader_param/use_triplanar = true
 shader_param/uv_scale = Vector3( 0.5, 0.5, 0.5 )

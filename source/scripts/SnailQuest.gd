@@ -32,6 +32,7 @@ var resource: Dictionary = {
 var chunk_start: Vector3 = Vector3.ZERO
 var chunk_size: int = 64
 
+signal game_time_active()
 signal controlled_health_change()
 
 func _ready():
@@ -86,6 +87,7 @@ func get_play_time() -> Node:
 
 func set_game_time(node: Node) -> void:
 	game_time = node
+	emit_signal("game_time_active")
 
 func get_game_time() -> Node:
 	return game_time
