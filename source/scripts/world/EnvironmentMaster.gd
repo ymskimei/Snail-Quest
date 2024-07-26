@@ -4,12 +4,14 @@ export var environment_colors: Texture
 
 onready var light: Position3D = $Light
 onready var orbital: Position3D = $Orbital
-onready var sky: MeshInstance = $MeshInstance
+onready var sky: MeshInstance = $Sky
+onready var stars: MeshInstance = $Stars
 
 var sky_gradient: Gradient 
 var c_map: Image
 
 var time: float
+var time_decimal: float
 
 var time_dawn: int = 360
 var time_day: int = 720
@@ -32,6 +34,11 @@ func _physics_process(delta: float) -> void:
 		var c = SnailQuest.get_controlled().get_global_translation()
 		sky.set_global_translation(Vector3(c.x, 0, c.z))
 
+	if is_instance_valid(SnailQuest.get_camera()):
+		var c = SnailQuest.get_camera().lens.get_global_translation()
+		orbital.set_global_translation(c)
+		stars.set_global_translation(c)
+
 	var modifier: int = 0
 
 	var current_sky_color: Color
@@ -39,7 +46,7 @@ func _physics_process(delta: float) -> void:
 
 	var fade_margin = 20
 
-	if time in range(0, time_dawn):
+	if time >= 0 and time <= time_dawn:
 		var time_range: float = Utility.normalize_range(time, 0, time_dawn)
 
 		light.get_child(0).set_color(lerp(get_color_value(0, 3 + modifier), get_color_value(0, 0 + modifier), time_range))
@@ -47,10 +54,10 @@ func _physics_process(delta: float) -> void:
 		current_sky_color = lerp(get_color_value(1, 3 + modifier), get_color_value(1, 0 + modifier), time_range)
 		current_horizon_color = lerp(get_color_value(2, 3 + modifier), get_color_value(2, 0 + modifier), time_range)
 
-		if time in range(time_dawn - fade_margin, time_dawn):
+		if time >= time_dawn - fade_margin and time <= time_dawn:
 			light.get_child(0).light_energy = lerp(1.75, 0.0, Utility.normalize_range(time, time_dawn - fade_margin, time_dawn))
 
-	elif time in range(time_dawn, time_day):
+	elif time >= time_dawn and time <= time_day:
 		var time_range: float = Utility.normalize_range(time, time_dawn, time_day)
 
 		light.get_child(0).set_color(lerp(get_color_value(0, 0 + modifier), get_color_value(0, 1 + modifier), time_range))
@@ -58,10 +65,10 @@ func _physics_process(delta: float) -> void:
 		current_sky_color = lerp(get_color_value(1, 0 + modifier), get_color_value(1, 1 + modifier), time_range)
 		current_horizon_color = lerp(get_color_value(2, 0 + modifier), get_color_value(2, 1 + modifier), time_range)
 
-		if time in range(time_dawn, time_dawn + fade_margin):
+		if time >= time_dawn and time <= time_dawn + fade_margin:
 			light.get_child(0).light_energy = lerp(0.0, 1.75, Utility.normalize_range(time, time_dawn, time_dawn + fade_margin))
 
-	elif time in range(time_day, time_twili):
+	elif time >= time_day and time <= time_twili:
 		var time_range: float = Utility.normalize_range(time, time_day, time_twili)
 
 		light.get_child(0).set_color(lerp(get_color_value(0, 1 + modifier), get_color_value(0, 2 + modifier), time_range))
@@ -69,10 +76,10 @@ func _physics_process(delta: float) -> void:
 		current_sky_color = lerp(get_color_value(1, 1 + modifier), get_color_value(1, 2 + modifier), time_range)
 		current_horizon_color = lerp(get_color_value(2, 1 + modifier), get_color_value(2, 2 + modifier), time_range)
 
-		if time in range(time_twili - fade_margin, time_twili):
+		if time >= time_twili - fade_margin and time <= time_twili:
 			light.get_child(0).light_energy = lerp(1.75, 0.0, Utility.normalize_range(time, time_twili - fade_margin, time_twili))
 		
-	elif time in range(time_twili, time_night):
+	elif time >= time_twili and time <= time_night:
 		var time_range: float = Utility.normalize_range(time, time_twili, time_night)
 
 		light.get_child(0).set_color(lerp(get_color_value(0, 2 + modifier), get_color_value(0, 3 + modifier), time_range))
@@ -80,22 +87,20 @@ func _physics_process(delta: float) -> void:
 		current_sky_color = lerp(get_color_value(1, 2 + modifier), get_color_value(1, 3 + modifier), time_range)
 		current_horizon_color = lerp(get_color_value(2, 2 + modifier), get_color_value(2, 3 + modifier), time_range)
 
-		if time in range(time_twili, time_twili + fade_margin):
+		if time >= time_twili and time <= time_twili + fade_margin:
 			light.get_child(0).light_energy = lerp(0.0, 1.75, Utility.normalize_range(time, time_twili, time_twili + fade_margin))
 	
-	if time in range (0, time_day):
+	if time >= 0 and time <= time_day:
 		var time_range: float = Utility.normalize_range(time, 0, time_day)
 		orbital.rotation.z = lerp_angle(deg2rad(-180), deg2rad(0), time_range)
 
-	elif time in range (time_day, time_night):
+	elif time >= time_day and time <= time_night:
 		var time_range: float = Utility.normalize_range(time, time_day, time_night)
 		orbital.rotation.z = lerp_angle(deg2rad(0), deg2rad(180), time_range)
 	
 	sky_gradient.set_color(0, current_sky_color)
 	sky_gradient.set_color(1, current_horizon_color)
 	sky_gradient.set_color(2, current_sky_color)
-
-	#orbital.rotation.x = lerp_angle(orbital.rotation.x, (-180 * PI / 180) + (day_percentage * (2 * PI)), 0.01)
 
 func get_color_value(x: int, y: int) -> Color:
 	return c_map.get_pixel(x, y)

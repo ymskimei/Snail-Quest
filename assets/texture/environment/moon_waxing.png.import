@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://import/star.png-c73c7f7345b2f97567cb0025ecb21816.s3tc.stex"
-path.etc="res://import/star.png-c73c7f7345b2f97567cb0025ecb21816.etc.stex"
+path.s3tc="res://import/moon_waxing.png-ffee4af6797b39feddaf895bb0d05f66.s3tc.stex"
+path.etc="res://import/moon_waxing.png-ffee4af6797b39feddaf895bb0d05f66.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/texture/environment/star.png"
-dest_files=[ "res://import/star.png-c73c7f7345b2f97567cb0025ecb21816.s3tc.stex", "res://import/star.png-c73c7f7345b2f97567cb0025ecb21816.etc.stex" ]
+source_file="res://assets/texture/environment/moon_waxing.png"
+dest_files=[ "res://import/moon_waxing.png-ffee4af6797b39feddaf895bb0d05f66.s3tc.stex", "res://import/moon_waxing.png-ffee4af6797b39feddaf895bb0d05f66.etc.stex" ]
 
 [params]
 
