@@ -1,5 +1,6 @@
 extends Node
 
+var game_day: int = 0
 var game_time: float = 0.0
 var modifier: float = 1.0
 
@@ -8,8 +9,10 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	game_time += delta * modifier
+
 	if (game_time >= (60 * 24)):
-		game_time = 0
+		game_time = 0.0
+		game_day += 1
 
 func set_raw_time(new_time: float) -> void:
 	game_time = new_time
