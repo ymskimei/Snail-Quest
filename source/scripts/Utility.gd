@@ -2,6 +2,7 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 
+## Math Functions ##
 
 func normalize_range(value: float, min_value: float, max_value: float) -> float:
 	return (value - min_value) / (max_value - min_value)
@@ -77,6 +78,8 @@ static func cardinal_to_degrees(direction: String) -> int:
 		"NORTHWEST":
 			result = 315
 	return result
+
+## Time and Date ##
 
 func get_time_as_clock(raw_time: int, hour_24: bool = true) -> String:
 	var time: Array = raw_time_to_array(raw_time, hour_24)
@@ -191,7 +194,9 @@ func basic_date_string(days_elapsed: int) -> String:
 
 	var weekday_string: String = get_date_info(get_day_from_integer(days_elapsed), "weekday")
 
-	return month_string + " " + day_string + " " + year_string + ": " + weekday_string
+	return weekday_string + ", " + month_string + " " + day_string + ", " + year_string
+
+## File Managing ##
 
 func get_files(folder_path: String, path: bool = false, recursive: bool = true) -> Array:
 	var dir := Directory.new()
@@ -255,6 +260,8 @@ func read_config(path: String, section: String, key: String):
 	else:
 		printerr("Config file section or key not found")
 		return null
+
+## Misc Functions ##
 
 func pause(toggle: bool) -> void:
 	if toggle:

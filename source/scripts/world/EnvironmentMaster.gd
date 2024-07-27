@@ -6,6 +6,7 @@ onready var light: Position3D = $Light
 onready var orbital: Position3D = $Orbital
 onready var sky: MeshInstance = $Sky
 onready var stars: MeshInstance = $Stars
+onready var star_particles: Particles2D = $Stars/Viewport/StarParticle
 
 var sky_gradient: Gradient 
 var c_map: Image
@@ -30,14 +31,15 @@ func _physics_process(delta: float) -> void:
 	if is_instance_valid(SnailQuest.get_game_time()):
 		time = SnailQuest.get_game_time().get_raw_time()
 
-	if is_instance_valid(SnailQuest.get_controlled()):
-		var c = SnailQuest.get_controlled().get_global_translation()
-		sky.set_global_translation(Vector3(c.x, 0, c.z))
-
-	if is_instance_valid(SnailQuest.get_camera()):
+	if is_instance_valid(SnailQuest.get_camera()) and is_instance_valid(SnailQuest.get_controlled()):
 		var c = SnailQuest.get_camera().lens.get_global_translation()
+		sky.set_global_translation(c)
 		orbital.set_global_translation(c)
 		stars.set_global_translation(c)
+	else:
+		sky.set_global_translation(Vector3.ZERO)
+		orbital.set_global_translation(Vector3.ZERO)
+		stars.set_global_translation(Vector3.ZERO)
 
 	var modifier: int = 0
 
@@ -57,6 +59,8 @@ func _physics_process(delta: float) -> void:
 		if time >= time_dawn - fade_margin and time <= time_dawn:
 			light.get_child(0).light_energy = lerp(1.75, 0.0, Utility.normalize_range(time, time_dawn - fade_margin, time_dawn))
 
+		star_particles.modulate = lerp(Color("FFFFFF"), Color("00FFFFFF"), time_range)
+
 	elif time >= time_dawn and time <= time_day:
 		var time_range: float = Utility.normalize_range(time, time_dawn, time_day)
 
@@ -68,6 +72,8 @@ func _physics_process(delta: float) -> void:
 		if time >= time_dawn and time <= time_dawn + fade_margin:
 			light.get_child(0).light_energy = lerp(0.0, 1.75, Utility.normalize_range(time, time_dawn, time_dawn + fade_margin))
 
+		star_particles.modulate = Color("00FFFFFF")
+
 	elif time >= time_day and time <= time_twili:
 		var time_range: float = Utility.normalize_range(time, time_day, time_twili)
 
@@ -78,7 +84,9 @@ func _physics_process(delta: float) -> void:
 
 		if time >= time_twili - fade_margin and time <= time_twili:
 			light.get_child(0).light_energy = lerp(1.75, 0.0, Utility.normalize_range(time, time_twili - fade_margin, time_twili))
-		
+
+		star_particles.modulate = lerp(Color("00FFFFFF"), Color("FFFFFF"), time_range)
+
 	elif time >= time_twili and time <= time_night:
 		var time_range: float = Utility.normalize_range(time, time_twili, time_night)
 
@@ -89,7 +97,9 @@ func _physics_process(delta: float) -> void:
 
 		if time >= time_twili and time <= time_twili + fade_margin:
 			light.get_child(0).light_energy = lerp(0.0, 1.75, Utility.normalize_range(time, time_twili, time_twili + fade_margin))
-	
+
+		star_particles.modulate = Color("FFFFFF")
+
 	if time >= 0 and time <= time_day:
 		var time_range: float = Utility.normalize_range(time, 0, time_day)
 		orbital.rotation.z = lerp_angle(deg2rad(-180), deg2rad(0), time_range)
