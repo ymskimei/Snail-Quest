@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=2]
+[gd_scene load_steps=123 format=2]
 
 [ext_resource path="res://source/scenes/interface/debug_healthbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scenes/entity/state_controller.tscn" type="PackedScene" id=2]
@@ -40,6 +40,7 @@
 [ext_resource path="res://source/scripts/entity/snail/SnailStateSpin.gd" type="Script" id=38]
 [ext_resource path="res://assets/resource/identity/snail/sheldon.tres" type="Resource" id=39]
 [ext_resource path="res://source/scripts/entity/snail/SnailStateJrll.gd" type="Script" id=40]
+[ext_resource path="res://source/scripts/object/EnvironmentMeshInstance.gd" type="Script" id=41]
 
 [sub_resource type="Skin" id=36]
 resource_name = "Skin"
@@ -369,7 +370,7 @@ states/SnailSpin/node = SubResource( 110 )
 states/SnailSpin/position = Vector2( 541, -183 )
 transitions = [ "SnailIdle", "SnailMove", SubResource( 57 ), "SnailMove", "SnailIdle", SubResource( 58 ), "SnailJump", "SnailFall", SubResource( 61 ), "SnailFall", "SnailIdle", SubResource( 62 ), "SnailFall", "SnailMove", SubResource( 63 ), "SnailRoll", "ShellUnhide", SubResource( 64 ), "ShellUnhide", "SnailJump", SubResource( 65 ), "ShellUnhide", "SnailMove", SubResource( 66 ), "ShellUnhide", "SnailIdle", SubResource( 67 ), "SnailMove", "SnailHide", SubResource( 68 ), "SnailHide", "SnailRoll", SubResource( 69 ), "SnailHide", "SnailHidden", SubResource( 70 ), "SnailHidden", "ShellUnhide", SubResource( 71 ), "SnailHide", "SnailMove", SubResource( 72 ), "SnailHide", "SnailIdle", SubResource( 73 ), "SnailIdle", "SnailHide", SubResource( 74 ), "SnailFall", "SnailGrab", SubResource( 75 ), "SnailJump", "SnailGrab", SubResource( 76 ), "SnailMove", "SnailPress", SubResource( 77 ), "SnailIdle", "SnailPress", SubResource( 78 ), "SnailPress", "SnailPush", SubResource( 79 ), "SnailPush", "SnailIdle", SubResource( 80 ), "SnailPush", "SnailMove", SubResource( 81 ), "SnailFall", "SnailHide", SubResource( 92 ), "SnailJump", "SnailHide", SubResource( 93 ), "SnailHidden", "SnailRoll", SubResource( 94 ), "SnailHidden", "SnailPeelingHorizontal", SubResource( 98 ), "SnailPeelingHorizontal", "SnailRoll", SubResource( 100 ), "SnailPeelingVertical", "SnailPeelingHorizontal", SubResource( 104 ), "SnailPeelingHorizontal", "SnailPeelingVertical", SubResource( 105 ), "SnailPeelingVertical", "SnailHidden", SubResource( 106 ), "SnailPeelingVertical", "SnailRoll", SubResource( 107 ), "SnailPeelingHorizontal", "SnailHidden", SubResource( 108 ), "SnailIdle", "SnailSpin", SubResource( 111 ), "SnailMove", "SnailSpin", SubResource( 112 ), "SnailSpin", "SnailMove", SubResource( 113 ), "SnailSpin", "SnailIdle", SubResource( 114 ), "SnailJump", "SnailSpin", SubResource( 115 ), "SnailSpin", "SnailFall", SubResource( 116 ), "SnailFall", "SnailSpin", SubResource( 117 ), "SnailMove", "SnailFall", SubResource( 118 ), "SnailIdle", "SnailJump", SubResource( 119 ), "SnailMove", "SnailJump", SubResource( 120 ) ]
 start_node = "SnailIdle"
-graph_offset = Vector2( -155, -48 )
+graph_offset = Vector2( 56, -203 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=83]
 
@@ -1563,6 +1564,7 @@ unique_name_in_owner = true
 transform = Transform( 1, 3.8078e-06, 7.96219e-07, 7.96222e-07, -4.76837e-07, -0.999999, -3.8078e-06, 1, -4.76837e-07, 0.369818, -0.737042, -0.570603 )
 mesh = ExtResource( 13 )
 material/0 = ExtResource( 7 )
+script = ExtResource( 41 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
 transform = Transform( 0.999876, 0.0152511, 0.00392942, -0.00547172, 0.10241, 0.994726, 0.0147683, -0.994626, 0.102481, 0.160124, 0.753786, -0.56485 )
@@ -1573,12 +1575,14 @@ unique_name_in_owner = true
 transform = Transform( 1, -3.747e-06, -5.81117e-07, -5.81119e-07, -3.57628e-07, -0.999999, 3.747e-06, 1, -3.57627e-07, 0.0416807, -0.737043, -0.570601 )
 mesh = ExtResource( 11 )
 material/0 = ExtResource( 7 )
+script = ExtResource( 41 )
 
 [node name="Body" type="MeshInstance" parent="Armature/Skeleton"]
 unique_name_in_owner = true
 mesh = ExtResource( 10 )
 skin = SubResource( 36 )
 material/0 = ExtResource( 8 )
+script = ExtResource( 41 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Armature/Skeleton"]
 unique_name_in_owner = true
@@ -1586,6 +1590,7 @@ mesh = ExtResource( 12 )
 skin = SubResource( 36 )
 material/0 = ExtResource( 6 )
 material/1 = ExtResource( 8 )
+script = ExtResource( 41 )
 
 [node name="Rays" type="Spatial" parent="Armature/Skeleton"]
 

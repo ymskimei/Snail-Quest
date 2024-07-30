@@ -1,4 +1,7 @@
-extends Spatial
+extends Menu
+
+export var button_play: Texture
+export var button_pause: Texture
 
 onready var snail: PhysicsBody = $Snail
 onready var camera: Camera = $Camera
@@ -21,9 +24,6 @@ onready var color_display_body: TextureRect = $Control/HBoxContainer/Background/
 onready var color_display_body_accent: TextureRect = $Control/HBoxContainer/Background/MarginContainer/VBoxContainer/VBoxContainer2/VBoxContainer/ButtonColorBodyAccent/TextureColorBodyAccent
 onready var color_display_eyes: TextureRect = $Control/HBoxContainer/Background/MarginContainer/VBoxContainer/VBoxContainer2/VBoxContainer/ButtonColorEyes/TextureColorEyes
 
-var button_play: Texture = load("res://snailgen/play.png")
-var button_pause: Texture = load("res://snailgen/pause.png")
-
 var resource_path: String = "user://generated/"
 
 var memorized_color: Color = Color("FFFFFF")
@@ -33,6 +33,7 @@ var spinning: bool = true
 
 func _ready() -> void:
 	_update_from_identity()
+	play.grab_focus()
 
 func _physics_process(delta: float) -> void:
 	if spinning:
@@ -176,7 +177,7 @@ func _on_ButtonRandom_button_down() -> void:
 	_play_sound_select()
 
 func _on_ButtonSave_button_down() -> void:
-	snail.save_resource(resource_path + "generated/")
+	snail.save_resource(resource_path)
 	_play_sound_success()
 
 func _on_ButtonLoad_button_down() -> void:

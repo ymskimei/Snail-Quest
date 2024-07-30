@@ -8,9 +8,10 @@
 [ext_resource path="res://assets/texture/entity/snail_shell_accent_2.png" type="Texture" id=6]
 [ext_resource path="res://assets/model/entity/snail_eye_left.mesh" type="ArrayMesh" id=7]
 [ext_resource path="res://assets/model/entity/snail_eye_right.mesh" type="ArrayMesh" id=8]
-[ext_resource path="res://assets/texture/object/sticker_0.png" type="Texture" id=9]
-[ext_resource path="res://assets/texture/object/hat_0.png" type="Texture" id=10]
+[ext_resource path="res://assets/texture/entity/sticker/sticker_0.png" type="Texture" id=9]
+[ext_resource path="res://assets/texture/entity/hat/hat_0.png" type="Texture" id=10]
 [ext_resource path="res://assets/model/entity/hat/hat_0.mesh" type="ArrayMesh" id=11]
+
 
 [resource]
 script = ExtResource( 1 )

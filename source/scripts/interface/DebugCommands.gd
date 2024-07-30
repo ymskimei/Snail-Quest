@@ -83,7 +83,7 @@ func on_command_suicide(_console, args: Array) -> void:
 	command_console.send_message(message)
 
 func on_command_time(_console, args: Array) -> void:
-	SnailQuest.game_time.set_time(args[0])
+	SnailQuest.game_time.set_raw_time(args[0])
 	command_console.send_message("World time set to " + command_console.success_color + "%s[/color]" % args[0])
 
 func on_command_tp(_console, args: Array) -> void:

@@ -22,7 +22,7 @@ func physics_process(delta: float) -> int:
 
 	if entity.direction.length() >= 0.1:
 		return State.MOVE
-
+	
 	if entity.jump_in_memory or entity.boost_momentum != Vector3.ZERO:
 		return State.JUMP
 

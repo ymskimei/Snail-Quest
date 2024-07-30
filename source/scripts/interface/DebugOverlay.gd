@@ -2,6 +2,7 @@ extends Menu
 
 onready var debug_information: VBoxContainer = $MarginContainer/HBoxContainer/DebugInformation
 onready var display_framerate: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayFramerate
+onready var display_game_calendar: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayGameCalendar
 onready var display_game_time: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayGameTime
 onready var display_play_time: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayPlayTime
 onready var display_camera_target: RichTextLabel = $MarginContainer/HBoxContainer/DebugInformation/DisplayCameraTarget
@@ -22,7 +23,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	set_display_framerate()
-	set_display_world_time()
+	set_display_game_calendar()
+	set_display_game_time()
 	set_display_play_time()
 	set_display_camera_target()
 	set_display_controlled()
@@ -44,35 +46,41 @@ func set_display_framerate() -> void:
 		color = RegistryColor.lime
 	display_framerate.set_bbcode(RegistryColor.get_bbcode(color) + "%s" % framerate)
 
-func set_display_world_time() -> void:
-	if SnailQuest.game_time:
-		display_game_time.set_bbcode(default_color + "%s" % Utility.get_time_as_clock(SnailQuest.game_time.get_raw_time(), false))
+func set_display_game_calendar() -> void:
+	if SnailQuest.get_game_time():
+		display_game_calendar.set_bbcode(default_color + "%s" % Utility.basic_date_string(SnailQuest.get_game_time().game_day))
+	else:
+		display_game_calendar.set_bbcode(default_color + "Weekday, Month 00th, 0000")
+
+func set_display_game_time() -> void:
+	if SnailQuest.get_game_time():
+		display_game_time.set_bbcode(default_color + "%s" % Utility.get_time_as_clock(SnailQuest.get_game_time().get_raw_time(), false))
 	else:
 		display_game_time.set_bbcode(default_color + "??:??")
 
 func set_display_play_time() -> void:
-	if SnailQuest.play_time:
-		display_play_time.set_bbcode(default_color + "%s" % Utility.get_time_as_count(SnailQuest.play_time.get_total_time()))
+	if SnailQuest.get_play_time():
+		display_play_time.set_bbcode(default_color + "%s" % Utility.get_time_as_count(SnailQuest.get_play_time().get_total_time()))
 	else:
 		display_play_time.set_bbcode(default_color + "??h, ??m, ??s")
 
 func set_display_camera_target() -> void:
-	if SnailQuest.camera:
-		if SnailQuest.camera.target:
-			display_camera_target.set_bbcode(default_color + "Cam Target: %s" % SnailQuest.camera.target.name)
+	if SnailQuest.get_camera():
+		if SnailQuest.get_camera().target:
+			display_camera_target.set_bbcode(default_color + "Cam Target: %s" % SnailQuest.get_camera().target.name)
 	else:
 		display_camera_target.set_bbcode(default_color + "Cam Target: ??")
 
 func set_display_controlled() -> void:
-	if SnailQuest.controlled:
-		display_controlled.set_bbcode(default_color + "Controlling: %s" % SnailQuest.controlled.name)
+	if SnailQuest.get_controlled():
+		display_controlled.set_bbcode(default_color + "Controlling: %s" % SnailQuest.get_controlled().name)
 	else:
 		display_controlled.set_bbcode(default_color + "Controlling: ??")
 
 func set_display_controlled_target() -> void:
-	if is_instance_valid(SnailQuest.controlled):
-		if SnailQuest.controlled is Entity and is_instance_valid(SnailQuest.controlled.target):
-			display_controlled_target.set_bbcode(default_color + "Target: %s" % SnailQuest.controlled.target.name)
+	if is_instance_valid(SnailQuest.get_controlled()):
+		if SnailQuest.get_controlled() is Entity and is_instance_valid(SnailQuest.get_controlled().target):
+			display_controlled_target.set_bbcode(default_color + "Target: %s" % SnailQuest.get_controlled().target.name)
 	else:
 		display_controlled_target.set_bbcode(default_color + "Target: ??")
 
@@ -83,12 +91,12 @@ func set_display_prev_controlled() -> void:
 		display_prev_controlled.set_bbcode(default_color + "Last controlling: ??")
 
 func set_display_chunk_coords() -> void:
-	if SnailQuest.controlled or SnailQuest.camera:
+	if SnailQuest.get_controlled() or SnailQuest.get_camera():
 		var e: Spatial = null
-		if SnailQuest.controlled:
-			e = SnailQuest.controlled
-		elif SnailQuest.camera:
-			e = SnailQuest.camera
+		if SnailQuest.get_controlled():
+			e = SnailQuest.get_controlled()
+		elif SnailQuest.get_camera():
+			e = SnailQuest.get_camera()
 		var coords_x = floor(e.global_translation.x / SnailQuest.chunk_size)
 		var coords_z = floor(e.global_translation.z / SnailQuest.chunk_size)
 		display_chunk_coords.set_bbcode(x_color + "%s, " % coords_x + z_color + "%s" % coords_z)
@@ -96,13 +104,13 @@ func set_display_chunk_coords() -> void:
 		display_chunk_coords.set_bbcode(x_color + "?, " + z_color + "?")
 
 func set_display_coordinates() -> void:
-	if SnailQuest.controlled or SnailQuest.camera:
+	if SnailQuest.get_controlled() or SnailQuest.get_camera():
 		var coords: Array = []
 		var e: Spatial = null
-		if SnailQuest.controlled:
-			e = SnailQuest.controlled
-		elif SnailQuest.camera:
-			e = SnailQuest.camera
+		if SnailQuest.get_controlled():
+			e = SnailQuest.get_controlled()
+		elif SnailQuest.get_camera():
+			e = SnailQuest.get_camera()
 		coords = e.get_coords()
 		display_coordinate.set_bbcode(x_color + "X: %s\n" % coords[0] + y_color + "Y: %s\n" % coords[1] + z_color + "Z: %s" % coords[2])
 	else:

@@ -1,6 +1,6 @@
 extends Interactable
 
-onready var rod: RigidBody = $Lever/Handle
+onready var rod: KinematicBody = $Lever/Handle
 onready var grab_point: Position3D = $Lever/Handle/Position3D
 onready var anim: AnimationPlayer = $AnimationPlayer
 

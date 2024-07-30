@@ -2,8 +2,10 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 
-#func get_modifications(mesh: MeshInstance) -> void:
-#	pass
+## Math Functions ##
+
+func normalize_range(value: float, min_value: float, max_value: float) -> float:
+	return (value - min_value) / (max_value - min_value)
 
 func rigid_look_at(state: PhysicsDirectBodyState, position: Transform, target: Vector3) -> void:
 	var up_dir = Vector3(0, 1, 0)
@@ -77,6 +79,8 @@ static func cardinal_to_degrees(direction: String) -> int:
 			result = 315
 	return result
 
+## Time and Date ##
+
 func get_time_as_clock(raw_time: int, hour_24: bool = true) -> String:
 	var time: Array = raw_time_to_array(raw_time, hour_24)
 	if hour_24:
@@ -106,6 +110,93 @@ func raw_time_to_array(raw_time: int = 0, hour_24: bool = true, real_time: bool 
 		if hour == 0: 
 			hour = 12
 		return [hour, minute, second, period]
+
+func get_number_with_suffix(n: int) -> String:
+	var suffixes = ["st", "nd", "rd"]
+	var suffix = "th"
+	if n % 10 == 1 and n % 100 != 11:
+		suffix = suffixes[0]
+	elif n % 10 == 2 and n % 100 != 12:
+		suffix = suffixes[1]
+	elif n % 10 == 3 and n % 100 != 13:
+		suffix = suffixes[2]
+	return str(n) + suffix
+
+func first_year() -> int:
+	return 2006
+
+func days_to_date(days_elapsed: int) -> Array:
+	var days_per_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	var days_in_year = 365
+
+	var years_elapsed = 0
+
+	while days_elapsed >= days_in_year:
+		if is_leap_year(years_elapsed):
+			days_in_year = 366
+		else:
+			days_in_year = 365
+
+		if days_elapsed >= days_in_year:
+			days_elapsed -= days_in_year
+			years_elapsed += 1
+
+	var months_elapsed = 0
+
+	if is_leap_year(years_elapsed):
+		days_per_month[1] = 29
+
+	while months_elapsed < 12 and days_elapsed >= days_per_month[months_elapsed]:
+		days_elapsed -= days_per_month[months_elapsed]
+		months_elapsed += 1
+
+	return [years_elapsed, months_elapsed, days_elapsed]
+
+func is_leap_year(year: int) -> bool:
+	var y = year + first_year()
+	return (y % 4 == 0) and (y % 100 != 0 or (y % 400 == 0))
+
+func get_day_from_integer(days_elapsed: int) -> int:
+	var days_of_week: Array = [0, 1, 2, 3, 4, 5, 6]
+	#first int is for the first day of the counter
+	return days_of_week[(days_of_week.find(0) + days_elapsed) % 7]
+
+func get_date_info(variable: int, calculator: String) -> String:
+	var result: String
+	var months: Array = [
+		"January", "February", "March", "April",
+		"May", "June", "July", "August",
+		"September", "October", "November", "December"]
+	var weekdays: Array = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+	match calculator:
+		"year":
+			result = str(first_year() + variable)
+		"month":
+			if variable < months.size():
+				result = months[variable]
+			else:
+				result = "Invalid month"
+		"weekday":
+			if variable < weekdays.size():
+				result = weekdays[variable]
+			else:
+				result = "Invalid weekday"
+		_:
+			result = "Invalid calc type"
+	return result
+
+func basic_date_string(days_elapsed: int) -> String:
+	var days_to_date: Array = days_to_date(days_elapsed)
+
+	var year_string: String = get_date_info(days_to_date[0], "year")
+	var month_string: String = get_date_info(days_to_date[1], "month")
+	var day_string: String = get_number_with_suffix(days_to_date[2] + 1)
+
+	var weekday_string: String = get_date_info(get_day_from_integer(days_elapsed), "weekday")
+
+	return weekday_string + ", " + month_string + " " + day_string + ", " + year_string
+
+## File Managing ##
 
 func get_files(folder_path: String, path: bool = false, recursive: bool = true) -> Array:
 	var dir := Directory.new()
@@ -169,6 +260,8 @@ func read_config(path: String, section: String, key: String):
 	else:
 		printerr("Config file section or key not found")
 		return null
+
+## Misc Functions ##
 
 func pause(toggle: bool) -> void:
 	if toggle:

@@ -6,7 +6,6 @@ export var identity: Resource
 onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
 onready var collision: CollisionShape = $CollisionShape
-onready var mesh: MeshInstance = $"%MeshInstance"
 onready var surface_rays: Spatial = $SurfaceRays
 onready var listener: Listener = $Listener
 
@@ -57,6 +56,7 @@ signal entity_killed(b)
 signal target_updated()
 
 func _ready() -> void:
+	mesh = $"%MeshInstance"
 	_set_display_health()
 	_get_timers()
 	#temp until can be updated from outside

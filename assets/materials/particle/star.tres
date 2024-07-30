@@ -25,6 +25,6 @@ orbit_velocity_random = 0.0
 angle = 360.0
 angle_random = 1.0
 angle_curve = SubResource( 4 )
-scale = 0.05
+scale = 0.03
 scale_random = 0.25
 color_ramp = SubResource( 2 )

@@ -1,8 +1,9 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://source/scenes/object/imitation_snail.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/materials/tile/mushroom_wood.tres" type="Material" id=2]
-[ext_resource path="res://assets/shader/cel.shader" type="Shader" id=24]
+[ext_resource path="res://assets/texture/interface/snailgen/play.png" type="Texture" id=3]
+[ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=24]
 [ext_resource path="res://assets/resource/environment/environment_default.tres" type="Environment" id=26]
 [ext_resource path="res://assets/interface/theme/menu.tres" type="Theme" id=27]
 [ext_resource path="res://source/scripts/interface/SnailGenMenu.gd" type="Script" id=28]
@@ -34,28 +35,26 @@
 
 [sub_resource type="ShaderMaterial" id=59]
 shader = ExtResource( 24 )
-shader_param/use_diffuse = true
+shader_param/light_affected = true
 shader_param/use_specular = false
 shader_param/use_rim = false
-shader_param/use_light = true
-shader_param/use_shadow = false
+shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
 shader_param/shade_color = Color( 0.784314, 0.647059, 0.721569, 1 )
-shader_param/specular_color = Color( 1, 1, 1, 0.74902 )
-shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/normal_scale = 0.1
+shader_param/normal_scale = 0.01
 shader_param/shade_threshold = 0.0
-shader_param/shade_softness = 0.125
+shader_param/shade_softness = 0.025
 shader_param/specular_glossiness = 15.0
 shader_param/specular_threshold = 0.5
 shader_param/specular_softness = 0.0
 shader_param/rim_threshold = 0.25
 shader_param/rim_softness = 0.0
 shader_param/rim_spread = 0.5
-shader_param/shadow_threshold = 0.7
-shader_param/shadow_softness = 0.0
-shader_param/emission_energy = 1.0
+shader_param/shadow_threshold = 0.5
+shader_param/shadow_softness = 0.1
+shader_param/emission_energy = 0.0
 shader_param/screen_scale = 10.0
 shader_param/uv_scale = Vector3( 0.5, 0.5, 0.5 )
 shader_param/uv_offset = Vector3( 1, 0, 0 )
@@ -66,27 +65,25 @@ shader_param/texture_albedo = ExtResource( 37 )
 
 [sub_resource type="ShaderMaterial" id=55]
 shader = ExtResource( 24 )
-shader_param/use_diffuse = false
+shader_param/light_affected = true
 shader_param/use_specular = false
 shader_param/use_rim = false
-shader_param/use_light = false
-shader_param/use_shadow = false
+shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
 shader_param/shade_color = Color( 1, 1, 1, 1 )
-shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/normal_scale = 0.1
+shader_param/normal_scale = 0.01
 shader_param/shade_threshold = 0.0
-shader_param/shade_softness = 0.0
+shader_param/shade_softness = 0.025
 shader_param/specular_glossiness = 15.0
 shader_param/specular_threshold = 0.5
 shader_param/specular_softness = 0.0
 shader_param/rim_threshold = 0.25
 shader_param/rim_softness = 0.0
 shader_param/rim_spread = 0.5
-shader_param/shadow_threshold = 0.7
-shader_param/shadow_softness = 0.0
+shader_param/shadow_threshold = 0.5
+shader_param/shadow_softness = 0.1
 shader_param/emission_energy = 0.0
 shader_param/screen_scale = 10.0
 shader_param/uv_scale = Vector3( 0.5, 0.5, 0.05 )
@@ -143,36 +140,36 @@ surfaces/3 = {
 
 [sub_resource type="ShaderMaterial" id=57]
 shader = ExtResource( 24 )
-shader_param/use_diffuse = true
+shader_param/light_affected = true
 shader_param/use_specular = false
 shader_param/use_rim = false
-shader_param/use_light = true
-shader_param/use_shadow = true
+shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
 shader_param/shade_color = Color( 0.866667, 0.921569, 0.901961, 1 )
-shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/normal_scale = 0.0
+shader_param/normal_scale = 0.01
 shader_param/shade_threshold = 0.0
-shader_param/shade_softness = 0.01
+shader_param/shade_softness = 0.025
 shader_param/specular_glossiness = 15.0
 shader_param/specular_threshold = 0.5
-shader_param/specular_softness = 0.1
+shader_param/specular_softness = 0.0
 shader_param/rim_threshold = 0.25
-shader_param/rim_softness = 0.05
+shader_param/rim_softness = 0.0
 shader_param/rim_spread = 0.5
-shader_param/shadow_threshold = 0.7
+shader_param/shadow_threshold = 0.5
 shader_param/shadow_softness = 0.1
-shader_param/emission_energy = 1.0
+shader_param/emission_energy = 0.0
 shader_param/screen_scale = 10.0
 shader_param/uv_scale = Vector3( 1, 1, 1 )
 shader_param/uv_offset = Vector3( 0, 0, 0 )
 shader_param/use_triplanar = false
 shader_param/texture_albedo = ExtResource( 49 )
 
-[node name="Menu" type="Spatial"]
+[node name="Menu" type="CanvasLayer"]
 script = ExtResource( 28 )
+button_play = ExtResource( 3 )
+button_pause = ExtResource( 53 )
 
 [node name="Snail" parent="." instance=ExtResource( 1 )]
 transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 0, -5.278 )
@@ -320,6 +317,8 @@ margin_right = 453.0
 margin_bottom = 102.0
 align = 1
 max_length = 25
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Control/HBoxContainer/Background/MarginContainer/VBoxContainer/HBoxContainer2"]
 margin_left = 457.0
@@ -778,10 +777,10 @@ margin_right = 685.0
 margin_bottom = 760.0
 
 [node name="ColorPicker" type="ColorPicker" parent="Control/ColorPicker/MarginContainer/Background2/MarginContainer/VBoxContainer"]
-margin_left = 80.0
-margin_top = 80.0
-margin_right = 701.0
-margin_bottom = 633.0
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 721.0
+margin_bottom = 653.0
 color = Color( 0.760784, 0.490196, 0.490196, 1 )
 edit_alpha = false
 

@@ -1,24 +1,26 @@
 extends Node
 
-var game_time: int = 0
+var game_day: int = 0
+var game_time: float = 0.0
+var modifier: float = 1.0
 
 func _ready() -> void:
 	SnailQuest.set_game_time(self)
-	var second_timer = Timer.new()
-	second_timer.set_timer_process_mode(1)
-	second_timer.set_wait_time(1)
-	second_timer.connect("timeout", self, "on_unpaused_second")
-	add_child(second_timer)
-	second_timer.start()
 
-func on_unpaused_second() -> void:
-	game_time += 1 
+func _physics_process(delta: float) -> void:
+	game_time += delta * modifier
 	if (game_time >= (60 * 24)):
-		game_time = 0
+		game_time = 0.0
+		game_day += 1
 
-func set_raw_time(new_time: int) -> void:
+func set_raw_time(new_time: float) -> void:
 	game_time = new_time
 
-func get_raw_time() -> int:
+func get_raw_time() -> float:
 	return game_time
 
+func set_time_speed(value: float = 1.0) -> void:
+	modifier = value
+
+func get_time_speed() -> float:
+	return modifier

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/materials/tile/dev/tile_cm_2_5.tres" type="Material" id=1]
+[ext_resource path="res://source/scripts/object/EnvironmentMeshInstance.gd" type="Script" id=2]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "test_block_two_Cube"
@@ -27,6 +28,7 @@ collision_mask = 13
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="TestBlockHitbox" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )

@@ -34,7 +34,7 @@ func physics_process(delta: float) -> int:
 	set_movement(delta, 1.2 + (entity.move_momentum * 0.5) * get_gravity(), true, false, 0.6)
 	set_rotation(delta * 0.5)
 	boost_momentum()
-	entity.move_and_collide(((Vector3.UP * 0.2 + entity.boost_momentum) * entity.fall_momentum), false)
+	entity.move_and_collide(((Vector3.UP * 0.2 + entity.boost_momentum) * entity.fall_momentum) * get_gravity(), false)
 
 	if !jumping:
 		entity.fall_momentum -= 7 * get_gravity() * delta
