@@ -13,6 +13,7 @@ onready var sticker: MeshInstance = $Armature/Skeleton/BoneAttachment3/Sticker
 onready var anim: AnimationPlayer = $AnimationPlayer
 
 var shell_mat: Material = null
+var shell_opening_mat: Material = null
 var shell_accent_mat: Material = null
 var shell_body_mat: Material = null
 var body_mat: Material = null
@@ -41,6 +42,7 @@ var darkener = Color("0E0B3A")
 
 func _ready() -> void:
 	shell_mat = shell.get_surface_material(0)
+	shell_opening_mat = shell.get_surface_material(1)
 	shell_accent_mat = shell.get_surface_material(0).get_next_pass()
 	shell_body_mat = shell.get_surface_material(1)
 	body_mat = body.get_surface_material(0)
@@ -360,6 +362,8 @@ func update_appearance() -> void:
 
 	shell_mat.set_shader_param("albedo_color", identity.get_color_shell_base())
 	shell_mat.set_shader_param("shade_color", identity.get_color_shell_base().blend(darkener))
+	shell_opening_mat.set_shader_param("albedo_color", identity.get_color_body_base())
+	shell_opening_mat.set_shader_param("shade_color", identity.get_color_body_base().blend(darkener))
 
 	shell_accent_mat.set_shader_param("albedo_color", identity.get_color_shell_accent())
 	shell_accent_mat.set_shader_param("shade_color", identity.get_color_shell_accent())

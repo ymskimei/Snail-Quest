@@ -169,7 +169,7 @@ func track_light_source(delta, self_location: Vector3, material: Material) -> vo
 		if closest_light:
 			new_light_direction = -(self_location - closest_light.get_global_translation()).normalized()
 		else:
-			new_light_direction = Vector3.UP
+			new_light_direction = Vector3(0.5, 0.5, 0.5)
 		closest_light_direction = lerp(material.get_shader_param("light_direction"), new_light_direction, 6.0 * delta)
 		material.set_shader_param("light_direction", closest_light_direction)
 

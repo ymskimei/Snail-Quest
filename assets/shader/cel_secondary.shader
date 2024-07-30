@@ -22,10 +22,10 @@ uniform float shade_softness: hint_range(0.0, 1.0) = 0.025;
 
 uniform float specular_glossiness: hint_range(1.0, 100.0) = 15.0;
 uniform float specular_threshold: hint_range(0.0, 1.0) = 0.5;
-uniform float specular_softness: hint_range(0.0, 1.0) = 0.0;
+uniform float specular_softness: hint_range(0.0, 1.0) = 0.01;
 
 uniform float rim_threshold: hint_range(0.0, 1.0) = 0.25;
-uniform float rim_softness: hint_range(0.0, 1.0) = 0.0;
+uniform float rim_softness: hint_range(0.0, 1.0) = 0.01;
 uniform float rim_spread: hint_range(0.0, 1.0) = 0.5;
 
 uniform float shadow_threshold: hint_range(0.0, 1.0) = 0.5;

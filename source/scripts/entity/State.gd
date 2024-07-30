@@ -44,20 +44,25 @@ func get_input(turn_modifier: float = 1.0, raw: bool = false) -> Vector3:
 	return direction
 
 func set_movement(delta: float, modifier: float = 1.0, control: bool = true, reverse: bool = false, turn_modifier: float = 1.0, slide_speed: float = 20) -> void:
-	if control:
-		var temp_input: Vector3 = get_input(turn_modifier)
-		entity.direction = lerp(entity.direction, temp_input, slide_speed * delta)
+	if entity.is_controlled():
+		if control:
+			var temp_input: Vector3 = get_input(turn_modifier)
+			entity.direction = lerp(entity.direction, temp_input, slide_speed * delta)
 
-	if entity.direction != Vector3.ZERO:
-		var movement: Vector3 = (3.75 * modifier * entity.direction * delta)
-		if reverse:
-			movement = -movement
-		entity.move_and_slide(movement * 45 * modifier, Vector3.UP, false, 4, deg2rad(75), false)
+		if entity.direction != Vector3.ZERO:
+			var movement: Vector3 = (3.75 * modifier * entity.direction * delta)
+			if reverse:
+				movement = -movement
+			entity.move_and_slide(movement * 45 * modifier, Vector3.UP, false, 4, deg2rad(75), false)
 
-	for i in entity.get_slide_count():
-		var c = entity.get_slide_collision(i)
-		if c.collider is RigidBody:
-			c.collider.apply_central_impulse(-c.normal * 2)
+		#physics interaction
+
+		for i in entity.get_slide_count():
+			var c = entity.get_slide_collision(i)
+			if c.collider is RigidBody:
+				c.collider.apply_central_impulse(-c.normal * (0.25 + (entity.move_momentum * 50)))
+#			elif c.collider is Entity:
+#				c.collider.move_and_slide(lerp(c.collider.get_global_translation(), -c.normal * (1 + (entity.move_momentum * 50)), 0.5 * delta))
 
 func boost_momentum() -> void:
 	if entity.surface_rays:

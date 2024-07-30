@@ -40,8 +40,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	#update_appearance()
-	if is_controlled():
-		states.physics_process(delta)
+	states.physics_process(delta)
 
 func _on_proximity_entered(b) -> void:
 	if b is Enemy:
@@ -53,6 +52,7 @@ func _on_proximity_exited(b) -> void:
 
 func update_appearance() -> void:
 	var shell_mat = shell.get_surface_material(0)
+	var shell_opening = shell.get_surface_material(1)
 	var shell_accent_mat = shell.get_surface_material(0).get_next_pass()
 	var body_mat = body.get_surface_material(0)
 	var body_accent_mat = body.get_surface_material(0).get_next_pass()
@@ -73,6 +73,8 @@ func update_appearance() -> void:
 
 		shell_mat.set_shader_param("albedo_color", identity.color_shell_base)
 		shell_mat.set_shader_param("shade_color", identity.color_shell_shade)
+		shell_opening.set_shader_param("albedo_color", identity.color_body_base)
+		shell_opening.set_shader_param("shade_color", identity.color_body_shade)
 
 		shell_accent_mat.set_shader_param("albedo_color", identity.color_shell_accent)
 		shell_accent_mat.set_shader_param("shade_color", identity.color_shell_accent)
