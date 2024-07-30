@@ -28,7 +28,7 @@
 [ext_resource path="res://assets/model/entity/snail_eye_right.mesh" type="ArrayMesh" id=26]
 [ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=27]
 [ext_resource path="res://assets/shader/decal.shader" type="Shader" id=28]
-[ext_resource path="res://assets/texture/object/sticker_1.png" type="Texture" id=30]
+[ext_resource path="res://assets/texture/entity/sticker/sticker_1.png" type="Texture" id=30]
 
 
 [sub_resource type="Skin" id=36]

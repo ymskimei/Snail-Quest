@@ -3,64 +3,140 @@ render_mode cull_disabled, depth_draw_alpha_prepass;
 
 uniform bool light_affected = true;
 
-uniform sampler2D texture_albedo;
+uniform bool use_specular = false;
+uniform bool use_rim = false;
+
 uniform vec3 light_direction = vec3(0.5, 0.5, 0.5);
 
-uniform vec4 albedo_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform vec4 shade_color : hint_color = vec4(0.75, 0.75, 0.75, 1.0);
+uniform vec4 albedo_color: hint_color = vec4(1.0);
+uniform vec4 shade_color: hint_color = vec4(1.0);
 
-uniform float shade_threshold : hint_range(0.0, 1.0) = 0.025;
+uniform vec4 highlight_color: hint_color = vec4(0.75);
+
+uniform vec4 emission: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform float normal_scale: hint_range(-16, 16) = 0.01;
+
+uniform float shade_threshold: hint_range(-1.0, 1.0) = 0.025;
+uniform float shade_softness: hint_range(0.0, 1.0) = 0.025;
+
+uniform float specular_glossiness: hint_range(1.0, 100.0) = 15.0;
+uniform float specular_threshold: hint_range(0.0, 1.0) = 0.5;
+uniform float specular_softness: hint_range(0.0, 1.0) = 0.0;
+
+uniform float rim_threshold: hint_range(0.0, 1.0) = 0.25;
+uniform float rim_softness: hint_range(0.0, 1.0) = 0.0;
+uniform float rim_spread: hint_range(0.0, 1.0) = 0.5;
+
+uniform float shadow_threshold: hint_range(0.0, 1.0) = 0.5;
+uniform float shadow_softness: hint_range(0.0, 1.0) = 0.1;
+
+uniform float emission_energy = 0.0;
+
+uniform sampler2D texture_albedo: hint_albedo;
+uniform sampler2D texture_normal: hint_normal;
+uniform sampler2D texture_emission: hint_black_albedo;
+uniform sampler2D texture_screen;
+uniform float screen_scale = 10.0;
+
+uniform vec3 uv_scale = vec3(1.0, 1.0, 1.0);
+uniform vec3 uv_offset = vec3(1.0, 0.0, 0.0);
 
 uniform bool use_triplanar = false;
-uniform vec3 uv_scale = vec3(1.0, 1.0, 1.0);
-uniform vec3 uv_offset = vec3(0.0, 0.0, 0.0);
 
-varying vec3 world_position;
-varying vec3 uv_triplanar_pos;
 varying vec3 uv_power_normal;
+varying vec3 uv_triplanar_pos;
+
 varying vec3 world_normal;
 
 void vertex() {
-	world_normal = normalize((WORLD_MATRIX * vec4(NORMAL, 0.0)).xyz);
+	TANGENT = vec3(0.0, 0.0, -1.0) * abs(NORMAL.x);
+	TANGENT+= vec3(1.0, 0.0, 0.0) * abs(NORMAL.y);
+	TANGENT+= vec3(1.0, 0.0, 0.0) * abs(NORMAL.z);
+	TANGENT = normalize(TANGENT);
 
-	uv_triplanar_pos = VERTEX * uv_scale + uv_offset;
-	uv_triplanar_pos *= vec3(1.0, -1.0, 1.0);
+	BINORMAL = vec3(0.0, 1.0, 0.0) * abs(NORMAL.x);
+	BINORMAL+= vec3(0.0, 0.0, -1.0) * abs(NORMAL.y);
+	BINORMAL+= vec3(0.0, 1.0, 0.0) * abs(NORMAL.z);
+	BINORMAL = normalize(BINORMAL);
+
 	uv_power_normal = abs(NORMAL);
 	uv_power_normal /= dot(uv_power_normal, vec3(1.0));
+	uv_triplanar_pos = VERTEX * uv_scale + uv_offset;
+	uv_triplanar_pos *= vec3(1.0, -1.0, 1.0);
+	
+	world_normal = normalize((WORLD_MATRIX * vec4(NORMAL, 0.0)).xyz);
 }
 
-vec4 triplanar_texture(sampler2D sampler, vec2 uv) {
+vec4 triplanar_texture(sampler2D p_sampler, vec2 uv) {
 	vec4 samp = vec4(0.0);
-	if (use_triplanar) {
-		samp += texture(sampler, uv_triplanar_pos.xy) * uv_power_normal.z;
-		samp += texture(sampler, uv_triplanar_pos.xz) * uv_power_normal.y;
-		samp += texture(sampler, uv_triplanar_pos.zy * vec2(-1.0, 1.0)) * uv_power_normal.x;
+
+    if (use_triplanar) {
+	samp += texture(p_sampler, uv_triplanar_pos.xy) * uv_power_normal.z;
+	samp += texture(p_sampler, uv_triplanar_pos.xz) * uv_power_normal.y;
+	samp += texture(p_sampler, uv_triplanar_pos.zy * vec2(-1.0, 1.0)) * uv_power_normal.x;
 	} else {
-		samp = texture(sampler, uv);
+		samp = texture(p_sampler, uv);
 	}
 	return samp;
 }
 
 void fragment() {
-	vec4 texture_color = triplanar_texture(texture_albedo, UV);
-	vec3 base_color = albedo_color.rgb * texture_color.rgb;
+	ALBEDO = albedo_color.rgb * triplanar_texture(texture_albedo, UV).rgb;
+	ALPHA = albedo_color.a * triplanar_texture(texture_albedo, UV).a;  
 
-	float NdotL = dot(world_normal, light_direction);
-	NdotL = smoothstep(0.0, shade_threshold, NdotL);
+	NORMALMAP = triplanar_texture(texture_normal, UV).rgb;
+	NORMALMAP_DEPTH = normal_scale;
 
-	vec3 diffuse = base_color * texture_color.rgb;
-	vec3 shade_effect = mix(vec3(1.0), shade_color.rgb, 1.0 - NdotL);
-
-	ALBEDO = diffuse * shade_effect;
-	ALPHA = texture_color.a;
+	EMISSION = (emission.rgb + triplanar_texture(texture_emission, UV).rgb) * emission_energy;
 }
 
 void light() {
-	vec3 lit_diffuse = ALBEDO;
+	vec2 uv = FRAGCOORD.xy;
 
-	if (light_affected) {
-		lit_diffuse *= LIGHT_COLOR;
+	vec2 tiling_uv = uv / (10.0 * screen_scale * -1.0);
+	vec4 texture_result = texture(texture_screen, tiling_uv);
+
+	float NdotL = dot(world_normal, light_direction);
+	float is_lit = step(shade_threshold, NdotL);
+
+	vec4 base = triplanar_texture(texture_albedo, UV).rgba * albedo_color.rgba * texture_result.rgba;
+	vec4 shade = triplanar_texture(texture_albedo, UV).rgba * shade_color.rgba * texture_result.rgba;
+
+	float shade_value = smoothstep(shade_threshold - shade_softness , shade_threshold + shade_softness, NdotL);
+	
+	vec4 diffuse = mix(shade, base, shade_value);
+
+	if (use_specular) {
+		vec3 half = normalize(VIEW + LIGHT);
+		float NdotH = dot(NORMAL, half);
+
+		float specular_value = pow(NdotH * is_lit, specular_glossiness * specular_glossiness);
+		specular_value = smoothstep(specular_threshold - specular_softness, specular_threshold + specular_softness, specular_value);
+
+		vec4 specular_contribution = highlight_color.rgba * specular_value * is_lit * 1.0;
+		diffuse = mix(diffuse, specular_contribution, specular_value);
 	}
 
-	DIFFUSE_LIGHT = lit_diffuse;
+	if (use_rim) {
+		float iVdotN = 1.0 - dot(VIEW, NORMAL);
+
+		float inverted_rim_threshold = 1.0 - rim_threshold;
+		float inverted_rim_spread = 1.0 - rim_spread;
+
+		float rim_value = iVdotN * pow(NdotL, inverted_rim_spread);
+		rim_value = smoothstep(inverted_rim_threshold - rim_softness, inverted_rim_threshold + rim_softness, rim_value);
+
+		vec4 rim_contribution = highlight_color.rgba * rim_value * is_lit * 1.0;
+		diffuse = mix(diffuse, rim_contribution, rim_value);
+	}
+
+	diffuse *= vec4(1.0, 1.0, 1.0, 1.0);
+
+	if (light_affected) {
+		diffuse *= vec4(LIGHT_COLOR, 1.0);
+	}
+
+	DIFFUSE_LIGHT = diffuse.rgb;
+	ALPHA = diffuse.a;
 }

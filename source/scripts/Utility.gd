@@ -162,12 +162,12 @@ func get_day_from_integer(days_elapsed: int) -> int:
 	return days_of_week[(days_of_week.find(0) + days_elapsed) % 7]
 
 func get_date_info(variable: int, calculator: String) -> String:
+	var result: String
 	var months: Array = [
 		"January", "February", "March", "April",
 		"May", "June", "July", "August",
 		"September", "October", "November", "December"]
 	var weekdays: Array = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-	var result: String
 	match calculator:
 		"year":
 			result = str(first_year() + variable)

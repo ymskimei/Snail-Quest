@@ -12,8 +12,6 @@ onready var hat: MeshInstance = $Armature/Skeleton/BoneAttachment3/Hat
 onready var sticker: MeshInstance = $Armature/Skeleton/BoneAttachment3/Sticker
 onready var anim: AnimationPlayer = $AnimationPlayer
 
-var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-
 var shell_mat: Material = null
 var shell_accent_mat: Material = null
 var shell_body_mat: Material = null
@@ -186,7 +184,7 @@ func load_resource(path) -> void:
 
 func _get_random_amount() -> int:
 	randomize()
-	var num = rng.randi_range(1, rng.randi_range(10, 20))
+	var num = Utility.rng.randi_range(1, Utility.rng.randi_range(10, 20))
 	return num
 
 func get_ramped_random_amount(minimum: float, maximum: float):
@@ -195,7 +193,7 @@ func get_ramped_random_amount(minimum: float, maximum: float):
 	var bias: float = 0.8
 	mean = clamp(mean, minimum, maximum)
 	deviation = clamp(deviation, 0.1, (maximum - minimum) / 2.0)
-	var value = clamp(rng.randfn(mean, deviation), minimum, maximum)
+	var value = clamp(Utility.rng.randfn(mean, deviation), minimum, maximum)
 	return value
 
 func _get_random_color() -> Color:
@@ -343,9 +341,9 @@ func _update_appearance_arrays() -> void:
 	body_patterns.append_array(Utility.get_loaded_files(textures, "entity/snail_body_accent", ".png"))
 	shells.append_array(Utility.get_loaded_files(meshes, "entity/snail_shell", ".mesh"))
 	shell_patterns.append_array(Utility.get_loaded_files(textures, "entity/snail_shell_accent", ".png"))
-	stickers.append_array(Utility.get_loaded_files(textures, "object/sticker", ".png"))
-	hats.append_array(Utility.get_loaded_files(meshes, "object/hat", ".mesh"))
-	hat_patterns.append_array(Utility.get_loaded_files(textures, "object/hat", ".png"))
+	stickers.append_array(Utility.get_loaded_files(textures, "entity/sticker", ".png"))
+	hats.append_array(Utility.get_loaded_files(meshes, "entity/hat", ".mesh"))
+	hat_patterns.append_array(Utility.get_loaded_files(textures, "entity/hat", ".png"))
 
 func update_appearance() -> void:
 	armature.scale = Vector3(identity.get_entity_scale(), identity.get_entity_scale(), identity.get_entity_scale())
@@ -354,26 +352,42 @@ func update_appearance() -> void:
 	body.set_mesh(identity.get_mesh_body())
 	eye_left.set_mesh(identity.get_mesh_eye_left())
 	eye_right.set_mesh(identity.get_mesh_eye_right())
+
 	shell_accent_mat.set_shader_param("texture_albedo", identity.get_pattern_shell())
+
 	eye_left_mat.set_shader_param("texture_albedo", identity.get_pattern_eyes())
 	eye_right_mat.set_shader_param("texture_albedo", identity.get_pattern_eyes())
+
 	shell_mat.set_shader_param("albedo_color", identity.get_color_shell_base())
 	shell_mat.set_shader_param("shade_color", identity.get_color_shell_base().blend(darkener))
+
 	shell_accent_mat.set_shader_param("albedo_color", identity.get_color_shell_accent())
+	shell_accent_mat.set_shader_param("shade_color", identity.get_color_shell_accent())
+
 	shell_body_mat.set_shader_param("albedo_color", identity.get_color_body_base())
 	shell_body_mat.set_shader_param("shade_color", identity.get_color_body_base().blend(darkener))
+
 	body_mat.set_shader_param("specular_color", identity.get_color_body_base().blend(lightener))
 	body_mat.set_shader_param("rim_color", identity.get_color_body_base().blend(lightener))
 	body_mat.set_shader_param("albedo_color", identity.get_color_body_base())
 	body_mat.set_shader_param("shade_color", identity.get_color_body_base().blend(darkener))
+
 	body_accent_mat.set_shader_param("texture_albedo", identity.get_pattern_body())
 	body_accent_mat.set_shader_param("albedo_color", identity.get_color_body_accent())
+
 	eye_left_mat.set_shader_param("albedo_color", identity.get_color_eyes())
+	eye_left_mat.set_shader_param("shade_color", identity.get_color_eyes())
 	eye_right_mat.set_shader_param("albedo_color", identity.get_color_eyes())
+	eye_right_mat.set_shader_param("shade_color", identity.get_color_eyes())
+
 	eyelid_left_mat.set_shader_param("texture_albedo", identity.get_pattern_eyelids())
 	eyelid_right_mat.set_shader_param("texture_albedo", identity.get_pattern_eyelids())
-	eyelid_left_mat.set_shader_param("albedo_color", identity.get_color_body_base().blend(darkener))
-	eyelid_right_mat.set_shader_param("albedo_color", identity.get_color_body_base().blend(darkener))
+
+	eyelid_left_mat.set_shader_param("albedo_color", identity.get_color_body_base())
+	eyelid_right_mat.set_shader_param("albedo_color", identity.get_color_body_base())
+	eyelid_left_mat.set_shader_param("shade_color", identity.get_color_body_base().blend(darkener))
+	eyelid_right_mat.set_shader_param("shade_color", identity.get_color_body_base().blend(darkener))
+
 	hat.set_mesh(identity.get_mesh_hat())
 	hat_mat.set_shader_param("texture_albedo", identity.get_pattern_hat())
 	sticker_mat.set_shader_param("texture_albedo", identity.get_pattern_sticker())

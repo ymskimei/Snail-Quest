@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://import/hat_0.png-9cbed30a1b9544796450b62d3b8c16eb.s3tc.stex"
-path.etc="res://import/hat_0.png-9cbed30a1b9544796450b62d3b8c16eb.etc.stex"
+path.s3tc="res://import/sticker_3.png-3dea26b26dee3ce97eb7cc8397d9a657.s3tc.stex"
+path.etc="res://import/sticker_3.png-3dea26b26dee3ce97eb7cc8397d9a657.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/texture/object/hat_0.png"
-dest_files=[ "res://import/hat_0.png-9cbed30a1b9544796450b62d3b8c16eb.s3tc.stex", "res://import/hat_0.png-9cbed30a1b9544796450b62d3b8c16eb.etc.stex" ]
+source_file="res://assets/texture/entity/sticker/sticker_3.png"
+dest_files=[ "res://import/sticker_3.png-3dea26b26dee3ce97eb7cc8397d9a657.s3tc.stex", "res://import/sticker_3.png-3dea26b26dee3ce97eb7cc8397d9a657.etc.stex" ]
 
 [params]
 

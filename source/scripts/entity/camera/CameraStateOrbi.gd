@@ -49,8 +49,32 @@ func physics_process(delta: float) -> int:
 		rotation.x = (Input.get_action_strength(Device.stick_alt_up) - Input.get_action_strength(Device.stick_alt_down)) * 3
 
 		velocity = velocity.linear_interpolate(rotation * sensitivity, rotation_speed * delta)
+		
 		entity.rotation.y += (deg2rad(velocity.y))
-		entity.rotation.x += (deg2rad(velocity.x))
+		entity.rotation.x += (deg2rad(velocity.x) * 1.2)
+		entity.rotation.x = (clamp(entity.rotation.x, deg2rad(-90), deg2rad(0)))
+		var angle_range: float = Utility.normalize_range(rad2deg(entity.rotation.x), 0, -90)
+
+		entity.set_length(lerp(5, 7, angle_range))
+		entity.lens.set_fov(lerp(50, 70, angle_range))
+
+#	if is_instance_valid(entity.target):
+#		entity.translation.x = lerp(entity.translation.x, entity.target.translation.x, track_speed * delta)
+#		entity.translation.y = lerp(entity.translation.y, entity.target.translation.y + 0.25, track_speed * 0.45 * delta)
+#		entity.translation.z = lerp(entity.translation.z, entity.target.translation.z, track_speed * delta)
+#
+#		rotation.y = (Input.get_action_strength(Device.stick_alt_left) - Input.get_action_strength(Device.stick_alt_right)) * 3
+#		if is_inverted(true):
+#			rotation.y = -rotation.y
+#		rotation.y += (Input.get_action_strength(Device.stick_main_left) - Input.get_action_strength(Device.stick_main_right)) * 1.5
+#
+#		rotation.x = (Input.get_action_strength(Device.stick_alt_up) - Input.get_action_strength(Device.stick_alt_down)) * 3
+#
+#		velocity = velocity.linear_interpolate(rotation * sensitivity, rotation_speed * delta)
+#
+#		entity.rotation.y += (deg2rad(velocity.y))
+#		entity.rotation.x += (deg2rad(velocity.x) * 1.2)
+#		entity.rotation.x = (clamp(entity.rotation.x, deg2rad(-90), deg2rad(0)))
 
 		if Input.is_action_just_pressed(Device.stick_alt_left) or Input.is_action_just_pressed(Device.stick_alt_right):
 			input_spin += 1

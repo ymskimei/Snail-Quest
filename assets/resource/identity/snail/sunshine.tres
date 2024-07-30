@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=13 format=2]
 
-[ext_resource path="res://assets/texture/object/sticker_0.png" type="Texture" id=1]
-[ext_resource path="res://assets/texture/object/hat_0.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/entity/sticker/sticker_0.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/entity/hat/hat_0.png" type="Texture" id=2]
 [ext_resource path="res://assets/model/entity/hat/hat_0.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://source/scripts/resource/ResourceIdentity.gd" type="Script" id=4]
 [ext_resource path="res://assets/texture/trans.png" type="Texture" id=5]

@@ -8,7 +8,7 @@ func _ready() -> void:
 	SnailQuest.set_game_time(self)
 
 func _physics_process(delta: float) -> void:
-	game_time += delta * modifier * 100
+	game_time += delta * modifier
 	if (game_time >= (60 * 24)):
 		game_time = 0.0
 		game_day += 1

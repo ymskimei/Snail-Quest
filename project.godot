@@ -94,15 +94,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://source/scripts/entity/camera/Camera.gd"
 }, {
-"base": "MenuParent",
+"base": "CanvasLayer",
 "class": "Menu",
 "language": "GDScript",
 "path": "res://source/scripts/interface/Menu.gd"
-}, {
-"base": "CanvasLayer",
-"class": "MenuParent",
-"language": "GDScript",
-"path": "res://source/scripts/interface/MenuParent.gd"
 }, {
 "base": "Node",
 "class": "MusicBooth",
@@ -253,7 +248,6 @@ _global_script_class_icons={
 "ItemParent": "",
 "MainCamera": "",
 "Menu": "",
-"MenuParent": "",
 "MusicBooth": "",
 "Options": "",
 "Pushable": "",

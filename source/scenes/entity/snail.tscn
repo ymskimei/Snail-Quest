@@ -370,7 +370,7 @@ states/SnailSpin/node = SubResource( 110 )
 states/SnailSpin/position = Vector2( 541, -183 )
 transitions = [ "SnailIdle", "SnailMove", SubResource( 57 ), "SnailMove", "SnailIdle", SubResource( 58 ), "SnailJump", "SnailFall", SubResource( 61 ), "SnailFall", "SnailIdle", SubResource( 62 ), "SnailFall", "SnailMove", SubResource( 63 ), "SnailRoll", "ShellUnhide", SubResource( 64 ), "ShellUnhide", "SnailJump", SubResource( 65 ), "ShellUnhide", "SnailMove", SubResource( 66 ), "ShellUnhide", "SnailIdle", SubResource( 67 ), "SnailMove", "SnailHide", SubResource( 68 ), "SnailHide", "SnailRoll", SubResource( 69 ), "SnailHide", "SnailHidden", SubResource( 70 ), "SnailHidden", "ShellUnhide", SubResource( 71 ), "SnailHide", "SnailMove", SubResource( 72 ), "SnailHide", "SnailIdle", SubResource( 73 ), "SnailIdle", "SnailHide", SubResource( 74 ), "SnailFall", "SnailGrab", SubResource( 75 ), "SnailJump", "SnailGrab", SubResource( 76 ), "SnailMove", "SnailPress", SubResource( 77 ), "SnailIdle", "SnailPress", SubResource( 78 ), "SnailPress", "SnailPush", SubResource( 79 ), "SnailPush", "SnailIdle", SubResource( 80 ), "SnailPush", "SnailMove", SubResource( 81 ), "SnailFall", "SnailHide", SubResource( 92 ), "SnailJump", "SnailHide", SubResource( 93 ), "SnailHidden", "SnailRoll", SubResource( 94 ), "SnailHidden", "SnailPeelingHorizontal", SubResource( 98 ), "SnailPeelingHorizontal", "SnailRoll", SubResource( 100 ), "SnailPeelingVertical", "SnailPeelingHorizontal", SubResource( 104 ), "SnailPeelingHorizontal", "SnailPeelingVertical", SubResource( 105 ), "SnailPeelingVertical", "SnailHidden", SubResource( 106 ), "SnailPeelingVertical", "SnailRoll", SubResource( 107 ), "SnailPeelingHorizontal", "SnailHidden", SubResource( 108 ), "SnailIdle", "SnailSpin", SubResource( 111 ), "SnailMove", "SnailSpin", SubResource( 112 ), "SnailSpin", "SnailMove", SubResource( 113 ), "SnailSpin", "SnailIdle", SubResource( 114 ), "SnailJump", "SnailSpin", SubResource( 115 ), "SnailSpin", "SnailFall", SubResource( 116 ), "SnailFall", "SnailSpin", SubResource( 117 ), "SnailMove", "SnailFall", SubResource( 118 ), "SnailIdle", "SnailJump", SubResource( 119 ), "SnailMove", "SnailJump", SubResource( 120 ) ]
 start_node = "SnailIdle"
-graph_offset = Vector2( -155, -48 )
+graph_offset = Vector2( 56, -203 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=83]
 
@@ -1556,7 +1556,7 @@ bone_name = "BoneEyeballRight"
 unique_name_in_owner = true
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999324, -0.0351896, -0.0106632, 0.0182686, 0.223477, 0.974536, -0.0319107, -0.974074, 0.223969, -0.154577, 0.719341, -0.56298 )
+transform = Transform( 0.999739, -0.0155681, -0.0166914, 0.0182521, 0.106153, 0.99418, -0.0137057, -0.994228, 0.10641, -0.160039, 0.752798, -0.564783 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -1567,7 +1567,7 @@ material/0 = ExtResource( 7 )
 script = ExtResource( 41 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999387, 0.0314378, -0.0153656, 0.00817627, 0.217151, 0.976102, 0.0340233, -0.975632, 0.216761, 0.1555, 0.721335, -0.562852 )
+transform = Transform( 0.999876, 0.0152511, 0.00392942, -0.00547172, 0.10241, 0.994726, 0.0147683, -0.994626, 0.102481, 0.160124, 0.753786, -0.56485 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]

@@ -6,8 +6,8 @@ uniform bool light_affected = true;
 uniform bool use_specular = false;
 uniform bool use_rim = false;
 
-uniform vec4 albedo_color: hint_color = vec4(1.0);
-uniform vec4 shade_color: hint_color = vec4(1.0);
+uniform vec4 albedo_color: hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 shade_color: hint_color = vec4(1.0, 1.0, 1.0, 0.0);
 
 uniform vec4 highlight_color: hint_color = vec4(0.75);
 
@@ -82,8 +82,6 @@ void fragment() {
 	NORMALMAP = triplanar_texture(texture_normal, UV).rgb;
 	NORMALMAP_DEPTH = normal_scale;
 
-	//AO_LIGHT_AFFECT = ao_light_affect;
-
 	EMISSION = (emission.rgb + triplanar_texture(texture_emission, UV).rgb) * emission_energy;
 }
 
@@ -98,46 +96,44 @@ void light() {
 
 	vec4 base = triplanar_texture(texture_albedo, UV).rgba * albedo_color.rgba * texture_result.rgba;
 	vec4 shade = triplanar_texture(texture_albedo, UV).rgba * shade_color.rgba * texture_result.rgba;
-	vec4 diffuse = base;
 
 	float shade_value = smoothstep(shade_threshold - shade_softness , shade_threshold + shade_softness, NdotL);
-	diffuse = mix(shade, base, shade_value);
-
 	float shadow_value = smoothstep(shadow_threshold - shadow_softness ,shadow_threshold + shadow_softness, ATTENUATION.r);
+
 	shade_value = min(shade_value, shadow_value);
 	
-	diffuse = mix(shade, base, shade_value);
-	is_lit = step(shadow_threshold, shade_value);
+	vec4 diffuse = mix(shade, base, shade_value);
 
 	if (use_specular) {
 		vec3 half = normalize(VIEW + LIGHT);
 		float NdotH = dot(NORMAL, half);
-		
+
 		float specular_value = pow(NdotH * is_lit, specular_glossiness * specular_glossiness);
 		specular_value = smoothstep(specular_threshold - specular_softness, specular_threshold + specular_softness, specular_value);
-		
+
 		vec4 specular_contribution = highlight_color.rgba * specular_value * is_lit * 1.0;
 		diffuse = mix(diffuse, specular_contribution, specular_value);
 	}
 
 	if (use_rim) {
 		float iVdotN = 1.0 - dot(VIEW, NORMAL);
-		
+
 		float inverted_rim_threshold = 1.0 - rim_threshold;
 		float inverted_rim_spread = 1.0 - rim_spread;
-		
+
 		float rim_value = iVdotN * pow(NdotL, inverted_rim_spread);
 		rim_value = smoothstep(inverted_rim_threshold - rim_softness, inverted_rim_threshold + rim_softness, rim_value);
-		
+
 		vec4 rim_contribution = highlight_color.rgba * rim_value * is_lit * 1.0;
 		diffuse = mix(diffuse, rim_contribution, rim_value);
 	}
 
 	diffuse *= vec4(1.0, 1.0, 1.0, 1.0);
-	
+
 	if (light_affected) {
 		diffuse *= vec4(LIGHT_COLOR, 1.0);
 	}
+
 	DIFFUSE_LIGHT = diffuse.rgb;
 	ALPHA = diffuse.a;
 }

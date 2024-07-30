@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://import/sticker_4.png-baba3d38f40a53ec6bb3e9f795ac3343.stex"
+path="res://import/hat_2.png-d94174063348d261482ea05e50fb3a1d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/object/sticker_4.png"
-dest_files=[ "res://import/sticker_4.png-baba3d38f40a53ec6bb3e9f795ac3343.stex" ]
+source_file="res://assets/texture/entity/hat/hat_2.png"
+dest_files=[ "res://import/hat_2.png-d94174063348d261482ea05e50fb3a1d.stex" ]
 
 [params]
 
