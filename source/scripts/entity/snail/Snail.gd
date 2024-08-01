@@ -125,14 +125,16 @@ func play_sound_peel(s: bool = false) -> void:
 func play_sound_slam() -> void:
 	Audio.play_pos_sfx(RegistryAudio.snail_slam, get_global_translation(), Utility.rng.randf_range(0.9, 1.1), 0.9)
 
-func play_sound_swipe(index: int = 0) -> void:
+func play_sound_swipe() -> void:
+	var index: int = Utility.rng.randi_range(0, 2)
+	var pitch: float = Utility.rng.randf_range(1.0, 1.2)
 	match index:
 		1:
-			Audio.play_pos_sfx(RegistryAudio.needle_swipe_1, get_global_translation(), 1.0, 1.7)
+			Audio.play_pos_sfx(RegistryAudio.needle_swipe_1, get_global_translation(), pitch, 1.5)
 		2:
-			Audio.play_pos_sfx(RegistryAudio.needle_swipe_2, get_global_translation(), 1.0, 1.7)
+			Audio.play_pos_sfx(RegistryAudio.needle_swipe_2, get_global_translation(), pitch, 1.5)
 		_:
-			Audio.play_pos_sfx(RegistryAudio.needle_swipe_0, get_global_translation(), 1.0, 1.7)
+			Audio.play_pos_sfx(RegistryAudio.needle_swipe_0, get_global_translation(), pitch, 1.5)
 
 func _on_AffectArea_area_entered(area):
 	if area.is_in_group("liquid"):
@@ -143,3 +145,7 @@ func _on_AffectArea_area_exited(area):
 	if area.is_in_group("liquid"):
 		submerged = false
 		#$MeshInstance.set_visible(false)
+
+func _on_AffectArea_body_entered(body):
+	if body.is_in_group("damage"):
+		set_entity_health(body.get_damage_amount())

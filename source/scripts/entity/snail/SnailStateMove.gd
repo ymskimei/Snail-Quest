@@ -10,6 +10,7 @@ var can_slide: bool = false
 
 func enter() -> void:
 	print("Snail State: MOVE")
+	entity.move_momentum = 0
 	boost_timer = Timer.new()
 	boost_timer.set_wait_time(5.5)
 	boost_timer.one_shot = true

@@ -33,11 +33,11 @@ func physics_process(delta: float) -> int:
 		return State.JUMP
 
 	if entity.is_submerged():
-		set_movement(delta, 1.2 + entity.move_momentum, true, false, 0.9, 0.8)
+		set_movement(delta, 1.0 + entity.move_momentum, true, false, 0.6, 0.8)
 	else:
-		set_movement(delta, 1.2 + entity.move_momentum, true, false, 0.9, 1.0)
+		set_movement(delta, 1.0 + entity.move_momentum, true, false, 0.6, 1.0)
 
-	entity.anim_tree.set("parameters/SnailRoll/TimeScale/scale", entity.direction.length() * 1.75)
+	entity.anim_tree.set("parameters/SnailRoll/TimeScale/scale", entity.direction.length() * 1.2)
 
 	if entity.direction.length() >= 0.1:
 		roll_sound.set_unit_db(linear2db(entity.direction.length()))
@@ -55,4 +55,4 @@ func physics_process(delta: float) -> int:
 func exit() -> void:
 	roll_sound.stop()
 	roll_sound.queue_free()
-	entity.anim.set_speed_scale(1.0)
+	entity.anim_tree.set("parameters/SnailRoll/TimeScale/scale", 1.0)

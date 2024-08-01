@@ -50,10 +50,10 @@ func set_movement(delta: float, modifier: float = 1.0, control: bool = true, rev
 			entity.direction = lerp(entity.direction, temp_input, slide_speed * delta)
 
 		if entity.direction != Vector3.ZERO:
-			var movement: Vector3 = (3.75 * modifier * entity.direction * delta)
+			var movement: Vector3 = modifier * entity.direction
 			if reverse:
 				movement = -movement
-			entity.move_and_slide(movement * 45 * modifier, Vector3.UP, false, 4, deg2rad(75), false)
+			entity.move_and_slide(movement * 2.75 * modifier, Vector3.UP, false, 4, deg2rad(75), false)
 
 		#physics interaction
 

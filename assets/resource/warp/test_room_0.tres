@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource( 1 )
 room_path = "res://source/scenes/world/dev/test_room_0.tscn"
-coordinates = Vector3( 0, 10, 0 )
-direction = "NORTH"
+coordinates = Vector3( -33, 11, -29 )
+direction = "SOUTH"
