@@ -3,6 +3,15 @@ extends SnailState
 func enter() -> void:
 	print("Snail State: IDLE")
 	entity.anim_states.travel("SnailIdle")
+	var amount: int = 0
+	match entity.get_entity_identity().get_entity_personality():
+		1:
+			amount = 1.0
+		2:
+			amount = -1.0
+		_:
+			amount = 0.0
+	entity.anim_tree.set("parameters/SnailIdle/Blend3/blend_amount", amount)
 	entity.move_momentum = 0
 	entity.boosting = false
 
@@ -17,7 +26,6 @@ func unhandled_input(event: InputEvent) -> int:
 
 func physics_process(delta: float) -> int:
 	set_movement(delta)
-	set_rotation(delta)
 	boost_momentum()
 
 	if entity.direction.length() >= 0.1:
@@ -28,6 +36,12 @@ func physics_process(delta: float) -> int:
 
 	if !is_on_surface():
 		return State.FALL
+
+	var music_players: Array = Utility.get_group_by_nearest(entity, "music_player")
+	for i in music_players:
+		if entity.get_global_translation().distance_to(i.get_global_translation()) <= 5:
+			entity.anim_states.travel("SnailGrooving")
+			entity.anim_tree.set("parameters/SnailGrooving/TimeScale/scale", i.bpm / 120)
 
 	return State.NULL
 

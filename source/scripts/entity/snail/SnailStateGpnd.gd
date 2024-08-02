@@ -37,9 +37,9 @@ func _on_wait_timeout() -> void:
 
 func exit() -> void:
 	entity.play_sound_slam()
+	Utility.damage(entity, Vector3(1.0, 0.5, 1.0), 1.5)
+	Utility.damage(entity, Vector3(2.0, 0.5, 2.0), 0.5)
 	can_pound = false
-
 	entity.fall_momentum = 0
-
 	wait_timer.queue_free()
 

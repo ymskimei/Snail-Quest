@@ -131,7 +131,7 @@ func on_command_spawn(_console, args: Array) -> void:
 			if SnailQuest.controlled:
 				new_pos = SnailQuest.controlled.global_translation
 				new_rot = SnailQuest.controlled.global_rotation
-			entity.global_translation = new_pos
+			entity.global_translation = new_pos + Vector3(Utility.rng.randf_range(-1.5, 1.5), 10, Utility.rng.randf_range(-1.5, 1.5))
 			entity.global_rotation = Vector3(-new_rot.x, new_rot.y, -new_rot.z)
 		var entity_name = args[0]
 		var plural = "s"

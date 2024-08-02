@@ -16,8 +16,4 @@ func update_bar(body: MeshInstance, health: float, max_health: float) -> void:
 	var amount = int((health / max_health) * 100)
 	new_value = amount
 	if body:
-		if body == SnailQuest.controlled:
-			show()
-			translation.y = body.get_aabb().size.y + 1
-		else:
-			hide()
+		translation.y = body.get_aabb().size.y + 1

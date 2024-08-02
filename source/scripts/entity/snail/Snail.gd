@@ -1,10 +1,9 @@
 class_name Snail
 extends Entity
 
-onready var shell = $"%MeshInstance"
-onready var body = $"%Body"
-onready var eye_left = $"%EyeLeft"
-onready var eye_right = $"%EyeRight"
+onready var body = $Armature/Skeleton/Body
+onready var eye_left = $Armature/Skeleton/BoneAttachment2/EyeLeft
+onready var eye_right = $Armature/Skeleton/BoneAttachment/EyeRight
 
 onready var affect_area: Area = $AffectArea
 
@@ -21,6 +20,8 @@ var can_turn: bool = true
 var can_roll: bool = true
 
 func _ready() -> void:
+	mesh = $Armature/Skeleton/MeshInstance
+	
 	states.ready(self)
 	update_appearance()
 	set_interaction_text("")
@@ -51,9 +52,9 @@ func _on_proximity_exited(b) -> void:
 		enemy_found = false
 
 func update_appearance() -> void:
-	var shell_mat = shell.get_surface_material(0)
-	var shell_opening = shell.get_surface_material(1)
-	var shell_accent_mat = shell.get_surface_material(0).get_next_pass()
+	var shell_mat = mesh.get_surface_material(0)
+	var shell_opening = mesh.get_surface_material(1)
+	var shell_accent_mat = mesh.get_surface_material(0).get_next_pass()
 	var body_mat = body.get_surface_material(0)
 	var body_accent_mat = body.get_surface_material(0).get_next_pass()
 	var eye_left_mat = eye_left.get_surface_material(0).get_next_pass()
@@ -61,7 +62,7 @@ func update_appearance() -> void:
 	var eyelid_left_mat = eye_left.get_surface_material(0).get_next_pass().get_next_pass()
 	var eyelid_right_mat = eye_right.get_surface_material(0).get_next_pass().get_next_pass()
 	if identity:
-		shell.set_mesh(identity.mesh_shell)
+		mesh.set_mesh(identity.mesh_shell)
 		body.set_mesh(identity.mesh_body)
 		eye_left.set_mesh(identity.mesh_eye_left)
 		eye_right.set_mesh(identity.mesh_eye_right)

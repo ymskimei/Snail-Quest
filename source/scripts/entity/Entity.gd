@@ -56,7 +56,6 @@ signal entity_killed(b)
 signal target_updated()
 
 func _ready() -> void:
-	mesh = $"%MeshInstance"
 	_set_display_health()
 	_get_timers()
 	#temp until can be updated from outside

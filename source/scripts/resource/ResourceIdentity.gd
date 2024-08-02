@@ -2,6 +2,7 @@ class_name ResourceIdentity
 extends Resource
 
 export var entity_name: String = "???"
+export var entity_personality: int = 0
 export var entity_scale: float = 1.0
 
 export var mesh_shell: Mesh = null
@@ -34,6 +35,12 @@ func set_entity_name(name: String) -> void:
 
 func get_entity_name() -> String:
 	return entity_name
+
+func set_entity_personality(type: int) -> void:
+	entity_personality = type
+
+func get_entity_personality() -> int:
+	return entity_personality
 
 func set_entity_scale(size: float) -> void:
 	entity_scale = size

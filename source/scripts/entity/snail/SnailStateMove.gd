@@ -70,6 +70,7 @@ func physics_process(delta: float) -> int:
 	else:
 		set_movement(delta, 1.0 + entity.move_momentum)
 	entity.anim_tree.set("parameters/SnailMove/TimeScale/scale", entity.direction.length())
+	entity.anim_tree.set("parameters/SnailMove/Blend3/blend_amount", (Input.get_axis(Device.stick_main_left, Device.stick_main_right) * 0.75))
 	if entity.direction.length() <= 0.1:
 		return State.IDLE
 

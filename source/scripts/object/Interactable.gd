@@ -3,7 +3,7 @@ extends KinematicBody
 
 export var dialog: Resource = null
 
-onready var mesh: MeshInstance = $MeshInstance
+onready var mesh: MeshInstance
 
 var target_proxy: Position3D = null
 var character: bool = false

@@ -65,6 +65,7 @@ surfaces/1 = {
 [resource]
 script = ExtResource( 1 )
 entity_name = "Default"
+entity_personality = 0
 entity_scale = 1.0
 mesh_shell = SubResource( 1 )
 mesh_body = ExtResource( 7 )

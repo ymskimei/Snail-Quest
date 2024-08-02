@@ -4,19 +4,16 @@
 [ext_resource path="res://assets/texture/object/radio.png" type="Texture" id=2]
 [ext_resource path="res://assets/texture/object/radio_normal.png" type="Texture" id=3]
 
-
 [resource]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
-shader_param/use_diffuse = true
+shader_param/light_affected = true
 shader_param/use_specular = true
 shader_param/use_rim = true
-shader_param/use_light = true
-shader_param/use_shadow = true
+shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
 shader_param/shade_color = Color( 0.658824, 0.698039, 0.772549, 0.717647 )
-shader_param/specular_color = Color( 1, 1, 1, 1 )
-shader_param/rim_color = Color( 0.517647, 0.560784, 0.596078, 1 )
+shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/normal_scale = -2.0
 shader_param/shade_threshold = 0.0
