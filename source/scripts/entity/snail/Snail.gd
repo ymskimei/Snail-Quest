@@ -146,6 +146,6 @@ func _on_AffectArea_area_exited(area):
 		submerged = false
 		#$MeshInstance.set_visible(false)
 
-func _on_AffectArea_body_entered(body):
-	if body.is_in_group("damage"):
-		set_entity_health(body.get_damage_amount())
+func _on_AffectArea_body_entered(b):
+	if b.is_in_group("damage"):
+		set_entity_health(b.get_damage_amount())

@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Area
 
 onready var mesh: MeshInstance = $MeshInstance
 onready var collision: CollisionShape = $CollisionShape
@@ -12,11 +12,22 @@ func _ready():
 	add_child(damage_timer)
 	damage_timer.start()
 
-func _physics_process(delta: float):
-	for i in get_slide_count():
-		var c = get_slide_collision(i)
-		if c.collider is RigidBody:
-			c.collider.apply_central_impulse(-c.normal * delta)
+func _on_Damager_body_entered(body):
+	if body is RigidBody:
+		var direction: Vector3 = (body.get_global_translation() - get_global_translation()).normalized()
+		body.apply_central_impulse((direction + (Vector3.UP * 0.5)) * 100)
+		play_sound_slap()
+
+func play_sound_slap() -> void:
+	var index: int = Utility.rng.randi_range(0, 2)
+	var pitch: float = Utility.rng.randf_range(0.9, 1.1)
+	match index:
+		1:
+			Audio.play_pos_sfx(RegistryAudio.snail_slap_0, get_global_translation(), pitch, 1.2)
+		2:
+			Audio.play_pos_sfx(RegistryAudio.snail_slap_1, get_global_translation(), pitch, 1.2)
+		_:
+			Audio.play_pos_sfx(RegistryAudio.snail_slap_2, get_global_translation(), pitch, 1.2)
 
 func _on_timer() -> void:
 	queue_free()
@@ -26,3 +37,5 @@ func set_damage_amount(amount: float) -> void:
 
 func get_damage_amount() -> float:
 	return damage_amount
+
+

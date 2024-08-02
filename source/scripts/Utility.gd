@@ -264,7 +264,7 @@ func read_config(path: String, section: String, key: String):
 ## Misc Functions ##
 
 func damage(host: Spatial, size: Vector3 = Vector3(1.0, 1.0, 1.0), amount: float = 1.0) -> void:
-	var damager: KinematicBody = load("res://source/scenes/entity/damager.tscn").instance()
+	var damager: Area = load("res://source/scenes/entity/damager.tscn").instance()
 	host.add_child(damager)
 	damager.set_global_translation(host.get_global_translation())
 	damager.mesh.set_scale(size)
