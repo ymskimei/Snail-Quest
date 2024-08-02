@@ -12,12 +12,9 @@ signal interaction_ended
 
 func _ready() -> void:
 	target_proxy = get_node_or_null("CameraTarget")
-	_set_visibility_enabler()
-
-func _set_visibility_enabler() -> void:
 	var visibility = VisibilityEnabler.new()
-	visibility.pause_animations = true
-	visibility.freeze_bodies = false
+	visibility.set_enabler(VisibilityEnabler.ENABLER_FREEZE_BODIES, false)
+	visibility.set_enabler(VisibilityEnabler.ENABLER_PAUSE_ANIMATIONS, true)
 	add_child(visibility)
 
 func interact():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://source/scripts/world/EnvironmentMaster.gd" type="Script" id=1]
 [ext_resource path="res://assets/texture/environment/moon_waxing.png" type="Texture" id=3]
@@ -82,6 +82,8 @@ resource_local_to_scene = true
 render_priority = -99
 shader = SubResource( 28 )
 shader_param/texture_albedo = SubResource( 30 )
+
+[sub_resource type="SphereShape" id=31]
 
 [node name="EnvironmentMaster" type="Spatial"]
 script = ExtResource( 1 )
@@ -179,3 +181,12 @@ amount = 32
 lifetime = 16.0
 process_material = ExtResource( 10 )
 texture = ExtResource( 11 )
+
+[node name="Area" type="Area" parent="."]
+transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 31 )
+
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]

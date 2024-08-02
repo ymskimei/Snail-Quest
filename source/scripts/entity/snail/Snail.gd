@@ -41,7 +41,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	#update_appearance()
-	states.physics_process(delta)
+	if is_controlled():
+		states.physics_process(delta)
+	else:
+		move_and_slide((Vector3.DOWN * 2) * ProjectSettings.get_setting("physics/3d/default_gravity"), Vector3.UP, false, 8, 0.785398, false)
 
 func _on_proximity_entered(b) -> void:
 	if b is Enemy:

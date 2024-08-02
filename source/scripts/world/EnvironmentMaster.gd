@@ -2,6 +2,7 @@ extends Spatial
 
 export var environment_colors: Texture
 
+onready var area: Area = $Area
 onready var light: Position3D = $Light
 onready var orbital: Position3D = $Orbital
 onready var sky: MeshInstance = $Sky
@@ -20,6 +21,9 @@ var time_twili: int = 1080
 var time_night: int = 1440
 
 var light_sources: Array = []
+var nearby_bodies: Array = []
+
+var lighting_timer = Timer.new()
 
 func _ready() -> void:
 	sky_gradient = sky.get_surface_material(0).get_shader_param("texture_albedo").get_gradient()
@@ -27,11 +31,15 @@ func _ready() -> void:
 	c_map = environment_colors.get_data()
 	c_map.lock()
 
+	lighting_timer.set_wait_time(0.5)
+	add_child(lighting_timer)
+	lighting_timer.start()
+
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(SnailQuest.get_game_time()):
 		time = SnailQuest.get_game_time().get_raw_time()
 
-	if is_instance_valid(SnailQuest.get_camera()) and is_instance_valid(SnailQuest.get_controlled()):
+	if is_instance_valid(SnailQuest.get_camera()):
 		var c = SnailQuest.get_camera().lens.get_global_translation()
 		sky.set_global_translation(c)
 		orbital.set_global_translation(c)
@@ -40,6 +48,13 @@ func _physics_process(delta: float) -> void:
 		sky.set_global_translation(Vector3.ZERO)
 		orbital.set_global_translation(Vector3.ZERO)
 		stars.set_global_translation(Vector3.ZERO)
+
+	if is_instance_valid(SnailQuest.get_controlled()):
+		area.set_global_translation(SnailQuest.get_controlled().get_global_translation())
+	elif is_instance_valid(SnailQuest.get_camera()):
+		area.set_global_translation(SnailQuest.get_camera().lens.get_global_translation())
+	else:
+		area.set_global_translation(Vector3.ZERO)
 
 	var modifier: int = 0
 
@@ -149,7 +164,7 @@ func make_material_unique(base_material: Material) -> Material:
 		return new_material
 	return base_material
 
-func track_light_source(delta, self_location: Vector3, material: Material) -> void:
+func track_light_source(delta, self_location: Vector3, previous_location: Vector3) -> Vector3:
 	var closest_light: Spatial
 	var closest_light_distance: float
 	var closest_light_direction: Vector3
@@ -164,14 +179,13 @@ func track_light_source(delta, self_location: Vector3, material: Material) -> vo
 		else:
 			closest_light = null
 
-	if material.get_shader().has_param("light_direction"):
-		var new_light_direction: Vector3
-		if closest_light:
-			new_light_direction = -(self_location - closest_light.get_global_translation()).normalized()
-		else:
-			new_light_direction = Vector3(0.5, 0.5, 0.5)
-		closest_light_direction = lerp(material.get_shader_param("light_direction"), new_light_direction, 6.0 * delta)
-		material.set_shader_param("light_direction", closest_light_direction)
+	var new_light_direction: Vector3
+	if closest_light:
+		new_light_direction = -(self_location - closest_light.get_global_translation()).normalized()
+	else:
+		new_light_direction = Vector3(0.5, 0.5, 0.5)
+	closest_light_direction = lerp(previous_location, new_light_direction, 6.0 * delta)
+	return closest_light_direction
 
 	#Chucky wrote this:
 	#*************///////////////////////////////------------
@@ -190,3 +204,23 @@ func _get_light_sources(node: Node) -> Array:
 			result.append(n)
 		_get_light_sources(n)
 	return result
+
+func disable_body_activity(node: Node) -> void:
+	for n in node.get_children():
+		if n is Entity or n is RigidBody:
+			n.set_physics_process(false)
+			n.set_visible(false)
+			print("here's one")
+			disable_body_activity(n)
+
+func _on_Area_body_entered(body):
+	if body is Entity or body is RigidBody:
+		body.set_physics_process(true)
+		body.set_visible(true)
+		print("in")
+
+func _on_Area_body_exited(body):
+	if body is Entity or body is RigidBody:
+		body.set_physics_process(false)
+		body.set_visible(false)
+		print("out")

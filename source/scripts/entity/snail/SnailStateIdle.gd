@@ -3,7 +3,7 @@ extends SnailState
 func enter() -> void:
 	print("Snail State: IDLE")
 	entity.anim_states.travel("SnailIdle")
-	var amount: int = 0
+	var amount: float = 0
 	match entity.get_entity_identity().get_entity_personality():
 		1:
 			amount = 1.0

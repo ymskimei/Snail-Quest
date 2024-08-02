@@ -72,7 +72,7 @@ func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 		state.apply_central_impulse(Vector3.UP * 20)
 		orientating = true
 		var timer = Timer.new()
-		timer.set_wait_time(0.4)
+		timer.set_wait_time(0.5)
 		timer.set_one_shot(true)
 		timer.connect("timeout", self, "_on_timeout")
 		add_child(timer)

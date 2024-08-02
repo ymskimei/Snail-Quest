@@ -122,17 +122,19 @@ func on_command_spawn(_console, args: Array) -> void:
 	var path: String = SnailQuest.scene["entity"] + args[0] + ".tscn"
 	var all: Array = Utility.get_files(SnailQuest.scene["entity"], true, true)
 	if path in all:
-		var room = SnailQuest.controlled.get_node("../").get_child(0).get_child(0)
-		var new_pos: Vector3 = SnailQuest.camera.global_translation
-		var new_rot: Vector3 = SnailQuest.camera.global_rotation
+		var room = SnailQuest.get_controlled().get_node("../").get_child(0).get_child(0)
+		var new_pos: Vector3 = SnailQuest.get_camera().get_global_translation()
+		var new_rot: Vector3 = SnailQuest.get_camera().get_global_rotation()
 		for i in args[1]:
 			var entity = load(path).instance()
+			entity.set_physics_process(false)
+			entity.set_visible(false)
 			room.add_child(entity)
-			if SnailQuest.controlled:
-				new_pos = SnailQuest.controlled.global_translation
-				new_rot = SnailQuest.controlled.global_rotation
-			entity.global_translation = new_pos + Vector3(Utility.rng.randf_range(-1.5, 1.5), 10, Utility.rng.randf_range(-1.5, 1.5))
-			entity.global_rotation = Vector3(-new_rot.x, new_rot.y, -new_rot.z)
+			if SnailQuest.get_controlled():
+				new_pos = SnailQuest.get_controlled().get_global_translation()
+				new_rot = SnailQuest.get_controlled().get_global_rotation()
+			entity.set_global_translation(new_pos + Vector3(Utility.rng.randf_range(-1.5, 1.5), 10, Utility.rng.randf_range(-1.5, 1.5)))
+			entity.set_global_rotation(Vector3(-new_rot.x, new_rot.y, -new_rot.z))
 		var entity_name = args[0]
 		var plural = "s"
 		if args[0].ends_with("s") or args[0].ends_with("i"):
@@ -140,5 +142,5 @@ func on_command_spawn(_console, args: Array) -> void:
 		elif args[0].ends_with("y"):
 			entity_name.erase(entity_name.length() - 1, 1)
 			plural = "ies"
-		message = "%s spawned " % SnailQuest.controlled.identity.get_entity_name() + command_console.success_color + "%s %s" % [args[1], entity_name] + plural + "[/color]"
+		message = "%s spawned " % SnailQuest.get_controlled().get_entity_identity().get_entity_name() + command_console.success_color + "%s %s" % [args[1], entity_name] + plural + "[/color]"
 	command_console.send_message(message)
