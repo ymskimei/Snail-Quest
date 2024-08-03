@@ -46,6 +46,25 @@ func _physics_process(delta: float) -> void:
 	else:
 		move_and_slide((Vector3.DOWN * 2) * ProjectSettings.get_setting("physics/3d/default_gravity"), Vector3.UP, false, 8, 0.785398, false)
 
+	anim_states.travel("SnailIdle")
+	var amount: float = 0
+	match get_entity_identity().get_entity_personality():
+		1:
+			amount = 1.0
+		2:
+			amount = -1.0
+		_:
+			amount = 0.0
+	anim_tree.set("parameters/SnailIdle/Blend3/blend_amount", amount)
+
+	var looking_target_distance = SnailQuest.get_controlled().get_global_translation() - get_global_translation().normalized()
+	var looking_direction = Vector2(looking_target_distance.x, looking_target_distance.y)
+	var eye_direction = looking_direction.normalized()
+	var eye_direction_adjusted = Vector2(Utility.adjusted_range(eye_direction.x, -1.0, 1.0, -0.5, 0.5), Utility.adjusted_range(eye_direction.y, -1.0, 1.0, -0.5, 0.5))
+
+	eye_left.get_surface_material(0).get_next_pass().set_shader_param("pupil_position", eye_direction_adjusted)
+	eye_right.get_surface_material(0).get_next_pass().set_shader_param("pupil_position", eye_direction_adjusted)
+
 func _on_proximity_entered(b) -> void:
 	if b is Enemy:
 		enemy_found = true

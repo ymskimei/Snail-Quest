@@ -7,6 +7,9 @@ var rng = RandomNumberGenerator.new()
 func normalize_range(value: float, min_value: float, max_value: float) -> float:
 	return (value - min_value) / (max_value - min_value)
 
+func adjusted_range(value: float, min_in: float, max_in: float, min_out: float, max_out: float):
+	return min_out + (value - min_in) * (max_out - min_out) / (max_in - min_in)
+
 func rigid_look_at(state: PhysicsDirectBodyState, position: Transform, target: Vector3) -> void:
 	var up_dir = Vector3(0, 1, 0)
 	var cur_dir = position.basis.xform(Vector3(0, 0, 1))

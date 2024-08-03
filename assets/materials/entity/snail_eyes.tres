@@ -1,6 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=2]
+[gd_resource type="ShaderMaterial" load_steps=7 format=2]
 
 [ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=1]
+[ext_resource path="res://assets/texture/entity/snail_eye_test.png" type="Texture" id=2]
+[ext_resource path="res://assets/shader/cel_eye.gdshader" type="Shader" id=3]
 [ext_resource path="res://assets/texture/entity/snail_eyelids_top.png" type="Texture" id=5]
 
 [sub_resource type="ShaderMaterial" id=4]
@@ -33,46 +35,26 @@ shader_param/uv_offset = Vector3( 0, 0, 0 )
 shader_param/use_triplanar = false
 shader_param/texture_albedo = ExtResource( 5 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
 render_priority = 1
 next_pass = SubResource( 4 )
-shader = ExtResource( 1 )
-shader_param/light_affected = true
-shader_param/use_specular = false
-shader_param/use_rim = false
-shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
-shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 0.75, 0.75, 0.75, 1 )
-shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/normal_scale = 0.01
-shader_param/shade_threshold = 0.025
-shader_param/shade_softness = 0.025
-shader_param/specular_glossiness = 15.0
-shader_param/specular_threshold = 0.5
-shader_param/specular_softness = 0.0
-shader_param/rim_threshold = 0.25
-shader_param/rim_softness = 0.0
-shader_param/rim_spread = 0.5
-shader_param/shadow_threshold = 0.5
-shader_param/shadow_softness = 0.1
-shader_param/emission_energy = 0.0
-shader_param/screen_scale = 10.0
-shader_param/uv_scale = Vector3( 1, 1, 1 )
-shader_param/uv_offset = Vector3( 0, 0, 0 )
-shader_param/use_triplanar = false
+shader = ExtResource( 3 )
+shader_param/albedo_color = Color( 0.513726, 0.513726, 0.513726, 1 )
+shader_param/pupil_position = Vector2( 0, 0 )
+shader_param/is_right = true
+shader_param/texture_albedo = ExtResource( 2 )
 
 [resource]
 resource_local_to_scene = true
-next_pass = SubResource( 3 )
+next_pass = SubResource( 5 )
 shader = ExtResource( 1 )
 shader_param/light_affected = false
 shader_param/use_specular = false
 shader_param/use_rim = false
 shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 0.75, 0.75, 0.75, 1 )
+shader_param/shade_color = Color( 0.74902, 0.74902, 0.74902, 1 )
 shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/normal_scale = 0.01
