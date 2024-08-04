@@ -25,11 +25,8 @@ func _ready() -> void:
 	states.ready(self)
 	update_appearance()
 	set_interaction_text("")
-	#anim_states.start("SnailIdle")
-#	if character:
-#		char_target.visible = true
-#	elif !character:
-#		char_target.visible = false
+
+	eye_blinking_init(eye_left.get_surface_material(0), eye_right.get_surface_material(0))
 
 func _input(event: InputEvent) -> void:
 	if is_controlled():
@@ -57,14 +54,9 @@ func _physics_process(delta: float) -> void:
 				amount = 0.0
 		anim_tree.set("parameters/SnailIdle/Blend3/blend_amount", amount)
 
-	var looking_target_distance = SnailQuest.get_controlled().get_global_translation() - get_global_translation()
-	looking_target_distance.normalized()
-	var looking_direction: Vector2 = Vector2(looking_target_distance.x, looking_target_distance.y)
-	looking_direction.normalized()
-	var looking_direction_adjusted: Vector2 = Vector2(Utility.adjusted_range(looking_direction.x, -1.0, 1.0, -0.2, 0.2), Utility.adjusted_range(looking_direction.y, -1.0, 1.0, -0.2, 0.2))
-	eye_left.get_surface_material(0).get_next_pass().set_shader_param("pupil_position", looking_direction_adjusted)
-	eye_right.get_surface_material(0).get_next_pass().set_shader_param("pupil_position", looking_direction_adjusted)
-
+	set_looking_target()
+	eye_tracking_behavior(delta, eye_left.get_surface_material(0), eye_right.get_surface_material(0))
+	
 func _on_proximity_entered(b) -> void:
 	if b is Enemy:
 		enemy_found = true

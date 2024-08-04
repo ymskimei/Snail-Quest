@@ -210,17 +210,14 @@ func disable_body_activity(node: Node) -> void:
 		if n is Entity or n is RigidBody:
 			n.set_physics_process(false)
 			n.set_visible(false)
-			print("here's one")
 			disable_body_activity(n)
 
 func _on_Area_body_entered(body):
 	if body is Entity or body is RigidBody:
 		body.set_physics_process(true)
 		body.set_visible(true)
-		print("in")
 
 func _on_Area_body_exited(body):
 	if body is Entity or body is RigidBody:
 		body.set_physics_process(false)
 		body.set_visible(false)
-		print("out")

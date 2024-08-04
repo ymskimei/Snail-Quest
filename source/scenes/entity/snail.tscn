@@ -1,4 +1,4 @@
-[gd_scene load_steps=157 format=2]
+[gd_scene load_steps=165 format=2]
 
 [ext_resource path="res://source/scenes/interface/debug_healthbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scenes/entity/state_controller.tscn" type="PackedScene" id=2]
@@ -47,10 +47,17 @@
 [ext_resource path="res://assets/resource/animation/SnailTurnLeft.tres" type="Animation" id=45]
 [ext_resource path="res://assets/resource/animation/SnailTurnRight.tres" type="Animation" id=46]
 [ext_resource path="res://assets/resource/animation/SnailGrooving.tres" type="Animation" id=47]
+[ext_resource path="res://assets/texture/entity/snail_mood_eyelids_wince.png" type="Texture" id=48]
 [ext_resource path="res://assets/texture/entity/snail_eye_test.png" type="Texture" id=49]
 [ext_resource path="res://assets/texture/entity/snail_eyelids_top.png" type="Texture" id=50]
 [ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=51]
 [ext_resource path="res://assets/shader/cel_eye.gdshader" type="Shader" id=52]
+[ext_resource path="res://assets/texture/entity/snail_mood_eyelids_blink.png" type="Texture" id=53]
+[ext_resource path="res://assets/texture/entity/snail_mood_eyes_angry.png" type="Texture" id=54]
+[ext_resource path="res://assets/texture/entity/snail_mood_eyes_sleepy.png" type="Texture" id=55]
+[ext_resource path="res://assets/texture/entity/snail_mood_eyes_sad.png" type="Texture" id=56]
+[ext_resource path="res://assets/texture/entity/snail_mood_eyelids_tired.png" type="Texture" id=57]
+[ext_resource path="res://assets/texture/entity/snail_mood_eyes_happy.png" type="Texture" id=58]
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
@@ -200,8 +207,6 @@ bind/23/pose = Transform( 1, -2.70234e-16, 2.70234e-16, 2.70234e-16, 1, 7.30266e
 [sub_resource type="SphereShape" id=43]
 
 [sub_resource type="BoxShape" id=30]
-
-[sub_resource type="SphereShape" id=31]
 
 [sub_resource type="AnimationNodeAnimation" id=90]
 animation = "ShellUnhide"
@@ -1455,10 +1460,23 @@ tracks/22/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( -360, 0, 0 ) ]
 }
 
+[sub_resource type="PrismMesh" id=165]
+
+[sub_resource type="SpatialMaterial" id=166]
+flags_unshaded = true
+albedo_color = Color( 0.14902, 1, 0, 1 )
+
 [node name="Snail" type="KinematicBody"]
 collision_mask = 13
 script = ExtResource( 25 )
 identity = ExtResource( 39 )
+blink_texture = ExtResource( 53 )
+wince_texture = ExtResource( 48 )
+tired_texture = ExtResource( 57 )
+sleepy_eye_texture = ExtResource( 55 )
+happy_eye_texture = ExtResource( 58 )
+angry_eye_texture = ExtResource( 54 )
+sad_eye_texture = ExtResource( 56 )
 
 [node name="StateController" parent="." instance=ExtResource( 2 )]
 
@@ -1618,7 +1636,7 @@ bones/23/enabled = true
 bones/23/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999668, -0.0212173, -0.0145987, 0.0172983, 0.133174, 0.99094, -0.019081, -0.990866, 0.133497, -0.157093, 0.734588, -0.563892 )
+transform = Transform( 1, -5.60158e-05, -0.000333047, 0.000333498, 0.000449737, 0.999999, -5.59147e-05, -1, 0.000449915, -0.163997, 0.779776, -0.564609 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -1628,7 +1646,7 @@ material/0 = ExtResource( 7 )
 script = ExtResource( 41 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999786, 0.0198675, -0.00566155, 0.00305277, 0.128937, 0.991647, 0.0204316, -0.991454, 0.128849, 0.157611, 0.736149, -0.563764 )
+transform = Transform( 1, 6.21183e-05, 9.16196e-05, -9.20973e-05, 0.00042312, 0.999999, 6.21285e-05, -1, 0.000423285, 0.163998, 0.779796, -0.564606 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]
@@ -1692,19 +1710,14 @@ transform = Transform( 0.45, 0, 0, 0, 0.5, 0, 0, 0, 0.65, 0, -0.02, 0 )
 shape = SubResource( 43 )
 
 [node name="AffectArea" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42299, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.425, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="AffectArea"]
 transform = Transform( 0.36, 0, 0, 0, 0.5, 0, 0, 0, 0.72, 0, 0.45, 0 )
 shape = SubResource( 30 )
 
-[node name="Proximity" type="Area" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="Proximity"]
-transform = Transform( 15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0 )
-shape = SubResource( 31 )
-
 [node name="DebugHealthBar" parent="." instance=ExtResource( 1 )]
+visible = false
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 82 )
@@ -2037,6 +2050,13 @@ debug_shape_custom_color = Color( 0.333333, 0.835294, 0.901961, 1 )
 visible = false
 
 [node name="Listener" type="Listener" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.12, 0, 0, 0, -0.12, 1.04907e-08, 0, -1.04907e-08, -0.12, 0, 1, 0 )
+mesh = SubResource( 165 )
+material/0 = SubResource( 166 )
+
+[node name="Camera" type="Camera" parent="."]
 
 [connection signal="area_entered" from="AffectArea" to="." method="_on_AffectArea_area_entered"]
 [connection signal="area_exited" from="AffectArea" to="." method="_on_AffectArea_area_exited"]

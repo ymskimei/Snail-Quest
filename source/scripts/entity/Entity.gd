@@ -1,13 +1,18 @@
 class_name Entity
 extends Conversable
 
-export var identity: Resource
-
 onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
 onready var collision: CollisionShape = $CollisionShape
 onready var surface_rays: Spatial = $SurfaceRays
+
 onready var listener: Listener = $Listener
+
+onready var proximity: Area
+
+## Data ##
+
+export var identity: Resource
 
 export var health: int = 10
 export var max_health: int = 10
@@ -16,17 +21,42 @@ export var keys: int = 0
 export var boss_key: bool = false
 export var items: Array = []
 export var strength: int = 1
+
+## Physics ##
+
 export var speed: int = 10
 export var jump: int = 65
 
 var direction: Vector3 = Vector3.ZERO
+var facing: float = 0.0
 
 var fall_momentum: float = 0.0
 var move_momentum: float = 0.0
 var max_momentum: float = 0.5
 var boost_momentum: Vector3 = Vector3.ZERO
 
-var facing: float = 0.0
+## Eyes ##
+
+var freelooking: bool = true
+
+var eyesight: Camera
+var relevent_goal: Interactable
+var looking_target: Interactable
+
+var blink_timer: Timer
+var blink_end_timer: Timer
+
+export var blink_texture: Texture
+export var wince_texture: Texture
+export var tired_texture: Texture
+export var sleepy_eye_texture: Texture
+export var happy_eye_texture: Texture
+export var angry_eye_texture: Texture
+export var sad_eye_texture: Texture
+
+## Misc ##
+
+var targets_list = []
 
 var target = null
 var can_swap_target: bool = true
@@ -58,7 +88,19 @@ signal target_updated()
 func _ready() -> void:
 	_set_display_health()
 	_get_timers()
-	#temp until can be updated from outside
+
+	proximity = Area.new()
+	add_child(proximity)
+	proximity.add_child(CollisionShape.new())
+	proximity.get_child(0).set_shape(SphereShape.new())
+	proximity.set_scale(Vector3(15.0, 15.0, 15.0))
+	proximity.connect("body_entered", self, "_on_Proximity_entered")
+	proximity.connect("body_exited", self, "_on_Proximity_exited")
+
+	eyesight = Camera.new()
+	eyesight.set_zfar(false)
+	eyesight.set_affect_lod(false)
+	add_child(eyesight)
 
 	SnailQuest.camera.connect("target_updated", self, "_on_cam_target_updated")
 	emit_signal("health_changed", health, max_health, is_controlled())
@@ -175,6 +217,97 @@ func update_equipped(point) -> void:
 			equipped_tool.set_name(tool_item.item_name)
 			point.add_child(equipped_tool)
 
+## Eye behavior ##
+
+func set_looking_target() -> void:
+	#looking_target = SnailQuest.get_controlled()
+	if relevent_goal and relevent_goal.get_global_translation().distance_to(get_global_translation()) > 15:
+		looking_target = relevent_goal
+	elif is_controlled():
+		if targets_list.size() > 0:
+			var closest_target: Interactable
+			var min_distance: float = INF
+			for t in targets_list:
+				if is_instance_valid(t):
+					var distance = t.get_global_translation().distance_to(get_global_translation())
+					if distance < min_distance and distance < 10.0:
+						min_distance = distance
+						closest_target = t
+			looking_target = closest_target
+	else:
+		if SnailQuest.get_controlled().get_global_translation().distance_to(get_global_translation()) > 10:
+			looking_target = SnailQuest.get_controlled()
+		elif targets_list.size() > 0:
+			var closest_target: Conversable
+			var min_distance: float = INF
+			for t in targets_list:
+				if is_instance_valid(t):
+					if t is Conversable:
+						var distance = t.get_global_translation().distance_to(get_global_translation())
+						if distance < min_distance and distance < 7.0:
+							min_distance = distance
+							closest_target = t
+			looking_target = closest_target
+
+func eye_tracking_behavior(delta: float, eye_mat_left: Material, eye_mat_right: Material) -> void:
+	if freelooking and looking_target:
+		var previous_looking_direction = eye_mat_left.get_next_pass().get_shader_param("pupil_position")
+
+		var looking_target_direction = looking_target.get_global_translation() - get_global_translation()
+		looking_target_direction = looking_target_direction.rotated(Vector3.UP, -get_global_rotation().y)
+	
+		var looking_direction: Vector2 = Vector2(looking_target_direction.x, looking_target_direction.y)
+		looking_direction = looking_direction.normalized()
+		
+		var looking_direction_adjusted: Vector2	 = Vector2(
+			Utility.adjusted_range(looking_direction.x, -1.0, 1.0, -0.4, 0.4),
+			Utility.adjusted_range(looking_direction.y, -1.0, 1.0, -0.4, 0.4))
+	
+		eye_mat_left.get_next_pass().set_shader_param("pupil_position", lerp(previous_looking_direction, looking_direction_adjusted, 10 * delta))
+		eye_mat_right.get_next_pass().set_shader_param("pupil_position", lerp(previous_looking_direction, looking_direction_adjusted, 10 * delta))
+		$MeshInstance.set_global_translation(Vector3.UP * 2 + looking_target.get_global_translation())
+	else:
+		eye_mat_left.get_next_pass().set_shader_param("pupil_position", Vector2(0, 0))
+		eye_mat_right.get_next_pass().set_shader_param("pupil_position", Vector2(0, 0))
+
+func eye_blinking_init(eye_mat_left: Material, eye_mat_right: Material) -> void:
+	blink_timer = Timer.new()
+	blink_end_timer = Timer.new()
+	blink_timer.set_wait_time(0.1)
+	blink_timer.connect("timeout", self, "_on_blink_timeout", [eye_mat_left.get_next_pass().get_next_pass(), eye_mat_right.get_next_pass().get_next_pass()])
+	blink_end_timer.connect("timeout", self, "_on_blink_end_timeout", [eye_mat_left.get_next_pass().get_next_pass(), eye_mat_right.get_next_pass().get_next_pass()])
+	add_child(blink_timer)
+	add_child(blink_end_timer)
+	blink_timer.start()
+
+func _on_blink_timeout(eyelid_left: Material, eyelid_right: Material) -> void:
+	var blink_length: float = 0.25
+	blink_timer.set_wait_time(Utility.rng.randf_range(4.0, 12.0))
+	if randi() % 64 == 1:
+		blink_length += Utility.rng.randf_range(1.0, 6.0)
+		eyelid_left.set_shader_param("texture_albedo", wince_texture)
+		eyelid_right.set_shader_param("texture_albedo", wince_texture)
+	else:
+		eyelid_left.set_shader_param("texture_albedo", blink_texture)
+		eyelid_right.set_shader_param("texture_albedo", blink_texture)
+	blink_end_timer.set_wait_time(blink_length)
+	blink_end_timer.start()
+
+	if randi() % 2 == 1:
+		freelooking = true
+	else:
+		freelooking = false
+
+func _on_blink_end_timeout(eyelid_left: Material, eyelid_right: Material):
+	if EnvironmentMaster.time > EnvironmentMaster.time_twili or EnvironmentMaster.time < EnvironmentMaster.time_dawn:
+		eyelid_left.set_shader_param("texture_albedo", tired_texture)
+		eyelid_right.set_shader_param("texture_albedo", tired_texture)
+	else:
+		eyelid_left.set_shader_param("texture_albedo", identity.get_pattern_eyelids())
+		eyelid_right.set_shader_param("texture_albedo", identity.get_pattern_eyelids())
+
+## Targeting behavior ##
+
 func target_interact() -> void:
 	var target_distance: float  = target.get_global_translation().distance_to(get_global_translation())
 	var relative_facing: float = target.get_global_transform().basis.z.dot(get_global_transform().origin - target.get_global_transform().origin)
@@ -210,6 +343,16 @@ func get_interaction_text():
 func interact():
 	#trigger_dialog()
 	pass
+
+func _on_Proximity_entered(body) -> void:
+	if body is Interactable and body != self:
+		targets_list.append(body)
+	
+func _on_Proximity_exited(body) -> void:
+	if body is Interactable and body != self:
+		for t in targets_list.size() - 1:
+			if targets_list[t] == body:
+				targets_list.remove(t)
 
 func _on_Area_area_entered(area) -> void:
 	if area.is_in_group("danger"):
