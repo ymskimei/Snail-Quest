@@ -1,14 +1,18 @@
 extends SnailState
 
-var can_pound: bool = false
 var wait_timer: Timer = Timer.new()
 
 func enter() -> void:
-	print("gno")
+	print_state_name(STATE_NAMES, State.HIDE)
+
 	entity.anim_states.travel("SnailHide")
-	#entity.play_sound_swipe(0)
-	can_pound = false
+
+	entity.zero_gravity = true
+	entity.zero_movement = true
+
 	entity.fall_momentum = 0
+	entity.jump_strength = 0
+
 	wait_timer = Timer.new()
 	wait_timer.set_wait_time(0.25)
 	wait_timer.one_shot = true
@@ -17,15 +21,16 @@ func enter() -> void:
 	wait_timer.start()
 
 func physics_process(delta: float) -> int:
-	if can_pound:
+	set_movement(delta, 0.25)
+
+	if !entity.zero_gravity:
 		if entity.fall_momentum <= 10:
 			entity.fall_momentum += 6 * delta
 
-	entity.move_and_collide((Vector3.DOWN * entity.fall_momentum), false)
+	entity.boost_direction = Vector3.DOWN * entity.fall_momentum
 
-	# Checks if entity is on the ground
-	if is_on_surface(true):
-		if entity.direction != Vector3.ZERO:
+	if is_on_surface():
+		if entity.move_direction.length() > 0.01:
 			return State.ROLL
 		else:
 			return State.HIDE
@@ -33,13 +38,14 @@ func physics_process(delta: float) -> int:
 	return State.NULL
 
 func _on_wait_timeout() -> void:
-	can_pound = true
+	entity.zero_gravity = false
+	entity.zero_movement = false
 
 func exit() -> void:
-	entity.play_sound_slam()
-	Utility.damage(entity, Vector3(1.0, 0.5, 1.0), 1.5)
-	Utility.damage(entity, Vector3(2.0, 0.5, 2.0), 0.5)
-	can_pound = false
 	entity.fall_momentum = 0
+
+	Utility.damage(entity, Vector3(2.0, 0.5, 2.0), 0.5, 0.2)
+
+	entity.play_sound_slam()
 	wait_timer.queue_free()
 

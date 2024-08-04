@@ -4,7 +4,8 @@ var sliding_timer: Timer = Timer.new()
 var sliding_end: bool = false
 
 func enter() -> void:
-	print("KYA")
+	print_state_name(STATE_NAMES, State.SLIDE)
+
 	sliding_timer = Timer.new()
 	sliding_timer.set_wait_time(0.6)
 	sliding_timer.one_shot = true
@@ -13,14 +14,14 @@ func enter() -> void:
 	sliding_timer.start()
 
 func physics_process(delta: float) -> int:
-	set_movement(delta, 1.0, false, true)
+	set_movement(delta)
 
 	entity.move_momentum -= 5 * delta
 
 	if sliding_end:
 		return State.MOVE
 
-	if !is_on_surface(true):
+	if !is_on_surface():
 		return State.FALL
 	return State.NULL
 

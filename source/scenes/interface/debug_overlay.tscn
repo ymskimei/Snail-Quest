@@ -18,6 +18,7 @@ margin_right = -20.0
 margin_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_right = 1880.0

@@ -4,12 +4,15 @@ export var identity: Resource = null
 
 onready var armature: Spatial = $Armature
 onready var collision: CollisionShape = $CollisionShape
+
 onready var shell: MeshInstance = $Armature/Skeleton/MeshInstance
 onready var body: MeshInstance = $Armature/Skeleton/Body
 onready var eye_left: MeshInstance = $Armature/Skeleton/BoneAttachment2/EyeLeft
 onready var eye_right: MeshInstance = $Armature/Skeleton/BoneAttachment/EyeRight
+
 onready var hat: MeshInstance = $Armature/Skeleton/BoneAttachment3/Hat
 onready var sticker: MeshInstance = $Armature/Skeleton/BoneAttachment3/Sticker
+
 onready var anim: AnimationPlayer = $AnimationPlayer
 
 var shell_mat: Material = null

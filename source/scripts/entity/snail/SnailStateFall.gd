@@ -9,7 +9,8 @@ var stored_jump_timer: Timer = Timer.new()
 var dive_timer: Timer = Timer.new()
 
 func enter() -> void:
-	print("Snail State: FALL")
+	print_state_name(STATE_NAMES, State.FALL)
+
 	can_dive = false
 	entity.fall_momentum = 0
 
@@ -40,36 +41,32 @@ func enter() -> void:
 
 func unhandled_input(event: InputEvent) -> int:
 	if event.is_action_pressed(Device.action_main):
-		if entity.is_submerged() or is_on_surface(true) or entity.can_late_jump:
+
+		if entity.is_submerged() or is_on_surface() or entity.can_late_jump:
 			return State.JUMP
 		else:
 			entity.jump_in_memory = true
 			stored_jump_timer.start()
+
 	if event.is_action_pressed(Device.trigger_right):
 			return State.GPND
+
 	if event.is_action_pressed(Device.action_alt):
 		return State.SPIN
 
 	return State.NULL
 
 func physics_process(delta: float) -> int:
-	set_rotation(delta)
-	if entity.can_turn:
-		set_movement(delta, 1.3 + (entity.move_momentum * 0.5) * get_gravity(), true, false, 0.5)
-
-	entity.move_and_collide((Vector3.DOWN * 0.45 * entity.fall_momentum) * get_gravity(), false)
+	set_movement(delta, 1.3 + (entity.move_momentum * 0.5), 0.5)
 
 	if entity.fall_momentum <= 10:
 		if entity.boosting:
-			entity.fall_momentum += 1.6 * get_gravity() * delta
+			entity.fall_momentum += 8.5 * delta
 		else:
-			entity.fall_momentum += 3 * get_gravity() * delta
+			entity.fall_momentum += 10.0 * delta
 
-	# Checks if entity is on the ground
-	if is_on_surface(false):
-		if entity.direction.length() >= 0.1:
-#			if entity.move_momentum >= entity.max_momentum:
-#				entity.temporary_exhaustion = true
+	if is_on_surface():
+		if entity.move_direction.length() > 0.01:
 			return State.MOVE
 		else:
 			return State.IDLE
@@ -86,14 +83,17 @@ func _on_dive_timeout() -> void:
 	can_dive = true
 
 func exit() -> void:
-	fall_sound.stop()
-	fall_sound.queue_free()
 	can_dive = false
-	entity.fall_momentum = 0.0
-	entity.move_momentum = entity.move_momentum * 0.333
 	entity.can_turn = true
 	entity.can_late_jump = false
+
+	entity.move_momentum = entity.move_momentum * 0.333
+	entity.fall_momentum = 0.0
+	entity.jump_strength = 0
+
+	fall_sound.stop()
+	fall_sound.queue_free()
+
 	late_jump_timer.queue_free()
 	stored_jump_timer.queue_free()
 	dive_timer.queue_free()
-

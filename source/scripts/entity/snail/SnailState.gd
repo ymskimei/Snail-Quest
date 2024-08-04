@@ -13,19 +13,30 @@ var input_timer: Timer = Timer.new()
 enum State {
 	NULL,
 	FALL,
-
 	IDLE,
 	MOVE,
 	JUMP,
-
 	HIDE,
 	ROLL,
 	JRLL,
-
 	GPND,
 	SLID,
 	SPIN
 }
+
+const STATE_NAMES: Array = [
+	"NULL",
+	"FALL",
+	"IDLE",
+	"MOVE",
+	"JUMP",
+	"HIDE",
+	"ROLL",
+	"JRLL",
+	"GPND",
+	"SLID",
+	"SPIN"
+]
 
 func roll(event) -> bool:
 	if event.is_action_pressed(Device.stick_main_up):

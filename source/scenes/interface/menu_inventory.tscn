@@ -6,8 +6,6 @@
 [ext_resource path="res://assets/texture/interface/menu/container_bag.png" type="Texture" id=4]
 [ext_resource path="res://source/scripts/interface/GuiPopupItem.gd" type="Script" id=5]
 
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "Exit"
 length = 0.2
@@ -59,6 +57,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1100.0
 margin_bottom = -1100.0
+mouse_filter = 1
 color = Color( 0.415686, 0.639216, 0.290196, 0.392157 )
 
 [node name="CenterContainer" type="CenterContainer" parent="Background"]

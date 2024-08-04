@@ -68,7 +68,7 @@ func _ready() -> void:
 	anim.play("SnailSquirm")
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
-	if get_linear_velocity().length() < 0.1:
+	if get_linear_velocity().length() < 0.01:
 		state.apply_central_impulse(Vector3.UP * 20)
 		orientating = true
 		var timer = Timer.new()

@@ -12,25 +12,13 @@ onready var anim: AnimationPlayer = $AnimationPlayer
 
 onready var anim_states: AnimationNodeStateMachinePlayback = anim_tree.get("parameters/playback")
 
-var boosting: bool = false
-#var temporary_exhaustion: bool = false
-
-var can_jump: bool = false
-var can_turn: bool = true
-var can_roll: bool = true
-
 func _ready() -> void:
 	mesh = $Armature/Skeleton/MeshInstance
-	
 	states.ready(self)
 	update_appearance()
 	set_interaction_text("")
 
 	eye_blinking_init(eye_left.get_surface_material(0), eye_right.get_surface_material(0))
-
-func _input(event: InputEvent) -> void:
-	if is_controlled():
-		states.input(event)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_controlled():
@@ -38,8 +26,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	#update_appearance()
+	states.physics_process(delta)
+
 	if is_controlled():
-		states.physics_process(delta)
+		input_direction.x = Input.get_axis(Device.stick_main_left, Device.stick_main_right)
+		input_direction.y = Input.get_axis(Device.stick_main_up, Device.stick_main_down)
 	else:
 		move_and_slide((Vector3.DOWN * 2) * ProjectSettings.get_setting("physics/3d/default_gravity"), Vector3.UP, false, 8, 0.785398, false)
 
@@ -56,7 +47,7 @@ func _physics_process(delta: float) -> void:
 
 	set_looking_target()
 	eye_tracking_behavior(delta, eye_left.get_surface_material(0), eye_right.get_surface_material(0))
-	
+
 func _on_proximity_entered(b) -> void:
 	if b is Enemy:
 		enemy_found = true
@@ -123,7 +114,7 @@ func play_sound_slide(s: bool = false) -> void:
 		Audio.play_pos_sfx(RegistryAudio.snail_slide_forward, get_global_translation(), Utility.rng.randf_range(1.2, 1.3), 0.4)
 
 func play_sound_bounce() -> void:
-	Audio.play_pos_sfx(RegistryAudio.snail_bounce, get_global_translation(), Utility.rng.randf_range(0.8, 1.2), 0.3)
+	Audio.play_pos_sfx(RegistryAudio.snail_bounce, get_global_translation(), Utility.rng.randf_range(1.0, 1.4), 0.3)
 
 func play_sound_hide(s: bool = false) -> void:
 	if s:
@@ -150,6 +141,17 @@ func play_sound_swipe() -> void:
 			Audio.play_pos_sfx(RegistryAudio.needle_swipe_2, get_global_translation(), pitch, 1.5)
 		_:
 			Audio.play_pos_sfx(RegistryAudio.needle_swipe_0, get_global_translation(), pitch, 1.5)
+
+func play_sound_slap() -> void:
+	var index: int = Utility.rng.randi_range(0, 2)
+	var pitch: float = Utility.rng.randf_range(0.9, 1.1)
+	match index:
+		1:
+			Audio.play_pos_sfx(RegistryAudio.snail_slap_0, get_global_translation(), pitch, 0.5)
+		2:
+			Audio.play_pos_sfx(RegistryAudio.snail_slap_1, get_global_translation(), pitch, 0.5)
+		_:
+			Audio.play_pos_sfx(RegistryAudio.snail_slap_2, get_global_translation(), pitch, 0.5)
 
 func _on_AffectArea_area_entered(area):
 	if area.is_in_group("liquid"):

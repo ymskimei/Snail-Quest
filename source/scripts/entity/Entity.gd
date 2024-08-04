@@ -27,17 +27,27 @@ export var strength: int = 1
 export var speed: int = 10
 export var jump: int = 65
 
-var direction: Vector3 = Vector3.ZERO
-var facing: float = 0.0
+var gravity: float = 9.8
+
+var gravity_direction: Vector3 = Vector3.DOWN
+var move_direction: Vector3
+var boost_direction: Vector3
+var jump_strength: float
+
+var facing_angle: float = 0.0
 
 var fall_momentum: float = 0.0
 var move_momentum: float = 0.0
-var max_momentum: float = 0.5
-var boost_momentum: Vector3 = Vector3.ZERO
+var max_momentum: float = 0.4
+
+var zero_gravity: bool = false
+var zero_movement: bool = false
+var mirrored_movement: bool = false
 
 ## Eyes ##
 
 var freelooking: bool = true
+var random_looking_direction: Vector2
 
 var eyesight: Camera
 var relevent_goal: Interactable
@@ -53,6 +63,15 @@ export var sleepy_eye_texture: Texture
 export var happy_eye_texture: Texture
 export var angry_eye_texture: Texture
 export var sad_eye_texture: Texture
+
+## Inputs ##
+
+var input_direction: Vector2
+
+var boosting: bool = false
+var can_jump: bool = false
+var can_turn: bool = true
+var can_roll: bool = true
 
 ## Misc ##
 
@@ -86,24 +105,36 @@ signal entity_killed(b)
 signal target_updated()
 
 func _ready() -> void:
-	_set_display_health()
-	_get_timers()
+	gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-	proximity = Area.new()
-	add_child(proximity)
-	proximity.add_child(CollisionShape.new())
-	proximity.get_child(0).set_shape(SphereShape.new())
-	proximity.set_scale(Vector3(15.0, 15.0, 15.0))
-	proximity.connect("body_entered", self, "_on_Proximity_entered")
-	proximity.connect("body_exited", self, "_on_Proximity_exited")
+	jump_memory_timer.set_wait_time(0.075)
+	jump_memory_timer.one_shot = true
+	jump_memory_timer.connect("timeout", self, "on_jump_memory_timeout")
+	add_child(jump_memory_timer)
+
+	ledge_timer.set_wait_time(1)
+	ledge_timer.one_shot = true
+	ledge_timer.connect("timeout", self, "on_ledge_timeout")
+	add_child(ledge_timer)
 
 	eyesight = Camera.new()
 	eyesight.set_zfar(false)
 	eyesight.set_affect_lod(false)
 	add_child(eyesight)
 
-	SnailQuest.camera.connect("target_updated", self, "_on_cam_target_updated")
+	proximity = Area.new()
+	add_child(proximity)
+
+	proximity.add_child(CollisionShape.new())
+	proximity.get_child(0).set_shape(SphereShape.new())
+	proximity.set_scale(Vector3(15.0, 15.0, 15.0))
+	proximity.connect("body_entered", self, "_on_Proximity_entered")
+	proximity.connect("body_exited", self, "_on_Proximity_exited")
+
+	_set_display_health()
 	emit_signal("health_changed", health, max_health, is_controlled())
+
+	SnailQuest.camera.connect("target_updated", self, "_on_cam_target_updated")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_controlled():
@@ -153,21 +184,29 @@ func _get_viewport_target(dir):
 	return nearest_target
 
 func _physics_process(delta: float) -> void:
+	## Gravity and Movement ##
+
+	var modified_gravity: Vector3 = Vector3.ZERO
+	var modified_movement: Vector3 = Vector3.ZERO
+
+	if !zero_gravity:
+		modified_gravity = gravity_direction * (1.0 + fall_momentum) * gravity * 0.8
+		if is_submerged():
+			modified_gravity = modified_gravity * 0.5
+
+	if !zero_movement:
+		modified_movement = move_direction + (Vector3.UP * jump_strength)
+
+	var movement_vector: Vector3 = modified_gravity + modified_movement + boost_direction
+	move_and_slide(movement_vector, Vector3.UP, false, 4, deg2rad(75), false)
+
+	## Target Search ##
+
 	if is_controlled():
 		all_targets = Utility.get_group_by_nearest(self, "target")
 		if targeting and target:
 			if !global_transform.origin.distance_to(target.global_transform.origin) < 10:
 				target = null
-
-func _get_timers():
-	jump_memory_timer.set_wait_time(0.075)
-	jump_memory_timer.one_shot = true
-	jump_memory_timer.connect("timeout", self, "on_jump_memory_timeout")
-	add_child(jump_memory_timer)
-	ledge_timer.set_wait_time(1)
-	ledge_timer.one_shot = true
-	ledge_timer.connect("timeout", self, "on_ledge_timeout")
-	add_child(ledge_timer)
 
 func set_entity_identity(appearance: Resource) -> void:
 	identity = appearance
@@ -265,10 +304,9 @@ func eye_tracking_behavior(delta: float, eye_mat_left: Material, eye_mat_right: 
 	
 		eye_mat_left.get_next_pass().set_shader_param("pupil_position", lerp(previous_looking_direction, looking_direction_adjusted, 10 * delta))
 		eye_mat_right.get_next_pass().set_shader_param("pupil_position", lerp(previous_looking_direction, looking_direction_adjusted, 10 * delta))
-		$MeshInstance.set_global_translation(Vector3.UP * 2 + looking_target.get_global_translation())
 	else:
-		eye_mat_left.get_next_pass().set_shader_param("pupil_position", Vector2(0, 0))
-		eye_mat_right.get_next_pass().set_shader_param("pupil_position", Vector2(0, 0))
+		eye_mat_left.get_next_pass().set_shader_param("pupil_position", random_looking_direction)
+		eye_mat_right.get_next_pass().set_shader_param("pupil_position", random_looking_direction)
 
 func eye_blinking_init(eye_mat_left: Material, eye_mat_right: Material) -> void:
 	blink_timer = Timer.new()
@@ -293,10 +331,11 @@ func _on_blink_timeout(eyelid_left: Material, eyelid_right: Material) -> void:
 	blink_end_timer.set_wait_time(blink_length)
 	blink_end_timer.start()
 
-	if randi() % 2 == 1:
-		freelooking = true
-	else:
+	if randi() % 4 == 1:
 		freelooking = false
+	else:
+		random_looking_direction = Vector2(Utility.rng.randf_range(-0.4, 0.4), Utility.rng.randf_range(-0.4, 0.4))
+		freelooking = true
 
 func _on_blink_end_timeout(eyelid_left: Material, eyelid_right: Material):
 	if EnvironmentMaster.time > EnvironmentMaster.time_twili or EnvironmentMaster.time < EnvironmentMaster.time_dawn:
@@ -350,9 +389,9 @@ func _on_Proximity_entered(body) -> void:
 	
 func _on_Proximity_exited(body) -> void:
 	if body is Interactable and body != self:
-		for t in targets_list.size() - 1:
-			if targets_list[t] == body:
-				targets_list.remove(t)
+		for t in targets_list:
+			if t == body:
+				targets_list.remove(targets_list.find(t))
 
 func _on_Area_area_entered(area) -> void:
 	if area.is_in_group("danger"):

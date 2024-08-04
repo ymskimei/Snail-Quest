@@ -148,10 +148,12 @@ layer = 0
 follow_viewport_enable = true
 
 [node name="TextureRect" type="ColorRect" parent="Blur"]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 10 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Blur"]
 playback_process_mode = 0
@@ -164,6 +166,7 @@ layer = 10
 [node name="TransitionRect" type="ColorRect" parent="Transition"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 color = Color( 0.188235, 0.188235, 0.188235, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Transition"]
@@ -176,6 +179,7 @@ anims/RESET = SubResource( 16 )
 [node name="MarginContainer" type="MarginContainer" parent="Indicator"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 custom_constants/margin_right = 32
 custom_constants/margin_top = 32
 custom_constants/margin_left = 32

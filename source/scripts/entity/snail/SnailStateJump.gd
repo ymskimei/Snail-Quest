@@ -4,7 +4,8 @@ var jumping: bool = true
 var jump_timer: Timer = Timer.new()
 
 func enter() -> void:
-	print("Snail State: JUMP")
+	print_state_name(STATE_NAMES, State.JUMP)
+
 	entity.anim_states.travel("SnailJump")
 	entity.jump_in_memory = false
 	entity.fall_momentum = 1
@@ -21,23 +22,25 @@ func enter() -> void:
 func unhandled_input(event: InputEvent) -> int:
 	if entity.is_submerged() and event.is_action_pressed(Device.action_main):
 		return State.JUMP
+
 	if event.is_action_released(Device.action_main):
 		jumping = false
+
 	if event.is_action_pressed(Device.trigger_right):
 			return State.GPND
+
 	if event.is_action_pressed(Device.action_alt):
 		return State.SPIN
 
 	return State.NULL
 
 func physics_process(delta: float) -> int:
-	set_movement(delta, 1.2 + (entity.move_momentum * 0.5) * get_gravity(), true, false, 0.6)
-	set_rotation(delta * 0.5)
-	boost_momentum()
-	entity.move_and_collide(((Vector3.UP * 0.2 + entity.boost_momentum) * entity.fall_momentum) * get_gravity(), false)
+	set_movement(delta, 1.6 + (entity.move_momentum * 0.5), 0.6)
+
+	entity.jump_strength = 3 * entity.fall_momentum * entity.gravity
 
 	if !jumping:
-		entity.fall_momentum -= 7 * get_gravity() * delta
+		entity.fall_momentum -= 7 * delta
 	if entity.fall_momentum <= 0:
 
 		return State.FALL

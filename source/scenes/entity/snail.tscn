@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=2]
+[gd_scene load_steps=169 format=2]
 
 [ext_resource path="res://source/scenes/interface/debug_healthbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/scenes/entity/state_controller.tscn" type="PackedScene" id=2]
@@ -58,6 +58,9 @@
 [ext_resource path="res://assets/texture/entity/snail_mood_eyes_sad.png" type="Texture" id=56]
 [ext_resource path="res://assets/texture/entity/snail_mood_eyelids_tired.png" type="Texture" id=57]
 [ext_resource path="res://assets/texture/entity/snail_mood_eyes_happy.png" type="Texture" id=58]
+[ext_resource path="res://assets/model/entity/hat/hat_0.mesh" type="ArrayMesh" id=59]
+[ext_resource path="res://assets/texture/entity/sticker/sticker_1.png" type="Texture" id=60]
+[ext_resource path="res://assets/shader/decal.shader" type="Shader" id=61]
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
@@ -204,6 +207,44 @@ bind/23/name = "Mantle"
 bind/23/bone = -1
 bind/23/pose = Transform( 1, -2.70234e-16, 2.70234e-16, 2.70234e-16, 1, 7.30266e-32, -2.70234e-16, 7.30266e-32, 1, 1.10197e-16, -0.251689, 0.0753158 )
 
+[sub_resource type="SphereMesh" id=165]
+
+[sub_resource type="ShaderMaterial" id=166]
+render_priority = 2
+shader = ExtResource( 61 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/diffuse_color = Color( 1, 1, 1, 1 )
+shader_param/cube_half_size = 1.0
+shader_param/texture_albedo = ExtResource( 60 )
+
+[sub_resource type="ShaderMaterial" id=167]
+render_priority = 3
+shader = ExtResource( 51 )
+shader_param/light_affected = true
+shader_param/use_specular = false
+shader_param/use_rim = false
+shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
+shader_param/albedo_color = Color( 1, 1, 1, 1 )
+shader_param/shade_color = Color( 0.784314, 0.733333, 0.882353, 1 )
+shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/normal_scale = 0.1
+shader_param/shade_threshold = 0.0
+shader_param/shade_softness = 0.0
+shader_param/specular_glossiness = 15.0
+shader_param/specular_threshold = 0.5
+shader_param/specular_softness = 0.0
+shader_param/rim_threshold = 0.25
+shader_param/rim_softness = 0.0
+shader_param/rim_spread = 0.5
+shader_param/shadow_threshold = 0.7
+shader_param/shadow_softness = 0.0
+shader_param/emission_energy = 0.0
+shader_param/screen_scale = 10.0
+shader_param/uv_scale = Vector3( 1, 1, 1 )
+shader_param/uv_offset = Vector3( 1, 0, 0 )
+shader_param/use_triplanar = false
+
 [sub_resource type="SphereShape" id=43]
 
 [sub_resource type="BoxShape" id=30]
@@ -309,9 +350,9 @@ animation = "SnailTurnRight"
 [sub_resource type="AnimationNodeTimeScale" id=85]
 
 [sub_resource type="AnimationNodeBlendTree" id=53]
-graph_offset = Vector2( -412, 26 )
+graph_offset = Vector2( -588.611, 49.8333 )
 nodes/Animation/node = SubResource( 84 )
-nodes/Animation/position = Vector2( -320, 180 )
+nodes/Animation/position = Vector2( -520, 160 )
 nodes/Blend3/node = SubResource( 150 )
 nodes/Blend3/position = Vector2( 0, 120 )
 nodes/SnailTurnLeft/node = SubResource( 151 )
@@ -319,9 +360,9 @@ nodes/SnailTurnLeft/position = Vector2( -320, 60 )
 nodes/SnailTurnRight/node = SubResource( 152 )
 nodes/SnailTurnRight/position = Vector2( -320, 300 )
 nodes/TimeScale/node = SubResource( 85 )
-nodes/TimeScale/position = Vector2( 160, 140 )
+nodes/TimeScale/position = Vector2( -280, 180 )
 nodes/output/position = Vector2( 340, 140 )
-node_connections = [ "Blend3", 0, "SnailTurnLeft", "Blend3", 1, "Animation", "Blend3", 2, "SnailTurnRight", "TimeScale", 0, "Blend3", "output", 0, "TimeScale" ]
+node_connections = [ "Blend3", 0, "SnailTurnLeft", "Blend3", 1, "TimeScale", "Blend3", 2, "SnailTurnRight", "TimeScale", 0, "Animation", "output", 0, "Blend3" ]
 
 [sub_resource type="AnimationNodeAnimation" id=95]
 animation = "SnailPeelingHorizontal"
@@ -549,7 +590,7 @@ states/SnailSpin/node = SubResource( 110 )
 states/SnailSpin/position = Vector2( 541, -183 )
 transitions = [ "SnailIdle", "SnailMove", SubResource( 57 ), "SnailMove", "SnailIdle", SubResource( 58 ), "SnailJump", "SnailFall", SubResource( 61 ), "SnailFall", "SnailIdle", SubResource( 62 ), "SnailFall", "SnailMove", SubResource( 63 ), "SnailRoll", "ShellUnhide", SubResource( 64 ), "ShellUnhide", "SnailJump", SubResource( 65 ), "ShellUnhide", "SnailMove", SubResource( 66 ), "ShellUnhide", "SnailIdle", SubResource( 67 ), "SnailMove", "SnailHide", SubResource( 68 ), "SnailHide", "SnailRoll", SubResource( 69 ), "SnailHide", "SnailHidden", SubResource( 70 ), "SnailHidden", "ShellUnhide", SubResource( 71 ), "SnailHide", "SnailMove", SubResource( 72 ), "SnailHide", "SnailIdle", SubResource( 73 ), "SnailIdle", "SnailHide", SubResource( 74 ), "SnailFall", "SnailGrab", SubResource( 75 ), "SnailJump", "SnailGrab", SubResource( 76 ), "SnailMove", "SnailPress", SubResource( 77 ), "SnailIdle", "SnailPress", SubResource( 78 ), "SnailPress", "SnailPush", SubResource( 79 ), "SnailPush", "SnailIdle", SubResource( 80 ), "SnailPush", "SnailMove", SubResource( 81 ), "SnailFall", "SnailHide", SubResource( 92 ), "SnailJump", "SnailHide", SubResource( 93 ), "SnailHidden", "SnailRoll", SubResource( 94 ), "SnailHidden", "SnailPeelingHorizontal", SubResource( 98 ), "SnailPeelingHorizontal", "SnailRoll", SubResource( 100 ), "SnailPeelingVertical", "SnailPeelingHorizontal", SubResource( 104 ), "SnailPeelingHorizontal", "SnailPeelingVertical", SubResource( 105 ), "SnailPeelingVertical", "SnailHidden", SubResource( 106 ), "SnailPeelingVertical", "SnailRoll", SubResource( 107 ), "SnailPeelingHorizontal", "SnailHidden", SubResource( 108 ), "SnailIdle", "SnailSpin", SubResource( 111 ), "SnailMove", "SnailSpin", SubResource( 112 ), "SnailSpin", "SnailMove", SubResource( 113 ), "SnailSpin", "SnailIdle", SubResource( 114 ), "SnailJump", "SnailSpin", SubResource( 115 ), "SnailSpin", "SnailFall", SubResource( 116 ), "SnailFall", "SnailSpin", SubResource( 117 ), "SnailMove", "SnailFall", SubResource( 118 ), "SnailIdle", "SnailJump", SubResource( 119 ), "SnailMove", "SnailJump", SubResource( 120 ), "SnailIdleHappy", "SnailIdle", SubResource( 144 ), "SnailIdleSad", "SnailIdle", SubResource( 145 ), "SnailIdle", "SnailIdleSad", SubResource( 146 ), "SnailIdle", "SnailIdleHappy", SubResource( 147 ), "SnailGrooving", "SnailIdle", SubResource( 161 ), "SnailIdle", "SnailGrooving", SubResource( 162 ) ]
 start_node = "SnailIdle"
-graph_offset = Vector2( -410, -255 )
+graph_offset = Vector2( -405, -162 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=83]
 
@@ -1460,12 +1501,6 @@ tracks/22/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( -360, 0, 0 ) ]
 }
 
-[sub_resource type="PrismMesh" id=165]
-
-[sub_resource type="SpatialMaterial" id=166]
-flags_unshaded = true
-albedo_color = Color( 0.14902, 1, 0, 1 )
-
 [node name="Snail" type="KinematicBody"]
 collision_mask = 13
 script = ExtResource( 25 )
@@ -1633,10 +1668,10 @@ bones/23/name = "Mantle"
 bones/23/parent = -1
 bones/23/rest = Transform( 1, 2.70234e-16, -2.70234e-16, -2.70234e-16, 1, 3.65133e-32, 2.70234e-16, 3.65133e-32, 1, -2.18294e-17, 0.251689, -0.0753158 )
 bones/23/enabled = true
-bones/23/bound_children = [  ]
+bones/23/bound_children = [ NodePath("BoneAttachment3") ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, -5.60158e-05, -0.000333047, 0.000333498, 0.000449737, 0.999999, -5.59147e-05, -1, 0.000449915, -0.163997, 0.779776, -0.564609 )
+transform = Transform( 0.999584, -0.0254648, -0.0135492, 0.0174653, 0.160453, 0.986887, -0.022957, -0.986715, 0.160832, -0.156338, 0.730008, -0.563618 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -1646,7 +1681,7 @@ material/0 = ExtResource( 7 )
 script = ExtResource( 41 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, 6.21183e-05, 9.16196e-05, -9.20973e-05, 0.00042312, 0.999999, 6.21285e-05, -1, 0.000423285, 0.163998, 0.779796, -0.564606 )
+transform = Transform( 0.999688, 0.0235018, -0.00848254, 0.00472426, 0.155561, 0.987813, 0.0245351, -0.987547, 0.155401, 0.156977, 0.731702, -0.56349 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]
@@ -1704,6 +1739,21 @@ enabled = true
 cast_to = Vector3( 0, -0.5, 0 )
 collision_mask = 12
 debug_shape_custom_color = Color( 0.219608, 0.792157, 0.215686, 1 )
+
+[node name="BoneAttachment3" type="BoneAttachment" parent="Armature/Skeleton"]
+transform = Transform( 0.999988, 0.00099296, 0.00474598, -0.000836969, 0.999463, -0.0327578, -0.00477596, 0.0327534, 0.999452, -2.18294e-17, 0.251689, -0.0753158 )
+bone_name = "Mantle"
+
+[node name="Sticker" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment3"]
+transform = Transform( -1.09278e-08, -0.15, 1.09278e-08, 0, -6.55671e-09, -0.25, 0.25, -6.55671e-09, 4.77671e-16, -0.2, 0.25, 0.15 )
+mesh = SubResource( 165 )
+skeleton = NodePath("../../MeshInstance")
+material/0 = SubResource( 166 )
+
+[node name="Hat" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment3"]
+transform = Transform( 1.1, -2.64698e-23, 0, 2.91168e-23, 1, 0, 0, 0, 1.1, -0.03, 0.45, 0.15 )
+mesh = ExtResource( 59 )
+material/0 = SubResource( 167 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.45, 0, 0, 0, 0.5, 0, 0, 0, 0.65, 0, -0.02, 0 )
@@ -2050,11 +2100,6 @@ debug_shape_custom_color = Color( 0.333333, 0.835294, 0.901961, 1 )
 visible = false
 
 [node name="Listener" type="Listener" parent="."]
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.12, 0, 0, 0, -0.12, 1.04907e-08, 0, -1.04907e-08, -0.12, 0, 1, 0 )
-mesh = SubResource( 165 )
-material/0 = SubResource( 166 )
 
 [node name="Camera" type="Camera" parent="."]
 

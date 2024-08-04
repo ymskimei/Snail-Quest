@@ -1,7 +1,8 @@
 extends SnailState
 
 func enter() -> void:
-	print("Snail State: IDLE")
+	print_state_name(STATE_NAMES, State.IDLE)
+
 	entity.anim_states.travel("SnailIdle")
 	var amount: float = 0
 	match entity.get_entity_identity().get_entity_personality():
@@ -12,30 +13,35 @@ func enter() -> void:
 		_:
 			amount = 0.0
 	entity.anim_tree.set("parameters/SnailIdle/Blend3/blend_amount", amount)
+
 	entity.move_momentum = 0
 	entity.boosting = false
 
 func unhandled_input(event: InputEvent) -> int:
 	if event.is_action_pressed(Device.action_main):
 		return State.JUMP
+
 	if event.is_action_pressed(Device.action_alt):
 		return State.SPIN
+
 	if event.is_action_pressed(Device.trigger_right):
 		return State.HIDE
+
 	return State.NULL
 
 func physics_process(delta: float) -> int:
 	set_movement(delta)
-	boost_momentum()
-
-	if entity.direction.length() >= 0.1:
-		return State.MOVE
-	
-	if entity.jump_in_memory or entity.boost_momentum != Vector3.ZERO:
-		return State.JUMP
 
 	if !is_on_surface():
 		return State.FALL
+
+	if entity.move_direction.length() > 0.01:
+		return State.MOVE
+
+	if entity.jump_in_memory or entity.boost_direction.length() > 0.01:
+		return State.JUMP
+
+	## Temporary ##
 
 	var music_players: Array = Utility.get_group_by_nearest(entity, "music_player")
 	for i in music_players:

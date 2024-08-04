@@ -1,8 +1,9 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://source/scenes/object/imitation_snail.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/materials/tile/mushroom_wood.tres" type="Material" id=2]
 [ext_resource path="res://assets/texture/interface/snailgen/play.png" type="Texture" id=3]
+[ext_resource path="res://assets/resource/animation/SnailIdle.tres" type="Animation" id=4]
 [ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=24]
 [ext_resource path="res://assets/resource/environment/environment_default.tres" type="Environment" id=26]
 [ext_resource path="res://assets/interface/theme/menu.tres" type="Theme" id=27]
@@ -175,7 +176,7 @@ button_pause = ExtResource( 53 )
 transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 0, -5.278 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Snail"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1, 0 )
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -1.23, 0 )
 mesh = SubResource( 58 )
 material/0 = SubResource( 59 )
 
@@ -184,6 +185,9 @@ transform = Transform( 1.2, 0, 0, 0, 0.1, 0, 0, 0, 1.2, 0, 1, 0 )
 mesh = SubResource( 58 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Snail"]
+anims/SnailIdle = ExtResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( -2.59516e-07, -0.593703, 0.00722472, 6, -2.62268e-08, 0, 3.78963e-08, 0.0866966, 0.0494753, -1, 4.5, -6 )
@@ -212,6 +216,7 @@ texture = ExtResource( 52 )
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 theme = ExtResource( 27 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
@@ -777,10 +782,10 @@ margin_right = 685.0
 margin_bottom = 760.0
 
 [node name="ColorPicker" type="ColorPicker" parent="Control/ColorPicker/MarginContainer/Background2/MarginContainer/VBoxContainer"]
-margin_left = 100.0
-margin_top = 100.0
-margin_right = 721.0
-margin_bottom = 653.0
+margin_left = 116.0
+margin_top = 116.0
+margin_right = 737.0
+margin_bottom = 669.0
 color = Color( 0.760784, 0.490196, 0.490196, 1 )
 edit_alpha = false
 
