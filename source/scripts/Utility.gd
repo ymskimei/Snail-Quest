@@ -275,6 +275,18 @@ func damage(host: Spatial, size: Vector3 = Vector3(1.0, 1.0, 1.0), amount: float
 	damager.collision.set_scale(size)
 	damager.set_damage_amount(amount)
 
+func kinematic_to_physics_body(kinematic_body: Entity) -> RigidBody:
+	var physics_body: RigidBody = kinematic_body.get_physics_body().instance()
+	physics_body.set_entity_identity(kinematic_body.get_entity_identity())
+
+	return physics_body
+
+func physics_to_kinematic_body(physics_body: RigidBody) -> KinematicBody:
+	var kinematic_body: KinematicBody = physics_body.get_kinematic_body().instance()
+	kinematic_body.set_entity_identity(physics_body.get_entity_identity())
+
+	return kinematic_body
+
 func pause(toggle: bool) -> void:
 	if toggle:
 		get_tree().set_deferred("paused", true)

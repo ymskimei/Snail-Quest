@@ -6,8 +6,8 @@ var world = preload("res://source/scenes/world/world.tscn")
 
 var game: Node = null
 var camera: Spatial = null
-var controlled: Spatial = null
-var prev_controlled: Spatial = null
+var controlled: PhysicsBody = null
+var prev_controlled: PhysicsBody = null
 var play_time: Node = null
 var game_time: Node = null
 
@@ -50,21 +50,27 @@ func set_camera(node: Spatial) -> void:
 func get_camera() -> Spatial:
 	return camera
 
-func set_controlled(node: Spatial) -> void:
+func set_controlled(node: PhysicsBody) -> void:
+	if controlled:
+		prev_controlled = controlled
+		if "listener" in prev_controlled:
+			prev_controlled.listener.clear_current()
+
 	controlled = node
+
+	if "listener" in node:
+		node.listener.make_current()
+
 	if node is Entity:
 		node.connect("health_changed", self, "_on_health_changed")
-		node.listener.make_current()
-	elif is_instance_valid(node.listener):
-		prev_controlled.clear_current()
 
-func get_controlled() -> Spatial:
+func get_controlled() -> PhysicsBody:
 	return controlled
 
-func set_prev_controlled(node: Spatial) -> void:
+func set_prev_controlled(node: PhysicsBody) -> void:
 	prev_controlled = node
 
-func get_prev_controlled() -> Spatial:
+func get_prev_controlled() -> PhysicsBody:
 	return prev_controlled
 
 func set_world(node: Node) -> void:

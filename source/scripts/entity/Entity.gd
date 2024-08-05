@@ -1,6 +1,8 @@
 class_name Entity
 extends Conversable
 
+export var fake_body: PackedScene
+
 onready var states: Node = $StateController
 onready var skeleton: Skeleton = $Armature/Skeleton
 onready var collision: CollisionShape = $CollisionShape
@@ -51,7 +53,7 @@ var random_looking_direction: Vector2
 
 var eyesight: Camera
 var relevent_goal: Interactable
-var looking_target: Interactable
+var looking_target: PhysicsBody
 
 var blink_timer: Timer
 var blink_end_timer: Timer
@@ -198,7 +200,7 @@ func _physics_process(delta: float) -> void:
 		modified_movement = move_direction + (Vector3.UP * jump_strength)
 
 	var movement_vector: Vector3 = modified_gravity + modified_movement + boost_direction
-	move_and_slide(movement_vector, Vector3.UP, false, 4, deg2rad(75), false)
+	move_and_slide(movement_vector, Vector3.UP, false, 4, deg2rad(90), false)
 
 	## Target Search ##
 
@@ -274,8 +276,9 @@ func set_looking_target() -> void:
 						closest_target = t
 			looking_target = closest_target
 	else:
-		if SnailQuest.get_controlled().get_global_translation().distance_to(get_global_translation()) > 10:
-			looking_target = SnailQuest.get_controlled()
+		if is_instance_valid(SnailQuest.get_controlled()):
+			if SnailQuest.get_controlled().get_global_translation().distance_to(get_global_translation()) > 10:
+				looking_target = SnailQuest.get_controlled()
 		elif targets_list.size() > 0:
 			var closest_target: Conversable
 			var min_distance: float = INF
@@ -289,7 +292,7 @@ func set_looking_target() -> void:
 			looking_target = closest_target
 
 func eye_tracking_behavior(delta: float, eye_mat_left: Material, eye_mat_right: Material) -> void:
-	if freelooking and looking_target:
+	if freelooking and is_instance_valid(looking_target):
 		var previous_looking_direction = eye_mat_left.get_next_pass().get_shader_param("pupil_position")
 
 		var looking_target_direction = looking_target.get_global_translation() - get_global_translation()

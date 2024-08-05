@@ -166,3 +166,6 @@ func _on_AffectArea_area_exited(area):
 func _on_AffectArea_body_entered(b):
 	if b.is_in_group("damage"):
 		set_entity_health(b.get_damage_amount())
+
+func get_physics_body() -> PackedScene:
+	return fake_body

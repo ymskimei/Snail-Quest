@@ -26,16 +26,16 @@ func get_interaction_text() -> String:
 func camera_override(toggle: bool = true) -> void:
 	if toggle:
 		if target_proxy:
-			SnailQuest.camera.override = target_proxy
+			SnailQuest.get_camera().override = target_proxy
 		else:
-			SnailQuest.camera.override = self
+			SnailQuest.get_camera().override = self
 	else:
-		SnailQuest.camera.override = false
+		SnailQuest.get_camera().override = false
 
 func get_coords(raw: bool = false) -> Vector3:
-	var x = global_transform.origin.x
-	var y = global_transform.origin.y
-	var z = global_transform.origin.z
+	var x = get_global_translation().x
+	var y = get_global_translation().y
+	var z = get_global_translation().z
 	if !raw:
 		x = round(x)
 		y = round(y)

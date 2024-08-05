@@ -26,12 +26,15 @@ func _process(_delta: float) -> void:
 	set_display_game_calendar()
 	set_display_game_time()
 	set_display_play_time()
-	set_display_camera_target()
-	set_display_controlled()
-	set_display_controlled_target()
-	set_display_prev_controlled()
-	set_display_chunk_coords()
-	set_display_coordinates()
+	if is_instance_valid(SnailQuest.get_camera()):
+		set_display_camera_target()
+	if is_instance_valid(SnailQuest.get_controlled()):
+		set_display_controlled()
+		set_display_controlled_target()
+		set_display_chunk_coords()
+		set_display_coordinates()
+	if is_instance_valid(SnailQuest.get_prev_controlled()):
+		set_display_prev_controlled()
 
 func set_display_framerate() -> void:
 	var framerate: int = int(Engine.get_frames_per_second())
@@ -66,14 +69,14 @@ func set_display_play_time() -> void:
 
 func set_display_camera_target() -> void:
 	if SnailQuest.get_camera():
-		if SnailQuest.get_camera().target:
+		if is_instance_valid(SnailQuest.get_camera().target):
 			display_camera_target.set_bbcode(default_color + "Cam Target: %s" % SnailQuest.get_camera().target.name)
 	else:
 		display_camera_target.set_bbcode(default_color + "Cam Target: ??")
 
 func set_display_controlled() -> void:
 	if SnailQuest.get_controlled():
-		display_controlled.set_bbcode(default_color + "Controlling: %s" % SnailQuest.get_controlled().name)
+		display_controlled.set_bbcode(default_color + "Controlling: %s" % SnailQuest.get_controlled().get_entity_identity().get_entity_name())
 	else:
 		display_controlled.set_bbcode(default_color + "Controlling: ??")
 
@@ -85,7 +88,7 @@ func set_display_controlled_target() -> void:
 		display_controlled_target.set_bbcode(default_color + "Target: ??")
 
 func set_display_prev_controlled() -> void:
-	if SnailQuest.prev_controlled:
+	if SnailQuest.get_prev_controlled():
 		display_prev_controlled.set_bbcode(default_color + "Last controlling: %s" % SnailQuest.prev_controlled.name)
 	else:
 		display_prev_controlled.set_bbcode(default_color + "Last controlling: ??")

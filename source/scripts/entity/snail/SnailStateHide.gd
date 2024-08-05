@@ -1,6 +1,6 @@
 extends SnailState
 
-var roll_sound: AudioStreamPlayer3D 
+var roll_sound: AudioStreamPlayer3D
 var slide_timer: Timer
 var spin_timer: Timer
 

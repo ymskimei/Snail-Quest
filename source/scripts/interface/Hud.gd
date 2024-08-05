@@ -69,10 +69,11 @@ func _process(_delta: float) -> void:
 	display_vehicle_boost()
 
 func _physics_process(delta: float) -> void:
-	if is_instance_valid(SnailQuest.controlled) and SnailQuest.controlled.all_targets.size() > 0:
-		cursor_target.show()
-	else:
-		cursor_target.hide()
+	if is_instance_valid(SnailQuest.get_controlled()) and "all_targets" in SnailQuest.get_controlled():
+		if SnailQuest.get_controlled().all_targets.size() > 0:
+			cursor_target.show()
+		else:
+			cursor_target.hide()
 
 func _unhandled_input(event: InputEvent) -> void:
 #	if Input.is_action_just_pressed("action_combat"):

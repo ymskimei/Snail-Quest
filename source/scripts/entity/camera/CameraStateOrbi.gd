@@ -29,12 +29,13 @@ func unhandled_input(event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	if !target_controlled():
 		return State.LOCK
+	
+	if "target" in entity.target and is_instance_valid(entity.target):
+		if  entity.target is VehicleBody:
+			return State.VEHI
 
-	if entity.target is VehicleBody:
-		return State.VEHI
-
-	if is_instance_valid(entity.target) and entity.target.targeting:
-		return State.TARG
+		if entity.target.targeting:
+			return State.TARG
 
 	if is_instance_valid(entity.target):
 		entity.translation.x = lerp(entity.translation.x, entity.target.translation.x, track_speed * delta)

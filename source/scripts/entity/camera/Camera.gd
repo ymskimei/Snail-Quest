@@ -38,11 +38,11 @@ func _update_target() -> void:
 		target = override
 	elif positioner:
 		target = positioner
-	elif SnailQuest.controlled:
-		if SnailQuest.controlled.target_proxy:
-			target = SnailQuest.controlled.target_proxy
+	elif is_instance_valid(SnailQuest.get_controlled()):
+		if "target_proxy" in SnailQuest.get_controlled() and SnailQuest.get_controlled().target_proxy:
+			target = SnailQuest.get_controlled().target_proxy
 		else:
-			target = SnailQuest.controlled
+			target = SnailQuest.get_controlled()
 	else:
 		target = null
 
@@ -50,8 +50,8 @@ func _update_positioner() -> void:
 	var positioners = Utility.get_group_by_nearest(self, "positioner")
 	if positioners.size() > 0:
 		var p = positioners[0]
-		if SnailQuest.controlled and p:
-			var distance = p.get_global_translation().distance_to(SnailQuest.controlled.get_global_translation())
+		if SnailQuest.get_controlled() and p:
+			var distance = p.get_global_translation().distance_to(SnailQuest.get_controlled().get_global_translation())
 			var max_distance = 17
 			if distance < max_distance:
 				positioner = p
@@ -59,9 +59,9 @@ func _update_positioner() -> void:
 				positioner = null
 
 func get_coords(raw: bool = false) -> Vector3:
-	var x = global_transform.origin.x
-	var y = global_transform.origin.y
-	var z = global_transform.origin.z
+	var x = get_global_translation().x
+	var y = get_global_translation().y
+	var z = get_global_translation().z
 	if !raw:
 		x = round(x)
 		y = round(y)

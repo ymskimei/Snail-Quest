@@ -18,10 +18,10 @@ func _ready() -> void:
 
 func _process(_delta: float):
 	if !Device.get_block_input():
-		if !SnailQuest.controlled or get_tree().paused == true:
+		if !SnailQuest.get_controlled() or get_tree().paused == true:
 			hud.hide() 
 			cursor.show()
-		elif SnailQuest.controlled is Entity or VehicleBody:
+		elif SnailQuest.get_controlled() is Entity or VehicleBody:
 			hud.show()
 			cursor.hide()
 
@@ -32,7 +32,7 @@ func _unhandled_input(event: InputEvent):
 	else:
 		if event.is_action_pressed(Device.debug_menu):
 			get_menu(null, debug)
-		if SnailQuest.controlled:
+		if SnailQuest.get_controlled():
 			if event.is_action_pressed(Device.main_0):
 				get_menu(blur, options)
 			if event.is_action_pressed(Device.main_1):

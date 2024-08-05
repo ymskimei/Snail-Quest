@@ -40,7 +40,7 @@ func physics_process(_delta: float) -> int:
 	return State.NULL
 
 func target_controlled() -> bool:
-	if entity.target == SnailQuest.controlled:
+	if entity.target == SnailQuest.get_controlled():
 		return true
 	else:
 		return false

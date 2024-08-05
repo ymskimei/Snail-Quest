@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://source/scripts/object/FakeSnail.gd" type="Script" id=1]
+[ext_resource path="res://assets/resource/animation/SnailHidden.tres" type="Animation" id=3]
 [ext_resource path="res://assets/materials/entity/snail_eyes.tres" type="Material" id=19]
 [ext_resource path="res://assets/model/entity/snail_body.mesh" type="ArrayMesh" id=22]
 [ext_resource path="res://assets/model/entity/snail_shell_1.mesh" type="ArrayMesh" id=23]
@@ -243,28 +244,178 @@ shader_param/use_triplanar = false
 
 [sub_resource type="SphereShape" id=50]
 
-[sub_resource type="Animation" id=62]
+[sub_resource type="Animation" id=90]
 resource_name = "RESET"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Armature:translation")
+length = 0.1
+loop = true
+step = 0.01
+tracks/0/type = "transform"
+tracks/0/path = NodePath("Armature/Skeleton:Mantle")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = {
+tracks/0/keys = PoolRealArray( 0, 1, 1.16624e-17, -0.131445, 0.0197167, -0.193725, -5.23512e-17, 9.53668e-17, 0.981056, 1, 1, 1 )
+tracks/1/type = "transform"
+tracks/1/path = NodePath("Armature/Skeleton:HeadController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = PoolRealArray( 0, 1, -7.7703e-18, -0.565213, -0.0624363, 0, 0, 0, 1, 1, 1, 1 )
+tracks/2/type = "transform"
+tracks/2/path = NodePath("Armature/Skeleton:TailController")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = PoolRealArray( 0, 1, 4.08612e-17, -0.358187, -0.184023, 0, 0, 0, 1, 1, 1, 1 )
+tracks/3/type = "transform"
+tracks/3/path = NodePath("Armature/Skeleton:Foot")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = PoolRealArray( 0, 1, -0.0162719, 0.0750174, 0.412703, -0.603567, 5.84163e-10, -0.0164584, 0.797142, 0.547881, 0.547881, 0.547881 )
+tracks/4/type = "transform"
+tracks/4/path = NodePath("Armature/Skeleton:Tail")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = PoolRealArray( 0, 1, -1.62981e-09, 2.98023e-08, 7.04895e-08, -0.00194243, -8.84084e-10, -5.29667e-05, 0.999998, 0.592545, 0.592546, 0.592546 )
+tracks/5/type = "transform"
+tracks/5/path = NodePath("Armature/Skeleton:Body")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = PoolRealArray( 0, 1, 0.0162719, -0.25147, 0.500929, -0.5536, 0.00226941, 0.0144894, 0.832653, 0.684432, 0.684432, 0.684432 )
+tracks/6/type = "transform"
+tracks/6/path = NodePath("Armature/Skeleton:Head")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = PoolRealArray( 0, 1, -2.56114e-09, 1.19209e-07, 1.39698e-08, -0.00252499, 0.00153618, 3.98048e-05, 0.999996, 0.869022, 0.869022, 0.869022 )
+tracks/7/type = "transform"
+tracks/7/path = NodePath("Armature/Skeleton:StalkController.L")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = PoolRealArray( 0, 1, 0.00200948, -0.297969, 0.268039, -3.48876e-12, 4.65661e-10, -4.65661e-10, 1, 1, 1, 1 )
+tracks/8/type = "transform"
+tracks/8/path = NodePath("Armature/Skeleton:StalkController.R")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = PoolRealArray( 0, 1, -0.0020095, -0.297969, 0.268039, 3.49232e-12, -9.31323e-10, -5.82077e-10, 1, 1, 1, 1 )
+tracks/9/type = "transform"
+tracks/9/path = NodePath("Armature/Skeleton:Stalk4.R")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = PoolRealArray( 0, 1, 7.45058e-09, 0, 5.96046e-08, -0.0798597, 0.0149036, -0.0296196, 0.996255, 1, 1, 1 )
+tracks/10/type = "transform"
+tracks/10/path = NodePath("Armature/Skeleton:Stalk3.R")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = PoolRealArray( 0, 1, -3.95812e-09, -3.72529e-08, 2.14204e-08, 0.162037, 0.0165802, -0.0348364, 0.98603, 1, 1, 1 )
+tracks/11/type = "transform"
+tracks/11/path = NodePath("Armature/Skeleton:Stalk2.R")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = PoolRealArray( 0, 1, -1.11759e-08, 2.23517e-08, 7.86968e-08, 0.336404, 0.017599, -0.0257277, 0.941202, 1, 1, 1 )
+tracks/12/type = "transform"
+tracks/12/path = NodePath("Armature/Skeleton:Stalk1.R")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = PoolRealArray( 0, 1, 7.45058e-09, 9.68575e-08, 2.98023e-08, 0.380503, 0.0149018, -0.00797183, 0.924625, 1, 1, 1 )
+tracks/13/type = "transform"
+tracks/13/path = NodePath("Armature/Skeleton:Eye.R")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = PoolRealArray( 0, 1, -1.86265e-08, 2.98023e-08, -1.49012e-08, 0.280409, 0.00281528, 0.0122459, 0.959799, 1, 1, 1 )
+tracks/14/type = "transform"
+tracks/14/path = NodePath("Armature/Skeleton:EyeCenter.R")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = PoolRealArray( 0, 1, 9.31323e-09, -3.01516e-07, -2.98023e-08, -0.714271, 3.29789e-08, 0.174529, 0.677758, 1, 0.999999, 1 )
+tracks/15/type = "transform"
+tracks/15/path = NodePath("Armature/Skeleton:Stalk4.L")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = PoolRealArray( 0, 1, -7.45058e-09, -1.49012e-08, 5.96046e-08, -0.0798595, -0.0149035, 0.0296196, 0.996255, 1, 1, 1 )
+tracks/16/type = "transform"
+tracks/16/path = NodePath("Armature/Skeleton:Stalk3.L")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = PoolRealArray( 0, 1, -1.06666e-08, -2.98023e-08, -1.11293e-07, 0.162037, -0.0165802, 0.0348364, 0.98603, 1, 1, 1 )
+tracks/17/type = "transform"
+tracks/17/path = NodePath("Armature/Skeleton:Stalk2.L")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = PoolRealArray( 0, 1, 3.72529e-09, 2.23517e-08, 1.234e-08, 0.336404, -0.017599, 0.0257276, 0.941202, 1, 1, 1 )
+tracks/18/type = "transform"
+tracks/18/path = NodePath("Armature/Skeleton:Stalk1.L")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = PoolRealArray( 0, 1, -3.72529e-09, -1.49012e-08, 7.45058e-09, 0.380503, -0.0149018, 0.00797173, 0.924625, 1, 1, 1 )
+tracks/19/type = "transform"
+tracks/19/path = NodePath("Armature/Skeleton:Eye.L")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = PoolRealArray( 0, 1, 2.25846e-08, -2.98023e-08, 8.10251e-08, 0.280408, -0.00281529, -0.0122459, 0.959799, 0.999999, 1, 0.999999 )
+tracks/20/type = "transform"
+tracks/20/path = NodePath("Armature/Skeleton:EyeCenter.L")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = PoolRealArray( 0, 1, -4.65661e-09, -3.09199e-07, -4.47035e-08, -0.714727, -8.25074e-08, -0.174581, 0.677265, 1, 0.999999, 1 )
+tracks/21/type = "value"
+tracks/21/path = NodePath("Armature:translation")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, -0.45, 0.05 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Armature:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
+tracks/22/type = "value"
+tracks/22/path = NodePath("Armature:rotation_degrees")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0.01 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
@@ -1012,7 +1163,7 @@ bones/23/enabled = true
 bones/23/bound_children = [ NodePath("BoneAttachment3") ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, 5.54137e-08, 7.8463e-08, 3.61168e-07, -5.86733e-08, 0.999999, 8.3819e-09, -1, 1.07917e-07, -0.16407, 0.780282, -0.564601 )
+transform = Transform( 0.593056, -0.0252421, -0.0376464, 0.0165078, -0.339798, 0.487888, -0.0422127, -0.487514, -0.338109, -0.0814592, 0.504923, -0.0872917 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -1022,7 +1173,7 @@ mesh = ExtResource( 26 )
 material/0 = ExtResource( 19 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, -5.82077e-08, -9.33669e-08, -3.31365e-07, -5.84405e-08, 0.999999, -1.11759e-08, -1, 1.08383e-07, 0.16407, 0.780282, -0.564601 )
+transform = Transform( 0.593008, -0.00724694, 0.045389, -0.041393, -0.339539, 0.486591, 0.0199822, -0.488293, -0.339029, 0.101928, 0.500872, -0.0901245 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]
@@ -1043,7 +1194,7 @@ material/0 = SubResource( 49 )
 material/1 = SubResource( 47 )
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 1, 2.70234e-16, -2.70234e-16, -2.70234e-16, 1, 3.65133e-32, 2.70234e-16, 3.65133e-32, 1, -2.18294e-17, 0.251689, -0.0753158 )
+transform = Transform( 1, 1.85832e-16, -2.86901e-16, -6.28302e-17, 0.924941, 0.38011, 3.36003e-16, -0.38011, 0.924941, -5.1016e-17, 0.120244, -0.0555991 )
 bone_name = "Mantle"
 
 [node name="Sticker" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment3"]
@@ -1058,13 +1209,15 @@ mesh = ExtResource( 24 )
 material/0 = SubResource( 61 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0 )
+transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.075, 0.1 )
 shape = SubResource( 50 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
-playback_default_blend_time = 0.25
-anims/RESET = SubResource( 62 )
+anims/RESET = SubResource( 90 )
+anims/SnailHidden = ExtResource( 3 )
 anims/SnailHide = SubResource( 70 )
 anims/SnailIdle = SubResource( 71 )
 anims/SnailSquirm = SubResource( 89 )
+
+[node name="Listener" type="Listener" parent="."]

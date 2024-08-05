@@ -15,20 +15,19 @@ func _ready():
 func _on_Damager_body_entered(body):
 	if body is RigidBody:
 		var direction: Vector3 = (body.get_global_translation() - get_global_translation()).normalized()
-		body.apply_central_impulse((direction + (Vector3.UP * 0.5)) * 10)
+		body.apply_central_impulse((direction + (Vector3.UP * 1.35)) * 10)
 
 	if body is Snail and body != SnailQuest.get_controlled():
-		var fake_snail: RigidBody = load("res://source/scenes/object/fake_snail.tscn").instance()
-		fake_snail.set_entity_identity(body.get_entity_identity())
+		body.play_sound_slap()
 
+		var fake_snail = Utility.kinematic_to_physics_body(body)
 		body.get_parent().add_child(fake_snail)
 		fake_snail.set_global_translation(body.get_global_translation())
-
-		body.play_sound_slap()
+		fake_snail.set_global_rotation(Vector3(0, body.get_rotation_degrees().y, 0))
 		body.queue_free()
 
 		var direction: Vector3 = (fake_snail.get_global_translation() - get_global_translation()).normalized()
-		fake_snail.apply_central_impulse((direction + (Vector3.UP * 0.5)) * 10)
+		fake_snail.apply_central_impulse((direction + (Vector3.UP * 5.5)) * 10)
 
 func _on_timer() -> void:
 	queue_free()
