@@ -27,7 +27,7 @@ func _on_Damager_body_entered(body):
 		body.queue_free()
 
 		var direction: Vector3 = (fake_snail.get_global_translation() - get_global_translation()).normalized()
-		fake_snail.apply_central_impulse((direction + (Vector3.UP * 5.5)) * 10)
+		fake_snail.apply_central_impulse((direction + (Vector3.UP * 5.5)) * 2)
 
 func _on_timer() -> void:
 	queue_free()

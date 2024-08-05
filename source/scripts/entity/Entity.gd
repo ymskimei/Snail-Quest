@@ -30,8 +30,9 @@ export var speed: int = 10
 export var jump: int = 65
 
 var gravity: float = 9.8
-
+var surface_normal: Vector3
 var gravity_direction: Vector3 = Vector3.DOWN
+
 var move_direction: Vector3
 var boost_direction: Vector3
 var jump_strength: float
@@ -68,6 +69,7 @@ export var sad_eye_texture: Texture
 
 ## Inputs ##
 
+var modified_input_direction: Vector3
 var input_direction: Vector2
 
 var boosting: bool = false
@@ -186,21 +188,37 @@ func _get_viewport_target(dir):
 	return nearest_target
 
 func _physics_process(delta: float) -> void:
+	## Surface Normal ##
+
+	var norm_avg = Vector3.ZERO
+	var rays_colliding: int = 0
+	for ray in surface_rays.get_children():
+		var r : RayCast = ray
+		if r.is_colliding() and !r.get_collider().is_in_group("slippery"):
+			rays_colliding += 1
+			norm_avg += r.get_collision_normal()
+	if norm_avg:
+		surface_normal = norm_avg / rays_colliding
+	else:
+		surface_normal = Vector3.UP
+
+	global_transform = Utility.apply_surface_align(global_transform, surface_normal)
+
 	## Gravity and Movement ##
 
 	var modified_gravity: Vector3 = Vector3.ZERO
 	var modified_movement: Vector3 = Vector3.ZERO
 
-	if !zero_gravity:
-		modified_gravity = gravity_direction * (1.0 + fall_momentum) * gravity * 0.8
+	if !zero_gravity and !is_on_floor():
+		modified_gravity = gravity_direction * surface_normal * (1.0 + fall_momentum) * gravity * 0.6
 		if is_submerged():
 			modified_gravity = modified_gravity * 0.5
 
 	if !zero_movement:
-		modified_movement = move_direction + (Vector3.UP * jump_strength)
+		modified_movement = move_direction + (surface_normal * jump_strength)
 
 	var movement_vector: Vector3 = modified_gravity + modified_movement + boost_direction
-	move_and_slide(movement_vector, Vector3.UP, false, 4, deg2rad(90), false)
+	move_and_slide_with_snap(movement_vector, Vector3.UP, Vector3.UP, true, 4, deg2rad(45), false)
 
 	## Target Search ##
 

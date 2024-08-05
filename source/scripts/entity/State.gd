@@ -6,35 +6,32 @@ var entity: Entity = null
 func print_state_name(state_names: Array, state: int) -> void:
 	print(entity.get_entity_identity().get_entity_name() + "'s state is " + state_names[state])
 
-func get_surface_normal(raw: bool = false) -> Vector3:
-	var surface_normal = Vector3.ZERO
-	var norm_avg = Vector3.ZERO
-	var rays_colliding := 0
-	for ray in entity.surface_rays.get_children():
-		var r : RayCast = ray
-		if r.is_colliding():
-			if !raw:
-				if r.get_collision_normal().y == -180 or !r.get_collider().is_in_group("slippery"):
-					rays_colliding += 1
-					norm_avg += r.get_collision_normal()
-			else:
-				rays_colliding += 1
-				norm_avg += r.get_collision_normal()
-	if norm_avg:
-		surface_normal = norm_avg / rays_colliding
-	else:
-		surface_normal = Vector3.UP
-	return surface_normal
-
 func set_movement(delta: float, speed_modifier: float = 1.0, turn_modifier: float = 1.0, lerp_speed: float = 20) -> void:
-	var modified_input_direction: Vector3 = (Vector3(entity.input_direction.x * turn_modifier, 0, entity.input_direction.y) * 1.6 * speed_modifier).rotated(Vector3.UP, SnailQuest.get_camera().get_global_rotation().y)
-	entity.move_direction = lerp(modified_input_direction, entity.move_direction, lerp_speed * delta) * 1.75
+	var floor_angle = rad2deg(acos(Vector3.UP.dot(entity.surface_normal)))
+
+	if floor_angle > 45 and floor_angle < 135:
+		entity.modified_input_direction = Vector3(-entity.input_direction.x * turn_modifier, -entity.input_direction.y, 0)
+
+		if entity.is_controlled():
+			entity.modified_input_direction = entity.modified_input_direction.rotated(Vector3.FORWARD, SnailQuest.get_camera().get_global_rotation().x * 0.2)
+
+	else:
+		entity.modified_input_direction = Vector3(entity.input_direction.x * turn_modifier, 0, entity.input_direction.y)
+		if entity.is_controlled():
+			entity.modified_input_direction = entity.modified_input_direction.rotated(Vector3.UP, SnailQuest.get_camera().get_global_rotation().y)
+
+	if floor_angle > 45 and floor_angle < 135:
+		if entity.input_direction.length() > 0.01:
+			entity.facing_angle = atan2(-entity.modified_input_direction.x, -entity.modified_input_direction.y)
+		entity.rotation.z = lerp_angle(entity.rotation.x, entity.facing_angle, 12 * delta)
+	else:
+		if entity.input_direction.length() > 0.01:
+			entity.facing_angle = atan2(-entity.modified_input_direction.x, -entity.modified_input_direction.z)
+		entity.rotation.y = lerp_angle(entity.rotation.y, entity.facing_angle, 12 * delta)
+
+	entity.move_direction = lerp(entity.modified_input_direction * 1.6 * speed_modifier, entity.move_direction, lerp_speed * delta) * 1.75
 	if entity.mirrored_movement:
 		entity.move_direction = -entity.move_direction
-
-	if entity.move_direction != Vector3.ZERO:
-		entity.facing_angle = atan2(-entity.move_direction.x, -entity.move_direction.z)
-	entity.rotation.y = lerp_angle(entity.rotation.y, entity.facing_angle, 12 * delta)
 
 	## physics interaction ##
 

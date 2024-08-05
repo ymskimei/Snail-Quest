@@ -27,7 +27,7 @@ func physics_process(delta: float) -> int:
 		if entity.fall_momentum <= 10:
 			entity.fall_momentum += 6 * delta
 
-	entity.boost_direction = Vector3.DOWN * entity.fall_momentum
+		entity.boost_direction = Vector3.DOWN * 7.5 + Vector3.DOWN * entity.fall_momentum
 
 	if is_on_surface():
 		if entity.move_direction.length() > 0.01:

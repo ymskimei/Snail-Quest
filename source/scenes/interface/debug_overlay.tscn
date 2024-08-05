@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/interface/theme/debug.tres" type="Theme" id=1]
 [ext_resource path="res://source/scenes/interface/debug_console.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/scripts/interface/DebugOverlay.gd" type="Script" id=3]
+[ext_resource path="res://source/scenes/interface/debug_gimbal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://source/scripts/interface/DebugGimbal.gd" type="Script" id=5]
 
 [node name="GuiDebug" type="CanvasLayer"]
 pause_mode = 2
@@ -178,3 +180,6 @@ bbcode_enabled = true
 bbcode_text = "0, 0, 0"
 tab_size = 5
 text = "0, 0, 0"
+
+[node name="DebugGimbal" parent="." instance=ExtResource( 4 )]
+script = ExtResource( 5 )

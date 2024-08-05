@@ -97,7 +97,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	if is_controlled():
-		state.apply_central_impulse(Vector3(input_direction.x, 0, input_direction.y).rotated(Vector3.UP, SnailQuest.get_camera().get_global_rotation().y) * 0.7)
+		state.apply_central_impulse(Vector3(input_direction.x, 0, input_direction.y).rotated(Vector3.UP, SnailQuest.get_camera().get_global_rotation().y) * 0.6)
 		#state.add_torque(Vector3(-0.3, 0, -0.3))
 
 	elif get_linear_velocity().length() < 0.01:

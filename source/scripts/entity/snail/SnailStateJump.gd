@@ -37,7 +37,7 @@ func unhandled_input(event: InputEvent) -> int:
 func physics_process(delta: float) -> int:
 	set_movement(delta, 1.6 + (entity.move_momentum * 0.5), 0.6)
 
-	entity.jump_strength = 3 * entity.fall_momentum * entity.gravity
+	entity.jump_strength = 24 * entity.fall_momentum
 
 	if !jumping:
 		entity.fall_momentum -= 7 * delta
