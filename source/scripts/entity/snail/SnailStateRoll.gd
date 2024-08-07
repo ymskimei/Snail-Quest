@@ -19,9 +19,11 @@ func enter() -> void:
 	shell.set_collision_layer_bit(0, true)
 	shell.is_in_shell = true
 	shell.input_direction = entity.input_direction * 1.5
+	shell.set_linear_velocity(-Vector3(entity.input_direction.x, 0, entity.input_direction.y) * 3)
 
 func _on_queue_timeout() -> void:
 	entity.get_parent().add_child(shell)
+	shell.hide_snail_body()
 	shell.set_global_translation(entity.get_global_translation())
 	shell.set_global_rotation(Vector3(0, entity.get_rotation_degrees().y, 0))
 

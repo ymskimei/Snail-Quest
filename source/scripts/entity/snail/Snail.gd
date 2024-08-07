@@ -12,6 +12,8 @@ onready var anim: AnimationPlayer = $AnimationPlayer
 
 onready var anim_states: AnimationNodeStateMachinePlayback = anim_tree.get("parameters/playback")
 
+var was_just_in_shell: bool = false
+
 func _ready() -> void:
 	mesh = $Armature/Skeleton/MeshInstance
 	states.ready(self)

@@ -36,6 +36,7 @@ func _ready() -> void:
 	var eye_right_mat = eye_right.get_surface_material(0).get_next_pass()
 	var eyelid_left_mat = eye_left.get_surface_material(0).get_next_pass().get_next_pass()
 	var eyelid_right_mat = eye_right.get_surface_material(0).get_next_pass().get_next_pass()
+
 	if identity:
 		mesh.set_mesh(identity.mesh_shell)
 		body.set_mesh(identity.mesh_body)
@@ -87,8 +88,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		input_direction.x = Input.get_axis(Device.stick_main_left, Device.stick_main_right)
 		input_direction.y = Input.get_axis(Device.stick_main_up, Device.stick_main_down)
 
-		if event.is_action_released(Device.trigger_right):
+		if event.is_action_released(Device.trigger_right) or event.is_action_pressed(Device.action_main):
 			var snail: KinematicBody = Utility.physics_to_kinematic_body(self)
+			if event.is_action_pressed(Device.action_main):
+				snail.jump_in_memory = true
+			snail.was_just_in_shell = true
 			get_parent().add_child(snail)
 			snail.set_global_translation(get_global_translation() + Vector3.UP * 0.5)
 			snail.set_global_rotation(Vector3(0, get_rotation_degrees().y, 0))
@@ -97,7 +101,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	if is_controlled():
-		state.apply_central_impulse(Vector3(input_direction.x, 0, input_direction.y).rotated(Vector3.UP, SnailQuest.get_camera().get_global_rotation().y) * 0.6)
+		state.apply_central_impulse(Vector3(input_direction.x, 0, input_direction.y).rotated(Vector3.UP, SnailQuest.get_camera().get_global_rotation().y) * 0.55)
 		#state.add_torque(Vector3(-0.3, 0, -0.3))
 
 	elif get_linear_velocity().length() < 0.01:
@@ -116,6 +120,11 @@ func _on_timeout() -> void:
 	snail.set_global_translation(get_global_translation() + Vector3.UP * 0.3)
 	snail.set_global_rotation(Vector3(0, get_rotation_degrees().y, 0))
 	queue_free()
+
+func hide_snail_body() -> void:
+	body.set_visible(false)
+	eye_left.set_visible(false)
+	eye_right.set_visible(false)
 
 func get_coords(raw: bool = false) -> Vector3:
 	var x = get_global_translation().x

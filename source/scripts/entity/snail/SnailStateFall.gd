@@ -11,6 +11,10 @@ var dive_timer: Timer = Timer.new()
 func enter() -> void:
 	print_state_name(STATE_NAMES, State.FALL)
 
+	if entity.was_just_in_shell:
+		entity.anim_states.travel("SnailHidden")
+		entity.was_just_in_shell = false
+
 	can_dive = false
 	entity.fall_momentum = 0
 
