@@ -182,4 +182,5 @@ tab_size = 5
 text = "0, 0, 0"
 
 [node name="DebugGimbal" parent="." instance=ExtResource( 4 )]
+visible = false
 script = ExtResource( 5 )

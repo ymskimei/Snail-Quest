@@ -1,20 +1,18 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
 
 [ext_resource path="res://assets/texture/entity/agari_trilo_em.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/entity/agari_trilo.png" type="Texture" id=2]
 [ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=3]
-
 
 [resource]
 shader = ExtResource( 3 )
-shader_param/use_diffuse = false
+shader_param/light_affected = true
 shader_param/use_specular = false
 shader_param/use_rim = false
-shader_param/use_light = false
-shader_param/use_shadow = false
+shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
 shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 1, 1, 1, 1 )
-shader_param/specular_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/rim_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/shade_color = Color( 0.772549, 0.768627, 0.776471, 1 )
+shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
 shader_param/emission = Color( 0, 0, 0, 1 )
 shader_param/normal_scale = 0.0
 shader_param/shade_threshold = 0.0
@@ -32,4 +30,5 @@ shader_param/screen_scale = 10.0
 shader_param/uv_scale = Vector3( 1, 1, 1 )
 shader_param/uv_offset = Vector3( 0, 0, 0 )
 shader_param/use_triplanar = false
+shader_param/texture_albedo = ExtResource( 2 )
 shader_param/texture_emission = ExtResource( 1 )

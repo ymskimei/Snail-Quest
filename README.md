@@ -7,10 +7,23 @@ Please feel free to express creative changes and project organization as you may
 
 ## Development Credits:
 ### Programming:
-Mei Yamasaki, James Reynolds
+Mei Yamasaki
+James Reynolds
 
 ### Art Design & 3D Modeling:
-Mei Yamasaki, Kai Futers
+Mei Yamasaki
 
 ### Sound Design & Composing:
 Mei Yamasaki
+Virginia Matthews
+
+## Writing & Story:
+Mei Yamasaki
+Virginia Matthews
+Hailey Marigold
+
+## Bug Testing:
+Trey Johansen
+
+Dedications:
+Ida Akimoto

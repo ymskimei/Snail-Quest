@@ -33,6 +33,8 @@ var gravity: float = 9.8
 var surface_normal: Vector3
 var gravity_direction: Vector3 = Vector3.DOWN
 
+var floor_angle: float = 0.0
+
 var move_direction: Vector3
 var boost_direction: Vector3
 var jump_strength: float
@@ -202,15 +204,16 @@ func _physics_process(delta: float) -> void:
 	else:
 		surface_normal = Vector3.UP
 
-	global_transform = Utility.apply_surface_align(global_transform, surface_normal)
-
 	## Gravity and Movement ##
 
 	var modified_gravity: Vector3 = Vector3.ZERO
 	var modified_movement: Vector3 = Vector3.ZERO
 
+	floor_angle = rad2deg(acos(Vector3.UP.dot(surface_normal)))
+
 	if !zero_gravity and !is_on_floor():
-		modified_gravity = gravity_direction * surface_normal * (1.0 + fall_momentum) * gravity * 0.6
+		modified_gravity = -surface_normal * (1.0 + fall_momentum) * gravity * 0.6
+
 		if is_submerged():
 			modified_gravity = modified_gravity * 0.5
 
@@ -218,7 +221,7 @@ func _physics_process(delta: float) -> void:
 		modified_movement = move_direction + (surface_normal * jump_strength)
 
 	var movement_vector: Vector3 = modified_gravity + modified_movement + boost_direction
-	move_and_slide_with_snap(movement_vector, Vector3.UP, Vector3.UP, true, 4, deg2rad(45), false)
+	move_and_slide_with_snap(movement_vector, surface_normal, Vector3.UP, true, 4, deg2rad(90), false)
 
 	## Target Search ##
 

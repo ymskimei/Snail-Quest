@@ -50,11 +50,17 @@ func compare_distance(a: Spatial, b: Spatial) -> bool:
 		return true
 	return false
 
-func apply_surface_align(tform: Transform, new_up: Vector3) -> Transform:
+func align_from_transform(tform: Transform, new_up: Vector3) -> Transform:
 	tform.basis.y = new_up
 	tform.basis.x = -tform.basis.z.cross(new_up)
 	tform.basis = tform.basis.orthonormalized()
 	return tform
+
+func align_from_vector(vector: Vector3, target: Vector3) -> Vector3:
+	vector = vector.normalized()
+	target = target.normalized()
+	var rotation_quat = Quat(vector.cross(target).normalized(), acos(vector.dot(target)))
+	return rotation_quat.xform(vector)
 
 static func degrees_to_cardinal(angle: float) -> String:
 	var directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]

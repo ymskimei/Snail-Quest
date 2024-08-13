@@ -5,8 +5,6 @@
 [ext_resource path="res://source/scripts/entity/enemy/EnemyAgariTrilo.gd" type="Script" id=3]
 [ext_resource path="res://source/scripts/entity/StateController.gd" type="Script" id=4]
 
-
-
 [sub_resource type="ArrayMesh" id=7]
 resource_name = "trilobite2_Sphere001"
 surfaces/0 = {
@@ -193,12 +191,12 @@ bones/3/name = "Eye.L"
 bones/3/parent = 2
 bones/3/rest = Transform( 0.926019, 0.374723, 0.0455079, -0.373631, 0.892735, 0.251843, 0.053745, -0.250215, 0.966697, -1.44336, 0.773894, 0.52881 )
 bones/3/enabled = true
-bones/3/bound_children = [ NodePath("BoneAttachment") ]
+bones/3/bound_children = [  ]
 bones/4/name = "Eye.R"
 bones/4/parent = 2
 bones/4/rest = Transform( -0.375281, 0.374724, -0.847789, 0.392832, 0.892734, 0.220699, 0.839552, -0.250214, -0.48223, -1.13119, 0.784777, 1.03515 )
 bones/4/enabled = true
-bones/4/bound_children = [ NodePath("BoneAttachment2") ]
+bones/4/bound_children = [  ]
 bones/5/name = "EyeControl"
 bones/5/parent = 2
 bones/5/rest = Transform( -0.524711, 0.344212, 0.778586, -0.0182938, 0.909835, -0.414566, -0.851084, -0.231771, -0.471104, -1.13533, 1.16931, 0.679922 )

@@ -7,29 +7,31 @@ func print_state_name(state_names: Array, state: int) -> void:
 	print(entity.get_entity_identity().get_entity_name() + "'s state is " + state_names[state])
 
 func set_movement(delta: float, speed_modifier: float = 1.0, turn_modifier: float = 1.0, lerp_speed: float = 20) -> void:
-	var floor_angle = rad2deg(acos(Vector3.UP.dot(entity.surface_normal)))
+	#entity.rotation = Vector3.ZERO
+	#entity.rotation = entity.rotation.rotated(Vector3.LEFT, entity.surface_normal.z)
+	#entity.global_transform = Utility.align_from_transform(entity.global_transform, entity.surface_normal)
 
-	if floor_angle > 45 and floor_angle < 135:
-		entity.modified_input_direction = Vector3(-entity.input_direction.x * turn_modifier, -entity.input_direction.y, 0)
+	entity.global_transform = Utility.align_from_transform(entity.global_transform, entity.surface_normal)
 
-		if entity.is_controlled():
-			entity.modified_input_direction = entity.modified_input_direction.rotated(Vector3.FORWARD, SnailQuest.get_camera().get_global_rotation().x * 0.2)
+	entity.modified_input_direction = Vector3(entity.input_direction.x * turn_modifier, 0, entity.input_direction.y)
+	if entity.floor_angle > 90:
+		pass
+	
+	if entity.is_controlled():
+		entity.modified_input_direction = entity.modified_input_direction.rotated(Vector3.UP, SnailQuest.get_camera().get_global_rotation().y)
 
-	else:
-		entity.modified_input_direction = Vector3(entity.input_direction.x * turn_modifier, 0, entity.input_direction.y)
-		if entity.is_controlled():
-			entity.modified_input_direction = entity.modified_input_direction.rotated(Vector3.UP, SnailQuest.get_camera().get_global_rotation().y)
+	entity.modified_input_direction = (entity.modified_input_direction - entity.surface_normal * entity.surface_normal.dot(entity.modified_input_direction)).normalized()
 
-	if floor_angle > 45 and floor_angle < 135:
-		if entity.input_direction.length() > 0.01:
-			entity.facing_angle = atan2(-entity.modified_input_direction.x, -entity.modified_input_direction.y)
-		entity.rotation.z = lerp_angle(entity.rotation.x, entity.facing_angle, 12 * delta)
-	else:
-		if entity.input_direction.length() > 0.01:
-			entity.facing_angle = atan2(-entity.modified_input_direction.x, -entity.modified_input_direction.z)
-		entity.rotation.y = lerp_angle(entity.rotation.y, entity.facing_angle, 12 * delta)
+	if entity.modified_input_direction.length() > 0.01:
+		entity.facing_angle = atan2(-entity.modified_input_direction.x, -entity.modified_input_direction.z)
+	entity.rotation.y = lerp_angle(entity.rotation.y, entity.facing_angle, 12 * delta)
 
-	entity.move_direction = lerp(entity.modified_input_direction * 1.6 * speed_modifier, entity.move_direction, lerp_speed * delta) * 1.75
+	#entity.modified_input_direction = entity.modified_input_direction.rotated(Vector3.LEFT, entity.rotation.x)
+
+	#entity.modified_input_direction = entity.modified_input_direction.rotated(Vector3.LEFT, entity.rotation.x)
+
+
+	entity.move_direction = lerp(entity.move_direction, entity.modified_input_direction * speed_modifier * 4, 24 * delta)
 	if entity.mirrored_movement:
 		entity.move_direction = -entity.move_direction
 
