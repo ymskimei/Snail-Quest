@@ -53,7 +53,7 @@ func physics_process(delta: float) -> int:
 		
 		entity.rotation.y += (deg2rad(velocity.y))
 		entity.rotation.x += (deg2rad(velocity.x) * 1.2)
-		entity.rotation.x = (clamp(entity.rotation.x, deg2rad(-90), deg2rad(0)))
+		#entity.rotation.x = (clamp(entity.rotation.x, deg2rad(-90), deg2rad(0)))
 		var angle_range: float = Utility.normalize_range(rad2deg(entity.rotation.x), 0, -90)
 
 		entity.set_length(lerp(5, 7, angle_range))
