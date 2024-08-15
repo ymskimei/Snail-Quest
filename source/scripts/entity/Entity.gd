@@ -31,10 +31,9 @@ export var jump: int = 65
 
 var gravity: float = 9.8
 var surface_normal: Vector3
-var gravity_direction: Vector3 = Vector3.DOWN
+var distanced_normal: Vector3
 
-var floor_angle: float = 0.0
-
+var facing_direction: Vector3
 var move_direction: Vector3
 var boost_direction: Vector3
 var jump_strength: float
@@ -48,6 +47,7 @@ var max_momentum: float = 0.4
 var zero_gravity: bool = false
 var zero_movement: bool = false
 var mirrored_movement: bool = false
+var on_surface: bool = false
 
 ## Eyes ##
 
@@ -192,24 +192,33 @@ func _get_viewport_target(dir):
 func _physics_process(delta: float) -> void:
 	## Surface Normal ##
 
-	var norm_avg = Vector3.ZERO
-	var rays_colliding: int = 0
+	var norm_avg: Vector3 = Vector3.ZERO
+	var sticky_rays_colliding: int = 0
+	var distanced_norm_avg: Vector3 = Vector3.ZERO
+	var distanced_rays_colliding: int = 0
+	
 	for ray in surface_rays.get_children():
 		var r : RayCast = ray
-		if r.is_colliding() and !r.get_collider().is_in_group("slippery"):
-			rays_colliding += 1
-			norm_avg += r.get_collision_normal()
+		if r.is_colliding():
+			distanced_rays_colliding += 1
+			distanced_norm_avg += r.get_collision_normal()
+
+			if get_global_translation().distance_to(r.get_collision_point()) < 0.5:
+				if r.get_collider().is_in_group("sticky"):
+					sticky_rays_colliding += 1
+					norm_avg += r.get_collision_normal()
+
 	if norm_avg:
-		surface_normal = norm_avg / rays_colliding
+		distanced_normal = distanced_norm_avg / distanced_rays_colliding
+		surface_normal = norm_avg / sticky_rays_colliding
 	else:
+		distanced_normal = Vector3.ZERO
 		surface_normal = Vector3.UP
 
 	## Gravity and Movement ##
 
 	var modified_gravity: Vector3 = Vector3.ZERO
 	var modified_movement: Vector3 = Vector3.ZERO
-
-	floor_angle = rad2deg(acos(Vector3.UP.dot(surface_normal)))
 
 	if !zero_gravity and !is_on_floor():
 		modified_gravity = -surface_normal * (1.0 + fall_momentum) * gravity * 0.6
@@ -222,6 +231,7 @@ func _physics_process(delta: float) -> void:
 
 	var movement_vector: Vector3 = modified_gravity + modified_movement + boost_direction
 	move_and_slide_with_snap(movement_vector, surface_normal, Vector3.UP, true, 4, deg2rad(90), false)
+	set_global_rotation(Utility.align_from_rotation(delta, get_global_rotation(), surface_normal, facing_direction, 16 * delta))
 
 	## Target Search ##
 

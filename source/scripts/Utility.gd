@@ -50,11 +50,16 @@ func compare_distance(a: Spatial, b: Spatial) -> bool:
 		return true
 	return false
 
-func align_from_transform(tform: Transform, new_up: Vector3) -> Transform:
-	tform.basis.y = new_up
-	tform.basis.x = -tform.basis.z.cross(new_up)
-	tform.basis = tform.basis.orthonormalized()
-	return tform
+func align_from_rotation(delta: float, current_rotation: Vector3, new_up: Vector3, direction: Vector3, value: float) -> Vector3:
+	var target_basis = Basis()
+	target_basis.y = new_up
+	target_basis.z = -direction
+	target_basis.x = new_up.cross(-direction)
+	target_basis = target_basis.orthonormalized()
+
+	var target_rotation = target_basis.get_euler()
+	var t = value * 60 * delta
+	return Vector3(lerp_angle(current_rotation.x, target_rotation.x, t), lerp_angle(current_rotation.y, target_rotation.y, t), lerp_angle(current_rotation.z, target_rotation.z, t))
 
 func align_from_vector(vector: Vector3, target: Vector3) -> Vector3:
 	vector = vector.normalized()
