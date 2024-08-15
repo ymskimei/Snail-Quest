@@ -7,14 +7,15 @@ func print_state_name(state_names: Array, state: int) -> void:
 	print(entity.get_entity_identity().get_entity_name() + "'s state is " + state_names[state])
 
 func set_movement(delta: float, speed_modifier: float = 1.0, turn_modifier: float = 1.0, lerp_speed: float = 20) -> void:
-	entity.modified_input_direction = Vector3(entity.input_direction.x * turn_modifier, -entity.input_direction.y, entity.input_direction.y)
+	entity.modified_input_direction = Vector3(entity.input_direction.x, -entity.input_direction.y, entity.input_direction.y)
 	if entity.is_controlled():
-		var cam2entity_difference: float = -SnailQuest.get_camera().lens.global_transform.basis.z.dot(entity.global_transform.basis.y)
-		if cam2entity_difference > 0:
+
+		if -SnailQuest.get_camera().lens.global_transform.basis.z.dot(entity.global_transform.basis.y) > -0.5:
 			entity.modified_input_direction.y = -entity.modified_input_direction.y
 		entity.modified_input_direction = entity.modified_input_direction.rotated(Vector3.UP, SnailQuest.get_camera().get_global_rotation().y)
 
-	#entity.modified_input_direction = (entity.modified_input_direction * 0.75) - entity.surface_normal
+	if rad2deg(entity.global_transform.basis.y.angle_to(Vector3.UP)) < 80:
+		entity.modified_input_direction = entity.modified_input_direction.length() * (entity.modified_input_direction.normalized() - entity.surface_normal)
 
 	if entity.modified_input_direction.length() > 0.01:
 		entity.facing_direction = entity.modified_input_direction

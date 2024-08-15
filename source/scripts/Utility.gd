@@ -61,12 +61,6 @@ func align_from_rotation(delta: float, current_rotation: Vector3, new_up: Vector
 	var t = value * 60 * delta
 	return Vector3(lerp_angle(current_rotation.x, target_rotation.x, t), lerp_angle(current_rotation.y, target_rotation.y, t), lerp_angle(current_rotation.z, target_rotation.z, t))
 
-func align_from_vector(vector: Vector3, target: Vector3) -> Vector3:
-	vector = vector.normalized()
-	target = target.normalized()
-	var rotation_quat = Quat(vector.cross(target).normalized(), acos(vector.dot(target)))
-	return rotation_quat.xform(vector)
-
 static func degrees_to_cardinal(angle: float) -> String:
 	var directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
 	var i = int(round(angle / (360 / len(directions))))

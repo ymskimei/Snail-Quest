@@ -1,57 +1,28 @@
 extends SnailState
 
-var roll_sound: AudioStreamPlayer3D 
+var shell: RigidBody
 
 func enter() -> void:
 	print_state_name(STATE_NAMES, State.ROLL)
-
-	roll_sound = AudioStreamPlayer3D.new()
-	roll_sound.set_stream(load("res://assets/sound/snail_roll.ogg"))
-	add_child(roll_sound)
-	#roll_sound.play()
-
 	entity.anim_states.travel("SnailRoll")
+	var queue_timer = Timer.new()
+	queue_timer.set_wait_time(0.2)
+	queue_timer.one_shot = true
+	queue_timer.connect("timeout", self, "_on_queue_timeout")
+	add_child(queue_timer)
+	queue_timer.start()
+	shell = Utility.kinematic_to_physics_body(entity)
+	shell.set_collision_layer_bit(3, false)
+	shell.set_collision_layer_bit(0, true)
+	shell.is_in_shell = true
+	shell.input_direction = entity.input_direction * 1.5
+	shell.set_linear_velocity(-Vector3(entity.input_direction.x, 0, entity.input_direction.y) * 3)
 
-func unhandled_input(event: InputEvent) -> int:
-	if is_on_surface():
-		if event.is_action_pressed(Device.action_main):
-			return State.JUMP
+func _on_queue_timeout() -> void:
+	entity.get_parent().add_child(shell)
+	shell.hide_snail_body()
+	shell.set_global_translation(entity.get_global_translation())
+	shell.set_global_rotation(Vector3(0, entity.get_rotation_degrees().y, 0))
 
-	return State.NULL
-
-func physics_process(delta: float) -> int:
-	if !Input.is_action_pressed(Device.trigger_right):
-		return State.MOVE
-
-	if entity.move_direction.length() > 1.1:
-		if entity.move_momentum < entity.max_momentum:
-			entity.move_momentum += 0.25 * delta
-	else:
-		entity.move_momentum = 0.0
-
-	if entity.jump_in_memory or entity.boost_direction.length() > 0.1:
-		return State.JUMP
-
-	if entity.is_submerged():
-		set_movement(delta, 1.0 + entity.move_momentum, 0.8)
-	else:
-		set_movement(delta, 1.9 + entity.move_momentum, 0.2)
-
-	entity.anim_tree.set("parameters/SnailRoll/TimeScale/scale", entity.move_direction.length())
-
-	if entity.move_direction.length() >= 0.1:
-		roll_sound.set_unit_db(linear2db(entity.move_direction.length()))
-		roll_sound.set_pitch_scale(entity.move_direction.length())
-	else:
-		roll_sound.set_unit_db(linear2db(0.0))
-		roll_sound.set_pitch_scale(0.1)
-
-	if !is_on_surface():
-		entity.can_late_jump = true
-		return State.FALL
-	return State.NULL
-
-func exit() -> void:
-	roll_sound.stop()
-	roll_sound.queue_free()
-	entity.anim_tree.set("parameters/SnailRoll/TimeScale/scale", 1.0)
+	SnailQuest.set_controlled(shell)
+	entity.queue_free()
