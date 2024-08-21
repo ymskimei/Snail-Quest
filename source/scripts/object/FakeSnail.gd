@@ -96,6 +96,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_parent().add_child(snail)
 			snail.set_global_translation(get_global_translation() + Vector3.UP * 0.5)
 			snail.set_global_rotation(Vector3(0, get_rotation_degrees().y, 0))
+			print(get_rotation_degrees().y)
 			SnailQuest.set_controlled(snail)
 			queue_free()
 

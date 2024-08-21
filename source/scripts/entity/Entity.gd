@@ -38,8 +38,6 @@ var move_direction: Vector3
 var boost_direction: Vector3
 var jump_strength: float
 
-var facing_angle: float = 0.0
-
 var fall_momentum: float = 0.0
 var move_momentum: float = 0.0
 var max_momentum: float = 0.4

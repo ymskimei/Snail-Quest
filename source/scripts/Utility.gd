@@ -280,7 +280,7 @@ func damage(host: Spatial, size: Vector3 = Vector3(1.0, 1.0, 1.0), amount: float
 	damager.collision.set_scale(size)
 	damager.set_damage_amount(amount)
 
-func kinematic_to_physics_body(kinematic_body: Entity) -> RigidBody:
+func kinematic_to_physics_body(kinematic_body: KinematicBody) -> RigidBody:
 	var physics_body: RigidBody = kinematic_body.get_physics_body().instance()
 	physics_body.set_entity_identity(kinematic_body.get_entity_identity())
 
