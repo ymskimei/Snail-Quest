@@ -2,8 +2,9 @@
 
 [ext_resource path="res://assets/model/needle.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://assets/texture/interface/item/tool_needle.png" type="Texture" id=2]
-[ext_resource path="res://source/scripts/resource/ResourceItem.gd" type="Script" id=3]
+[ext_resource path="res://source/script/resource/ResourceItem.gd" type="Script" id=3]
 [ext_resource path="res://assets/resource/inventory.tres" type="Resource" id=4]
+
 
 
 [resource]

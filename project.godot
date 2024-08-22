@@ -12,92 +12,92 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "AimCursor",
 "language": "GDScript",
-"path": "res://source/scripts/interface/CursorAim.gd"
+"path": "res://source/script/interface/CursorAim.gd"
 }, {
 "base": "CameraStateMain",
 "class": "CameraStateIsom",
 "language": "GDScript",
-"path": "res://source/scripts/entity/camera/CameraStateIsom.gd"
+"path": "res://source/script/entity/camera/CameraStateIsom.gd"
 }, {
 "base": "CameraStateMain",
 "class": "CameraStateLock",
 "language": "GDScript",
-"path": "res://source/scripts/entity/camera/CameraStateLock.gd"
+"path": "res://source/script/entity/camera/CameraStateLock.gd"
 }, {
 "base": "Node",
 "class": "CameraStateMain",
 "language": "GDScript",
-"path": "res://source/scripts/entity/camera/CameraStateMain.gd"
+"path": "res://source/script/entity/camera/CameraStateMain.gd"
 }, {
 "base": "Object",
 "class": "Chunk",
 "language": "GDScript",
-"path": "res://source/scripts/world/Chunk.gd"
+"path": "res://source/script/world/Chunk.gd"
 }, {
 "base": "Interactable",
 "class": "Conversable",
 "language": "GDScript",
-"path": "res://source/scripts/object/Conversable.gd"
+"path": "res://source/script/object/Conversable.gd"
 }, {
 "base": "Node",
 "class": "DebugConsoleCategory",
 "language": "GDScript",
-"path": "res://source/scripts/interface/DebugConsoleCategory.gd"
+"path": "res://source/script/interface/DebugConsoleCategory.gd"
 }, {
 "base": "Node",
 "class": "DebugConsoleCommand",
 "language": "GDScript",
-"path": "res://source/scripts/interface/DebugConsoleCommand.gd"
+"path": "res://source/script/interface/DebugConsoleCommand.gd"
 }, {
 "base": "Entity",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://source/scripts/entity/enemy/Enemy.gd"
+"path": "res://source/script/entity/enemy/Enemy.gd"
 }, {
 "base": "Node",
 "class": "EnemyStateMain",
 "language": "GDScript",
-"path": "res://source/scripts/entity/enemy/EnemyStateMain.gd"
+"path": "res://source/script/entity/enemy/EnemyStateMain.gd"
 }, {
 "base": "Conversable",
 "class": "Entity",
 "language": "GDScript",
-"path": "res://source/scripts/entity/Entity.gd"
+"path": "res://source/script/entity/Entity.gd"
 }, {
 "base": "MeshInstance",
 "class": "EnvironmentMeshInstance",
 "language": "GDScript",
-"path": "res://source/scripts/object/EnvironmentMeshInstance.gd"
+"path": "res://source/script/object/EnvironmentMeshInstance.gd"
 }, {
 "base": "KinematicBody",
 "class": "Interactable",
 "language": "GDScript",
-"path": "res://source/scripts/object/Interactable.gd"
+"path": "res://source/script/object/Interactable.gd"
 }, {
 "base": "Node",
 "class": "InterfaceParent",
 "language": "GDScript",
-"path": "res://source/scripts/interface/InterfaceParent.gd"
+"path": "res://source/script/interface/InterfaceParent.gd"
 }, {
 "base": "Menu",
 "class": "InventoryParent",
 "language": "GDScript",
-"path": "res://source/scripts/interface/InventoryParent.gd"
+"path": "res://source/script/interface/InventoryParent.gd"
 }, {
 "base": "Spatial",
 "class": "ItemParent",
 "language": "GDScript",
-"path": "res://source/scripts/item/ItemParent.gd"
+"path": "res://source/script/item/ItemParent.gd"
 }, {
 "base": "SpringArm",
 "class": "MainCamera",
 "language": "GDScript",
-"path": "res://source/scripts/entity/camera/Camera.gd"
+"path": "res://source/script/entity/camera/Camera.gd"
 }, {
 "base": "CanvasLayer",
 "class": "Menu",
 "language": "GDScript",
-"path": "res://source/scripts/interface/Menu.gd"
+"path": "res://source/script/interface/Menu.gd"
 }, {
 "base": "Node",
 "class": "MusicBooth",
@@ -107,82 +107,92 @@ _global_script_classes=[ {
 "base": "Menu",
 "class": "Options",
 "language": "GDScript",
-"path": "res://source/scripts/interface/Options.gd"
+"path": "res://source/script/interface/Options.gd"
 }, {
 "base": "Interactable",
 "class": "Pushable",
 "language": "GDScript",
-"path": "res://source/scripts/object/Pushable.gd"
+"path": "res://source/script/object/Pushable.gd"
 }, {
 "base": "Node",
 "class": "RegistryAudio",
 "language": "GDScript",
-"path": "res://source/scripts/RegistryAudio.gd"
+"path": "res://source/script/RegistryAudio.gd"
 }, {
 "base": "Node",
 "class": "RegistryColor",
 "language": "GDScript",
-"path": "res://source/scripts/RegistryColor.gd"
+"path": "res://source/script/RegistryColor.gd"
+}, {
+"base": "Node",
+"class": "RegistryDialogId",
+"language": "GDScript",
+"path": "res://source/script/RegistryDialogId.gd"
 }, {
 "base": "Resource",
 "class": "ResourceAudioPlayer",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceAudioPlayer.gd"
+"path": "res://source/script/resource/ResourceAudioPlayer.gd"
 }, {
 "base": "Resource",
 "class": "ResourceDialog",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceDialog.gd"
+"path": "res://source/script/resource/ResourceDialog.gd"
 }, {
 "base": "Resource",
 "class": "ResourceEnvironment",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceEnvironment.gd"
+"path": "res://source/script/resource/ResourceEnvironment.gd"
 }, {
 "base": "Resource",
 "class": "ResourceIdentity",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceIdentity.gd"
+"path": "res://source/script/resource/ResourceIdentity.gd"
 }, {
 "base": "Resource",
 "class": "ResourceItem",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceItem.gd"
+"path": "res://source/script/resource/ResourceItem.gd"
 }, {
 "base": "Resource",
 "class": "ResourceLocation",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceLocation.gd"
+"path": "res://source/script/resource/ResourceLocation.gd"
 }, {
 "base": "Resource",
 "class": "ResourceLootTable",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceLootTable.gd"
+"path": "res://source/script/resource/ResourceLootTable.gd"
 }, {
 "base": "Resource",
 "class": "ResourceMusic",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceMusic.gd"
+"path": "res://source/script/resource/ResourceMusic.gd"
 }, {
 "base": "Resource",
 "class": "ResourcePushableBlock",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourcePushableBlock.gd"
+"path": "res://source/script/resource/ResourcePushableBlock.gd"
 }, {
 "base": "Resource",
 "class": "ResourceStatistics",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceStatistics.gd"
+"path": "res://source/script/resource/ResourceStatistics.gd"
+}, {
+"base": "Conversable",
+"class": "Sign",
+"language": "GDScript",
+"path": "res://source/script/object/Sign.gd"
 }, {
 "base": "Entity",
 "class": "Snail",
 "language": "GDScript",
-"path": "res://source/scripts/entity/snail/Snail.gd"
+"path": "res://source/script/entity/snail/Snail.gd"
 }, {
 "base": "StateMain",
 "class": "SnailState",
 "language": "GDScript",
-"path": "res://source/scripts/entity/snail/SnailState.gd"
+"path": "res://source/script/entity/snail/SnailState.gd"
 }, {
 "base": "Node",
 "class": "Song",
@@ -212,7 +222,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "StateMain",
 "language": "GDScript",
-"path": "res://source/scripts/entity/State.gd"
+"path": "res://source/script/entity/State.gd"
 }, {
 "base": "Node",
 "class": "StingerContainer",
@@ -224,10 +234,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/containers/TrackContainer.gd"
 }, {
+"base": "RichTextEffect",
+"class": "TransitionBase",
+"language": "GDScript",
+"path": "res://source/script/bbtransition/TransitionBase.gd"
+}, {
 "base": "Spatial",
 "class": "Warp",
 "language": "GDScript",
-"path": "res://source/scripts/object/Warp.gd"
+"path": "res://source/script/object/Warp.gd"
 } ]
 _global_script_class_icons={
 "AimCursor": "",
@@ -253,6 +268,7 @@ _global_script_class_icons={
 "Pushable": "",
 "RegistryAudio": "",
 "RegistryColor": "",
+"RegistryDialogId": "",
 "ResourceAudioPlayer": "",
 "ResourceDialog": "",
 "ResourceEnvironment": "",
@@ -263,6 +279,7 @@ _global_script_class_icons={
 "ResourceMusic": "",
 "ResourcePushableBlock": "",
 "ResourceStatistics": "",
+"Sign": "",
 "Snail": "",
 "SnailState": "",
 "Song": "",
@@ -273,6 +290,7 @@ _global_script_class_icons={
 "StateMain": "",
 "StingerContainer": "",
 "TrackContainer": "",
+"TransitionBase": "",
 "Warp": ""
 }
 
@@ -289,7 +307,7 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 
 config/name="Snail Quest"
 config/description="A small snail on an adventure to save his homeland! "
-run/main_scene="res://source/scenes/game.tscn"
+run/main_scene="res://source/scene/game.tscn"
 config/use_hidden_project_data_directory=false
 config/use_custom_user_dir=true
 run/delta_sync_after_draw=true
@@ -303,16 +321,17 @@ default_bus_layout="res://assets/default_bus_layout.tres"
 
 [autoload]
 
-Utility="*res://source/scripts/Utility.gd"
-Device="*res://source/scripts/Device.gd"
-Data="*res://source/scripts/Data.gd"
-Items="*res://source/scripts/Items.gd"
-EventFlags="*res://source/scripts/EventFlags.gd"
-WorldSave="*res://source/scripts/world/WorldSave.gd"
-Audio="*res://source/scenes/audio.tscn"
-SnailQuest="*res://source/scenes/snailquest.tscn"
-Interface="*res://source/scenes/interface/interface.tscn"
-EnvironmentMaster="*res://source/scenes/world/environment_master.tscn"
+Utility="*res://source/script/Utility.gd"
+Device="*res://source/script/Device.gd"
+Data="*res://source/script/Data.gd"
+Items="*res://source/script/Items.gd"
+EventManager="*res://source/script/EventManager.gd"
+WorldSave="*res://source/script/world/WorldSave.gd"
+Audio="*res://source/scene/audio.tscn"
+SnailQuest="*res://source/scene/snailquest.tscn"
+Interface="*res://source/scene/interface/interface.tscn"
+EnvironmentMaster="*res://source/scene/world/environment_master.tscn"
+Functions="*res://source/script/Functions.gd"
 
 [debug]
 
@@ -638,7 +657,7 @@ debug_cam_fov_decrease={
 
 [locale]
 
-translations=PoolStringArray( "res://source/translations/translation.en_GB.translation", "res://source/translations/translation.en_US.translation", "res://source/translations/translation.es_AR.translation", "res://source/translations/translation.es_MX.translation", "res://source/translations/translation.ja_JP.translation", "res://source/translations/translation.pr.translation" )
+translations=PoolStringArray( "res://source/translation/translation.en_GB.translation", "res://source/translation/translation.en_US.translation", "res://source/translation/translation.es_AR.translation", "res://source/translation/translation.es_MX.translation", "res://source/translation/translation.ja_JP.translation", "res://source/translation/translation.pr.translation" )
 
 [logging]
 

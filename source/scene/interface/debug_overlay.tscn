@@ -1,0 +1,186 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/interface/theme/debug.tres" type="Theme" id=1]
+[ext_resource path="res://source/scene/interface/debug_console.tscn" type="PackedScene" id=2]
+[ext_resource path="res://source/script/interface/DebugOverlay.gd" type="Script" id=3]
+[ext_resource path="res://source/scene/interface/debug_gimbal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://source/script/interface/DebugGimbal.gd" type="Script" id=5]
+
+[node name="GuiDebug" type="CanvasLayer"]
+pause_mode = 2
+layer = 16
+script = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 1880.0
+margin_bottom = 1040.0
+alignment = 1
+
+[node name="ConsoleContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 1250.0
+margin_bottom = 1040.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+
+[node name="GuiConsole" parent="MarginContainer/HBoxContainer/ConsoleContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 1218.0
+margin_bottom = 1008.0
+
+[node name="DebugInformation" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 1254.0
+margin_right = 1880.0
+margin_bottom = 1040.0
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+alignment = 2
+
+[node name="DisplayFramerate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_right = 626.0
+margin_bottom = 64.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+bbcode_text = "00"
+tab_size = 5
+text = "00"
+
+[node name="DisplayGameCalendar" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 68.0
+margin_right = 626.0
+margin_bottom = 132.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+bbcode_text = "??? ??, ????"
+tab_size = 5
+text = "??? ??, ????"
+
+[node name="DisplayGameTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 136.0
+margin_right = 626.0
+margin_bottom = 200.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+tab_size = 5
+text = "00:00:00"
+
+[node name="DisplayPlayTime" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 204.0
+margin_right = 626.0
+margin_bottom = 268.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+bbcode_text = "00"
+tab_size = 5
+text = "00"
+
+[node name="DisplayCameraTarget" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 272.0
+margin_right = 626.0
+margin_bottom = 336.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+bbcode_text = "00"
+tab_size = 5
+text = "00"
+
+[node name="DisplayControlled" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 340.0
+margin_right = 626.0
+margin_bottom = 404.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+bbcode_text = "00"
+tab_size = 5
+text = "00"
+
+[node name="DisplayControlledTarget" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 408.0
+margin_right = 626.0
+margin_bottom = 472.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+bbcode_text = "00"
+tab_size = 5
+text = "00"
+
+[node name="DisplayPrevControlled" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 476.0
+margin_right = 626.0
+margin_bottom = 540.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+bbcode_text = "00"
+tab_size = 5
+text = "00"
+
+[node name="DisplayChunkCoords" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 544.0
+margin_right = 626.0
+margin_bottom = 608.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+bbcode_text = "0, 0"
+tab_size = 5
+text = "0, 0"
+
+[node name="DisplayCoordinate" type="RichTextLabel" parent="MarginContainer/HBoxContainer/DebugInformation"]
+margin_top = 612.0
+margin_right = 626.0
+margin_bottom = 1040.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "0, 0, 0"
+tab_size = 5
+text = "0, 0, 0"
+
+[node name="DebugGimbal" parent="." instance=ExtResource( 4 )]
+visible = false
+script = ExtResource( 5 )

@@ -1,0 +1,228 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/texture/interface/menu/button_dropdown.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/interface/menu/button_checkbox_off.png" type="Texture" id=3]
+[ext_resource path="res://assets/texture/interface/menu/button_checkbox_on.png" type="Texture" id=4]
+[ext_resource path="res://assets/interface/theme/menu.tres" type="Theme" id=5]
+[ext_resource path="res://source/script/interface/ScreenTitle.gd" type="Script" id=8]
+[ext_resource path="res://assets/sound/music/layers_test/ost_layerstest_bass.ogg" type="AudioStream" id=11]
+[ext_resource path="res://assets/texture/interface/menu/logo_bg.png" type="Texture" id=15]
+[ext_resource path="res://assets/texture/interface/menu/logo_text.png" type="Texture" id=16]
+
+
+[sub_resource type="StyleBoxTexture" id=1]
+
+[sub_resource type="StyleBoxTexture" id=2]
+
+[sub_resource type="StyleBoxTexture" id=3]
+
+[sub_resource type="StyleBoxTexture" id=4]
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://assets/interface/font/data/mochi_pop_p_one.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_space = 4
+font_data = SubResource( 5 )
+
+[sub_resource type="StyleBoxEmpty" id=34]
+
+[sub_resource type="Theme" id=26]
+default_font = SubResource( 6 )
+Button/styles/focus = SubResource( 1 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 3 )
+Button/styles/pressed = SubResource( 4 )
+CheckBox/icons/checked = ExtResource( 4 )
+CheckBox/icons/unchecked = ExtResource( 3 )
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+Label/fonts/font = SubResource( 6 )
+OptionButton/constants/arrow_margin = 0
+OptionButton/constants/hseparation = 32
+OptionButton/icons/arrow = ExtResource( 2 )
+SpinBox/icons/updown = ExtResource( 2 )
+TabContainer/styles/panel = SubResource( 34 )
+
+[sub_resource type="ShaderMaterial" id=31]
+
+[sub_resource type="Shader" id=32]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec4 fore_color : hint_color = vec4(0.5, 0.75, 1.0, 1.0);
+uniform vec4 back_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+
+void fragment() {
+	float aspect = (1.0 / TEXTURE_PIXEL_SIZE).y / (1.0 / TEXTURE_PIXEL_SIZE).x;
+	float value;
+	vec2 uv = UV.xy / (1.0 / TEXTURE_PIXEL_SIZE).x;
+	uv -= vec2(0.5, 0.35 * aspect);
+	float rot = radians(45.0); // radians(45.0*sin(iTime));
+	vec2 part1 = vec2(cos(rot), -sin(rot));
+	vec2 part2 = vec2(sin(rot), cos(rot));
+	mat2 m = mat2(part1, part2);
+	uv = m * uv;
+	uv += vec2(0.5, 0.5*aspect);
+	uv.y += 0.5 * (1.0-aspect);
+	vec2 pos = 10.0 * uv;
+	vec2 rep = fract(pos);
+	float dist = 2.0 * min(min(rep.x, 1.0 - rep.x), min(rep.y, 1.0 - rep.y));
+	float squareDist = length((floor(pos) + vec2(0.5)) - vec2(5.0));
+	float edge = sin(TIME - squareDist * 0.5) * 0.5 + 0.5;
+	edge = (TIME - squareDist * 0.5) * 0.5;
+	edge = 2.0 * fract(edge * 0.5);
+	value = fract (dist * 2.0);
+	value = mix(value, 1.0 - value, step(1.0, edge));
+	edge = pow(abs(1.0 - edge), 2.0);
+	value = smoothstep( edge - 0.25, edge, 0.95 * value);
+	value += squareDist * 0.1;
+	COLOR = mix(back_color, fore_color, value);
+}"
+
+[sub_resource type="ShaderMaterial" id=33]
+shader = SubResource( 32 )
+shader_param/fore_color = Color( 1, 1, 1, 1 )
+shader_param/back_color = Color( 1, 0.952941, 0.87451, 1 )
+
+[node name="GuiTitle" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 26 )
+script = ExtResource( 8 )
+
+[node name="CanvasMain" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasMain"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -349.0
+margin_right = 480.0
+margin_bottom = 151.0
+rect_scale = Vector2( 0.8, 0.8 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasMain/MarginContainer2"]
+margin_right = 800.0
+margin_bottom = 500.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 16 )
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasMain/MarginContainer2/TextureRect"]
+show_behind_parent = true
+material = SubResource( 31 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -600.0
+margin_top = -400.0
+margin_right = 600.0
+margin_bottom = 400.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 15 )
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasMain"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 5 )
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasMain/MarginContainer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 1888.0
+margin_bottom = 1048.0
+alignment = 1
+
+[node name="LabelSplash" type="RichTextLabel" parent="CanvasMain/MarginContainer/HBoxContainer"]
+margin_right = 1856.0
+margin_bottom = 44.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 2
+bbcode_enabled = true
+bbcode_text = "test"
+text = "test"
+fit_content_height = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasMain/MarginContainer/HBoxContainer"]
+margin_top = 510.0
+margin_right = 1856.0
+margin_bottom = 1016.0
+size_flags_vertical = 3
+custom_constants/margin_top = 128
+
+[node name="VBoxContainer" type="HBoxContainer" parent="CanvasMain/MarginContainer/HBoxContainer/MarginContainer"]
+margin_top = 128.0
+margin_right = 1856.0
+margin_bottom = 506.0
+size_flags_vertical = 3
+custom_constants/separation = 32
+alignment = 1
+
+[node name="LabelVersion" type="RichTextLabel" parent="CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 334.0
+margin_right = 756.0
+margin_bottom = 378.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 12
+bbcode_enabled = true
+bbcode_text = "test"
+text = "test"
+fit_content_height = true
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+margin_left = 788.0
+margin_right = 1068.0
+margin_bottom = 378.0
+
+[node name="StartButton" type="Button" parent="CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer"]
+margin_top = 167.0
+margin_right = 280.0
+margin_bottom = 210.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "TITLE_START"
+
+[node name="LabelInfo" type="RichTextLabel" parent="CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+margin_left = 1100.0
+margin_top = 334.0
+margin_right = 1856.0
+margin_bottom = 378.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 12
+bbcode_enabled = true
+bbcode_text = "test"
+text = "test"
+fit_content_height = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -80.0
+autoplay = true
+bus = "Music"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+material = SubResource( 33 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+
+[connection signal="pressed" from="CanvasMain/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/ButtonContainer/StartButton" to="." method="_on_StartButton_pressed"]

@@ -1,0 +1,39 @@
+[gd_resource type="Resource" load_steps=13 format=2]
+
+[ext_resource path="res://assets/model/entity/snail_eye_right_big.mesh" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/model/entity/snail_shell_7.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/model/entity/snail_eye_left_big.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/texture/entity/hat/hat_0.png" type="Texture" id=4]
+[ext_resource path="res://assets/texture/entity/sticker/sticker_0.png" type="Texture" id=5]
+[ext_resource path="res://assets/model/entity/hat/hat_0.mesh" type="ArrayMesh" id=6]
+[ext_resource path="res://assets/model/entity/snail_body_small.mesh" type="ArrayMesh" id=7]
+[ext_resource path="res://source/script/resource/ResourceIdentity.gd" type="Script" id=8]
+[ext_resource path="res://assets/texture/entity/snail_eyelids_top.png" type="Texture" id=9]
+[ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=10]
+[ext_resource path="res://assets/texture/entity/snail_body_accent_1.png" type="Texture" id=11]
+[ext_resource path="res://assets/texture/entity/snail_shell_accent_1.png" type="Texture" id=12]
+
+[resource]
+script = ExtResource( 8 )
+entity_name = "ENTITY_DUSKJR"
+entity_personality = 0
+entity_scale = 1.0
+mesh_shell = ExtResource( 2 )
+mesh_body = ExtResource( 7 )
+mesh_eye_left = ExtResource( 3 )
+mesh_eye_right = ExtResource( 1 )
+pattern_shell = ExtResource( 12 )
+pattern_body = ExtResource( 11 )
+pattern_eyes = ExtResource( 10 )
+pattern_eyelids = ExtResource( 9 )
+color_shell_base = Color( 0.525391, 0.168716, 0.168716, 1 )
+color_shell_shade = Color( 0.478431, 0.478431, 0.478431, 1 )
+color_shell_accent = Color( 0.395199, 0.160476, 0.507813, 1 )
+color_body_specular = Color( 0.729412, 0.729412, 0.729412, 1 )
+color_body_base = Color( 0.2573, 0.475121, 0.742188, 1 )
+color_body_shade = Color( 0.556863, 0.556863, 0.556863, 1 )
+color_body_accent = Color( 0.379289, 0.612041, 0.941406, 1 )
+color_eyes = Color( 0.168515, 0.390625, 0.143407, 1 )
+mesh_hat = ExtResource( 6 )
+pattern_hat = ExtResource( 4 )
+pattern_sticker = ExtResource( 5 )

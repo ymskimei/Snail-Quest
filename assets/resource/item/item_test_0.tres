@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=7 format=2]
 
-[ext_resource path="res://source/scripts/resource/ResourceItem.gd" type="Script" id=1]
+[ext_resource path="res://source/script/resource/ResourceItem.gd" type="Script" id=1]
 [ext_resource path="res://assets/texture/interface/item/item_test.png" type="Texture" id=2]
 [ext_resource path="res://assets/shader/cel_old.shader" type="Shader" id=5]
 [ext_resource path="res://assets/resource/inventory.tres" type="Resource" id=6]

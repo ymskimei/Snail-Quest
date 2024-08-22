@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/model/entity/hat/hat_0.mesh" type="ArrayMesh" id=4]
 [ext_resource path="res://assets/texture/trans.png" type="Texture" id=5]
 [ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=6]
-[ext_resource path="res://source/scripts/resource/ResourceIdentity.gd" type="Script" id=7]
+[ext_resource path="res://source/script/resource/ResourceIdentity.gd" type="Script" id=7]
 [ext_resource path="res://assets/texture/entity/snail_shell_accent_1.png" type="Texture" id=8]
 [ext_resource path="res://assets/texture/entity/snail_eyelids_bottom_half.png" type="Texture" id=9]
 
@@ -65,7 +65,7 @@ surfaces/1 = {
 
 [resource]
 script = ExtResource( 7 )
-entity_name = "Izabell"
+entity_name = "ENTITY_IZABELL"
 entity_personality = 1
 entity_scale = 0.9
 mesh_shell = SubResource( 1 )

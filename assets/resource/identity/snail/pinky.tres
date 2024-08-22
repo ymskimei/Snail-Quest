@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=5]
 [ext_resource path="res://assets/texture/entity/sticker/sticker_0.png" type="Texture" id=6]
 [ext_resource path="res://assets/texture/entity/hat/hat_0.png" type="Texture" id=7]
-[ext_resource path="res://source/scripts/resource/ResourceIdentity.gd" type="Script" id=8]
+[ext_resource path="res://source/script/resource/ResourceIdentity.gd" type="Script" id=8]
 [ext_resource path="res://assets/texture/entity/snail_shell_accent_2.png" type="Texture" id=9]
 [ext_resource path="res://assets/texture/entity/snail_body_accent_1.png" type="Texture" id=10]
 [ext_resource path="res://assets/texture/entity/snail_eyelids.png" type="Texture" id=11]
@@ -15,7 +15,7 @@
 
 [resource]
 script = ExtResource( 8 )
-entity_name = "Pinky"
+entity_name = "ENTITY_PINKALINA"
 entity_personality = 0
 entity_scale = 1.0
 mesh_shell = ExtResource( 12 )
