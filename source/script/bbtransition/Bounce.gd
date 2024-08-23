@@ -9,6 +9,6 @@ func bounce(t, wave = 8.0) -> float:
 
 func _process_custom_fx(char_fx):
 	var t = get_t(char_fx)
-	char_fx.offset.y = bounce(t, 8.0) * 8.0
+	char_fx.offset.y = bounce(t, 8.0) * 18.0
 	char_fx.color.a *= (1.0 - t)
 	return true

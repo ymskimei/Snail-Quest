@@ -390,18 +390,34 @@ func _update_nearest_target() -> void:
 
 		if (!target.is_controlled() and target is Interactable) and target_distance < 1.5: #and relative_facing >= 0):
 			can_interact = true
-			set_interaction_text(target.get_interaction_text())
 		else:
 			if interacting:
 				interacting = false
 			can_interact = false
+	
+		if can_interact and !interacting:
+			set_interaction_text(target.get_interaction_text())
+		else:
 			set_interaction_text("")
+
+func interact() -> void:
+	var bubble: CanvasLayer = dialog_bubble.instance()
+	bubble.dialog_display_name = get_entity_identity().get_entity_name()
+	bubble.dialog_color = get_entity_identity().get_color_shell_base()
+	bubble.current_dialog_keys = dialog_fetcher()
+	camera_override()
+	if bubble.current_dialog_keys.size() > 0:
+		add_child(bubble)
+		bubble.connect("dialog_ended", self,"_dialog_end")
+	else:
+		_dialog_end()
 
 func set_interaction_text(text) -> void:
 	var label = Interface.hud.interaction_label
 	if !text:
 		label.set_text("")
 		label.set_visible(false)
+
 	else:
 		var interaction_key: String = OS.get_scancode_string(InputMap.get_action_list(Device.action_main)[0].scancode).capitalize()
 		var translated_prompt: String = tr("INTERFACE_INTERACTION_PROMPT")
@@ -440,12 +456,14 @@ func dialog_fetcher() -> Array:
 func _get_viewport_target(dir):
 	var nearest_target = null
 	var nearest_distance = INF
+
 	for t in all_targets:
 		if t != target and global_transform.origin.distance_to(t.global_transform.origin) < 10:
 			var vec3_target_direction = (t.global_transform.origin - global_transform.origin).rotated(Vector3.UP, SnailQuest.camera.rotation.y)
 			var target_direction = Vector2(vec3_target_direction.x, vec3_target_direction.y)
 			#var target_direction = (SnailQuest.camera.lens.unproject_position(t.global_transform.origin) - SnailQuest.camera.lens.unproject_position(target.global_transform.origin))
 			var dot_result = dir.normalized().dot(target_direction.normalized())
+
 			if target_direction.length() < nearest_distance and dot_result:
 				nearest_target = t
 	return nearest_target

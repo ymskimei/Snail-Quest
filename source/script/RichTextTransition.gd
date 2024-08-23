@@ -1,3 +1,4 @@
+tool
 extends RichTextLabel
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer

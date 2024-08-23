@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/snail_voice_fem_babble_1.ogg-dfbea99da5aec200743a764deee61e4f.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/snail_voice_fem_babble_1.ogg"
+dest_files=[ "res://import/snail_voice_fem_babble_1.ogg-dfbea99da5aec200743a764deee61e4f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -3,13 +3,14 @@ extends CanvasLayer
 export var bbcode_transition_label: PackedScene
 
 onready var dialog_bubble: MarginContainer = $DialogContainer
-onready var container: HFlowContainer = $DialogContainer/ColorRect/MarginContainer/HFlowContainer
+onready var container: HFlowContainer = $DialogContainer/NinePatchRect/MarginContainer/HFlowContainer
+onready var dialog_name: Label = $DialogContainer/NameContainer/TextureRect/Label
 
 onready var branch_bubble: MarginContainer = $DialogContainer/BranchContainer
-onready var branch_button_0: Button = $DialogContainer/BranchContainer/ColorRect/MarginContainer/VBoxContainer/Button
-onready var branch_button_1: Button = $DialogContainer/BranchContainer/ColorRect/MarginContainer/VBoxContainer/Button2
-onready var branch_button_2: Button = $DialogContainer/BranchContainer/ColorRect/MarginContainer/VBoxContainer/Button3
-onready var branch_button_3: Button = $DialogContainer/BranchContainer/ColorRect/MarginContainer/VBoxContainer/Button4
+onready var branch_button_0: Button = $DialogContainer/BranchContainer/NinePatchRect/VBoxContainer/Button
+onready var branch_button_1: Button = $DialogContainer/BranchContainer/NinePatchRect/VBoxContainer/Button2
+onready var branch_button_2: Button = $DialogContainer/BranchContainer/NinePatchRect/VBoxContainer/Button3
+onready var branch_button_3: Button = $DialogContainer/BranchContainer/NinePatchRect/VBoxContainer/Button4
 
 onready var question_bubble: MarginContainer = $QuestionContainer
 onready var question_text: RichTextLabel = $QuestionContainer/VBoxContainer/RichTextTransition
@@ -23,11 +24,14 @@ var break_chars: Array = ["!", ".", "?", "..."]
 var current_dialog_keys: Array = ["TEST_PHRASE_1", "TEST_PHRASE_2", "TEST_PHRASE_3"]
 var current_dialog_key: String = ""
 
+var dialog_display_name: String = ""
+var dialog_color: Color = Color.cornflower
 var dialog_in_pages: Array = []
 var current_dialog_words: Array = []
 
 var current_word: int = 0
 var page_type_in_wait: int = 0
+var current_font: String = "res://assets/interface/font/nishiki_teki_40.tres"
 var current_bbcode: Array = ["", ""]
 var function_to_update: String = ""
 
@@ -39,6 +43,15 @@ var input_allowed: bool = true
 signal dialog_ended()
 
 func _ready() -> void:
+	if dialog_display_name != "":
+		var texture_id: String = dialog_display_name
+		texture_id.erase(0, 7)
+		dialog_bubble.get_child(0).set_texture(load("res://assets/texture/interface/menu/dialog/dialog_%s.png" % texture_id.to_lower()))
+		dialog_name.get_parent().set_self_modulate(dialog_color)
+		dialog_name.set_text(tr(dialog_display_name))
+	else:
+		dialog_name.get_parent().set_visible(false)
+
 	question_bubble.set_visible(false)
 	branch_button_0.set_visible(false)
 	branch_button_1.set_visible(false)
@@ -301,18 +314,20 @@ func _on_word_timeout() -> void:
 				stored_punctuation = ""
 			
 			var char_ghost_label: Label = Label.new()
+			char_ghost_label.add_font_override("font", load(current_font))
 			char_ghost_label.set_visible(false)
 			char_ghost_label.set_text(display_word)
 			container.add_child(char_ghost_label)
 
 			var new_char_label: RichTextLabel = bbcode_transition_label.instance()
+			new_char_label.add_font_override("normal_font", load(current_font))
 			new_char_label.set_custom_minimum_size(char_ghost_label.get_size())
 			char_ghost_label.queue_free()
 
 			new_char_label.id = "word_" + str(current_word)
 			new_char_label.animation_time = (1.0 / display_word.length()) * text_speed
 
-			new_char_label.set_bbcode("[bounce id=word_" + str(current_word) + "]" + current_bbcode[0] + display_word + current_bbcode[1] + "[/bounce]")
+			new_char_label.set_bbcode("[bounce id=word_" + str(current_word) + "]" + current_bbcode[0] + "[color=black]" + display_word + "[/color]" + current_bbcode[1] + "[/bounce]")
 			current_word += 1
 
 			#print(new_char_label.get_bbcode())
@@ -322,6 +337,9 @@ func _on_word_timeout() -> void:
 
 			word_timer.set_wait_time((display_word.length() / text_speed) * 0.6)
 			word_timer.start()
+
+			if dialog_display_name != "":
+				get_parent().play_sound_babble()
 
 func _on_Button_button_down():
 	_get_dialog_response(current_dialog_key + "_B0")

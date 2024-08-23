@@ -78,6 +78,8 @@ func _ready() -> void:
 		eyelid_right_mat.set_shader_param("albedo_color", identity.color_body_base)
 		eyelid_right_mat.set_shader_param("shade_color", identity.color_body_shade)
 		
+		armature.set_scale(Vector3(identity.entity_scale, identity.entity_scale, identity.entity_scale))
+		
 		if is_in_shell:
 			anim.play("SnailHidden")
 		else:

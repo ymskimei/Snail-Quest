@@ -17,7 +17,7 @@
 script = ExtResource( 9 )
 entity_name = "ENTITY_LEONARDO"
 entity_personality = 0
-entity_scale = 1.0
+entity_scale = 1.1
 mesh_shell = ExtResource( 12 )
 mesh_body = ExtResource( 2 )
 mesh_eye_left = ExtResource( 4 )

@@ -27,7 +27,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		states.unhandled_input(event)
 
 func _physics_process(delta: float) -> void:
-	#update_appearance()
 	states.physics_process(delta)
 
 	if is_controlled():
@@ -109,6 +108,8 @@ func update_appearance() -> void:
 		eyelid_right_mat.set_shader_param("albedo_color", identity.color_body_base)
 		eyelid_right_mat.set_shader_param("shade_color", identity.color_body_shade)
 
+		skeleton.get_parent().set_scale(Vector3(identity.entity_scale, identity.entity_scale, identity.entity_scale))
+
 func play_sound_slide(s: bool = false) -> void:
 	if s:
 		Audio.play_pos_sfx(RegistryAudio.snail_slide_backward, get_global_translation(), Utility.rng.randf_range(1.0, 1.2), 0.4)
@@ -154,6 +155,18 @@ func play_sound_slap() -> void:
 			Audio.play_pos_sfx(RegistryAudio.snail_slap_1, get_global_translation(), pitch, 0.5)
 		_:
 			Audio.play_pos_sfx(RegistryAudio.snail_slap_2, get_global_translation(), pitch, 0.5)
+
+func play_sound_babble() -> void:
+	var index: int = Utility.rng.randi_range(0, 2)
+	var pitch: float = Utility.rng.randf_range(1.0, 1.2)
+	match index:
+		1:
+			Audio.play_pos_sfx(RegistryAudio.snail_voice_fem_babble_0, get_global_translation(), pitch, 0.5)
+		2:
+			Audio.play_pos_sfx(RegistryAudio.snail_voice_fem_babble_1, get_global_translation(), pitch, 0.5)
+		_:
+			Audio.play_pos_sfx(RegistryAudio.snail_voice_fem_babble_2, get_global_translation(), pitch, 0.5)
+
 
 func _on_AffectArea_area_entered(area):
 	if area.is_in_group("liquid"):
