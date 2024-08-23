@@ -4,6 +4,7 @@ export var bbcode_transition_label: PackedScene
 
 onready var dialog_bubble: MarginContainer = $DialogContainer
 onready var container: HFlowContainer = $DialogContainer/NinePatchRect/MarginContainer/HFlowContainer
+onready var shadows_container: HFlowContainer = $DialogContainer/NinePatchRect/MarginContainer/MarginContainer/HFlowContainerShadows
 onready var dialog_name: Label = $DialogContainer/NameContainer/TextureRect/Label
 
 onready var branch_bubble: MarginContainer = $DialogContainer/BranchContainer
@@ -32,6 +33,7 @@ var current_dialog_words: Array = []
 var current_word: int = 0
 var page_type_in_wait: int = 0
 var current_font: String = "res://assets/interface/font/nishiki_teki_40.tres"
+var current_color: Array = ["", ""]
 var current_bbcode: Array = ["", ""]
 var function_to_update: String = ""
 
@@ -47,9 +49,15 @@ func _ready() -> void:
 		var texture_id: String = dialog_display_name
 		texture_id.erase(0, 7)
 		dialog_bubble.get_child(0).set_texture(load("res://assets/texture/interface/menu/dialog/dialog_%s.png" % texture_id.to_lower()))
-		dialog_name.get_parent().set_self_modulate(dialog_color)
 		dialog_name.set_text(tr(dialog_display_name))
+	
+		var dialog_bubble_image: Image = dialog_bubble.get_child(0).get_texture().get_data()
+		dialog_bubble_image.lock()
+		dialog_name.get_parent().set_self_modulate(dialog_bubble_image.get_pixel(0, dialog_bubble_image.get_height() / 2))
+		if dialog_bubble_image.get_pixel(dialog_bubble_image.get_width() / 2, dialog_bubble_image.get_height() / 2).get_luminance() <= 0.5:
+			current_color = ["[color=white]", "[/color]"]
 	else:
+		current_color = ["[color=black]", "[/color]"]
 		dialog_name.get_parent().set_visible(false)
 
 	question_bubble.set_visible(false)
@@ -115,8 +123,12 @@ func _load_new_dialog(dialog_key: String) -> void:
 
 func _new_dialog_page(dialog_page: Array) -> void:
 	current_dialog_words.clear()
+
 	for c in container.get_children():
 		c.queue_free()
+
+	for s in shadows_container.get_children():
+		s.queue_free()
 
 	current_dialog_words = dialog_page
 	word_timer.start()
@@ -327,10 +339,11 @@ func _on_word_timeout() -> void:
 			new_char_label.id = "word_" + str(current_word)
 			new_char_label.animation_time = (1.0 / display_word.length()) * text_speed
 
-			new_char_label.set_bbcode("[bounce id=word_" + str(current_word) + "]" + current_bbcode[0] + "[color=black]" + display_word + "[/color]" + current_bbcode[1] + "[/bounce]")
-			current_word += 1
+			var label_text: String = "[bounce id=word_" + str(current_word) + "]" + current_bbcode[0] + current_color[0] + display_word + current_color[1] + current_bbcode[1] + "[/bounce]"
+			new_char_label.set_bbcode(label_text)
+			shadows_container.add_child(new_char_label.duplicate())
 
-			#print(new_char_label.get_bbcode())
+			current_word += 1
 
 			container.add_child(new_char_label)
 			new_char_label.fade_in()

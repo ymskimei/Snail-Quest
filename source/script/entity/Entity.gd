@@ -403,7 +403,6 @@ func _update_nearest_target() -> void:
 func interact() -> void:
 	var bubble: CanvasLayer = dialog_bubble.instance()
 	bubble.dialog_display_name = get_entity_identity().get_entity_name()
-	bubble.dialog_color = get_entity_identity().get_color_shell_base()
 	bubble.current_dialog_keys = dialog_fetcher()
 	camera_override()
 	if bubble.current_dialog_keys.size() > 0:

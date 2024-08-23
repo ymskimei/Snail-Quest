@@ -24,12 +24,10 @@ margin_left = 256.0
 margin_right = 1664.0
 margin_bottom = 320.0
 texture = ExtResource( 3 )
-patch_margin_left = 96
-patch_margin_top = 96
-patch_margin_right = 96
-patch_margin_bottom = 96
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
+patch_margin_left = 95
+patch_margin_top = 95
+patch_margin_right = 95
+patch_margin_bottom = 95
 
 [node name="MarginContainer" type="MarginContainer" parent="DialogContainer/NinePatchRect"]
 anchor_right = 1.0
@@ -38,6 +36,25 @@ custom_constants/margin_right = 64
 custom_constants/margin_top = 64
 custom_constants/margin_left = 64
 custom_constants/margin_bottom = 64
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogContainer/NinePatchRect/MarginContainer"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 1344.0
+margin_bottom = 256.0
+custom_constants/margin_right = -5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = -5
+
+[node name="HFlowContainerShadows" type="HFlowContainer" parent="DialogContainer/NinePatchRect/MarginContainer/MarginContainer"]
+modulate = Color( 0, 0, 0, 0.27451 )
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1285.0
+margin_bottom = 197.0
+custom_constants/vseparation = 6
+custom_constants/hseparation = 8
 
 [node name="HFlowContainer" type="HFlowContainer" parent="DialogContainer/NinePatchRect/MarginContainer"]
 margin_left = 64.0
