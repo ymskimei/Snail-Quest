@@ -56,7 +56,7 @@ func physics_process(delta: float) -> int:
 	entity.anim_tree.set("parameters/SnailMove/TimeScale/scale", entity.input_direction.length())
 	entity.anim_tree.set("parameters/SnailMove/Blend3/blend_amount", entity.input_direction.x * 0.75)
 
-	if entity.move_direction.length() < 0.1:
+	if entity.move_direction.length() < 0.1 or entity.interacting:
 		return State.IDLE
 
 	if !is_on_surface():

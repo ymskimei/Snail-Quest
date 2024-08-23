@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/material/object/test_sign.tres" type="Material" id=1]
 [ext_resource path="res://assets/model/sign.mesh" type="ArrayMesh" id=2]
 [ext_resource path="res://source/script/object/Sign.gd" type="Script" id=3]
-[ext_resource path="res://assets/resource/dialog/old/sign_test_0.tres" type="Resource" id=4]
 [ext_resource path="res://assets/resource/animation/SignIdle.tres" type="Animation" id=5]
 [ext_resource path="res://source/script/object/EnvironmentMeshInstance.gd" type="Script" id=6]
 
@@ -14,8 +13,6 @@
 [node name="Sign" type="KinematicBody" groups=["target"]]
 collision_layer = 8
 script = ExtResource( 3 )
-dialog = ExtResource( 4 )
-bubble_type = "res://source/scene/interface/menu_dialog.tscn"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.984808, 0.191013, 0, -0.173648, 1.08329, 0, 0, 0, 1, 0, 0, 0 )

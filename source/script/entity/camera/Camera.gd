@@ -2,6 +2,7 @@ class_name MainCamera
 extends SpringArm
 
 onready var lens: Camera = $CameraLens
+onready var collision: CollisionShape = $Area/CollisionShape
 
 onready var anim_tween: Tween = $Animation/AnimationCam
 onready var anim_bars: AnimationPlayer = $Animation/AnimationBars
@@ -12,7 +13,7 @@ onready var overlay_water: CanvasLayer = $OverlayWater
 
 var target: Spatial = null
 var positioner: Position3D = null
-var override: Position3D = null
+var override: Spatial = null
 
 var debug_cam: bool = false
 

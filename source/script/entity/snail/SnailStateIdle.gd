@@ -35,7 +35,7 @@ func physics_process(delta: float) -> int:
 	if !is_on_surface():
 		return State.FALL
 
-	if entity.move_direction.length() > 0.01:
+	if entity.move_direction.length() > 0.01 and !entity.interacting:
 		return State.MOVE
 
 	if entity.jump_in_memory or entity.boost_direction.length() > 0.01:

@@ -23,7 +23,7 @@ func _ready() -> void:
 	eye_blinking_init(eye_left.get_surface_material(0), eye_right.get_surface_material(0))
 
 func _unhandled_input(event: InputEvent) -> void:
-	if is_controlled() and !interacting:
+	if is_controlled():
 		states.unhandled_input(event)
 
 func _physics_process(delta: float) -> void:

@@ -214,9 +214,13 @@ func _physics_process(delta: float) -> void:
 	if !zero_movement:
 		modified_movement = move_direction + (surface_normal * jump_strength)
 
-	var movement_vector: Vector3 = modified_gravity + modified_movement + boost_direction
+	var movement_vector: Vector3
+	if interacting:
+		movement_vector = Vector3.ZERO
+	else:
+		movement_vector = modified_gravity + modified_movement + boost_direction
+		set_global_rotation(Utility.align_from_rotation(delta, get_global_rotation(), surface_normal, facing_direction, 16 * delta))
 	move_and_slide_with_snap(movement_vector, surface_normal, Vector3.UP, true, 4, deg2rad(90), false)
-	set_global_rotation(Utility.align_from_rotation(delta, get_global_rotation(), surface_normal, facing_direction, 16 * delta))
 
 	## Target Search ##
 
@@ -408,6 +412,7 @@ func interact() -> void:
 	if bubble.current_dialog_keys.size() > 0:
 		add_child(bubble)
 		bubble.connect("dialog_ended", self,"_dialog_end")
+		facing_direction = (facing_direction - SnailQuest.get_controlled().facing_direction).normalized()
 	else:
 		_dialog_end()
 

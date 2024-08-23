@@ -1673,7 +1673,7 @@ bones/23/enabled = true
 bones/23/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999458, -0.0306089, -0.0121081, 0.0178156, 0.193691, 0.980899, -0.0276791, -0.980585, 0.194132, -0.155412, 0.7244, -0.563283 )
+transform = Transform( 0.99979, -0.0122577, -0.0164094, 0.0172963, 0.076102, 0.996949, -0.0109716, -0.997025, 0.0762983, -0.158666, 0.744117, -0.564463 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -1683,7 +1683,7 @@ material/0 = ExtResource( 2 )
 script = ExtResource( 4 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999542, 0.0277677, -0.0120497, 0.00661598, 0.188027, 0.98214, 0.0295375, -0.981771, 0.187758, 0.156201, 0.726253, -0.563155 )
+transform = Transform( 0.999929, 0.011879, -7.9311e-05, -0.000792176, 0.0733032, 0.997308, 0.0118529, -0.997239, 0.0733077, 0.158928, 0.745393, -0.564333 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]
@@ -1743,7 +1743,7 @@ collision_mask = 12
 debug_shape_custom_color = Color( 0.219608, 0.792157, 0.215686, 1 )
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999983, 0.00121437, 0.00570909, -0.000988327, 0.999222, -0.0394314, -0.00575253, 0.039425, 0.999206, -2.18294e-17, 0.251689, -0.0753158 )
+transform = Transform( 0.999997, 0.000464332, 0.00231624, -0.000427306, 0.999873, -0.0159608, -0.00232335, 0.0159597, 0.99987, -2.18294e-17, 0.251689, -0.0753158 )
 bone_name = "Mantle"
 
 [node name="Sticker" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment3"]
