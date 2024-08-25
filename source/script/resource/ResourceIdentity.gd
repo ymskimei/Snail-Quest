@@ -16,13 +16,10 @@ export var pattern_eyes: Texture = null
 export var pattern_eyelids: Texture = null
 
 export var color_shell_base: Color = Color("FFFFFF")
-export var color_shell_shade: Color = Color("FFFFFF")
-export var color_shell_accent: Color = Color("FFFFFF")
+export var color_shell_accent: Color = Color("00ffffff")
 
-export var color_body_specular: Color = Color("FFFFFF")
 export var color_body_base: Color = Color("FFFFFF")
-export var color_body_shade: Color = Color("FFFFFF")
-export var color_body_accent: Color = Color("FFFFFF")
+export var color_body_accent: Color = Color("00ffffff")
 
 export var color_eyes: Color = Color("FFFFFF")
 
@@ -102,35 +99,17 @@ func set_color_shell_base(shade: Color) -> void:
 func get_color_shell_base() -> Color:
 	return color_shell_base
 
-func set_color_shell_shade(shade: Color) -> void:
-	color_shell_shade = shade
-
-func get_color_shell_shade() -> Color:
-	return color_shell_shade
-
 func set_color_shell_accent(shade: Color) -> void:
 	color_shell_accent = shade
 
 func get_color_shell_accent() -> Color:
 	return color_shell_accent
 
-func set_color_body_specular(shade: Color) -> void:
-	color_body_specular = shade
-
-func get_color_body_specular() -> Color:
-	return color_body_specular
-
 func set_color_body_base(shade: Color) -> void:
 	color_body_base = shade
 
 func get_color_body_base() -> Color:
 	return color_body_base
-
-func set_color_body_shade(shade: Color) -> void:
-	color_body_shade = shade
-
-func get_color_body_shade() -> Color:
-	return color_body_shade
 
 func set_color_body_accent(accent: Color) -> void:
 	color_body_accent = accent

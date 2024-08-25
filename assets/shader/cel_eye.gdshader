@@ -15,9 +15,10 @@ void fragment() {
 	if (is_right) {
 		corrected_pupil_position = corrected_pupil_position + vec2(0.0, 2.0);
 	}
-	
+
 	uv += corrected_pupil_position * 0.25;
 	vec4 pupil = albedo_color * texture(texture_albedo, uv);
+
 	ALBEDO = pupil.rgb;
 	ALPHA = pupil.a;
 }

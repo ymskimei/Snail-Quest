@@ -17,7 +17,7 @@ var was_just_in_shell: bool = false
 func _ready() -> void:
 	mesh = $Armature/Skeleton/MeshInstance
 	states.ready(self)
-	update_appearance()
+	Functions.update_snail_appearance(identity, mesh, body, eye_left, eye_right)
 	set_interaction_text("")
 
 	eye_blinking_init(eye_left.get_surface_material(0), eye_right.get_surface_material(0))
@@ -56,59 +56,6 @@ func _on_proximity_entered(b) -> void:
 func _on_proximity_exited(b) -> void:
 	if b is Enemy:
 		enemy_found = false
-
-func update_appearance() -> void:
-	var shell_mat = mesh.get_surface_material(0)
-	var shell_opening = mesh.get_surface_material(1)
-	var shell_accent_mat = mesh.get_surface_material(0).get_next_pass()
-	var body_mat = body.get_surface_material(0)
-	var body_accent_mat = body.get_surface_material(0).get_next_pass()
-	var eye_left_mat = eye_left.get_surface_material(0).get_next_pass()
-	var eye_right_mat = eye_right.get_surface_material(0).get_next_pass()
-	var eyelid_left_mat = eye_left.get_surface_material(0).get_next_pass().get_next_pass()
-	var eyelid_right_mat = eye_right.get_surface_material(0).get_next_pass().get_next_pass()
-	if identity:
-		mesh.set_mesh(identity.mesh_shell)
-		body.set_mesh(identity.mesh_body)
-		eye_left.set_mesh(identity.mesh_eye_left)
-		eye_right.set_mesh(identity.mesh_eye_right)
-
-		shell_accent_mat.set_shader_param("texture_albedo", identity.pattern_shell)
-
-		eye_left_mat.set_shader_param("texture_albedo", identity.pattern_eyes)
-		eye_right_mat.set_shader_param("texture_albedo", identity.pattern_eyes)
-
-		shell_mat.set_shader_param("albedo_color", identity.color_shell_base)
-		shell_mat.set_shader_param("shade_color", identity.color_shell_shade)
-		shell_opening.set_shader_param("albedo_color", identity.color_body_base)
-		shell_opening.set_shader_param("shade_color", identity.color_body_shade)
-
-		shell_accent_mat.set_shader_param("albedo_color", identity.color_shell_accent)
-		shell_accent_mat.set_shader_param("shade_color", identity.color_shell_accent)
-
-		body_mat.set_shader_param("specular_color", identity.color_body_specular)
-		body_mat.set_shader_param("rim_color", identity.color_body_specular)
-		body_mat.set_shader_param("albedo_color", identity.color_body_base)
-		body_mat.set_shader_param("shade_color", identity.color_body_shade)
-
-		body_accent_mat.set_shader_param("texture_albedo", identity.pattern_body)
-		body_accent_mat.set_shader_param("albedo_color", identity.color_body_accent)
-		body_accent_mat.set_shader_param("shade_color", identity.color_body_shade)
-
-		eye_left_mat.set_shader_param("albedo_color", identity.color_eyes)
-		eye_left_mat.set_shader_param("shade_color", identity.color_eyes)
-		eye_right_mat.set_shader_param("albedo_color", identity.color_eyes)
-		eye_right_mat.set_shader_param("shade_color", identity.color_eyes)
-
-		eyelid_left_mat.set_shader_param("texture_albedo", identity.pattern_eyelids)
-		eyelid_right_mat.set_shader_param("texture_albedo", identity.pattern_eyelids)
-
-		eyelid_left_mat.set_shader_param("albedo_color", identity.color_body_base)
-		eyelid_left_mat.set_shader_param("shade_color", identity.color_body_shade)
-		eyelid_right_mat.set_shader_param("albedo_color", identity.color_body_base)
-		eyelid_right_mat.set_shader_param("shade_color", identity.color_body_shade)
-
-		skeleton.get_parent().set_scale(Vector3(identity.entity_scale, identity.entity_scale, identity.entity_scale))
 
 func play_sound_slide(s: bool = false) -> void:
 	if s:

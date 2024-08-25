@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode cull_disabled, depth_draw_alpha_prepass;
+render_mode cull_disabled, depth_draw_alpha_prepass, ensure_correct_normals;
 
 uniform bool light_affected = true;
 
@@ -17,19 +17,19 @@ uniform vec4 emission: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 
 uniform float normal_scale: hint_range(-16, 16) = 0.01;
 
-uniform float shade_threshold: hint_range(-1.0, 1.0) = 0.025;
-uniform float shade_softness: hint_range(0.0, 1.0) = 0.025;
+uniform float shade_threshold: hint_range(-1.0, 1.0) = 0.1;
+uniform float shade_softness: hint_range(0.0, 1.0) = 0.01;
 
 uniform float specular_glossiness: hint_range(1.0, 100.0) = 15.0;
 uniform float specular_threshold: hint_range(0.0, 1.0) = 0.5;
 uniform float specular_softness: hint_range(0.0, 1.0) = 0.01;
 
-uniform float rim_threshold: hint_range(0.0, 1.0) = 0.25;
+uniform float rim_threshold: hint_range(0.0, 1.0) = 0.1;
 uniform float rim_softness: hint_range(0.0, 1.0) = 0.01;
 uniform float rim_spread: hint_range(0.0, 1.0) = 0.5;
 
 uniform float shadow_threshold: hint_range(0.0, 1.0) = 0.5;
-uniform float shadow_softness: hint_range(0.0, 1.0) = 0.1;
+uniform float shadow_softness: hint_range(0.0, 1.0) = 0.01;
 
 uniform float emission_energy = 0.0;
 
@@ -81,8 +81,11 @@ vec4 triplanar_texture(sampler2D p_sampler, vec2 uv) {
 	return samp;
 }
 
+uniform float hue_shift_amount : hint_range(-1.0, 1.0) = 0.9; // Adjusts how much the hue is shifted toward red
+
 void fragment() {
-	ALBEDO = albedo_color.rgb * triplanar_texture(texture_albedo, UV).rgb;
+    // Output the final color
+    ALBEDO = albedo_color.rgb * triplanar_texture(texture_albedo, UV).rgb;
 	ALPHA = albedo_color.a * triplanar_texture(texture_albedo, UV).a;  
 
 	NORMALMAP = triplanar_texture(texture_normal, UV).rgb;
@@ -109,26 +112,21 @@ void light() {
 
 	if (use_specular) {
 		vec3 half = normalize(VIEW + LIGHT);
-		float NdotH = dot(NORMAL, half);
+		float NdotH = max(0.0, dot(NORMAL, half));
+		float specular_value = pow(NdotH, max(0.0, specular_glossiness));
 
-		float specular_value = pow(NdotH * is_lit, specular_glossiness * specular_glossiness);
 		specular_value = smoothstep(specular_threshold - specular_softness, specular_threshold + specular_softness, specular_value);
-
-		vec4 specular_contribution = highlight_color.rgba * specular_value * is_lit * 1.0;
-		diffuse = mix(diffuse, specular_contribution, specular_value);
+		vec4 specular_contribution = highlight_color.rgba * specular_value;
+		diffuse = mix(diffuse, diffuse + specular_contribution, specular_value);
 	}
 
 	if (use_rim) {
 		float iVdotN = 1.0 - dot(VIEW, NORMAL);
+		float rim_value = max(0.0, iVdotN) * pow(max(0.0, NdotL), 1.0 - rim_spread);
 
-		float inverted_rim_threshold = 1.0 - rim_threshold;
-		float inverted_rim_spread = 1.0 - rim_spread;
-
-		float rim_value = iVdotN * pow(NdotL, inverted_rim_spread);
-		rim_value = smoothstep(inverted_rim_threshold - rim_softness, inverted_rim_threshold + rim_softness, rim_value);
-
-		vec4 rim_contribution = highlight_color.rgba * rim_value * is_lit * 1.0;
-		diffuse = mix(diffuse, rim_contribution, rim_value);
+		rim_value = smoothstep(1.0 - rim_threshold - rim_softness, 1.0 - rim_threshold + rim_softness, rim_value);
+		vec4 rim_contribution = highlight_color.rgba * rim_value;
+		diffuse = mix(diffuse, diffuse + rim_contribution, rim_value);
 	}
 
 	diffuse *= vec4(1.0, 1.0, 1.0, 1.0);

@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/texture/entity/sticker/sticker_0.png" type="Texture" id=2]
 [ext_resource path="res://assets/model/entity/hat/hat_0.mesh" type="ArrayMesh" id=3]
 [ext_resource path="res://source/script/resource/ResourceIdentity.gd" type="Script" id=4]
-[ext_resource path="res://assets/texture/trans.png" type="Texture" id=5]
+[ext_resource path="res://assets/texture/entity/snail_body_accent_0.png" type="Texture" id=5]
 [ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=6]
 [ext_resource path="res://assets/texture/entity/snail_shell_accent_0.png" type="Texture" id=8]
 [ext_resource path="res://assets/texture/entity/snail_eyelids_top_half.png" type="Texture" id=9]
@@ -89,14 +89,11 @@ pattern_shell = ExtResource( 8 )
 pattern_body = ExtResource( 5 )
 pattern_eyes = ExtResource( 6 )
 pattern_eyelids = ExtResource( 9 )
-color_shell_base = Color( 1, 0.643137, 0.85098, 1 )
-color_shell_shade = Color( 0.933333, 0.494118, 0.811765, 1 )
-color_shell_accent = Color( 0.756863, 0.270588, 0.592157, 1 )
-color_body_specular = Color( 1, 0.898039, 0.882353, 1 )
+color_shell_base = Color( 1, 0.588235, 0.780392, 1 )
+color_shell_accent = Color( 0.945098, 0.329412, 0.682353, 1 )
 color_body_base = Color( 0.945098, 0.768627, 0.741176, 1 )
-color_body_shade = Color( 0.819608, 0.635294, 0.572549, 1 )
-color_body_accent = Color( 0.85098, 0.662745, 0.662745, 1 )
-color_eyes = Color( 0.341176, 0.266667, 0.215686, 1 )
+color_body_accent = Color( 1, 1, 1, 0 )
+color_eyes = Color( 0.529412, 0.427451, 0.360784, 1 )
 mesh_hat = ExtResource( 3 )
 pattern_hat = ExtResource( 1 )
 pattern_sticker = ExtResource( 2 )

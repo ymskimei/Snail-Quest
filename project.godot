@@ -352,8 +352,7 @@ window/size/test_width=1280
 window/size/test_height=720
 window/dpi/allow_hidpi=true
 window/vsync/use_vsync=false
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/mode="2d"
 window/use_filter=false
 
 [editor]
@@ -688,7 +687,6 @@ quality/reflections/high_quality_ggx=false
 quality/shading/force_vertex_shading.mobile=false
 quality/shading/force_lambert_over_burley=true
 quality/shading/force_blinn_over_ggx=true
-quality/shading/use_physical_light_attenuation=true
 quality/filters/anisotropic_filter_level=2
 quality/lightmapping/use_bicubic_sampling=false
 limits/rendering/max_renderable_lights=16
@@ -696,6 +694,7 @@ limits/rendering/max_renderable_reflections=8
 limits/rendering/max_lights_per_object=8
 quality/subsurface_scattering/quality=0
 environment/default_clear_color=Color( 0, 0, 0, 1 )
-quality/filters/msaa=2
+quality/filters/msaa=1
 quality/filters/use_debanding=true
+quality/depth/hdr=false
 environment/default_environment="res://assets/resource/environment/environment_interior.tres"

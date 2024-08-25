@@ -30,6 +30,8 @@ func set_movement(delta: float, speed_modifier: float = 1.0, turn_modifier: floa
 		var c = entity.get_slide_collision(i)
 		if c.collider is RigidBody:
 			c.collider.apply_central_impulse(-c.normal * (0.25 + (entity.move_momentum * 50)))
+		elif c.collider is KinematicBody:
+			entity.move_and_collide(-c.get_travel())
 
 	if entity.surface_rays:
 		for ray in entity.surface_rays.get_children():

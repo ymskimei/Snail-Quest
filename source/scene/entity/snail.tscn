@@ -1,7 +1,7 @@
-[gd_scene load_steps=170 format=2]
+[gd_scene load_steps=167 format=2]
 
 [ext_resource path="res://assets/material/entity/snail_body.tres" type="Material" id=1]
-[ext_resource path="res://assets/material/entity/snail_eyes.tres" type="Material" id=2]
+[ext_resource path="res://assets/material/entity/snail_eye_right.tres" type="Material" id=2]
 [ext_resource path="res://assets/material/entity/snail_shell.tres" type="Material" id=3]
 [ext_resource path="res://source/script/object/EnvironmentMeshInstance.gd" type="Script" id=4]
 [ext_resource path="res://source/script/entity/snail/SnailStateGpnd.gd" type="Script" id=5]
@@ -17,8 +17,7 @@
 [ext_resource path="res://source/script/entity/snail/SnailStateHide.gd" type="Script" id=15]
 [ext_resource path="res://assets/resource/identity/snail/sheldon.tres" type="Resource" id=16]
 [ext_resource path="res://assets/texture/entity/sticker/sticker_1.png" type="Texture" id=17]
-[ext_resource path="res://assets/texture/entity/snail_eyelids_top.png" type="Texture" id=18]
-[ext_resource path="res://assets/texture/entity/snail_eye_test.png" type="Texture" id=19]
+[ext_resource path="res://assets/material/entity/snail_eye_left.tres" type="Material" id=18]
 [ext_resource path="res://assets/texture/entity/snail_mood_eyes_sad.png" type="Texture" id=20]
 [ext_resource path="res://assets/texture/entity/snail_mood_eyelids_tired.png" type="Texture" id=21]
 [ext_resource path="res://assets/texture/entity/snail_mood_eyes_angry.png" type="Texture" id=22]
@@ -56,81 +55,11 @@
 [ext_resource path="res://assets/resource/animation/SnailGrooving.tres" type="Animation" id=54]
 [ext_resource path="res://assets/resource/animation/SnailLift.tres" type="Animation" id=55]
 [ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=56]
-[ext_resource path="res://assets/shader/cel_eye.gdshader" type="Shader" id=57]
 [ext_resource path="res://assets/shader/decal.shader" type="Shader" id=58]
 [ext_resource path="res://source/scene/entity/state_controller.tscn" type="PackedScene" id=59]
 [ext_resource path="res://source/scene/entity/fake_snail.tscn" type="PackedScene" id=60]
 [ext_resource path="res://source/scene/entity/trail.tscn" type="PackedScene" id=61]
 [ext_resource path="res://source/scene/interface/debug_healthbar.tscn" type="PackedScene" id=62]
-
-[sub_resource type="ShaderMaterial" id=4]
-resource_local_to_scene = true
-render_priority = 2
-shader = ExtResource( 56 )
-shader_param/light_affected = true
-shader_param/use_specular = false
-shader_param/use_rim = false
-shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
-shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 1, 1, 1, 1 )
-shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/normal_scale = 0.01
-shader_param/shade_threshold = 0.025
-shader_param/shade_softness = 0.025
-shader_param/specular_glossiness = 15.0
-shader_param/specular_threshold = 0.5
-shader_param/specular_softness = 0.0
-shader_param/rim_threshold = 0.25
-shader_param/rim_softness = 0.0
-shader_param/rim_spread = 0.5
-shader_param/shadow_threshold = 0.5
-shader_param/shadow_softness = 0.1
-shader_param/emission_energy = 0.0
-shader_param/screen_scale = 10.0
-shader_param/uv_scale = Vector3( 1, 1, 1 )
-shader_param/uv_offset = Vector3( 0, 0, 0 )
-shader_param/use_triplanar = false
-shader_param/texture_albedo = ExtResource( 18 )
-
-[sub_resource type="ShaderMaterial" id=164]
-resource_local_to_scene = true
-render_priority = 1
-next_pass = SubResource( 4 )
-shader = ExtResource( 57 )
-shader_param/albedo_color = Color( 0.490196, 0.486275, 0.486275, 1 )
-shader_param/pupil_position = Vector2( 0, 0 )
-shader_param/is_right = false
-shader_param/texture_albedo = ExtResource( 19 )
-
-[sub_resource type="ShaderMaterial" id=163]
-resource_local_to_scene = true
-next_pass = SubResource( 164 )
-shader = ExtResource( 56 )
-shader_param/light_affected = false
-shader_param/use_specular = false
-shader_param/use_rim = false
-shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
-shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 0.74902, 0.74902, 0.74902, 1 )
-shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/normal_scale = 0.01
-shader_param/shade_threshold = 0.025
-shader_param/shade_softness = 0.025
-shader_param/specular_glossiness = 15.0
-shader_param/specular_threshold = 0.5
-shader_param/specular_softness = 0.0
-shader_param/rim_threshold = 0.25
-shader_param/rim_softness = 0.0
-shader_param/rim_spread = 0.5
-shader_param/shadow_threshold = 0.5
-shader_param/shadow_softness = 0.1
-shader_param/emission_energy = 0.0
-shader_param/screen_scale = 10.0
-shader_param/uv_scale = Vector3( 1, 1, 1 )
-shader_param/uv_offset = Vector3( 0, 0, 0 )
-shader_param/use_triplanar = false
 
 [sub_resource type="Skin" id=36]
 resource_name = "Skin"
@@ -245,6 +174,7 @@ shader_param/screen_scale = 10.0
 shader_param/uv_scale = Vector3( 1, 1, 1 )
 shader_param/uv_offset = Vector3( 1, 0, 0 )
 shader_param/use_triplanar = false
+shader_param/hue_shift_amount = 0.9
 
 [sub_resource type="SphereShape" id=43]
 
@@ -340,7 +270,12 @@ animation = "SnailJump"
 [sub_resource type="AnimationNodeAnimation" id=84]
 animation = "SnailMove"
 
+[sub_resource type="AnimationNodeBlend2" id=168]
+
 [sub_resource type="AnimationNodeBlend3" id=150]
+
+[sub_resource type="AnimationNodeAnimation" id=169]
+animation = "SnailIdle"
 
 [sub_resource type="AnimationNodeAnimation" id=151]
 animation = "SnailTurnLeft"
@@ -348,22 +283,26 @@ animation = "SnailTurnLeft"
 [sub_resource type="AnimationNodeAnimation" id=152]
 animation = "SnailTurnRight"
 
-[sub_resource type="AnimationNodeTimeScale" id=85]
+[sub_resource type="AnimationNodeTimeScale" id=170]
 
 [sub_resource type="AnimationNodeBlendTree" id=53]
-graph_offset = Vector2( -588.611, 49.8333 )
+graph_offset = Vector2( -705.095, -96.1263 )
 nodes/Animation/node = SubResource( 84 )
-nodes/Animation/position = Vector2( -520, 160 )
+nodes/Animation/position = Vector2( -863.158, 231.579 )
+nodes/Blend2/node = SubResource( 168 )
+nodes/Blend2/position = Vector2( -484.211, 147.368 )
 nodes/Blend3/node = SubResource( 150 )
 nodes/Blend3/position = Vector2( 0, 120 )
+nodes/SnailIdle/node = SubResource( 169 )
+nodes/SnailIdle/position = Vector2( -673.684, 84.2105 )
 nodes/SnailTurnLeft/node = SubResource( 151 )
 nodes/SnailTurnLeft/position = Vector2( -320, 60 )
 nodes/SnailTurnRight/node = SubResource( 152 )
 nodes/SnailTurnRight/position = Vector2( -320, 300 )
-nodes/TimeScale/node = SubResource( 85 )
-nodes/TimeScale/position = Vector2( -280, 180 )
-nodes/output/position = Vector2( 340, 140 )
-node_connections = [ "Blend3", 0, "SnailTurnLeft", "Blend3", 1, "TimeScale", "Blend3", 2, "SnailTurnRight", "TimeScale", 0, "Animation", "output", 0, "Blend3" ]
+nodes/TimeScale/node = SubResource( 170 )
+nodes/TimeScale/position = Vector2( -673.684, 231.579 )
+nodes/output/position = Vector2( 189.474, 147.368 )
+node_connections = [ "Blend2", 0, "SnailIdle", "Blend2", 1, "TimeScale", "Blend3", 0, "SnailTurnLeft", "Blend3", 1, "Blend2", "Blend3", 2, "SnailTurnRight", "TimeScale", 0, "Animation", "output", 0, "Blend3" ]
 
 [sub_resource type="AnimationNodeAnimation" id=95]
 animation = "SnailPeelingHorizontal"
@@ -1673,7 +1612,7 @@ bones/23/enabled = true
 bones/23/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.99979, -0.0122577, -0.0164094, 0.0172963, 0.076102, 0.996949, -0.0109716, -0.997025, 0.0762983, -0.158666, 0.744117, -0.564463 )
+transform = Transform( 1, 5.54137e-08, 7.8463e-08, 3.61168e-07, -5.86733e-08, 0.999999, 8.3819e-09, -1, 1.07917e-07, -0.16407, 0.780282, -0.564601 )
 bone_name = "EyeCenter.L"
 
 [node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
@@ -1683,13 +1622,13 @@ material/0 = ExtResource( 2 )
 script = ExtResource( 4 )
 
 [node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999929, 0.011879, -7.9311e-05, -0.000792176, 0.0733032, 0.997308, 0.0118529, -0.997239, 0.0733077, 0.158928, 0.745393, -0.564333 )
+transform = Transform( 1, -5.82077e-08, -9.33669e-08, -3.31365e-07, -5.84405e-08, 0.999999, -1.11759e-08, -1, 1.08383e-07, 0.16407, 0.780282, -0.564601 )
 bone_name = "EyeCenter.R"
 
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]
 transform = Transform( 1, -3.747e-06, -5.81117e-07, -5.81119e-07, -3.57628e-07, -0.999999, 3.747e-06, 1, -3.57627e-07, 0.0416807, -0.737043, -0.570601 )
 mesh = ExtResource( 27 )
-material/0 = SubResource( 163 )
+material/0 = ExtResource( 18 )
 script = ExtResource( 4 )
 
 [node name="Body" type="MeshInstance" parent="Armature/Skeleton"]
@@ -1743,7 +1682,7 @@ collision_mask = 12
 debug_shape_custom_color = Color( 0.219608, 0.792157, 0.215686, 1 )
 
 [node name="BoneAttachment3" type="BoneAttachment" parent="Armature/Skeleton"]
-transform = Transform( 0.999997, 0.000464332, 0.00231624, -0.000427306, 0.999873, -0.0159608, -0.00232335, 0.0159597, 0.99987, -2.18294e-17, 0.251689, -0.0753158 )
+transform = Transform( 1, 2.70234e-16, -2.70234e-16, -2.70234e-16, 1, 3.65133e-32, 2.70234e-16, 3.65133e-32, 1, -2.18294e-17, 0.251689, -0.0753158 )
 bone_name = "Mantle"
 
 [node name="Sticker" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment3"]
@@ -1781,6 +1720,7 @@ parameters/SnailGrooving/TimeScale/scale = 1.0
 parameters/SnailHide/TimeScale/scale = 2.0
 parameters/SnailIdle/Blend3/blend_amount = 0.0
 parameters/SnailIdle/TimeScale/scale = 0.5
+parameters/SnailMove/Blend2/blend_amount = 0.0
 parameters/SnailMove/Blend3/blend_amount = 0.0
 parameters/SnailMove/TimeScale/scale = 1.0
 parameters/SnailPeelingHorizontal/TimeScale/scale = 1.0

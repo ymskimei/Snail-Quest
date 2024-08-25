@@ -1,11 +1,16 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/texture/tile/test_map_1.png" type="Texture" id=1]
 [ext_resource path="res://source/scene/object/sign.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/shader/cel_primary.shader" type="Shader" id=3]
 [ext_resource path="res://source/scene/entity/snail.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/resource/identity/snail/melon.tres" type="Resource" id=5]
+[ext_resource path="res://assets/resource/identity/snail/melonie.tres" type="Resource" id=5]
 [ext_resource path="res://assets/resource/identity/snail/sarah.tres" type="Resource" id=6]
+[ext_resource path="res://assets/resource/identity/snail/pinkalina.tres" type="Resource" id=7]
+[ext_resource path="res://assets/resource/identity/snail/tubbington.tres" type="Resource" id=8]
+[ext_resource path="res://assets/resource/identity/snail/duskjr.tres" type="Resource" id=9]
+[ext_resource path="res://assets/resource/identity/snail/edmund.tres" type="Resource" id=10]
+[ext_resource path="res://assets/resource/identity/snail/leonardo.tres" type="Resource" id=11]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -57,10 +62,30 @@ shape = SubResource( 2 )
 [node name="Sign" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
 
-[node name="Snail" parent="." instance=ExtResource( 4 )]
+[node name="Melonie" parent="." instance=ExtResource( 4 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0.482041, -5 )
 identity = ExtResource( 5 )
 
-[node name="Snail2" parent="." instance=ExtResource( 4 )]
+[node name="Sarah" parent="." instance=ExtResource( 4 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5, 0.482041, -5 )
 identity = ExtResource( 6 )
+
+[node name="Pinky" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -8, 0.482041, -5 )
+identity = ExtResource( 7 )
+
+[node name="DuskJr" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11, 0.482041, -5 )
+identity = ExtResource( 9 )
+
+[node name="Edmund" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -8, 0.482041, -9 )
+identity = ExtResource( 10 )
+
+[node name="Lenny" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5, 0.482041, -9 )
+identity = ExtResource( 11 )
+
+[node name="Tubby" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0.482041, -9 )
+identity = ExtResource( 8 )

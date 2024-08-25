@@ -50,13 +50,14 @@ func _ready() -> void:
 		texture_id.erase(0, 7)
 		dialog_bubble.get_child(0).set_texture(load("res://assets/texture/interface/menu/dialog/dialog_%s.png" % texture_id.to_lower()))
 		dialog_name.set_text(tr(dialog_display_name))
-	
+
 		var dialog_bubble_image: Image = dialog_bubble.get_child(0).get_texture().get_data()
 		dialog_bubble_image.lock()
 		dialog_name.get_parent().set_self_modulate(dialog_bubble_image.get_pixel(0, dialog_bubble_image.get_height() / 2))
 		if dialog_bubble_image.get_pixel(dialog_bubble_image.get_width() / 2, dialog_bubble_image.get_height() / 2).get_luminance() <= 0.5:
 			current_color = ["[color=white]", "[/color]"]
 	else:
+		dialog_bubble.get_child(0).set_texture(load("res://assets/texture/interface/menu/dialog/dialog_sign.png"))
 		current_color = ["[color=black]", "[/color]"]
 		dialog_name.get_parent().set_visible(false)
 

@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode cull_disabled, depth_draw_alpha_prepass;
+render_mode cull_disabled, depth_draw_alpha_prepass, ensure_correct_normals;
 
 uniform bool light_affected = true;
 

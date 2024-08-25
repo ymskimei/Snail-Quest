@@ -54,7 +54,14 @@ func physics_process(delta: float) -> int:
 		set_movement(delta, 1.0 + entity.move_momentum)
 
 	entity.anim_tree.set("parameters/SnailMove/TimeScale/scale", entity.input_direction.length())
-	entity.anim_tree.set("parameters/SnailMove/Blend3/blend_amount", entity.input_direction.x * 0.75)
+	entity.anim_tree.set("parameters/SnailMove/Blend2/blend_amount", entity.input_direction.length())
+
+	var angle = fmod(rad2deg(atan2(entity.facing_direction.x, entity.facing_direction.z)) - rad2deg(entity.get_global_rotation().y) + 180, 360) - 180
+	angle = Utility.adjusted_range(angle, -180, 180, -1, 1)
+	#if entity.is_controlled():
+		#print(angle)
+	entity.anim_tree.set("parameters/SnailMove/Blend3/blend_amount", lerp(0, angle * entity.input_direction.length(), 20 * delta))
+
 
 	if entity.move_direction.length() < 0.1 or entity.interacting:
 		return State.IDLE

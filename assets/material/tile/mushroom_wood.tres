@@ -29,4 +29,5 @@ shader_param/screen_scale = 10.0
 shader_param/uv_scale = Vector3( 0.5, 0.05, 0.5 )
 shader_param/uv_offset = Vector3( 0.5, 0.5, 0.5 )
 shader_param/use_triplanar = true
+shader_param/hue_shift_amount = 0.9
 shader_param/texture_albedo = ExtResource( 1 )

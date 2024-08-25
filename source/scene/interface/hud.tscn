@@ -349,8 +349,8 @@ show_behind_parent = true
 material = SubResource( 8 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 5120.0
-margin_bottom = 5120.0
+margin_right = 6080.0
+margin_bottom = 6080.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 18 )
@@ -767,3 +767,4 @@ text = "Press A to Interact"
 scroll_active = false
 
 [node name="CursorTarget" parent="." instance=ExtResource( 28 )]
+visible = false

@@ -3,7 +3,9 @@ extends Interactable
 
 var dialog_bubble: PackedScene = load("res://source/scene/dialog.tscn")
 
-export var dialog_id: int
+export var dialog_id: int = 0
+
+var interacted_with: bool = false
 
 func interact() -> void:
 	var bubble: CanvasLayer = dialog_bubble.instance()
@@ -12,6 +14,7 @@ func interact() -> void:
 	if bubble.current_dialog_keys.size() > 0:
 		add_child(bubble)
 		bubble.connect("dialog_ended", self,"_dialog_end")
+		interacted_with = true
 	else:
 		_dialog_end()
 
@@ -24,5 +27,6 @@ func dialog_fetcher() -> Array:
 	return dialog_array
 
 func _dialog_end() -> void:
-	SnailQuest.get_controlled().interacting = false
+	interacted_with = false
 	camera_override(false)
+	SnailQuest.get_controlled().interacting = false

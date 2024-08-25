@@ -1,14 +1,12 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/resource/identity/snail/default.tres" type="Resource" id=1]
 [ext_resource path="res://source/script/object/EnvironmentMeshInstance.gd" type="Script" id=2]
-[ext_resource path="res://assets/texture/entity/snail_eye_test.png" type="Texture" id=3]
-[ext_resource path="res://assets/texture/entity/snail_eyelids_top.png" type="Texture" id=4]
-[ext_resource path="res://assets/shader/cel_eye.gdshader" type="Shader" id=5]
+[ext_resource path="res://assets/material/entity/snail_eye_left.tres" type="Material" id=3]
 [ext_resource path="res://assets/material/entity/snail_shell.tres" type="Material" id=6]
 [ext_resource path="res://assets/material/entity/snail_body.tres" type="Material" id=7]
 [ext_resource path="res://assets/resource/animation/SnailIdle.tres" type="Animation" id=9]
-[ext_resource path="res://assets/material/entity/snail_eyes.tres" type="Material" id=19]
+[ext_resource path="res://assets/material/entity/snail_eye_right.tres" type="Material" id=19]
 [ext_resource path="res://source/script/interface/SnailGen.gd" type="Script" id=21]
 [ext_resource path="res://assets/model/entity/snail_body.mesh" type="ArrayMesh" id=22]
 [ext_resource path="res://assets/model/entity/snail_shell_1.mesh" type="ArrayMesh" id=23]
@@ -18,75 +16,6 @@
 [ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=27]
 [ext_resource path="res://assets/shader/decal.shader" type="Shader" id=28]
 [ext_resource path="res://assets/texture/entity/sticker/sticker_1.png" type="Texture" id=30]
-
-[sub_resource type="ShaderMaterial" id=165]
-resource_local_to_scene = true
-render_priority = 2
-shader = ExtResource( 27 )
-shader_param/light_affected = true
-shader_param/use_specular = false
-shader_param/use_rim = false
-shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
-shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 1, 1, 1, 1 )
-shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/normal_scale = 0.01
-shader_param/shade_threshold = 0.025
-shader_param/shade_softness = 0.025
-shader_param/specular_glossiness = 15.0
-shader_param/specular_threshold = 0.5
-shader_param/specular_softness = 0.0
-shader_param/rim_threshold = 0.25
-shader_param/rim_softness = 0.0
-shader_param/rim_spread = 0.5
-shader_param/shadow_threshold = 0.5
-shader_param/shadow_softness = 0.1
-shader_param/emission_energy = 0.0
-shader_param/screen_scale = 10.0
-shader_param/uv_scale = Vector3( 1, 1, 1 )
-shader_param/uv_offset = Vector3( 0, 0, 0 )
-shader_param/use_triplanar = false
-shader_param/texture_albedo = ExtResource( 4 )
-
-[sub_resource type="ShaderMaterial" id=164]
-resource_local_to_scene = true
-render_priority = 1
-next_pass = SubResource( 165 )
-shader = ExtResource( 5 )
-shader_param/albedo_color = Color( 0.490196, 0.486275, 0.486275, 1 )
-shader_param/pupil_position = Vector2( 0, 0 )
-shader_param/is_right = false
-shader_param/texture_albedo = ExtResource( 3 )
-
-[sub_resource type="ShaderMaterial" id=166]
-resource_local_to_scene = true
-next_pass = SubResource( 164 )
-shader = ExtResource( 27 )
-shader_param/light_affected = false
-shader_param/use_specular = false
-shader_param/use_rim = false
-shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
-shader_param/albedo_color = Color( 1, 1, 1, 1 )
-shader_param/shade_color = Color( 0.74902, 0.74902, 0.74902, 1 )
-shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
-shader_param/emission = Color( 0, 0, 0, 1 )
-shader_param/normal_scale = 0.01
-shader_param/shade_threshold = 0.025
-shader_param/shade_softness = 0.025
-shader_param/specular_glossiness = 15.0
-shader_param/specular_threshold = 0.5
-shader_param/specular_softness = 0.0
-shader_param/rim_threshold = 0.25
-shader_param/rim_softness = 0.0
-shader_param/rim_spread = 0.5
-shader_param/shadow_threshold = 0.5
-shader_param/shadow_softness = 0.1
-shader_param/emission_energy = 0.0
-shader_param/screen_scale = 10.0
-shader_param/uv_scale = Vector3( 1, 1, 1 )
-shader_param/uv_offset = Vector3( 0, 0, 0 )
-shader_param/use_triplanar = false
 
 [sub_resource type="Skin" id=167]
 resource_name = "Skin"
@@ -201,6 +130,7 @@ shader_param/screen_scale = 10.0
 shader_param/uv_scale = Vector3( 1, 1, 1 )
 shader_param/uv_offset = Vector3( 1, 0, 0 )
 shader_param/use_triplanar = false
+shader_param/hue_shift_amount = 0.9
 
 [sub_resource type="SphereShape" id=50]
 
@@ -255,7 +185,7 @@ bones/7/name = "EyeCenter.L"
 bones/7/parent = 6
 bones/7/rest = Transform( 0.98911, -0.00749677, 0.146989, -0.146993, 2.38419e-07, 0.989137, -0.00741538, -0.999972, -0.00110173, 0.00569856, 0.134216, 0.0029342 )
 bones/7/enabled = true
-bones/7/bound_children = [ NodePath("BoneAttachment") ]
+bones/7/bound_children = [  ]
 bones/8/name = "Stalk4.R"
 bones/8/parent = 1
 bones/8/rest = Transform( 0.984805, 0.173026, 0.0148803, -2.78354e-05, 0.0858412, -0.996309, -0.173665, 0.981169, 0.0845417, 0.0776723, 0.157739, 0.2027 )
@@ -285,7 +215,7 @@ bones/13/name = "EyeCenter.R"
 bones/13/parent = 12
 bones/13/rest = Transform( 0.98911, 0.00749677, -0.146989, 0.146993, 2.38419e-07, 0.989137, 0.00741538, -0.999972, -0.00110173, -0.00303061, 0.134613, 0.00295423 )
 bones/13/enabled = true
-bones/13/bound_children = [ NodePath("BoneAttachment2") ]
+bones/13/bound_children = [  ]
 bones/14/name = "EyeMainController"
 bones/14/parent = 1
 bones/14/rest = Transform( 1, -1.56945e-43, 5.85619e-37, -1.56945e-43, 1, 5.34499e-07, -5.85619e-37, -5.34499e-07, 1, 0.0216394, 0.502939, 0.734361 )
@@ -335,7 +265,7 @@ bones/23/name = "Mantle"
 bones/23/parent = -1
 bones/23/rest = Transform( 1, 2.70234e-16, -2.70234e-16, -2.70234e-16, 1, 3.65133e-32, 2.70234e-16, 3.65133e-32, 1, -2.18294e-17, 0.251689, -0.0753158 )
 bones/23/enabled = true
-bones/23/bound_children = [ NodePath("BoneAttachment3") ]
+bones/23/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
 transform = Transform( 1, 5.54137e-08, 7.8463e-08, 3.61168e-07, -5.86733e-08, 0.999999, 8.3819e-09, -1, 1.07917e-07, -0.16407, 0.780282, -0.564601 )
@@ -354,7 +284,7 @@ bone_name = "EyeCenter.R"
 [node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]
 transform = Transform( 1, -3.747e-06, -5.81117e-07, -5.81119e-07, -3.57628e-07, -0.999999, 3.747e-06, 1, -3.57627e-07, 0.0416807, -0.737043, -0.570601 )
 mesh = ExtResource( 25 )
-material/0 = SubResource( 166 )
+material/0 = ExtResource( 3 )
 script = ExtResource( 2 )
 
 [node name="Body" type="MeshInstance" parent="Armature/Skeleton"]

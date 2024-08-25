@@ -125,7 +125,7 @@ func _get_new_data() -> Dictionary:
 		"items": [],
 		"translation": Vector3.ZERO,
 		"rotation": Vector3.ZERO,
-		"game_time": 480,
+		"game_time": 750,
 		"location": "",
 		"event_flags": [],
 		"nearby_entities": [],
@@ -137,6 +137,7 @@ func _get_new_data() -> Dictionary:
 func load_data(data: Array) -> void:
 	var snail = SnailQuest.controlled
 	snail.identity = data[1]
+	Functions.update_snail_appearance(data[1], snail.mesh, snail.body, snail.eye_left, snail.eye_right)
 	snail.max_health = data[0]["max_health"]
 	snail.health = data[0]["health"]
 	snail.currency = data[0]["currency"]
@@ -152,7 +153,6 @@ func load_data(data: Array) -> void:
 	#needs event flag setting
 	#needs set entity locations
 	SnailQuest.play_time.reset_time_to(data[0]["play_time"])
-	snail.update_appearance()
 
 func save_screenshot() -> void:
 	var extension: String = ".png"

@@ -29,13 +29,13 @@ var mood_level: int = 5
 
 ## Physics ##
 
-export var speed: int = 10
 export var jump: int = 65
 
 var gravity: float = 9.8
 var surface_normal: Vector3
 var distanced_normal: Vector3
 
+var raw_facing_angle: float
 var facing_direction: Vector3
 var move_direction: Vector3
 var boost_direction: Vector3
@@ -80,9 +80,18 @@ var can_jump: bool = false
 var can_turn: bool = true
 var can_roll: bool = true
 
+## Behavior ##
+
+export var speed: float = 1
+var speed_modifier: float = 1.0
+var auto_navigation: bool = false
+var navigation_destination: Vector3
+
+var navigation_agent: NavigationAgent
+
 ## Misc ##
 
-var targets_list = []
+var proximity_list = []
 
 var target = null
 var can_swap_target: bool = true
@@ -95,13 +104,12 @@ var interacting: bool = false
 var targeting: bool = false
 var jump_in_memory: bool = false
 var can_late_jump: bool = false
-var ledge_usable: bool = true
 var pushing: bool = false
 var attached_to_location: bool
 var immortal: bool = false
 
 var jump_memory_timer: Timer = Timer.new()
-var ledge_timer: Timer = Timer.new()
+var navigation_decision_timer: Timer = Timer.new()
 
 signal health_changed(health, max_health, b)
 signal entity_killed(b)
@@ -113,13 +121,14 @@ func _ready() -> void:
 
 	jump_memory_timer.set_wait_time(0.075)
 	jump_memory_timer.one_shot = true
-	jump_memory_timer.connect("timeout", self, "on_jump_memory_timeout")
+	jump_memory_timer.connect("timeout", self, "_on_jump_memory_timeout")
 	add_child(jump_memory_timer)
 
-	ledge_timer.set_wait_time(1)
-	ledge_timer.one_shot = true
-	ledge_timer.connect("timeout", self, "on_ledge_timeout")
-	add_child(ledge_timer)
+	navigation_decision_timer.set_wait_time(0.1)
+	navigation_decision_timer.one_shot = true
+	navigation_decision_timer.connect("timeout", self, "_on_navigation_decision_timeout")
+	add_child(navigation_decision_timer)
+	navigation_decision_timer.start()
 
 	eyesight = Camera.new()
 	eyesight.set_zfar(false)
@@ -131,9 +140,15 @@ func _ready() -> void:
 
 	proximity.add_child(CollisionShape.new())
 	proximity.get_child(0).set_shape(SphereShape.new())
-	proximity.set_scale(Vector3(15.0, 15.0, 15.0))
+	if is_controlled():
+		proximity.set_scale(Vector3(16.0, 16.0, 16.0))
+	else:
+		proximity.set_scale(Vector3(8.0, 8.0, 8.0))
 	proximity.connect("body_entered", self, "_on_Proximity_entered")
 	proximity.connect("body_exited", self, "_on_Proximity_exited")
+
+	navigation_agent = NavigationAgent.new()
+	add_child(navigation_agent)
 
 	_set_display_health()
 	emit_signal("health_changed", health, max_health, is_controlled())
@@ -166,7 +181,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		if event.is_action_pressed(Device.action_main) and can_interact and !interacting:
 			target.interact()
-			interacting = true
 
 		if Interface.options.debug_mode:
 			if event.is_action_pressed(Device.debug_fov_decrease):
@@ -219,14 +233,45 @@ func _physics_process(delta: float) -> void:
 		movement_vector = Vector3.ZERO
 	else:
 		movement_vector = modified_gravity + modified_movement + boost_direction
+		raw_facing_angle = get_global_rotation().y
 		set_global_rotation(Utility.align_from_rotation(delta, get_global_rotation(), surface_normal, facing_direction, 16 * delta))
 	move_and_slide_with_snap(movement_vector, surface_normal, Vector3.UP, true, 4, deg2rad(90), false)
+
+	if !is_controlled():
+		_auto_navigate()
 
 	## Target Search ##
 
 	if is_controlled():
 		_update_nearest_target()
-		#print(target)
+
+## Behavioral AI ##
+
+func _on_navigation_decision_timeout() -> void:
+	if randi() % 3:
+		auto_navigation = true
+		#if randi() % 2:
+		navigation_destination = get_global_translation() + Vector3(Utility.rng.randi_range(-10, 10), 0, Utility.rng.randi_range(-10, 10))
+		speed_modifier = Utility.rng.randf_range(0.05, 0.2)
+	else:
+		auto_navigation = false
+		input_direction = Vector2.ZERO
+
+	navigation_decision_timer.set_wait_time(Utility.rng.randf_range(3, 10))
+	navigation_decision_timer.start()
+
+func _auto_navigate() -> void:
+	if proximity_list.size() > 0 and get_global_translation().distance_to(SnailQuest.get_controlled().get_global_translation()) > 1.5:
+		if !interacted_with and auto_navigation:
+			navigation_agent.set_target_location((navigation_destination - get_global_translation()).normalized())
+			input_direction = Vector2(navigation_agent.get_next_location().x - get_global_translation().x, navigation_agent.get_next_location().z - get_global_translation().z) * speed_modifier * speed
+
+#			var navigation_direction: Vector3 = (navigation_destination - get_global_translation()).normalized()
+#			input_direction = Vector2(navigation_direction.x, navigation_direction.z) * speed_modifier * speed
+
+	else:
+		input_direction = Vector2.ZERO
+		#Input.action_press("action_main")
 
 func set_entity_identity(appearance: Resource) -> void:
 	identity = appearance
@@ -279,40 +324,43 @@ func update_equipped(point) -> void:
 ## Eye behavior ##
 
 func set_looking_target() -> void:
-	if relevent_goal and relevent_goal.get_global_translation().distance_to(get_global_translation()) > 15:
-		looking_target = relevent_goal
-
-	elif is_controlled():
-		if targets_list.size() > 0:
-			var closest_target: Interactable
-			var min_distance: float = INF
-
-			for t in targets_list:
-				if is_instance_valid(t):
-					var distance = t.get_global_translation().distance_to(get_global_translation())
-					if distance < min_distance and distance < 10.0:
-						min_distance = distance
-						closest_target = t
-			looking_target = closest_target
-
+	if interacted_with:
+		looking_target = SnailQuest.get_controlled()
 	else:
-		if is_instance_valid(SnailQuest.get_controlled()):
-			if SnailQuest.get_controlled().get_global_translation().distance_to(get_global_translation()) > 10:
-				looking_target = SnailQuest.get_controlled()
+		if relevent_goal and relevent_goal.get_global_translation().distance_to(get_global_translation()) > 15:
+			looking_target = relevent_goal
 
-		elif targets_list.size() > 0:
-			var closest_target: Conversable
-			var min_distance: float = INF
+		elif is_controlled():
+			if proximity_list.size() > 0:
+				var closest_target: Interactable
+				var min_distance: float = INF
 
-			for t in targets_list:
-				if is_instance_valid(t):
-					if t is Conversable:
+				for t in proximity_list:
+					if is_instance_valid(t):
 						var distance = t.get_global_translation().distance_to(get_global_translation())
-
-						if distance < min_distance and distance < 7.0:
+						if distance < min_distance and distance < 10.0:
 							min_distance = distance
 							closest_target = t
-			looking_target = closest_target
+				looking_target = closest_target
+
+		else:
+			if is_instance_valid(SnailQuest.get_controlled()):
+				if SnailQuest.get_controlled().get_global_translation().distance_to(get_global_translation()) > 10:
+					looking_target = SnailQuest.get_controlled()
+
+			elif proximity_list.size() > 0:
+				var closest_target: Conversable
+				var min_distance: float = INF
+
+				for t in proximity_list:
+					if is_instance_valid(t):
+						if t is Conversable:
+							var distance = t.get_global_translation().distance_to(get_global_translation())
+
+							if distance < min_distance and distance < 7.0:
+								min_distance = distance
+								closest_target = t
+				looking_target = closest_target
 
 func eye_tracking_behavior(delta: float, eye_mat_left: Material, eye_mat_right: Material) -> void:
 	if freelooking and is_instance_valid(looking_target):
@@ -381,7 +429,7 @@ func _on_blink_end_timeout(eyelid_left: Material, eyelid_right: Material):
 
 func _update_nearest_target() -> void:
 	var closest_distance = INF
-	for t in targets_list:
+	for t in proximity_list:
 		if t.is_in_group("target"):
 			var distance = t.get_global_translation().distance_to(get_global_translation())
 			if distance < closest_distance:
@@ -412,8 +460,12 @@ func interact() -> void:
 	if bubble.current_dialog_keys.size() > 0:
 		add_child(bubble)
 		bubble.connect("dialog_ended", self,"_dialog_end")
+		interacted_with = true
 		facing_direction = (facing_direction - SnailQuest.get_controlled().facing_direction).normalized()
+		SnailQuest.get_controlled().interacting = true
 	else:
+		printerr("DIALOG IS MISSING FROM THIS ENTITY!")
+		interacted_with = false
 		_dialog_end()
 
 func set_interaction_text(text) -> void:
@@ -508,13 +560,13 @@ func _get_time_cycle() -> String:
 
 func _on_Proximity_entered(body) -> void:
 	if body is Interactable and body != self:
-		targets_list.append(body)
+		proximity_list.append(body)
 
 func _on_Proximity_exited(body) -> void:
 	if body is Interactable and body != self:
-		for t in targets_list:
+		for t in proximity_list:
 			if t == body:
-				targets_list.remove(targets_list.find(t))
+				proximity_list.remove(proximity_list.find(t))
 
 func _on_Area_area_entered(area) -> void:
 	if area.is_in_group("danger"):
@@ -534,13 +586,6 @@ func jump_memory() -> void:
 
 func on_jump_memory_timeout() -> void:
 	jump_in_memory = false
-
-func ledge() -> void:
-	ledge_usable = false
-	ledge_timer.start()
-
-func on_ledge_timeout() -> void:
-	ledge_usable = true
 
 func set_max_health(amount: int) -> void:
 	max_health = amount
@@ -584,10 +629,10 @@ func set_strength(power: int) -> void:
 func get_strength() -> int:
 	return strength
 
-func set_speed(power: int) -> void:
+func set_speed(power: float) -> void:
 	speed = power
 
-func get_speed() -> int:
+func get_speed() -> float:
 	return speed
 
 func set_jump(power: int) -> void:
