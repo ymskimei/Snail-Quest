@@ -29,7 +29,7 @@ surfaces/0 = {
 
 [sub_resource type="Shader" id=18]
 code = "shader_type spatial;
-render_mode depth_draw_never, cull_back, unshaded;
+render_mode cull_back, unshaded;
 
 uniform sampler2D texture_albedo : hint_albedo;
 

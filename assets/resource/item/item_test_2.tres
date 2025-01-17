@@ -30,6 +30,7 @@ shader_param/screen_scale = 10.0
 shader_param/uv_scale = Vector3( 16, 16, 16 )
 shader_param/uv_offset = Vector3( 0, 0, 0 )
 shader_param/use_triplanar = false
+shader_param/hue_shift_amount = 0.9
 
 [sub_resource type="CubeMesh" id=1]
 material = SubResource( 2 )

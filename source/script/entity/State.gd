@@ -14,13 +14,13 @@ func set_movement(delta: float, speed_modifier: float = 1.0, turn_modifier: floa
 			entity.modified_input_direction.y = -entity.modified_input_direction.y
 		entity.modified_input_direction = entity.modified_input_direction.rotated(Vector3.UP, SnailQuest.get_camera().get_global_rotation().y)
 
-	if rad2deg(entity.global_transform.basis.y.angle_to(Vector3.UP)) < 80:
+	if is_on_surface():
 		entity.modified_input_direction = entity.modified_input_direction.length() * (entity.modified_input_direction.normalized() - entity.surface_normal)
 
 	if entity.modified_input_direction.length() > 0.05:
 		entity.facing_direction = lerp(entity.facing_direction, entity.modified_input_direction, 16 * delta)
 
-	entity.move_direction = lerp(entity.move_direction, entity.modified_input_direction * speed_modifier * 4, 24 * delta)
+	entity.move_direction = lerp(entity.move_direction, entity.modified_input_direction * speed_modifier * 3.5, 24 * delta)
 	if entity.mirrored_movement:
 		entity.move_direction = -entity.move_direction
 

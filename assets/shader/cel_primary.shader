@@ -32,7 +32,13 @@ uniform float shadow_softness : hint_range(0.0, 1.0) = 0.1;
 uniform float emission_energy = 0.0;
 
 uniform sampler2D texture_albedo: hint_albedo;
+uniform sampler2D texture_alt_albedo: hint_albedo;
+
 uniform sampler2D texture_normal : hint_normal;
+uniform sampler2D texture_alt_normal : hint_normal;
+
+uniform sampler2D blend_texture: hint_albedo;
+
 uniform sampler2D texture_emission : hint_black_albedo;
 uniform sampler2D texture_screen;
 uniform float screen_scale = 10.0;
@@ -76,6 +82,8 @@ vec4 triplanar_texture(sampler2D p_sampler, vec2 uv) {
 }
 
 void fragment() {
+	vec3 blended_texture = mix(texture(texture_albedo, UV).rgb, texture(texture_alt_albedo, UV).rgb, texture(blend_texture, UV).rgb);
+	
 	ALBEDO = albedo_color.rgb * triplanar_texture(texture_albedo, UV).rgb;
 	ALPHA = albedo_color.a * triplanar_texture(texture_albedo, UV).a;  
 

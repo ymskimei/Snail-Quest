@@ -9,7 +9,6 @@
 [ext_resource path="res://source/scene/interface/data_file.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/interface/theme/menu.tres" type="Theme" id=8]
 
-
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 4 )
 shader_param/strength = 0.125

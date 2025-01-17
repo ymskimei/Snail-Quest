@@ -27,6 +27,8 @@ func enter() -> void:
 	slide_timer.connect("timeout", self, "_on_slide_timeout")
 	add_child(slide_timer)
 
+	prev_dir = entity.facing_direction
+
 func unhandled_input(event: InputEvent) -> int:
 	if is_on_surface():
 		if event.is_action_pressed(Device.action_main) and !entity.can_interact:
@@ -56,12 +58,17 @@ func physics_process(delta: float) -> int:
 	entity.anim_tree.set("parameters/SnailMove/TimeScale/scale", entity.input_direction.length())
 	entity.anim_tree.set("parameters/SnailMove/Blend2/blend_amount", entity.input_direction.length())
 
-	var angle = fmod(rad2deg(atan2(entity.facing_direction.x, entity.facing_direction.z)) - rad2deg(entity.get_global_rotation().y) + 180, 360) - 180
-	angle = Utility.adjusted_range(angle, -180, 180, -1, 1)
-	#if entity.is_controlled():
-		#print(angle)
-	entity.anim_tree.set("parameters/SnailMove/Blend3/blend_amount", lerp(0, angle * entity.input_direction.length(), 20 * delta))
+	var angle: int = 0
+	var cur_dir = entity.facing_direction
+	var rot_diff = cur_dir - prev_dir
+	if abs(rot_diff.y) > 0.1:
+		if rot_diff.y < 0:
+			angle = 1
+		else:
+			angle = -1
+	prev_dir = cur_dir
 
+	#entity.anim_tree.set("parameters/SnailMove/Blend3/blend_amount", lerp(0, angle, 20 * delta))
 
 	if entity.move_direction.length() < 0.1 or entity.interacting:
 		return State.IDLE

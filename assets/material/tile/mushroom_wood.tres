@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[ext_resource path="res://assets/texture/tile/wood_test.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/tile/house_planks.png" type="Texture" id=1]
 [ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=2]
 
 [resource]

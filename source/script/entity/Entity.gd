@@ -261,13 +261,14 @@ func _on_navigation_decision_timeout() -> void:
 	navigation_decision_timer.start()
 
 func _auto_navigate() -> void:
-	if proximity_list.size() > 0 and get_global_translation().distance_to(SnailQuest.get_controlled().get_global_translation()) > 1.5:
-		if !interacted_with and auto_navigation:
-			navigation_agent.set_target_location((navigation_destination - get_global_translation()).normalized())
-			input_direction = Vector2(navigation_agent.get_next_location().x - get_global_translation().x, navigation_agent.get_next_location().z - get_global_translation().z) * speed_modifier * speed
+	if is_instance_valid(SnailQuest.get_controlled()):
+		if proximity_list.size() > 0 and get_global_translation().distance_to(SnailQuest.get_controlled().get_global_translation()) > 1.5:
+			if !interacted_with and auto_navigation:
+				navigation_agent.set_target_location((navigation_destination - get_global_translation()).normalized())
+				input_direction = Vector2(navigation_agent.get_next_location().x - get_global_translation().x, navigation_agent.get_next_location().z - get_global_translation().z) * speed_modifier * speed
 
-#			var navigation_direction: Vector3 = (navigation_destination - get_global_translation()).normalized()
-#			input_direction = Vector2(navigation_direction.x, navigation_direction.z) * speed_modifier * speed
+	#			var navigation_direction: Vector3 = (navigation_destination - get_global_translation()).normalized()
+	#			input_direction = Vector2(navigation_direction.x, navigation_direction.z) * speed_modifier * speed
 
 	else:
 		input_direction = Vector2.ZERO
