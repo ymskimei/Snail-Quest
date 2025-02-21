@@ -1,0 +1,85 @@
+key,en_US,en_GB,es_MX,ja_JP,pr
+TITLE,Snail Quest,Snail Quest,,,
+TITLE_VERSION,version,version,,,
+TITLE_START,Start Game,Start Game,,,Set Sail
+TITLE_OPTIONS,Options,Options,,,Maintenance
+TITLE_SPLASH_0,There will never be splash text in the game ever,There will never be splash text in the game ever,,,Thar will never be splash writin' in the game ever
+TITLE_SPLASH_1,"Pillow, or closet?","Pillow, or closet?",,,"Piller, er closet?"
+TITLE_SPLASH_2,Why are there two generals?,Why are there two generals?,,,Why thar be two generals?
+TITLE_SPLASH_3,"Currently, yes, I am a pumpkin","Currently, yes, I am a pumpkin",,,"Currently, yar, I be a pumpkin"
+TITLE_SPLASH_4,I like touching old pennies,I like touching old pennies,,,I like touching old doubloons
+TITLE_SPLASH_5,Grapes r gren or purpol,Grapes r gren or purpol,,,Grapes arrr gren or purpol
+TITLE_SPLASH_6,Somebody kick Razzbow already,Somebody kick Razzbow already,,,Some lubber throw Razzbow overboard
+TITLE_SPLASH_7,"Here you are my good sir, a complimentary boog","Here you are my fine chap, a complimentary boog",,,"Here ye are my matey, a complimentary boog"
+TITLE_SPLASH_8,(x^2 + 5x +6) = (x+3)(x+2) = math = Eddie wins against dragone,(x^2 + 5x +6) = (x+3)(x+2) = maths = Eddie wins against dragone,,,(2 paces) + 5 paces + 6) = (3 east )(x weast) = Eddie finds the treasar
+TITLE_SPLASH_9,I dont follow monkey lore,I dont follow monkey lore,,,I dont follow monkey tales
+OPTIONS_FULLSCREEN,Fullscreen Window,Fullscreen Window,,,Fullscreen Winder
+OPTIONS_RESOLUTION,Display Resolution,Display Resolution,,,Porthole Quality
+OPTIONS_FILTER,Screen Filter,Screen Filter,,,Eyepatch Type
+OPTIONS_FILTER_DEFAULT,Default,Default,,,Swabbie-standard
+OPTIONS_FILTER_CONTRASTED,Contrasted,Contrasted,,,High-focus
+OPTIONS_FILTER_MONOCHROME,Monochrome,Monochrome,,,Moving pictures
+OPTIONS_FILTER_PROTANOPIA,Protanopia (Debug),Protanopia (Debug),,,Anti-red Eyepatch
+OPTIONS_FILTER_DEUTERANOPIA,Deuteranopia (Debug),Deuteranopia (Debug),,,Anti-green Eyepatch
+OPTIONS_FILTER_TRITANOPIA,Tritanopia (Debug),Tritanopia (Debug),,,Yeller-blue Eyepatch
+OPTIONS_FILTER_ACHROMATOPSIA,Achromatopsia (Debug),Achromatopsia (Debug),,,Daylight Eyepatch
+OPTIONS_FPS,Framerate,Framerate,,,Framerrrrate
+OPTIONS_VSYNC,Vertical Sync,Vertical Sync,,,Screen waves
+OPTIONS_VOLUME_MASTER,Master Volume,Master Volume,,,Captain's Volume
+OPTIONS_VOLUME_MUSIC,Music Volume,Music Volume,,,Bard's volume
+OPTIONS_VOLUME_SFX,Effects Volume,Effects Volume,,,Sea's volume
+OPTIONS_HEADPHONES,Headphones Mode,Headphones Mode,,,Pirate Cap Mode
+OPTIONS_MONO,Toggle Mono,Toggle Mono,,,Use Earpatch
+OPTIONS_SENSITIVITY,Camera Sensitivity,Camera Sensitivity,,,Camera sway
+OPTIONS_INVERT,Camera Invert,Camera Invert,,,Camera reverse
+OPTIONS_HORIZONTAL,Horizontal,Horizontal,,,Longitude
+OPTIONS_VERTICAL,Vertical,Vertical,,,Latitude
+OPTIONS_CONTROLS,Control Mapping,Control Mapping,,,Crew Mapping
+OPTIONS_BUTTON_ACTION,Action Button,Action Button,,,Attack Button
+OPTIONS_BUTTON_COMBAT,Combat Button,Combat Button,,,Dual Button
+OPTIONS_BUTTON_DEFENSE,Defense Button,Defence Button,,,Retreat Button
+OPTIONS_LANGUAGE,Language,Language,,,Switch Tongue
+OPTIONS_LANGUAGE_EN_US,English (United States),English (United States),,,English (The Colonies)
+OPTIONS_LANGUAGE_EN_GB,English (Great Britain),English (Great Britain),,,English (The Empire)
+OPTIONS_LANGUAGE_ES_MX,Español (Spanish),Español (Spanish),,,Español (Spanish)
+OPTIONS_LANGUAGE_JA_JP,日本語 (Japanese),日本語 (Japanese),,,日本語 (Japanese)
+OPTIONS_LANGUAGE_PR,Pirate (ARRGGGH!!),Pirate (ARRGGGH!!),,,Pirate (ARRGGGH!!)
+TOOL_MALLET,Mallet,Mallet,,,
+TOOL_NEEDLE,Needle,Needle,,,
+TOOL_SPOOL,Spool,Spool,,,
+ITEM_PETAL,Petal,Petal,,,
+ITEM_GEM_1,Gem,Gem,,,
+ITEM_GEM_5,Gem (x5),Gem (x5),,,
+ITEM_GEM_10,Gem (x10),Gem (x10),,,
+ITEM_GEM_50,Gem (x50),Gem(x500),,,
+ITEM_GEM_100,Gem (x100),Gem(x500),,,
+ITEM_GEM_500,Gem (x500),Gem (x500),,,
+ITEM_GEM_1000,"Gem (x1,000)","Gem (x1,000)",,,
+ITEM_SAMARA,Samara,Samara,,,
+ENTITY_SIGN,Sign,Sign,,,
+ENTITY_SHELDON,Sheldon,Sheldon,,,Cap'n Sheld
+ENTITY_FUBWARD,Fubby,Fubby,,,First Mate Fub
+ENTITY_SUNSHINE,Sunny,Sunny,,,Scalawag Sun
+ENTITY_IZABELL,Izzy,Izzy,,,Crewmate Bell
+ENTITY_SARAH,Sarah,Sarah,,,Sarrra
+ENTITY_PINKALINA,Pinky,Pinky,,,Planky
+ENTITY_MELONIE,Melon,Melon,,,Grenfruit
+ENTITY_EDMUND,Eddie,Eddie,,,Eddington
+ENTITY_LEONARDO,Lenny,Lenny,,,Lenard
+ENTITY_DUSKJR,DJ,DJ,,,Sir. Gurdy
+ENTITY_TUBBINGTON,Tubby,Tubby,,,Tubbington
+INTERFACE_INTERACTION_PROMPT,%s to %s,,,,
+INTERFACE_INTERACTION_ENTITY,chat,chat,,,
+INTERFACE_INTERACTION_SIGN,read,read,,,
+DIALOG_0_0,"If you're reading this, that means the dialog for this object/entity is absent! Oops!",,,,
+DIALOG_MELONIE_MEET_0,"OMG! Hi hi, {get_controlled_name}! How was your sleep? Did you get enough rest for the big festival?? I really hope so, because I definitely didn't! I'm just way too excited!",,,,
+DIALOG_MELONIE_MEET_1,"Oh, I've been asking everyone but I guess I forgot to ask you! Have you seen Pinky this morning? We were supposed to go watch the celebration together, but I'm really not sure where she's gone...",,,,
+DIALOG_MELONIE_MEET_2,"Uhm, anyway... I really hope I see her before everything gets started! You should even watch with us!! I'll tell you what, if I see Pinky soon, I'll make sure to let her know that we're saving a spot for just for you!",,,,
+DIALOG_FUBWARD_CH0_CDAY_SNAILYTOWN_M5_R0_0,,,,,
+DIALOG_SARAH_CH0_CDAY_SNAILYTOWN_M5_R0_0,"I'm really thirsty, but there's no water anywhere around here... This place needs it's own water cooler! A big, mystical water spout!!",,,,
+DIALOG_SARAH_CH0_CDAY_SNAILYTOWN_M5_R1_0,"Lots of snails ask about the weather... I don't really understand? There's only a few types of weather... Dry and wet! Everything else is just inbetween those two, right?",,,,
+DIALOG_SARAH_CH0_CDAY_SNAILYTOWN_M5_R1_1,Actually... There's temperature too... But I've never learned how to understand temperature. I know there are smart snails from the city that do!,,,,
+DIALOG_MELONIE_CH0_CDAY_SNAILYTOWN_M5_R0_0,"Hi again, {get_controlled_name}! Was there something you had to say before? Have you seen Pinky yet...? Oh... Well, that's okay! She'll turn up at some point soon!!",,,,
+DIALOG_MELONIE_CH0_CDAY_SNAILYTOWN_M5_R0_1,"Did you happen to see the Super Snail episode last night? I only just got a screen in my house after Fubby suggested it, but it was just SO good to see action! I was so used to comics that I had never even imagined such a thing... Wow!",,,,
+DIALOG_MELONIE_CH0_CDAY_SNAILYTOWN_M5_R1_0,"Oh, {get_controlled_name}! Could you do me a super duper big favor? Could you check if Tubby has restocked on Super Snail action figures? Pretty please? I really want one SO badly!!",,,,
+DIALOG_MELONIE_CH0_CDAY_SNAILYTOWN_M5_R2_0,"Have you seen Sarah's garden this morning? It's so pretty!! There's all this big beautiful flowers, and right next to those... Guess what! That's right, even MORE flowers!",,,,

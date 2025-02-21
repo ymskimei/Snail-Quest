@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/texture/trail.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=10]
+code = "shader_type particles;
+
+render_mode keep_data,disable_force,disable_velocity;
+
+void vertex() {
+	vec3 a = (EMISSION_TRANSFORM*vec4(0,-1,0,1)).xyz;
+	vec3 b = (EMISSION_TRANSFORM*vec4(0,1,0,1)).xyz;
+
+	if(CUSTOM.w == LIFETIME){
+		CUSTOM.z = LIFETIME;
+		CUSTOM.w = 0.0;
+	}
+
+	if(CUSTOM.w == 0.0){
+		TRANSFORM[0].xyz = b;
+		TRANSFORM[1].xyz = a;
+		TRANSFORM[2].xyz = a;
+		TRANSFORM[3].xyz = b;
+	}
+	if(CUSTOM.w == 1.0){
+		TRANSFORM[0].xyz = b;
+		TRANSFORM[1].xyz = a;
+	}
+
+	CUSTOM.w++;
+}"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+
+[sub_resource type="Shader" id=13]
+code = "shader_type spatial;
+
+render_mode unshaded,blend_add,world_vertex_coords,cull_disabled;
+
+uniform sampler2D tex;
+
+void vertex(){
+	vec3 a = mix(WORLD_MATRIX[3].xyz,WORLD_MATRIX[2].xyz,UV.y);
+	vec3 b = mix(WORLD_MATRIX[0].xyz,WORLD_MATRIX[1].xyz,UV.y);
+	VERTEX = mix(a,b,UV.x);
+	
+	UV.x = (INSTANCE_CUSTOM.w-1.0 - UV.x)/INSTANCE_CUSTOM.z;
+}
+
+void fragment(){
+	vec4 T = texture(tex,UV);
+	ALBEDO = T.xyz;
+	ALPHA = T.w;
+}"
+
+[sub_resource type="ShaderMaterial" id=14]
+shader = SubResource( 13 )
+shader_param/tex = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=12]
+material = SubResource( 14 )
+
+[node name="Particles" type="Particles"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+amount = 100
+lifetime = 100.0
+speed_scale = 60.0
+fixed_fps = 60
+local_coords = false
+process_material = SubResource( 11 )
+draw_passes = 2
+draw_pass_1 = SubResource( 12 )
+draw_pass_2 = null

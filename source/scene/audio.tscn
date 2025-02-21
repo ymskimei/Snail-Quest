@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://source/script/Audio.gd" type="Script" id=1]
+[ext_resource path="res://addons/audio_booth/source/music/MusicBooth.gd" type="Script" id=2]
+[ext_resource path="res://addons/audio_booth/source/sfx/SoundBooth.gd" type="Script" id=3]
+[ext_resource path="res://source/scene/sound/data.tscn" type="PackedScene" id=4]
+[ext_resource path="res://source/scene/sound/title.tscn" type="PackedScene" id=5]
+[ext_resource path="res://source/scene/sound/chamber.tscn" type="PackedScene" id=6]
+
+
+[node name="Audio" type="Node"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="SoundBooth" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="AmbieBooth" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="MusicBooth" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Title" parent="MusicBooth" instance=ExtResource( 5 )]
+
+[node name="Data" parent="MusicBooth" instance=ExtResource( 4 )]
+
+[node name="Chamber" parent="MusicBooth" instance=ExtResource( 6 )]

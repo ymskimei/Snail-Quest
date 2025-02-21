@@ -1,0 +1,34 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=1]
+[ext_resource path="res://assets/texture/object/mushroom_cap.png" type="Texture" id=2]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/use_diffuse = true
+shader_param/use_specular = true
+shader_param/use_rim = true
+shader_param/use_light = true
+shader_param/use_shadow = true
+shader_param/albedo_color = Color( 1, 1, 1, 1 )
+shader_param/shade_color = Color( 0.815686, 0.752941, 0.933333, 1 )
+shader_param/specular_color = Color( 1, 0.6, 0.909804, 1 )
+shader_param/rim_color = Color( 1, 0.6, 0.909804, 1 )
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/normal_scale = 0.0
+shader_param/shade_threshold = 0.0
+shader_param/shade_softness = 1.0
+shader_param/specular_glossiness = 5.0
+shader_param/specular_threshold = 0.7
+shader_param/specular_softness = 0.0
+shader_param/rim_threshold = 0.25
+shader_param/rim_softness = 0.0
+shader_param/rim_spread = 0.5
+shader_param/shadow_threshold = 0.7
+shader_param/shadow_softness = 0.0
+shader_param/emission_energy = 0.0
+shader_param/screen_scale = 10.0
+shader_param/uv_scale = Vector3( 1, 1, 1 )
+shader_param/uv_offset = Vector3( 1, 0, 0 )
+shader_param/use_triplanar = false
+shader_param/texture_albedo = ExtResource( 2 )

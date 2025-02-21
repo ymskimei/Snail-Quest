@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://source/script/resource/ResourceLocation.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+room_path = "res://source/scene/world/dev/test_room_0.tscn"
+coordinates = Vector3( -33, 16, -29 )
+direction = "SOUTH"

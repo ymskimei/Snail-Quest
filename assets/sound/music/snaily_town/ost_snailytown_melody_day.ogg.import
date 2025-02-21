@@ -11,5 +11,5 @@ dest_files=[ "res://import/ost_snailytown_melody_day.ogg-9491dbd8f167488e864ef8b
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

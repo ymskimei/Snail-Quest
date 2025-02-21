@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/octo_idle_0.ogg-791a9590500e2ff3eb322bdd5f1e6e2e.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/octo_idle_0.ogg"
+dest_files=[ "res://import/octo_idle_0.ogg-791a9590500e2ff3eb322bdd5f1e6e2e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

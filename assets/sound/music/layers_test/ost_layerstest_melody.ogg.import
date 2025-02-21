@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/ost_layerstest_melody.ogg-d5d2079307ef8ee7eee60e122a04a7c8.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/music/layers_test/ost_layerstest_melody.ogg"
+dest_files=[ "res://import/ost_layerstest_melody.ogg-d5d2079307ef8ee7eee60e122a04a7c8.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

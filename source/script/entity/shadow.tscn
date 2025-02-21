@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="ViewportTexture" id=121]
+viewport_path = NodePath("Sprite3D/Viewport")
+
+[node name="Sprite3D" type="Sprite3D"]
+modulate = Color( 0, 0, 0, 0.501961 )
+axis = 1
+texture = SubResource( 121 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 256, 256 )
+transparent_bg = true
+
+[node name="Camera" type="Camera" parent="Viewport"]

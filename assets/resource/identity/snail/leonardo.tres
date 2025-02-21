@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=13 format=2]
+
+[ext_resource path="res://assets/model/entity/hat/hat_0.mesh" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/model/entity/snail_body_ripple.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/model/entity/snail_eye_right.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/model/entity/snail_eye_left.mesh" type="ArrayMesh" id=4]
+[ext_resource path="res://assets/texture/entity/snail_eyes_14.png" type="Texture" id=5]
+[ext_resource path="res://assets/texture/entity/sticker/sticker_0.png" type="Texture" id=6]
+[ext_resource path="res://assets/texture/entity/snail_body_accent_0.png" type="Texture" id=7]
+[ext_resource path="res://assets/texture/entity/hat/hat_0.png" type="Texture" id=8]
+[ext_resource path="res://source/script/resource/ResourceIdentity.gd" type="Script" id=9]
+[ext_resource path="res://assets/texture/entity/snail_shell_accent_1.png" type="Texture" id=10]
+[ext_resource path="res://assets/texture/entity/snail_eyelids_top.png" type="Texture" id=11]
+[ext_resource path="res://assets/model/entity/snail_shell_6.mesh" type="ArrayMesh" id=12]
+
+[resource]
+script = ExtResource( 9 )
+entity_name = "ENTITY_LEONARDO"
+entity_personality = 0
+entity_scale = 1.15
+mesh_shell = ExtResource( 12 )
+mesh_body = ExtResource( 2 )
+mesh_eye_left = ExtResource( 4 )
+mesh_eye_right = ExtResource( 3 )
+pattern_shell = ExtResource( 10 )
+pattern_body = ExtResource( 7 )
+pattern_eyes = ExtResource( 5 )
+pattern_eyelids = ExtResource( 11 )
+color_shell_base = Color( 0.698039, 0.537255, 0.47451, 1 )
+color_shell_accent = Color( 0.529412, 0.403922, 0.396078, 1 )
+color_body_base = Color( 0.290196, 0.623529, 0.701961, 1 )
+color_body_accent = Color( 1, 1, 1, 0 )
+color_eyes = Color( 0.423529, 0.301961, 0.607843, 1 )
+mesh_hat = ExtResource( 1 )
+pattern_hat = ExtResource( 8 )
+pattern_sticker = ExtResource( 6 )

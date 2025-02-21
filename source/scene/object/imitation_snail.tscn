@@ -1,0 +1,326 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://assets/resource/identity/snail/default.tres" type="Resource" id=1]
+[ext_resource path="res://source/script/object/EnvironmentMeshInstance.gd" type="Script" id=2]
+[ext_resource path="res://assets/material/entity/snail_eye_left.tres" type="Material" id=3]
+[ext_resource path="res://assets/material/entity/snail_shell.tres" type="Material" id=6]
+[ext_resource path="res://assets/material/entity/snail_body.tres" type="Material" id=7]
+[ext_resource path="res://assets/resource/animation/SnailIdle.tres" type="Animation" id=9]
+[ext_resource path="res://assets/material/entity/snail_eye_right.tres" type="Material" id=19]
+[ext_resource path="res://source/script/interface/SnailGen.gd" type="Script" id=21]
+[ext_resource path="res://assets/model/entity/snail_body.mesh" type="ArrayMesh" id=22]
+[ext_resource path="res://assets/model/entity/snail_shell_1.mesh" type="ArrayMesh" id=23]
+[ext_resource path="res://assets/model/entity/hat/hat_0.mesh" type="ArrayMesh" id=24]
+[ext_resource path="res://assets/model/entity/snail_eye_left.mesh" type="ArrayMesh" id=25]
+[ext_resource path="res://assets/model/entity/snail_eye_right.mesh" type="ArrayMesh" id=26]
+[ext_resource path="res://assets/shader/cel_secondary.shader" type="Shader" id=27]
+[ext_resource path="res://assets/shader/decal.shader" type="Shader" id=28]
+[ext_resource path="res://assets/texture/entity/sticker/sticker_1.png" type="Texture" id=30]
+
+[sub_resource type="Skin" id=167]
+resource_name = "Skin"
+bind_count = 24
+bind/0/name = "Body"
+bind/0/bone = -1
+bind/0/pose = Transform( 1, 1.10291e-23, -2.22045e-16, -2.22045e-16, 9.93411e-08, -1, 1.10291e-23, 1, 9.93411e-08, 5.00252e-17, -0.0753159, -0.0493908 )
+bind/1/name = "Head"
+bind/1/bone = -1
+bind/1/pose = Transform( 1, 0, -1.09564e-30, 1.09564e-30, 0, -1, 0, 1, 0, 1.33362e-16, -0.375316, -0.0493909 )
+bind/2/name = "Stalk4.L"
+bind/2/bone = -1
+bind/2/pose = Transform( 0.984805, 0.173665, -2.78531e-05, -0.173026, 0.981169, -0.0858413, -0.0148803, 0.0845416, 0.996309, 0.0353542, -0.307008, 0.508579 )
+bind/3/name = "Stalk3.L"
+bind/3/bone = -1
+bind/3/pose = Transform( 0.984805, 0.173665, -2.78717e-05, -0.173026, 0.981169, -0.0858413, -0.0148803, 0.0845416, 0.996309, 0.0353541, -0.407551, 0.508579 )
+bind/4/name = "Stalk2.L"
+bind/4/bone = -1
+bind/4/pose = Transform( 0.984805, 0.173665, -2.78885e-05, -0.173026, 0.981169, -0.0858413, -0.0148803, 0.0845416, 0.996309, 0.0353541, -0.508095, 0.508579 )
+bind/5/name = "Stalk1.L"
+bind/5/bone = -1
+bind/5/pose = Transform( 0.984805, 0.173665, -2.79564e-05, -0.173026, 0.981169, -0.0858414, -0.0148802, 0.0845416, 0.996309, 0.0353542, -0.608638, 0.508579 )
+bind/6/name = "Eye.L"
+bind/6/bone = -1
+bind/6/pose = Transform( 0.98911, 0.146989, 0.0074968, -0.146993, 0.989138, -2.12225e-07, -0.00741538, -0.001102, 0.999972, 0.0575216, -0.661709, 0.567162 )
+bind/7/name = "EyeCenter.L"
+bind/7/bone = -1
+bind/7/pose = Transform( 1, 1.225e-08, 4.65661e-09, -6.51929e-09, 4.3842e-07, -1, -7.87168e-08, 1, -2.67755e-08, 0.16407, -0.564601, -0.780284 )
+bind/8/name = "Stalk4.R"
+bind/8/bone = -1
+bind/8/pose = Transform( 0.984805, -0.173665, 2.78531e-05, 0.173026, 0.981169, -0.0858413, 0.0148803, 0.0845416, 0.996309, -0.0326979, -0.306541, 0.508619 )
+bind/9/name = "Stalk3.R"
+bind/9/bone = -1
+bind/9/pose = Transform( 0.984805, -0.173665, 2.78717e-05, 0.173026, 0.981169, -0.0858413, 0.0148803, 0.0845416, 0.996309, -0.0326978, -0.407085, 0.508619 )
+bind/10/name = "Stalk2.R"
+bind/10/bone = -1
+bind/10/pose = Transform( 0.984805, -0.173665, 2.78428e-05, 0.173026, 0.981169, -0.0858413, 0.0148803, 0.0845416, 0.996309, -0.0326979, -0.507628, 0.508619 )
+bind/11/name = "Stalk1.R"
+bind/11/bone = -1
+bind/11/pose = Transform( 0.984805, -0.173665, 2.79555e-05, 0.173026, 0.981169, -0.0858414, 0.0148802, 0.0845416, 0.996309, -0.0326979, -0.608171, 0.508619 )
+bind/12/name = "Eye.R"
+bind/12/bone = -1
+bind/12/pose = Transform( 0.98911, -0.146989, -0.0074968, 0.146993, 0.989138, -2.12225e-07, 0.00741538, -0.001102, 0.999972, -0.0548536, -0.661313, 0.567182 )
+bind/13/name = "EyeCenter.R"
+bind/13/bone = -1
+bind/13/pose = Transform( 1, -1.22473e-08, -4.65661e-10, 1.11759e-08, 4.38071e-07, -1, 7.87223e-08, 1, 3.72529e-09, -0.16407, -0.564601, -0.780284 )
+bind/14/name = "EyeMainController"
+bind/14/bone = -1
+bind/14/pose = Transform( 1, -5.85619e-37, -1.09564e-30, 1.09564e-30, -5.34499e-07, -1, 1.17124e-36, 1, -5.34499e-07, -0.0216394, -0.878254, -0.783753 )
+bind/15/name = "EyeController.L"
+bind/15/bone = -1
+bind/15/pose = Transform( 1, 3.13891e-41, -1.09564e-30, 1.09564e-30, 2.86491e-11, -1, -6.27782e-41, 1, 2.86491e-11, 0.16407, -0.822194, -0.780284 )
+bind/16/name = "EyeController.R"
+bind/16/bone = -1
+bind/16/pose = Transform( 1, 3.13891e-41, -1.09564e-30, 1.09564e-30, 2.86491e-11, -1, -6.27782e-41, 1, 2.86491e-11, -0.16407, -0.822194, -0.780284 )
+bind/17/name = "StalkController.R"
+bind/17/bone = -1
+bind/17/pose = Transform( 0.999972, 0, -0.00749676, 0, 1, 0, 0.00749676, 0, 0.999972, -0.16637, -0.746691, 0.566346 )
+bind/18/name = "StalkController.L"
+bind/18/bone = -1
+bind/18/pose = Transform( 0.999972, 0, 0.00749676, 0, 1, 0, -0.00749676, 0, 0.999972, 0.169067, -0.746691, 0.566326 )
+bind/19/name = "Foot"
+bind/19/bone = -1
+bind/19/pose = Transform( -1, 0, 0, 0, 0, 1, 0, 1, 0, -6.67487e-17, 0.0753158, -0.0493908 )
+bind/20/name = "Tail"
+bind/20/bone = -1
+bind/20/pose = Transform( -1, 0, -1.19785e-18, -1.19785e-18, 0, 1, 0, 1, 0, -6.64795e-17, -0.224684, -0.0493908 )
+bind/21/name = "TailController"
+bind/21/bone = -1
+bind/21/pose = Transform( -1, 0, 0, 0, 0, 1, 0, 1, 0, -6.85454e-17, -0.524684, -0.0493908 )
+bind/22/name = "HeadController"
+bind/22/bone = -1
+bind/22/pose = Transform( 1, 0, 1.07806e-17, 1.07806e-17, 0, -1, 0, 1, 0, 1.40085e-16, -0.623617, -0.0493909 )
+bind/23/name = "Mantle"
+bind/23/bone = -1
+bind/23/pose = Transform( 1, -2.70234e-16, 2.70234e-16, 2.70234e-16, 1, 7.30266e-32, -2.70234e-16, 7.30266e-32, 1, 1.10197e-16, -0.251689, 0.0753158 )
+
+[sub_resource type="SphereMesh" id=168]
+
+[sub_resource type="ShaderMaterial" id=169]
+render_priority = 2
+shader = ExtResource( 28 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/diffuse_color = Color( 1, 1, 1, 1 )
+shader_param/cube_half_size = 1.0
+shader_param/texture_albedo = ExtResource( 30 )
+
+[sub_resource type="ShaderMaterial" id=170]
+render_priority = 3
+shader = ExtResource( 27 )
+shader_param/light_affected = true
+shader_param/use_specular = false
+shader_param/use_rim = false
+shader_param/light_direction = Vector3( 0.5, 0.5, 0.5 )
+shader_param/albedo_color = Color( 1, 1, 1, 1 )
+shader_param/shade_color = Color( 0.784314, 0.733333, 0.882353, 1 )
+shader_param/highlight_color = Color( 0.75, 0.75, 0.75, 0.75 )
+shader_param/emission = Color( 0, 0, 0, 1 )
+shader_param/normal_scale = 0.1
+shader_param/shade_threshold = 0.0
+shader_param/shade_softness = 0.0
+shader_param/specular_glossiness = 15.0
+shader_param/specular_threshold = 0.5
+shader_param/specular_softness = 0.0
+shader_param/rim_threshold = 0.25
+shader_param/rim_softness = 0.0
+shader_param/rim_spread = 0.5
+shader_param/shadow_threshold = 0.7
+shader_param/shadow_softness = 0.0
+shader_param/emission_energy = 0.0
+shader_param/screen_scale = 10.0
+shader_param/uv_scale = Vector3( 1, 1, 1 )
+shader_param/uv_offset = Vector3( 1, 0, 0 )
+shader_param/use_triplanar = false
+shader_param/hue_shift_amount = 0.9
+
+[sub_resource type="SphereShape" id=50]
+
+[sub_resource type="Animation" id=41]
+resource_name = "RESET"
+
+[node name="Snail" type="KinematicBody"]
+collision_mask = 13
+script = ExtResource( 21 )
+identity = ExtResource( 1 )
+
+[node name="Armature" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0.05 )
+
+[node name="Skeleton" type="Skeleton" parent="Armature"]
+bones/0/name = "Body"
+bones/0/parent = -1
+bones/0/rest = Transform( 1, -2.22045e-16, 0, 0, 0, 1, -2.22045e-16, -1, 0, -6.67487e-17, 0.0493908, -0.0753158 )
+bones/0/enabled = true
+bones/0/bound_children = [  ]
+bones/1/name = "Head"
+bones/1/parent = 0
+bones/1/rest = Transform( 1, 2.22045e-16, 1.10291e-23, -2.22045e-16, 1, 9.93411e-08, 1.10291e-23, -9.93411e-08, 1, 5.44735e-25, 0.3, -3.1374e-11 )
+bones/1/enabled = true
+bones/1/bound_children = [  ]
+bones/2/name = "Stalk4.L"
+bones/2/parent = 1
+bones/2/rest = Transform( 0.984805, -0.173026, -0.0148803, 2.78354e-05, 0.0858412, -0.996309, 0.173665, 0.981169, 0.0845417, -0.0803696, 0.157739, 0.2027 )
+bones/2/enabled = true
+bones/2/bound_children = [  ]
+bones/3/name = "Stalk3.L"
+bones/3/parent = 2
+bones/3/rest = Transform( 1, -8.90089e-08, 1.16543e-08, 8.90089e-08, 1, 3.27127e-08, -1.16543e-08, -3.27127e-08, 1, 1.66438e-10, 0.100543, -3.08501e-08 )
+bones/3/enabled = true
+bones/3/bound_children = [  ]
+bones/4/name = "Stalk2.L"
+bones/4/parent = 3
+bones/4/rest = Transform( 1, -2.19004e-08, 1.61481e-08, 2.19004e-08, 1, -2.38651e-08, -1.61481e-08, 2.38651e-08, 1, 1.21508e-09, 0.100543, 1.00117e-08 )
+bones/4/enabled = true
+bones/4/bound_children = [  ]
+bones/5/name = "Stalk1.L"
+bones/5/parent = 4
+bones/5/rest = Transform( 1, 1.54783e-07, 8.13943e-08, -1.54783e-07, 1, 4.38886e-08, -8.13943e-08, -4.38886e-08, 1, 1.54432e-09, 0.100543, -3.67872e-08 )
+bones/5/enabled = true
+bones/5/bound_children = [  ]
+bones/6/name = "Eye.L"
+bones/6/parent = 5
+bones/6/rest = Transform( 0.999606, 0.0270187, -0.00752201, -0.0275642, 0.995945, -0.0856369, 0.00517771, 0.0858106, 0.996298, -2.29011e-09, 0.100543, -4.02797e-08 )
+bones/6/enabled = true
+bones/6/bound_children = [  ]
+bones/7/name = "EyeCenter.L"
+bones/7/parent = 6
+bones/7/rest = Transform( 0.98911, -0.00749677, 0.146989, -0.146993, 2.38419e-07, 0.989137, -0.00741538, -0.999972, -0.00110173, 0.00569856, 0.134216, 0.0029342 )
+bones/7/enabled = true
+bones/7/bound_children = [  ]
+bones/8/name = "Stalk4.R"
+bones/8/parent = 1
+bones/8/rest = Transform( 0.984805, 0.173026, 0.0148803, -2.78354e-05, 0.0858412, -0.996309, -0.173665, 0.981169, 0.0845417, 0.0776723, 0.157739, 0.2027 )
+bones/8/enabled = true
+bones/8/bound_children = [  ]
+bones/9/name = "Stalk3.R"
+bones/9/parent = 8
+bones/9/rest = Transform( 1, 8.90089e-08, -1.16543e-08, -8.90089e-08, 1, 3.27127e-08, 1.16543e-08, -3.27127e-08, 1, 3.55885e-09, 0.100543, -5.36675e-08 )
+bones/9/enabled = true
+bones/9/bound_children = [  ]
+bones/10/name = "Stalk2.R"
+bones/10/parent = 9
+bones/10/rest = Transform( 1, -5.45909e-08, 2.41271e-08, 5.45909e-08, 1, -2.36323e-08, -2.41271e-08, 2.36323e-08, 1, 2.51021e-09, 0.100543, -1.28057e-08 )
+bones/10/enabled = true
+bones/10/bound_children = [  ]
+bones/11/name = "Stalk1.R"
+bones/11/parent = 10
+bones/11/rest = Transform( 1, -8.58092e-08, -1.19961e-07, 8.58092e-08, 1, 4.37722e-08, 1.19961e-07, -4.37722e-08, 1, 1.60981e-09, 0.100543, -5.45988e-08 )
+bones/11/enabled = true
+bones/11/bound_children = [  ]
+bones/12/name = "Eye.R"
+bones/12/parent = 11
+bones/12/rest = Transform( 0.999606, -0.0270187, 0.00752201, 0.0275642, 0.995945, -0.0856369, -0.00517771, 0.0858106, 0.996298, 6.5429e-09, 0.100543, -3.49246e-09 )
+bones/12/enabled = true
+bones/12/bound_children = [  ]
+bones/13/name = "EyeCenter.R"
+bones/13/parent = 12
+bones/13/rest = Transform( 0.98911, 0.00749677, -0.146989, 0.146993, 2.38419e-07, 0.989137, 0.00741538, -0.999972, -0.00110173, -0.00303061, 0.134613, 0.00295423 )
+bones/13/enabled = true
+bones/13/bound_children = [  ]
+bones/14/name = "EyeMainController"
+bones/14/parent = 1
+bones/14/rest = Transform( 1, -1.56945e-43, 5.85619e-37, -1.56945e-43, 1, 5.34499e-07, -5.85619e-37, -5.34499e-07, 1, 0.0216394, 0.502939, 0.734361 )
+bones/14/enabled = true
+bones/14/bound_children = [  ]
+bones/15/name = "EyeController.L"
+bones/15/parent = 14
+bones/15/rest = Transform( 1, -1.56945e-43, -5.8565e-37, -1.56945e-43, 1, -5.34528e-07, 5.8565e-37, 5.34528e-07, 1, -0.18571, -0.0560609, -0.00346837 )
+bones/15/enabled = true
+bones/15/bound_children = [  ]
+bones/16/name = "EyeController.R"
+bones/16/parent = 14
+bones/16/rest = Transform( 1, -1.56945e-43, -5.8565e-37, -1.56945e-43, 1, -5.34528e-07, 5.8565e-37, 5.34528e-07, 1, 0.142431, -0.0560609, -0.00346837 )
+bones/16/enabled = true
+bones/16/bound_children = [  ]
+bones/17/name = "StalkController.R"
+bones/17/parent = 1
+bones/17/rest = Transform( 0.999972, -2.32831e-10, 0.00749676, 0.00749676, 1.19209e-07, -0.999972, -2.32831e-10, 1, 1.19209e-07, 0.16212, 0.192262, 0.6973 )
+bones/17/enabled = true
+bones/17/bound_children = [  ]
+bones/18/name = "StalkController.L"
+bones/18/parent = 1
+bones/18/rest = Transform( 0.999972, 2.32831e-10, -0.00749676, -0.00749676, 1.19209e-07, -0.999972, 2.32831e-10, 1, 1.19209e-07, -0.164817, 0.192262, 0.6973 )
+bones/18/enabled = true
+bones/18/bound_children = [  ]
+bones/19/name = "Foot"
+bones/19/parent = -1
+bones/19/rest = Transform( -1, 0, 0, 0, 0, 1, 0, 1, 0, -6.67487e-17, 0.0493908, -0.0753158 )
+bones/19/enabled = true
+bones/19/bound_children = [  ]
+bones/20/name = "Tail"
+bones/20/parent = 19
+bones/20/rest = Transform( 1, 1.19785e-18, 0, -1.19785e-18, 1, 0, 0, 0, 1, 0, 0.3, 0 )
+bones/20/enabled = true
+bones/20/bound_children = [  ]
+bones/21/name = "TailController"
+bones/21/parent = -1
+bones/21/rest = Transform( -1, 0, 0, 0, 0, 1, 0, 1, 0, -6.85454e-17, 0.0493908, 0.524684 )
+bones/21/enabled = true
+bones/21/bound_children = [  ]
+bones/22/name = "HeadController"
+bones/22/parent = -1
+bones/22/rest = Transform( 1, 1.07806e-17, 0, 0, 0, 1, 1.07806e-17, -1, 0, -1.33362e-16, 0.0493909, -0.623617 )
+bones/22/enabled = true
+bones/22/bound_children = [  ]
+bones/23/name = "Mantle"
+bones/23/parent = -1
+bones/23/rest = Transform( 1, 2.70234e-16, -2.70234e-16, -2.70234e-16, 1, 3.65133e-32, 2.70234e-16, 3.65133e-32, 1, -2.18294e-17, 0.251689, -0.0753158 )
+bones/23/enabled = true
+bones/23/bound_children = [  ]
+
+[node name="BoneAttachment" type="BoneAttachment" parent="Armature/Skeleton"]
+transform = Transform( 1, 5.54137e-08, 7.8463e-08, 3.61168e-07, -5.86733e-08, 0.999999, 8.3819e-09, -1, 1.07917e-07, -0.16407, 0.780282, -0.564601 )
+bone_name = "EyeCenter.L"
+
+[node name="EyeRight" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment"]
+transform = Transform( 1, 3.8078e-06, 7.96219e-07, 7.96222e-07, -4.76837e-07, -0.999999, -3.8078e-06, 1, -4.76837e-07, 0.369818, -0.737042, -0.570603 )
+mesh = ExtResource( 26 )
+material/0 = ExtResource( 19 )
+script = ExtResource( 2 )
+
+[node name="BoneAttachment2" type="BoneAttachment" parent="Armature/Skeleton"]
+transform = Transform( 1, -5.82077e-08, -9.33669e-08, -3.31365e-07, -5.84405e-08, 0.999999, -1.11759e-08, -1, 1.08383e-07, 0.16407, 0.780282, -0.564601 )
+bone_name = "EyeCenter.R"
+
+[node name="EyeLeft" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment2"]
+transform = Transform( 1, -3.747e-06, -5.81117e-07, -5.81119e-07, -3.57628e-07, -0.999999, 3.747e-06, 1, -3.57627e-07, 0.0416807, -0.737043, -0.570601 )
+mesh = ExtResource( 25 )
+material/0 = ExtResource( 3 )
+script = ExtResource( 2 )
+
+[node name="Body" type="MeshInstance" parent="Armature/Skeleton"]
+mesh = ExtResource( 22 )
+skin = SubResource( 167 )
+material/0 = ExtResource( 7 )
+script = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Armature/Skeleton"]
+mesh = ExtResource( 23 )
+skin = SubResource( 167 )
+material/0 = ExtResource( 6 )
+material/1 = ExtResource( 7 )
+script = ExtResource( 2 )
+
+[node name="BoneAttachment3" type="BoneAttachment" parent="Armature/Skeleton"]
+transform = Transform( 1, 2.70234e-16, -2.70234e-16, -2.70234e-16, 1, 3.65133e-32, 2.70234e-16, 3.65133e-32, 1, -2.18294e-17, 0.251689, -0.0753158 )
+bone_name = "Mantle"
+
+[node name="Sticker" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment3"]
+transform = Transform( -1.09278e-08, -0.15, 1.09278e-08, 0, -6.55671e-09, -0.25, 0.25, -6.55671e-09, 4.77671e-16, -0.2, 0.25, 0.15 )
+mesh = SubResource( 168 )
+skeleton = NodePath("../../MeshInstance")
+material/0 = SubResource( 169 )
+
+[node name="Hat" type="MeshInstance" parent="Armature/Skeleton/BoneAttachment3"]
+transform = Transform( 1.1, -2.64698e-23, 0, 2.91168e-23, 1, 0, 0, 0, 1.1, -0.03, 0.45, 0.15 )
+mesh = ExtResource( 24 )
+material/0 = SubResource( 170 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 50 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+playback_default_blend_time = 0.2
+anims/RESET = SubResource( 41 )
+anims/SnailIdle = ExtResource( 9 )

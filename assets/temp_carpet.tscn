@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/model/carpet.mesh" type="ArrayMesh" id=1]
-[ext_resource path="res://source/scripts/world/Blades.gd" type="Script" id=2]
+[ext_resource path="res://source/script/world/Blades.gd" type="Script" id=2]
 [ext_resource path="res://assets/shader/wind.shader" type="Shader" id=3]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/croctest.ogg-5f4ffecfe90f92a19b0ecda061c28f00.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/music/radio/croctest.ogg"
+dest_files=[ "res://import/croctest.ogg-5f4ffecfe90f92a19b0ecda061c28f00.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

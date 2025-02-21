@@ -2,8 +2,10 @@
 
 [ext_resource path="res://assets/model/player.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://assets/texture/interface/item/tool_mallet.png" type="Texture" id=2]
-[ext_resource path="res://addons/snowball_framework/source/scripts/resource/ResourceItem.gd" type="Script" id=3]
+[ext_resource path="res://source/script/resource/ResourceItem.gd" type="Script" id=3]
 [ext_resource path="res://assets/resource/inventory.tres" type="Resource" id=4]
+
+
 
 [resource]
 script = ExtResource( 3 )

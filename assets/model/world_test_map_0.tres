@@ -1,6 +1,6 @@
 [gd_resource type="ArrayMesh" load_steps=2 format=2]
 
-[ext_resource path="res://assets/materials/tile/grass_top.material" type="Material" id=1]
+[ext_resource path="res://assets/material/tile/grass_top.material" type="Material" id=1]
 
 [resource]
 resource_name = "testmap2EPICVERSION_TestMap"

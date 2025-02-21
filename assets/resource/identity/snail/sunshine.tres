@@ -1,11 +1,11 @@
 [gd_resource type="Resource" load_steps=13 format=2]
 
-[ext_resource path="res://assets/texture/object/sticker_0.png" type="Texture" id=1]
-[ext_resource path="res://assets/texture/object/hat_0.png" type="Texture" id=2]
-[ext_resource path="res://assets/model/object/hat_0.mesh" type="ArrayMesh" id=3]
-[ext_resource path="res://assets/texture/trans.png" type="Texture" id=5]
+[ext_resource path="res://assets/texture/entity/hat/hat_0.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/entity/sticker/sticker_0.png" type="Texture" id=2]
+[ext_resource path="res://assets/model/entity/hat/hat_0.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://source/script/resource/ResourceIdentity.gd" type="Script" id=4]
+[ext_resource path="res://assets/texture/entity/snail_body_accent_0.png" type="Texture" id=5]
 [ext_resource path="res://assets/texture/entity/snail_eyes_0.png" type="Texture" id=6]
-[ext_resource path="res://source/scripts/resource/ResourceIdentitySnail.gd" type="Script" id=7]
 [ext_resource path="res://assets/texture/entity/snail_shell_accent_0.png" type="Texture" id=8]
 [ext_resource path="res://assets/texture/entity/snail_eyelids_top_half.png" type="Texture" id=9]
 
@@ -77,15 +77,10 @@ surfaces/1 = {
 }
 
 [resource]
-script = ExtResource( 7 )
-entity_name = "Sunshine"
-entity_scale = 1.0
-character = false
-health = 3
-max_health = 3
-strength = 0
-speed = 0
-jump = 0
+script = ExtResource( 4 )
+entity_name = "ENTITY_SUNSHINE"
+entity_personality = 2
+entity_scale = 1.05
 mesh_shell = SubResource( 1 )
 mesh_body = SubResource( 4 )
 mesh_eye_left = SubResource( 2 )
@@ -94,14 +89,11 @@ pattern_shell = ExtResource( 8 )
 pattern_body = ExtResource( 5 )
 pattern_eyes = ExtResource( 6 )
 pattern_eyelids = ExtResource( 9 )
-color_shell_base = Color( 0.482353, 0.321569, 0.717647, 1 )
-color_shell_base_shade = Color( 0.356863, 0.262745, 0.556863, 1 )
-color_shell_accent = Color( 0.694118, 0.215686, 0.596078, 1 )
-color_body_specular = Color( 1, 0.898039, 0.882353, 1 )
-color_body_base = Color( 0.941176, 0.807843, 0.788235, 1 )
-color_body_shade = Color( 0.85098, 0.643137, 0.517647, 1 )
-color_body_accent = Color( 0.85098, 0.662745, 0.662745, 1 )
-color_eyes = Color( 0.341176, 0.266667, 0.215686, 1 )
+color_shell_base = Color( 1, 0.588235, 0.780392, 1 )
+color_shell_accent = Color( 0.945098, 0.329412, 0.682353, 1 )
+color_body_base = Color( 0.945098, 0.768627, 0.741176, 1 )
+color_body_accent = Color( 1, 1, 1, 0 )
+color_eyes = Color( 0.529412, 0.427451, 0.360784, 1 )
 mesh_hat = ExtResource( 3 )
-pattern_hat = ExtResource( 2 )
-pattern_sticker = ExtResource( 1 )
+pattern_hat = ExtResource( 1 )
+pattern_sticker = ExtResource( 2 )

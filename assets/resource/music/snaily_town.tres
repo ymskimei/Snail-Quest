@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=10 format=2]
 
-[ext_resource path="res://source/scripts/resource/ResourceMusic.gd" type="Script" id=1]
+[ext_resource path="res://source/script/resource/ResourceMusic.gd" type="Script" id=1]
 [ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_perc_day.ogg" type="AudioStream" id=2]
 [ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_bass_day.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/sound/music/snaily_town/ost_snailytown_bassaccomp_day.ogg" type="AudioStream" id=4]

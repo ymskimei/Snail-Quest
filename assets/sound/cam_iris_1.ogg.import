@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://import/cam_iris_1.ogg-fa7c07b7f1d5ad9ddd0458609da5c94c.oggstr"
+
+[deps]
+
+source_file="res://assets/sound/cam_iris_1.ogg"
+dest_files=[ "res://import/cam_iris_1.ogg-fa7c07b7f1d5ad9ddd0458609da5c94c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -12,97 +12,92 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "AimCursor",
 "language": "GDScript",
-"path": "res://source/scripts/interface/CursorAim.gd"
+"path": "res://source/script/interface/CursorAim.gd"
 }, {
 "base": "CameraStateMain",
 "class": "CameraStateIsom",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/camera/CameraStateIsom.gd"
+"path": "res://source/script/entity/camera/CameraStateIsom.gd"
 }, {
 "base": "CameraStateMain",
 "class": "CameraStateLock",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/camera/CameraStateLock.gd"
+"path": "res://source/script/entity/camera/CameraStateLock.gd"
 }, {
 "base": "Node",
 "class": "CameraStateMain",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/camera/CameraStateMain.gd"
+"path": "res://source/script/entity/camera/CameraStateMain.gd"
 }, {
 "base": "Object",
 "class": "Chunk",
 "language": "GDScript",
-"path": "res://source/scripts/world/Chunk.gd"
+"path": "res://source/script/world/Chunk.gd"
 }, {
 "base": "Interactable",
 "class": "Conversable",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/object/Conversable.gd"
+"path": "res://source/script/object/Conversable.gd"
 }, {
 "base": "Node",
 "class": "DebugConsoleCategory",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/DebugConsoleCategory.gd"
+"path": "res://source/script/interface/DebugConsoleCategory.gd"
 }, {
 "base": "Node",
 "class": "DebugConsoleCommand",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/DebugConsoleCommand.gd"
-}, {
-"base": "Resource",
-"class": "DialogueResource",
-"language": "GDScript",
-"path": "res://addons/dialogue_manager/dialogue_resource.gd"
+"path": "res://source/script/interface/DebugConsoleCommand.gd"
 }, {
 "base": "Entity",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://source/scripts/entity/enemy/Enemy.gd"
+"path": "res://source/script/entity/enemy/Enemy.gd"
 }, {
 "base": "Node",
 "class": "EnemyStateMain",
 "language": "GDScript",
-"path": "res://source/scripts/entity/enemy/EnemyStateMain.gd"
+"path": "res://source/script/entity/enemy/EnemyStateMain.gd"
 }, {
 "base": "Conversable",
 "class": "Entity",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/Entity.gd"
+"path": "res://source/script/entity/Entity.gd"
 }, {
-"base": "RigidBody",
+"base": "MeshInstance",
+"class": "EnvironmentMeshInstance",
+"language": "GDScript",
+"path": "res://source/script/object/EnvironmentMeshInstance.gd"
+}, {
+"base": "KinematicBody",
 "class": "Interactable",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/object/Interactable.gd"
+"path": "res://source/script/object/Interactable.gd"
 }, {
 "base": "Node",
 "class": "InterfaceParent",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/InterfaceParent.gd"
+"path": "res://source/script/interface/InterfaceParent.gd"
 }, {
 "base": "Menu",
 "class": "InventoryParent",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/InventoryParent.gd"
+"path": "res://source/script/interface/InventoryParent.gd"
 }, {
 "base": "Spatial",
 "class": "ItemParent",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/item/ItemParent.gd"
+"path": "res://source/script/item/ItemParent.gd"
 }, {
 "base": "SpringArm",
 "class": "MainCamera",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/camera/Camera.gd"
-}, {
-"base": "MenuParent",
-"class": "Menu",
-"language": "GDScript",
-"path": "res://source/scripts/interface/Menu.gd"
+"path": "res://source/script/entity/camera/Camera.gd"
 }, {
 "base": "CanvasLayer",
-"class": "MenuParent",
+"class": "Menu",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/MenuParent.gd"
+"path": "res://source/script/interface/Menu.gd"
 }, {
 "base": "Node",
 "class": "MusicBooth",
@@ -112,97 +107,97 @@ _global_script_classes=[ {
 "base": "Menu",
 "class": "Options",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/interface/Options.gd"
+"path": "res://source/script/interface/Options.gd"
 }, {
 "base": "Interactable",
 "class": "Pushable",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/object/Pushable.gd"
+"path": "res://source/script/object/Pushable.gd"
 }, {
 "base": "Node",
 "class": "RegistryAudio",
 "language": "GDScript",
-"path": "res://source/scripts/RegistryAudio.gd"
+"path": "res://source/script/RegistryAudio.gd"
 }, {
 "base": "Node",
 "class": "RegistryColor",
 "language": "GDScript",
-"path": "res://source/scripts/RegistryColor.gd"
+"path": "res://source/script/RegistryColor.gd"
+}, {
+"base": "Node",
+"class": "RegistryDialogId",
+"language": "GDScript",
+"path": "res://source/script/RegistryDialogId.gd"
 }, {
 "base": "Resource",
 "class": "ResourceAudioPlayer",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceAudioPlayer.gd"
+"path": "res://source/script/resource/ResourceAudioPlayer.gd"
 }, {
 "base": "Resource",
 "class": "ResourceDialog",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceDialog.gd"
+"path": "res://source/script/resource/ResourceDialog.gd"
 }, {
 "base": "Resource",
 "class": "ResourceEnvironment",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceEnvironment.gd"
+"path": "res://source/script/resource/ResourceEnvironment.gd"
 }, {
 "base": "Resource",
 "class": "ResourceIdentity",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceIdentity.gd"
-}, {
-"base": "ResourceIdentity",
-"class": "ResourceIdentitySnail",
-"language": "GDScript",
-"path": "res://source/scripts/resource/ResourceIdentitySnail.gd"
-}, {
-"base": "Resource",
-"class": "ResourceInventory",
-"language": "GDScript",
-"path": "res://source/scripts/resource/ResourceInventory.gd"
+"path": "res://source/script/resource/ResourceIdentity.gd"
 }, {
 "base": "Resource",
 "class": "ResourceItem",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/resource/ResourceItem.gd"
+"path": "res://source/script/resource/ResourceItem.gd"
 }, {
 "base": "Resource",
 "class": "ResourceLocation",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceLocation.gd"
+"path": "res://source/script/resource/ResourceLocation.gd"
 }, {
 "base": "Resource",
 "class": "ResourceLootTable",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceLootTable.gd"
+"path": "res://source/script/resource/ResourceLootTable.gd"
 }, {
 "base": "Resource",
 "class": "ResourceMusic",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourceMusic.gd"
+"path": "res://source/script/resource/ResourceMusic.gd"
 }, {
 "base": "Resource",
 "class": "ResourcePushableBlock",
 "language": "GDScript",
-"path": "res://source/scripts/resource/ResourcePushableBlock.gd"
+"path": "res://source/script/resource/ResourcePushableBlock.gd"
+}, {
+"base": "Resource",
+"class": "ResourceStatistics",
+"language": "GDScript",
+"path": "res://source/script/resource/ResourceStatistics.gd"
+}, {
+"base": "Conversable",
+"class": "Sign",
+"language": "GDScript",
+"path": "res://source/script/object/Sign.gd"
 }, {
 "base": "Entity",
 "class": "Snail",
 "language": "GDScript",
-"path": "res://source/scripts/entity/snail/Snail.gd"
+"path": "res://source/script/entity/snail/Snail.gd"
 }, {
 "base": "StateMain",
-"class": "SnailStateMain",
+"class": "SnailState",
 "language": "GDScript",
-"path": "res://source/scripts/entity/snail/SnailStateMain.gd"
+"path": "res://source/script/entity/snail/SnailState.gd"
 }, {
 "base": "Node",
 "class": "Song",
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/Song.gd"
-}, {
-"base": "Reference",
-"class": "Sorter",
-"language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/utility/Sorter.gd"
 }, {
 "base": "AudioStreamPlayer",
 "class": "Sound",
@@ -227,7 +222,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "StateMain",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/entity/State.gd"
+"path": "res://source/script/entity/State.gd"
 }, {
 "base": "Node",
 "class": "StingerContainer",
@@ -239,10 +234,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/audio_booth/source/music/containers/TrackContainer.gd"
 }, {
+"base": "RichTextEffect",
+"class": "TransitionBase",
+"language": "GDScript",
+"path": "res://source/script/bbtransition/TransitionBase.gd"
+}, {
 "base": "Spatial",
 "class": "Warp",
 "language": "GDScript",
-"path": "res://addons/snowball_framework/source/scripts/object/Warp.gd"
+"path": "res://source/script/object/Warp.gd"
 } ]
 _global_script_class_icons={
 "AimCursor": "",
@@ -253,37 +253,36 @@ _global_script_class_icons={
 "Conversable": "",
 "DebugConsoleCategory": "",
 "DebugConsoleCommand": "",
-"DialogueResource": "",
 "Enemy": "",
 "EnemyStateMain": "",
 "Entity": "",
+"EnvironmentMeshInstance": "",
 "Interactable": "",
 "InterfaceParent": "",
 "InventoryParent": "",
 "ItemParent": "",
 "MainCamera": "",
 "Menu": "",
-"MenuParent": "",
 "MusicBooth": "",
 "Options": "",
 "Pushable": "",
 "RegistryAudio": "",
 "RegistryColor": "",
+"RegistryDialogId": "",
 "ResourceAudioPlayer": "",
 "ResourceDialog": "",
 "ResourceEnvironment": "",
 "ResourceIdentity": "",
-"ResourceIdentitySnail": "",
-"ResourceInventory": "",
 "ResourceItem": "",
 "ResourceLocation": "",
 "ResourceLootTable": "",
 "ResourceMusic": "",
 "ResourcePushableBlock": "",
+"ResourceStatistics": "",
+"Sign": "",
 "Snail": "",
-"SnailStateMain": "",
+"SnailState": "",
 "Song": "",
-"Sorter": "",
 "Sound": "",
 "Sound2D": "",
 "Sound3D": "",
@@ -291,6 +290,7 @@ _global_script_class_icons={
 "StateMain": "",
 "StingerContainer": "",
 "TrackContainer": "",
+"TransitionBase": "",
 "Warp": ""
 }
 
@@ -307,11 +307,11 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 
 config/name="Snail Quest"
 config/description="A small snail on an adventure to save his homeland! "
-run/main_scene="res://source/scenes/game.tscn"
+run/main_scene="res://source/scene/game.tscn"
 config/use_hidden_project_data_directory=false
 config/use_custom_user_dir=true
 run/delta_sync_after_draw=true
-boot_splash/image="res://assets/texture/interface/application/splash.png"
+boot_splash/show_image=false
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://assets/texture/interface/application/icon.png"
 
@@ -321,25 +321,27 @@ default_bus_layout="res://assets/default_bus_layout.tres"
 
 [autoload]
 
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-EventFlags="*res://source/scripts/EventFlags.gd"
-WorldSave="*res://source/scripts/world/WorldSave.gd"
-SB="*res://addons/snowball_framework/source/scenes/auto/sb.tscn"
-Utility="*res://addons/snowball_framework/source/scenes/auto/utility.tscn"
-Data="*res://addons/snowball_framework/source/scenes/auto/data.tscn"
-Device="*res://addons/snowball_framework/source/scenes/auto/device.tscn"
-Audio="*res://addons/snowball_framework/source/scenes/auto/audio.tscn"
-Item="*res://addons/snowball_framework/source/scenes/auto/item.tscn"
+Utility="*res://source/script/Utility.gd"
+Device="*res://source/script/Device.gd"
+Data="*res://source/script/Data.gd"
+Items="*res://source/script/Items.gd"
+EventManager="*res://source/script/EventManager.gd"
+WorldSave="*res://source/script/world/WorldSave.gd"
+Audio="*res://source/scene/audio.tscn"
+SnailQuest="*res://source/scene/snailquest.tscn"
+Interface="*res://source/scene/interface/interface.tscn"
+EnvironmentMaster="*res://source/scene/world/environment_master.tscn"
+Functions="*res://source/script/Functions.gd"
 
 [debug]
 
+settings/physics_interpolation/enable_warnings=false
 gdscript/warnings/unassigned_variable=false
 gdscript/warnings/unused_variable=false
 gdscript/warnings/unused_argument=false
 gdscript/warnings/void_assignment=false
 gdscript/warnings/function_may_yield=false
 gdscript/warnings/unused_signal=false
-gdscript/warnings/return_value_discarded=false
 gdscript/warnings/integer_division=false
 
 [display]
@@ -351,7 +353,6 @@ window/size/test_height=720
 window/dpi/allow_hidpi=true
 window/vsync/use_vsync=false
 window/stretch/mode="2d"
-window/stretch/aspect="expand"
 window/use_filter=false
 
 [editor]
@@ -361,7 +362,7 @@ reimport_missing_imported_files=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/blender_importer/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/snowball_framework/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/audio_booth/plugin.cfg", "res://addons/blender_importer/plugin.cfg", "res://addons/circular_container/plugin.cfg", "res://addons/project-statistics/plugin.cfg" )
 
 [filesystem]
 
@@ -432,23 +433,23 @@ ui_down={
 ui_page_up={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777235,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
+, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"canceled":false,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 ui_page_down={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777236,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"canceled":false,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 cam_lock={
-"deadzone": 0.5,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 action_defense={
-"deadzone": 0.5,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777237,"unicode":0,"echo":false,"script":null)
  ]
@@ -460,25 +461,25 @@ cam_zoom={
  ]
 }
 joy_left={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 joy_right={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 joy_up={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 joy_down={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
@@ -492,7 +493,7 @@ action_main={
 }
 action_alt={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"doubleclick":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
@@ -533,25 +534,25 @@ pad_down={
  ]
 }
 cam_left={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":-1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 cam_right={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 cam_up={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":-1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777232,"unicode":0,"echo":false,"script":null)
  ]
 }
 cam_down={
-"deadzone": 0.25,
+"deadzone": 0.1,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777234,"unicode":0,"echo":false,"script":null)
  ]
@@ -655,7 +656,11 @@ debug_cam_fov_decrease={
 
 [locale]
 
-translations=PoolStringArray( "res://source/translations/translation.en_GB.translation", "res://source/translations/translation.en_US.translation", "res://source/translations/translation.es_AR.translation", "res://source/translations/translation.es_MX.translation", "res://source/translations/translation.ja_JP.translation", "res://source/translations/translation.pr.translation" )
+translations=PoolStringArray( "res://source/translation/translation.en_GB.translation", "res://source/translation/translation.en_US.translation", "res://source/translation/translation.es_AR.translation", "res://source/translation/translation.es_MX.translation", "res://source/translation/translation.ja_JP.translation", "res://source/translation/translation.pr.translation" )
+
+[logging]
+
+file_logging/max_log_files=10
 
 [physics]
 
@@ -665,7 +670,7 @@ common/enable_pause_aware_picking=true
 3d/godot_physics/use_bvh=false
 3d/godot_physics/bvh_collision_margin=1.0
 2d/thread_model=2
-3d/default_gravity=50.0
+3d/default_gravity=9.6
 3d/default_linear_damp=2.0
 3d/default_angular_damp=2.0
 common/physics_interpolation=true
@@ -676,21 +681,24 @@ quality/driver/fallback_to_gles2=true
 threads/thread_model=2
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-quality/shadow_atlas/size=6400
-quality/shadow_atlas/size.mobile=4096
-quality/shadow_atlas/quadrant_0_subdiv=2
-quality/shadow_atlas/quadrant_1_subdiv=3
-quality/shadow_atlas/quadrant_2_subdiv=4
-quality/shadow_atlas/quadrant_3_subdiv=5
 quality/shadows/filter_mode=2
 quality/reflections/texture_array_reflections=false
 quality/reflections/high_quality_ggx=false
 quality/shading/force_vertex_shading.mobile=false
-quality/shading/use_physical_light_attenuation=true
+quality/shading/force_lambert_over_burley=true
+quality/shading/force_blinn_over_ggx=true
 quality/filters/anisotropic_filter_level=2
 quality/lightmapping/use_bicubic_sampling=false
+limits/rendering/max_renderable_lights=16
+limits/rendering/max_renderable_reflections=8
+limits/rendering/max_lights_per_object=8
 quality/subsurface_scattering/quality=0
-environment/default_clear_color=Color( 0.823529, 0.823529, 0.823529, 1 )
-quality/filters/use_fxaa=true
+environment/default_clear_color=Color( 0, 0, 0, 1 )
+quality/filters/msaa=1
 quality/filters/use_debanding=true
-environment/default_environment="res://assets/resource/environment/environment_default.tres"
+quality/depth/hdr=false
+environment/default_environment="res://assets/resource/environment/environment_interior.tres"
+
+[statistics]
+
+force_include=PoolStringArray(  )

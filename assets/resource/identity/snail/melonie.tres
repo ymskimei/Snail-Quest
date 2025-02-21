@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=13 format=2]
+
+[ext_resource path="res://assets/model/entity/hat/hat_0.mesh" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/model/entity/snail_shell_1.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/model/entity/snail_body_small.mesh" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/texture/entity/snail_eyes_7.png" type="Texture" id=4]
+[ext_resource path="res://assets/texture/entity/sticker/sticker_0.png" type="Texture" id=5]
+[ext_resource path="res://assets/texture/entity/snail_body_accent_0.png" type="Texture" id=6]
+[ext_resource path="res://assets/texture/entity/hat/hat_0.png" type="Texture" id=7]
+[ext_resource path="res://source/script/resource/ResourceIdentity.gd" type="Script" id=8]
+[ext_resource path="res://assets/texture/entity/snail_shell_accent_1.png" type="Texture" id=9]
+[ext_resource path="res://assets/texture/entity/snail_eyelids.png" type="Texture" id=10]
+[ext_resource path="res://assets/model/entity/snail_eye_left_big.mesh" type="ArrayMesh" id=11]
+[ext_resource path="res://assets/model/entity/snail_eye_right_big.mesh" type="ArrayMesh" id=12]
+
+[resource]
+script = ExtResource( 8 )
+entity_name = "ENTITY_MELONIE"
+entity_personality = 0
+entity_scale = 0.95
+mesh_shell = ExtResource( 2 )
+mesh_body = ExtResource( 3 )
+mesh_eye_left = ExtResource( 11 )
+mesh_eye_right = ExtResource( 12 )
+pattern_shell = ExtResource( 9 )
+pattern_body = ExtResource( 6 )
+pattern_eyes = ExtResource( 4 )
+pattern_eyelids = ExtResource( 10 )
+color_shell_base = Color( 0.435294, 0.717647, 0.282353, 1 )
+color_shell_accent = Color( 0.168627, 0.560784, 0.411765, 1 )
+color_body_base = Color( 0.956863, 0.533333, 0.52549, 1 )
+color_body_accent = Color( 1, 1, 1, 0 )
+color_eyes = Color( 0.886275, 0.368627, 0.698039, 1 )
+mesh_hat = ExtResource( 1 )
+pattern_hat = ExtResource( 7 )
+pattern_sticker = ExtResource( 5 )
