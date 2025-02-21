@@ -4,7 +4,7 @@ var jumping: bool = true
 var jump_timer: Timer = Timer.new()
 
 func enter() -> void:
-	print_state_name(STATE_NAMES, State.JUMP)
+	print_state_name(STATE_NAMES, State.FLNG)
 
 	entity.anim_states.travel("SnailJump")
 	entity.jump_in_memory = false
@@ -35,15 +35,15 @@ func unhandled_input(event: InputEvent) -> int:
 	return State.NULL
 
 func physics_process(delta: float) -> int:
-	set_movement(delta, 1.6 + (entity.move_momentum * 0.5), 0.6)
+	set_movement(delta, 1.6 + (entity.move_momentum * 5), 0.1, 0.3)
 
-	entity.jump_strength = 24 * entity.fall_momentum
+	entity.jump_strength = 34 * entity.fall_momentum
 
 	if !jumping:
 		entity.fall_momentum -= 7 * delta
 	if entity.fall_momentum <= 0:
-		return State.FALL
 
+		return State.FALL
 	return State.NULL
 
 func _on_jump_timeout() -> void:

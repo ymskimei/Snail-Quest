@@ -8,7 +8,7 @@ var recent_focus: Control = null
 
 func _ready() -> void:
 	get_viewport().connect("gui_focus_changed", self, "_on_gui_focus_changed")
-	if $AnimationPlayer:
+	if $AnimationPlayer != null:
 		anim = $AnimationPlayer
 
 func open(toggle: bool = false) -> void:

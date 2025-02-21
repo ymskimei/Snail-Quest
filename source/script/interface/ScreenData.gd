@@ -5,7 +5,7 @@ onready var default_selection: TextureButton = $MarginContainer/GridContainer/Da
 func _ready() -> void:
 	default_selection.grab_focus()
 	Audio.music_booth.play_song("Data")
-	
+
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed(Device.action_alt) and !Device.get_block_input():
 		Audio.play_sfx(RegistryAudio.tone_success)

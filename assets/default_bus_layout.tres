@@ -19,7 +19,6 @@ band_db/10000_hz = -40.0
 resource_name = "EQ"
 
 [resource]
-bus/0/volume_db = 0.267241
 bus/0/effect/0/effect = SubResource( 3 )
 bus/0/effect/0/enabled = true
 bus/1/name = "Mode"

@@ -32,7 +32,7 @@ func enter() -> void:
 func unhandled_input(event: InputEvent) -> int:
 	if is_on_surface():
 		if event.is_action_pressed(Device.action_main) and !entity.can_interact:
-			return State.JUMP
+			return State.STCK
 
 		if event.is_action_pressed(Device.trigger_right):
 			return State.ROLL
@@ -48,7 +48,7 @@ func physics_process(delta: float) -> int:
 			entity.move_momentum += 0.5 * delta
 
 	if entity.jump_in_memory or entity.boost_direction.length() > 0.1:
-		return State.JUMP
+		return State.STCK
 
 	if entity.is_submerged():
 		set_movement(delta, 1.1 + entity.move_momentum, 5.0)

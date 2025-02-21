@@ -62,8 +62,9 @@ func get_data(folder_path: String) -> Array:
 	var data_file_path: String = folder_path + "save" + data_file_type
 	var file: File = File.new()
 	var data: Dictionary 
-	var appearance: Resource = ResourceLoader.load(folder_path + "identity" + appearance_file_type)
+	var appearance: Resource
 	if file.file_exists(data_file_path):
+		appearance = ResourceLoader.load(folder_path + "identity" + appearance_file_type)
 		var open_file = file.open_encrypted_with_pass(data_file_path, File.READ, encryption)
 		if open_file == OK:
 			data = file.get_var()
@@ -123,7 +124,7 @@ func _get_new_data() -> Dictionary:
 		"keys": 0,
 		"boss_key": 0,
 		"items": [],
-		"translation": Vector3.ZERO,
+		"translation": Vector3.ZERO + Vector3(0, 100, 0),
 		"rotation": Vector3.ZERO,
 		"game_time": 750,
 		"location": "",

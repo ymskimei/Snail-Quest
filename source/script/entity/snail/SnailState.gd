@@ -15,6 +15,8 @@ enum State {
 	FALL,
 	IDLE,
 	MOVE,
+	STCK,
+	FLNG,
 	JUMP,
 	HIDE,
 	ROLL,

@@ -19,7 +19,7 @@ func enter() -> void:
 
 func unhandled_input(event: InputEvent) -> int:
 	if event.is_action_pressed(Device.action_main) and !entity.can_interact:
-		return State.JUMP
+		return State.STCK
 
 	if event.is_action_pressed(Device.action_alt):
 		return State.SPIN
@@ -39,7 +39,7 @@ func physics_process(delta: float) -> int:
 		return State.MOVE
 
 	if entity.jump_in_memory or entity.boost_direction.length() > 0.01:
-		return State.JUMP
+		return State.STCK
 
 	## Temporary ##
 

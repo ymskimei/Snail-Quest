@@ -20,7 +20,7 @@ func set_movement(delta: float, speed_modifier: float = 1.0, turn_modifier: floa
 	if entity.modified_input_direction.length() > 0.05:
 		entity.facing_direction = lerp(entity.facing_direction, entity.modified_input_direction, 16 * delta)
 
-	entity.move_direction = lerp(entity.move_direction, entity.modified_input_direction * speed_modifier * 3.5, 24 * delta)
+	entity.move_direction = lerp(entity.move_direction, entity.modified_input_direction * speed_modifier * 4.5, 24 * delta)
 	if entity.mirrored_movement:
 		entity.move_direction = -entity.move_direction
 
